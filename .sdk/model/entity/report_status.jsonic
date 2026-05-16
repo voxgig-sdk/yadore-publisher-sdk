@@ -1,0 +1,55 @@
+# Entity: report_status
+
+main: kit: entity: report_status: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "status"
+      req: false
+      type: "`$STRING`"
+    }
+  ]
+
+  name: "report_status"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          args: {
+            query: [
+              {
+                kind: "query"
+                name: "date"
+                orig: "date"
+                reqd: true
+                type: "`$STRING`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/v2/report/status"
+          parts: [
+            "v2"
+            "report"
+            "status"
+          ]
+          select: {
+            exist: [
+              "date"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

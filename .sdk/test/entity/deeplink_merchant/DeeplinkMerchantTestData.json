@@ -1,0 +1,53 @@
+{
+  "existing": {
+    "deeplink_merchant": {
+      "DEEPLINK_MERCHANT00": {
+        "deeplink_count": "s5a",
+        "estimated_cpc": {},
+        "has_external_homepage": true,
+        "has_smartlink_homepage": false,
+        "id": "DEEPLINK_MERCHANT00",
+        "is_smartlink": false,
+        "logo": {},
+        "name": "s61",
+        "traffic_type": []
+      },
+      "DEEPLINK_MERCHANT01": {
+        "deeplink_count": "sb4",
+        "estimated_cpc": {},
+        "has_external_homepage": true,
+        "has_smartlink_homepage": false,
+        "id": "DEEPLINK_MERCHANT01",
+        "is_smartlink": false,
+        "logo": {},
+        "name": "sbb",
+        "traffic_type": []
+      },
+      "DEEPLINK_MERCHANT02": {
+        "deeplink_count": "s10e",
+        "estimated_cpc": {},
+        "has_external_homepage": true,
+        "has_smartlink_homepage": false,
+        "id": "DEEPLINK_MERCHANT02",
+        "is_smartlink": false,
+        "logo": {},
+        "name": "s115",
+        "traffic_type": []
+      }
+    }
+  },
+  "new": {
+    "deeplink_merchant": {
+      "deeplink_merchant_ref01": {
+        "deeplink_count": "s168",
+        "estimated_cpc": {},
+        "has_external_homepage": true,
+        "has_smartlink_homepage": false,
+        "is_smartlink": false,
+        "logo": {},
+        "name": "s16f",
+        "traffic_type": []
+      }
+    }
+  }
+}

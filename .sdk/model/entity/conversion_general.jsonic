@@ -1,0 +1,81 @@
+# Entity: conversion_general
+
+main: kit: entity: conversion_general: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "date"
+      req: false
+      type: "`$OBJECT`"
+    }
+    {
+      name: "market"
+      req: false
+      type: "`$OBJECT`"
+    }
+    {
+      name: "total"
+      req: false
+      type: "`$OBJECT`"
+    }
+  ]
+
+  name: "conversion_general"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          args: {
+            query: [
+              {
+                kind: "query"
+                name: "format"
+                orig: "format"
+                reqd: true
+                type: "`$STRING`"
+              }
+              {
+                kind: "query"
+                name: "from"
+                orig: "from"
+                reqd: true
+                type: "`$STRING`"
+              }
+              {
+                kind: "query"
+                name: "to"
+                orig: "to"
+                reqd: true
+                type: "`$STRING`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/v2/conversion/general"
+          parts: [
+            "v2"
+            "conversion"
+            "general"
+          ]
+          select: {
+            exist: [
+              "format"
+              "from"
+              "to"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

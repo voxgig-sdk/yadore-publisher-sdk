@@ -1,0 +1,28 @@
+# BasicReportModifiedFlow
+
+main: kit: flow: BasicReportModifiedFlow:
+{
+  entity: "report_modified",
+  kind: "basic",
+  name: "BasicReportModifiedFlow",
+  step: [
+    {
+      input: {
+        ref: "report_modified_ref01",
+        srcdatavar: "report_modified_ref01_data",
+        suffix: "_dt0"
+      }
+
+      op: "load",
+      valid: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-report_modified_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicReportModifiedFlow"
+}

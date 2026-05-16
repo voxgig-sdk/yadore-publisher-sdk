@@ -1,0 +1,46 @@
+{
+  "existing": {
+    "report_detail": {
+      "REPORT_DETAIL00": {
+        "click_id": "CLICK01",
+        "currency": "s47",
+        "date": "s48",
+        "market": "s49",
+        "merchant": {},
+        "placement_id": "PLACEMENT01",
+        "revenue": 76
+      },
+      "REPORT_DETAIL01": {
+        "click_id": "CLICK01",
+        "currency": "s8d",
+        "date": "s8e",
+        "market": "s8f",
+        "merchant": {},
+        "placement_id": "PLACEMENT01",
+        "revenue": 146
+      },
+      "REPORT_DETAIL02": {
+        "click_id": "CLICK01",
+        "currency": "sd3",
+        "date": "sd4",
+        "market": "sd5",
+        "merchant": {},
+        "placement_id": "PLACEMENT01",
+        "revenue": 216
+      }
+    }
+  },
+  "new": {
+    "report_detail": {
+      "report_detail_ref01": {
+        "click_id": "CLICK01",
+        "currency": "s119",
+        "date": "s11a",
+        "market": "s11b",
+        "merchant": {},
+        "placement_id": "PLACEMENT01",
+        "revenue": 286
+      }
+    }
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "existing": {
+    "report_status": {
+      "REPORT_STATUS00": {
+        "status": "sa"
+      },
+      "REPORT_STATUS01": {
+        "status": "s14"
+      },
+      "REPORT_STATUS02": {
+        "status": "s1e"
+      }
+    }
+  },
+  "new": {
+    "report_status": {
+      "report_status_ref01": {
+        "status": "s28"
+      }
+    }
+  }
+}

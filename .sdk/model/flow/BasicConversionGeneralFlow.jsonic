@@ -1,0 +1,28 @@
+# BasicConversionGeneralFlow
+
+main: kit: flow: BasicConversionGeneralFlow:
+{
+  entity: "conversion_general",
+  kind: "basic",
+  name: "BasicConversionGeneralFlow",
+  step: [
+    {
+      input: {
+        ref: "conversion_general_ref01",
+        srcdatavar: "conversion_general_ref01_data",
+        suffix: "_dt0"
+      }
+
+      op: "load",
+      valid: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-conversion_general_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicConversionGeneralFlow"
+}

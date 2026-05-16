@@ -1,0 +1,28 @@
+# BasicDntFlow
+
+main: kit: flow: BasicDntFlow:
+{
+  entity: "dnt",
+  kind: "basic",
+  name: "BasicDntFlow",
+  step: [
+    {
+      input: {
+        ref: "dnt_ref01",
+        srcdatavar: "dnt_ref01_data",
+        suffix: "_dt0"
+      }
+
+      op: "load",
+      valid: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-dnt_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicDntFlow"
+}

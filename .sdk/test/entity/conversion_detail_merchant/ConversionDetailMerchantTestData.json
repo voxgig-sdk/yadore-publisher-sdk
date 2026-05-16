@@ -1,0 +1,34 @@
+{
+  "existing": {
+    "conversion_detail_merchant": {
+      "CONVERSION_DETAIL_MERCHANT00": {
+        "click": "s28",
+        "market": "s29",
+        "merchant": {},
+        "sale": "s2b"
+      },
+      "CONVERSION_DETAIL_MERCHANT01": {
+        "click": "s50",
+        "market": "s51",
+        "merchant": {},
+        "sale": "s53"
+      },
+      "CONVERSION_DETAIL_MERCHANT02": {
+        "click": "s78",
+        "market": "s79",
+        "merchant": {},
+        "sale": "s7b"
+      }
+    }
+  },
+  "new": {
+    "conversion_detail_merchant": {
+      "conversion_detail_merchant_ref01": {
+        "click": "sa0",
+        "market": "sa1",
+        "merchant": {},
+        "sale": "sa3"
+      }
+    }
+  }
+}

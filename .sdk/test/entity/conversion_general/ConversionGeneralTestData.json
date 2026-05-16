@@ -1,0 +1,30 @@
+{
+  "existing": {
+    "conversion_general": {
+      "CONVERSION_GENERAL00": {
+        "date": {},
+        "market": {},
+        "total": {}
+      },
+      "CONVERSION_GENERAL01": {
+        "date": {},
+        "market": {},
+        "total": {}
+      },
+      "CONVERSION_GENERAL02": {
+        "date": {},
+        "market": {},
+        "total": {}
+      }
+    }
+  },
+  "new": {
+    "conversion_general": {
+      "conversion_general_ref01": {
+        "date": {},
+        "market": {},
+        "total": {}
+      }
+    }
+  }
+}

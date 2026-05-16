@@ -1,0 +1,94 @@
+# Entity: dnt
+
+main: kit: entity: dnt: {
+
+  alias: field: {}
+
+  name: "dnt"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          args: {
+            query: [
+              {
+                kind: "query"
+                name: "callback_url"
+                orig: "callback_url"
+                reqd: false
+                type: "`$STRING`"
+              }
+              {
+                kind: "query"
+                name: "is_couponing"
+                orig: "is_couponing"
+                reqd: false
+                type: "`$BOOLEAN`"
+              }
+              {
+                kind: "query"
+                name: "market"
+                orig: "market"
+                reqd: true
+                type: "`$STRING`"
+              }
+              {
+                kind: "query"
+                name: "merchant_id"
+                orig: "merchant_id"
+                reqd: false
+                type: "`$STRING`"
+              }
+              {
+                kind: "query"
+                name: "placement_id"
+                orig: "placement_id"
+                reqd: false
+                type: "`$STRING`"
+              }
+              {
+                kind: "query"
+                name: "project_id"
+                orig: "project_id"
+                reqd: true
+                type: "`$STRING`"
+              }
+              {
+                kind: "query"
+                name: "url"
+                orig: "url"
+                reqd: true
+                type: "`$STRING`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/v2/d"
+          parts: [
+            "v2"
+            "d"
+          ]
+          select: {
+            exist: [
+              "callback_url"
+              "is_couponing"
+              "market"
+              "merchant_id"
+              "placement_id"
+              "project_id"
+              "url"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

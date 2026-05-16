@@ -1,0 +1,30 @@
+{
+  "existing": {
+    "report_general": {
+      "REPORT_GENERAL00": {
+        "date": {},
+        "market": {},
+        "total": {}
+      },
+      "REPORT_GENERAL01": {
+        "date": {},
+        "market": {},
+        "total": {}
+      },
+      "REPORT_GENERAL02": {
+        "date": {},
+        "market": {},
+        "total": {}
+      }
+    }
+  },
+  "new": {
+    "report_general": {
+      "report_general_ref01": {
+        "date": {},
+        "market": {},
+        "total": {}
+      }
+    }
+  }
+}

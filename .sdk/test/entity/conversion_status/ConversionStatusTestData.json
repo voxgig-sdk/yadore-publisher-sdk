@@ -1,0 +1,22 @@
+{
+  "existing": {
+    "conversion_status": {
+      "CONVERSION_STATUS00": {
+        "status": "sa"
+      },
+      "CONVERSION_STATUS01": {
+        "status": "s14"
+      },
+      "CONVERSION_STATUS02": {
+        "status": "s1e"
+      }
+    }
+  },
+  "new": {
+    "conversion_status": {
+      "conversion_status_ref01": {
+        "status": "s28"
+      }
+    }
+  }
+}

@@ -1,0 +1,124 @@
+# Entity: deeplink_merchant
+
+main: kit: entity: deeplink_merchant: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "deeplink_count"
+      req: false
+      type: "`$INTEGER`"
+    }
+    {
+      name: "estimated_cpc"
+      req: false
+      type: "`$OBJECT`"
+    }
+    {
+      name: "has_external_homepage"
+      req: false
+      type: "`$BOOLEAN`"
+    }
+    {
+      name: "has_smartlink_homepage"
+      req: false
+      type: "`$BOOLEAN`"
+    }
+    {
+      name: "id"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "is_smartlink"
+      req: false
+      type: "`$BOOLEAN`"
+    }
+    {
+      name: "logo"
+      req: false
+      type: "`$OBJECT`"
+    }
+    {
+      name: "name"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "traffic_type"
+      req: false
+      type: "`$ARRAY`"
+    }
+  ]
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "deeplink_merchant"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          args: {
+            query: [
+              {
+                kind: "query"
+                name: "has_homepage"
+                orig: "has_homepage"
+                reqd: false
+                type: "`$BOOLEAN`"
+              }
+              {
+                kind: "query"
+                name: "is_couponing"
+                orig: "is_couponing"
+                reqd: false
+                type: "`$BOOLEAN`"
+              }
+              {
+                kind: "query"
+                name: "is_smartlink"
+                orig: "is_smartlink"
+                reqd: false
+                type: "`$BOOLEAN`"
+              }
+              {
+                kind: "query"
+                name: "market"
+                orig: "market"
+                reqd: true
+                type: "`$STRING`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/v2/deeplink/merchant"
+          parts: [
+            "v2"
+            "deeplink"
+            "merchant"
+          ]
+          select: {
+            exist: [
+              "has_homepage"
+              "is_couponing"
+              "is_smartlink"
+              "market"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

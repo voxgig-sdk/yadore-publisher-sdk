@@ -1,0 +1,22 @@
+# BasicReportDetailFlow
+
+main: kit: flow: BasicReportDetailFlow:
+{
+  entity: "report_detail",
+  kind: "basic",
+  name: "BasicReportDetailFlow",
+  step: [
+    {
+      op: "list",
+      valid: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "report_detail_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicReportDetailFlow"
+}

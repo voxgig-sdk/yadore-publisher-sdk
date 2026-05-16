@@ -1,0 +1,22 @@
+# BasicDeeplinkMerchantFlow
+
+main: kit: flow: BasicDeeplinkMerchantFlow:
+{
+  entity: "deeplink_merchant",
+  kind: "basic",
+  name: "BasicDeeplinkMerchantFlow",
+  step: [
+    {
+      op: "list",
+      valid: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "deeplink_merchant_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicDeeplinkMerchantFlow"
+}

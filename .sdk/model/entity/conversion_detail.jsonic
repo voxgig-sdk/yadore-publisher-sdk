@@ -1,0 +1,96 @@
+# Entity: conversion_detail
+
+main: kit: entity: conversion_detail: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "click_id"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "date"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "market"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "merchant"
+      req: false
+      type: "`$OBJECT`"
+    }
+    {
+      name: "placement_id"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "sale"
+      req: false
+      type: "`$NUMBER`"
+    }
+  ]
+
+  name: "conversion_detail"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          args: {
+            query: [
+              {
+                kind: "query"
+                name: "date"
+                orig: "date"
+                reqd: true
+                type: "`$STRING`"
+              }
+              {
+                kind: "query"
+                name: "format"
+                orig: "format"
+                reqd: true
+                type: "`$STRING`"
+              }
+              {
+                kind: "query"
+                name: "market"
+                orig: "market"
+                reqd: false
+                type: "`$STRING`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/v2/conversion/detail"
+          parts: [
+            "v2"
+            "conversion"
+            "detail"
+          ]
+          select: {
+            exist: [
+              "date"
+              "format"
+              "market"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

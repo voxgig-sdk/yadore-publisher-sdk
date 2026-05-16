@@ -1,0 +1,54 @@
+# API Information
+
+
+main: {
+  kit: {
+    info: {
+      description: `This is an overview of all the available API endpoints.
+Each API is grouped and you can unfold the different endpoints to get detailed information on how to use them.
+
+You can use this actionable documentation or an application of your choice (e.g. [Postman](https://www.postman.com/)) to browse the API.
+
+## Endpoints
+The API servers are available under the URL: \`https://api.yadore.com/\`. You must use this URL for all API requests.
+For example to search for offers, you must send your request to \`https://api.yadore.com/v2/offer\`.
+
+This doesn't concern you when you are using this documentation. You can use the endpoints here by clicking on \`Try it out\`.
+
+## Authentication
+You must add your API-Key as header \`API-Key\` to all requests in the application of your choice.
+
+For authorizing your requests in this actionable documentation, you must use the \`Authorize\` button below and enter your API-Key.
+
+## FAQ
+
+1. What Yadore understands as **offer** – for us an offer is a product offer from a specific merchant, example would be a specific washing machine from e.g. _Mediamarkt.de_.
+
+2. What Yadore understands as **deeplink** – for us a deeplink is a specific product landing page from a merchant, so the deep link request must look like \`shopdomain.de/category/specific_product.html\`.
+
+3. What Yadore understands as **smartlink** – for us a smartlink merchant is a merchant, where the publisher can send the user anywhere, means home page, category page, product page, etc. However, you must specify exactly where you want to send the user (i.e. homepage, category, ..) as the API will not automatically generate this for you.
+
+4. All monetary values are always in **Euro**.
+
+5. All dates returned from any endpoint are in **UTC time**.
+
+6. All API parameters are **case sensitive**.
+
+7. The estimated CPC in all APIs is 100% Yadore, to calculate your revenue you have to adapt your share.
+
+8. We classify publishers in _“no couponing”_, _“couponing”_ and _“mixed”_. This is important as _“mixed”_ publishers need to use a parameter to inform if a click is couponing or not. If you feel wrongly classified just speak to your account manager.
+
+9. If there are any further questions, please contact your account manager or send an email to [mail@yadore.com](mailto:mail@yadore.com).
+`
+      servers: [
+        {
+          url: "https://api.yadore.com/"
+        }
+      ]
+      title: "Yadore Publisher API"
+      version: "2.0.0"
+    }
+  }
+}
+
+}

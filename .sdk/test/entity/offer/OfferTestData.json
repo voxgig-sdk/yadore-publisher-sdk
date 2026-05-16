@@ -1,0 +1,89 @@
+{
+  "existing": {
+    "offer": {
+      "OFFER00": {
+        "availability": "sb4",
+        "brand": "sb5",
+        "click_url": "sb6",
+        "description": "sb7",
+        "ean": {},
+        "eer": "sb9",
+        "estimated_cpc": {},
+        "id": "OFFER00",
+        "image": {},
+        "merchant": {},
+        "original_price": {},
+        "price": {},
+        "promo_text": "sc0",
+        "shipping_price": {},
+        "shipping_time": {},
+        "thumbnail": {},
+        "title": "sc4",
+        "unit_price": {}
+      },
+      "OFFER01": {
+        "availability": "s168",
+        "brand": "s169",
+        "click_url": "s16a",
+        "description": "s16b",
+        "ean": {},
+        "eer": "s16d",
+        "estimated_cpc": {},
+        "id": "OFFER01",
+        "image": {},
+        "merchant": {},
+        "original_price": {},
+        "price": {},
+        "promo_text": "s174",
+        "shipping_price": {},
+        "shipping_time": {},
+        "thumbnail": {},
+        "title": "s178",
+        "unit_price": {}
+      },
+      "OFFER02": {
+        "availability": "s21c",
+        "brand": "s21d",
+        "click_url": "s21e",
+        "description": "s21f",
+        "ean": {},
+        "eer": "s221",
+        "estimated_cpc": {},
+        "id": "OFFER02",
+        "image": {},
+        "merchant": {},
+        "original_price": {},
+        "price": {},
+        "promo_text": "s228",
+        "shipping_price": {},
+        "shipping_time": {},
+        "thumbnail": {},
+        "title": "s22c",
+        "unit_price": {}
+      }
+    }
+  },
+  "new": {
+    "offer": {
+      "offer_ref01": {
+        "availability": "s2d0",
+        "brand": "s2d1",
+        "click_url": "s2d2",
+        "description": "s2d3",
+        "ean": {},
+        "eer": "s2d5",
+        "estimated_cpc": {},
+        "image": {},
+        "merchant": {},
+        "original_price": {},
+        "price": {},
+        "promo_text": "s2dc",
+        "shipping_price": {},
+        "shipping_time": {},
+        "thumbnail": {},
+        "title": "s2e0",
+        "unit_price": {}
+      }
+    }
+  }
+}

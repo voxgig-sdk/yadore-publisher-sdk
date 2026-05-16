@@ -1,0 +1,37 @@
+{
+  "existing": {
+    "merchant": {
+      "MERCHANT00": {
+        "id": "MERCHANT00",
+        "logo": {},
+        "name": "s34",
+        "offer_count": "s35",
+        "traffic_type": []
+      },
+      "MERCHANT01": {
+        "id": "MERCHANT01",
+        "logo": {},
+        "name": "s66",
+        "offer_count": "s67",
+        "traffic_type": []
+      },
+      "MERCHANT02": {
+        "id": "MERCHANT02",
+        "logo": {},
+        "name": "s98",
+        "offer_count": "s99",
+        "traffic_type": []
+      }
+    }
+  },
+  "new": {
+    "merchant": {
+      "merchant_ref01": {
+        "logo": {},
+        "name": "sca",
+        "offer_count": "scb",
+        "traffic_type": []
+      }
+    }
+  }
+}

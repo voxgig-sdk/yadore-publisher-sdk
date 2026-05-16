@@ -1,0 +1,28 @@
+# BasicReportStatusFlow
+
+main: kit: flow: BasicReportStatusFlow:
+{
+  entity: "report_status",
+  kind: "basic",
+  name: "BasicReportStatusFlow",
+  step: [
+    {
+      input: {
+        ref: "report_status_ref01",
+        srcdatavar: "report_status_ref01_data",
+        suffix: "_dt0"
+      }
+
+      op: "load",
+      valid: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-report_status_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicReportStatusFlow"
+}

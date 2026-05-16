@@ -1,0 +1,58 @@
+# Entity: deeplink
+
+main: kit: entity: deeplink: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "is_couponing"
+      req: false
+      type: "`$BOOLEAN`"
+    }
+    {
+      name: "market"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "placement_id"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "result"
+      req: false
+      type: "`$OBJECT`"
+    }
+    {
+      name: "url"
+      req: true
+      type: "`$ARRAY`"
+    }
+  ]
+
+  name: "deeplink"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          method: "POST"
+          orig: "/v2/deeplink"
+          parts: [
+            "v2"
+            "deeplink"
+          ]
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

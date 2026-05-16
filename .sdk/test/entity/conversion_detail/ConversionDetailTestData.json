@@ -1,0 +1,42 @@
+{
+  "existing": {
+    "conversion_detail": {
+      "CONVERSION_DETAIL00": {
+        "click_id": "CLICK01",
+        "date": "s3d",
+        "market": "s3e",
+        "merchant": {},
+        "placement_id": "PLACEMENT01",
+        "sale": 65
+      },
+      "CONVERSION_DETAIL01": {
+        "click_id": "CLICK01",
+        "date": "s79",
+        "market": "s7a",
+        "merchant": {},
+        "placement_id": "PLACEMENT01",
+        "sale": 125
+      },
+      "CONVERSION_DETAIL02": {
+        "click_id": "CLICK01",
+        "date": "sb5",
+        "market": "sb6",
+        "merchant": {},
+        "placement_id": "PLACEMENT01",
+        "sale": 185
+      }
+    }
+  },
+  "new": {
+    "conversion_detail": {
+      "conversion_detail_ref01": {
+        "click_id": "CLICK01",
+        "date": "sf1",
+        "market": "sf2",
+        "merchant": {},
+        "placement_id": "PLACEMENT01",
+        "sale": 245
+      }
+    }
+  }
+}

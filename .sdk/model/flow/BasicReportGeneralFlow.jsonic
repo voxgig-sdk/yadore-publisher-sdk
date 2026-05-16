@@ -1,0 +1,28 @@
+# BasicReportGeneralFlow
+
+main: kit: flow: BasicReportGeneralFlow:
+{
+  entity: "report_general",
+  kind: "basic",
+  name: "BasicReportGeneralFlow",
+  step: [
+    {
+      input: {
+        ref: "report_general_ref01",
+        srcdatavar: "report_general_ref01_data",
+        suffix: "_dt0"
+      }
+
+      op: "load",
+      valid: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-report_general_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicReportGeneralFlow"
+}

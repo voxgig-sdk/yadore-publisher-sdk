@@ -1,0 +1,101 @@
+# Entity: report_detail
+
+main: kit: entity: report_detail: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "click_id"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "currency"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "date"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "market"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "merchant"
+      req: false
+      type: "`$OBJECT`"
+    }
+    {
+      name: "placement_id"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "revenue"
+      req: false
+      type: "`$NUMBER`"
+    }
+  ]
+
+  name: "report_detail"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          args: {
+            query: [
+              {
+                kind: "query"
+                name: "date"
+                orig: "date"
+                reqd: true
+                type: "`$STRING`"
+              }
+              {
+                kind: "query"
+                name: "format"
+                orig: "format"
+                reqd: true
+                type: "`$STRING`"
+              }
+              {
+                kind: "query"
+                name: "market"
+                orig: "market"
+                reqd: false
+                type: "`$STRING`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/v2/report/detail"
+          parts: [
+            "v2"
+            "report"
+            "detail"
+          ]
+          select: {
+            exist: [
+              "date"
+              "format"
+              "market"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

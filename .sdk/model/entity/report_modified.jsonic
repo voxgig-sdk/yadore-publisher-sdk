@@ -1,0 +1,71 @@
+# Entity: report_modified
+
+main: kit: entity: report_modified: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "market"
+      req: false
+      type: "`$OBJECT`"
+    }
+  ]
+
+  name: "report_modified"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          args: {
+            query: [
+              {
+                kind: "query"
+                name: "from"
+                orig: "from"
+                reqd: true
+                type: "`$STRING`"
+              }
+              {
+                kind: "query"
+                name: "market"
+                orig: "market"
+                reqd: false
+                type: "`$STRING`"
+              }
+              {
+                kind: "query"
+                name: "to"
+                orig: "to"
+                reqd: true
+                type: "`$STRING`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/v2/report/modified"
+          parts: [
+            "v2"
+            "report"
+            "modified"
+          ]
+          select: {
+            exist: [
+              "from"
+              "market"
+              "to"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

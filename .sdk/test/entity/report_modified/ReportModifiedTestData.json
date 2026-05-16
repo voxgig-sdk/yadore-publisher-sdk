@@ -1,0 +1,22 @@
+{
+  "existing": {
+    "report_modified": {
+      "REPORT_MODIFIED00": {
+        "market": {}
+      },
+      "REPORT_MODIFIED01": {
+        "market": {}
+      },
+      "REPORT_MODIFIED02": {
+        "market": {}
+      }
+    }
+  },
+  "new": {
+    "report_modified": {
+      "report_modified_ref01": {
+        "market": {}
+      }
+    }
+  }
+}

@@ -1,0 +1,22 @@
+# BasicConversionDetailFlow
+
+main: kit: flow: BasicConversionDetailFlow:
+{
+  entity: "conversion_detail",
+  kind: "basic",
+  name: "BasicConversionDetailFlow",
+  step: [
+    {
+      op: "list",
+      valid: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "conversion_detail_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicConversionDetailFlow"
+}

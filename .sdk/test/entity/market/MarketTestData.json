@@ -1,0 +1,20 @@
+{
+  "existing": {
+    "market": {
+      "MARKET00": {
+        "id": "MARKET00"
+      },
+      "MARKET01": {
+        "id": "MARKET01"
+      },
+      "MARKET02": {
+        "id": "MARKET02"
+      }
+    }
+  },
+  "new": {
+    "market": {
+      "market_ref01": {}
+    }
+  }
+}

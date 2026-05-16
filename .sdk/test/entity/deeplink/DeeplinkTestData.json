@@ -1,0 +1,38 @@
+{
+  "existing": {
+    "deeplink": {
+      "DEEPLINK00": {
+        "is_couponing": true,
+        "market": "s33",
+        "placement_id": "PLACEMENT01",
+        "result": {},
+        "url": []
+      },
+      "DEEPLINK01": {
+        "is_couponing": true,
+        "market": "s65",
+        "placement_id": "PLACEMENT01",
+        "result": {},
+        "url": []
+      },
+      "DEEPLINK02": {
+        "is_couponing": true,
+        "market": "s97",
+        "placement_id": "PLACEMENT01",
+        "result": {},
+        "url": []
+      }
+    }
+  },
+  "new": {
+    "deeplink": {
+      "deeplink_ref01": {
+        "is_couponing": true,
+        "market": "sc9",
+        "placement_id": "PLACEMENT01",
+        "result": {},
+        "url": []
+      }
+    }
+  }
+}
