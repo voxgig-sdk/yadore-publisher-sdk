@@ -1,9 +1,9 @@
 package utility
 
 import (
-	vs "github.com/voxgig/struct"
+	vs "github.com/voxgig-sdk/yadore-publisher-sdk/go/utility/struct"
 
-	"github.com/voxgig-sdk/yadore-publisher-sdk/core"
+	"github.com/voxgig-sdk/yadore-publisher-sdk/go/core"
 )
 
 const headerAuth = "authorization"

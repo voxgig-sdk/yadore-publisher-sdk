@@ -2,13 +2,16 @@
   "existing": {
     "report_status": {
       "REPORT_STATUS00": {
-        "status": "sa"
+        "status": "sa",
+        "id": "REPORT_STATUS00"
       },
       "REPORT_STATUS01": {
-        "status": "s14"
+        "status": "s14",
+        "id": "REPORT_STATUS01"
       },
       "REPORT_STATUS02": {
-        "status": "s1e"
+        "status": "s1e",
+        "id": "REPORT_STATUS02"
       }
     }
   },

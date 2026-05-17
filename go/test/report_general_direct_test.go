@@ -6,8 +6,8 @@ import (
 	"strings"
 	"testing"
 
-	sdk "github.com/voxgig-sdk/yadore-publisher-sdk"
-	"github.com/voxgig-sdk/yadore-publisher-sdk/core"
+	sdk "github.com/voxgig-sdk/yadore-publisher-sdk/go"
+	"github.com/voxgig-sdk/yadore-publisher-sdk/go/core"
 )
 
 func TestReportGeneralDirect(t *testing.T) {

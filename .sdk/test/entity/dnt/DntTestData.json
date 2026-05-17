@@ -1,9 +1,15 @@
 {
   "existing": {
     "dnt": {
-      "DNT00": {},
-      "DNT01": {},
-      "DNT02": {}
+      "DNT00": {
+        "id": "DNT00"
+      },
+      "DNT01": {
+        "id": "DNT01"
+      },
+      "DNT02": {
+        "id": "DNT02"
+      }
     }
   },
   "new": {

@@ -4,17 +4,20 @@
       "CONVERSION_GENERAL00": {
         "date": {},
         "market": {},
-        "total": {}
+        "total": {},
+        "id": "CONVERSION_GENERAL00"
       },
       "CONVERSION_GENERAL01": {
         "date": {},
         "market": {},
-        "total": {}
+        "total": {},
+        "id": "CONVERSION_GENERAL01"
       },
       "CONVERSION_GENERAL02": {
         "date": {},
         "market": {},
-        "total": {}
+        "total": {},
+        "id": "CONVERSION_GENERAL02"
       }
     }
   },

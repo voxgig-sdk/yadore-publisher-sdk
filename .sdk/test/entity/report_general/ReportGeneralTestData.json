@@ -4,17 +4,20 @@
       "REPORT_GENERAL00": {
         "date": {},
         "market": {},
-        "total": {}
+        "total": {},
+        "id": "REPORT_GENERAL00"
       },
       "REPORT_GENERAL01": {
         "date": {},
         "market": {},
-        "total": {}
+        "total": {},
+        "id": "REPORT_GENERAL01"
       },
       "REPORT_GENERAL02": {
         "date": {},
         "market": {},
-        "total": {}
+        "total": {},
+        "id": "REPORT_GENERAL02"
       }
     }
   },

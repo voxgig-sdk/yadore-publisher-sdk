@@ -1,6 +1,6 @@
 package utility
 
-import "github.com/voxgig-sdk/yadore-publisher-sdk/core"
+import "github.com/voxgig-sdk/yadore-publisher-sdk/go/core"
 
 func prepareBodyUtil(ctx *core.Context) any {
 	op := ctx.Op

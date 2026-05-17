@@ -6,21 +6,24 @@
         "market": "s33",
         "placement_id": "PLACEMENT01",
         "result": {},
-        "url": []
+        "url": [],
+        "id": "DEEPLINK00"
       },
       "DEEPLINK01": {
         "is_couponing": true,
         "market": "s65",
         "placement_id": "PLACEMENT01",
         "result": {},
-        "url": []
+        "url": [],
+        "id": "DEEPLINK01"
       },
       "DEEPLINK02": {
         "is_couponing": true,
         "market": "s97",
         "placement_id": "PLACEMENT01",
         "result": {},
-        "url": []
+        "url": [],
+        "id": "DEEPLINK02"
       }
     }
   },

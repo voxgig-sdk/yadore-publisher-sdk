@@ -2,13 +2,16 @@
   "existing": {
     "conversion_status": {
       "CONVERSION_STATUS00": {
-        "status": "sa"
+        "status": "sa",
+        "id": "CONVERSION_STATUS00"
       },
       "CONVERSION_STATUS01": {
-        "status": "s14"
+        "status": "s14",
+        "id": "CONVERSION_STATUS01"
       },
       "CONVERSION_STATUS02": {
-        "status": "s1e"
+        "status": "s1e",
+        "id": "CONVERSION_STATUS02"
       }
     }
   },

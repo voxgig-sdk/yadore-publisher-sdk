@@ -2,13 +2,16 @@
   "existing": {
     "report_modified": {
       "REPORT_MODIFIED00": {
-        "market": {}
+        "market": {},
+        "id": "REPORT_MODIFIED00"
       },
       "REPORT_MODIFIED01": {
-        "market": {}
+        "market": {},
+        "id": "REPORT_MODIFIED01"
       },
       "REPORT_MODIFIED02": {
-        "market": {}
+        "market": {},
+        "id": "REPORT_MODIFIED02"
       }
     }
   },
