@@ -23,12 +23,9 @@ loading a specific record.
 ### 1. Create a client
 
 ```python
-import os
 from yadorepublisher_sdk import YadorePublisherSDK
 
-client = YadorePublisherSDK({
-    "apikey": os.environ.get("YADORE-PUBLISHER_APIKEY"),
-})
+client = YadorePublisherSDK({})
 ```
 
 ### 2. List conversiondetails
@@ -121,7 +118,6 @@ Create a `.env.local` file at the project root:
 
 ```
 YADORE-PUBLISHER_TEST_LIVE=TRUE
-YADORE-PUBLISHER_APIKEY=<your-key>
 ```
 
 Then run:
@@ -145,7 +141,6 @@ Creates a new SDK client.
 
 | Option | Type | Description |
 | --- | --- | --- |
-| `apikey` | `str` | API key for authentication. |
 | `base` | `str` | Base URL of the API server. |
 | `prefix` | `str` | URL path prefix prepended to all requests. |
 | `suffix` | `str` | URL path suffix appended to all requests. |

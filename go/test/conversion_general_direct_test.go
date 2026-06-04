@@ -99,14 +99,12 @@ func conversion_generalDirectSetup(mockres any) *conversion_generalDirectSetupRe
 	env := envOverride(map[string]any{
 		"YADOREPUBLISHER_TEST_CONVERSION_GENERAL_ENTID": map[string]any{},
 		"YADOREPUBLISHER_TEST_LIVE":    "FALSE",
-		"YADOREPUBLISHER_APIKEY":       "NONE",
 	})
 
 	live := env["YADOREPUBLISHER_TEST_LIVE"] == "TRUE"
 
 	if live {
 		mergedOpts := map[string]any{
-			"apikey": env["YADOREPUBLISHER_APIKEY"],
 		}
 		client := sdk.NewYadorePublisherSDK(mergedOpts)
 

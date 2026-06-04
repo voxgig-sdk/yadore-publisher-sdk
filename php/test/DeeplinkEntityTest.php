@@ -80,7 +80,6 @@ function deeplink_basic_setup($extra)
         "YADOREPUBLISHER_TEST_DEEPLINK_ENTID" => $idmap,
         "YADOREPUBLISHER_TEST_LIVE" => "FALSE",
         "YADOREPUBLISHER_TEST_EXPLAIN" => "FALSE",
-        "YADOREPUBLISHER_APIKEY" => "NONE",
     ]);
 
     $idmap_resolved = Helpers::to_map(
@@ -92,7 +91,6 @@ function deeplink_basic_setup($extra)
     if ($env["YADOREPUBLISHER_TEST_LIVE"] === "TRUE") {
         $merged_opts = Vs::merge([
             [
-                "apikey" => $env["YADOREPUBLISHER_APIKEY"],
             ],
             $extra ?? [],
         ]);

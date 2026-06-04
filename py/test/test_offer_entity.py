@@ -102,7 +102,6 @@ def _offer_basic_setup(extra):
         "YADOREPUBLISHER_TEST_OFFER_ENTID": idmap,
         "YADOREPUBLISHER_TEST_LIVE": "FALSE",
         "YADOREPUBLISHER_TEST_EXPLAIN": "FALSE",
-        "YADOREPUBLISHER_APIKEY": "NONE",
     })
 
     idmap_resolved = helpers.to_map(
@@ -113,7 +112,6 @@ def _offer_basic_setup(extra):
     if env.get("YADOREPUBLISHER_TEST_LIVE") == "TRUE":
         merged_opts = vs.merge([
             {
-                "apikey": env.get("YADOREPUBLISHER_APIKEY"),
             },
             extra or {},
         ])

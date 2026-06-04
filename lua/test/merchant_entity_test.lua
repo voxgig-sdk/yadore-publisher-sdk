@@ -92,7 +92,6 @@ function merchant_basic_setup(extra)
     ["YADOREPUBLISHER_TEST_MERCHANT_ENTID"] = idmap,
     ["YADOREPUBLISHER_TEST_LIVE"] = "FALSE",
     ["YADOREPUBLISHER_TEST_EXPLAIN"] = "FALSE",
-    ["YADOREPUBLISHER_APIKEY"] = "NONE",
   })
 
   local idmap_resolved = helpers.to_map(
@@ -104,7 +103,6 @@ function merchant_basic_setup(extra)
   if env["YADOREPUBLISHER_TEST_LIVE"] == "TRUE" then
     local merged_opts = vs.merge({
       {
-        apikey = env["YADOREPUBLISHER_APIKEY"],
       },
       extra or {},
     })

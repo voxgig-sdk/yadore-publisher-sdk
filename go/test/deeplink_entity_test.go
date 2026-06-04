@@ -110,7 +110,6 @@ func deeplinkBasicSetup(extra map[string]any) *entityTestSetup {
 		"YADOREPUBLISHER_TEST_DEEPLINK_ENTID": idmap,
 		"YADOREPUBLISHER_TEST_LIVE":      "FALSE",
 		"YADOREPUBLISHER_TEST_EXPLAIN":   "FALSE",
-		"YADOREPUBLISHER_APIKEY":         "NONE",
 	})
 
 	idmapResolved := core.ToMapAny(env["YADOREPUBLISHER_TEST_DEEPLINK_ENTID"])
@@ -121,7 +120,6 @@ func deeplinkBasicSetup(extra map[string]any) *entityTestSetup {
 	if env["YADOREPUBLISHER_TEST_LIVE"] == "TRUE" {
 		mergedOpts := vs.Merge([]any{
 			map[string]any{
-				"apikey": env["YADOREPUBLISHER_APIKEY"],
 			},
 			extra,
 		})

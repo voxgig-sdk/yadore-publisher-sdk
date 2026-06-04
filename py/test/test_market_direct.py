@@ -61,14 +61,12 @@ def _market_direct_setup(mockres):
     env = runner.env_override({
         "YADOREPUBLISHER_TEST_MARKET_ENTID": {},
         "YADOREPUBLISHER_TEST_LIVE": "FALSE",
-        "YADOREPUBLISHER_APIKEY": "NONE",
     })
 
     live = env.get("YADOREPUBLISHER_TEST_LIVE") == "TRUE"
 
     if live:
         merged_opts = {
-            "apikey": env.get("YADOREPUBLISHER_APIKEY"),
         }
         client = YadorePublisherSDK(merged_opts)
         return {

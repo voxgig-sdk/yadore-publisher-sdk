@@ -82,7 +82,6 @@ def conversion_status_basic_setup(extra)
     "YADOREPUBLISHER_TEST_CONVERSION_STATUS_ENTID" => idmap,
     "YADOREPUBLISHER_TEST_LIVE" => "FALSE",
     "YADOREPUBLISHER_TEST_EXPLAIN" => "FALSE",
-    "YADOREPUBLISHER_APIKEY" => "NONE",
   })
 
   idmap_resolved = Helpers.to_map(
@@ -94,7 +93,6 @@ def conversion_status_basic_setup(extra)
   if env["YADOREPUBLISHER_TEST_LIVE"] == "TRUE"
     merged_opts = Vs.merge([
       {
-        "apikey" => env["YADOREPUBLISHER_APIKEY"],
       },
       extra || {},
     ])

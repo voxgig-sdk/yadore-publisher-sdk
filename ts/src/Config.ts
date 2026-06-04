@@ -38,10 +38,6 @@ class Config {
   options = {
     base: 'https://api.yadore.com/',
 
-    auth: {
-      prefix: 'Bearer',
-    },
-
     headers: {
       "content-type": "application/json"
     },

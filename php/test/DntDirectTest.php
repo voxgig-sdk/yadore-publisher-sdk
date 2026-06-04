@@ -67,14 +67,12 @@ function dnt_direct_setup($mockres)
     $env = Runner::env_override([
         "YADOREPUBLISHER_TEST_DNT_ENTID" => [],
         "YADOREPUBLISHER_TEST_LIVE" => "FALSE",
-        "YADOREPUBLISHER_APIKEY" => "NONE",
     ]);
 
     $live = $env["YADOREPUBLISHER_TEST_LIVE"] === "TRUE";
 
     if ($live) {
         $merged_opts = [
-            "apikey" => $env["YADOREPUBLISHER_APIKEY"],
         ];
         $client = new YadorePublisherSDK($merged_opts);
         return [

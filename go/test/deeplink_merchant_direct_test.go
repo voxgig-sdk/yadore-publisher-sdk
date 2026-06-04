@@ -93,14 +93,12 @@ func deeplink_merchantDirectSetup(mockres any) *deeplink_merchantDirectSetupResu
 	env := envOverride(map[string]any{
 		"YADOREPUBLISHER_TEST_DEEPLINK_MERCHANT_ENTID": map[string]any{},
 		"YADOREPUBLISHER_TEST_LIVE":    "FALSE",
-		"YADOREPUBLISHER_APIKEY":       "NONE",
 	})
 
 	live := env["YADOREPUBLISHER_TEST_LIVE"] == "TRUE"
 
 	if live {
 		mergedOpts := map[string]any{
-			"apikey": env["YADOREPUBLISHER_APIKEY"],
 		}
 		client := sdk.NewYadorePublisherSDK(mergedOpts)
 
