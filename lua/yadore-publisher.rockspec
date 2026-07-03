@@ -8,12 +8,14 @@ source = {
   dir = "yadore-publisher-sdk/lua"
 }
 description = {
-  summary = "YadorePublisher SDK for Lua",
-  license = "MIT"
+  summary = "Unofficial generated Lua SDK for the Yadore Publisher public API. Not affiliated with or endorsed by the upstream API provider.",
+  homepage = "https://github.com/voxgig-sdk/yadore-publisher-sdk",
+  issues_url = "https://github.com/voxgig-sdk/yadore-publisher-sdk/issues",
+  license = "MIT",
+  labels = { "voxgig", "sdk", "generated-sdk", "openapi", "api-client", "yadore-publisher" }
 }
 dependencies = {
   "lua >= 5.3",
-  "dkjson >= 2.5",
   "dkjson >= 2.5",
 }
 build = {

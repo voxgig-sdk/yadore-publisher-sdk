@@ -10,7 +10,7 @@ The TypeScript SDK for the YadorePublisher API — a type-safe, entity-oriented 
 
 ## Install
 ```bash
-npm install yadore-publisher
+npm install @voxgig-sdk/yadore-publisher
 ```
 ## Tutorial: your first API call
 

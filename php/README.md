@@ -10,7 +10,7 @@ The PHP SDK for the YadorePublisher API — an entity-oriented client using PHP 
 
 ## Install
 ```bash
-composer require voxgig/yadore-publisher-sdk
+composer require voxgig-sdk/yadore-publisher
 ```
 
 

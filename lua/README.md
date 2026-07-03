@@ -10,7 +10,7 @@ The Lua SDK for the YadorePublisher API — an entity-oriented client using Lua 
 
 ## Install
 ```bash
-luarocks install yadore-publisher-sdk
+luarocks install voxgig-sdk-yadore-publisher
 ```
 
 If the module is not yet published, add the source directory to

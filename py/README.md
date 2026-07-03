@@ -10,7 +10,7 @@ The Python SDK for the YadorePublisher API — an entity-oriented client followi
 
 ## Install
 ```bash
-pip install yadore-publisher-sdk
+pip install voxgig-sdk-yadore-publisher
 ```
 
 Or install from source:

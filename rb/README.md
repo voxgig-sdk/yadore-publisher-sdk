@@ -10,13 +10,13 @@ The Ruby SDK for the YadorePublisher API — an entity-oriented client using idi
 
 ## Install
 ```bash
-gem install yadore-publisher-sdk
+gem install voxgig-sdk-yadore-publisher
 ```
 
 Or add to your `Gemfile`:
 
 ```ruby
-gem "yadore-publisher-sdk"
+gem "voxgig-sdk-yadore-publisher"
 ```
 
 Then run:
