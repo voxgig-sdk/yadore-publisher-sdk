@@ -113,6 +113,7 @@ function basicSetup(extra?: any) {
     'YADORE_PUBLISHER_TEST_REPORT_GENERAL_ENTID': idmap,
     'YADORE_PUBLISHER_TEST_LIVE': 'FALSE',
     'YADORE_PUBLISHER_TEST_EXPLAIN': 'FALSE',
+    'YADORE_PUBLISHER_APIKEY': 'NONE',
   })
 
   idmap = env['YADORE_PUBLISHER_TEST_REPORT_GENERAL_ENTID']
@@ -122,6 +123,7 @@ function basicSetup(extra?: any) {
   if (live) {
     client = new YadorePublisherSDK(merge([
       {
+        apikey: env.YADORE_PUBLISHER_APIKEY,
       },
       extra
     ]))

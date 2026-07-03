@@ -1,48 +1,13 @@
 {
-  "name": "yadore-publisher",
-  "origin": "voxgig-sdk",
   "def": "yadore-publisher_0.1.0.yaml",
   "main": {
+    "def": {
+      "desc": ""
+    },
     "kit": {
-      "info": {
-        "description": "This is an overview of all the available API endpoints.\nEach API is grouped and you can unfold the different endpoints to get detailed information on how to use them.\n\nYou can use this actionable documentation or an application of your choice (e.g. [Postman](https://www.postman.com/)) to browse the API.\n\n## Endpoints\nThe API servers are available under the URL: `https://api.yadore.com/`. You must use this URL for all API requests.\nFor example to search for offers, you must send your request to `https://api.yadore.com/v2/offer`.\n\nThis doesn't concern you when you are using this documentation. You can use the endpoints here by clicking on `Try it out`.\n\n## Authentication\nYou must add your API-Key as header `API-Key` to all requests in the application of your choice.\n\nFor authorizing your requests in this actionable documentation, you must use the `Authorize` button below and enter your API-Key.\n\n## FAQ\n\n1. What Yadore understands as **offer** – for us an offer is a product offer from a specific merchant, example would be a specific washing machine from e.g. _Mediamarkt.de_.\n\n2. What Yadore understands as **deeplink** – for us a deeplink is a specific product landing page from a merchant, so the deep link request must look like `shopdomain.de/category/specific_product.html`.\n\n3. What Yadore understands as **smartlink** – for us a smartlink merchant is a merchant, where the publisher can send the user anywhere, means home page, category page, product page, etc. However, you must specify exactly where you want to send the user (i.e. homepage, category, ..) as the API will not automatically generate this for you.\n\n4. All monetary values are always in **Euro**.\n\n5. All dates returned from any endpoint are in **UTC time**.\n\n6. All API parameters are **case sensitive**.\n\n7. The estimated CPC in all APIs is 100% Yadore, to calculate your revenue you have to adapt your share.\n\n8. We classify publishers in _“no couponing”_, _“couponing”_ and _“mixed”_. This is important as _“mixed”_ publishers need to use a parameter to inform if a click is couponing or not. If you feel wrongly classified just speak to your account manager.\n\n9. If there are any further questions, please contact your account manager or send an email to [mail@yadore.com](mailto:mail@yadore.com).\n",
-        "servers": [
-          {
-            "url": "https://api.yadore.com/"
-          }
-        ],
-        "title": "Yadore Publisher API",
-        "version": "2.0.0",
-        "tagline": "Access affiliate offers, deeplinks, and conversion reports from Yadore's catalogue of 12,000+ merchants across 40+ markets",
-        "homepage": "https://www.yadore.com/",
-        "docs_url": "https://docs.yadore.com/",
-        "license_short": "Proprietary commercial API; access requires a Yadore publisher account and API key.",
-        "license_md": "- Proprietary commercial API operated by [Yadore GmbH](https://www.yadore.com/).\n- Use is governed by the Yadore publisher agreement; an API key is required.\n- No public licence text is published alongside the API spec.\n- Per-click payout model rather than a redistributable data licence.",
-        "about_md": "The Yadore Publisher API is the affiliate-marketing interface from [Yadore GmbH](https://www.yadore.com/), a German e-commerce data platform that aggregates and normalises product feeds for online publishers and advertisers. It exposes the same offer, merchant, deeplink, and reporting data that powers Yadore's WordPress and link-replacement integrations.\n\nWhat you can do with the API:\n\n- Search and retrieve merchant **offers** (product records) drawn from a catalogue of 12,000+ merchants in 40+ markets.\n- Generate **deeplinks** and merchant-specific tracking URLs for clicks and redirects.\n- Pull **conversion** data — general lists, per-conversion detail, merchant breakdowns, and status records.\n- Pull **reports** — general daily revenue stats, detailed click/placement analytics, modified-records snapshots, and report status.\n- Manage configuration around **markets**, **merchants**, and Do-Not-Track (**dnt**) settings.\n\nOperational notes: the API is served from `https://api.yadore.com/` and authenticates via an API key issued with a publisher account. Public uptime monitors report a sub-250 ms average response time. CORS is not enabled, so calls should be made server-side.",
-        "entity_desc": {
-          "conversion_detail": "Detailed per-conversion records returned by the conversions endpoints, including click and order metadata.",
-          "conversion_detail_merchant": "Per-merchant breakdown of conversion detail records, grouping conversions by the originating merchant.",
-          "conversion_general": "Summary list of conversions across the publisher account, used for top-level conversion reporting.",
-          "conversion_status": "Status information for conversions (e.g. pending, confirmed, cancelled) as tracked by Yadore.",
-          "deeplink": "Generated affiliate deeplinks that wrap a destination URL with the publisher's tracking parameters.",
-          "deeplink_merchant": "Merchant-scoped deeplink resources, used to create or list deeplinks for a specific merchant.",
-          "dnt": "Do-Not-Track configuration entries that exclude specified traffic or sources from tracking.",
-          "market": "Country or market definitions Yadore supports (40+ markets) for filtering offers, merchants, and reports.",
-          "merchant": "Catalogue of advertiser merchants available to the publisher, with metadata about each shop.",
-          "offer": "Individual product offers from merchants, the core search resource for product-level affiliate data.",
-          "report_detail": "Detailed click- and placement-level analytics records, suitable for granular performance analysis.",
-          "report_general": "High-level daily revenue and traffic statistics rolled up across the publisher account.",
-          "report_modified": "Snapshot of records that have changed since a given point, used for incremental report syncing.",
-          "report_status": "Status metadata for generated reports, indicating availability and processing state."
-        },
-        "auth": false
-      },
       "config": {
         "auth": {
           "prefix": "Bearer"
-        },
-        "headers": {
-          "content-type": "application/json"
         },
         "docs_order": [
           "ts",
@@ -51,82 +16,88 @@
           "go",
           "rb",
           "lua"
-        ]
+        ],
+        "headers": {
+          "content-type": "application/json"
+        }
       },
       "entity": {
         "conversion_detail": {
+          "active": true,
           "alias": {
             "field": {}
           },
           "fields": [
             {
+              "active": true,
               "name": "click_id",
               "req": false,
-              "type": "`$STRING`",
-              "active": true
+              "type": "`$STRING`"
             },
             {
+              "active": true,
               "name": "date",
               "req": false,
-              "type": "`$STRING`",
-              "active": true
+              "type": "`$STRING`"
             },
             {
+              "active": true,
               "name": "market",
               "req": false,
-              "type": "`$STRING`",
-              "active": true
+              "type": "`$STRING`"
             },
             {
+              "active": true,
               "name": "merchant",
               "req": false,
-              "type": "`$OBJECT`",
-              "active": true
+              "type": "`$OBJECT`"
             },
             {
+              "active": true,
               "name": "placement_id",
               "req": false,
-              "type": "`$STRING`",
-              "active": true
+              "type": "`$STRING`"
             },
             {
+              "active": true,
               "name": "sale",
               "req": false,
-              "type": "`$NUMBER`",
-              "active": true
+              "type": "`$NUMBER`"
             }
           ],
           "name": "conversion_detail",
           "op": {
             "list": {
+              "input": "data",
               "name": "list",
               "points": [
                 {
+                  "active": true,
                   "args": {
                     "query": [
                       {
+                        "active": true,
                         "kind": "query",
                         "name": "date",
                         "orig": "date",
                         "reqd": true,
-                        "type": "`$STRING`",
-                        "active": true
+                        "type": "`$STRING`"
                       },
                       {
+                        "active": true,
                         "kind": "query",
                         "name": "format",
                         "orig": "format",
                         "reqd": true,
-                        "type": "`$STRING`",
-                        "active": true
+                        "type": "`$STRING`"
                       },
                       {
+                        "active": true,
                         "kind": "query",
                         "name": "market",
                         "orig": "market",
                         "reqd": false,
-                        "type": "`$STRING`",
-                        "active": true
+                        "type": "`$STRING`"
                       }
                     ]
                   },
@@ -147,87 +118,87 @@
                   "transform": {
                     "req": "`reqdata`",
                     "res": "`body`"
-                  },
-                  "active": true
+                  }
                 }
-              ],
-              "input": "data"
+              ]
             }
           },
-          "active": true,
           "relations": {
             "ancestors": []
           }
         },
         "conversion_detail_merchant": {
+          "active": true,
           "alias": {
             "field": {}
           },
           "fields": [
             {
+              "active": true,
               "name": "click",
               "req": false,
-              "type": "`$INTEGER`",
-              "active": true
+              "type": "`$INTEGER`"
             },
             {
+              "active": true,
               "name": "market",
               "req": false,
-              "type": "`$STRING`",
-              "active": true
+              "type": "`$STRING`"
             },
             {
+              "active": true,
               "name": "merchant",
               "req": false,
-              "type": "`$OBJECT`",
-              "active": true
+              "type": "`$OBJECT`"
             },
             {
+              "active": true,
               "name": "sale",
               "req": false,
-              "type": "`$INTEGER`",
-              "active": true
+              "type": "`$INTEGER`"
             }
           ],
           "name": "conversion_detail_merchant",
           "op": {
             "list": {
+              "input": "data",
               "name": "list",
               "points": [
                 {
+                  "active": true,
                   "args": {
                     "query": [
                       {
+                        "active": true,
                         "kind": "query",
                         "name": "format",
                         "orig": "format",
                         "reqd": true,
-                        "type": "`$STRING`",
-                        "active": true
+                        "type": "`$STRING`"
                       },
                       {
+                        "active": true,
                         "kind": "query",
                         "name": "from",
                         "orig": "from",
                         "reqd": true,
-                        "type": "`$STRING`",
-                        "active": true
+                        "type": "`$STRING`"
                       },
                       {
+                        "active": true,
                         "kind": "query",
                         "name": "market",
                         "orig": "market",
                         "reqd": false,
-                        "type": "`$STRING`",
-                        "active": true
+                        "type": "`$STRING`"
                       },
                       {
+                        "active": true,
                         "kind": "query",
                         "name": "to",
                         "orig": "to",
                         "reqd": true,
-                        "type": "`$STRING`",
-                        "active": true
+                        "type": "`$STRING`"
                       }
                     ]
                   },
@@ -250,73 +221,73 @@
                   "transform": {
                     "req": "`reqdata`",
                     "res": "`body`"
-                  },
-                  "active": true
+                  }
                 }
-              ],
-              "input": "data"
+              ]
             }
           },
-          "active": true,
           "relations": {
             "ancestors": []
           }
         },
         "conversion_general": {
+          "active": true,
           "alias": {
             "field": {}
           },
           "fields": [
             {
+              "active": true,
               "name": "date",
               "req": false,
-              "type": "`$OBJECT`",
-              "active": true
+              "type": "`$OBJECT`"
             },
             {
+              "active": true,
               "name": "market",
               "req": false,
-              "type": "`$OBJECT`",
-              "active": true
+              "type": "`$OBJECT`"
             },
             {
+              "active": true,
               "name": "total",
               "req": false,
-              "type": "`$OBJECT`",
-              "active": true
+              "type": "`$OBJECT`"
             }
           ],
           "name": "conversion_general",
           "op": {
             "load": {
+              "input": "data",
               "name": "load",
               "points": [
                 {
+                  "active": true,
                   "args": {
                     "query": [
                       {
+                        "active": true,
                         "kind": "query",
                         "name": "format",
                         "orig": "format",
                         "reqd": true,
-                        "type": "`$STRING`",
-                        "active": true
+                        "type": "`$STRING`"
                       },
                       {
+                        "active": true,
                         "kind": "query",
                         "name": "from",
                         "orig": "from",
                         "reqd": true,
-                        "type": "`$STRING`",
-                        "active": true
+                        "type": "`$STRING`"
                       },
                       {
+                        "active": true,
                         "kind": "query",
                         "name": "to",
                         "orig": "to",
                         "reqd": true,
-                        "type": "`$STRING`",
-                        "active": true
+                        "type": "`$STRING`"
                       }
                     ]
                   },
@@ -337,45 +308,45 @@
                   "transform": {
                     "req": "`reqdata`",
                     "res": "`body`"
-                  },
-                  "active": true
+                  }
                 }
-              ],
-              "input": "data"
+              ]
             }
           },
-          "active": true,
           "relations": {
             "ancestors": []
           }
         },
         "conversion_status": {
+          "active": true,
           "alias": {
             "field": {}
           },
           "fields": [
             {
+              "active": true,
               "name": "status",
               "req": false,
-              "type": "`$STRING`",
-              "active": true
+              "type": "`$STRING`"
             }
           ],
           "name": "conversion_status",
           "op": {
             "load": {
+              "input": "data",
               "name": "load",
               "points": [
                 {
+                  "active": true,
                   "args": {
                     "query": [
                       {
+                        "active": true,
                         "kind": "query",
                         "name": "date",
                         "orig": "date",
                         "reqd": true,
-                        "type": "`$STRING`",
-                        "active": true
+                        "type": "`$STRING`"
                       }
                     ]
                   },
@@ -394,141 +365,139 @@
                   "transform": {
                     "req": "`reqdata`",
                     "res": "`body`"
-                  },
-                  "active": true
+                  }
                 }
-              ],
-              "input": "data"
+              ]
             }
           },
-          "active": true,
           "relations": {
             "ancestors": []
           }
         },
         "deeplink": {
+          "active": true,
           "alias": {
             "field": {}
           },
           "fields": [
             {
+              "active": true,
               "name": "is_couponing",
               "req": false,
-              "type": "`$BOOLEAN`",
-              "active": true
+              "type": "`$BOOLEAN`"
             },
             {
+              "active": true,
               "name": "market",
               "req": true,
-              "type": "`$STRING`",
-              "active": true
+              "type": "`$STRING`"
             },
             {
+              "active": true,
               "name": "placement_id",
               "req": false,
-              "type": "`$STRING`",
-              "active": true
+              "type": "`$STRING`"
             },
             {
+              "active": true,
               "name": "result",
               "req": false,
-              "type": "`$OBJECT`",
-              "active": true
+              "type": "`$OBJECT`"
             },
             {
+              "active": true,
               "name": "url",
               "req": true,
-              "type": "`$ARRAY`",
-              "active": true
+              "type": "`$ARRAY`"
             }
           ],
           "name": "deeplink",
           "op": {
             "create": {
+              "input": "data",
               "name": "create",
               "points": [
                 {
+                  "active": true,
+                  "args": {},
                   "method": "POST",
                   "orig": "/v2/deeplink",
                   "parts": [
                     "v2",
                     "deeplink"
                   ],
+                  "select": {},
                   "transform": {
                     "req": "`reqdata`",
                     "res": "`body`"
-                  },
-                  "active": true,
-                  "args": {},
-                  "select": {}
+                  }
                 }
-              ],
-              "input": "data"
+              ]
             }
           },
-          "active": true,
           "relations": {
             "ancestors": []
           }
         },
         "deeplink_merchant": {
+          "active": true,
           "alias": {
             "field": {}
           },
           "fields": [
             {
+              "active": true,
               "name": "deeplink_count",
               "req": false,
-              "type": "`$INTEGER`",
-              "active": true
+              "type": "`$INTEGER`"
             },
             {
+              "active": true,
               "name": "estimated_cpc",
               "req": false,
-              "type": "`$OBJECT`",
-              "active": true
+              "type": "`$OBJECT`"
             },
             {
+              "active": true,
               "name": "has_external_homepage",
               "req": false,
-              "type": "`$BOOLEAN`",
-              "active": true
+              "type": "`$BOOLEAN`"
             },
             {
+              "active": true,
               "name": "has_smartlink_homepage",
               "req": false,
-              "type": "`$BOOLEAN`",
-              "active": true
+              "type": "`$BOOLEAN`"
             },
             {
+              "active": true,
               "name": "id",
               "req": false,
-              "type": "`$STRING`",
-              "active": true
+              "type": "`$STRING`"
             },
             {
+              "active": true,
               "name": "is_smartlink",
               "req": false,
-              "type": "`$BOOLEAN`",
-              "active": true
+              "type": "`$BOOLEAN`"
             },
             {
+              "active": true,
               "name": "logo",
               "req": false,
-              "type": "`$OBJECT`",
-              "active": true
+              "type": "`$OBJECT`"
             },
             {
+              "active": true,
               "name": "name",
               "req": false,
-              "type": "`$STRING`",
-              "active": true
+              "type": "`$STRING`"
             },
             {
+              "active": true,
               "name": "traffic_type",
               "req": false,
-              "type": "`$ARRAY`",
-              "active": true
+              "type": "`$ARRAY`"
             }
           ],
           "id": {
@@ -538,42 +507,44 @@
           "name": "deeplink_merchant",
           "op": {
             "list": {
+              "input": "data",
               "name": "list",
               "points": [
                 {
+                  "active": true,
                   "args": {
                     "query": [
                       {
+                        "active": true,
                         "kind": "query",
                         "name": "has_homepage",
                         "orig": "has_homepage",
                         "reqd": false,
-                        "type": "`$BOOLEAN`",
-                        "active": true
+                        "type": "`$BOOLEAN`"
                       },
                       {
+                        "active": true,
                         "kind": "query",
                         "name": "is_couponing",
                         "orig": "is_couponing",
                         "reqd": false,
-                        "type": "`$BOOLEAN`",
-                        "active": true
+                        "type": "`$BOOLEAN`"
                       },
                       {
+                        "active": true,
                         "kind": "query",
                         "name": "is_smartlink",
                         "orig": "is_smartlink",
                         "reqd": false,
-                        "type": "`$BOOLEAN`",
-                        "active": true
+                        "type": "`$BOOLEAN`"
                       },
                       {
+                        "active": true,
                         "kind": "query",
                         "name": "market",
                         "orig": "market",
                         "reqd": true,
-                        "type": "`$STRING`",
-                        "active": true
+                        "type": "`$STRING`"
                       }
                     ]
                   },
@@ -595,85 +566,86 @@
                   "transform": {
                     "req": "`reqdata`",
                     "res": "`body`"
-                  },
-                  "active": true
+                  }
                 }
-              ],
-              "input": "data"
+              ]
             }
           },
-          "active": true,
           "relations": {
             "ancestors": []
           }
         },
         "dnt": {
+          "active": true,
           "alias": {
             "field": {}
           },
+          "fields": [],
           "name": "dnt",
           "op": {
             "load": {
+              "input": "data",
               "name": "load",
               "points": [
                 {
+                  "active": true,
                   "args": {
                     "query": [
                       {
+                        "active": true,
                         "kind": "query",
                         "name": "callback_url",
                         "orig": "callback_url",
                         "reqd": false,
-                        "type": "`$STRING`",
-                        "active": true
+                        "type": "`$STRING`"
                       },
                       {
+                        "active": true,
                         "kind": "query",
                         "name": "is_couponing",
                         "orig": "is_couponing",
                         "reqd": false,
-                        "type": "`$BOOLEAN`",
-                        "active": true
+                        "type": "`$BOOLEAN`"
                       },
                       {
+                        "active": true,
                         "kind": "query",
                         "name": "market",
                         "orig": "market",
                         "reqd": true,
-                        "type": "`$STRING`",
-                        "active": true
+                        "type": "`$STRING`"
                       },
                       {
+                        "active": true,
                         "kind": "query",
                         "name": "merchant_id",
                         "orig": "merchant_id",
                         "reqd": false,
-                        "type": "`$STRING`",
-                        "active": true
+                        "type": "`$STRING`"
                       },
                       {
+                        "active": true,
                         "kind": "query",
                         "name": "placement_id",
                         "orig": "placement_id",
                         "reqd": false,
-                        "type": "`$STRING`",
-                        "active": true
+                        "type": "`$STRING`"
                       },
                       {
+                        "active": true,
                         "kind": "query",
                         "name": "project_id",
                         "orig": "project_id",
                         "reqd": true,
-                        "type": "`$STRING`",
-                        "active": true
+                        "type": "`$STRING`"
                       },
                       {
+                        "active": true,
                         "kind": "query",
                         "name": "url",
                         "orig": "url",
                         "reqd": true,
-                        "type": "`$STRING`",
-                        "active": true
+                        "type": "`$STRING`"
                       }
                     ]
                   },
@@ -697,29 +669,26 @@
                   "transform": {
                     "req": "`reqdata`",
                     "res": "`body`"
-                  },
-                  "active": true
+                  }
                 }
-              ],
-              "input": "data"
+              ]
             }
           },
-          "active": true,
-          "fields": [],
           "relations": {
             "ancestors": []
           }
         },
         "market": {
+          "active": true,
           "alias": {
             "field": {}
           },
           "fields": [
             {
+              "active": true,
               "name": "id",
               "req": false,
-              "type": "`$STRING`",
-              "active": true
+              "type": "`$STRING`"
             }
           ],
           "id": {
@@ -729,66 +698,66 @@
           "name": "market",
           "op": {
             "list": {
+              "input": "data",
               "name": "list",
               "points": [
                 {
+                  "active": true,
+                  "args": {},
                   "method": "GET",
                   "orig": "/v2/markets",
                   "parts": [
                     "v2",
                     "markets"
                   ],
+                  "select": {},
                   "transform": {
                     "req": "`reqdata`",
                     "res": "`body`"
-                  },
-                  "active": true,
-                  "args": {},
-                  "select": {}
+                  }
                 }
-              ],
-              "input": "data"
+              ]
             }
           },
-          "active": true,
           "relations": {
             "ancestors": []
           }
         },
         "merchant": {
+          "active": true,
           "alias": {
             "field": {}
           },
           "fields": [
             {
+              "active": true,
               "name": "id",
               "req": false,
-              "type": "`$STRING`",
-              "active": true
+              "type": "`$STRING`"
             },
             {
+              "active": true,
               "name": "logo",
               "req": false,
-              "type": "`$OBJECT`",
-              "active": true
+              "type": "`$OBJECT`"
             },
             {
+              "active": true,
               "name": "name",
               "req": false,
-              "type": "`$STRING`",
-              "active": true
+              "type": "`$STRING`"
             },
             {
+              "active": true,
               "name": "offer_count",
               "req": false,
-              "type": "`$INTEGER`",
-              "active": true
+              "type": "`$INTEGER`"
             },
             {
+              "active": true,
               "name": "traffic_type",
               "req": false,
-              "type": "`$ARRAY`",
-              "active": true
+              "type": "`$ARRAY`"
             }
           ],
           "id": {
@@ -798,26 +767,28 @@
           "name": "merchant",
           "op": {
             "list": {
+              "input": "data",
               "name": "list",
               "points": [
                 {
+                  "active": true,
                   "args": {
                     "query": [
                       {
+                        "active": true,
                         "kind": "query",
                         "name": "is_couponing",
                         "orig": "is_couponing",
                         "reqd": false,
-                        "type": "`$BOOLEAN`",
-                        "active": true
+                        "type": "`$BOOLEAN`"
                       },
                       {
+                        "active": true,
                         "kind": "query",
                         "name": "market",
                         "orig": "market",
                         "reqd": true,
-                        "type": "`$STRING`",
-                        "active": true
+                        "type": "`$STRING`"
                       }
                     ]
                   },
@@ -836,130 +807,128 @@
                   "transform": {
                     "req": "`reqdata`",
                     "res": "`body`"
-                  },
-                  "active": true
+                  }
                 }
-              ],
-              "input": "data"
+              ]
             }
           },
-          "active": true,
           "relations": {
             "ancestors": []
           }
         },
         "offer": {
+          "active": true,
           "alias": {
             "field": {}
           },
           "fields": [
             {
+              "active": true,
               "name": "availability",
               "req": false,
-              "type": "`$STRING`",
-              "active": true
+              "type": "`$STRING`"
             },
             {
+              "active": true,
               "name": "brand",
               "req": false,
-              "type": "`$STRING`",
-              "active": true
+              "type": "`$STRING`"
             },
             {
+              "active": true,
               "name": "click_url",
               "req": false,
-              "type": "`$STRING`",
-              "active": true
+              "type": "`$STRING`"
             },
             {
+              "active": true,
               "name": "description",
               "req": false,
-              "type": "`$STRING`",
-              "active": true
+              "type": "`$STRING`"
             },
             {
+              "active": true,
               "name": "ean",
               "req": false,
-              "type": "`$OBJECT`",
-              "active": true
+              "type": "`$OBJECT`"
             },
             {
+              "active": true,
               "name": "eer",
               "req": false,
-              "type": "`$STRING`",
-              "active": true
+              "type": "`$STRING`"
             },
             {
+              "active": true,
               "name": "estimated_cpc",
               "req": false,
-              "type": "`$OBJECT`",
-              "active": true
+              "type": "`$OBJECT`"
             },
             {
+              "active": true,
               "name": "id",
               "req": false,
-              "type": "`$STRING`",
-              "active": true
+              "type": "`$STRING`"
             },
             {
+              "active": true,
               "name": "image",
               "req": false,
-              "type": "`$OBJECT`",
-              "active": true
+              "type": "`$OBJECT`"
             },
             {
+              "active": true,
               "name": "merchant",
               "req": false,
-              "type": "`$OBJECT`",
-              "active": true
+              "type": "`$OBJECT`"
             },
             {
+              "active": true,
               "name": "original_price",
               "req": false,
-              "type": "`$OBJECT`",
-              "active": true
+              "type": "`$OBJECT`"
             },
             {
+              "active": true,
               "name": "price",
               "req": false,
-              "type": "`$OBJECT`",
-              "active": true
+              "type": "`$OBJECT`"
             },
             {
+              "active": true,
               "name": "promo_text",
               "req": false,
-              "type": "`$STRING`",
-              "active": true
+              "type": "`$STRING`"
             },
             {
+              "active": true,
               "name": "shipping_price",
               "req": false,
-              "type": "`$OBJECT`",
-              "active": true
+              "type": "`$OBJECT`"
             },
             {
+              "active": true,
               "name": "shipping_time",
               "req": false,
-              "type": "`$OBJECT`",
-              "active": true
+              "type": "`$OBJECT`"
             },
             {
+              "active": true,
               "name": "thumbnail",
               "req": false,
-              "type": "`$OBJECT`",
-              "active": true
+              "type": "`$OBJECT`"
             },
             {
+              "active": true,
               "name": "title",
               "req": false,
-              "type": "`$STRING`",
-              "active": true
+              "type": "`$STRING`"
             },
             {
+              "active": true,
               "name": "unit_price",
               "req": false,
-              "type": "`$OBJECT`",
-              "active": true
+              "type": "`$OBJECT`"
             }
           ],
           "id": {
@@ -969,92 +938,94 @@
           "name": "offer",
           "op": {
             "list": {
+              "input": "data",
               "name": "list",
               "points": [
                 {
+                  "active": true,
                   "args": {
                     "query": [
                       {
+                        "active": true,
                         "kind": "query",
                         "name": "ean",
                         "orig": "ean",
                         "reqd": false,
-                        "type": "`$STRING`",
-                        "active": true
+                        "type": "`$STRING`"
                       },
                       {
+                        "active": true,
                         "kind": "query",
                         "name": "is_couponing",
                         "orig": "is_couponing",
                         "reqd": false,
-                        "type": "`$BOOLEAN`",
-                        "active": true
+                        "type": "`$BOOLEAN`"
                       },
                       {
+                        "active": true,
                         "kind": "query",
                         "name": "keyword",
                         "orig": "keyword",
                         "reqd": false,
-                        "type": "`$STRING`",
-                        "active": true
+                        "type": "`$STRING`"
                       },
                       {
+                        "active": true,
                         "kind": "query",
                         "name": "limit",
                         "orig": "limit",
                         "reqd": false,
-                        "type": "`$INTEGER`",
-                        "active": true
+                        "type": "`$INTEGER`"
                       },
                       {
+                        "active": true,
                         "kind": "query",
                         "name": "market",
                         "orig": "market",
                         "reqd": true,
-                        "type": "`$STRING`",
-                        "active": true
+                        "type": "`$STRING`"
                       },
                       {
+                        "active": true,
                         "kind": "query",
                         "name": "merchant_id",
                         "orig": "merchant_id",
                         "reqd": false,
-                        "type": "`$STRING`",
-                        "active": true
+                        "type": "`$STRING`"
                       },
                       {
+                        "active": true,
                         "kind": "query",
                         "name": "offer_id",
                         "orig": "offer_id",
                         "reqd": false,
-                        "type": "`$STRING`",
-                        "active": true
+                        "type": "`$STRING`"
                       },
                       {
+                        "active": true,
                         "kind": "query",
                         "name": "placement_id",
                         "orig": "placement_id",
                         "reqd": false,
-                        "type": "`$STRING`",
-                        "active": true
+                        "type": "`$STRING`"
                       },
                       {
+                        "active": true,
                         "example": "fuzzy",
                         "kind": "query",
                         "name": "precision",
                         "orig": "precision",
                         "reqd": false,
-                        "type": "`$STRING`",
-                        "active": true
+                        "type": "`$STRING`"
                       },
                       {
+                        "active": true,
                         "example": "rel_desc",
                         "kind": "query",
                         "name": "sort",
                         "orig": "sort",
                         "reqd": false,
-                        "type": "`$STRING`",
-                        "active": true
+                        "type": "`$STRING`"
                       }
                     ]
                   },
@@ -1081,58 +1052,58 @@
                   "transform": {
                     "req": "`reqdata`",
                     "res": "`body`"
-                  },
-                  "active": true
+                  }
                 }
-              ],
-              "input": "data"
+              ]
             },
             "load": {
+              "input": "data",
               "name": "load",
               "points": [
                 {
+                  "active": true,
                   "args": {
                     "query": [
                       {
+                        "active": true,
                         "example": "12345678,87654321",
                         "kind": "query",
                         "name": "ean",
                         "orig": "ean",
                         "reqd": true,
-                        "type": "`$STRING`",
-                        "active": true
+                        "type": "`$STRING`"
                       },
                       {
+                        "active": true,
                         "kind": "query",
                         "name": "is_couponing",
                         "orig": "is_couponing",
                         "reqd": false,
-                        "type": "`$BOOLEAN`",
-                        "active": true
+                        "type": "`$BOOLEAN`"
                       },
                       {
+                        "active": true,
                         "kind": "query",
                         "name": "market",
                         "orig": "market",
                         "reqd": true,
-                        "type": "`$STRING`",
-                        "active": true
+                        "type": "`$STRING`"
                       },
                       {
+                        "active": true,
                         "kind": "query",
                         "name": "merchant_id",
                         "orig": "merchant_id",
                         "reqd": false,
-                        "type": "`$STRING`",
-                        "active": true
+                        "type": "`$STRING`"
                       },
                       {
+                        "active": true,
                         "kind": "query",
                         "name": "placement_id",
                         "orig": "placement_id",
                         "reqd": false,
-                        "type": "`$STRING`",
-                        "active": true
+                        "type": "`$STRING`"
                       }
                     ]
                   },
@@ -1156,97 +1127,97 @@
                   "transform": {
                     "req": "`reqdata`",
                     "res": "`body`"
-                  },
-                  "active": true
+                  }
                 }
-              ],
-              "input": "data"
+              ]
             }
           },
-          "active": true,
           "relations": {
             "ancestors": []
           }
         },
         "report_detail": {
+          "active": true,
           "alias": {
             "field": {}
           },
           "fields": [
             {
+              "active": true,
               "name": "click_id",
               "req": false,
-              "type": "`$STRING`",
-              "active": true
+              "type": "`$STRING`"
             },
             {
+              "active": true,
               "name": "currency",
               "req": false,
-              "type": "`$STRING`",
-              "active": true
+              "type": "`$STRING`"
             },
             {
+              "active": true,
               "name": "date",
               "req": false,
-              "type": "`$STRING`",
-              "active": true
+              "type": "`$STRING`"
             },
             {
+              "active": true,
               "name": "market",
               "req": false,
-              "type": "`$STRING`",
-              "active": true
+              "type": "`$STRING`"
             },
             {
+              "active": true,
               "name": "merchant",
               "req": false,
-              "type": "`$OBJECT`",
-              "active": true
+              "type": "`$OBJECT`"
             },
             {
+              "active": true,
               "name": "placement_id",
               "req": false,
-              "type": "`$STRING`",
-              "active": true
+              "type": "`$STRING`"
             },
             {
+              "active": true,
               "name": "revenue",
               "req": false,
-              "type": "`$NUMBER`",
-              "active": true
+              "type": "`$NUMBER`"
             }
           ],
           "name": "report_detail",
           "op": {
             "list": {
+              "input": "data",
               "name": "list",
               "points": [
                 {
+                  "active": true,
                   "args": {
                     "query": [
                       {
+                        "active": true,
                         "kind": "query",
                         "name": "date",
                         "orig": "date",
                         "reqd": true,
-                        "type": "`$STRING`",
-                        "active": true
+                        "type": "`$STRING`"
                       },
                       {
+                        "active": true,
                         "kind": "query",
                         "name": "format",
                         "orig": "format",
                         "reqd": true,
-                        "type": "`$STRING`",
-                        "active": true
+                        "type": "`$STRING`"
                       },
                       {
+                        "active": true,
                         "kind": "query",
                         "name": "market",
                         "orig": "market",
                         "reqd": false,
-                        "type": "`$STRING`",
-                        "active": true
+                        "type": "`$STRING`"
                       }
                     ]
                   },
@@ -1267,65 +1238,65 @@
                   "transform": {
                     "req": "`reqdata`",
                     "res": "`body`"
-                  },
-                  "active": true
+                  }
                 }
-              ],
-              "input": "data"
+              ]
             }
           },
-          "active": true,
           "relations": {
             "ancestors": []
           }
         },
         "report_general": {
+          "active": true,
           "alias": {
             "field": {}
           },
           "fields": [
             {
+              "active": true,
               "name": "date",
               "req": false,
-              "type": "`$OBJECT`",
-              "active": true
+              "type": "`$OBJECT`"
             },
             {
+              "active": true,
               "name": "market",
               "req": false,
-              "type": "`$OBJECT`",
-              "active": true
+              "type": "`$OBJECT`"
             },
             {
+              "active": true,
               "name": "total",
               "req": false,
-              "type": "`$OBJECT`",
-              "active": true
+              "type": "`$OBJECT`"
             }
           ],
           "name": "report_general",
           "op": {
             "load": {
+              "input": "data",
               "name": "load",
               "points": [
                 {
+                  "active": true,
                   "args": {
                     "query": [
                       {
+                        "active": true,
                         "kind": "query",
                         "name": "date",
                         "orig": "date",
                         "reqd": true,
-                        "type": "`$STRING`",
-                        "active": true
+                        "type": "`$STRING`"
                       },
                       {
+                        "active": true,
                         "kind": "query",
                         "name": "format",
                         "orig": "format",
                         "reqd": true,
-                        "type": "`$STRING`",
-                        "active": true
+                        "type": "`$STRING`"
                       }
                     ]
                   },
@@ -1345,61 +1316,61 @@
                   "transform": {
                     "req": "`reqdata`",
                     "res": "`body`"
-                  },
-                  "active": true
+                  }
                 }
-              ],
-              "input": "data"
+              ]
             }
           },
-          "active": true,
           "relations": {
             "ancestors": []
           }
         },
         "report_modified": {
+          "active": true,
           "alias": {
             "field": {}
           },
           "fields": [
             {
+              "active": true,
               "name": "market",
               "req": false,
-              "type": "`$OBJECT`",
-              "active": true
+              "type": "`$OBJECT`"
             }
           ],
           "name": "report_modified",
           "op": {
             "load": {
+              "input": "data",
               "name": "load",
               "points": [
                 {
+                  "active": true,
                   "args": {
                     "query": [
                       {
+                        "active": true,
                         "kind": "query",
                         "name": "from",
                         "orig": "from",
                         "reqd": true,
-                        "type": "`$STRING`",
-                        "active": true
+                        "type": "`$STRING`"
                       },
                       {
+                        "active": true,
                         "kind": "query",
                         "name": "market",
                         "orig": "market",
                         "reqd": false,
-                        "type": "`$STRING`",
-                        "active": true
+                        "type": "`$STRING`"
                       },
                       {
+                        "active": true,
                         "kind": "query",
                         "name": "to",
                         "orig": "to",
                         "reqd": true,
-                        "type": "`$STRING`",
-                        "active": true
+                        "type": "`$STRING`"
                       }
                     ]
                   },
@@ -1420,45 +1391,45 @@
                   "transform": {
                     "req": "`reqdata`",
                     "res": "`body`"
-                  },
-                  "active": true
+                  }
                 }
-              ],
-              "input": "data"
+              ]
             }
           },
-          "active": true,
           "relations": {
             "ancestors": []
           }
         },
         "report_status": {
+          "active": true,
           "alias": {
             "field": {}
           },
           "fields": [
             {
+              "active": true,
               "name": "status",
               "req": false,
-              "type": "`$STRING`",
-              "active": true
+              "type": "`$STRING`"
             }
           ],
           "name": "report_status",
           "op": {
             "load": {
+              "input": "data",
               "name": "load",
               "points": [
                 {
+                  "active": true,
                   "args": {
                     "query": [
                       {
+                        "active": true,
                         "kind": "query",
                         "name": "date",
                         "orig": "date",
                         "reqd": true,
-                        "type": "`$STRING`",
-                        "active": true
+                        "type": "`$STRING`"
                       }
                     ]
                   },
@@ -1477,14 +1448,11 @@
                   "transform": {
                     "req": "`reqdata`",
                     "res": "`body`"
-                  },
-                  "active": true
+                  }
                 }
-              ],
-              "input": "data"
+              ]
             }
           },
-          "active": true,
           "relations": {
             "ancestors": []
           }
@@ -1492,9 +1460,6 @@
       },
       "feature": {
         "test": {
-          "name": "test",
-          "title": "In-memory mock transport for testing without a live server",
-          "version": "0.0.1",
           "active": true,
           "config": {
             "options": {
@@ -1502,6 +1467,14 @@
             }
           },
           "hook": {
+            "GetData": {
+              "active": true,
+              "await": false
+            },
+            "GetMatch": {
+              "active": true,
+              "await": false
+            },
             "PostConstruct": {
               "active": true,
               "await": false
@@ -1510,25 +1483,11 @@
               "active": true,
               "await": false
             },
-            "SetData": {
-              "active": true,
-              "await": false
-            },
-            "GetData": {
-              "active": true,
-              "await": false
-            },
-            "SetMatch": {
-              "active": true
-            },
-            "GetMatch": {
-              "active": true,
+            "PostOperation": {
+              "active": false,
               "await": false
             },
             "PrePoint": {
-              "active": true
-            },
-            "PreSpec": {
               "active": true,
               "await": false
             },
@@ -1544,20 +1503,32 @@
               "active": true,
               "await": false
             },
+            "PreSpec": {
+              "active": true,
+              "await": false
+            },
             "PreTarget": {
               "active": false,
               "await": false
             },
-            "PostOperation": {
-              "active": false,
+            "SetData": {
+              "active": true,
+              "await": false
+            },
+            "SetMatch": {
+              "active": true,
               "await": false
             }
           },
+          "name": "test",
           "target": {
-            "ts": {
+            "go": {
               "deps": {}
             },
-            "go": {
+            "go-cli": {
+              "deps": {}
+            },
+            "go-mcp": {
               "deps": {}
             },
             "lua": {
@@ -1572,23 +1543,30 @@
             "rb": {
               "deps": {}
             },
-            "go-cli": {
-              "deps": {}
-            },
-            "go-mcp": {
+            "ts": {
               "deps": {}
             }
-          }
+          },
+          "title": "In-memory mock transport for testing without a live server",
+          "version": "0.0.1"
         }
       },
       "flow": {
         "BasicConversionDetailFlow": {
+          "active": true,
           "entity": "conversion_detail",
+          "key$": "BasicConversionDetailFlow",
           "kind": "basic",
           "name": "BasicConversionDetailFlow",
+          "param": {},
           "step": [
             {
+              "active": true,
+              "data": {},
+              "input": {},
+              "match": {},
               "op": "list",
+              "spec": [],
               "valid": [
                 {
                   "apply": "ItemExists",
@@ -1596,25 +1574,25 @@
                     "ref": "conversion_detail_ref01"
                   }
                 }
-              ],
-              "active": true,
-              "match": {},
-              "data": {},
-              "input": {},
-              "spec": []
+              ]
             }
-          ],
-          "key$": "BasicConversionDetailFlow",
-          "active": true,
-          "param": {}
+          ]
         },
         "BasicConversionDetailMerchantFlow": {
+          "active": true,
           "entity": "conversion_detail_merchant",
+          "key$": "BasicConversionDetailMerchantFlow",
           "kind": "basic",
           "name": "BasicConversionDetailMerchantFlow",
+          "param": {},
           "step": [
             {
+              "active": true,
+              "data": {},
+              "input": {},
+              "match": {},
               "op": "list",
+              "spec": [],
               "valid": [
                 {
                   "apply": "ItemExists",
@@ -1622,30 +1600,29 @@
                     "ref": "conversion_detail_merchant_ref01"
                   }
                 }
-              ],
-              "active": true,
-              "match": {},
-              "data": {},
-              "input": {},
-              "spec": []
+              ]
             }
-          ],
-          "key$": "BasicConversionDetailMerchantFlow",
-          "active": true,
-          "param": {}
+          ]
         },
         "BasicConversionGeneralFlow": {
+          "active": true,
           "entity": "conversion_general",
+          "key$": "BasicConversionGeneralFlow",
           "kind": "basic",
           "name": "BasicConversionGeneralFlow",
+          "param": {},
           "step": [
             {
+              "active": true,
+              "data": {},
               "input": {
                 "ref": "conversion_general_ref01",
                 "srcdatavar": "conversion_general_ref01_data",
                 "suffix": "_dt0"
               },
+              "match": {},
               "op": "load",
+              "spec": [],
               "valid": [
                 {
                   "apply": "TextFieldMark",
@@ -1653,29 +1630,29 @@
                     "mark": "Mark01-conversion_general_ref01"
                   }
                 }
-              ],
-              "active": true,
-              "match": {},
-              "data": {},
-              "spec": []
+              ]
             }
-          ],
-          "key$": "BasicConversionGeneralFlow",
-          "active": true,
-          "param": {}
+          ]
         },
         "BasicConversionStatusFlow": {
+          "active": true,
           "entity": "conversion_status",
+          "key$": "BasicConversionStatusFlow",
           "kind": "basic",
           "name": "BasicConversionStatusFlow",
+          "param": {},
           "step": [
             {
+              "active": true,
+              "data": {},
               "input": {
                 "ref": "conversion_status_ref01",
                 "srcdatavar": "conversion_status_ref01_data",
                 "suffix": "_dt0"
               },
+              "match": {},
               "op": "load",
+              "spec": [],
               "valid": [
                 {
                   "apply": "TextFieldMark",
@@ -1683,45 +1660,46 @@
                     "mark": "Mark01-conversion_status_ref01"
                   }
                 }
-              ],
-              "active": true,
-              "match": {},
-              "data": {},
-              "spec": []
+              ]
             }
-          ],
-          "key$": "BasicConversionStatusFlow",
-          "active": true,
-          "param": {}
+          ]
         },
         "BasicDeeplinkFlow": {
+          "active": true,
           "entity": "deeplink",
+          "key$": "BasicDeeplinkFlow",
           "kind": "basic",
           "name": "BasicDeeplinkFlow",
+          "param": {},
           "step": [
             {
+              "active": true,
+              "data": {},
               "input": {
                 "ref": "deeplink_ref01"
               },
-              "op": "create",
-              "active": true,
               "match": {},
-              "data": {},
+              "op": "create",
               "spec": [],
               "valid": []
             }
-          ],
-          "key$": "BasicDeeplinkFlow",
-          "active": true,
-          "param": {}
+          ]
         },
         "BasicDeeplinkMerchantFlow": {
+          "active": true,
           "entity": "deeplink_merchant",
+          "key$": "BasicDeeplinkMerchantFlow",
           "kind": "basic",
           "name": "BasicDeeplinkMerchantFlow",
+          "param": {},
           "step": [
             {
+              "active": true,
+              "data": {},
+              "input": {},
+              "match": {},
               "op": "list",
+              "spec": [],
               "valid": [
                 {
                   "apply": "ItemExists",
@@ -1729,30 +1707,29 @@
                     "ref": "deeplink_merchant_ref01"
                   }
                 }
-              ],
-              "active": true,
-              "match": {},
-              "data": {},
-              "input": {},
-              "spec": []
+              ]
             }
-          ],
-          "key$": "BasicDeeplinkMerchantFlow",
-          "active": true,
-          "param": {}
+          ]
         },
         "BasicDntFlow": {
+          "active": true,
           "entity": "dnt",
+          "key$": "BasicDntFlow",
           "kind": "basic",
           "name": "BasicDntFlow",
+          "param": {},
           "step": [
             {
+              "active": true,
+              "data": {},
               "input": {
                 "ref": "dnt_ref01",
                 "srcdatavar": "dnt_ref01_data",
                 "suffix": "_dt0"
               },
+              "match": {},
               "op": "load",
+              "spec": [],
               "valid": [
                 {
                   "apply": "TextFieldMark",
@@ -1760,24 +1737,25 @@
                     "mark": "Mark01-dnt_ref01"
                   }
                 }
-              ],
-              "active": true,
-              "match": {},
-              "data": {},
-              "spec": []
+              ]
             }
-          ],
-          "key$": "BasicDntFlow",
-          "active": true,
-          "param": {}
+          ]
         },
         "BasicMarketFlow": {
+          "active": true,
           "entity": "market",
+          "key$": "BasicMarketFlow",
           "kind": "basic",
           "name": "BasicMarketFlow",
+          "param": {},
           "step": [
             {
+              "active": true,
+              "data": {},
+              "input": {},
+              "match": {},
               "op": "list",
+              "spec": [],
               "valid": [
                 {
                   "apply": "ItemExists",
@@ -1785,25 +1763,25 @@
                     "ref": "market_ref01"
                   }
                 }
-              ],
-              "active": true,
-              "match": {},
-              "data": {},
-              "input": {},
-              "spec": []
+              ]
             }
-          ],
-          "key$": "BasicMarketFlow",
-          "active": true,
-          "param": {}
+          ]
         },
         "BasicMerchantFlow": {
+          "active": true,
           "entity": "merchant",
+          "key$": "BasicMerchantFlow",
           "kind": "basic",
           "name": "BasicMerchantFlow",
+          "param": {},
           "step": [
             {
+              "active": true,
+              "data": {},
+              "input": {},
+              "match": {},
               "op": "list",
+              "spec": [],
               "valid": [
                 {
                   "apply": "ItemExists",
@@ -1811,25 +1789,25 @@
                     "ref": "merchant_ref01"
                   }
                 }
-              ],
-              "active": true,
-              "match": {},
-              "data": {},
-              "input": {},
-              "spec": []
+              ]
             }
-          ],
-          "key$": "BasicMerchantFlow",
-          "active": true,
-          "param": {}
+          ]
         },
         "BasicOfferFlow": {
+          "active": true,
           "entity": "offer",
+          "key$": "BasicOfferFlow",
           "kind": "basic",
           "name": "BasicOfferFlow",
+          "param": {},
           "step": [
             {
+              "active": true,
+              "data": {},
+              "input": {},
+              "match": {},
               "op": "list",
+              "spec": [],
               "valid": [
                 {
                   "apply": "ItemExists",
@@ -1837,20 +1815,19 @@
                     "ref": "offer_ref01"
                   }
                 }
-              ],
-              "active": true,
-              "match": {},
-              "data": {},
-              "input": {},
-              "spec": []
+              ]
             },
             {
+              "active": true,
+              "data": {},
               "input": {
                 "ref": "offer_ref01",
                 "srcdatavar": "offer_ref01_data",
                 "suffix": "_dt0"
               },
+              "match": {},
               "op": "load",
+              "spec": [],
               "valid": [
                 {
                   "apply": "TextFieldMark",
@@ -1858,24 +1835,25 @@
                     "mark": "Mark01-offer_ref01"
                   }
                 }
-              ],
-              "active": true,
-              "match": {},
-              "data": {},
-              "spec": []
+              ]
             }
-          ],
-          "key$": "BasicOfferFlow",
-          "active": true,
-          "param": {}
+          ]
         },
         "BasicReportDetailFlow": {
+          "active": true,
           "entity": "report_detail",
+          "key$": "BasicReportDetailFlow",
           "kind": "basic",
           "name": "BasicReportDetailFlow",
+          "param": {},
           "step": [
             {
+              "active": true,
+              "data": {},
+              "input": {},
+              "match": {},
               "op": "list",
+              "spec": [],
               "valid": [
                 {
                   "apply": "ItemExists",
@@ -1883,30 +1861,29 @@
                     "ref": "report_detail_ref01"
                   }
                 }
-              ],
-              "active": true,
-              "match": {},
-              "data": {},
-              "input": {},
-              "spec": []
+              ]
             }
-          ],
-          "key$": "BasicReportDetailFlow",
-          "active": true,
-          "param": {}
+          ]
         },
         "BasicReportGeneralFlow": {
+          "active": true,
           "entity": "report_general",
+          "key$": "BasicReportGeneralFlow",
           "kind": "basic",
           "name": "BasicReportGeneralFlow",
+          "param": {},
           "step": [
             {
+              "active": true,
+              "data": {},
               "input": {
                 "ref": "report_general_ref01",
                 "srcdatavar": "report_general_ref01_data",
                 "suffix": "_dt0"
               },
+              "match": {},
               "op": "load",
+              "spec": [],
               "valid": [
                 {
                   "apply": "TextFieldMark",
@@ -1914,29 +1891,29 @@
                     "mark": "Mark01-report_general_ref01"
                   }
                 }
-              ],
-              "active": true,
-              "match": {},
-              "data": {},
-              "spec": []
+              ]
             }
-          ],
-          "key$": "BasicReportGeneralFlow",
-          "active": true,
-          "param": {}
+          ]
         },
         "BasicReportModifiedFlow": {
+          "active": true,
           "entity": "report_modified",
+          "key$": "BasicReportModifiedFlow",
           "kind": "basic",
           "name": "BasicReportModifiedFlow",
+          "param": {},
           "step": [
             {
+              "active": true,
+              "data": {},
               "input": {
                 "ref": "report_modified_ref01",
                 "srcdatavar": "report_modified_ref01_data",
                 "suffix": "_dt0"
               },
+              "match": {},
               "op": "load",
+              "spec": [],
               "valid": [
                 {
                   "apply": "TextFieldMark",
@@ -1944,29 +1921,29 @@
                     "mark": "Mark01-report_modified_ref01"
                   }
                 }
-              ],
-              "active": true,
-              "match": {},
-              "data": {},
-              "spec": []
+              ]
             }
-          ],
-          "key$": "BasicReportModifiedFlow",
-          "active": true,
-          "param": {}
+          ]
         },
         "BasicReportStatusFlow": {
+          "active": true,
           "entity": "report_status",
+          "key$": "BasicReportStatusFlow",
           "kind": "basic",
           "name": "BasicReportStatusFlow",
+          "param": {},
           "step": [
             {
+              "active": true,
+              "data": {},
               "input": {
                 "ref": "report_status_ref01",
                 "srcdatavar": "report_status_ref01_data",
                 "suffix": "_dt0"
               },
+              "match": {},
               "op": "load",
+              "spec": [],
               "valid": [
                 {
                   "apply": "TextFieldMark",
@@ -1974,28 +1951,48 @@
                     "mark": "Mark01-report_status_ref01"
                   }
                 }
-              ],
-              "active": true,
-              "match": {},
-              "data": {},
-              "spec": []
+              ]
             }
-          ],
-          "key$": "BasicReportStatusFlow",
-          "active": true,
-          "param": {}
+          ]
         }
       },
+      "info": {
+        "description": "This is an overview of all the available API endpoints.\nEach API is grouped and you can unfold the different endpoints to get detailed information on how to use them.\n\nYou can use this actionable documentation or an application of your choice (e.g. [Postman](https://www.postman.com/)) to browse the API.\n\n## Endpoints\nThe API servers are available under the URL: `https://api.yadore.com/`. You must use this URL for all API requests.\nFor example to search for offers, you must send your request to `https://api.yadore.com/v2/offer`.\n\nThis doesn't concern you when you are using this documentation. You can use the endpoints here by clicking on `Try it out`.\n\n## Authentication\nYou must add your API-Key as header `API-Key` to all requests in the application of your choice.\n\nFor authorizing your requests in this actionable documentation, you must use the `Authorize` button below and enter your API-Key.\n\n## FAQ\n\n1. What Yadore understands as **offer** – for us an offer is a product offer from a specific merchant, example would be a specific washing machine from e.g. _Mediamarkt.de_.\n\n2. What Yadore understands as **deeplink** – for us a deeplink is a specific product landing page from a merchant, so the deep link request must look like `shopdomain.de/category/specific_product.html`.\n\n3. What Yadore understands as **smartlink** – for us a smartlink merchant is a merchant, where the publisher can send the user anywhere, means home page, category page, product page, etc. However, you must specify exactly where you want to send the user (i.e. homepage, category, ..) as the API will not automatically generate this for you.\n\n4. All monetary values are always in **Euro**.\n\n5. All dates returned from any endpoint are in **UTC time**.\n\n6. All API parameters are **case sensitive**.\n\n7. The estimated CPC in all APIs is 100% Yadore, to calculate your revenue you have to adapt your share.\n\n8. We classify publishers in _“no couponing”_, _“couponing”_ and _“mixed”_. This is important as _“mixed”_ publishers need to use a parameter to inform if a click is couponing or not. If you feel wrongly classified just speak to your account manager.\n\n9. If there are any further questions, please contact your account manager or send an email to [mail@yadore.com](mailto:mail@yadore.com).\n",
+        "servers": [
+          {
+            "url": "https://api.yadore.com/"
+          }
+        ],
+        "title": "Yadore Publisher API",
+        "version": "2.0.0"
+      },
+      "option": {},
       "target": {
-        "go-cli": {
-          "title": "Go CLI",
-          "ext": "go",
+        "go": {
+          "active": true,
           "comment": {
             "line": "//"
           },
+          "deps": {},
+          "ext": "go",
           "module": {
             "name": "yadore-publisher"
           },
+          "name": "go",
+          "srcfeature": false,
+          "title": "Golang"
+        },
+        "go-cli": {
+          "active": true,
+          "comment": {
+            "line": "//"
+          },
+          "deps": {},
+          "ext": "go",
+          "module": {
+            "name": "yadore-publisher"
+          },
+          "name": "go-cli",
           "phase": {
             "entity": {
               "active": false
@@ -2010,19 +2007,19 @@
               "active": false
             }
           },
-          "deps": {},
-          "name": "go-cli",
-          "active": true
+          "title": "Go CLI"
         },
         "go-mcp": {
-          "title": "Go MCP server",
-          "ext": "go",
+          "active": true,
           "comment": {
             "line": "//"
           },
+          "deps": {},
+          "ext": "go",
           "module": {
             "name": "yadore-publisher"
           },
+          "name": "go-mcp",
           "phase": {
             "entity": {
               "active": false
@@ -2037,138 +2034,120 @@
               "active": false
             }
           },
-          "deps": {},
-          "name": "go-mcp",
-          "active": true
-        },
-        "ts": {
-          "title": "TypeScript",
-          "ext": "ts",
-          "comment": {
-            "line": "//"
-          },
-          "module": {
-            "name": "yadore-publisher"
-          },
-          "base": "node_modules/@voxgig/sdkgen/project/.sdk",
-          "deps": {
-            "dotenv": {
-              "active": true,
-              "version": "^17.4.2",
-              "kind": "dev"
-            },
-            "typescript": {
-              "active": true,
-              "version": "^5.9.3",
-              "kind": "dev"
-            },
-            "@types/node": {
-              "active": true,
-              "version": "^25.6.0",
-              "kind": "dev"
-            }
-          },
-          "name": "ts",
-          "active": true
-        },
-        "go": {
-          "title": "Golang",
-          "ext": "go",
-          "comment": {
-            "line": "//"
-          },
-          "module": {
-            "name": "yadore-publisher"
-          },
-          "srcfeature": false,
-          "deps": {},
-          "name": "go",
-          "active": true
+          "title": "Go MCP server"
         },
         "lua": {
-          "title": "Lua",
-          "ext": "lua",
+          "active": true,
           "comment": {
             "line": "--"
           },
-          "module": {
-            "name": "yadore-publisher"
-          },
-          "srcfeature": false,
           "deps": {
             "dkjson": {
               "active": true,
-              "version": "2.5",
-              "kind": "prod"
+              "kind": "prod",
+              "version": "2.5"
             }
           },
+          "ext": "lua",
+          "module": {
+            "name": "yadore-publisher"
+          },
           "name": "lua",
-          "active": true
+          "srcfeature": false,
+          "title": "Lua"
         },
         "php": {
-          "title": "PHP",
-          "ext": "php",
+          "active": true,
           "comment": {
             "line": "//"
           },
+          "deps": {},
+          "ext": "php",
           "module": {
             "name": "yadore-publisher"
           },
-          "srcfeature": false,
-          "deps": {},
           "name": "php",
-          "active": true
+          "srcfeature": false,
+          "title": "PHP"
         },
         "py": {
-          "title": "Python",
-          "ext": "py",
+          "active": true,
           "comment": {
             "line": "#"
           },
-          "module": {
-            "name": "yadore-publisher"
-          },
-          "srcfeature": false,
           "deps": {
             "requests": {
               "active": true,
-              "version": "2.33",
-              "kind": "prod"
+              "kind": "prod",
+              "version": "2.33"
             }
           },
-          "name": "py",
-          "active": true
-        },
-        "rb": {
-          "title": "Ruby",
-          "ext": "rb",
-          "comment": {
-            "line": "#"
-          },
+          "ext": "py",
           "module": {
             "name": "yadore-publisher"
           },
+          "name": "py",
           "srcfeature": false,
+          "title": "Python"
+        },
+        "rb": {
+          "active": true,
+          "comment": {
+            "line": "#"
+          },
           "deps": {
-            "voxgig-struct": {
-              "active": true,
-              "version": "0.0.10",
-              "kind": "prod"
-            },
             "json": {
               "active": true,
-              "version": "0",
-              "kind": "prod"
+              "kind": "prod",
+              "version": "0"
+            },
+            "voxgig-struct": {
+              "active": true,
+              "kind": "prod",
+              "version": "0.0.10"
             }
           },
+          "ext": "rb",
+          "module": {
+            "name": "yadore-publisher"
+          },
           "name": "rb",
-          "active": true
+          "srcfeature": false,
+          "title": "Ruby"
+        },
+        "ts": {
+          "active": true,
+          "base": "node_modules/@voxgig/sdkgen/project/.sdk",
+          "comment": {
+            "line": "//"
+          },
+          "deps": {
+            "@types/node": {
+              "active": true,
+              "kind": "dev",
+              "version": "^25.6.0"
+            },
+            "dotenv": {
+              "active": true,
+              "kind": "dev",
+              "version": "^17.4.2"
+            },
+            "typescript": {
+              "active": true,
+              "kind": "dev",
+              "version": "^5.9.3"
+            }
+          },
+          "ext": "ts",
+          "module": {
+            "name": "yadore-publisher"
+          },
+          "name": "ts",
+          "title": "TypeScript"
         }
-      },
-      "option": {}
-    },
-    "def": {
-      "desc": ""
+      }
     }
-  }
+  },
+  "name": "yadore-publisher",
+  "origin": "voxgig-sdk"
 }

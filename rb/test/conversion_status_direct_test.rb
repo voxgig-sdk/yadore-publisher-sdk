@@ -61,12 +61,14 @@ def conversion_status_direct_setup(mockres)
   env = Runner.env_override({
     "YADOREPUBLISHER_TEST_CONVERSION_STATUS_ENTID" => {},
     "YADOREPUBLISHER_TEST_LIVE" => "FALSE",
+    "YADOREPUBLISHER_APIKEY" => "NONE",
   })
 
   live = env["YADOREPUBLISHER_TEST_LIVE"] == "TRUE"
 
   if live
     merged_opts = {
+      "apikey" => env["YADOREPUBLISHER_APIKEY"],
     }
     client = YadorePublisherSDK.new(merged_opts)
     return {

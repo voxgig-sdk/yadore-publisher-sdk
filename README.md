@@ -1,22 +1,8 @@
 # YadorePublisher SDK
 
-Access affiliate offers, deeplinks, and conversion reports from Yadore's catalogue of 12,000+ merchants across 40+ markets
+Yadore Publisher API client, generated from the OpenAPI spec.
 
 > TypeScript, Python, PHP, Golang, Ruby, Lua SDKs, a CLI, an interactive REPL, and an MCP server for AI agents — all generated from one OpenAPI spec by [@voxgig/sdkgen](https://github.com/voxgig/sdkgen).
-
-## About Yadore Publisher API
-
-The Yadore Publisher API is the affiliate-marketing interface from [Yadore GmbH](https://www.yadore.com/), a German e-commerce data platform that aggregates and normalises product feeds for online publishers and advertisers. It exposes the same offer, merchant, deeplink, and reporting data that powers Yadore's WordPress and link-replacement integrations.
-
-What you can do with the API:
-
-- Search and retrieve merchant **offers** (product records) drawn from a catalogue of 12,000+ merchants in 40+ markets.
-- Generate **deeplinks** and merchant-specific tracking URLs for clicks and redirects.
-- Pull **conversion** data — general lists, per-conversion detail, merchant breakdowns, and status records.
-- Pull **reports** — general daily revenue stats, detailed click/placement analytics, modified-records snapshots, and report status.
-- Manage configuration around **markets**, **merchants**, and Do-Not-Track (**dnt**) settings.
-
-Operational notes: the API is served from `https://api.yadore.com/` and authenticates via an API key issued with a publisher account. Public uptime monitors report a sub-250 ms average response time. CORS is not enabled, so calls should be made server-side.
 
 ## Try it
 
@@ -50,29 +36,31 @@ gem install yadore-publisher-sdk
 luarocks install yadore-publisher-sdk
 ```
 
-## 30-second quickstart
+## Quickstart
 
 ### TypeScript
 
 ```ts
 import { YadorePublisherSDK } from 'yadore-publisher'
 
-const client = new YadorePublisherSDK({})
+const client = new YadorePublisherSDK({
+  apikey: process.env.YADORE-PUBLISHER_APIKEY,
+})
 
 // List all conversiondetails
 const conversiondetails = await client.ConversionDetail().list()
+console.log(conversiondetails.data)
 ```
 
-See the [TypeScript README](ts/README.md) for the
-full guide, or scroll down for the same example in other languages.
+See the [TypeScript README](ts/README.md) for the full guide.
 
-## What's in the box
+## Surfaces
 
-| Surface | Use it for | Path |
-| --- | --- | --- |
-| **SDK** (TypeScript, Python, PHP, Golang, Ruby, Lua) | App integration | `ts/` `py/` `php/` `go/` `rb/` `lua/` |
-| **CLI** | Scripts, CI, ops, one-off API calls | `go-cli/` |
-| **MCP server** | AI agents (Claude, Cursor, Cline) | `go-mcp/` |
+| Surface | Path |
+| --- | --- |
+| **SDK** (TypeScript, Python, PHP, Golang, Ruby, Lua) | `ts/` `py/` `php/` `go/` `rb/` `lua/` |
+| **CLI** | `go-cli/` |
+| **MCP server** | `go-mcp/` |
 
 ## Use it from an AI agent (MCP)
 
@@ -102,20 +90,20 @@ The API exposes 14 entities:
 
 | Entity | Description | API path |
 | --- | --- | --- |
-| **ConversionDetail** | Detailed per-conversion records returned by the conversions endpoints, including click and order metadata. | `/v2/conversion/detail` |
-| **ConversionDetailMerchant** | Per-merchant breakdown of conversion detail records, grouping conversions by the originating merchant. | `/v2/conversion/detail/merchant` |
-| **ConversionGeneral** | Summary list of conversions across the publisher account, used for top-level conversion reporting. | `/v2/conversion/general` |
-| **ConversionStatus** | Status information for conversions (e.g. pending, confirmed, cancelled) as tracked by Yadore. | `/v2/conversion/status` |
-| **Deeplink** | Generated affiliate deeplinks that wrap a destination URL with the publisher's tracking parameters. | `/v2/deeplink` |
-| **DeeplinkMerchant** | Merchant-scoped deeplink resources, used to create or list deeplinks for a specific merchant. | `/v2/deeplink/merchant` |
-| **Dnt** | Do-Not-Track configuration entries that exclude specified traffic or sources from tracking. | `/v2/d` |
-| **Market** | Country or market definitions Yadore supports (40+ markets) for filtering offers, merchants, and reports. | `/v2/markets` |
-| **Merchant** | Catalogue of advertiser merchants available to the publisher, with metadata about each shop. | `/v2/merchant` |
-| **Offer** | Individual product offers from merchants, the core search resource for product-level affiliate data. | `/v2/offer` |
-| **ReportDetail** | Detailed click- and placement-level analytics records, suitable for granular performance analysis. | `/v2/report/detail` |
-| **ReportGeneral** | High-level daily revenue and traffic statistics rolled up across the publisher account. | `/v2/report/general` |
-| **ReportModified** | Snapshot of records that have changed since a given point, used for incremental report syncing. | `/v2/report/modified` |
-| **ReportStatus** | Status metadata for generated reports, indicating availability and processing state. | `/v2/report/status` |
+| **ConversionDetail** |  | `/v2/conversion/detail` |
+| **ConversionDetailMerchant** |  | `/v2/conversion/detail/merchant` |
+| **ConversionGeneral** |  | `/v2/conversion/general` |
+| **ConversionStatus** |  | `/v2/conversion/status` |
+| **Deeplink** |  | `/v2/deeplink` |
+| **DeeplinkMerchant** |  | `/v2/deeplink/merchant` |
+| **Dnt** |  | `/v2/d` |
+| **Market** |  | `/v2/markets` |
+| **Merchant** |  | `/v2/merchant` |
+| **Offer** |  | `/v2/offer` |
+| **ReportDetail** |  | `/v2/report/detail` |
+| **ReportGeneral** |  | `/v2/report/general` |
+| **ReportModified** |  | `/v2/report/modified` |
+| **ReportStatus** |  | `/v2/report/status` |
 
 Each entity supports the following operations where available: **load**,
 **list**, **create**, **update**, and **remove**.
@@ -125,12 +113,16 @@ Each entity supports the following operations where available: **load**,
 ### Python
 
 ```python
+import os
 from yadorepublisher_sdk import YadorePublisherSDK
 
-client = YadorePublisherSDK({})
+client = YadorePublisherSDK({
+    "apikey": os.environ.get("YADORE-PUBLISHER_APIKEY"),
+})
 
 # List all conversiondetails
-conversiondetails, err = client.ConversionDetail(None).list(None, None)
+conversiondetails, err = client.ConversionDetail().list()
+print(conversiondetails)
 ```
 
 ### PHP
@@ -139,10 +131,13 @@ conversiondetails, err = client.ConversionDetail(None).list(None, None)
 <?php
 require_once 'yadorepublisher_sdk.php';
 
-$client = new YadorePublisherSDK([]);
+$client = new YadorePublisherSDK([
+    "apikey" => getenv("YADORE-PUBLISHER_APIKEY"),
+]);
 
 // List all conversiondetails
-[$conversiondetails, $err] = $client->ConversionDetail(null)->list(null, null);
+[$conversiondetails, $err] = $client->ConversionDetail()->list();
+print_r($conversiondetails);
 ```
 
 ### Golang
@@ -150,10 +145,13 @@ $client = new YadorePublisherSDK([]);
 ```go
 import sdk "github.com/voxgig-sdk/yadore-publisher-sdk/go"
 
-client := sdk.NewYadorePublisherSDK(map[string]any{})
+client := sdk.NewYadorePublisherSDK(map[string]any{
+    "apikey": os.Getenv("YADORE-PUBLISHER_APIKEY"),
+})
 
 // List all conversiondetails
 conversiondetails, err := client.ConversionDetail(nil).List(nil, nil)
+fmt.Println(conversiondetails)
 ```
 
 ### Ruby
@@ -161,10 +159,13 @@ conversiondetails, err := client.ConversionDetail(nil).List(nil, nil)
 ```ruby
 require_relative "YadorePublisher_sdk"
 
-client = YadorePublisherSDK.new({})
+client = YadorePublisherSDK.new({
+  "apikey" => ENV["YADORE-PUBLISHER_APIKEY"],
+})
 
 # List all conversiondetails
-conversiondetails, err = client.ConversionDetail(nil).list(nil, nil)
+conversiondetails, err = client.ConversionDetail().list
+puts conversiondetails
 ```
 
 ### Lua
@@ -172,10 +173,13 @@ conversiondetails, err = client.ConversionDetail(nil).list(nil, nil)
 ```lua
 local sdk = require("yadore-publisher_sdk")
 
-local client = sdk.new({})
+local client = sdk.new({
+  apikey = os.getenv("YADORE-PUBLISHER_APIKEY"),
+})
 
 -- List all conversiondetails
-local conversiondetails, err = client:ConversionDetail(nil):list(nil, nil)
+local conversiondetails, err = client:ConversionDetail():list()
+print(conversiondetails)
 ```
 
 ## Unit testing in offline mode
@@ -194,25 +198,21 @@ const result = await client.ConversionDetail().load({ id: 'test01' })
 ### Python
 
 ```python
-client = YadorePublisherSDK.test(None, None)
-result, err = client.ConversionDetail(None).load(
-    {"id": "test01"}, None
-)
+client = YadorePublisherSDK.test()
+result, err = client.ConversionDetail().load({"id": "test01"})
 ```
 
 ### PHP
 
 ```php
-$client = YadorePublisherSDK::test(null, null);
-[$result, $err] = $client->ConversionDetail(null)->load(
-    ["id" => "test01"], null
-);
+$client = YadorePublisherSDK::test();
+[$result, $err] = $client->ConversionDetail()->load(["id" => "test01"]);
 ```
 
 ### Golang
 
 ```go
-client := sdk.TestSDK(nil, nil)
+client := sdk.Test()
 result, err := client.ConversionDetail(nil).Load(
     map[string]any{"id": "test01"}, nil,
 )
@@ -221,19 +221,15 @@ result, err := client.ConversionDetail(nil).Load(
 ### Ruby
 
 ```ruby
-client = YadorePublisherSDK.test(nil, nil)
-result, err = client.ConversionDetail(nil).load(
-  { "id" => "test01" }, nil
-)
+client = YadorePublisherSDK.test
+result, err = client.ConversionDetail().load({ "id" => "test01" })
 ```
 
 ### Lua
 
 ```lua
-local client = sdk.test(nil, nil)
-local result, err = client:ConversionDetail(nil):load(
-  { id = "test01" }, nil
-)
+local client = sdk.test()
+local result, err = client:ConversionDetail():load({ id = "test01" })
 ```
 
 ## How it works
@@ -337,16 +333,6 @@ local result, err = client:direct({
 - [Golang](go/README.md)
 - [Ruby](rb/README.md)
 - [Lua](lua/README.md)
-
-## Using the Yadore Publisher API
-
-- Upstream: [https://www.yadore.com/](https://www.yadore.com/)
-- API docs: [https://docs.yadore.com/](https://docs.yadore.com/)
-
-- Proprietary commercial API operated by [Yadore GmbH](https://www.yadore.com/).
-- Use is governed by the Yadore publisher agreement; an API key is required.
-- No public licence text is published alongside the API spec.
-- Per-click payout model rather than a redistributable data licence.
 
 ---
 

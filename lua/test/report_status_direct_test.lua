@@ -62,12 +62,14 @@ function report_status_direct_setup(mockres)
   local env = runner.env_override({
     ["YADOREPUBLISHER_TEST_REPORT_STATUS_ENTID"] = {},
     ["YADOREPUBLISHER_TEST_LIVE"] = "FALSE",
+    ["YADOREPUBLISHER_APIKEY"] = "NONE",
   })
 
   local live = env["YADOREPUBLISHER_TEST_LIVE"] == "TRUE"
 
   if live then
     local merged_opts = {
+      apikey = env["YADOREPUBLISHER_APIKEY"],
     }
     local client = sdk.new(merged_opts)
     return {

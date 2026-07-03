@@ -74,12 +74,14 @@ function directSetup(mockres?: any) {
   const env = envOverride({
     'YADOREPUBLISHER_TEST_DNT_ENTID': {},
     'YADOREPUBLISHER_TEST_LIVE': 'FALSE',
+    'YADOREPUBLISHER_APIKEY': 'NONE',
   })
 
   const live = 'TRUE' === env.YADOREPUBLISHER_TEST_LIVE
 
   if (live) {
     const client = new YadorePublisherSDK({
+      apikey: env.YADOREPUBLISHER_APIKEY,
     })
 
     let idmap: any = env['YADOREPUBLISHER_TEST_DNT_ENTID']

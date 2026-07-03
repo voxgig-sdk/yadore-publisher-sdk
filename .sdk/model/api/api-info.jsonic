@@ -47,42 +47,7 @@ For authorizing your requests in this actionable documentation, you must use the
       ]
       title: "Yadore Publisher API"
       version: "2.0.0"
-      tagline: "Access affiliate offers, deeplinks, and conversion reports from Yadore's catalogue of 12,000+ merchants across 40+ markets"
-      homepage: "https://www.yadore.com/"
-      docs_url: "https://docs.yadore.com/"
-      license_short: "Proprietary commercial API; access requires a Yadore publisher account and API key."
-      license_md: `- Proprietary commercial API operated by [Yadore GmbH](https://www.yadore.com/).
-- Use is governed by the Yadore publisher agreement; an API key is required.
-- No public licence text is published alongside the API spec.
-- Per-click payout model rather than a redistributable data licence.`
-      about_md: `The Yadore Publisher API is the affiliate-marketing interface from [Yadore GmbH](https://www.yadore.com/), a German e-commerce data platform that aggregates and normalises product feeds for online publishers and advertisers. It exposes the same offer, merchant, deeplink, and reporting data that powers Yadore's WordPress and link-replacement integrations.
-
-What you can do with the API:
-
-- Search and retrieve merchant **offers** (product records) drawn from a catalogue of 12,000+ merchants in 40+ markets.
-- Generate **deeplinks** and merchant-specific tracking URLs for clicks and redirects.
-- Pull **conversion** data — general lists, per-conversion detail, merchant breakdowns, and status records.
-- Pull **reports** — general daily revenue stats, detailed click/placement analytics, modified-records snapshots, and report status.
-- Manage configuration around **markets**, **merchants**, and Do-Not-Track (**dnt**) settings.
-
-Operational notes: the API is served from \`https://api.yadore.com/\` and authenticates via an API key issued with a publisher account. Public uptime monitors report a sub-250 ms average response time. CORS is not enabled, so calls should be made server-side.`
-      entity_desc: {
-        conversion_detail: "Detailed per-conversion records returned by the conversions endpoints, including click and order metadata."
-        conversion_detail_merchant: "Per-merchant breakdown of conversion detail records, grouping conversions by the originating merchant."
-        conversion_general: "Summary list of conversions across the publisher account, used for top-level conversion reporting."
-        conversion_status: "Status information for conversions (e.g. pending, confirmed, cancelled) as tracked by Yadore."
-        deeplink: "Generated affiliate deeplinks that wrap a destination URL with the publisher's tracking parameters."
-        deeplink_merchant: "Merchant-scoped deeplink resources, used to create or list deeplinks for a specific merchant."
-        dnt: "Do-Not-Track configuration entries that exclude specified traffic or sources from tracking."
-        market: "Country or market definitions Yadore supports (40+ markets) for filtering offers, merchants, and reports."
-        merchant: "Catalogue of advertiser merchants available to the publisher, with metadata about each shop."
-        offer: "Individual product offers from merchants, the core search resource for product-level affiliate data."
-        report_detail: "Detailed click- and placement-level analytics records, suitable for granular performance analysis."
-        report_general: "High-level daily revenue and traffic statistics rolled up across the publisher account."
-        report_modified: "Snapshot of records that have changed since a given point, used for incremental report syncing."
-        report_status: "Status metadata for generated reports, indicating availability and processing state."
-      }
-      auth: false
     }
   }
 }
+
