@@ -133,7 +133,7 @@ Prepare a fetch definition without sending. Returns the `fetchdef` and raises on
 ## ConversionDetailEntity
 
 ```python
-conversion_detail = client.conversion_detail
+conversion_detail = client.ConversionDetail()
 ```
 
 ### Fields
@@ -154,7 +154,9 @@ conversion_detail = client.conversion_detail
 List entities matching the given criteria. Returns a list and raises on error.
 
 ```python
-results = client.conversion_detail.list({})
+results = client.ConversionDetail().list({})
+for conversion_detail in results:
+    print(conversion_detail)
 ```
 
 ### Common Methods
@@ -189,7 +191,7 @@ Return the entity name.
 ## ConversionDetailMerchantEntity
 
 ```python
-conversion_detail_merchant = client.conversion_detail_merchant
+conversion_detail_merchant = client.ConversionDetailMerchant()
 ```
 
 ### Fields
@@ -208,7 +210,9 @@ conversion_detail_merchant = client.conversion_detail_merchant
 List entities matching the given criteria. Returns a list and raises on error.
 
 ```python
-results = client.conversion_detail_merchant.list({})
+results = client.ConversionDetailMerchant().list({})
+for conversion_detail_merchant in results:
+    print(conversion_detail_merchant)
 ```
 
 ### Common Methods
@@ -243,7 +247,7 @@ Return the entity name.
 ## ConversionGeneralEntity
 
 ```python
-conversion_general = client.conversion_general
+conversion_general = client.ConversionGeneral()
 ```
 
 ### Fields
@@ -261,7 +265,7 @@ conversion_general = client.conversion_general
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.conversion_general.load({"id": "conversion_general_id"})
+result = client.ConversionGeneral().load({"id": "conversion_general_id"})
 ```
 
 ### Common Methods
@@ -296,7 +300,7 @@ Return the entity name.
 ## ConversionStatusEntity
 
 ```python
-conversion_status = client.conversion_status
+conversion_status = client.ConversionStatus()
 ```
 
 ### Fields
@@ -312,7 +316,7 @@ conversion_status = client.conversion_status
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.conversion_status.load({"id": "conversion_status_id"})
+result = client.ConversionStatus().load({"id": "conversion_status_id"})
 ```
 
 ### Common Methods
@@ -347,7 +351,7 @@ Return the entity name.
 ## DeeplinkEntity
 
 ```python
-deeplink = client.deeplink
+deeplink = client.Deeplink()
 ```
 
 ### Fields
@@ -367,9 +371,9 @@ deeplink = client.deeplink
 Create a new entity with the given data. Returns the created entity data and raises on error.
 
 ```python
-result = client.deeplink.create({
-    "market": # `$STRING`,
-    "url": # `$ARRAY`,
+result = client.Deeplink().create({
+    "market": ...,  # `$STRING`
+    "url": ...,  # `$ARRAY`
 })
 ```
 
@@ -405,7 +409,7 @@ Return the entity name.
 ## DeeplinkMerchantEntity
 
 ```python
-deeplink_merchant = client.deeplink_merchant
+deeplink_merchant = client.DeeplinkMerchant()
 ```
 
 ### Fields
@@ -429,7 +433,9 @@ deeplink_merchant = client.deeplink_merchant
 List entities matching the given criteria. Returns a list and raises on error.
 
 ```python
-results = client.deeplink_merchant.list({})
+results = client.DeeplinkMerchant().list({})
+for deeplink_merchant in results:
+    print(deeplink_merchant)
 ```
 
 ### Common Methods
@@ -464,7 +470,7 @@ Return the entity name.
 ## DntEntity
 
 ```python
-dnt = client.dnt
+dnt = client.Dnt()
 ```
 
 ### Operations
@@ -474,7 +480,7 @@ dnt = client.dnt
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.dnt.load({"id": "dnt_id"})
+result = client.Dnt().load({"id": "dnt_id"})
 ```
 
 ### Common Methods
@@ -509,7 +515,7 @@ Return the entity name.
 ## MarketEntity
 
 ```python
-market = client.market
+market = client.Market()
 ```
 
 ### Fields
@@ -525,7 +531,9 @@ market = client.market
 List entities matching the given criteria. Returns a list and raises on error.
 
 ```python
-results = client.market.list({})
+results = client.Market().list({})
+for market in results:
+    print(market)
 ```
 
 ### Common Methods
@@ -560,7 +568,7 @@ Return the entity name.
 ## MerchantEntity
 
 ```python
-merchant = client.merchant
+merchant = client.Merchant()
 ```
 
 ### Fields
@@ -580,7 +588,9 @@ merchant = client.merchant
 List entities matching the given criteria. Returns a list and raises on error.
 
 ```python
-results = client.merchant.list({})
+results = client.Merchant().list({})
+for merchant in results:
+    print(merchant)
 ```
 
 ### Common Methods
@@ -615,7 +625,7 @@ Return the entity name.
 ## OfferEntity
 
 ```python
-offer = client.offer
+offer = client.Offer()
 ```
 
 ### Fields
@@ -648,7 +658,9 @@ offer = client.offer
 List entities matching the given criteria. Returns a list and raises on error.
 
 ```python
-results = client.offer.list({})
+results = client.Offer().list({})
+for offer in results:
+    print(offer)
 ```
 
 #### `load(reqmatch, ctrl=None) -> dict`
@@ -656,7 +668,7 @@ results = client.offer.list({})
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.offer.load({"id": "offer_id"})
+result = client.Offer().load({"id": "offer_id"})
 ```
 
 ### Common Methods
@@ -691,7 +703,7 @@ Return the entity name.
 ## ReportDetailEntity
 
 ```python
-report_detail = client.report_detail
+report_detail = client.ReportDetail()
 ```
 
 ### Fields
@@ -713,7 +725,9 @@ report_detail = client.report_detail
 List entities matching the given criteria. Returns a list and raises on error.
 
 ```python
-results = client.report_detail.list({})
+results = client.ReportDetail().list({})
+for report_detail in results:
+    print(report_detail)
 ```
 
 ### Common Methods
@@ -748,7 +762,7 @@ Return the entity name.
 ## ReportGeneralEntity
 
 ```python
-report_general = client.report_general
+report_general = client.ReportGeneral()
 ```
 
 ### Fields
@@ -766,7 +780,7 @@ report_general = client.report_general
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.report_general.load({"id": "report_general_id"})
+result = client.ReportGeneral().load({"id": "report_general_id"})
 ```
 
 ### Common Methods
@@ -801,7 +815,7 @@ Return the entity name.
 ## ReportModifiedEntity
 
 ```python
-report_modified = client.report_modified
+report_modified = client.ReportModified()
 ```
 
 ### Fields
@@ -817,7 +831,7 @@ report_modified = client.report_modified
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.report_modified.load({"id": "report_modified_id"})
+result = client.ReportModified().load({"id": "report_modified_id"})
 ```
 
 ### Common Methods
@@ -852,7 +866,7 @@ Return the entity name.
 ## ReportStatusEntity
 
 ```python
-report_status = client.report_status
+report_status = client.ReportStatus()
 ```
 
 ### Fields
@@ -868,7 +882,7 @@ report_status = client.report_status
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.report_status.load({"id": "report_status_id"})
+result = client.ReportStatus().load({"id": "report_status_id"})
 ```
 
 ### Common Methods

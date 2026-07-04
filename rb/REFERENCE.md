@@ -139,7 +139,7 @@ same parameters as `direct()`. Raises on error.
 ## ConversionDetailEntity
 
 ```ruby
-conversion_detail = client.conversion_detail
+conversion_detail = client.ConversionDetail
 ```
 
 ### Fields
@@ -160,7 +160,7 @@ conversion_detail = client.conversion_detail
 List entities matching the given criteria. Returns an array. Raises on error.
 
 ```ruby
-results = client.conversion_detail.list(nil)
+results = client.ConversionDetail.list(nil)
 ```
 
 ### Common Methods
@@ -196,7 +196,7 @@ Return the entity name.
 ## ConversionDetailMerchantEntity
 
 ```ruby
-conversion_detail_merchant = client.conversion_detail_merchant
+conversion_detail_merchant = client.ConversionDetailMerchant
 ```
 
 ### Fields
@@ -215,7 +215,7 @@ conversion_detail_merchant = client.conversion_detail_merchant
 List entities matching the given criteria. Returns an array. Raises on error.
 
 ```ruby
-results = client.conversion_detail_merchant.list(nil)
+results = client.ConversionDetailMerchant.list(nil)
 ```
 
 ### Common Methods
@@ -251,7 +251,7 @@ Return the entity name.
 ## ConversionGeneralEntity
 
 ```ruby
-conversion_general = client.conversion_general
+conversion_general = client.ConversionGeneral
 ```
 
 ### Fields
@@ -269,7 +269,7 @@ conversion_general = client.conversion_general
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.conversion_general.load({ "id" => "conversion_general_id" })
+result = client.ConversionGeneral.load({ "id" => "conversion_general_id" })
 ```
 
 ### Common Methods
@@ -305,7 +305,7 @@ Return the entity name.
 ## ConversionStatusEntity
 
 ```ruby
-conversion_status = client.conversion_status
+conversion_status = client.ConversionStatus
 ```
 
 ### Fields
@@ -321,7 +321,7 @@ conversion_status = client.conversion_status
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.conversion_status.load({ "id" => "conversion_status_id" })
+result = client.ConversionStatus.load({ "id" => "conversion_status_id" })
 ```
 
 ### Common Methods
@@ -357,7 +357,7 @@ Return the entity name.
 ## DeeplinkEntity
 
 ```ruby
-deeplink = client.deeplink
+deeplink = client.Deeplink
 ```
 
 ### Fields
@@ -377,7 +377,7 @@ deeplink = client.deeplink
 Create a new entity with the given data. Raises on error.
 
 ```ruby
-result = client.deeplink.create({
+result = client.Deeplink.create({
   "market" => # `$STRING`,
   "url" => # `$ARRAY`,
 })
@@ -416,7 +416,7 @@ Return the entity name.
 ## DeeplinkMerchantEntity
 
 ```ruby
-deeplink_merchant = client.deeplink_merchant
+deeplink_merchant = client.DeeplinkMerchant
 ```
 
 ### Fields
@@ -440,7 +440,7 @@ deeplink_merchant = client.deeplink_merchant
 List entities matching the given criteria. Returns an array. Raises on error.
 
 ```ruby
-results = client.deeplink_merchant.list(nil)
+results = client.DeeplinkMerchant.list(nil)
 ```
 
 ### Common Methods
@@ -476,7 +476,7 @@ Return the entity name.
 ## DntEntity
 
 ```ruby
-dnt = client.dnt
+dnt = client.Dnt
 ```
 
 ### Operations
@@ -486,7 +486,7 @@ dnt = client.dnt
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.dnt.load({ "id" => "dnt_id" })
+result = client.Dnt.load({ "id" => "dnt_id" })
 ```
 
 ### Common Methods
@@ -522,7 +522,7 @@ Return the entity name.
 ## MarketEntity
 
 ```ruby
-market = client.market
+market = client.Market
 ```
 
 ### Fields
@@ -538,7 +538,7 @@ market = client.market
 List entities matching the given criteria. Returns an array. Raises on error.
 
 ```ruby
-results = client.market.list(nil)
+results = client.Market.list(nil)
 ```
 
 ### Common Methods
@@ -574,7 +574,7 @@ Return the entity name.
 ## MerchantEntity
 
 ```ruby
-merchant = client.merchant
+merchant = client.Merchant
 ```
 
 ### Fields
@@ -594,7 +594,7 @@ merchant = client.merchant
 List entities matching the given criteria. Returns an array. Raises on error.
 
 ```ruby
-results = client.merchant.list(nil)
+results = client.Merchant.list(nil)
 ```
 
 ### Common Methods
@@ -630,7 +630,7 @@ Return the entity name.
 ## OfferEntity
 
 ```ruby
-offer = client.offer
+offer = client.Offer
 ```
 
 ### Fields
@@ -663,7 +663,7 @@ offer = client.offer
 List entities matching the given criteria. Returns an array. Raises on error.
 
 ```ruby
-results = client.offer.list(nil)
+results = client.Offer.list(nil)
 ```
 
 #### `load(reqmatch, ctrl = nil) -> result`
@@ -671,7 +671,7 @@ results = client.offer.list(nil)
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.offer.load({ "id" => "offer_id" })
+result = client.Offer.load({ "id" => "offer_id" })
 ```
 
 ### Common Methods
@@ -707,7 +707,7 @@ Return the entity name.
 ## ReportDetailEntity
 
 ```ruby
-report_detail = client.report_detail
+report_detail = client.ReportDetail
 ```
 
 ### Fields
@@ -729,7 +729,7 @@ report_detail = client.report_detail
 List entities matching the given criteria. Returns an array. Raises on error.
 
 ```ruby
-results = client.report_detail.list(nil)
+results = client.ReportDetail.list(nil)
 ```
 
 ### Common Methods
@@ -765,7 +765,7 @@ Return the entity name.
 ## ReportGeneralEntity
 
 ```ruby
-report_general = client.report_general
+report_general = client.ReportGeneral
 ```
 
 ### Fields
@@ -783,7 +783,7 @@ report_general = client.report_general
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.report_general.load({ "id" => "report_general_id" })
+result = client.ReportGeneral.load({ "id" => "report_general_id" })
 ```
 
 ### Common Methods
@@ -819,7 +819,7 @@ Return the entity name.
 ## ReportModifiedEntity
 
 ```ruby
-report_modified = client.report_modified
+report_modified = client.ReportModified
 ```
 
 ### Fields
@@ -835,7 +835,7 @@ report_modified = client.report_modified
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.report_modified.load({ "id" => "report_modified_id" })
+result = client.ReportModified.load({ "id" => "report_modified_id" })
 ```
 
 ### Common Methods
@@ -871,7 +871,7 @@ Return the entity name.
 ## ReportStatusEntity
 
 ```ruby
-report_status = client.report_status
+report_status = client.ReportStatus
 ```
 
 ### Fields
@@ -887,7 +887,7 @@ report_status = client.report_status
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.report_status.load({ "id" => "report_status_id" })
+result = client.ReportStatus.load({ "id" => "report_status_id" })
 ```
 
 ### Common Methods

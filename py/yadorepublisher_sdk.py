@@ -220,233 +220,93 @@ class YadorePublisherSDK:
         }
 
 
-    @property
-    def conversion_detail(self):
-        """Idiomatic facade: client.conversion_detail.list() / client.conversion_detail.load({"id": ...})."""
-        from entity.conversion_detail_entity import ConversionDetailEntity
-        cached = getattr(self, "_conversion_detail", None)
-        if cached is None:
-            cached = ConversionDetailEntity(self, None)
-            self._conversion_detail = cached
-        return cached
-
-    def ConversionDetail(self, data=None):
-        # Deprecated: use client.conversion_detail instead.
+    def ConversionDetail(self, data=None) -> "ConversionDetailEntity":
+        """Entity factory: client.ConversionDetail().list({}) / client.ConversionDetail().load({"id": ...})."""
         from entity.conversion_detail_entity import ConversionDetailEntity
         return ConversionDetailEntity(self, data)
 
 
-    @property
-    def conversion_detail_merchant(self):
-        """Idiomatic facade: client.conversion_detail_merchant.list() / client.conversion_detail_merchant.load({"id": ...})."""
-        from entity.conversion_detail_merchant_entity import ConversionDetailMerchantEntity
-        cached = getattr(self, "_conversion_detail_merchant", None)
-        if cached is None:
-            cached = ConversionDetailMerchantEntity(self, None)
-            self._conversion_detail_merchant = cached
-        return cached
-
-    def ConversionDetailMerchant(self, data=None):
-        # Deprecated: use client.conversion_detail_merchant instead.
+    def ConversionDetailMerchant(self, data=None) -> "ConversionDetailMerchantEntity":
+        """Entity factory: client.ConversionDetailMerchant().list({}) / client.ConversionDetailMerchant().load({"id": ...})."""
         from entity.conversion_detail_merchant_entity import ConversionDetailMerchantEntity
         return ConversionDetailMerchantEntity(self, data)
 
 
-    @property
-    def conversion_general(self):
-        """Idiomatic facade: client.conversion_general.list() / client.conversion_general.load({"id": ...})."""
-        from entity.conversion_general_entity import ConversionGeneralEntity
-        cached = getattr(self, "_conversion_general", None)
-        if cached is None:
-            cached = ConversionGeneralEntity(self, None)
-            self._conversion_general = cached
-        return cached
-
-    def ConversionGeneral(self, data=None):
-        # Deprecated: use client.conversion_general instead.
+    def ConversionGeneral(self, data=None) -> "ConversionGeneralEntity":
+        """Entity factory: client.ConversionGeneral().list({}) / client.ConversionGeneral().load({"id": ...})."""
         from entity.conversion_general_entity import ConversionGeneralEntity
         return ConversionGeneralEntity(self, data)
 
 
-    @property
-    def conversion_status(self):
-        """Idiomatic facade: client.conversion_status.list() / client.conversion_status.load({"id": ...})."""
-        from entity.conversion_status_entity import ConversionStatusEntity
-        cached = getattr(self, "_conversion_status", None)
-        if cached is None:
-            cached = ConversionStatusEntity(self, None)
-            self._conversion_status = cached
-        return cached
-
-    def ConversionStatus(self, data=None):
-        # Deprecated: use client.conversion_status instead.
+    def ConversionStatus(self, data=None) -> "ConversionStatusEntity":
+        """Entity factory: client.ConversionStatus().list({}) / client.ConversionStatus().load({"id": ...})."""
         from entity.conversion_status_entity import ConversionStatusEntity
         return ConversionStatusEntity(self, data)
 
 
-    @property
-    def deeplink(self):
-        """Idiomatic facade: client.deeplink.list() / client.deeplink.load({"id": ...})."""
-        from entity.deeplink_entity import DeeplinkEntity
-        cached = getattr(self, "_deeplink", None)
-        if cached is None:
-            cached = DeeplinkEntity(self, None)
-            self._deeplink = cached
-        return cached
-
-    def Deeplink(self, data=None):
-        # Deprecated: use client.deeplink instead.
+    def Deeplink(self, data=None) -> "DeeplinkEntity":
+        """Entity factory: client.Deeplink().list({}) / client.Deeplink().load({"id": ...})."""
         from entity.deeplink_entity import DeeplinkEntity
         return DeeplinkEntity(self, data)
 
 
-    @property
-    def deeplink_merchant(self):
-        """Idiomatic facade: client.deeplink_merchant.list() / client.deeplink_merchant.load({"id": ...})."""
-        from entity.deeplink_merchant_entity import DeeplinkMerchantEntity
-        cached = getattr(self, "_deeplink_merchant", None)
-        if cached is None:
-            cached = DeeplinkMerchantEntity(self, None)
-            self._deeplink_merchant = cached
-        return cached
-
-    def DeeplinkMerchant(self, data=None):
-        # Deprecated: use client.deeplink_merchant instead.
+    def DeeplinkMerchant(self, data=None) -> "DeeplinkMerchantEntity":
+        """Entity factory: client.DeeplinkMerchant().list({}) / client.DeeplinkMerchant().load({"id": ...})."""
         from entity.deeplink_merchant_entity import DeeplinkMerchantEntity
         return DeeplinkMerchantEntity(self, data)
 
 
-    @property
-    def dnt(self):
-        """Idiomatic facade: client.dnt.list() / client.dnt.load({"id": ...})."""
-        from entity.dnt_entity import DntEntity
-        cached = getattr(self, "_dnt", None)
-        if cached is None:
-            cached = DntEntity(self, None)
-            self._dnt = cached
-        return cached
-
-    def Dnt(self, data=None):
-        # Deprecated: use client.dnt instead.
+    def Dnt(self, data=None) -> "DntEntity":
+        """Entity factory: client.Dnt().list({}) / client.Dnt().load({"id": ...})."""
         from entity.dnt_entity import DntEntity
         return DntEntity(self, data)
 
 
-    @property
-    def market(self):
-        """Idiomatic facade: client.market.list() / client.market.load({"id": ...})."""
-        from entity.market_entity import MarketEntity
-        cached = getattr(self, "_market", None)
-        if cached is None:
-            cached = MarketEntity(self, None)
-            self._market = cached
-        return cached
-
-    def Market(self, data=None):
-        # Deprecated: use client.market instead.
+    def Market(self, data=None) -> "MarketEntity":
+        """Entity factory: client.Market().list({}) / client.Market().load({"id": ...})."""
         from entity.market_entity import MarketEntity
         return MarketEntity(self, data)
 
 
-    @property
-    def merchant(self):
-        """Idiomatic facade: client.merchant.list() / client.merchant.load({"id": ...})."""
-        from entity.merchant_entity import MerchantEntity
-        cached = getattr(self, "_merchant", None)
-        if cached is None:
-            cached = MerchantEntity(self, None)
-            self._merchant = cached
-        return cached
-
-    def Merchant(self, data=None):
-        # Deprecated: use client.merchant instead.
+    def Merchant(self, data=None) -> "MerchantEntity":
+        """Entity factory: client.Merchant().list({}) / client.Merchant().load({"id": ...})."""
         from entity.merchant_entity import MerchantEntity
         return MerchantEntity(self, data)
 
 
-    @property
-    def offer(self):
-        """Idiomatic facade: client.offer.list() / client.offer.load({"id": ...})."""
-        from entity.offer_entity import OfferEntity
-        cached = getattr(self, "_offer", None)
-        if cached is None:
-            cached = OfferEntity(self, None)
-            self._offer = cached
-        return cached
-
-    def Offer(self, data=None):
-        # Deprecated: use client.offer instead.
+    def Offer(self, data=None) -> "OfferEntity":
+        """Entity factory: client.Offer().list({}) / client.Offer().load({"id": ...})."""
         from entity.offer_entity import OfferEntity
         return OfferEntity(self, data)
 
 
-    @property
-    def report_detail(self):
-        """Idiomatic facade: client.report_detail.list() / client.report_detail.load({"id": ...})."""
-        from entity.report_detail_entity import ReportDetailEntity
-        cached = getattr(self, "_report_detail", None)
-        if cached is None:
-            cached = ReportDetailEntity(self, None)
-            self._report_detail = cached
-        return cached
-
-    def ReportDetail(self, data=None):
-        # Deprecated: use client.report_detail instead.
+    def ReportDetail(self, data=None) -> "ReportDetailEntity":
+        """Entity factory: client.ReportDetail().list({}) / client.ReportDetail().load({"id": ...})."""
         from entity.report_detail_entity import ReportDetailEntity
         return ReportDetailEntity(self, data)
 
 
-    @property
-    def report_general(self):
-        """Idiomatic facade: client.report_general.list() / client.report_general.load({"id": ...})."""
-        from entity.report_general_entity import ReportGeneralEntity
-        cached = getattr(self, "_report_general", None)
-        if cached is None:
-            cached = ReportGeneralEntity(self, None)
-            self._report_general = cached
-        return cached
-
-    def ReportGeneral(self, data=None):
-        # Deprecated: use client.report_general instead.
+    def ReportGeneral(self, data=None) -> "ReportGeneralEntity":
+        """Entity factory: client.ReportGeneral().list({}) / client.ReportGeneral().load({"id": ...})."""
         from entity.report_general_entity import ReportGeneralEntity
         return ReportGeneralEntity(self, data)
 
 
-    @property
-    def report_modified(self):
-        """Idiomatic facade: client.report_modified.list() / client.report_modified.load({"id": ...})."""
-        from entity.report_modified_entity import ReportModifiedEntity
-        cached = getattr(self, "_report_modified", None)
-        if cached is None:
-            cached = ReportModifiedEntity(self, None)
-            self._report_modified = cached
-        return cached
-
-    def ReportModified(self, data=None):
-        # Deprecated: use client.report_modified instead.
+    def ReportModified(self, data=None) -> "ReportModifiedEntity":
+        """Entity factory: client.ReportModified().list({}) / client.ReportModified().load({"id": ...})."""
         from entity.report_modified_entity import ReportModifiedEntity
         return ReportModifiedEntity(self, data)
 
 
-    @property
-    def report_status(self):
-        """Idiomatic facade: client.report_status.list() / client.report_status.load({"id": ...})."""
-        from entity.report_status_entity import ReportStatusEntity
-        cached = getattr(self, "_report_status", None)
-        if cached is None:
-            cached = ReportStatusEntity(self, None)
-            self._report_status = cached
-        return cached
-
-    def ReportStatus(self, data=None):
-        # Deprecated: use client.report_status instead.
+    def ReportStatus(self, data=None) -> "ReportStatusEntity":
+        """Entity factory: client.ReportStatus().list({}) / client.ReportStatus().load({"id": ...})."""
         from entity.report_status_entity import ReportStatusEntity
         return ReportStatusEntity(self, data)
 
 
 
     @classmethod
-    def test(cls, testopts=None, sdkopts=None):
+    def test(cls, testopts=None, sdkopts=None) -> "YadorePublisherSDK":
         if sdkopts is None:
             sdkopts = {}
         sdkopts = vs.clone(sdkopts)
@@ -466,3 +326,22 @@ class YadorePublisherSDK:
         sdk.mode = "test"
 
         return sdk
+
+
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from entity.conversion_detail_entity import ConversionDetailEntity
+    from entity.conversion_detail_merchant_entity import ConversionDetailMerchantEntity
+    from entity.conversion_general_entity import ConversionGeneralEntity
+    from entity.conversion_status_entity import ConversionStatusEntity
+    from entity.deeplink_entity import DeeplinkEntity
+    from entity.deeplink_merchant_entity import DeeplinkMerchantEntity
+    from entity.dnt_entity import DntEntity
+    from entity.market_entity import MarketEntity
+    from entity.merchant_entity import MerchantEntity
+    from entity.offer_entity import OfferEntity
+    from entity.report_detail_entity import ReportDetailEntity
+    from entity.report_general_entity import ReportGeneralEntity
+    from entity.report_modified_entity import ReportModifiedEntity
+    from entity.report_status_entity import ReportStatusEntity

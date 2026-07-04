@@ -4,273 +4,251 @@
 # params (op.<name>.points[].args.params[]). Field/param types come from the
 # canonical type sentinels via @voxgig/sdkgen canonToType (source of truth:
 # @voxgig/apidef VALID_CANON). Do not edit by hand.
+#
+# These are TypedDicts, not dataclasses: the SDK ops return/accept plain dicts
+# at runtime, and a TypedDict IS a dict shape, so the types match the runtime.
+# Optional (req:false) keys are modelled as TypedDict key-optionality
+# (total=False), split into a required base + total=False subclass when a type
+# has both required and optional keys.
 
 from __future__ import annotations
 
-from dataclasses import dataclass
-from typing import Optional, Any
+from typing import TypedDict, Any
 
 
-@dataclass
-class ConversionDetail:
-    click_id: Optional[str] = None
-    date: Optional[str] = None
-    market: Optional[str] = None
-    merchant: Optional[dict] = None
-    placement_id: Optional[str] = None
-    sale: Optional[float] = None
+class ConversionDetail(TypedDict, total=False):
+    click_id: str
+    date: str
+    market: str
+    merchant: dict
+    placement_id: str
+    sale: float
 
 
-@dataclass
-class ConversionDetailListMatch:
-    click_id: Optional[str] = None
-    date: Optional[str] = None
-    market: Optional[str] = None
-    merchant: Optional[dict] = None
-    placement_id: Optional[str] = None
-    sale: Optional[float] = None
+class ConversionDetailListMatch(TypedDict, total=False):
+    click_id: str
+    date: str
+    market: str
+    merchant: dict
+    placement_id: str
+    sale: float
 
 
-@dataclass
-class ConversionDetailMerchant:
-    click: Optional[int] = None
-    market: Optional[str] = None
-    merchant: Optional[dict] = None
-    sale: Optional[int] = None
+class ConversionDetailMerchant(TypedDict, total=False):
+    click: int
+    market: str
+    merchant: dict
+    sale: int
 
 
-@dataclass
-class ConversionDetailMerchantListMatch:
-    click: Optional[int] = None
-    market: Optional[str] = None
-    merchant: Optional[dict] = None
-    sale: Optional[int] = None
+class ConversionDetailMerchantListMatch(TypedDict, total=False):
+    click: int
+    market: str
+    merchant: dict
+    sale: int
 
 
-@dataclass
-class ConversionGeneral:
-    date: Optional[dict] = None
-    market: Optional[dict] = None
-    total: Optional[dict] = None
+class ConversionGeneral(TypedDict, total=False):
+    date: dict
+    market: dict
+    total: dict
 
 
-@dataclass
-class ConversionGeneralLoadMatch:
-    date: Optional[dict] = None
-    market: Optional[dict] = None
-    total: Optional[dict] = None
+class ConversionGeneralLoadMatch(TypedDict, total=False):
+    date: dict
+    market: dict
+    total: dict
 
 
-@dataclass
-class ConversionStatus:
-    status: Optional[str] = None
+class ConversionStatus(TypedDict, total=False):
+    status: str
 
 
-@dataclass
-class ConversionStatusLoadMatch:
-    status: Optional[str] = None
+class ConversionStatusLoadMatch(TypedDict, total=False):
+    status: str
 
 
-@dataclass
-class Deeplink:
+class DeeplinkRequired(TypedDict):
     market: str
     url: list
-    is_couponing: Optional[bool] = None
-    placement_id: Optional[str] = None
-    result: Optional[dict] = None
 
 
-@dataclass
-class DeeplinkCreateData:
-    is_couponing: Optional[bool] = None
-    market: Optional[str] = None
-    placement_id: Optional[str] = None
-    result: Optional[dict] = None
-    url: Optional[list] = None
+class Deeplink(DeeplinkRequired, total=False):
+    is_couponing: bool
+    placement_id: str
+    result: dict
 
 
-@dataclass
-class DeeplinkMerchant:
-    deeplink_count: Optional[int] = None
-    estimated_cpc: Optional[dict] = None
-    has_external_homepage: Optional[bool] = None
-    has_smartlink_homepage: Optional[bool] = None
-    id: Optional[str] = None
-    is_smartlink: Optional[bool] = None
-    logo: Optional[dict] = None
-    name: Optional[str] = None
-    traffic_type: Optional[list] = None
+class DeeplinkCreateData(TypedDict, total=False):
+    is_couponing: bool
+    market: str
+    placement_id: str
+    result: dict
+    url: list
 
 
-@dataclass
-class DeeplinkMerchantListMatch:
-    deeplink_count: Optional[int] = None
-    estimated_cpc: Optional[dict] = None
-    has_external_homepage: Optional[bool] = None
-    has_smartlink_homepage: Optional[bool] = None
-    id: Optional[str] = None
-    is_smartlink: Optional[bool] = None
-    logo: Optional[dict] = None
-    name: Optional[str] = None
-    traffic_type: Optional[list] = None
+class DeeplinkMerchant(TypedDict, total=False):
+    deeplink_count: int
+    estimated_cpc: dict
+    has_external_homepage: bool
+    has_smartlink_homepage: bool
+    id: str
+    is_smartlink: bool
+    logo: dict
+    name: str
+    traffic_type: list
 
 
-@dataclass
-class Dnt:
+class DeeplinkMerchantListMatch(TypedDict, total=False):
+    deeplink_count: int
+    estimated_cpc: dict
+    has_external_homepage: bool
+    has_smartlink_homepage: bool
+    id: str
+    is_smartlink: bool
+    logo: dict
+    name: str
+    traffic_type: list
+
+
+class Dnt(TypedDict):
     pass
 
 
-@dataclass
-class DntLoadMatch:
+class DntLoadMatch(TypedDict):
     pass
 
 
-@dataclass
-class Market:
-    id: Optional[str] = None
+class Market(TypedDict, total=False):
+    id: str
 
 
-@dataclass
-class MarketListMatch:
-    id: Optional[str] = None
+class MarketListMatch(TypedDict, total=False):
+    id: str
 
 
-@dataclass
-class Merchant:
-    id: Optional[str] = None
-    logo: Optional[dict] = None
-    name: Optional[str] = None
-    offer_count: Optional[int] = None
-    traffic_type: Optional[list] = None
+class Merchant(TypedDict, total=False):
+    id: str
+    logo: dict
+    name: str
+    offer_count: int
+    traffic_type: list
 
 
-@dataclass
-class MerchantListMatch:
-    id: Optional[str] = None
-    logo: Optional[dict] = None
-    name: Optional[str] = None
-    offer_count: Optional[int] = None
-    traffic_type: Optional[list] = None
+class MerchantListMatch(TypedDict, total=False):
+    id: str
+    logo: dict
+    name: str
+    offer_count: int
+    traffic_type: list
 
 
-@dataclass
-class Offer:
-    availability: Optional[str] = None
-    brand: Optional[str] = None
-    click_url: Optional[str] = None
-    description: Optional[str] = None
-    ean: Optional[dict] = None
-    eer: Optional[str] = None
-    estimated_cpc: Optional[dict] = None
-    id: Optional[str] = None
-    image: Optional[dict] = None
-    merchant: Optional[dict] = None
-    original_price: Optional[dict] = None
-    price: Optional[dict] = None
-    promo_text: Optional[str] = None
-    shipping_price: Optional[dict] = None
-    shipping_time: Optional[dict] = None
-    thumbnail: Optional[dict] = None
-    title: Optional[str] = None
-    unit_price: Optional[dict] = None
+class Offer(TypedDict, total=False):
+    availability: str
+    brand: str
+    click_url: str
+    description: str
+    ean: dict
+    eer: str
+    estimated_cpc: dict
+    id: str
+    image: dict
+    merchant: dict
+    original_price: dict
+    price: dict
+    promo_text: str
+    shipping_price: dict
+    shipping_time: dict
+    thumbnail: dict
+    title: str
+    unit_price: dict
 
 
-@dataclass
-class OfferLoadMatch:
-    availability: Optional[str] = None
-    brand: Optional[str] = None
-    click_url: Optional[str] = None
-    description: Optional[str] = None
-    ean: Optional[dict] = None
-    eer: Optional[str] = None
-    estimated_cpc: Optional[dict] = None
-    id: Optional[str] = None
-    image: Optional[dict] = None
-    merchant: Optional[dict] = None
-    original_price: Optional[dict] = None
-    price: Optional[dict] = None
-    promo_text: Optional[str] = None
-    shipping_price: Optional[dict] = None
-    shipping_time: Optional[dict] = None
-    thumbnail: Optional[dict] = None
-    title: Optional[str] = None
-    unit_price: Optional[dict] = None
+class OfferLoadMatch(TypedDict, total=False):
+    availability: str
+    brand: str
+    click_url: str
+    description: str
+    ean: dict
+    eer: str
+    estimated_cpc: dict
+    id: str
+    image: dict
+    merchant: dict
+    original_price: dict
+    price: dict
+    promo_text: str
+    shipping_price: dict
+    shipping_time: dict
+    thumbnail: dict
+    title: str
+    unit_price: dict
 
 
-@dataclass
-class OfferListMatch:
-    availability: Optional[str] = None
-    brand: Optional[str] = None
-    click_url: Optional[str] = None
-    description: Optional[str] = None
-    ean: Optional[dict] = None
-    eer: Optional[str] = None
-    estimated_cpc: Optional[dict] = None
-    id: Optional[str] = None
-    image: Optional[dict] = None
-    merchant: Optional[dict] = None
-    original_price: Optional[dict] = None
-    price: Optional[dict] = None
-    promo_text: Optional[str] = None
-    shipping_price: Optional[dict] = None
-    shipping_time: Optional[dict] = None
-    thumbnail: Optional[dict] = None
-    title: Optional[str] = None
-    unit_price: Optional[dict] = None
+class OfferListMatch(TypedDict, total=False):
+    availability: str
+    brand: str
+    click_url: str
+    description: str
+    ean: dict
+    eer: str
+    estimated_cpc: dict
+    id: str
+    image: dict
+    merchant: dict
+    original_price: dict
+    price: dict
+    promo_text: str
+    shipping_price: dict
+    shipping_time: dict
+    thumbnail: dict
+    title: str
+    unit_price: dict
 
 
-@dataclass
-class ReportDetail:
-    click_id: Optional[str] = None
-    currency: Optional[str] = None
-    date: Optional[str] = None
-    market: Optional[str] = None
-    merchant: Optional[dict] = None
-    placement_id: Optional[str] = None
-    revenue: Optional[float] = None
+class ReportDetail(TypedDict, total=False):
+    click_id: str
+    currency: str
+    date: str
+    market: str
+    merchant: dict
+    placement_id: str
+    revenue: float
 
 
-@dataclass
-class ReportDetailListMatch:
-    click_id: Optional[str] = None
-    currency: Optional[str] = None
-    date: Optional[str] = None
-    market: Optional[str] = None
-    merchant: Optional[dict] = None
-    placement_id: Optional[str] = None
-    revenue: Optional[float] = None
+class ReportDetailListMatch(TypedDict, total=False):
+    click_id: str
+    currency: str
+    date: str
+    market: str
+    merchant: dict
+    placement_id: str
+    revenue: float
 
 
-@dataclass
-class ReportGeneral:
-    date: Optional[dict] = None
-    market: Optional[dict] = None
-    total: Optional[dict] = None
+class ReportGeneral(TypedDict, total=False):
+    date: dict
+    market: dict
+    total: dict
 
 
-@dataclass
-class ReportGeneralLoadMatch:
-    date: Optional[dict] = None
-    market: Optional[dict] = None
-    total: Optional[dict] = None
+class ReportGeneralLoadMatch(TypedDict, total=False):
+    date: dict
+    market: dict
+    total: dict
 
 
-@dataclass
-class ReportModified:
-    market: Optional[dict] = None
+class ReportModified(TypedDict, total=False):
+    market: dict
 
 
-@dataclass
-class ReportModifiedLoadMatch:
-    market: Optional[dict] = None
+class ReportModifiedLoadMatch(TypedDict, total=False):
+    market: dict
 
 
-@dataclass
-class ReportStatus:
-    status: Optional[str] = None
+class ReportStatus(TypedDict, total=False):
+    status: str
 
 
-@dataclass
-class ReportStatusLoadMatch:
-    status: Optional[str] = None
-
+class ReportStatusLoadMatch(TypedDict, total=False):
+    status: str

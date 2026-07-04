@@ -30,15 +30,15 @@ const client = new YadorePublisherSDK({
 })
 ```
 
-### 2. List conversiondetails
+### 2. List conversiondetail records
+
+`list()` resolves to an array of ConversionDetail objects — iterate it directly:
 
 ```ts
-const result = await client.conversiondetail.list()
+const conversiondetails = await client.ConversionDetail().list()
 
-if (result.ok) {
-  for (const item of result.data) {
-    console.log(item.id, item.name)
-  }
+for (const conversiondetail of conversiondetails) {
+  console.log(conversiondetail)
 }
 ```
 
@@ -56,6 +56,9 @@ const result = await client.direct({
   params: { id: 'example' },
 })
 
+if (result instanceof Error) {
+  throw result
+}
 if (result.ok) {
   console.log(result.status)  // 200
   console.log(result.data)    // response body
@@ -84,9 +87,9 @@ Create a mock client for unit testing — no server required:
 ```ts
 const client = YadorePublisherSDK.test()
 
-const result = await client.conversiondetail.load({ id: 'test01' })
-// result.ok === true
-// result.data contains mock response data
+const conversiondetail = await client.ConversionDetail().load({ id: 'test01' })
+// conversiondetail is a bare entity populated with mock response data
+console.log(conversiondetail)
 ```
 
 You can also use the instance method:
@@ -101,7 +104,7 @@ const testClient = client.tester()
 Entity instances remember their last match and data:
 
 ```ts
-const entity = client.conversiondetail
+const entity = client.ConversionDetail()
 
 // First call sets internal match
 await entity.load({ id: 'example' })
@@ -192,7 +195,7 @@ new YadorePublisherSDK(options?: {
 | `Dnt(data?)` | `DntEntity` | Create a Dnt entity instance. |
 | `Market(data?)` | `MarketEntity` | Create a Market entity instance. |
 | `Merchant(data?)` | `MerchantEntity` | Create a Merchant entity instance. |
-| `Offer(data?)` | `OfferEntity` | Create a Offer entity instance. |
+| `Offer(data?)` | `OfferEntity` | Create an Offer entity instance. |
 | `ReportDetail(data?)` | `ReportDetailEntity` | Create a ReportDetail entity instance. |
 | `ReportGeneral(data?)` | `ReportGeneralEntity` | Create a ReportGeneral entity instance. |
 | `ReportModified(data?)` | `ReportModifiedEntity` | Create a ReportModified entity instance. |
@@ -213,29 +216,30 @@ All entities share the same interface.
 
 | Method | Signature | Description |
 | --- | --- | --- |
-| `load` | `load(reqmatch?, ctrl?): Promise<Result>` | Load a single entity by match criteria. |
-| `list` | `list(reqmatch?, ctrl?): Promise<Result>` | List entities matching the criteria. |
-| `create` | `create(reqdata?, ctrl?): Promise<Result>` | Create a new entity. |
-| `update` | `update(reqdata?, ctrl?): Promise<Result>` | Update an existing entity. |
-| `remove` | `remove(reqmatch?, ctrl?): Promise<Result>` | Remove an entity. |
+| `load` | `load(reqmatch?, ctrl?): Promise<Entity>` | Load a single entity by match criteria. |
+| `list` | `list(reqmatch?, ctrl?): Promise<Entity[]>` | List entities matching the criteria. |
+| `create` | `create(reqdata?, ctrl?): Promise<Entity>` | Create a new entity. |
+| `update` | `update(reqdata?, ctrl?): Promise<Entity>` | Update an existing entity. |
+| `remove` | `remove(reqmatch?, ctrl?): Promise<void>` | Remove an entity. |
 | `data` | `data(data?): any` | Get or set entity data. |
 | `match` | `match(match?): any` | Get or set entity match criteria. |
 | `make` | `make(): Entity` | Create a new instance with the same options. |
 | `client` | `client(): YadorePublisherSDK` | Return the parent SDK client. |
 | `entopts` | `entopts(): object` | Return a copy of the entity options. |
 
-#### Result shape
+#### Return values
 
-All entity operations return a Result object:
+Entity operations resolve to the entity data directly — there is no
+result envelope:
 
-```ts
-{
-  ok: boolean      // true if the HTTP status is 2xx
-  status: number   // HTTP status code
-  headers: object  // response headers
-  data: any        // parsed JSON response body
-}
-```
+- `load`, `create` and `update` resolve to a single entity object.
+- `list` resolves to an **array** of entity objects (iterate it directly;
+  there is no `.data` and no `.ok`).
+- `remove` resolves to `void`.
+
+On a failed request these methods **throw**, so wrap calls in
+`try`/`catch` to handle errors. Only `direct()` returns the result
+envelope described below.
 
 ### DirectResult shape
 
@@ -464,7 +468,7 @@ API path: `/v2/report/status`
 
 ### ConversionDetail
 
-Create an instance: `const conversion_detail = client.conversion_detail`
+Create an instance: `const conversion_detail = client.ConversionDetail()`
 
 #### Operations
 
@@ -486,13 +490,13 @@ Create an instance: `const conversion_detail = client.conversion_detail`
 #### Example: List
 
 ```ts
-const conversion_details = await client.conversion_detail.list()
+const conversion_details = await client.ConversionDetail().list()
 ```
 
 
 ### ConversionDetailMerchant
 
-Create an instance: `const conversion_detail_merchant = client.conversion_detail_merchant`
+Create an instance: `const conversion_detail_merchant = client.ConversionDetailMerchant()`
 
 #### Operations
 
@@ -512,13 +516,13 @@ Create an instance: `const conversion_detail_merchant = client.conversion_detail
 #### Example: List
 
 ```ts
-const conversion_detail_merchants = await client.conversion_detail_merchant.list()
+const conversion_detail_merchants = await client.ConversionDetailMerchant().list()
 ```
 
 
 ### ConversionGeneral
 
-Create an instance: `const conversion_general = client.conversion_general`
+Create an instance: `const conversion_general = client.ConversionGeneral()`
 
 #### Operations
 
@@ -537,13 +541,13 @@ Create an instance: `const conversion_general = client.conversion_general`
 #### Example: Load
 
 ```ts
-const conversion_general = await client.conversion_general.load({ id: 'conversion_general_id' })
+const conversion_general = await client.ConversionGeneral().load({ id: 'conversion_general_id' })
 ```
 
 
 ### ConversionStatus
 
-Create an instance: `const conversion_status = client.conversion_status`
+Create an instance: `const conversion_status = client.ConversionStatus()`
 
 #### Operations
 
@@ -560,13 +564,13 @@ Create an instance: `const conversion_status = client.conversion_status`
 #### Example: Load
 
 ```ts
-const conversion_status = await client.conversion_status.load({ id: 'conversion_status_id' })
+const conversion_status = await client.ConversionStatus().load({ id: 'conversion_status_id' })
 ```
 
 
 ### Deeplink
 
-Create an instance: `const deeplink = client.deeplink`
+Create an instance: `const deeplink = client.Deeplink()`
 
 #### Operations
 
@@ -587,7 +591,7 @@ Create an instance: `const deeplink = client.deeplink`
 #### Example: Create
 
 ```ts
-const deeplink = await client.deeplink.create({
+const deeplink = await client.Deeplink().create({
   market: /* `$STRING` */,
   url: /* `$ARRAY` */,
 })
@@ -596,7 +600,7 @@ const deeplink = await client.deeplink.create({
 
 ### DeeplinkMerchant
 
-Create an instance: `const deeplink_merchant = client.deeplink_merchant`
+Create an instance: `const deeplink_merchant = client.DeeplinkMerchant()`
 
 #### Operations
 
@@ -621,13 +625,13 @@ Create an instance: `const deeplink_merchant = client.deeplink_merchant`
 #### Example: List
 
 ```ts
-const deeplink_merchants = await client.deeplink_merchant.list()
+const deeplink_merchants = await client.DeeplinkMerchant().list()
 ```
 
 
 ### Dnt
 
-Create an instance: `const dnt = client.dnt`
+Create an instance: `const dnt = client.Dnt()`
 
 #### Operations
 
@@ -638,13 +642,13 @@ Create an instance: `const dnt = client.dnt`
 #### Example: Load
 
 ```ts
-const dnt = await client.dnt.load({ id: 'dnt_id' })
+const dnt = await client.Dnt().load({ id: 'dnt_id' })
 ```
 
 
 ### Market
 
-Create an instance: `const market = client.market`
+Create an instance: `const market = client.Market()`
 
 #### Operations
 
@@ -661,13 +665,13 @@ Create an instance: `const market = client.market`
 #### Example: List
 
 ```ts
-const markets = await client.market.list()
+const markets = await client.Market().list()
 ```
 
 
 ### Merchant
 
-Create an instance: `const merchant = client.merchant`
+Create an instance: `const merchant = client.Merchant()`
 
 #### Operations
 
@@ -688,13 +692,13 @@ Create an instance: `const merchant = client.merchant`
 #### Example: List
 
 ```ts
-const merchants = await client.merchant.list()
+const merchants = await client.Merchant().list()
 ```
 
 
 ### Offer
 
-Create an instance: `const offer = client.offer`
+Create an instance: `const offer = client.Offer()`
 
 #### Operations
 
@@ -729,19 +733,19 @@ Create an instance: `const offer = client.offer`
 #### Example: Load
 
 ```ts
-const offer = await client.offer.load({ id: 'offer_id' })
+const offer = await client.Offer().load({ id: 'offer_id' })
 ```
 
 #### Example: List
 
 ```ts
-const offers = await client.offer.list()
+const offers = await client.Offer().list()
 ```
 
 
 ### ReportDetail
 
-Create an instance: `const report_detail = client.report_detail`
+Create an instance: `const report_detail = client.ReportDetail()`
 
 #### Operations
 
@@ -764,13 +768,13 @@ Create an instance: `const report_detail = client.report_detail`
 #### Example: List
 
 ```ts
-const report_details = await client.report_detail.list()
+const report_details = await client.ReportDetail().list()
 ```
 
 
 ### ReportGeneral
 
-Create an instance: `const report_general = client.report_general`
+Create an instance: `const report_general = client.ReportGeneral()`
 
 #### Operations
 
@@ -789,13 +793,13 @@ Create an instance: `const report_general = client.report_general`
 #### Example: Load
 
 ```ts
-const report_general = await client.report_general.load({ id: 'report_general_id' })
+const report_general = await client.ReportGeneral().load({ id: 'report_general_id' })
 ```
 
 
 ### ReportModified
 
-Create an instance: `const report_modified = client.report_modified`
+Create an instance: `const report_modified = client.ReportModified()`
 
 #### Operations
 
@@ -812,13 +816,13 @@ Create an instance: `const report_modified = client.report_modified`
 #### Example: Load
 
 ```ts
-const report_modified = await client.report_modified.load({ id: 'report_modified_id' })
+const report_modified = await client.ReportModified().load({ id: 'report_modified_id' })
 ```
 
 
 ### ReportStatus
 
-Create an instance: `const report_status = client.report_status`
+Create an instance: `const report_status = client.ReportStatus()`
 
 #### Operations
 
@@ -835,7 +839,7 @@ Create an instance: `const report_status = client.report_status`
 #### Example: Load
 
 ```ts
-const report_status = await client.report_status.load({ id: 'report_status_id' })
+const report_status = await client.ReportStatus().load({ id: 'report_status_id' })
 ```
 
 
@@ -906,7 +910,7 @@ stores the returned data and match criteria internally. Subsequent
 calls on the same instance can rely on this state.
 
 ```ts
-const conversiondetail = client.conversiondetail
+const conversiondetail = client.ConversionDetail()
 await conversiondetail.load({ id: "example_id" })
 
 // conversiondetail.data() now returns the loaded conversiondetail data

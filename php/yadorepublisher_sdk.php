@@ -233,10 +233,10 @@ class YadorePublisherSDK
 
     private $_conversion_detail = null;
 
-    // Idiomatic facade: $client->conversion_detail()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias ConversionDetail() (PHP method
-    // names are case-insensitive).
-    public function conversion_detail($data = null)
+    // Canonical facade: $client->ConversionDetail()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->conversion_detail()
+    // resolves here too.
+    public function ConversionDetail($data = null)
     {
         require_once __DIR__ . '/entity/conversion_detail_entity.php';
         if ($data === null) {
@@ -251,10 +251,10 @@ class YadorePublisherSDK
 
     private $_conversion_detail_merchant = null;
 
-    // Idiomatic facade: $client->conversion_detail_merchant()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias ConversionDetailMerchant() (PHP method
-    // names are case-insensitive).
-    public function conversion_detail_merchant($data = null)
+    // Canonical facade: $client->ConversionDetailMerchant()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->conversion_detail_merchant()
+    // resolves here too.
+    public function ConversionDetailMerchant($data = null)
     {
         require_once __DIR__ . '/entity/conversion_detail_merchant_entity.php';
         if ($data === null) {
@@ -269,10 +269,10 @@ class YadorePublisherSDK
 
     private $_conversion_general = null;
 
-    // Idiomatic facade: $client->conversion_general()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias ConversionGeneral() (PHP method
-    // names are case-insensitive).
-    public function conversion_general($data = null)
+    // Canonical facade: $client->ConversionGeneral()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->conversion_general()
+    // resolves here too.
+    public function ConversionGeneral($data = null)
     {
         require_once __DIR__ . '/entity/conversion_general_entity.php';
         if ($data === null) {
@@ -287,10 +287,10 @@ class YadorePublisherSDK
 
     private $_conversion_status = null;
 
-    // Idiomatic facade: $client->conversion_status()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias ConversionStatus() (PHP method
-    // names are case-insensitive).
-    public function conversion_status($data = null)
+    // Canonical facade: $client->ConversionStatus()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->conversion_status()
+    // resolves here too.
+    public function ConversionStatus($data = null)
     {
         require_once __DIR__ . '/entity/conversion_status_entity.php';
         if ($data === null) {
@@ -305,10 +305,10 @@ class YadorePublisherSDK
 
     private $_deeplink = null;
 
-    // Idiomatic facade: $client->deeplink()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias Deeplink() (PHP method
-    // names are case-insensitive).
-    public function deeplink($data = null)
+    // Canonical facade: $client->Deeplink()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->deeplink()
+    // resolves here too.
+    public function Deeplink($data = null)
     {
         require_once __DIR__ . '/entity/deeplink_entity.php';
         if ($data === null) {
@@ -323,10 +323,10 @@ class YadorePublisherSDK
 
     private $_deeplink_merchant = null;
 
-    // Idiomatic facade: $client->deeplink_merchant()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias DeeplinkMerchant() (PHP method
-    // names are case-insensitive).
-    public function deeplink_merchant($data = null)
+    // Canonical facade: $client->DeeplinkMerchant()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->deeplink_merchant()
+    // resolves here too.
+    public function DeeplinkMerchant($data = null)
     {
         require_once __DIR__ . '/entity/deeplink_merchant_entity.php';
         if ($data === null) {
@@ -341,10 +341,10 @@ class YadorePublisherSDK
 
     private $_dnt = null;
 
-    // Idiomatic facade: $client->dnt()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias Dnt() (PHP method
-    // names are case-insensitive).
-    public function dnt($data = null)
+    // Canonical facade: $client->Dnt()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->dnt()
+    // resolves here too.
+    public function Dnt($data = null)
     {
         require_once __DIR__ . '/entity/dnt_entity.php';
         if ($data === null) {
@@ -359,10 +359,10 @@ class YadorePublisherSDK
 
     private $_market = null;
 
-    // Idiomatic facade: $client->market()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias Market() (PHP method
-    // names are case-insensitive).
-    public function market($data = null)
+    // Canonical facade: $client->Market()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->market()
+    // resolves here too.
+    public function Market($data = null)
     {
         require_once __DIR__ . '/entity/market_entity.php';
         if ($data === null) {
@@ -377,10 +377,10 @@ class YadorePublisherSDK
 
     private $_merchant = null;
 
-    // Idiomatic facade: $client->merchant()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias Merchant() (PHP method
-    // names are case-insensitive).
-    public function merchant($data = null)
+    // Canonical facade: $client->Merchant()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->merchant()
+    // resolves here too.
+    public function Merchant($data = null)
     {
         require_once __DIR__ . '/entity/merchant_entity.php';
         if ($data === null) {
@@ -395,10 +395,10 @@ class YadorePublisherSDK
 
     private $_offer = null;
 
-    // Idiomatic facade: $client->offer()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias Offer() (PHP method
-    // names are case-insensitive).
-    public function offer($data = null)
+    // Canonical facade: $client->Offer()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->offer()
+    // resolves here too.
+    public function Offer($data = null)
     {
         require_once __DIR__ . '/entity/offer_entity.php';
         if ($data === null) {
@@ -413,10 +413,10 @@ class YadorePublisherSDK
 
     private $_report_detail = null;
 
-    // Idiomatic facade: $client->report_detail()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias ReportDetail() (PHP method
-    // names are case-insensitive).
-    public function report_detail($data = null)
+    // Canonical facade: $client->ReportDetail()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->report_detail()
+    // resolves here too.
+    public function ReportDetail($data = null)
     {
         require_once __DIR__ . '/entity/report_detail_entity.php';
         if ($data === null) {
@@ -431,10 +431,10 @@ class YadorePublisherSDK
 
     private $_report_general = null;
 
-    // Idiomatic facade: $client->report_general()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias ReportGeneral() (PHP method
-    // names are case-insensitive).
-    public function report_general($data = null)
+    // Canonical facade: $client->ReportGeneral()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->report_general()
+    // resolves here too.
+    public function ReportGeneral($data = null)
     {
         require_once __DIR__ . '/entity/report_general_entity.php';
         if ($data === null) {
@@ -449,10 +449,10 @@ class YadorePublisherSDK
 
     private $_report_modified = null;
 
-    // Idiomatic facade: $client->report_modified()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias ReportModified() (PHP method
-    // names are case-insensitive).
-    public function report_modified($data = null)
+    // Canonical facade: $client->ReportModified()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->report_modified()
+    // resolves here too.
+    public function ReportModified($data = null)
     {
         require_once __DIR__ . '/entity/report_modified_entity.php';
         if ($data === null) {
@@ -467,10 +467,10 @@ class YadorePublisherSDK
 
     private $_report_status = null;
 
-    // Idiomatic facade: $client->report_status()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias ReportStatus() (PHP method
-    // names are case-insensitive).
-    public function report_status($data = null)
+    // Canonical facade: $client->ReportStatus()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->report_status()
+    // resolves here too.
+    public function ReportStatus($data = null)
     {
         require_once __DIR__ . '/entity/report_status_entity.php';
         if ($data === null) {

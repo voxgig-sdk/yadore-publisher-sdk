@@ -28,9 +28,11 @@ const client = new YadorePublisherSDK({
   apikey: process.env.YADORE_PUBLISHER_APIKEY,
 })
 
-// List all conversiondetails
-const conversiondetails = await client.conversiondetail.list()
-console.log(conversiondetails.data)
+// List all conversiondetails (returns ConversionDetail[])
+const conversiondetails = await client.ConversionDetail().list()
+for (const conversiondetail of conversiondetails) {
+  console.log(conversiondetail)
+}
 ```
 
 See the [TypeScript README](ts/README.md) for the full guide.
@@ -101,9 +103,10 @@ client = YadorePublisherSDK({
     "apikey": os.environ.get("YADORE_PUBLISHER_APIKEY"),
 })
 
-# List all conversiondetails
-conversiondetails = client.conversiondetail.list()
-print(conversiondetails)
+# List all conversiondetails (returns a list, raises on error)
+conversiondetails = client.ConversionDetail().list({})
+for conversiondetail in conversiondetails:
+    print(conversiondetail)
 ```
 
 ### PHP
@@ -116,8 +119,8 @@ $client = new YadorePublisherSDK([
     "apikey" => getenv("YADORE_PUBLISHER_APIKEY"),
 ]);
 
-// List all conversiondetails (throws on error)
-$conversiondetails = $client->conversiondetail()->list();
+// List all conversiondetails (returns an array; throws on error)
+$conversiondetails = $client->ConversionDetail()->list();
 print_r($conversiondetails);
 ```
 
@@ -144,8 +147,8 @@ client = YadorePublisherSDK.new({
   "apikey" => ENV["YADORE_PUBLISHER_APIKEY"],
 })
 
-# List all conversiondetails
-conversiondetails = client.conversiondetail.list
+# List all conversiondetails (returns an Array; raises on error)
+conversiondetails = client.ConversionDetail.list
 puts conversiondetails
 ```
 
@@ -159,7 +162,7 @@ local client = sdk.new({
 })
 
 -- List all conversiondetails
-local conversiondetails, err = client:conversiondetail():list()
+local conversiondetails, err = client:ConversionDetail():list()
 print(conversiondetails)
 ```
 
@@ -172,22 +175,27 @@ in-memory mock, so unit tests run offline.
 
 ```ts
 const client = YadorePublisherSDK.test()
-const result = await client.conversiondetail.load({ id: 'test01' })
-// result.ok === true, result.data contains mock data
+const conversiondetail = await client.ConversionDetail().load({ id: 'test01' })
+// conversiondetail is a bare ConversionDetail populated with mock data
+console.log(conversiondetail)
 ```
 
 ### Python
 
 ```python
 client = YadorePublisherSDK.test()
-result = client.conversiondetail.load({"id": "test01"})
+conversiondetail = client.ConversionDetail().load({"id": "test01"})
+print(conversiondetail)
 ```
 
 ### PHP
 
 ```php
-$client = YadorePublisherSDK::test();
-$result = $client->conversiondetail()->load(["id" => "test01"]);
+// Seed fixture data so offline calls resolve without a live server.
+$client = YadorePublisherSDK::test([
+    "entity" => ["conversiondetail" => ["test01" => ["id" => "test01"]]],
+]);
+$conversiondetail = $client->ConversionDetail()->load(["id" => "test01"]);
 ```
 
 ### Golang
@@ -202,15 +210,18 @@ result, err := client.ConversionDetail(nil).Load(
 ### Ruby
 
 ```ruby
-client = YadorePublisherSDK.test
-result = client.conversiondetail.load({ "id" => "test01" })
+# Seed fixture data so offline calls resolve without a live server.
+client = YadorePublisherSDK.test({
+  "entity" => { "conversiondetail" => { "test01" => { "id" => "test01" } } },
+})
+conversiondetail = client.ConversionDetail.load({ "id" => "test01" })
 ```
 
 ### Lua
 
 ```lua
 local client = sdk.test()
-local result, err = client:conversiondetail():load({ id = "test01" })
+local result, err = client:ConversionDetail():load({ id = "test01" })
 ```
 
 ## How it works
@@ -258,6 +269,9 @@ const result = await client.direct({
   method: 'GET',
   params: { id: 'example' },
 })
+if (result instanceof Error) {
+  throw result
+}
 console.log(result.data)
 ```
 

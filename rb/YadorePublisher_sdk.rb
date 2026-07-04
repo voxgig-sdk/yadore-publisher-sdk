@@ -208,182 +208,98 @@ class YadorePublisherSDK
   end
 
 
-  # Idiomatic facade: client.conversion_detail.list / client.conversion_detail.load({ "id" => ... })
-  def conversion_detail
-    require_relative 'entity/conversion_detail_entity'
-    @conversion_detail ||= ConversionDetailEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.conversion_detail instead.
+  # Canonical facade: client.ConversionDetail.list / client.ConversionDetail.load({ "id" => ... })
   def ConversionDetail(data = nil)
     require_relative 'entity/conversion_detail_entity'
     ConversionDetailEntity.new(self, data)
   end
 
 
-  # Idiomatic facade: client.conversion_detail_merchant.list / client.conversion_detail_merchant.load({ "id" => ... })
-  def conversion_detail_merchant
-    require_relative 'entity/conversion_detail_merchant_entity'
-    @conversion_detail_merchant ||= ConversionDetailMerchantEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.conversion_detail_merchant instead.
+  # Canonical facade: client.ConversionDetailMerchant.list / client.ConversionDetailMerchant.load({ "id" => ... })
   def ConversionDetailMerchant(data = nil)
     require_relative 'entity/conversion_detail_merchant_entity'
     ConversionDetailMerchantEntity.new(self, data)
   end
 
 
-  # Idiomatic facade: client.conversion_general.list / client.conversion_general.load({ "id" => ... })
-  def conversion_general
-    require_relative 'entity/conversion_general_entity'
-    @conversion_general ||= ConversionGeneralEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.conversion_general instead.
+  # Canonical facade: client.ConversionGeneral.list / client.ConversionGeneral.load({ "id" => ... })
   def ConversionGeneral(data = nil)
     require_relative 'entity/conversion_general_entity'
     ConversionGeneralEntity.new(self, data)
   end
 
 
-  # Idiomatic facade: client.conversion_status.list / client.conversion_status.load({ "id" => ... })
-  def conversion_status
-    require_relative 'entity/conversion_status_entity'
-    @conversion_status ||= ConversionStatusEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.conversion_status instead.
+  # Canonical facade: client.ConversionStatus.list / client.ConversionStatus.load({ "id" => ... })
   def ConversionStatus(data = nil)
     require_relative 'entity/conversion_status_entity'
     ConversionStatusEntity.new(self, data)
   end
 
 
-  # Idiomatic facade: client.deeplink.list / client.deeplink.load({ "id" => ... })
-  def deeplink
-    require_relative 'entity/deeplink_entity'
-    @deeplink ||= DeeplinkEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.deeplink instead.
+  # Canonical facade: client.Deeplink.list / client.Deeplink.load({ "id" => ... })
   def Deeplink(data = nil)
     require_relative 'entity/deeplink_entity'
     DeeplinkEntity.new(self, data)
   end
 
 
-  # Idiomatic facade: client.deeplink_merchant.list / client.deeplink_merchant.load({ "id" => ... })
-  def deeplink_merchant
-    require_relative 'entity/deeplink_merchant_entity'
-    @deeplink_merchant ||= DeeplinkMerchantEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.deeplink_merchant instead.
+  # Canonical facade: client.DeeplinkMerchant.list / client.DeeplinkMerchant.load({ "id" => ... })
   def DeeplinkMerchant(data = nil)
     require_relative 'entity/deeplink_merchant_entity'
     DeeplinkMerchantEntity.new(self, data)
   end
 
 
-  # Idiomatic facade: client.dnt.list / client.dnt.load({ "id" => ... })
-  def dnt
-    require_relative 'entity/dnt_entity'
-    @dnt ||= DntEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.dnt instead.
+  # Canonical facade: client.Dnt.list / client.Dnt.load({ "id" => ... })
   def Dnt(data = nil)
     require_relative 'entity/dnt_entity'
     DntEntity.new(self, data)
   end
 
 
-  # Idiomatic facade: client.market.list / client.market.load({ "id" => ... })
-  def market
-    require_relative 'entity/market_entity'
-    @market ||= MarketEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.market instead.
+  # Canonical facade: client.Market.list / client.Market.load({ "id" => ... })
   def Market(data = nil)
     require_relative 'entity/market_entity'
     MarketEntity.new(self, data)
   end
 
 
-  # Idiomatic facade: client.merchant.list / client.merchant.load({ "id" => ... })
-  def merchant
-    require_relative 'entity/merchant_entity'
-    @merchant ||= MerchantEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.merchant instead.
+  # Canonical facade: client.Merchant.list / client.Merchant.load({ "id" => ... })
   def Merchant(data = nil)
     require_relative 'entity/merchant_entity'
     MerchantEntity.new(self, data)
   end
 
 
-  # Idiomatic facade: client.offer.list / client.offer.load({ "id" => ... })
-  def offer
-    require_relative 'entity/offer_entity'
-    @offer ||= OfferEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.offer instead.
+  # Canonical facade: client.Offer.list / client.Offer.load({ "id" => ... })
   def Offer(data = nil)
     require_relative 'entity/offer_entity'
     OfferEntity.new(self, data)
   end
 
 
-  # Idiomatic facade: client.report_detail.list / client.report_detail.load({ "id" => ... })
-  def report_detail
-    require_relative 'entity/report_detail_entity'
-    @report_detail ||= ReportDetailEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.report_detail instead.
+  # Canonical facade: client.ReportDetail.list / client.ReportDetail.load({ "id" => ... })
   def ReportDetail(data = nil)
     require_relative 'entity/report_detail_entity'
     ReportDetailEntity.new(self, data)
   end
 
 
-  # Idiomatic facade: client.report_general.list / client.report_general.load({ "id" => ... })
-  def report_general
-    require_relative 'entity/report_general_entity'
-    @report_general ||= ReportGeneralEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.report_general instead.
+  # Canonical facade: client.ReportGeneral.list / client.ReportGeneral.load({ "id" => ... })
   def ReportGeneral(data = nil)
     require_relative 'entity/report_general_entity'
     ReportGeneralEntity.new(self, data)
   end
 
 
-  # Idiomatic facade: client.report_modified.list / client.report_modified.load({ "id" => ... })
-  def report_modified
-    require_relative 'entity/report_modified_entity'
-    @report_modified ||= ReportModifiedEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.report_modified instead.
+  # Canonical facade: client.ReportModified.list / client.ReportModified.load({ "id" => ... })
   def ReportModified(data = nil)
     require_relative 'entity/report_modified_entity'
     ReportModifiedEntity.new(self, data)
   end
 
 
-  # Idiomatic facade: client.report_status.list / client.report_status.load({ "id" => ... })
-  def report_status
-    require_relative 'entity/report_status_entity'
-    @report_status ||= ReportStatusEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.report_status instead.
+  # Canonical facade: client.ReportStatus.list / client.ReportStatus.load({ "id" => ... })
   def ReportStatus(data = nil)
     require_relative 'entity/report_status_entity'
     ReportStatusEntity.new(self, data)

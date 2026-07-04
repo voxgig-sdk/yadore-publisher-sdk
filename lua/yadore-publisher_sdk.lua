@@ -244,8 +244,9 @@ end
 
 
 
--- Idiomatic facade: client:conversion_detail():list() / client:conversion_detail():load({ id = ... })
-function YadorePublisherSDK:conversion_detail(data)
+-- Idiomatic facade: client:ConversionDetail():list() / client:ConversionDetail():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function YadorePublisherSDK:ConversionDetail(data)
   local EntityMod = require("entity.conversion_detail_entity")
   if data == nil then
     if self._conversion_detail == nil then
@@ -256,15 +257,10 @@ function YadorePublisherSDK:conversion_detail(data)
   return EntityMod.new(self, data)
 end
 
--- Deprecated: use client:conversion_detail() instead.
-function YadorePublisherSDK:ConversionDetail(data)
-  local EntityMod = require("entity.conversion_detail_entity")
-  return EntityMod.new(self, data)
-end
 
-
--- Idiomatic facade: client:conversion_detail_merchant():list() / client:conversion_detail_merchant():load({ id = ... })
-function YadorePublisherSDK:conversion_detail_merchant(data)
+-- Idiomatic facade: client:ConversionDetailMerchant():list() / client:ConversionDetailMerchant():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function YadorePublisherSDK:ConversionDetailMerchant(data)
   local EntityMod = require("entity.conversion_detail_merchant_entity")
   if data == nil then
     if self._conversion_detail_merchant == nil then
@@ -275,15 +271,10 @@ function YadorePublisherSDK:conversion_detail_merchant(data)
   return EntityMod.new(self, data)
 end
 
--- Deprecated: use client:conversion_detail_merchant() instead.
-function YadorePublisherSDK:ConversionDetailMerchant(data)
-  local EntityMod = require("entity.conversion_detail_merchant_entity")
-  return EntityMod.new(self, data)
-end
 
-
--- Idiomatic facade: client:conversion_general():list() / client:conversion_general():load({ id = ... })
-function YadorePublisherSDK:conversion_general(data)
+-- Idiomatic facade: client:ConversionGeneral():list() / client:ConversionGeneral():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function YadorePublisherSDK:ConversionGeneral(data)
   local EntityMod = require("entity.conversion_general_entity")
   if data == nil then
     if self._conversion_general == nil then
@@ -294,15 +285,10 @@ function YadorePublisherSDK:conversion_general(data)
   return EntityMod.new(self, data)
 end
 
--- Deprecated: use client:conversion_general() instead.
-function YadorePublisherSDK:ConversionGeneral(data)
-  local EntityMod = require("entity.conversion_general_entity")
-  return EntityMod.new(self, data)
-end
 
-
--- Idiomatic facade: client:conversion_status():list() / client:conversion_status():load({ id = ... })
-function YadorePublisherSDK:conversion_status(data)
+-- Idiomatic facade: client:ConversionStatus():list() / client:ConversionStatus():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function YadorePublisherSDK:ConversionStatus(data)
   local EntityMod = require("entity.conversion_status_entity")
   if data == nil then
     if self._conversion_status == nil then
@@ -313,15 +299,10 @@ function YadorePublisherSDK:conversion_status(data)
   return EntityMod.new(self, data)
 end
 
--- Deprecated: use client:conversion_status() instead.
-function YadorePublisherSDK:ConversionStatus(data)
-  local EntityMod = require("entity.conversion_status_entity")
-  return EntityMod.new(self, data)
-end
 
-
--- Idiomatic facade: client:deeplink():list() / client:deeplink():load({ id = ... })
-function YadorePublisherSDK:deeplink(data)
+-- Idiomatic facade: client:Deeplink():list() / client:Deeplink():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function YadorePublisherSDK:Deeplink(data)
   local EntityMod = require("entity.deeplink_entity")
   if data == nil then
     if self._deeplink == nil then
@@ -332,15 +313,10 @@ function YadorePublisherSDK:deeplink(data)
   return EntityMod.new(self, data)
 end
 
--- Deprecated: use client:deeplink() instead.
-function YadorePublisherSDK:Deeplink(data)
-  local EntityMod = require("entity.deeplink_entity")
-  return EntityMod.new(self, data)
-end
 
-
--- Idiomatic facade: client:deeplink_merchant():list() / client:deeplink_merchant():load({ id = ... })
-function YadorePublisherSDK:deeplink_merchant(data)
+-- Idiomatic facade: client:DeeplinkMerchant():list() / client:DeeplinkMerchant():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function YadorePublisherSDK:DeeplinkMerchant(data)
   local EntityMod = require("entity.deeplink_merchant_entity")
   if data == nil then
     if self._deeplink_merchant == nil then
@@ -351,15 +327,10 @@ function YadorePublisherSDK:deeplink_merchant(data)
   return EntityMod.new(self, data)
 end
 
--- Deprecated: use client:deeplink_merchant() instead.
-function YadorePublisherSDK:DeeplinkMerchant(data)
-  local EntityMod = require("entity.deeplink_merchant_entity")
-  return EntityMod.new(self, data)
-end
 
-
--- Idiomatic facade: client:dnt():list() / client:dnt():load({ id = ... })
-function YadorePublisherSDK:dnt(data)
+-- Idiomatic facade: client:Dnt():list() / client:Dnt():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function YadorePublisherSDK:Dnt(data)
   local EntityMod = require("entity.dnt_entity")
   if data == nil then
     if self._dnt == nil then
@@ -370,15 +341,10 @@ function YadorePublisherSDK:dnt(data)
   return EntityMod.new(self, data)
 end
 
--- Deprecated: use client:dnt() instead.
-function YadorePublisherSDK:Dnt(data)
-  local EntityMod = require("entity.dnt_entity")
-  return EntityMod.new(self, data)
-end
 
-
--- Idiomatic facade: client:market():list() / client:market():load({ id = ... })
-function YadorePublisherSDK:market(data)
+-- Idiomatic facade: client:Market():list() / client:Market():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function YadorePublisherSDK:Market(data)
   local EntityMod = require("entity.market_entity")
   if data == nil then
     if self._market == nil then
@@ -389,15 +355,10 @@ function YadorePublisherSDK:market(data)
   return EntityMod.new(self, data)
 end
 
--- Deprecated: use client:market() instead.
-function YadorePublisherSDK:Market(data)
-  local EntityMod = require("entity.market_entity")
-  return EntityMod.new(self, data)
-end
 
-
--- Idiomatic facade: client:merchant():list() / client:merchant():load({ id = ... })
-function YadorePublisherSDK:merchant(data)
+-- Idiomatic facade: client:Merchant():list() / client:Merchant():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function YadorePublisherSDK:Merchant(data)
   local EntityMod = require("entity.merchant_entity")
   if data == nil then
     if self._merchant == nil then
@@ -408,15 +369,10 @@ function YadorePublisherSDK:merchant(data)
   return EntityMod.new(self, data)
 end
 
--- Deprecated: use client:merchant() instead.
-function YadorePublisherSDK:Merchant(data)
-  local EntityMod = require("entity.merchant_entity")
-  return EntityMod.new(self, data)
-end
 
-
--- Idiomatic facade: client:offer():list() / client:offer():load({ id = ... })
-function YadorePublisherSDK:offer(data)
+-- Idiomatic facade: client:Offer():list() / client:Offer():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function YadorePublisherSDK:Offer(data)
   local EntityMod = require("entity.offer_entity")
   if data == nil then
     if self._offer == nil then
@@ -427,15 +383,10 @@ function YadorePublisherSDK:offer(data)
   return EntityMod.new(self, data)
 end
 
--- Deprecated: use client:offer() instead.
-function YadorePublisherSDK:Offer(data)
-  local EntityMod = require("entity.offer_entity")
-  return EntityMod.new(self, data)
-end
 
-
--- Idiomatic facade: client:report_detail():list() / client:report_detail():load({ id = ... })
-function YadorePublisherSDK:report_detail(data)
+-- Idiomatic facade: client:ReportDetail():list() / client:ReportDetail():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function YadorePublisherSDK:ReportDetail(data)
   local EntityMod = require("entity.report_detail_entity")
   if data == nil then
     if self._report_detail == nil then
@@ -446,15 +397,10 @@ function YadorePublisherSDK:report_detail(data)
   return EntityMod.new(self, data)
 end
 
--- Deprecated: use client:report_detail() instead.
-function YadorePublisherSDK:ReportDetail(data)
-  local EntityMod = require("entity.report_detail_entity")
-  return EntityMod.new(self, data)
-end
 
-
--- Idiomatic facade: client:report_general():list() / client:report_general():load({ id = ... })
-function YadorePublisherSDK:report_general(data)
+-- Idiomatic facade: client:ReportGeneral():list() / client:ReportGeneral():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function YadorePublisherSDK:ReportGeneral(data)
   local EntityMod = require("entity.report_general_entity")
   if data == nil then
     if self._report_general == nil then
@@ -465,15 +411,10 @@ function YadorePublisherSDK:report_general(data)
   return EntityMod.new(self, data)
 end
 
--- Deprecated: use client:report_general() instead.
-function YadorePublisherSDK:ReportGeneral(data)
-  local EntityMod = require("entity.report_general_entity")
-  return EntityMod.new(self, data)
-end
 
-
--- Idiomatic facade: client:report_modified():list() / client:report_modified():load({ id = ... })
-function YadorePublisherSDK:report_modified(data)
+-- Idiomatic facade: client:ReportModified():list() / client:ReportModified():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function YadorePublisherSDK:ReportModified(data)
   local EntityMod = require("entity.report_modified_entity")
   if data == nil then
     if self._report_modified == nil then
@@ -484,15 +425,10 @@ function YadorePublisherSDK:report_modified(data)
   return EntityMod.new(self, data)
 end
 
--- Deprecated: use client:report_modified() instead.
-function YadorePublisherSDK:ReportModified(data)
-  local EntityMod = require("entity.report_modified_entity")
-  return EntityMod.new(self, data)
-end
 
-
--- Idiomatic facade: client:report_status():list() / client:report_status():load({ id = ... })
-function YadorePublisherSDK:report_status(data)
+-- Idiomatic facade: client:ReportStatus():list() / client:ReportStatus():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function YadorePublisherSDK:ReportStatus(data)
   local EntityMod = require("entity.report_status_entity")
   if data == nil then
     if self._report_status == nil then
@@ -500,12 +436,6 @@ function YadorePublisherSDK:report_status(data)
     end
     return self._report_status
   end
-  return EntityMod.new(self, data)
-end
-
--- Deprecated: use client:report_status() instead.
-function YadorePublisherSDK:ReportStatus(data)
-  local EntityMod = require("entity.report_status_entity")
   return EntityMod.new(self, data)
 end
 

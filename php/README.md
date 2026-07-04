@@ -31,18 +31,16 @@ $client = new YadorePublisherSDK([
 ]);
 ```
 
-### 2. List conversiondetails
+### 2. List conversiondetail records
 
 ```php
 try {
-    $result = $client->conversiondetail()->list();
-    if (is_array($result)) {
-        foreach ($result as $item) {
-            $d = $item->data_get();
-            echo $d["id"] . " " . $d["name"] . "\n";
-        }
+    // list() returns an array of ConversionDetail records — iterate directly.
+    $conversiondetails = $client->ConversionDetail()->list();
+    foreach ($conversiondetails as $item) {
+        echo $item["id"] . " " . $item["name"] . "\n";
     }
-} catch (\Exception $err) {
+} catch (\Throwable $err) {
     echo "Error: " . $err->getMessage();
 }
 ```
@@ -88,13 +86,17 @@ print_r($fetchdef["headers"]);
 
 ### Use test mode
 
-Create a mock client for unit testing — no server required:
+Create a mock client for unit testing — no server required. Seed fixture
+data via the `entity` option so offline calls resolve without a live server:
 
 ```php
-$client = YadorePublisherSDK::test();
+$client = YadorePublisherSDK::test([
+    "entity" => ["conversiondetail" => ["test01" => ["id" => "test01"]]],
+]);
 
-$result = $client->conversiondetail()->load(["id" => "test01"]);
-// $result contains mock response data
+// load() returns the bare mock record (throws on error).
+$conversiondetail = $client->ConversionDetail()->load(["id" => "test01"]);
+print_r($conversiondetail);
 ```
 
 ### Use a custom fetch function
@@ -184,7 +186,7 @@ Creates a test-mode client with mock transport. Both arguments may be `null`.
 | `Dnt` | `($data): DntEntity` | Create a Dnt entity instance. |
 | `Market` | `($data): MarketEntity` | Create a Market entity instance. |
 | `Merchant` | `($data): MerchantEntity` | Create a Merchant entity instance. |
-| `Offer` | `($data): OfferEntity` | Create a Offer entity instance. |
+| `Offer` | `($data): OfferEntity` | Create an Offer entity instance. |
 | `ReportDetail` | `($data): ReportDetailEntity` | Create a ReportDetail entity instance. |
 | `ReportGeneral` | `($data): ReportGeneralEntity` | Create a ReportGeneral entity instance. |
 | `ReportModified` | `($data): ReportModifiedEntity` | Create a ReportModified entity instance. |
@@ -425,7 +427,7 @@ API path: `/v2/report/status`
 
 ### ConversionDetail
 
-Create an instance: `const conversion_detail = client.conversion_detail`
+Create an instance: `$conversion_detail = $client->ConversionDetail();`
 
 #### Operations
 
@@ -446,14 +448,15 @@ Create an instance: `const conversion_detail = client.conversion_detail`
 
 #### Example: List
 
-```ts
-const conversion_details = await client.conversion_detail.list()
+```php
+// list() returns an array of ConversionDetail records (throws on error).
+$conversion_details = $client->ConversionDetail()->list();
 ```
 
 
 ### ConversionDetailMerchant
 
-Create an instance: `const conversion_detail_merchant = client.conversion_detail_merchant`
+Create an instance: `$conversion_detail_merchant = $client->ConversionDetailMerchant();`
 
 #### Operations
 
@@ -472,14 +475,15 @@ Create an instance: `const conversion_detail_merchant = client.conversion_detail
 
 #### Example: List
 
-```ts
-const conversion_detail_merchants = await client.conversion_detail_merchant.list()
+```php
+// list() returns an array of ConversionDetailMerchant records (throws on error).
+$conversion_detail_merchants = $client->ConversionDetailMerchant()->list();
 ```
 
 
 ### ConversionGeneral
 
-Create an instance: `const conversion_general = client.conversion_general`
+Create an instance: `$conversion_general = $client->ConversionGeneral();`
 
 #### Operations
 
@@ -497,14 +501,15 @@ Create an instance: `const conversion_general = client.conversion_general`
 
 #### Example: Load
 
-```ts
-const conversion_general = await client.conversion_general.load({ id: 'conversion_general_id' })
+```php
+// load() returns the bare ConversionGeneral record (throws on error).
+$conversion_general = $client->ConversionGeneral()->load(["id" => "conversion_general_id"]);
 ```
 
 
 ### ConversionStatus
 
-Create an instance: `const conversion_status = client.conversion_status`
+Create an instance: `$conversion_status = $client->ConversionStatus();`
 
 #### Operations
 
@@ -520,14 +525,15 @@ Create an instance: `const conversion_status = client.conversion_status`
 
 #### Example: Load
 
-```ts
-const conversion_status = await client.conversion_status.load({ id: 'conversion_status_id' })
+```php
+// load() returns the bare ConversionStatus record (throws on error).
+$conversion_status = $client->ConversionStatus()->load(["id" => "conversion_status_id"]);
 ```
 
 
 ### Deeplink
 
-Create an instance: `const deeplink = client.deeplink`
+Create an instance: `$deeplink = $client->Deeplink();`
 
 #### Operations
 
@@ -547,17 +553,17 @@ Create an instance: `const deeplink = client.deeplink`
 
 #### Example: Create
 
-```ts
-const deeplink = await client.deeplink.create({
-  market: /* `$STRING` */,
-  url: /* `$ARRAY` */,
-})
+```php
+$deeplink = $client->Deeplink()->create([
+    "market" => null, // `$STRING`
+    "url" => null, // `$ARRAY`
+]);
 ```
 
 
 ### DeeplinkMerchant
 
-Create an instance: `const deeplink_merchant = client.deeplink_merchant`
+Create an instance: `$deeplink_merchant = $client->DeeplinkMerchant();`
 
 #### Operations
 
@@ -581,14 +587,15 @@ Create an instance: `const deeplink_merchant = client.deeplink_merchant`
 
 #### Example: List
 
-```ts
-const deeplink_merchants = await client.deeplink_merchant.list()
+```php
+// list() returns an array of DeeplinkMerchant records (throws on error).
+$deeplink_merchants = $client->DeeplinkMerchant()->list();
 ```
 
 
 ### Dnt
 
-Create an instance: `const dnt = client.dnt`
+Create an instance: `$dnt = $client->Dnt();`
 
 #### Operations
 
@@ -598,14 +605,15 @@ Create an instance: `const dnt = client.dnt`
 
 #### Example: Load
 
-```ts
-const dnt = await client.dnt.load({ id: 'dnt_id' })
+```php
+// load() returns the bare Dnt record (throws on error).
+$dnt = $client->Dnt()->load(["id" => "dnt_id"]);
 ```
 
 
 ### Market
 
-Create an instance: `const market = client.market`
+Create an instance: `$market = $client->Market();`
 
 #### Operations
 
@@ -621,14 +629,15 @@ Create an instance: `const market = client.market`
 
 #### Example: List
 
-```ts
-const markets = await client.market.list()
+```php
+// list() returns an array of Market records (throws on error).
+$markets = $client->Market()->list();
 ```
 
 
 ### Merchant
 
-Create an instance: `const merchant = client.merchant`
+Create an instance: `$merchant = $client->Merchant();`
 
 #### Operations
 
@@ -648,14 +657,15 @@ Create an instance: `const merchant = client.merchant`
 
 #### Example: List
 
-```ts
-const merchants = await client.merchant.list()
+```php
+// list() returns an array of Merchant records (throws on error).
+$merchants = $client->Merchant()->list();
 ```
 
 
 ### Offer
 
-Create an instance: `const offer = client.offer`
+Create an instance: `$offer = $client->Offer();`
 
 #### Operations
 
@@ -689,20 +699,22 @@ Create an instance: `const offer = client.offer`
 
 #### Example: Load
 
-```ts
-const offer = await client.offer.load({ id: 'offer_id' })
+```php
+// load() returns the bare Offer record (throws on error).
+$offer = $client->Offer()->load(["id" => "offer_id"]);
 ```
 
 #### Example: List
 
-```ts
-const offers = await client.offer.list()
+```php
+// list() returns an array of Offer records (throws on error).
+$offers = $client->Offer()->list();
 ```
 
 
 ### ReportDetail
 
-Create an instance: `const report_detail = client.report_detail`
+Create an instance: `$report_detail = $client->ReportDetail();`
 
 #### Operations
 
@@ -724,14 +736,15 @@ Create an instance: `const report_detail = client.report_detail`
 
 #### Example: List
 
-```ts
-const report_details = await client.report_detail.list()
+```php
+// list() returns an array of ReportDetail records (throws on error).
+$report_details = $client->ReportDetail()->list();
 ```
 
 
 ### ReportGeneral
 
-Create an instance: `const report_general = client.report_general`
+Create an instance: `$report_general = $client->ReportGeneral();`
 
 #### Operations
 
@@ -749,14 +762,15 @@ Create an instance: `const report_general = client.report_general`
 
 #### Example: Load
 
-```ts
-const report_general = await client.report_general.load({ id: 'report_general_id' })
+```php
+// load() returns the bare ReportGeneral record (throws on error).
+$report_general = $client->ReportGeneral()->load(["id" => "report_general_id"]);
 ```
 
 
 ### ReportModified
 
-Create an instance: `const report_modified = client.report_modified`
+Create an instance: `$report_modified = $client->ReportModified();`
 
 #### Operations
 
@@ -772,14 +786,15 @@ Create an instance: `const report_modified = client.report_modified`
 
 #### Example: Load
 
-```ts
-const report_modified = await client.report_modified.load({ id: 'report_modified_id' })
+```php
+// load() returns the bare ReportModified record (throws on error).
+$report_modified = $client->ReportModified()->load(["id" => "report_modified_id"]);
 ```
 
 
 ### ReportStatus
 
-Create an instance: `const report_status = client.report_status`
+Create an instance: `$report_status = $client->ReportStatus();`
 
 #### Operations
 
@@ -795,8 +810,9 @@ Create an instance: `const report_status = client.report_status`
 
 #### Example: Load
 
-```ts
-const report_status = await client.report_status.load({ id: 'report_status_id' })
+```php
+// load() returns the bare ReportStatus record (throws on error).
+$report_status = $client->ReportStatus()->load(["id" => "report_status_id"]);
 ```
 
 
@@ -871,7 +887,7 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```php
-$conversiondetail = $client->conversiondetail();
+$conversiondetail = $client->ConversionDetail();
 $conversiondetail->load(["id" => "example_id"]);
 
 // $conversiondetail->dataGet() now returns the loaded conversiondetail data

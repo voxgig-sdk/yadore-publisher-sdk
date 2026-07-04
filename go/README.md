@@ -30,7 +30,12 @@ go mod edit -replace github.com/voxgig-sdk/yadore-publisher-sdk/go=../yadore-pub
 This tutorial walks through creating a client, listing entities, and
 loading a specific record.
 
-### 1. Create a client
+### Quickstart
+
+A complete program: create a client, then call the entity operations.
+Each operation returns `(value, error)` — the value is the data itself
+(there is no `{ok, data}` wrapper), so check `err` and use the value
+directly.
 
 ```go
 package main
@@ -38,32 +43,23 @@ package main
 import (
     "fmt"
     "os"
-
     sdk "github.com/voxgig-sdk/yadore-publisher-sdk/go"
-    "github.com/voxgig-sdk/yadore-publisher-sdk/go/core"
 )
 
 func main() {
     client := sdk.NewYadorePublisherSDK(map[string]any{
         "apikey": os.Getenv("YADORE_PUBLISHER_APIKEY"),
     })
-```
 
-### 2. List conversiondetails
-
-```go
-    result, err := client.ConversionDetail(nil).List(nil, nil)
+    // List conversiondetail records — the value is the array of records itself.
+    conversiondetails, err := client.ConversionDetail(nil).List(nil, nil)
     if err != nil {
         panic(err)
     }
-
-    rm := core.ToMapAny(result)
-    if rm["ok"] == true {
-        for _, item := range rm["data"].([]any) {
-            p := core.ToMapAny(item)
-            fmt.Println(p["id"], p["name"])
-        }
+    for _, item := range conversiondetails.([]any) {
+        fmt.Println(item)
     }
+}
 ```
 
 
@@ -113,10 +109,13 @@ Create a mock client for unit testing — no server required:
 ```go
 client := sdk.Test()
 
-result, err := client.ConversionDetail(nil).Load(
+conversiondetail, err := client.ConversionDetail(nil).Load(
     map[string]any{"id": "test01"}, nil,
 )
-// result contains mock response data
+if err != nil {
+    panic(err)
+}
+fmt.Println(conversiondetail) // the loaded mock data
 ```
 
 ### Use a custom fetch function
@@ -204,7 +203,7 @@ Creates a test-mode client with mock transport. Both arguments may be `nil`.
 | `Dnt` | `(data map[string]any) YadorePublisherEntity` | Create a Dnt entity instance. |
 | `Market` | `(data map[string]any) YadorePublisherEntity` | Create a Market entity instance. |
 | `Merchant` | `(data map[string]any) YadorePublisherEntity` | Create a Merchant entity instance. |
-| `Offer` | `(data map[string]any) YadorePublisherEntity` | Create a Offer entity instance. |
+| `Offer` | `(data map[string]any) YadorePublisherEntity` | Create an Offer entity instance. |
 | `ReportDetail` | `(data map[string]any) YadorePublisherEntity` | Create a ReportDetail entity instance. |
 | `ReportGeneral` | `(data map[string]any) YadorePublisherEntity` | Create a ReportGeneral entity instance. |
 | `ReportModified` | `(data map[string]any) YadorePublisherEntity` | Create a ReportModified entity instance. |
@@ -228,17 +227,24 @@ All entities implement the `YadorePublisherEntity` interface.
 
 ### Result shape
 
-Entity operations return `(any, error)`. The `any` value is a
-`map[string]any` with these keys:
+Entity operations return `(value, error)`. The `value` is the
+operation's data **directly** — there is no wrapper:
 
-| Key | Type | Description |
-| --- | --- | --- |
-| `"ok"` | `bool` | `true` if the HTTP status is 2xx. |
-| `"status"` | `int` | HTTP status code. |
-| `"headers"` | `map[string]any` | Response headers. |
-| `"data"` | `any` | Parsed JSON response body. |
+| Operation | `value` |
+| --- | --- |
+| `Load` / `Create` / `Update` / `Remove` | the entity record (`map[string]any`) |
+| `List` | a `[]any` of entity records |
 
-On error, `"ok"` is `false` and `"err"` contains the error value.
+Check `err` first, then use the value directly (or the typed
+`...Typed` variants, which return the entity's model struct and a typed
+slice):
+
+    conversiondetail, err := client.ConversionDetail(nil).Load(map[string]any{"id": "example_id"}, nil)
+    if err != nil { /* handle */ }
+    // conversiondetail is the loaded record
+
+Only `Direct()` returns a response envelope — a `map[string]any` with
+`"ok"`, `"status"`, `"headers"`, and `"data"` keys.
 
 ### Entities
 
@@ -461,7 +467,11 @@ Create an instance: `conversion_detail := client.ConversionDetail(nil)`
 #### Example: List
 
 ```go
-results, err := client.ConversionDetail(nil).List(nil, nil)
+conversion_details, err := client.ConversionDetail(nil).List(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(conversion_details) // the array of records
 ```
 
 
@@ -487,7 +497,11 @@ Create an instance: `conversion_detail_merchant := client.ConversionDetailMercha
 #### Example: List
 
 ```go
-results, err := client.ConversionDetailMerchant(nil).List(nil, nil)
+conversion_detail_merchants, err := client.ConversionDetailMerchant(nil).List(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(conversion_detail_merchants) // the array of records
 ```
 
 
@@ -512,7 +526,11 @@ Create an instance: `conversion_general := client.ConversionGeneral(nil)`
 #### Example: Load
 
 ```go
-result, err := client.ConversionGeneral(nil).Load(map[string]any{"id": "conversion_general_id"}, nil)
+conversion_general, err := client.ConversionGeneral(nil).Load(map[string]any{"id": "conversion_general_id"}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(conversion_general) // the loaded record
 ```
 
 
@@ -535,7 +553,11 @@ Create an instance: `conversion_status := client.ConversionStatus(nil)`
 #### Example: Load
 
 ```go
-result, err := client.ConversionStatus(nil).Load(map[string]any{"id": "conversion_status_id"}, nil)
+conversion_status, err := client.ConversionStatus(nil).Load(map[string]any{"id": "conversion_status_id"}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(conversion_status) // the loaded record
 ```
 
 
@@ -596,7 +618,11 @@ Create an instance: `deeplink_merchant := client.DeeplinkMerchant(nil)`
 #### Example: List
 
 ```go
-results, err := client.DeeplinkMerchant(nil).List(nil, nil)
+deeplink_merchants, err := client.DeeplinkMerchant(nil).List(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(deeplink_merchants) // the array of records
 ```
 
 
@@ -613,7 +639,11 @@ Create an instance: `dnt := client.Dnt(nil)`
 #### Example: Load
 
 ```go
-result, err := client.Dnt(nil).Load(map[string]any{"id": "dnt_id"}, nil)
+dnt, err := client.Dnt(nil).Load(map[string]any{"id": "dnt_id"}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(dnt) // the loaded record
 ```
 
 
@@ -636,7 +666,11 @@ Create an instance: `market := client.Market(nil)`
 #### Example: List
 
 ```go
-results, err := client.Market(nil).List(nil, nil)
+markets, err := client.Market(nil).List(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(markets) // the array of records
 ```
 
 
@@ -663,7 +697,11 @@ Create an instance: `merchant := client.Merchant(nil)`
 #### Example: List
 
 ```go
-results, err := client.Merchant(nil).List(nil, nil)
+merchants, err := client.Merchant(nil).List(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(merchants) // the array of records
 ```
 
 
@@ -704,13 +742,21 @@ Create an instance: `offer := client.Offer(nil)`
 #### Example: Load
 
 ```go
-result, err := client.Offer(nil).Load(map[string]any{"id": "offer_id"}, nil)
+offer, err := client.Offer(nil).Load(map[string]any{"id": "offer_id"}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(offer) // the loaded record
 ```
 
 #### Example: List
 
 ```go
-results, err := client.Offer(nil).List(nil, nil)
+offers, err := client.Offer(nil).List(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(offers) // the array of records
 ```
 
 
@@ -739,7 +785,11 @@ Create an instance: `report_detail := client.ReportDetail(nil)`
 #### Example: List
 
 ```go
-results, err := client.ReportDetail(nil).List(nil, nil)
+report_details, err := client.ReportDetail(nil).List(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(report_details) // the array of records
 ```
 
 
@@ -764,7 +814,11 @@ Create an instance: `report_general := client.ReportGeneral(nil)`
 #### Example: Load
 
 ```go
-result, err := client.ReportGeneral(nil).Load(map[string]any{"id": "report_general_id"}, nil)
+report_general, err := client.ReportGeneral(nil).Load(map[string]any{"id": "report_general_id"}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(report_general) // the loaded record
 ```
 
 
@@ -787,7 +841,11 @@ Create an instance: `report_modified := client.ReportModified(nil)`
 #### Example: Load
 
 ```go
-result, err := client.ReportModified(nil).Load(map[string]any{"id": "report_modified_id"}, nil)
+report_modified, err := client.ReportModified(nil).Load(map[string]any{"id": "report_modified_id"}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(report_modified) // the loaded record
 ```
 
 
@@ -810,7 +868,11 @@ Create an instance: `report_status := client.ReportStatus(nil)`
 #### Example: Load
 
 ```go
-result, err := client.ReportStatus(nil).Load(map[string]any{"id": "report_status_id"}, nil)
+report_status, err := client.ReportStatus(nil).Load(map[string]any{"id": "report_status_id"}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(report_status) // the loaded record
 ```
 
 

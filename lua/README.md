@@ -33,17 +33,17 @@ local client = sdk.new({
 })
 ```
 
-### 2. List conversiondetails
+### 2. List conversiondetail records
+
+Entity operations return `(value, err)`. For `list`, `value` is the
+array of records itself — iterate it directly (there is no wrapper).
 
 ```lua
-local result, err = client:conversiondetail():list()
+local conversiondetails, err = client:ConversionDetail():list()
 if err then error(err) end
 
-if type(result) == "table" then
-  for _, item in ipairs(result) do
-    local d = item:data_get()
-    print(d["id"], d["name"])
-  end
+for _, item in ipairs(conversiondetails) do
+  print(item["id"], item["name"])
 end
 ```
 
@@ -90,8 +90,8 @@ Create a mock client for unit testing — no server required:
 ```lua
 local client = sdk.test()
 
-local result, err = client:conversiondetail():load({ id = "test01" })
--- result contains mock response data
+local result, err = client:ConversionDetail():load({ id = "test01" })
+-- result is the loaded data; err is set on failure
 ```
 
 ### Use a custom fetch function
@@ -180,7 +180,7 @@ Creates a test-mode client with mock transport. Both arguments may be `nil`.
 | `Dnt` | `(data) -> DntEntity` | Create a Dnt entity instance. |
 | `Market` | `(data) -> MarketEntity` | Create a Market entity instance. |
 | `Merchant` | `(data) -> MerchantEntity` | Create a Merchant entity instance. |
-| `Offer` | `(data) -> OfferEntity` | Create a Offer entity instance. |
+| `Offer` | `(data) -> OfferEntity` | Create an Offer entity instance. |
 | `ReportDetail` | `(data) -> ReportDetailEntity` | Create a ReportDetail entity instance. |
 | `ReportGeneral` | `(data) -> ReportGeneralEntity` | Create a ReportGeneral entity instance. |
 | `ReportModified` | `(data) -> ReportModifiedEntity` | Create a ReportModified entity instance. |
@@ -206,17 +206,22 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return `(any, err)`. The first value is a
-`table` with these keys:
+Entity operations return `(value, err)`. The `value` is the operation's
+data **directly** — there is no wrapper:
 
-| Key | Type | Description |
-| --- | --- | --- |
-| `ok` | `boolean` | `true` if the HTTP status is 2xx. |
-| `status` | `number` | HTTP status code. |
-| `headers` | `table` | Response headers. |
-| `data` | `any` | Parsed JSON response body. |
+| Operation | `value` |
+| --- | --- |
+| `load` / `create` / `update` / `remove` | the entity record (a `table`) |
+| `list` | an array (`table`) of entity records |
 
-On error, `ok` is `false` and `err` contains the error value.
+Check `err` first (it is non-`nil` on failure), then use `value`:
+
+    local conversion_detail, err = client:ConversionDetail():load({ id = "example_id" })
+    if err then error(err) end
+    -- conversion_detail is the loaded record
+
+Only `direct()` returns a response envelope — a `table` with `ok`,
+`status`, `headers`, and `data` keys.
 
 ### Entities
 
@@ -417,7 +422,7 @@ API path: `/v2/report/status`
 
 ### ConversionDetail
 
-Create an instance: `const conversion_detail = client.conversion_detail`
+Create an instance: `local conversion_detail = client:ConversionDetail(nil)`
 
 #### Operations
 
@@ -438,14 +443,14 @@ Create an instance: `const conversion_detail = client.conversion_detail`
 
 #### Example: List
 
-```ts
-const conversion_details = await client.conversion_detail.list()
+```lua
+local conversion_details, err = client:ConversionDetail():list()
 ```
 
 
 ### ConversionDetailMerchant
 
-Create an instance: `const conversion_detail_merchant = client.conversion_detail_merchant`
+Create an instance: `local conversion_detail_merchant = client:ConversionDetailMerchant(nil)`
 
 #### Operations
 
@@ -464,14 +469,14 @@ Create an instance: `const conversion_detail_merchant = client.conversion_detail
 
 #### Example: List
 
-```ts
-const conversion_detail_merchants = await client.conversion_detail_merchant.list()
+```lua
+local conversion_detail_merchants, err = client:ConversionDetailMerchant():list()
 ```
 
 
 ### ConversionGeneral
 
-Create an instance: `const conversion_general = client.conversion_general`
+Create an instance: `local conversion_general = client:ConversionGeneral(nil)`
 
 #### Operations
 
@@ -489,14 +494,14 @@ Create an instance: `const conversion_general = client.conversion_general`
 
 #### Example: Load
 
-```ts
-const conversion_general = await client.conversion_general.load({ id: 'conversion_general_id' })
+```lua
+local conversion_general, err = client:ConversionGeneral():load({ id = "conversion_general_id" })
 ```
 
 
 ### ConversionStatus
 
-Create an instance: `const conversion_status = client.conversion_status`
+Create an instance: `local conversion_status = client:ConversionStatus(nil)`
 
 #### Operations
 
@@ -512,14 +517,14 @@ Create an instance: `const conversion_status = client.conversion_status`
 
 #### Example: Load
 
-```ts
-const conversion_status = await client.conversion_status.load({ id: 'conversion_status_id' })
+```lua
+local conversion_status, err = client:ConversionStatus():load({ id = "conversion_status_id" })
 ```
 
 
 ### Deeplink
 
-Create an instance: `const deeplink = client.deeplink`
+Create an instance: `local deeplink = client:Deeplink(nil)`
 
 #### Operations
 
@@ -539,17 +544,17 @@ Create an instance: `const deeplink = client.deeplink`
 
 #### Example: Create
 
-```ts
-const deeplink = await client.deeplink.create({
-  market: /* `$STRING` */,
-  url: /* `$ARRAY` */,
+```lua
+local deeplink, err = client:Deeplink():create({
+  market = nil, -- `$STRING`
+  url = nil, -- `$ARRAY`
 })
 ```
 
 
 ### DeeplinkMerchant
 
-Create an instance: `const deeplink_merchant = client.deeplink_merchant`
+Create an instance: `local deeplink_merchant = client:DeeplinkMerchant(nil)`
 
 #### Operations
 
@@ -573,14 +578,14 @@ Create an instance: `const deeplink_merchant = client.deeplink_merchant`
 
 #### Example: List
 
-```ts
-const deeplink_merchants = await client.deeplink_merchant.list()
+```lua
+local deeplink_merchants, err = client:DeeplinkMerchant():list()
 ```
 
 
 ### Dnt
 
-Create an instance: `const dnt = client.dnt`
+Create an instance: `local dnt = client:Dnt(nil)`
 
 #### Operations
 
@@ -590,14 +595,14 @@ Create an instance: `const dnt = client.dnt`
 
 #### Example: Load
 
-```ts
-const dnt = await client.dnt.load({ id: 'dnt_id' })
+```lua
+local dnt, err = client:Dnt():load({ id = "dnt_id" })
 ```
 
 
 ### Market
 
-Create an instance: `const market = client.market`
+Create an instance: `local market = client:Market(nil)`
 
 #### Operations
 
@@ -613,14 +618,14 @@ Create an instance: `const market = client.market`
 
 #### Example: List
 
-```ts
-const markets = await client.market.list()
+```lua
+local markets, err = client:Market():list()
 ```
 
 
 ### Merchant
 
-Create an instance: `const merchant = client.merchant`
+Create an instance: `local merchant = client:Merchant(nil)`
 
 #### Operations
 
@@ -640,14 +645,14 @@ Create an instance: `const merchant = client.merchant`
 
 #### Example: List
 
-```ts
-const merchants = await client.merchant.list()
+```lua
+local merchants, err = client:Merchant():list()
 ```
 
 
 ### Offer
 
-Create an instance: `const offer = client.offer`
+Create an instance: `local offer = client:Offer(nil)`
 
 #### Operations
 
@@ -681,20 +686,20 @@ Create an instance: `const offer = client.offer`
 
 #### Example: Load
 
-```ts
-const offer = await client.offer.load({ id: 'offer_id' })
+```lua
+local offer, err = client:Offer():load({ id = "offer_id" })
 ```
 
 #### Example: List
 
-```ts
-const offers = await client.offer.list()
+```lua
+local offers, err = client:Offer():list()
 ```
 
 
 ### ReportDetail
 
-Create an instance: `const report_detail = client.report_detail`
+Create an instance: `local report_detail = client:ReportDetail(nil)`
 
 #### Operations
 
@@ -716,14 +721,14 @@ Create an instance: `const report_detail = client.report_detail`
 
 #### Example: List
 
-```ts
-const report_details = await client.report_detail.list()
+```lua
+local report_details, err = client:ReportDetail():list()
 ```
 
 
 ### ReportGeneral
 
-Create an instance: `const report_general = client.report_general`
+Create an instance: `local report_general = client:ReportGeneral(nil)`
 
 #### Operations
 
@@ -741,14 +746,14 @@ Create an instance: `const report_general = client.report_general`
 
 #### Example: Load
 
-```ts
-const report_general = await client.report_general.load({ id: 'report_general_id' })
+```lua
+local report_general, err = client:ReportGeneral():load({ id = "report_general_id" })
 ```
 
 
 ### ReportModified
 
-Create an instance: `const report_modified = client.report_modified`
+Create an instance: `local report_modified = client:ReportModified(nil)`
 
 #### Operations
 
@@ -764,14 +769,14 @@ Create an instance: `const report_modified = client.report_modified`
 
 #### Example: Load
 
-```ts
-const report_modified = await client.report_modified.load({ id: 'report_modified_id' })
+```lua
+local report_modified, err = client:ReportModified():load({ id = "report_modified_id" })
 ```
 
 
 ### ReportStatus
 
-Create an instance: `const report_status = client.report_status`
+Create an instance: `local report_status = client:ReportStatus(nil)`
 
 #### Operations
 
@@ -787,8 +792,8 @@ Create an instance: `const report_status = client.report_status`
 
 #### Example: Load
 
-```ts
-const report_status = await client.report_status.load({ id: 'report_status_id' })
+```lua
+local report_status, err = client:ReportStatus():load({ id = "report_status_id" })
 ```
 
 
@@ -863,7 +868,7 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```lua
-local conversiondetail = client:conversiondetail()
+local conversiondetail = client:ConversionDetail()
 conversiondetail:load({ id = "example_id" })
 
 -- conversiondetail:data_get() now returns the loaded conversiondetail data
