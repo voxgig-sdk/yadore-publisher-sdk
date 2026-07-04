@@ -85,6 +85,27 @@ func (e *DeeplinkEntity) Match(args ...any) any {
 	return out
 }
 
+// DataTyped is the statically-typed accessor for this entity's data. With no
+// argument it returns the current data as an Deeplink; with an argument it
+// sets the data and returns the stored value. It delegates to the untyped Data
+// (identical runtime) and converts at the typed boundary.
+func (e *DeeplinkEntity) DataTyped(data ...Deeplink) Deeplink {
+	if len(data) > 0 {
+		return typedFrom[Deeplink](e.Data(asMap(data[0])))
+	}
+	return typedFrom[Deeplink](e.Data())
+}
+
+// MatchTyped mirrors DataTyped for the entity's match filter. The match is a
+// partial of the entity, so it round-trips through Deeplink (all fields
+// optional at the wire level).
+func (e *DeeplinkEntity) MatchTyped(match ...Deeplink) Deeplink {
+	if len(match) > 0 {
+		return typedFrom[Deeplink](e.Match(asMap(match[0])))
+	}
+	return typedFrom[Deeplink](e.Match())
+}
+
 func (e *DeeplinkEntity) Load(_ map[string]any, _ map[string]any) (any, error) {
 	return core.UnsupportedOp("load", e.name)
 }
@@ -116,6 +137,17 @@ func (e *DeeplinkEntity) Create(reqdata map[string]any, ctrl map[string]any) (an
 			}
 		}
 	})
+}
+
+// CreateTyped is the statically-typed variant of Create: it takes an
+// DeeplinkCreateData and returns an Deeplink. It delegates to the untyped
+// Create (identical runtime) and converts at the typed boundary.
+func (e *DeeplinkEntity) CreateTyped(reqdata DeeplinkCreateData, ctrl map[string]any) (Deeplink, error) {
+	res, err := e.Create(asMap(reqdata), ctrl)
+	if err != nil {
+		return Deeplink{}, err
+	}
+	return typedFrom[Deeplink](res), nil
 }
 
 

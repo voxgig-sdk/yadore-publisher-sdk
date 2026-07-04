@@ -50,8 +50,7 @@ class ConversionDetailMerchantEntityTest extends TestCase
         $conversion_detail_merchant_ref01_ent = $client->ConversionDetailMerchant(null);
         $conversion_detail_merchant_ref01_match = [];
 
-        [$conversion_detail_merchant_ref01_list_result, $err] = $conversion_detail_merchant_ref01_ent->list($conversion_detail_merchant_ref01_match, null);
-        $this->assertNull($err);
+        $conversion_detail_merchant_ref01_list_result = $conversion_detail_merchant_ref01_ent->list($conversion_detail_merchant_ref01_match, null);
         $this->assertIsArray($conversion_detail_merchant_ref01_list_result);
 
     }

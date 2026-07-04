@@ -49,8 +49,7 @@ class ConversionStatusEntityTest extends TestCase
         // LOAD
         $conversion_status_ref01_ent = $client->ConversionStatus(null);
         $conversion_status_ref01_match_dt0 = [];
-        [$conversion_status_ref01_data_dt0_loaded, $err] = $conversion_status_ref01_ent->load($conversion_status_ref01_match_dt0, null);
-        $this->assertNull($err);
+        $conversion_status_ref01_data_dt0_loaded = $conversion_status_ref01_ent->load($conversion_status_ref01_match_dt0, null);
         $this->assertNotNull($conversion_status_ref01_data_dt0_loaded);
 
     }

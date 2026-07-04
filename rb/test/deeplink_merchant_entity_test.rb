@@ -43,8 +43,7 @@ class DeeplinkMerchantEntityTest < Minitest::Test
     deeplink_merchant_ref01_ent = client.DeeplinkMerchant(nil)
     deeplink_merchant_ref01_match = {}
 
-    deeplink_merchant_ref01_list_result, err = deeplink_merchant_ref01_ent.list(deeplink_merchant_ref01_match, nil)
-    assert_nil err
+    deeplink_merchant_ref01_list_result = deeplink_merchant_ref01_ent.list(deeplink_merchant_ref01_match, nil)
     assert deeplink_merchant_ref01_list_result.is_a?(Array)
 
   end

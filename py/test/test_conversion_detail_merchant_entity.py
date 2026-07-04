@@ -50,8 +50,7 @@ class TestConversionDetailMerchantEntity:
         conversion_detail_merchant_ref01_ent = client.ConversionDetailMerchant(None)
         conversion_detail_merchant_ref01_match = {}
 
-        conversion_detail_merchant_ref01_list_result, err = conversion_detail_merchant_ref01_ent.list(conversion_detail_merchant_ref01_match, None)
-        assert err is None
+        conversion_detail_merchant_ref01_list_result = conversion_detail_merchant_ref01_ent.list(conversion_detail_merchant_ref01_match, None)
         assert isinstance(conversion_detail_merchant_ref01_list_result, list)
 
 

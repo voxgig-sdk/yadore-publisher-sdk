@@ -79,6 +79,10 @@ end
 
 
 
+---@param reqmatch ReportModifiedLoadMatch
+---@param ctrl? table
+---@return ReportModified
+---@return string? err
 function ReportModifiedEntity:load(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({

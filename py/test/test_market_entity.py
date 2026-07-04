@@ -50,8 +50,7 @@ class TestMarketEntity:
         market_ref01_ent = client.Market(None)
         market_ref01_match = {}
 
-        market_ref01_list_result, err = market_ref01_ent.list(market_ref01_match, None)
-        assert err is None
+        market_ref01_list_result = market_ref01_ent.list(market_ref01_match, None)
         assert isinstance(market_ref01_list_result, list)
 
 

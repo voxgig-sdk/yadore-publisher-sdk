@@ -103,7 +103,7 @@ class YadorePublisherSDK
         return $this->_rootctx;
     }
 
-    public function prepare(array $fetchargs = []): array
+    public function prepare(array $fetchargs = []): mixed
     {
         $utility = $this->_utility;
         $fetchargs = $fetchargs ?? [];
@@ -149,19 +149,27 @@ class YadorePublisherSDK
 
         [$_, $err] = ($utility->prepare_auth)($ctx);
         if ($err) {
-            return [null, $err];
+            return ($utility->make_error)($ctx, $err);
         }
 
-        return ($utility->make_fetch_def)($ctx);
+        [$fetchdef, $fd_err] = ($utility->make_fetch_def)($ctx);
+        if ($fd_err) {
+            return ($utility->make_error)($ctx, $fd_err);
+        }
+        return $fetchdef;
     }
 
-    public function direct(array $fetchargs = []): array
+    public function direct(array $fetchargs = []): mixed
     {
         $utility = $this->_utility;
 
-        [$fetchdef, $err] = $this->prepare($fetchargs);
-        if ($err) {
-            return [["ok" => false, "err" => $err], null];
+        // direct() is the raw-HTTP escape hatch: it never throws, it returns
+        // an {ok, err, ...} dict. prepare() now raises on error, so catch it
+        // and surface the failure through the dict instead.
+        try {
+            $fetchdef = $this->prepare($fetchargs);
+        } catch (\Throwable $err) {
+            return ["ok" => false, "err" => $err];
         }
 
         $fetchargs = $fetchargs ?? [];
@@ -176,14 +184,14 @@ class YadorePublisherSDK
         [$fetched, $fetch_err] = ($utility->fetcher)($ctx, $url, $fetchdef);
 
         if ($fetch_err) {
-            return [["ok" => false, "err" => $fetch_err], null];
+            return ["ok" => false, "err" => $fetch_err];
         }
 
         if ($fetched === null) {
-            return [[
+            return [
                 "ok" => false,
                 "err" => $ctx->make_error("direct_no_response", "response: undefined"),
-            ], null];
+            ];
         }
 
         if (is_array($fetched)) {
@@ -208,115 +216,269 @@ class YadorePublisherSDK
                 }
             }
 
-            return [[
+            return [
                 "ok" => $status >= 200 && $status < 300,
                 "status" => $status,
                 "headers" => Struct::getprop($fetched, "headers"),
                 "data" => $json_data,
-            ], null];
+            ];
         }
 
-        return [[
+        return [
             "ok" => false,
             "err" => $ctx->make_error("direct_invalid", "invalid response type"),
-        ], null];
+        ];
     }
 
 
-    public function ConversionDetail($data = null)
+    private $_conversion_detail = null;
+
+    // Idiomatic facade: $client->conversion_detail()->list() / ->load(["id" => ...]).
+    // Also serves the deprecated PascalCase alias ConversionDetail() (PHP method
+    // names are case-insensitive).
+    public function conversion_detail($data = null)
     {
         require_once __DIR__ . '/entity/conversion_detail_entity.php';
+        if ($data === null) {
+            if ($this->_conversion_detail === null) {
+                $this->_conversion_detail = new ConversionDetailEntity($this, null);
+            }
+            return $this->_conversion_detail;
+        }
         return new ConversionDetailEntity($this, $data);
     }
 
 
-    public function ConversionDetailMerchant($data = null)
+    private $_conversion_detail_merchant = null;
+
+    // Idiomatic facade: $client->conversion_detail_merchant()->list() / ->load(["id" => ...]).
+    // Also serves the deprecated PascalCase alias ConversionDetailMerchant() (PHP method
+    // names are case-insensitive).
+    public function conversion_detail_merchant($data = null)
     {
         require_once __DIR__ . '/entity/conversion_detail_merchant_entity.php';
+        if ($data === null) {
+            if ($this->_conversion_detail_merchant === null) {
+                $this->_conversion_detail_merchant = new ConversionDetailMerchantEntity($this, null);
+            }
+            return $this->_conversion_detail_merchant;
+        }
         return new ConversionDetailMerchantEntity($this, $data);
     }
 
 
-    public function ConversionGeneral($data = null)
+    private $_conversion_general = null;
+
+    // Idiomatic facade: $client->conversion_general()->list() / ->load(["id" => ...]).
+    // Also serves the deprecated PascalCase alias ConversionGeneral() (PHP method
+    // names are case-insensitive).
+    public function conversion_general($data = null)
     {
         require_once __DIR__ . '/entity/conversion_general_entity.php';
+        if ($data === null) {
+            if ($this->_conversion_general === null) {
+                $this->_conversion_general = new ConversionGeneralEntity($this, null);
+            }
+            return $this->_conversion_general;
+        }
         return new ConversionGeneralEntity($this, $data);
     }
 
 
-    public function ConversionStatus($data = null)
+    private $_conversion_status = null;
+
+    // Idiomatic facade: $client->conversion_status()->list() / ->load(["id" => ...]).
+    // Also serves the deprecated PascalCase alias ConversionStatus() (PHP method
+    // names are case-insensitive).
+    public function conversion_status($data = null)
     {
         require_once __DIR__ . '/entity/conversion_status_entity.php';
+        if ($data === null) {
+            if ($this->_conversion_status === null) {
+                $this->_conversion_status = new ConversionStatusEntity($this, null);
+            }
+            return $this->_conversion_status;
+        }
         return new ConversionStatusEntity($this, $data);
     }
 
 
-    public function Deeplink($data = null)
+    private $_deeplink = null;
+
+    // Idiomatic facade: $client->deeplink()->list() / ->load(["id" => ...]).
+    // Also serves the deprecated PascalCase alias Deeplink() (PHP method
+    // names are case-insensitive).
+    public function deeplink($data = null)
     {
         require_once __DIR__ . '/entity/deeplink_entity.php';
+        if ($data === null) {
+            if ($this->_deeplink === null) {
+                $this->_deeplink = new DeeplinkEntity($this, null);
+            }
+            return $this->_deeplink;
+        }
         return new DeeplinkEntity($this, $data);
     }
 
 
-    public function DeeplinkMerchant($data = null)
+    private $_deeplink_merchant = null;
+
+    // Idiomatic facade: $client->deeplink_merchant()->list() / ->load(["id" => ...]).
+    // Also serves the deprecated PascalCase alias DeeplinkMerchant() (PHP method
+    // names are case-insensitive).
+    public function deeplink_merchant($data = null)
     {
         require_once __DIR__ . '/entity/deeplink_merchant_entity.php';
+        if ($data === null) {
+            if ($this->_deeplink_merchant === null) {
+                $this->_deeplink_merchant = new DeeplinkMerchantEntity($this, null);
+            }
+            return $this->_deeplink_merchant;
+        }
         return new DeeplinkMerchantEntity($this, $data);
     }
 
 
-    public function Dnt($data = null)
+    private $_dnt = null;
+
+    // Idiomatic facade: $client->dnt()->list() / ->load(["id" => ...]).
+    // Also serves the deprecated PascalCase alias Dnt() (PHP method
+    // names are case-insensitive).
+    public function dnt($data = null)
     {
         require_once __DIR__ . '/entity/dnt_entity.php';
+        if ($data === null) {
+            if ($this->_dnt === null) {
+                $this->_dnt = new DntEntity($this, null);
+            }
+            return $this->_dnt;
+        }
         return new DntEntity($this, $data);
     }
 
 
-    public function Market($data = null)
+    private $_market = null;
+
+    // Idiomatic facade: $client->market()->list() / ->load(["id" => ...]).
+    // Also serves the deprecated PascalCase alias Market() (PHP method
+    // names are case-insensitive).
+    public function market($data = null)
     {
         require_once __DIR__ . '/entity/market_entity.php';
+        if ($data === null) {
+            if ($this->_market === null) {
+                $this->_market = new MarketEntity($this, null);
+            }
+            return $this->_market;
+        }
         return new MarketEntity($this, $data);
     }
 
 
-    public function Merchant($data = null)
+    private $_merchant = null;
+
+    // Idiomatic facade: $client->merchant()->list() / ->load(["id" => ...]).
+    // Also serves the deprecated PascalCase alias Merchant() (PHP method
+    // names are case-insensitive).
+    public function merchant($data = null)
     {
         require_once __DIR__ . '/entity/merchant_entity.php';
+        if ($data === null) {
+            if ($this->_merchant === null) {
+                $this->_merchant = new MerchantEntity($this, null);
+            }
+            return $this->_merchant;
+        }
         return new MerchantEntity($this, $data);
     }
 
 
-    public function Offer($data = null)
+    private $_offer = null;
+
+    // Idiomatic facade: $client->offer()->list() / ->load(["id" => ...]).
+    // Also serves the deprecated PascalCase alias Offer() (PHP method
+    // names are case-insensitive).
+    public function offer($data = null)
     {
         require_once __DIR__ . '/entity/offer_entity.php';
+        if ($data === null) {
+            if ($this->_offer === null) {
+                $this->_offer = new OfferEntity($this, null);
+            }
+            return $this->_offer;
+        }
         return new OfferEntity($this, $data);
     }
 
 
-    public function ReportDetail($data = null)
+    private $_report_detail = null;
+
+    // Idiomatic facade: $client->report_detail()->list() / ->load(["id" => ...]).
+    // Also serves the deprecated PascalCase alias ReportDetail() (PHP method
+    // names are case-insensitive).
+    public function report_detail($data = null)
     {
         require_once __DIR__ . '/entity/report_detail_entity.php';
+        if ($data === null) {
+            if ($this->_report_detail === null) {
+                $this->_report_detail = new ReportDetailEntity($this, null);
+            }
+            return $this->_report_detail;
+        }
         return new ReportDetailEntity($this, $data);
     }
 
 
-    public function ReportGeneral($data = null)
+    private $_report_general = null;
+
+    // Idiomatic facade: $client->report_general()->list() / ->load(["id" => ...]).
+    // Also serves the deprecated PascalCase alias ReportGeneral() (PHP method
+    // names are case-insensitive).
+    public function report_general($data = null)
     {
         require_once __DIR__ . '/entity/report_general_entity.php';
+        if ($data === null) {
+            if ($this->_report_general === null) {
+                $this->_report_general = new ReportGeneralEntity($this, null);
+            }
+            return $this->_report_general;
+        }
         return new ReportGeneralEntity($this, $data);
     }
 
 
-    public function ReportModified($data = null)
+    private $_report_modified = null;
+
+    // Idiomatic facade: $client->report_modified()->list() / ->load(["id" => ...]).
+    // Also serves the deprecated PascalCase alias ReportModified() (PHP method
+    // names are case-insensitive).
+    public function report_modified($data = null)
     {
         require_once __DIR__ . '/entity/report_modified_entity.php';
+        if ($data === null) {
+            if ($this->_report_modified === null) {
+                $this->_report_modified = new ReportModifiedEntity($this, null);
+            }
+            return $this->_report_modified;
+        }
         return new ReportModifiedEntity($this, $data);
     }
 
 
-    public function ReportStatus($data = null)
+    private $_report_status = null;
+
+    // Idiomatic facade: $client->report_status()->list() / ->load(["id" => ...]).
+    // Also serves the deprecated PascalCase alias ReportStatus() (PHP method
+    // names are case-insensitive).
+    public function report_status($data = null)
     {
         require_once __DIR__ . '/entity/report_status_entity.php';
+        if ($data === null) {
+            if ($this->_report_status === null) {
+                $this->_report_status = new ReportStatusEntity($this, null);
+            }
+            return $this->_report_status;
+        }
         return new ReportStatusEntity($this, $data);
     }
 

@@ -36,8 +36,7 @@ class DeeplinkEntityTest < Minitest::Test
     deeplink_ref01_data = Helpers.to_map(Vs.getprop(
       Vs.getpath(setup[:data], "new.deeplink"), "deeplink_ref01"))
 
-    deeplink_ref01_data_result, err = deeplink_ref01_ent.create(deeplink_ref01_data, nil)
-    assert_nil err
+    deeplink_ref01_data_result = deeplink_ref01_ent.create(deeplink_ref01_data, nil)
     deeplink_ref01_data = Helpers.to_map(deeplink_ref01_data_result)
     assert !deeplink_ref01_data.nil?
 

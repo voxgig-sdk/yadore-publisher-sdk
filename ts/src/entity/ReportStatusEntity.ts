@@ -14,9 +14,13 @@ import type {
   Control,
 } from '../types'
 
+import type {
+  ReportStatus,
+  ReportStatusLoadMatch,
+} from '../YadorePublisherTypes'
 
 // TODO: needs Entity superclass
-class ReportStatusEntity extends YadorePublisherEntityBase {
+class ReportStatusEntity extends YadorePublisherEntityBase<ReportStatus> {
 
   constructor(client: YadorePublisherSDK, entopts: any) {
     super(client, entopts)
@@ -32,7 +36,7 @@ class ReportStatusEntity extends YadorePublisherEntityBase {
 
 
 
-  async load(this: any, reqmatch?: any, ctrl?: Control) {
+  async load(this: any, reqmatch?: ReportStatusLoadMatch, ctrl?: Control): Promise<ReportStatus> {
 
     const utility = this._utility
 
@@ -136,7 +140,9 @@ class ReportStatusEntity extends YadorePublisherEntityBase {
         throw err
       }
       else {
-        return undefined
+        // Off-happy-path (throw disabled): typed as any so the method's
+        // Promise<ReportStatus> return stays clean under strict null checks.
+        return undefined as any
       }
     }
   }

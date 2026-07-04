@@ -81,6 +81,10 @@ end
 
 
 
+---@param reqmatch ConversionDetailListMatch
+---@param ctrl? table
+---@return ConversionDetail[]
+---@return string? err
 function ConversionDetailEntity:list(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({

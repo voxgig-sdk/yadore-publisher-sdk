@@ -49,8 +49,7 @@ class TestConversionStatusEntity:
         # LOAD
         conversion_status_ref01_ent = client.ConversionStatus(None)
         conversion_status_ref01_match_dt0 = {}
-        conversion_status_ref01_data_dt0_loaded, err = conversion_status_ref01_ent.load(conversion_status_ref01_match_dt0, None)
-        assert err is None
+        conversion_status_ref01_data_dt0_loaded = conversion_status_ref01_ent.load(conversion_status_ref01_match_dt0, None)
         assert conversion_status_ref01_data_dt0_loaded is not None
 
 

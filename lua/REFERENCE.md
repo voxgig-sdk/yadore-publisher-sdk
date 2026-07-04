@@ -136,7 +136,7 @@ same parameters as `direct()`.
 ## ConversionDetailEntity
 
 ```lua
-local conversion_detail = client:ConversionDetail(nil)
+local conversion_detail = client:conversion_detail(nil)
 ```
 
 ### Fields
@@ -157,7 +157,7 @@ local conversion_detail = client:ConversionDetail(nil)
 List entities matching the given criteria. Returns an array.
 
 ```lua
-local results, err = client:ConversionDetail():list()
+local results, err = client:conversion_detail():list()
 ```
 
 ### Common Methods
@@ -193,7 +193,7 @@ Return the entity name.
 ## ConversionDetailMerchantEntity
 
 ```lua
-local conversion_detail_merchant = client:ConversionDetailMerchant(nil)
+local conversion_detail_merchant = client:conversion_detail_merchant(nil)
 ```
 
 ### Fields
@@ -212,7 +212,7 @@ local conversion_detail_merchant = client:ConversionDetailMerchant(nil)
 List entities matching the given criteria. Returns an array.
 
 ```lua
-local results, err = client:ConversionDetailMerchant():list()
+local results, err = client:conversion_detail_merchant():list()
 ```
 
 ### Common Methods
@@ -248,7 +248,7 @@ Return the entity name.
 ## ConversionGeneralEntity
 
 ```lua
-local conversion_general = client:ConversionGeneral(nil)
+local conversion_general = client:conversion_general(nil)
 ```
 
 ### Fields
@@ -266,7 +266,7 @@ local conversion_general = client:ConversionGeneral(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:ConversionGeneral():load({ id = "conversion_general_id" })
+local result, err = client:conversion_general():load({ id = "conversion_general_id" })
 ```
 
 ### Common Methods
@@ -302,7 +302,7 @@ Return the entity name.
 ## ConversionStatusEntity
 
 ```lua
-local conversion_status = client:ConversionStatus(nil)
+local conversion_status = client:conversion_status(nil)
 ```
 
 ### Fields
@@ -318,7 +318,7 @@ local conversion_status = client:ConversionStatus(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:ConversionStatus():load({ id = "conversion_status_id" })
+local result, err = client:conversion_status():load({ id = "conversion_status_id" })
 ```
 
 ### Common Methods
@@ -354,7 +354,7 @@ Return the entity name.
 ## DeeplinkEntity
 
 ```lua
-local deeplink = client:Deeplink(nil)
+local deeplink = client:deeplink(nil)
 ```
 
 ### Fields
@@ -374,7 +374,7 @@ local deeplink = client:Deeplink(nil)
 Create a new entity with the given data.
 
 ```lua
-local result, err = client:Deeplink():create({
+local result, err = client:deeplink():create({
   market = --[[ `$STRING` ]],
   url = --[[ `$ARRAY` ]],
 })
@@ -413,7 +413,7 @@ Return the entity name.
 ## DeeplinkMerchantEntity
 
 ```lua
-local deeplink_merchant = client:DeeplinkMerchant(nil)
+local deeplink_merchant = client:deeplink_merchant(nil)
 ```
 
 ### Fields
@@ -437,7 +437,7 @@ local deeplink_merchant = client:DeeplinkMerchant(nil)
 List entities matching the given criteria. Returns an array.
 
 ```lua
-local results, err = client:DeeplinkMerchant():list()
+local results, err = client:deeplink_merchant():list()
 ```
 
 ### Common Methods
@@ -473,7 +473,7 @@ Return the entity name.
 ## DntEntity
 
 ```lua
-local dnt = client:Dnt(nil)
+local dnt = client:dnt(nil)
 ```
 
 ### Operations
@@ -483,7 +483,7 @@ local dnt = client:Dnt(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Dnt():load({ id = "dnt_id" })
+local result, err = client:dnt():load({ id = "dnt_id" })
 ```
 
 ### Common Methods
@@ -519,7 +519,7 @@ Return the entity name.
 ## MarketEntity
 
 ```lua
-local market = client:Market(nil)
+local market = client:market(nil)
 ```
 
 ### Fields
@@ -535,7 +535,7 @@ local market = client:Market(nil)
 List entities matching the given criteria. Returns an array.
 
 ```lua
-local results, err = client:Market():list()
+local results, err = client:market():list()
 ```
 
 ### Common Methods
@@ -571,7 +571,7 @@ Return the entity name.
 ## MerchantEntity
 
 ```lua
-local merchant = client:Merchant(nil)
+local merchant = client:merchant(nil)
 ```
 
 ### Fields
@@ -591,7 +591,7 @@ local merchant = client:Merchant(nil)
 List entities matching the given criteria. Returns an array.
 
 ```lua
-local results, err = client:Merchant():list()
+local results, err = client:merchant():list()
 ```
 
 ### Common Methods
@@ -627,7 +627,7 @@ Return the entity name.
 ## OfferEntity
 
 ```lua
-local offer = client:Offer(nil)
+local offer = client:offer(nil)
 ```
 
 ### Fields
@@ -660,7 +660,7 @@ local offer = client:Offer(nil)
 List entities matching the given criteria. Returns an array.
 
 ```lua
-local results, err = client:Offer():list()
+local results, err = client:offer():list()
 ```
 
 #### `load(reqmatch, ctrl) -> any, err`
@@ -668,7 +668,7 @@ local results, err = client:Offer():list()
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Offer():load({ id = "offer_id" })
+local result, err = client:offer():load({ id = "offer_id" })
 ```
 
 ### Common Methods
@@ -704,7 +704,7 @@ Return the entity name.
 ## ReportDetailEntity
 
 ```lua
-local report_detail = client:ReportDetail(nil)
+local report_detail = client:report_detail(nil)
 ```
 
 ### Fields
@@ -726,7 +726,7 @@ local report_detail = client:ReportDetail(nil)
 List entities matching the given criteria. Returns an array.
 
 ```lua
-local results, err = client:ReportDetail():list()
+local results, err = client:report_detail():list()
 ```
 
 ### Common Methods
@@ -762,7 +762,7 @@ Return the entity name.
 ## ReportGeneralEntity
 
 ```lua
-local report_general = client:ReportGeneral(nil)
+local report_general = client:report_general(nil)
 ```
 
 ### Fields
@@ -780,7 +780,7 @@ local report_general = client:ReportGeneral(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:ReportGeneral():load({ id = "report_general_id" })
+local result, err = client:report_general():load({ id = "report_general_id" })
 ```
 
 ### Common Methods
@@ -816,7 +816,7 @@ Return the entity name.
 ## ReportModifiedEntity
 
 ```lua
-local report_modified = client:ReportModified(nil)
+local report_modified = client:report_modified(nil)
 ```
 
 ### Fields
@@ -832,7 +832,7 @@ local report_modified = client:ReportModified(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:ReportModified():load({ id = "report_modified_id" })
+local result, err = client:report_modified():load({ id = "report_modified_id" })
 ```
 
 ### Common Methods
@@ -868,7 +868,7 @@ Return the entity name.
 ## ReportStatusEntity
 
 ```lua
-local report_status = client:ReportStatus(nil)
+local report_status = client:report_status(nil)
 ```
 
 ### Fields
@@ -884,7 +884,7 @@ local report_status = client:ReportStatus(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:ReportStatus():load({ id = "report_status_id" })
+local result, err = client:report_status():load({ id = "report_status_id" })
 ```
 
 ### Common Methods

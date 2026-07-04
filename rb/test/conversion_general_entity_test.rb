@@ -42,8 +42,7 @@ class ConversionGeneralEntityTest < Minitest::Test
     # LOAD
     conversion_general_ref01_ent = client.ConversionGeneral(nil)
     conversion_general_ref01_match_dt0 = {}
-    conversion_general_ref01_data_dt0_loaded, err = conversion_general_ref01_ent.load(conversion_general_ref01_match_dt0, nil)
-    assert_nil err
+    conversion_general_ref01_data_dt0_loaded = conversion_general_ref01_ent.load(conversion_general_ref01_match_dt0, nil)
     assert !conversion_general_ref01_data_dt0_loaded.nil?
 
   end

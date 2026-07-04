@@ -15,6 +15,8 @@ import { ReportGeneralEntity } from './entity/ReportGeneralEntity'
 import { ReportModifiedEntity } from './entity/ReportModifiedEntity'
 import { ReportStatusEntity } from './entity/ReportStatusEntity'
 
+export type * from './YadorePublisherTypes'
+
 
 import { inspect } from 'node:util'
 
@@ -215,84 +217,196 @@ class YadorePublisherSDK {
 
 
 
+  _conversion_detail?: ConversionDetailEntity
+
+  // Idiomatic facade: `client.conversion_detail.list()` / `client.conversion_detail.load({ id })`.
+  get conversion_detail(): ConversionDetailEntity {
+    return (this._conversion_detail ??= new ConversionDetailEntity(this, undefined))
+  }
+
+  /** @deprecated Use `client.conversion_detail` instead. */
   ConversionDetail(data?: any) {
     const self = this
     return new ConversionDetailEntity(self,data)
   }
 
 
+  _conversion_detail_merchant?: ConversionDetailMerchantEntity
+
+  // Idiomatic facade: `client.conversion_detail_merchant.list()` / `client.conversion_detail_merchant.load({ id })`.
+  get conversion_detail_merchant(): ConversionDetailMerchantEntity {
+    return (this._conversion_detail_merchant ??= new ConversionDetailMerchantEntity(this, undefined))
+  }
+
+  /** @deprecated Use `client.conversion_detail_merchant` instead. */
   ConversionDetailMerchant(data?: any) {
     const self = this
     return new ConversionDetailMerchantEntity(self,data)
   }
 
 
+  _conversion_general?: ConversionGeneralEntity
+
+  // Idiomatic facade: `client.conversion_general.list()` / `client.conversion_general.load({ id })`.
+  get conversion_general(): ConversionGeneralEntity {
+    return (this._conversion_general ??= new ConversionGeneralEntity(this, undefined))
+  }
+
+  /** @deprecated Use `client.conversion_general` instead. */
   ConversionGeneral(data?: any) {
     const self = this
     return new ConversionGeneralEntity(self,data)
   }
 
 
+  _conversion_status?: ConversionStatusEntity
+
+  // Idiomatic facade: `client.conversion_status.list()` / `client.conversion_status.load({ id })`.
+  get conversion_status(): ConversionStatusEntity {
+    return (this._conversion_status ??= new ConversionStatusEntity(this, undefined))
+  }
+
+  /** @deprecated Use `client.conversion_status` instead. */
   ConversionStatus(data?: any) {
     const self = this
     return new ConversionStatusEntity(self,data)
   }
 
 
+  _deeplink?: DeeplinkEntity
+
+  // Idiomatic facade: `client.deeplink.list()` / `client.deeplink.load({ id })`.
+  get deeplink(): DeeplinkEntity {
+    return (this._deeplink ??= new DeeplinkEntity(this, undefined))
+  }
+
+  /** @deprecated Use `client.deeplink` instead. */
   Deeplink(data?: any) {
     const self = this
     return new DeeplinkEntity(self,data)
   }
 
 
+  _deeplink_merchant?: DeeplinkMerchantEntity
+
+  // Idiomatic facade: `client.deeplink_merchant.list()` / `client.deeplink_merchant.load({ id })`.
+  get deeplink_merchant(): DeeplinkMerchantEntity {
+    return (this._deeplink_merchant ??= new DeeplinkMerchantEntity(this, undefined))
+  }
+
+  /** @deprecated Use `client.deeplink_merchant` instead. */
   DeeplinkMerchant(data?: any) {
     const self = this
     return new DeeplinkMerchantEntity(self,data)
   }
 
 
+  _dnt?: DntEntity
+
+  // Idiomatic facade: `client.dnt.list()` / `client.dnt.load({ id })`.
+  get dnt(): DntEntity {
+    return (this._dnt ??= new DntEntity(this, undefined))
+  }
+
+  /** @deprecated Use `client.dnt` instead. */
   Dnt(data?: any) {
     const self = this
     return new DntEntity(self,data)
   }
 
 
+  _market?: MarketEntity
+
+  // Idiomatic facade: `client.market.list()` / `client.market.load({ id })`.
+  get market(): MarketEntity {
+    return (this._market ??= new MarketEntity(this, undefined))
+  }
+
+  /** @deprecated Use `client.market` instead. */
   Market(data?: any) {
     const self = this
     return new MarketEntity(self,data)
   }
 
 
+  _merchant?: MerchantEntity
+
+  // Idiomatic facade: `client.merchant.list()` / `client.merchant.load({ id })`.
+  get merchant(): MerchantEntity {
+    return (this._merchant ??= new MerchantEntity(this, undefined))
+  }
+
+  /** @deprecated Use `client.merchant` instead. */
   Merchant(data?: any) {
     const self = this
     return new MerchantEntity(self,data)
   }
 
 
+  _offer?: OfferEntity
+
+  // Idiomatic facade: `client.offer.list()` / `client.offer.load({ id })`.
+  get offer(): OfferEntity {
+    return (this._offer ??= new OfferEntity(this, undefined))
+  }
+
+  /** @deprecated Use `client.offer` instead. */
   Offer(data?: any) {
     const self = this
     return new OfferEntity(self,data)
   }
 
 
+  _report_detail?: ReportDetailEntity
+
+  // Idiomatic facade: `client.report_detail.list()` / `client.report_detail.load({ id })`.
+  get report_detail(): ReportDetailEntity {
+    return (this._report_detail ??= new ReportDetailEntity(this, undefined))
+  }
+
+  /** @deprecated Use `client.report_detail` instead. */
   ReportDetail(data?: any) {
     const self = this
     return new ReportDetailEntity(self,data)
   }
 
 
+  _report_general?: ReportGeneralEntity
+
+  // Idiomatic facade: `client.report_general.list()` / `client.report_general.load({ id })`.
+  get report_general(): ReportGeneralEntity {
+    return (this._report_general ??= new ReportGeneralEntity(this, undefined))
+  }
+
+  /** @deprecated Use `client.report_general` instead. */
   ReportGeneral(data?: any) {
     const self = this
     return new ReportGeneralEntity(self,data)
   }
 
 
+  _report_modified?: ReportModifiedEntity
+
+  // Idiomatic facade: `client.report_modified.list()` / `client.report_modified.load({ id })`.
+  get report_modified(): ReportModifiedEntity {
+    return (this._report_modified ??= new ReportModifiedEntity(this, undefined))
+  }
+
+  /** @deprecated Use `client.report_modified` instead. */
   ReportModified(data?: any) {
     const self = this
     return new ReportModifiedEntity(self,data)
   }
 
 
+  _report_status?: ReportStatusEntity
+
+  // Idiomatic facade: `client.report_status.list()` / `client.report_status.load({ id })`.
+  get report_status(): ReportStatusEntity {
+    return (this._report_status ??= new ReportStatusEntity(this, undefined))
+  }
+
+  /** @deprecated Use `client.report_status` instead. */
   ReportStatus(data?: any) {
     const self = this
     return new ReportStatusEntity(self,data)

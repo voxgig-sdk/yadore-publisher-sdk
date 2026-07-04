@@ -45,6 +45,7 @@ class ReportModifiedEntity
     end
   end
 
+  # @return [ReportModified, Hash] the current ReportModified data
   def data_get
     @_utility.feature_hook.call(@_entctx, "GetData")
     VoxgigStruct.clone(@_data)
@@ -57,12 +58,18 @@ class ReportModifiedEntity
     end
   end
 
+  # @return [Hash] the current match filter (any subset of ReportModified fields)
   def match_get
     @_utility.feature_hook.call(@_entctx, "GetMatch")
     VoxgigStruct.clone(@_match)
   end
 
   
+  # Load a single ReportModified.
+  #
+  # @param reqmatch [ReportModifiedLoadMatch, Hash, nil] match criteria (id/query fields)
+  # @param ctrl [Object, nil] optional per-call control
+  # @return [ReportModified, Hash] the loaded ReportModified; raises YadorePublisherError on failure
   def load(reqmatch, ctrl = nil)
     utility = @_utility
     ctx = utility.make_context.call({

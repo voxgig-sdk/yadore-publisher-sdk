@@ -79,6 +79,10 @@ end
 
 
 
+---@param reqmatch OfferLoadMatch
+---@param ctrl? table
+---@return Offer
+---@return string? err
 function OfferEntity:load(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({
@@ -104,6 +108,10 @@ end
 
 
 
+---@param reqmatch OfferListMatch
+---@param ctrl? table
+---@return Offer[]
+---@return string? err
 function OfferEntity:list(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({

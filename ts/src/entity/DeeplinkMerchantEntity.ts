@@ -14,9 +14,13 @@ import type {
   Control,
 } from '../types'
 
+import type {
+  DeeplinkMerchant,
+  DeeplinkMerchantListMatch,
+} from '../YadorePublisherTypes'
 
 // TODO: needs Entity superclass
-class DeeplinkMerchantEntity extends YadorePublisherEntityBase {
+class DeeplinkMerchantEntity extends YadorePublisherEntityBase<DeeplinkMerchant> {
 
   constructor(client: YadorePublisherSDK, entopts: any) {
     super(client, entopts)
@@ -33,7 +37,7 @@ class DeeplinkMerchantEntity extends YadorePublisherEntityBase {
 
 
 
-  async list(this: any, reqmatch?: any, ctrl?: Control) {
+  async list(this: any, reqmatch?: DeeplinkMerchantListMatch, ctrl?: Control): Promise<DeeplinkMerchant[]> {
 
     const utility = this._utility
 
@@ -133,7 +137,9 @@ class DeeplinkMerchantEntity extends YadorePublisherEntityBase {
         throw err
       }
       else {
-        return undefined
+        // Off-happy-path (throw disabled): typed as any so the method's
+        // Promise<DeeplinkMerchant[]> return stays clean under strict null checks.
+        return undefined as any
       }
     }
   }

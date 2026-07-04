@@ -49,8 +49,7 @@ class ReportGeneralEntityTest extends TestCase
         // LOAD
         $report_general_ref01_ent = $client->ReportGeneral(null);
         $report_general_ref01_match_dt0 = [];
-        [$report_general_ref01_data_dt0_loaded, $err] = $report_general_ref01_ent->load($report_general_ref01_match_dt0, null);
-        $this->assertNull($err);
+        $report_general_ref01_data_dt0_loaded = $report_general_ref01_ent->load($report_general_ref01_match_dt0, null);
         $this->assertNotNull($report_general_ref01_data_dt0_loaded);
 
     }

@@ -50,8 +50,7 @@ class MarketEntityTest extends TestCase
         $market_ref01_ent = $client->Market(null);
         $market_ref01_match = [];
 
-        [$market_ref01_list_result, $err] = $market_ref01_ent->list($market_ref01_match, null);
-        $this->assertNull($err);
+        $market_ref01_list_result = $market_ref01_ent->list($market_ref01_match, null);
         $this->assertIsArray($market_ref01_list_result);
 
     }

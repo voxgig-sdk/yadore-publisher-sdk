@@ -13,6 +13,9 @@ require_relative 'config'
 require_relative 'feature/base_feature'
 require_relative 'features'
 
+# Load typed models (Struct value objects).
+require_relative 'YadorePublisher_types'
+
 
 class YadorePublisherSDK
   attr_accessor :mode, :features, :options
@@ -131,7 +134,7 @@ class YadorePublisherSDK
     end
 
     _, err = utility.prepare_auth.call(ctx)
-    return nil, err if err
+    raise err if err
 
     utility.make_fetch_def.call(ctx)
   end
@@ -139,8 +142,14 @@ class YadorePublisherSDK
   def direct(fetchargs = {})
     utility = @_utility
 
-    fetchdef, err = prepare(fetchargs)
-    return { "ok" => false, "err" => err }, nil if err
+    # direct() is the raw-HTTP escape hatch: it always returns a result hash
+    # ({ "ok" => ..., ... }) and never raises. prepare() raises on error, so
+    # trap that and surface it in the hash.
+    begin
+      fetchdef = prepare(fetchargs)
+    rescue YadorePublisherError => err
+      return { "ok" => false, "err" => err }
+    end
 
     fetchargs ||= {}
     ctrl = YadorePublisherHelpers.to_map(VoxgigStruct.getprop(fetchargs, "ctrl")) || {}
@@ -153,13 +162,13 @@ class YadorePublisherSDK
     url = fetchdef["url"] || ""
     fetched, fetch_err = utility.fetcher.call(ctx, url, fetchdef)
 
-    return { "ok" => false, "err" => fetch_err }, nil if fetch_err
+    return { "ok" => false, "err" => fetch_err } if fetch_err
 
     if fetched.nil?
       return {
         "ok" => false,
         "err" => ctx.make_error("direct_no_response", "response: undefined"),
-      }, nil
+      }
     end
 
     if fetched.is_a?(Hash)
@@ -189,94 +198,192 @@ class YadorePublisherSDK
         "status" => status,
         "headers" => headers,
         "data" => json_data,
-      }, nil
+      }
     end
 
     return {
       "ok" => false,
       "err" => ctx.make_error("direct_invalid", "invalid response type"),
-    }, nil
+    }
   end
 
 
+  # Idiomatic facade: client.conversion_detail.list / client.conversion_detail.load({ "id" => ... })
+  def conversion_detail
+    require_relative 'entity/conversion_detail_entity'
+    @conversion_detail ||= ConversionDetailEntity.new(self, nil)
+  end
+
+  # Deprecated: use client.conversion_detail instead.
   def ConversionDetail(data = nil)
     require_relative 'entity/conversion_detail_entity'
     ConversionDetailEntity.new(self, data)
   end
 
 
+  # Idiomatic facade: client.conversion_detail_merchant.list / client.conversion_detail_merchant.load({ "id" => ... })
+  def conversion_detail_merchant
+    require_relative 'entity/conversion_detail_merchant_entity'
+    @conversion_detail_merchant ||= ConversionDetailMerchantEntity.new(self, nil)
+  end
+
+  # Deprecated: use client.conversion_detail_merchant instead.
   def ConversionDetailMerchant(data = nil)
     require_relative 'entity/conversion_detail_merchant_entity'
     ConversionDetailMerchantEntity.new(self, data)
   end
 
 
+  # Idiomatic facade: client.conversion_general.list / client.conversion_general.load({ "id" => ... })
+  def conversion_general
+    require_relative 'entity/conversion_general_entity'
+    @conversion_general ||= ConversionGeneralEntity.new(self, nil)
+  end
+
+  # Deprecated: use client.conversion_general instead.
   def ConversionGeneral(data = nil)
     require_relative 'entity/conversion_general_entity'
     ConversionGeneralEntity.new(self, data)
   end
 
 
+  # Idiomatic facade: client.conversion_status.list / client.conversion_status.load({ "id" => ... })
+  def conversion_status
+    require_relative 'entity/conversion_status_entity'
+    @conversion_status ||= ConversionStatusEntity.new(self, nil)
+  end
+
+  # Deprecated: use client.conversion_status instead.
   def ConversionStatus(data = nil)
     require_relative 'entity/conversion_status_entity'
     ConversionStatusEntity.new(self, data)
   end
 
 
+  # Idiomatic facade: client.deeplink.list / client.deeplink.load({ "id" => ... })
+  def deeplink
+    require_relative 'entity/deeplink_entity'
+    @deeplink ||= DeeplinkEntity.new(self, nil)
+  end
+
+  # Deprecated: use client.deeplink instead.
   def Deeplink(data = nil)
     require_relative 'entity/deeplink_entity'
     DeeplinkEntity.new(self, data)
   end
 
 
+  # Idiomatic facade: client.deeplink_merchant.list / client.deeplink_merchant.load({ "id" => ... })
+  def deeplink_merchant
+    require_relative 'entity/deeplink_merchant_entity'
+    @deeplink_merchant ||= DeeplinkMerchantEntity.new(self, nil)
+  end
+
+  # Deprecated: use client.deeplink_merchant instead.
   def DeeplinkMerchant(data = nil)
     require_relative 'entity/deeplink_merchant_entity'
     DeeplinkMerchantEntity.new(self, data)
   end
 
 
+  # Idiomatic facade: client.dnt.list / client.dnt.load({ "id" => ... })
+  def dnt
+    require_relative 'entity/dnt_entity'
+    @dnt ||= DntEntity.new(self, nil)
+  end
+
+  # Deprecated: use client.dnt instead.
   def Dnt(data = nil)
     require_relative 'entity/dnt_entity'
     DntEntity.new(self, data)
   end
 
 
+  # Idiomatic facade: client.market.list / client.market.load({ "id" => ... })
+  def market
+    require_relative 'entity/market_entity'
+    @market ||= MarketEntity.new(self, nil)
+  end
+
+  # Deprecated: use client.market instead.
   def Market(data = nil)
     require_relative 'entity/market_entity'
     MarketEntity.new(self, data)
   end
 
 
+  # Idiomatic facade: client.merchant.list / client.merchant.load({ "id" => ... })
+  def merchant
+    require_relative 'entity/merchant_entity'
+    @merchant ||= MerchantEntity.new(self, nil)
+  end
+
+  # Deprecated: use client.merchant instead.
   def Merchant(data = nil)
     require_relative 'entity/merchant_entity'
     MerchantEntity.new(self, data)
   end
 
 
+  # Idiomatic facade: client.offer.list / client.offer.load({ "id" => ... })
+  def offer
+    require_relative 'entity/offer_entity'
+    @offer ||= OfferEntity.new(self, nil)
+  end
+
+  # Deprecated: use client.offer instead.
   def Offer(data = nil)
     require_relative 'entity/offer_entity'
     OfferEntity.new(self, data)
   end
 
 
+  # Idiomatic facade: client.report_detail.list / client.report_detail.load({ "id" => ... })
+  def report_detail
+    require_relative 'entity/report_detail_entity'
+    @report_detail ||= ReportDetailEntity.new(self, nil)
+  end
+
+  # Deprecated: use client.report_detail instead.
   def ReportDetail(data = nil)
     require_relative 'entity/report_detail_entity'
     ReportDetailEntity.new(self, data)
   end
 
 
+  # Idiomatic facade: client.report_general.list / client.report_general.load({ "id" => ... })
+  def report_general
+    require_relative 'entity/report_general_entity'
+    @report_general ||= ReportGeneralEntity.new(self, nil)
+  end
+
+  # Deprecated: use client.report_general instead.
   def ReportGeneral(data = nil)
     require_relative 'entity/report_general_entity'
     ReportGeneralEntity.new(self, data)
   end
 
 
+  # Idiomatic facade: client.report_modified.list / client.report_modified.load({ "id" => ... })
+  def report_modified
+    require_relative 'entity/report_modified_entity'
+    @report_modified ||= ReportModifiedEntity.new(self, nil)
+  end
+
+  # Deprecated: use client.report_modified instead.
   def ReportModified(data = nil)
     require_relative 'entity/report_modified_entity'
     ReportModifiedEntity.new(self, data)
   end
 
 
+  # Idiomatic facade: client.report_status.list / client.report_status.load({ "id" => ... })
+  def report_status
+    require_relative 'entity/report_status_entity'
+    @report_status ||= ReportStatusEntity.new(self, nil)
+  end
+
+  # Deprecated: use client.report_status instead.
   def ReportStatus(data = nil)
     require_relative 'entity/report_status_entity'
     ReportStatusEntity.new(self, data)

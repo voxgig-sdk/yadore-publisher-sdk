@@ -81,6 +81,10 @@ end
 
 
 
+---@param reqmatch MarketListMatch
+---@param ctrl? table
+---@return Market[]
+---@return string? err
 function MarketEntity:list(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({

@@ -49,8 +49,7 @@ class TestReportGeneralEntity:
         # LOAD
         report_general_ref01_ent = client.ReportGeneral(None)
         report_general_ref01_match_dt0 = {}
-        report_general_ref01_data_dt0_loaded, err = report_general_ref01_ent.load(report_general_ref01_match_dt0, None)
-        assert err is None
+        report_general_ref01_data_dt0_loaded = report_general_ref01_ent.load(report_general_ref01_match_dt0, None)
         assert report_general_ref01_data_dt0_loaded is not None
 
 

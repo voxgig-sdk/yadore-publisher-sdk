@@ -81,6 +81,10 @@ end
 
 
 
+---@param reqmatch ReportDetailListMatch
+---@param ctrl? table
+---@return ReportDetail[]
+---@return string? err
 function ReportDetailEntity:list(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({

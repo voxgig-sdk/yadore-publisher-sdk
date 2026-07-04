@@ -245,71 +245,113 @@ func (sdk *YadorePublisherSDK) Direct(fetchargs map[string]any) (map[string]any,
 }
 
 
+// ConversionDetail returns a ConversionDetail entity bound to this client.
+// Idiomatic usage: client.ConversionDetail(nil).List(nil, nil) or
+// client.ConversionDetail(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *YadorePublisherSDK) ConversionDetail(data map[string]any) YadorePublisherEntity {
 	return NewConversionDetailEntityFunc(sdk, data)
 }
 
 
+// ConversionDetailMerchant returns a ConversionDetailMerchant entity bound to this client.
+// Idiomatic usage: client.ConversionDetailMerchant(nil).List(nil, nil) or
+// client.ConversionDetailMerchant(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *YadorePublisherSDK) ConversionDetailMerchant(data map[string]any) YadorePublisherEntity {
 	return NewConversionDetailMerchantEntityFunc(sdk, data)
 }
 
 
+// ConversionGeneral returns a ConversionGeneral entity bound to this client.
+// Idiomatic usage: client.ConversionGeneral(nil).List(nil, nil) or
+// client.ConversionGeneral(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *YadorePublisherSDK) ConversionGeneral(data map[string]any) YadorePublisherEntity {
 	return NewConversionGeneralEntityFunc(sdk, data)
 }
 
 
+// ConversionStatus returns a ConversionStatus entity bound to this client.
+// Idiomatic usage: client.ConversionStatus(nil).List(nil, nil) or
+// client.ConversionStatus(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *YadorePublisherSDK) ConversionStatus(data map[string]any) YadorePublisherEntity {
 	return NewConversionStatusEntityFunc(sdk, data)
 }
 
 
+// Deeplink returns a Deeplink entity bound to this client.
+// Idiomatic usage: client.Deeplink(nil).List(nil, nil) or
+// client.Deeplink(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *YadorePublisherSDK) Deeplink(data map[string]any) YadorePublisherEntity {
 	return NewDeeplinkEntityFunc(sdk, data)
 }
 
 
+// DeeplinkMerchant returns a DeeplinkMerchant entity bound to this client.
+// Idiomatic usage: client.DeeplinkMerchant(nil).List(nil, nil) or
+// client.DeeplinkMerchant(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *YadorePublisherSDK) DeeplinkMerchant(data map[string]any) YadorePublisherEntity {
 	return NewDeeplinkMerchantEntityFunc(sdk, data)
 }
 
 
+// Dnt returns a Dnt entity bound to this client.
+// Idiomatic usage: client.Dnt(nil).List(nil, nil) or
+// client.Dnt(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *YadorePublisherSDK) Dnt(data map[string]any) YadorePublisherEntity {
 	return NewDntEntityFunc(sdk, data)
 }
 
 
+// Market returns a Market entity bound to this client.
+// Idiomatic usage: client.Market(nil).List(nil, nil) or
+// client.Market(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *YadorePublisherSDK) Market(data map[string]any) YadorePublisherEntity {
 	return NewMarketEntityFunc(sdk, data)
 }
 
 
+// Merchant returns a Merchant entity bound to this client.
+// Idiomatic usage: client.Merchant(nil).List(nil, nil) or
+// client.Merchant(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *YadorePublisherSDK) Merchant(data map[string]any) YadorePublisherEntity {
 	return NewMerchantEntityFunc(sdk, data)
 }
 
 
+// Offer returns a Offer entity bound to this client.
+// Idiomatic usage: client.Offer(nil).List(nil, nil) or
+// client.Offer(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *YadorePublisherSDK) Offer(data map[string]any) YadorePublisherEntity {
 	return NewOfferEntityFunc(sdk, data)
 }
 
 
+// ReportDetail returns a ReportDetail entity bound to this client.
+// Idiomatic usage: client.ReportDetail(nil).List(nil, nil) or
+// client.ReportDetail(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *YadorePublisherSDK) ReportDetail(data map[string]any) YadorePublisherEntity {
 	return NewReportDetailEntityFunc(sdk, data)
 }
 
 
+// ReportGeneral returns a ReportGeneral entity bound to this client.
+// Idiomatic usage: client.ReportGeneral(nil).List(nil, nil) or
+// client.ReportGeneral(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *YadorePublisherSDK) ReportGeneral(data map[string]any) YadorePublisherEntity {
 	return NewReportGeneralEntityFunc(sdk, data)
 }
 
 
+// ReportModified returns a ReportModified entity bound to this client.
+// Idiomatic usage: client.ReportModified(nil).List(nil, nil) or
+// client.ReportModified(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *YadorePublisherSDK) ReportModified(data map[string]any) YadorePublisherEntity {
 	return NewReportModifiedEntityFunc(sdk, data)
 }
 
 
+// ReportStatus returns a ReportStatus entity bound to this client.
+// Idiomatic usage: client.ReportStatus(nil).List(nil, nil) or
+// client.ReportStatus(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *YadorePublisherSDK) ReportStatus(data map[string]any) YadorePublisherEntity {
 	return NewReportStatusEntityFunc(sdk, data)
 }

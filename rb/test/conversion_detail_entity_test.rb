@@ -43,8 +43,7 @@ class ConversionDetailEntityTest < Minitest::Test
     conversion_detail_ref01_ent = client.ConversionDetail(nil)
     conversion_detail_ref01_match = {}
 
-    conversion_detail_ref01_list_result, err = conversion_detail_ref01_ent.list(conversion_detail_ref01_match, nil)
-    assert_nil err
+    conversion_detail_ref01_list_result = conversion_detail_ref01_ent.list(conversion_detail_ref01_match, nil)
     assert conversion_detail_ref01_list_result.is_a?(Array)
 
   end

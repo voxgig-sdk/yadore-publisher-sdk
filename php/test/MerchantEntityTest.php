@@ -50,8 +50,7 @@ class MerchantEntityTest extends TestCase
         $merchant_ref01_ent = $client->Merchant(null);
         $merchant_ref01_match = [];
 
-        [$merchant_ref01_list_result, $err] = $merchant_ref01_ent->list($merchant_ref01_match, null);
-        $this->assertNull($err);
+        $merchant_ref01_list_result = $merchant_ref01_ent->list($merchant_ref01_match, null);
         $this->assertIsArray($merchant_ref01_list_result);
 
     }

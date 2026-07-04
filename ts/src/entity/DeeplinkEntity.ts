@@ -14,9 +14,13 @@ import type {
   Control,
 } from '../types'
 
+import type {
+  Deeplink,
+  DeeplinkCreateData,
+} from '../YadorePublisherTypes'
 
 // TODO: needs Entity superclass
-class DeeplinkEntity extends YadorePublisherEntityBase {
+class DeeplinkEntity extends YadorePublisherEntityBase<Deeplink> {
 
   constructor(client: YadorePublisherSDK, entopts: any) {
     super(client, entopts)
@@ -34,7 +38,7 @@ class DeeplinkEntity extends YadorePublisherEntityBase {
 
 
 
-  async create(this: any, reqdata?: any, ctrl?: Control) {
+  async create(this: any, reqdata?: DeeplinkCreateData, ctrl?: Control): Promise<Deeplink> {
 
     const utility = this._utility
     const {
@@ -133,7 +137,9 @@ class DeeplinkEntity extends YadorePublisherEntityBase {
         throw err
       }
       else {
-        return undefined
+        // Off-happy-path (throw disabled): typed as any so the method's
+        // Promise<Deeplink> return stays clean under strict null checks.
+        return undefined as any
       }
     }
   }

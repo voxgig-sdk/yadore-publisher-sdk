@@ -81,6 +81,10 @@ end
 
 
 
+---@param reqmatch ConversionDetailMerchantListMatch
+---@param ctrl? table
+---@return ConversionDetailMerchant[]
+---@return string? err
 function ConversionDetailMerchantEntity:list(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({

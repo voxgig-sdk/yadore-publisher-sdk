@@ -50,16 +50,14 @@ class OfferEntityTest extends TestCase
         $offer_ref01_ent = $client->Offer(null);
         $offer_ref01_match = [];
 
-        [$offer_ref01_list_result, $err] = $offer_ref01_ent->list($offer_ref01_match, null);
-        $this->assertNull($err);
+        $offer_ref01_list_result = $offer_ref01_ent->list($offer_ref01_match, null);
         $this->assertIsArray($offer_ref01_list_result);
 
         // LOAD
         $offer_ref01_match_dt0 = [
             "id" => $offer_ref01_data["id"],
         ];
-        [$offer_ref01_data_dt0_loaded, $err] = $offer_ref01_ent->load($offer_ref01_match_dt0, null);
-        $this->assertNull($err);
+        $offer_ref01_data_dt0_loaded = $offer_ref01_ent->load($offer_ref01_match_dt0, null);
         $offer_ref01_data_dt0_load_result = Helpers::to_map($offer_ref01_data_dt0_loaded);
         $this->assertNotNull($offer_ref01_data_dt0_load_result);
         $this->assertEquals($offer_ref01_data_dt0_load_result["id"], $offer_ref01_data["id"]);

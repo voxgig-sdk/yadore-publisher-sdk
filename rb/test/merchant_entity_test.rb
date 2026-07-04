@@ -43,8 +43,7 @@ class MerchantEntityTest < Minitest::Test
     merchant_ref01_ent = client.Merchant(nil)
     merchant_ref01_match = {}
 
-    merchant_ref01_list_result, err = merchant_ref01_ent.list(merchant_ref01_match, nil)
-    assert_nil err
+    merchant_ref01_list_result = merchant_ref01_ent.list(merchant_ref01_match, nil)
     assert merchant_ref01_list_result.is_a?(Array)
 
   end

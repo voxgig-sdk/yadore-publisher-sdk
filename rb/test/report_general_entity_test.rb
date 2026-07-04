@@ -42,8 +42,7 @@ class ReportGeneralEntityTest < Minitest::Test
     # LOAD
     report_general_ref01_ent = client.ReportGeneral(nil)
     report_general_ref01_match_dt0 = {}
-    report_general_ref01_data_dt0_loaded, err = report_general_ref01_ent.load(report_general_ref01_match_dt0, nil)
-    assert_nil err
+    report_general_ref01_data_dt0_loaded = report_general_ref01_ent.load(report_general_ref01_match_dt0, nil)
     assert !report_general_ref01_data_dt0_loaded.nil?
 
   end

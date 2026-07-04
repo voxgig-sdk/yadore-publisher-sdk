@@ -50,8 +50,7 @@ class ReportDetailEntityTest extends TestCase
         $report_detail_ref01_ent = $client->ReportDetail(null);
         $report_detail_ref01_match = [];
 
-        [$report_detail_ref01_list_result, $err] = $report_detail_ref01_ent->list($report_detail_ref01_match, null);
-        $this->assertNull($err);
+        $report_detail_ref01_list_result = $report_detail_ref01_ent->list($report_detail_ref01_match, null);
         $this->assertIsArray($report_detail_ref01_list_result);
 
     }

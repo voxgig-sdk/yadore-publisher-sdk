@@ -43,16 +43,14 @@ class OfferEntityTest < Minitest::Test
     offer_ref01_ent = client.Offer(nil)
     offer_ref01_match = {}
 
-    offer_ref01_list_result, err = offer_ref01_ent.list(offer_ref01_match, nil)
-    assert_nil err
+    offer_ref01_list_result = offer_ref01_ent.list(offer_ref01_match, nil)
     assert offer_ref01_list_result.is_a?(Array)
 
     # LOAD
     offer_ref01_match_dt0 = {
       "id" => offer_ref01_data["id"],
     }
-    offer_ref01_data_dt0_loaded, err = offer_ref01_ent.load(offer_ref01_match_dt0, nil)
-    assert_nil err
+    offer_ref01_data_dt0_loaded = offer_ref01_ent.load(offer_ref01_match_dt0, nil)
     offer_ref01_data_dt0_load_result = Helpers.to_map(offer_ref01_data_dt0_loaded)
     assert !offer_ref01_data_dt0_load_result.nil?
     assert_equal offer_ref01_data_dt0_load_result["id"], offer_ref01_data["id"]

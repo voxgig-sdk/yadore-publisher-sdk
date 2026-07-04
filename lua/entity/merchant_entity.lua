@@ -81,6 +81,10 @@ end
 
 
 
+---@param reqmatch MerchantListMatch
+---@param ctrl? table
+---@return Merchant[]
+---@return string? err
 function MerchantEntity:list(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({

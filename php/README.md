@@ -9,9 +9,10 @@ The PHP SDK for the YadorePublisher API — an entity-oriented client using PHP 
 
 
 ## Install
-```bash
-composer require voxgig-sdk/yadore-publisher
-```
+This package is not yet published to Packagist. Install it from the
+GitHub release tag (`php/vX.Y.Z`):
+
+- Releases: [https://github.com/voxgig-sdk/yadore-publisher-sdk/releases](https://github.com/voxgig-sdk/yadore-publisher-sdk/releases)
 
 
 ## Tutorial: your first API call
@@ -26,21 +27,23 @@ loading a specific record.
 require_once 'yadorepublisher_sdk.php';
 
 $client = new YadorePublisherSDK([
-    "apikey" => getenv("YADORE-PUBLISHER_APIKEY"),
+    "apikey" => getenv("YADORE_PUBLISHER_APIKEY"),
 ]);
 ```
 
 ### 2. List conversiondetails
 
 ```php
-[$result, $err] = $client->ConversionDetail()->list();
-if ($err) { throw new \Exception($err); }
-
-if (is_array($result)) {
-    foreach ($result as $item) {
-        $d = $item->data_get();
-        echo $d["id"] . " " . $d["name"] . "\n";
+try {
+    $result = $client->conversiondetail()->list();
+    if (is_array($result)) {
+        foreach ($result as $item) {
+            $d = $item->data_get();
+            echo $d["id"] . " " . $d["name"] . "\n";
+        }
     }
+} catch (\Exception $err) {
+    echo "Error: " . $err->getMessage();
 }
 ```
 
@@ -52,28 +55,31 @@ if (is_array($result)) {
 For endpoints not covered by entity methods:
 
 ```php
-[$result, $err] = $client->direct([
+// direct() is the raw-HTTP escape hatch: it returns a result array
+// (it does not throw). Branch on $result["ok"].
+$result = $client->direct([
     "path" => "/api/resource/{id}",
     "method" => "GET",
     "params" => ["id" => "example"],
 ]);
-if ($err) { throw new \Exception($err); }
 
 if ($result["ok"]) {
     echo $result["status"];  // 200
     print_r($result["data"]);  // response body
+} else {
+    echo "Error: " . $result["err"]->getMessage();
 }
 ```
 
 ### Prepare a request without sending it
 
 ```php
-[$fetchdef, $err] = $client->prepare([
+// prepare() throws on error and returns the fetch definition.
+$fetchdef = $client->prepare([
     "path" => "/api/resource/{id}",
     "method" => "DELETE",
     "params" => ["id" => "example"],
 ]);
-if ($err) { throw new \Exception($err); }
 
 echo $fetchdef["url"];
 echo $fetchdef["method"];
@@ -87,7 +93,7 @@ Create a mock client for unit testing — no server required:
 ```php
 $client = YadorePublisherSDK::test();
 
-[$result, $err] = $client->YadorePublisher()->load(["id" => "test01"]);
+$result = $client->conversiondetail()->load(["id" => "test01"]);
 // $result contains mock response data
 ```
 
@@ -121,8 +127,8 @@ $client = new YadorePublisherSDK([
 Create a `.env.local` file at the project root:
 
 ```
-YADORE-PUBLISHER_TEST_LIVE=TRUE
-YADORE-PUBLISHER_APIKEY=<your-key>
+YADORE_PUBLISHER_TEST_LIVE=TRUE
+YADORE_PUBLISHER_APIKEY=<your-key>
 ```
 
 Then run:
@@ -204,8 +210,12 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return `[$result, $err]`. The first value is an
-`array` with these keys:
+Entity operations return the bare result data (an `array` for single-entity
+ops, a `list` for `list`) and throw on error. Wrap calls in
+`try`/`catch` to handle failures.
+
+The `direct()` escape hatch never throws — it returns a result `array`
+you branch on via `$result["ok"]`:
 
 | Key | Type | Description |
 | --- | --- | --- |
@@ -415,7 +425,7 @@ API path: `/v2/report/status`
 
 ### ConversionDetail
 
-Create an instance: `const conversion_detail = client.ConversionDetail()`
+Create an instance: `const conversion_detail = client.conversion_detail`
 
 #### Operations
 
@@ -437,13 +447,13 @@ Create an instance: `const conversion_detail = client.ConversionDetail()`
 #### Example: List
 
 ```ts
-const conversion_details = await client.ConversionDetail().list()
+const conversion_details = await client.conversion_detail.list()
 ```
 
 
 ### ConversionDetailMerchant
 
-Create an instance: `const conversion_detail_merchant = client.ConversionDetailMerchant()`
+Create an instance: `const conversion_detail_merchant = client.conversion_detail_merchant`
 
 #### Operations
 
@@ -463,13 +473,13 @@ Create an instance: `const conversion_detail_merchant = client.ConversionDetailM
 #### Example: List
 
 ```ts
-const conversion_detail_merchants = await client.ConversionDetailMerchant().list()
+const conversion_detail_merchants = await client.conversion_detail_merchant.list()
 ```
 
 
 ### ConversionGeneral
 
-Create an instance: `const conversion_general = client.ConversionGeneral()`
+Create an instance: `const conversion_general = client.conversion_general`
 
 #### Operations
 
@@ -488,13 +498,13 @@ Create an instance: `const conversion_general = client.ConversionGeneral()`
 #### Example: Load
 
 ```ts
-const conversion_general = await client.ConversionGeneral().load({ id: 'conversion_general_id' })
+const conversion_general = await client.conversion_general.load({ id: 'conversion_general_id' })
 ```
 
 
 ### ConversionStatus
 
-Create an instance: `const conversion_status = client.ConversionStatus()`
+Create an instance: `const conversion_status = client.conversion_status`
 
 #### Operations
 
@@ -511,13 +521,13 @@ Create an instance: `const conversion_status = client.ConversionStatus()`
 #### Example: Load
 
 ```ts
-const conversion_status = await client.ConversionStatus().load({ id: 'conversion_status_id' })
+const conversion_status = await client.conversion_status.load({ id: 'conversion_status_id' })
 ```
 
 
 ### Deeplink
 
-Create an instance: `const deeplink = client.Deeplink()`
+Create an instance: `const deeplink = client.deeplink`
 
 #### Operations
 
@@ -538,7 +548,7 @@ Create an instance: `const deeplink = client.Deeplink()`
 #### Example: Create
 
 ```ts
-const deeplink = await client.Deeplink().create({
+const deeplink = await client.deeplink.create({
   market: /* `$STRING` */,
   url: /* `$ARRAY` */,
 })
@@ -547,7 +557,7 @@ const deeplink = await client.Deeplink().create({
 
 ### DeeplinkMerchant
 
-Create an instance: `const deeplink_merchant = client.DeeplinkMerchant()`
+Create an instance: `const deeplink_merchant = client.deeplink_merchant`
 
 #### Operations
 
@@ -572,13 +582,13 @@ Create an instance: `const deeplink_merchant = client.DeeplinkMerchant()`
 #### Example: List
 
 ```ts
-const deeplink_merchants = await client.DeeplinkMerchant().list()
+const deeplink_merchants = await client.deeplink_merchant.list()
 ```
 
 
 ### Dnt
 
-Create an instance: `const dnt = client.Dnt()`
+Create an instance: `const dnt = client.dnt`
 
 #### Operations
 
@@ -589,13 +599,13 @@ Create an instance: `const dnt = client.Dnt()`
 #### Example: Load
 
 ```ts
-const dnt = await client.Dnt().load({ id: 'dnt_id' })
+const dnt = await client.dnt.load({ id: 'dnt_id' })
 ```
 
 
 ### Market
 
-Create an instance: `const market = client.Market()`
+Create an instance: `const market = client.market`
 
 #### Operations
 
@@ -612,13 +622,13 @@ Create an instance: `const market = client.Market()`
 #### Example: List
 
 ```ts
-const markets = await client.Market().list()
+const markets = await client.market.list()
 ```
 
 
 ### Merchant
 
-Create an instance: `const merchant = client.Merchant()`
+Create an instance: `const merchant = client.merchant`
 
 #### Operations
 
@@ -639,13 +649,13 @@ Create an instance: `const merchant = client.Merchant()`
 #### Example: List
 
 ```ts
-const merchants = await client.Merchant().list()
+const merchants = await client.merchant.list()
 ```
 
 
 ### Offer
 
-Create an instance: `const offer = client.Offer()`
+Create an instance: `const offer = client.offer`
 
 #### Operations
 
@@ -680,19 +690,19 @@ Create an instance: `const offer = client.Offer()`
 #### Example: Load
 
 ```ts
-const offer = await client.Offer().load({ id: 'offer_id' })
+const offer = await client.offer.load({ id: 'offer_id' })
 ```
 
 #### Example: List
 
 ```ts
-const offers = await client.Offer().list()
+const offers = await client.offer.list()
 ```
 
 
 ### ReportDetail
 
-Create an instance: `const report_detail = client.ReportDetail()`
+Create an instance: `const report_detail = client.report_detail`
 
 #### Operations
 
@@ -715,13 +725,13 @@ Create an instance: `const report_detail = client.ReportDetail()`
 #### Example: List
 
 ```ts
-const report_details = await client.ReportDetail().list()
+const report_details = await client.report_detail.list()
 ```
 
 
 ### ReportGeneral
 
-Create an instance: `const report_general = client.ReportGeneral()`
+Create an instance: `const report_general = client.report_general`
 
 #### Operations
 
@@ -740,13 +750,13 @@ Create an instance: `const report_general = client.ReportGeneral()`
 #### Example: Load
 
 ```ts
-const report_general = await client.ReportGeneral().load({ id: 'report_general_id' })
+const report_general = await client.report_general.load({ id: 'report_general_id' })
 ```
 
 
 ### ReportModified
 
-Create an instance: `const report_modified = client.ReportModified()`
+Create an instance: `const report_modified = client.report_modified`
 
 #### Operations
 
@@ -763,13 +773,13 @@ Create an instance: `const report_modified = client.ReportModified()`
 #### Example: Load
 
 ```ts
-const report_modified = await client.ReportModified().load({ id: 'report_modified_id' })
+const report_modified = await client.report_modified.load({ id: 'report_modified_id' })
 ```
 
 
 ### ReportStatus
 
-Create an instance: `const report_status = client.ReportStatus()`
+Create an instance: `const report_status = client.report_status`
 
 #### Operations
 
@@ -786,7 +796,7 @@ Create an instance: `const report_status = client.ReportStatus()`
 #### Example: Load
 
 ```ts
-const report_status = await client.ReportStatus().load({ id: 'report_status_id' })
+const report_status = await client.report_status.load({ id: 'report_status_id' })
 ```
 
 
@@ -861,11 +871,11 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```php
-$moon = $client->Moon();
-[$result, $err] = $moon->load(["planet_id" => "earth", "id" => "luna"]);
+$conversiondetail = $client->conversiondetail();
+$conversiondetail->load(["id" => "example_id"]);
 
-// $moon->dataGet() now returns the loaded moon data
-// $moon->matchGet() returns the last match criteria
+// $conversiondetail->dataGet() now returns the loaded conversiondetail data
+// $conversiondetail->matchGet() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

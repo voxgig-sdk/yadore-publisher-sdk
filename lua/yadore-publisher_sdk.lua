@@ -244,84 +244,266 @@ end
 
 
 
+-- Idiomatic facade: client:conversion_detail():list() / client:conversion_detail():load({ id = ... })
+function YadorePublisherSDK:conversion_detail(data)
+  local EntityMod = require("entity.conversion_detail_entity")
+  if data == nil then
+    if self._conversion_detail == nil then
+      self._conversion_detail = EntityMod.new(self, nil)
+    end
+    return self._conversion_detail
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:conversion_detail() instead.
 function YadorePublisherSDK:ConversionDetail(data)
   local EntityMod = require("entity.conversion_detail_entity")
   return EntityMod.new(self, data)
 end
 
 
+-- Idiomatic facade: client:conversion_detail_merchant():list() / client:conversion_detail_merchant():load({ id = ... })
+function YadorePublisherSDK:conversion_detail_merchant(data)
+  local EntityMod = require("entity.conversion_detail_merchant_entity")
+  if data == nil then
+    if self._conversion_detail_merchant == nil then
+      self._conversion_detail_merchant = EntityMod.new(self, nil)
+    end
+    return self._conversion_detail_merchant
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:conversion_detail_merchant() instead.
 function YadorePublisherSDK:ConversionDetailMerchant(data)
   local EntityMod = require("entity.conversion_detail_merchant_entity")
   return EntityMod.new(self, data)
 end
 
 
+-- Idiomatic facade: client:conversion_general():list() / client:conversion_general():load({ id = ... })
+function YadorePublisherSDK:conversion_general(data)
+  local EntityMod = require("entity.conversion_general_entity")
+  if data == nil then
+    if self._conversion_general == nil then
+      self._conversion_general = EntityMod.new(self, nil)
+    end
+    return self._conversion_general
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:conversion_general() instead.
 function YadorePublisherSDK:ConversionGeneral(data)
   local EntityMod = require("entity.conversion_general_entity")
   return EntityMod.new(self, data)
 end
 
 
+-- Idiomatic facade: client:conversion_status():list() / client:conversion_status():load({ id = ... })
+function YadorePublisherSDK:conversion_status(data)
+  local EntityMod = require("entity.conversion_status_entity")
+  if data == nil then
+    if self._conversion_status == nil then
+      self._conversion_status = EntityMod.new(self, nil)
+    end
+    return self._conversion_status
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:conversion_status() instead.
 function YadorePublisherSDK:ConversionStatus(data)
   local EntityMod = require("entity.conversion_status_entity")
   return EntityMod.new(self, data)
 end
 
 
+-- Idiomatic facade: client:deeplink():list() / client:deeplink():load({ id = ... })
+function YadorePublisherSDK:deeplink(data)
+  local EntityMod = require("entity.deeplink_entity")
+  if data == nil then
+    if self._deeplink == nil then
+      self._deeplink = EntityMod.new(self, nil)
+    end
+    return self._deeplink
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:deeplink() instead.
 function YadorePublisherSDK:Deeplink(data)
   local EntityMod = require("entity.deeplink_entity")
   return EntityMod.new(self, data)
 end
 
 
+-- Idiomatic facade: client:deeplink_merchant():list() / client:deeplink_merchant():load({ id = ... })
+function YadorePublisherSDK:deeplink_merchant(data)
+  local EntityMod = require("entity.deeplink_merchant_entity")
+  if data == nil then
+    if self._deeplink_merchant == nil then
+      self._deeplink_merchant = EntityMod.new(self, nil)
+    end
+    return self._deeplink_merchant
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:deeplink_merchant() instead.
 function YadorePublisherSDK:DeeplinkMerchant(data)
   local EntityMod = require("entity.deeplink_merchant_entity")
   return EntityMod.new(self, data)
 end
 
 
+-- Idiomatic facade: client:dnt():list() / client:dnt():load({ id = ... })
+function YadorePublisherSDK:dnt(data)
+  local EntityMod = require("entity.dnt_entity")
+  if data == nil then
+    if self._dnt == nil then
+      self._dnt = EntityMod.new(self, nil)
+    end
+    return self._dnt
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:dnt() instead.
 function YadorePublisherSDK:Dnt(data)
   local EntityMod = require("entity.dnt_entity")
   return EntityMod.new(self, data)
 end
 
 
+-- Idiomatic facade: client:market():list() / client:market():load({ id = ... })
+function YadorePublisherSDK:market(data)
+  local EntityMod = require("entity.market_entity")
+  if data == nil then
+    if self._market == nil then
+      self._market = EntityMod.new(self, nil)
+    end
+    return self._market
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:market() instead.
 function YadorePublisherSDK:Market(data)
   local EntityMod = require("entity.market_entity")
   return EntityMod.new(self, data)
 end
 
 
+-- Idiomatic facade: client:merchant():list() / client:merchant():load({ id = ... })
+function YadorePublisherSDK:merchant(data)
+  local EntityMod = require("entity.merchant_entity")
+  if data == nil then
+    if self._merchant == nil then
+      self._merchant = EntityMod.new(self, nil)
+    end
+    return self._merchant
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:merchant() instead.
 function YadorePublisherSDK:Merchant(data)
   local EntityMod = require("entity.merchant_entity")
   return EntityMod.new(self, data)
 end
 
 
+-- Idiomatic facade: client:offer():list() / client:offer():load({ id = ... })
+function YadorePublisherSDK:offer(data)
+  local EntityMod = require("entity.offer_entity")
+  if data == nil then
+    if self._offer == nil then
+      self._offer = EntityMod.new(self, nil)
+    end
+    return self._offer
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:offer() instead.
 function YadorePublisherSDK:Offer(data)
   local EntityMod = require("entity.offer_entity")
   return EntityMod.new(self, data)
 end
 
 
+-- Idiomatic facade: client:report_detail():list() / client:report_detail():load({ id = ... })
+function YadorePublisherSDK:report_detail(data)
+  local EntityMod = require("entity.report_detail_entity")
+  if data == nil then
+    if self._report_detail == nil then
+      self._report_detail = EntityMod.new(self, nil)
+    end
+    return self._report_detail
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:report_detail() instead.
 function YadorePublisherSDK:ReportDetail(data)
   local EntityMod = require("entity.report_detail_entity")
   return EntityMod.new(self, data)
 end
 
 
+-- Idiomatic facade: client:report_general():list() / client:report_general():load({ id = ... })
+function YadorePublisherSDK:report_general(data)
+  local EntityMod = require("entity.report_general_entity")
+  if data == nil then
+    if self._report_general == nil then
+      self._report_general = EntityMod.new(self, nil)
+    end
+    return self._report_general
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:report_general() instead.
 function YadorePublisherSDK:ReportGeneral(data)
   local EntityMod = require("entity.report_general_entity")
   return EntityMod.new(self, data)
 end
 
 
+-- Idiomatic facade: client:report_modified():list() / client:report_modified():load({ id = ... })
+function YadorePublisherSDK:report_modified(data)
+  local EntityMod = require("entity.report_modified_entity")
+  if data == nil then
+    if self._report_modified == nil then
+      self._report_modified = EntityMod.new(self, nil)
+    end
+    return self._report_modified
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:report_modified() instead.
 function YadorePublisherSDK:ReportModified(data)
   local EntityMod = require("entity.report_modified_entity")
   return EntityMod.new(self, data)
 end
 
 
+-- Idiomatic facade: client:report_status():list() / client:report_status():load({ id = ... })
+function YadorePublisherSDK:report_status(data)
+  local EntityMod = require("entity.report_status_entity")
+  if data == nil then
+    if self._report_status == nil then
+      self._report_status = EntityMod.new(self, nil)
+    end
+    return self._report_status
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:report_status() instead.
 function YadorePublisherSDK:ReportStatus(data)
   local EntityMod = require("entity.report_status_entity")
   return EntityMod.new(self, data)

@@ -50,8 +50,7 @@ class DeeplinkMerchantEntityTest extends TestCase
         $deeplink_merchant_ref01_ent = $client->DeeplinkMerchant(null);
         $deeplink_merchant_ref01_match = [];
 
-        [$deeplink_merchant_ref01_list_result, $err] = $deeplink_merchant_ref01_ent->list($deeplink_merchant_ref01_match, null);
-        $this->assertNull($err);
+        $deeplink_merchant_ref01_list_result = $deeplink_merchant_ref01_ent->list($deeplink_merchant_ref01_match, null);
         $this->assertIsArray($deeplink_merchant_ref01_list_result);
 
     }

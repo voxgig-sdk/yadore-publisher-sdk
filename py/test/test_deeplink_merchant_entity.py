@@ -50,8 +50,7 @@ class TestDeeplinkMerchantEntity:
         deeplink_merchant_ref01_ent = client.DeeplinkMerchant(None)
         deeplink_merchant_ref01_match = {}
 
-        deeplink_merchant_ref01_list_result, err = deeplink_merchant_ref01_ent.list(deeplink_merchant_ref01_match, None)
-        assert err is None
+        deeplink_merchant_ref01_list_result = deeplink_merchant_ref01_ent.list(deeplink_merchant_ref01_match, None)
         assert isinstance(deeplink_merchant_ref01_list_result, list)
 
 

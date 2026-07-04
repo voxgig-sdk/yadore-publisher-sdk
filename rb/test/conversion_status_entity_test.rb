@@ -42,8 +42,7 @@ class ConversionStatusEntityTest < Minitest::Test
     # LOAD
     conversion_status_ref01_ent = client.ConversionStatus(nil)
     conversion_status_ref01_match_dt0 = {}
-    conversion_status_ref01_data_dt0_loaded, err = conversion_status_ref01_ent.load(conversion_status_ref01_match_dt0, nil)
-    assert_nil err
+    conversion_status_ref01_data_dt0_loaded = conversion_status_ref01_ent.load(conversion_status_ref01_match_dt0, nil)
     assert !conversion_status_ref01_data_dt0_loaded.nil?
 
   end

@@ -49,8 +49,7 @@ class DntEntityTest extends TestCase
         // LOAD
         $dnt_ref01_ent = $client->Dnt(null);
         $dnt_ref01_match_dt0 = [];
-        [$dnt_ref01_data_dt0_loaded, $err] = $dnt_ref01_ent->load($dnt_ref01_match_dt0, null);
-        $this->assertNull($err);
+        $dnt_ref01_data_dt0_loaded = $dnt_ref01_ent->load($dnt_ref01_match_dt0, null);
         $this->assertNotNull($dnt_ref01_data_dt0_loaded);
 
     }

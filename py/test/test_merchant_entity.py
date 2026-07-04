@@ -50,8 +50,7 @@ class TestMerchantEntity:
         merchant_ref01_ent = client.Merchant(None)
         merchant_ref01_match = {}
 
-        merchant_ref01_list_result, err = merchant_ref01_ent.list(merchant_ref01_match, None)
-        assert err is None
+        merchant_ref01_list_result = merchant_ref01_ent.list(merchant_ref01_match, None)
         assert isinstance(merchant_ref01_list_result, list)
 
 

@@ -85,6 +85,27 @@ func (e *ConversionStatusEntity) Match(args ...any) any {
 	return out
 }
 
+// DataTyped is the statically-typed accessor for this entity's data. With no
+// argument it returns the current data as an ConversionStatus; with an argument it
+// sets the data and returns the stored value. It delegates to the untyped Data
+// (identical runtime) and converts at the typed boundary.
+func (e *ConversionStatusEntity) DataTyped(data ...ConversionStatus) ConversionStatus {
+	if len(data) > 0 {
+		return typedFrom[ConversionStatus](e.Data(asMap(data[0])))
+	}
+	return typedFrom[ConversionStatus](e.Data())
+}
+
+// MatchTyped mirrors DataTyped for the entity's match filter. The match is a
+// partial of the entity, so it round-trips through ConversionStatus (all fields
+// optional at the wire level).
+func (e *ConversionStatusEntity) MatchTyped(match ...ConversionStatus) ConversionStatus {
+	if len(match) > 0 {
+		return typedFrom[ConversionStatus](e.Match(asMap(match[0])))
+	}
+	return typedFrom[ConversionStatus](e.Match())
+}
+
 
 func (e *ConversionStatusEntity) Load(reqmatch map[string]any, ctrl map[string]any) (any, error) {
 	utility := e.utility
@@ -109,6 +130,17 @@ func (e *ConversionStatusEntity) Load(reqmatch map[string]any, ctrl map[string]a
 			}
 		}
 	})
+}
+
+// LoadTyped is the statically-typed variant of Load: it takes an
+// ConversionStatusLoadMatch and returns an ConversionStatus. It delegates to the untyped
+// Load (identical runtime) and converts at the typed boundary.
+func (e *ConversionStatusEntity) LoadTyped(reqmatch ConversionStatusLoadMatch, ctrl map[string]any) (ConversionStatus, error) {
+	res, err := e.Load(asMap(reqmatch), ctrl)
+	if err != nil {
+		return ConversionStatus{}, err
+	}
+	return typedFrom[ConversionStatus](res), nil
 }
 
 

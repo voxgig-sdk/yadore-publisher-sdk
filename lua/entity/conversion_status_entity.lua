@@ -79,6 +79,10 @@ end
 
 
 
+---@param reqmatch ConversionStatusLoadMatch
+---@param ctrl? table
+---@return ConversionStatus
+---@return string? err
 function ConversionStatusEntity:load(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({

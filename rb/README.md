@@ -9,21 +9,10 @@ The Ruby SDK for the YadorePublisher API — an entity-oriented client using idi
 
 
 ## Install
-```bash
-gem install voxgig-sdk-yadore-publisher
-```
+This package is not yet published to RubyGems. Install it from the
+GitHub release tag (`rb/vX.Y.Z`):
 
-Or add to your `Gemfile`:
-
-```ruby
-gem "voxgig-sdk-yadore-publisher"
-```
-
-Then run:
-
-```bash
-bundle install
-```
+- Releases: [https://github.com/voxgig-sdk/yadore-publisher-sdk/releases](https://github.com/voxgig-sdk/yadore-publisher-sdk/releases)
 
 
 ## Tutorial: your first API call
@@ -37,21 +26,23 @@ loading a specific record.
 require_relative "YadorePublisher_sdk"
 
 client = YadorePublisherSDK.new({
-  "apikey" => ENV["YADORE-PUBLISHER_APIKEY"],
+  "apikey" => ENV["YADORE_PUBLISHER_APIKEY"],
 })
 ```
 
 ### 2. List conversiondetails
 
 ```ruby
-result, err = client.ConversionDetail().list
-raise err if err
-
-if result.is_a?(Array)
-  result.each do |item|
-    d = item.data_get
-    puts "#{d["id"]} #{d["name"]}"
+begin
+  result = client.conversiondetail.list
+  if result.is_a?(Array)
+    result.each do |item|
+      d = item.data_get
+      puts "#{d["id"]} #{d["name"]}"
+    end
   end
+rescue => err
+  warn "list failed: #{err}"
 end
 ```
 
@@ -63,32 +54,35 @@ end
 For endpoints not covered by entity methods:
 
 ```ruby
-result, err = client.direct({
+result = client.direct({
   "path" => "/api/resource/{id}",
   "method" => "GET",
   "params" => { "id" => "example" },
 })
-raise err if err
 
 if result["ok"]
   puts result["status"]  # 200
   puts result["data"]    # response body
+else
+  warn result["err"]
 end
 ```
 
 ### Prepare a request without sending it
 
 ```ruby
-fetchdef, err = client.prepare({
-  "path" => "/api/resource/{id}",
-  "method" => "DELETE",
-  "params" => { "id" => "example" },
-})
-raise err if err
-
-puts fetchdef["url"]
-puts fetchdef["method"]
-puts fetchdef["headers"]
+begin
+  fetchdef = client.prepare({
+    "path" => "/api/resource/{id}",
+    "method" => "DELETE",
+    "params" => { "id" => "example" },
+  })
+  puts fetchdef["url"]
+  puts fetchdef["method"]
+  puts fetchdef["headers"]
+rescue => err
+  warn "prepare failed: #{err}"
+end
 ```
 
 ### Use test mode
@@ -98,7 +92,7 @@ Create a mock client for unit testing — no server required:
 ```ruby
 client = YadorePublisherSDK.test
 
-result, err = client.YadorePublisher().load({ "id" => "test01" })
+result = client.conversiondetail.load({ "id" => "test01" })
 # result contains mock response data
 ```
 
@@ -129,8 +123,8 @@ client = YadorePublisherSDK.new({
 Create a `.env.local` file at the project root:
 
 ```
-YADORE-PUBLISHER_TEST_LIVE=TRUE
-YADORE-PUBLISHER_APIKEY=<your-key>
+YADORE_PUBLISHER_TEST_LIVE=TRUE
+YADORE_PUBLISHER_APIKEY=<your-key>
 ```
 
 Then run:
@@ -175,8 +169,8 @@ Creates a test-mode client with mock transport. Both arguments may be `nil`.
 | --- | --- | --- |
 | `options_map` | `() -> Hash` | Deep copy of current SDK options. |
 | `get_utility` | `() -> Utility` | Copy of the SDK utility object. |
-| `prepare` | `(fetchargs) -> [Hash, err]` | Build an HTTP request definition without sending. |
-| `direct` | `(fetchargs) -> [Hash, err]` | Build and send an HTTP request. |
+| `prepare` | `(fetchargs) -> Hash` | Build an HTTP request definition without sending. Raises on error. |
+| `direct` | `(fetchargs) -> Hash` | Build and send an HTTP request. Returns a result hash (`result["ok"]`); does not raise. |
 | `ConversionDetail` | `(data) -> ConversionDetailEntity` | Create a ConversionDetail entity instance. |
 | `ConversionDetailMerchant` | `(data) -> ConversionDetailMerchantEntity` | Create a ConversionDetailMerchant entity instance. |
 | `ConversionGeneral` | `(data) -> ConversionGeneralEntity` | Create a ConversionGeneral entity instance. |
@@ -198,11 +192,11 @@ All entities share the same interface.
 
 | Method | Signature | Description |
 | --- | --- | --- |
-| `load` | `(reqmatch, ctrl) -> [any, err]` | Load a single entity by match criteria. |
-| `list` | `(reqmatch, ctrl) -> [any, err]` | List entities matching the criteria. |
-| `create` | `(reqdata, ctrl) -> [any, err]` | Create a new entity. |
-| `update` | `(reqdata, ctrl) -> [any, err]` | Update an existing entity. |
-| `remove` | `(reqmatch, ctrl) -> [any, err]` | Remove an entity. |
+| `load` | `(reqmatch, ctrl) -> any` | Load a single entity by match criteria. Raises on error. |
+| `list` | `(reqmatch, ctrl) -> Array` | List entities matching the criteria. Raises on error. |
+| `create` | `(reqdata, ctrl) -> any` | Create a new entity. Raises on error. |
+| `update` | `(reqdata, ctrl) -> any` | Update an existing entity. Raises on error. |
+| `remove` | `(reqmatch, ctrl) -> any` | Remove an entity. Raises on error. |
 | `data_get` | `() -> Hash` | Get entity data. |
 | `data_set` | `(data)` | Set entity data. |
 | `match_get` | `() -> Hash` | Get entity match criteria. |
@@ -212,8 +206,12 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return `[any, err]`. The first value is a
-`Hash` with these keys:
+Entity operations return the result data directly. On failure they
+raise a `YadorePublisherError` (a `StandardError` subclass), so wrap
+calls in `begin`/`rescue` where you need to handle errors.
+
+The `direct` escape hatch is the exception: it never raises and instead
+returns a result `Hash` with these keys:
 
 | Key | Type | Description |
 | --- | --- | --- |
@@ -221,8 +219,7 @@ Entity operations return `[any, err]`. The first value is a
 | `status` | `Integer` | HTTP status code. |
 | `headers` | `Hash` | Response headers. |
 | `data` | `any` | Parsed JSON response body. |
-
-On error, `ok` is `false` and `err` contains the error value.
+| `err` | `Error` | Present when `ok` is `false`. |
 
 ### Entities
 
@@ -423,7 +420,7 @@ API path: `/v2/report/status`
 
 ### ConversionDetail
 
-Create an instance: `const conversion_detail = client.ConversionDetail()`
+Create an instance: `const conversion_detail = client.conversion_detail`
 
 #### Operations
 
@@ -445,13 +442,13 @@ Create an instance: `const conversion_detail = client.ConversionDetail()`
 #### Example: List
 
 ```ts
-const conversion_details = await client.ConversionDetail().list()
+const conversion_details = await client.conversion_detail.list()
 ```
 
 
 ### ConversionDetailMerchant
 
-Create an instance: `const conversion_detail_merchant = client.ConversionDetailMerchant()`
+Create an instance: `const conversion_detail_merchant = client.conversion_detail_merchant`
 
 #### Operations
 
@@ -471,13 +468,13 @@ Create an instance: `const conversion_detail_merchant = client.ConversionDetailM
 #### Example: List
 
 ```ts
-const conversion_detail_merchants = await client.ConversionDetailMerchant().list()
+const conversion_detail_merchants = await client.conversion_detail_merchant.list()
 ```
 
 
 ### ConversionGeneral
 
-Create an instance: `const conversion_general = client.ConversionGeneral()`
+Create an instance: `const conversion_general = client.conversion_general`
 
 #### Operations
 
@@ -496,13 +493,13 @@ Create an instance: `const conversion_general = client.ConversionGeneral()`
 #### Example: Load
 
 ```ts
-const conversion_general = await client.ConversionGeneral().load({ id: 'conversion_general_id' })
+const conversion_general = await client.conversion_general.load({ id: 'conversion_general_id' })
 ```
 
 
 ### ConversionStatus
 
-Create an instance: `const conversion_status = client.ConversionStatus()`
+Create an instance: `const conversion_status = client.conversion_status`
 
 #### Operations
 
@@ -519,13 +516,13 @@ Create an instance: `const conversion_status = client.ConversionStatus()`
 #### Example: Load
 
 ```ts
-const conversion_status = await client.ConversionStatus().load({ id: 'conversion_status_id' })
+const conversion_status = await client.conversion_status.load({ id: 'conversion_status_id' })
 ```
 
 
 ### Deeplink
 
-Create an instance: `const deeplink = client.Deeplink()`
+Create an instance: `const deeplink = client.deeplink`
 
 #### Operations
 
@@ -546,7 +543,7 @@ Create an instance: `const deeplink = client.Deeplink()`
 #### Example: Create
 
 ```ts
-const deeplink = await client.Deeplink().create({
+const deeplink = await client.deeplink.create({
   market: /* `$STRING` */,
   url: /* `$ARRAY` */,
 })
@@ -555,7 +552,7 @@ const deeplink = await client.Deeplink().create({
 
 ### DeeplinkMerchant
 
-Create an instance: `const deeplink_merchant = client.DeeplinkMerchant()`
+Create an instance: `const deeplink_merchant = client.deeplink_merchant`
 
 #### Operations
 
@@ -580,13 +577,13 @@ Create an instance: `const deeplink_merchant = client.DeeplinkMerchant()`
 #### Example: List
 
 ```ts
-const deeplink_merchants = await client.DeeplinkMerchant().list()
+const deeplink_merchants = await client.deeplink_merchant.list()
 ```
 
 
 ### Dnt
 
-Create an instance: `const dnt = client.Dnt()`
+Create an instance: `const dnt = client.dnt`
 
 #### Operations
 
@@ -597,13 +594,13 @@ Create an instance: `const dnt = client.Dnt()`
 #### Example: Load
 
 ```ts
-const dnt = await client.Dnt().load({ id: 'dnt_id' })
+const dnt = await client.dnt.load({ id: 'dnt_id' })
 ```
 
 
 ### Market
 
-Create an instance: `const market = client.Market()`
+Create an instance: `const market = client.market`
 
 #### Operations
 
@@ -620,13 +617,13 @@ Create an instance: `const market = client.Market()`
 #### Example: List
 
 ```ts
-const markets = await client.Market().list()
+const markets = await client.market.list()
 ```
 
 
 ### Merchant
 
-Create an instance: `const merchant = client.Merchant()`
+Create an instance: `const merchant = client.merchant`
 
 #### Operations
 
@@ -647,13 +644,13 @@ Create an instance: `const merchant = client.Merchant()`
 #### Example: List
 
 ```ts
-const merchants = await client.Merchant().list()
+const merchants = await client.merchant.list()
 ```
 
 
 ### Offer
 
-Create an instance: `const offer = client.Offer()`
+Create an instance: `const offer = client.offer`
 
 #### Operations
 
@@ -688,19 +685,19 @@ Create an instance: `const offer = client.Offer()`
 #### Example: Load
 
 ```ts
-const offer = await client.Offer().load({ id: 'offer_id' })
+const offer = await client.offer.load({ id: 'offer_id' })
 ```
 
 #### Example: List
 
 ```ts
-const offers = await client.Offer().list()
+const offers = await client.offer.list()
 ```
 
 
 ### ReportDetail
 
-Create an instance: `const report_detail = client.ReportDetail()`
+Create an instance: `const report_detail = client.report_detail`
 
 #### Operations
 
@@ -723,13 +720,13 @@ Create an instance: `const report_detail = client.ReportDetail()`
 #### Example: List
 
 ```ts
-const report_details = await client.ReportDetail().list()
+const report_details = await client.report_detail.list()
 ```
 
 
 ### ReportGeneral
 
-Create an instance: `const report_general = client.ReportGeneral()`
+Create an instance: `const report_general = client.report_general`
 
 #### Operations
 
@@ -748,13 +745,13 @@ Create an instance: `const report_general = client.ReportGeneral()`
 #### Example: Load
 
 ```ts
-const report_general = await client.ReportGeneral().load({ id: 'report_general_id' })
+const report_general = await client.report_general.load({ id: 'report_general_id' })
 ```
 
 
 ### ReportModified
 
-Create an instance: `const report_modified = client.ReportModified()`
+Create an instance: `const report_modified = client.report_modified`
 
 #### Operations
 
@@ -771,13 +768,13 @@ Create an instance: `const report_modified = client.ReportModified()`
 #### Example: Load
 
 ```ts
-const report_modified = await client.ReportModified().load({ id: 'report_modified_id' })
+const report_modified = await client.report_modified.load({ id: 'report_modified_id' })
 ```
 
 
 ### ReportStatus
 
-Create an instance: `const report_status = client.ReportStatus()`
+Create an instance: `const report_status = client.report_status`
 
 #### Operations
 
@@ -794,7 +791,7 @@ Create an instance: `const report_status = client.ReportStatus()`
 #### Example: Load
 
 ```ts
-const report_status = await client.ReportStatus().load({ id: 'report_status_id' })
+const report_status = await client.report_status.load({ id: 'report_status_id' })
 ```
 
 
@@ -869,11 +866,11 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```ruby
-moon = client.Moon
-moon.load({ "planet_id" => "earth", "id" => "luna" })
+conversiondetail = client.conversiondetail
+conversiondetail.load({ "id" => "example_id" })
 
-# moon.data_get now returns the loaded moon data
-# moon.match_get returns the last match criteria
+# conversiondetail.data_get now returns the loaded conversiondetail data
+# conversiondetail.match_get returns the last match criteria
 ```
 
 Call `make` to create a fresh instance with the same configuration

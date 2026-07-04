@@ -45,6 +45,7 @@ class ReportStatusEntity
     end
   end
 
+  # @return [ReportStatus, Hash] the current ReportStatus data
   def data_get
     @_utility.feature_hook.call(@_entctx, "GetData")
     VoxgigStruct.clone(@_data)
@@ -57,12 +58,18 @@ class ReportStatusEntity
     end
   end
 
+  # @return [Hash] the current match filter (any subset of ReportStatus fields)
   def match_get
     @_utility.feature_hook.call(@_entctx, "GetMatch")
     VoxgigStruct.clone(@_match)
   end
 
   
+  # Load a single ReportStatus.
+  #
+  # @param reqmatch [ReportStatusLoadMatch, Hash, nil] match criteria (id/query fields)
+  # @param ctrl [Object, nil] optional per-call control
+  # @return [ReportStatus, Hash] the loaded ReportStatus; raises YadorePublisherError on failure
   def load(reqmatch, ctrl = nil)
     utility = @_utility
     ctx = utility.make_context.call({

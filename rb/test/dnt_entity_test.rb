@@ -42,8 +42,7 @@ class DntEntityTest < Minitest::Test
     # LOAD
     dnt_ref01_ent = client.Dnt(nil)
     dnt_ref01_match_dt0 = {}
-    dnt_ref01_data_dt0_loaded, err = dnt_ref01_ent.load(dnt_ref01_match_dt0, nil)
-    assert_nil err
+    dnt_ref01_data_dt0_loaded = dnt_ref01_ent.load(dnt_ref01_match_dt0, nil)
     assert !dnt_ref01_data_dt0_loaded.nil?
 
   end

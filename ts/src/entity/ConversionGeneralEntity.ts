@@ -14,9 +14,13 @@ import type {
   Control,
 } from '../types'
 
+import type {
+  ConversionGeneral,
+  ConversionGeneralLoadMatch,
+} from '../YadorePublisherTypes'
 
 // TODO: needs Entity superclass
-class ConversionGeneralEntity extends YadorePublisherEntityBase {
+class ConversionGeneralEntity extends YadorePublisherEntityBase<ConversionGeneral> {
 
   constructor(client: YadorePublisherSDK, entopts: any) {
     super(client, entopts)
@@ -32,7 +36,7 @@ class ConversionGeneralEntity extends YadorePublisherEntityBase {
 
 
 
-  async load(this: any, reqmatch?: any, ctrl?: Control) {
+  async load(this: any, reqmatch?: ConversionGeneralLoadMatch, ctrl?: Control): Promise<ConversionGeneral> {
 
     const utility = this._utility
 
@@ -136,7 +140,9 @@ class ConversionGeneralEntity extends YadorePublisherEntityBase {
         throw err
       }
       else {
-        return undefined
+        // Off-happy-path (throw disabled): typed as any so the method's
+        // Promise<ConversionGeneral> return stays clean under strict null checks.
+        return undefined as any
       }
     }
   }

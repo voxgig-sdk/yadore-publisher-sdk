@@ -44,9 +44,7 @@ class TestDeeplinkEntity:
         deeplink_ref01_data = helpers.to_map(vs.getprop(
             vs.getpath(setup["data"], "new.deeplink"), "deeplink_ref01"))
 
-        deeplink_ref01_data_result, err = deeplink_ref01_ent.create(deeplink_ref01_data, None)
-        assert err is None
-        deeplink_ref01_data = helpers.to_map(deeplink_ref01_data_result)
+        deeplink_ref01_data = helpers.to_map(deeplink_ref01_ent.create(deeplink_ref01_data, None))
         assert deeplink_ref01_data is not None
 
 

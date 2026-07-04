@@ -49,8 +49,7 @@ class TestDntEntity:
         # LOAD
         dnt_ref01_ent = client.Dnt(None)
         dnt_ref01_match_dt0 = {}
-        dnt_ref01_data_dt0_loaded, err = dnt_ref01_ent.load(dnt_ref01_match_dt0, None)
-        assert err is None
+        dnt_ref01_data_dt0_loaded = dnt_ref01_ent.load(dnt_ref01_match_dt0, None)
         assert dnt_ref01_data_dt0_loaded is not None
 
 

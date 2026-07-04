@@ -49,8 +49,7 @@ class ReportModifiedEntityTest extends TestCase
         // LOAD
         $report_modified_ref01_ent = $client->ReportModified(null);
         $report_modified_ref01_match_dt0 = [];
-        [$report_modified_ref01_data_dt0_loaded, $err] = $report_modified_ref01_ent->load($report_modified_ref01_match_dt0, null);
-        $this->assertNull($err);
+        $report_modified_ref01_data_dt0_loaded = $report_modified_ref01_ent->load($report_modified_ref01_match_dt0, null);
         $this->assertNotNull($report_modified_ref01_data_dt0_loaded);
 
     }

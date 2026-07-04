@@ -45,6 +45,7 @@ class ReportDetailEntity
     end
   end
 
+  # @return [ReportDetail, Hash] the current ReportDetail data
   def data_get
     @_utility.feature_hook.call(@_entctx, "GetData")
     VoxgigStruct.clone(@_data)
@@ -57,6 +58,7 @@ class ReportDetailEntity
     end
   end
 
+  # @return [Hash] the current match filter (any subset of ReportDetail fields)
   def match_get
     @_utility.feature_hook.call(@_entctx, "GetMatch")
     VoxgigStruct.clone(@_match)
@@ -65,6 +67,11 @@ class ReportDetailEntity
   
 
   
+  # List ReportDetail items matching the given filter.
+  #
+  # @param reqmatch [ReportDetailListMatch, Hash, nil] match filter (any subset of ReportDetail fields)
+  # @param ctrl [Object, nil] optional per-call control
+  # @return [Array<ReportDetail>, Array] the matching ReportDetail items; raises YadorePublisherError on failure
   def list(reqmatch, ctrl = nil)
     utility = @_utility
     ctx = utility.make_context.call({

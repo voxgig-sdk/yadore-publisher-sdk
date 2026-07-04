@@ -79,6 +79,10 @@ end
 
 
 
+---@param reqmatch ReportGeneralLoadMatch
+---@param ctrl? table
+---@return ReportGeneral
+---@return string? err
 function ReportGeneralEntity:load(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({

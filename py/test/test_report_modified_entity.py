@@ -49,8 +49,7 @@ class TestReportModifiedEntity:
         # LOAD
         report_modified_ref01_ent = client.ReportModified(None)
         report_modified_ref01_match_dt0 = {}
-        report_modified_ref01_data_dt0_loaded, err = report_modified_ref01_ent.load(report_modified_ref01_match_dt0, None)
-        assert err is None
+        report_modified_ref01_data_dt0_loaded = report_modified_ref01_ent.load(report_modified_ref01_match_dt0, None)
         assert report_modified_ref01_data_dt0_loaded is not None
 
 

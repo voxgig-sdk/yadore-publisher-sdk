@@ -83,6 +83,10 @@ end
 
 
 
+---@param reqdata DeeplinkCreateData
+---@param ctrl? table
+---@return Deeplink
+---@return string? err
 function DeeplinkEntity:create(reqdata, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({

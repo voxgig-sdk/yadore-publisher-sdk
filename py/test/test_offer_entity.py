@@ -50,16 +50,14 @@ class TestOfferEntity:
         offer_ref01_ent = client.Offer(None)
         offer_ref01_match = {}
 
-        offer_ref01_list_result, err = offer_ref01_ent.list(offer_ref01_match, None)
-        assert err is None
+        offer_ref01_list_result = offer_ref01_ent.list(offer_ref01_match, None)
         assert isinstance(offer_ref01_list_result, list)
 
         # LOAD
         offer_ref01_match_dt0 = {
             "id": offer_ref01_data["id"],
         }
-        offer_ref01_data_dt0_loaded, err = offer_ref01_ent.load(offer_ref01_match_dt0, None)
-        assert err is None
+        offer_ref01_data_dt0_loaded = offer_ref01_ent.load(offer_ref01_match_dt0, None)
         offer_ref01_data_dt0_load_result = helpers.to_map(offer_ref01_data_dt0_loaded)
         assert offer_ref01_data_dt0_load_result is not None
         assert offer_ref01_data_dt0_load_result["id"] == offer_ref01_data["id"]

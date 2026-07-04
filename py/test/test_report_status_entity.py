@@ -49,8 +49,7 @@ class TestReportStatusEntity:
         # LOAD
         report_status_ref01_ent = client.ReportStatus(None)
         report_status_ref01_match_dt0 = {}
-        report_status_ref01_data_dt0_loaded, err = report_status_ref01_ent.load(report_status_ref01_match_dt0, None)
-        assert err is None
+        report_status_ref01_data_dt0_loaded = report_status_ref01_ent.load(report_status_ref01_match_dt0, None)
         assert report_status_ref01_data_dt0_loaded is not None
 
 

@@ -9,9 +9,12 @@ The TypeScript SDK for the YadorePublisher API — a type-safe, entity-oriented 
 
 
 ## Install
-```bash
-npm install @voxgig-sdk/yadore-publisher
-```
+This package is not yet published to npm. Install it from the GitHub
+release tag (`ts/vX.Y.Z`):
+
+- Releases: [https://github.com/voxgig-sdk/yadore-publisher-sdk/releases](https://github.com/voxgig-sdk/yadore-publisher-sdk/releases)
+
+
 ## Tutorial: your first API call
 
 This tutorial walks through creating a client, listing entities, and
@@ -20,17 +23,17 @@ loading a specific record.
 ### 1. Create a client
 
 ```ts
-import { YadorePublisherSDK } from 'yadore-publisher'
+import { YadorePublisherSDK } from '@voxgig-sdk/yadore-publisher'
 
 const client = new YadorePublisherSDK({
-  apikey: process.env.YADORE-PUBLISHER_APIKEY,
+  apikey: process.env.YADORE_PUBLISHER_APIKEY,
 })
 ```
 
 ### 2. List conversiondetails
 
 ```ts
-const result = await client.ConversionDetail().list()
+const result = await client.conversiondetail.list()
 
 if (result.ok) {
   for (const item of result.data) {
@@ -81,7 +84,7 @@ Create a mock client for unit testing — no server required:
 ```ts
 const client = YadorePublisherSDK.test()
 
-const result = await client.Planet().load({ id: 'test01' })
+const result = await client.conversiondetail.load({ id: 'test01' })
 // result.ok === true
 // result.data contains mock response data
 ```
@@ -98,7 +101,7 @@ const testClient = client.tester()
 Entity instances remember their last match and data:
 
 ```ts
-const entity = client.Planet()
+const entity = client.conversiondetail
 
 // First call sets internal match
 await entity.load({ id: 'example' })
@@ -135,8 +138,8 @@ const client = new YadorePublisherSDK({
 Create a `.env.local` file at the project root:
 
 ```
-YADORE-PUBLISHER_TEST_LIVE=TRUE
-YADORE-PUBLISHER_APIKEY=<your-key>
+YADORE_PUBLISHER_TEST_LIVE=TRUE
+YADORE_PUBLISHER_APIKEY=<your-key>
 ```
 
 Then run:
@@ -461,7 +464,7 @@ API path: `/v2/report/status`
 
 ### ConversionDetail
 
-Create an instance: `const conversion_detail = client.ConversionDetail()`
+Create an instance: `const conversion_detail = client.conversion_detail`
 
 #### Operations
 
@@ -483,13 +486,13 @@ Create an instance: `const conversion_detail = client.ConversionDetail()`
 #### Example: List
 
 ```ts
-const conversion_details = await client.ConversionDetail().list()
+const conversion_details = await client.conversion_detail.list()
 ```
 
 
 ### ConversionDetailMerchant
 
-Create an instance: `const conversion_detail_merchant = client.ConversionDetailMerchant()`
+Create an instance: `const conversion_detail_merchant = client.conversion_detail_merchant`
 
 #### Operations
 
@@ -509,13 +512,13 @@ Create an instance: `const conversion_detail_merchant = client.ConversionDetailM
 #### Example: List
 
 ```ts
-const conversion_detail_merchants = await client.ConversionDetailMerchant().list()
+const conversion_detail_merchants = await client.conversion_detail_merchant.list()
 ```
 
 
 ### ConversionGeneral
 
-Create an instance: `const conversion_general = client.ConversionGeneral()`
+Create an instance: `const conversion_general = client.conversion_general`
 
 #### Operations
 
@@ -534,13 +537,13 @@ Create an instance: `const conversion_general = client.ConversionGeneral()`
 #### Example: Load
 
 ```ts
-const conversion_general = await client.ConversionGeneral().load({ id: 'conversion_general_id' })
+const conversion_general = await client.conversion_general.load({ id: 'conversion_general_id' })
 ```
 
 
 ### ConversionStatus
 
-Create an instance: `const conversion_status = client.ConversionStatus()`
+Create an instance: `const conversion_status = client.conversion_status`
 
 #### Operations
 
@@ -557,13 +560,13 @@ Create an instance: `const conversion_status = client.ConversionStatus()`
 #### Example: Load
 
 ```ts
-const conversion_status = await client.ConversionStatus().load({ id: 'conversion_status_id' })
+const conversion_status = await client.conversion_status.load({ id: 'conversion_status_id' })
 ```
 
 
 ### Deeplink
 
-Create an instance: `const deeplink = client.Deeplink()`
+Create an instance: `const deeplink = client.deeplink`
 
 #### Operations
 
@@ -584,7 +587,7 @@ Create an instance: `const deeplink = client.Deeplink()`
 #### Example: Create
 
 ```ts
-const deeplink = await client.Deeplink().create({
+const deeplink = await client.deeplink.create({
   market: /* `$STRING` */,
   url: /* `$ARRAY` */,
 })
@@ -593,7 +596,7 @@ const deeplink = await client.Deeplink().create({
 
 ### DeeplinkMerchant
 
-Create an instance: `const deeplink_merchant = client.DeeplinkMerchant()`
+Create an instance: `const deeplink_merchant = client.deeplink_merchant`
 
 #### Operations
 
@@ -618,13 +621,13 @@ Create an instance: `const deeplink_merchant = client.DeeplinkMerchant()`
 #### Example: List
 
 ```ts
-const deeplink_merchants = await client.DeeplinkMerchant().list()
+const deeplink_merchants = await client.deeplink_merchant.list()
 ```
 
 
 ### Dnt
 
-Create an instance: `const dnt = client.Dnt()`
+Create an instance: `const dnt = client.dnt`
 
 #### Operations
 
@@ -635,13 +638,13 @@ Create an instance: `const dnt = client.Dnt()`
 #### Example: Load
 
 ```ts
-const dnt = await client.Dnt().load({ id: 'dnt_id' })
+const dnt = await client.dnt.load({ id: 'dnt_id' })
 ```
 
 
 ### Market
 
-Create an instance: `const market = client.Market()`
+Create an instance: `const market = client.market`
 
 #### Operations
 
@@ -658,13 +661,13 @@ Create an instance: `const market = client.Market()`
 #### Example: List
 
 ```ts
-const markets = await client.Market().list()
+const markets = await client.market.list()
 ```
 
 
 ### Merchant
 
-Create an instance: `const merchant = client.Merchant()`
+Create an instance: `const merchant = client.merchant`
 
 #### Operations
 
@@ -685,13 +688,13 @@ Create an instance: `const merchant = client.Merchant()`
 #### Example: List
 
 ```ts
-const merchants = await client.Merchant().list()
+const merchants = await client.merchant.list()
 ```
 
 
 ### Offer
 
-Create an instance: `const offer = client.Offer()`
+Create an instance: `const offer = client.offer`
 
 #### Operations
 
@@ -726,19 +729,19 @@ Create an instance: `const offer = client.Offer()`
 #### Example: Load
 
 ```ts
-const offer = await client.Offer().load({ id: 'offer_id' })
+const offer = await client.offer.load({ id: 'offer_id' })
 ```
 
 #### Example: List
 
 ```ts
-const offers = await client.Offer().list()
+const offers = await client.offer.list()
 ```
 
 
 ### ReportDetail
 
-Create an instance: `const report_detail = client.ReportDetail()`
+Create an instance: `const report_detail = client.report_detail`
 
 #### Operations
 
@@ -761,13 +764,13 @@ Create an instance: `const report_detail = client.ReportDetail()`
 #### Example: List
 
 ```ts
-const report_details = await client.ReportDetail().list()
+const report_details = await client.report_detail.list()
 ```
 
 
 ### ReportGeneral
 
-Create an instance: `const report_general = client.ReportGeneral()`
+Create an instance: `const report_general = client.report_general`
 
 #### Operations
 
@@ -786,13 +789,13 @@ Create an instance: `const report_general = client.ReportGeneral()`
 #### Example: Load
 
 ```ts
-const report_general = await client.ReportGeneral().load({ id: 'report_general_id' })
+const report_general = await client.report_general.load({ id: 'report_general_id' })
 ```
 
 
 ### ReportModified
 
-Create an instance: `const report_modified = client.ReportModified()`
+Create an instance: `const report_modified = client.report_modified`
 
 #### Operations
 
@@ -809,13 +812,13 @@ Create an instance: `const report_modified = client.ReportModified()`
 #### Example: Load
 
 ```ts
-const report_modified = await client.ReportModified().load({ id: 'report_modified_id' })
+const report_modified = await client.report_modified.load({ id: 'report_modified_id' })
 ```
 
 
 ### ReportStatus
 
-Create an instance: `const report_status = client.ReportStatus()`
+Create an instance: `const report_status = client.report_status`
 
 #### Operations
 
@@ -832,7 +835,7 @@ Create an instance: `const report_status = client.ReportStatus()`
 #### Example: Load
 
 ```ts
-const report_status = await client.ReportStatus().load({ id: 'report_status_id' })
+const report_status = await client.report_status.load({ id: 'report_status_id' })
 ```
 
 
@@ -893,7 +896,7 @@ yadore-publisher/
 Import the SDK from the package root:
 
 ```ts
-import { YadorePublisherSDK } from 'yadore-publisher'
+import { YadorePublisherSDK } from '@voxgig-sdk/yadore-publisher'
 ```
 
 ### Entity state
@@ -903,11 +906,11 @@ stores the returned data and match criteria internally. Subsequent
 calls on the same instance can rely on this state.
 
 ```ts
-const moon = client.Moon()
-await moon.load({ planet_id: 'earth', id: 'luna' })
+const conversiondetail = client.conversiondetail
+await conversiondetail.load({ id: "example_id" })
 
-// moon.data() now returns the loaded moon data
-// moon.match() returns { planet_id: 'earth', id: 'luna' }
+// conversiondetail.data() now returns the loaded conversiondetail data
+// conversiondetail.match() returns { id: "example_id" }
 ```
 
 Call `make()` to create a fresh instance with the same configuration

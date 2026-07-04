@@ -266,7 +266,7 @@ Alias for `YadorePublisherSDK.test()`.
 ## ConversionDetailEntity
 
 ```ts
-const conversion_detail = client.ConversionDetail()
+const conversion_detail = client.conversion_detail
 ```
 
 ### Fields
@@ -287,7 +287,7 @@ const conversion_detail = client.ConversionDetail()
 List entities matching the given criteria. Returns an array.
 
 ```ts
-const results = await client.ConversionDetail().list()
+const results = await client.conversion_detail.list()
 ```
 
 ### Common Methods
@@ -321,7 +321,7 @@ Return a copy of the entity options.
 ## ConversionDetailMerchantEntity
 
 ```ts
-const conversion_detail_merchant = client.ConversionDetailMerchant()
+const conversion_detail_merchant = client.conversion_detail_merchant
 ```
 
 ### Fields
@@ -340,7 +340,7 @@ const conversion_detail_merchant = client.ConversionDetailMerchant()
 List entities matching the given criteria. Returns an array.
 
 ```ts
-const results = await client.ConversionDetailMerchant().list()
+const results = await client.conversion_detail_merchant.list()
 ```
 
 ### Common Methods
@@ -374,7 +374,7 @@ Return a copy of the entity options.
 ## ConversionGeneralEntity
 
 ```ts
-const conversion_general = client.ConversionGeneral()
+const conversion_general = client.conversion_general
 ```
 
 ### Fields
@@ -392,7 +392,7 @@ const conversion_general = client.ConversionGeneral()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.ConversionGeneral().load({ id: 'conversion_general_id' })
+const result = await client.conversion_general.load({ id: 'conversion_general_id' })
 ```
 
 ### Common Methods
@@ -426,7 +426,7 @@ Return a copy of the entity options.
 ## ConversionStatusEntity
 
 ```ts
-const conversion_status = client.ConversionStatus()
+const conversion_status = client.conversion_status
 ```
 
 ### Fields
@@ -442,7 +442,7 @@ const conversion_status = client.ConversionStatus()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.ConversionStatus().load({ id: 'conversion_status_id' })
+const result = await client.conversion_status.load({ id: 'conversion_status_id' })
 ```
 
 ### Common Methods
@@ -476,7 +476,7 @@ Return a copy of the entity options.
 ## DeeplinkEntity
 
 ```ts
-const deeplink = client.Deeplink()
+const deeplink = client.deeplink
 ```
 
 ### Fields
@@ -496,7 +496,7 @@ const deeplink = client.Deeplink()
 Create a new entity with the given data.
 
 ```ts
-const result = await client.Deeplink().create({
+const result = await client.deeplink.create({
   market: /* `$STRING` */,
   url: /* `$ARRAY` */,
 })
@@ -533,7 +533,7 @@ Return a copy of the entity options.
 ## DeeplinkMerchantEntity
 
 ```ts
-const deeplink_merchant = client.DeeplinkMerchant()
+const deeplink_merchant = client.deeplink_merchant
 ```
 
 ### Fields
@@ -557,7 +557,7 @@ const deeplink_merchant = client.DeeplinkMerchant()
 List entities matching the given criteria. Returns an array.
 
 ```ts
-const results = await client.DeeplinkMerchant().list()
+const results = await client.deeplink_merchant.list()
 ```
 
 ### Common Methods
@@ -591,7 +591,7 @@ Return a copy of the entity options.
 ## DntEntity
 
 ```ts
-const dnt = client.Dnt()
+const dnt = client.dnt
 ```
 
 ### Operations
@@ -601,7 +601,7 @@ const dnt = client.Dnt()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.Dnt().load({ id: 'dnt_id' })
+const result = await client.dnt.load({ id: 'dnt_id' })
 ```
 
 ### Common Methods
@@ -635,7 +635,7 @@ Return a copy of the entity options.
 ## MarketEntity
 
 ```ts
-const market = client.Market()
+const market = client.market
 ```
 
 ### Fields
@@ -651,7 +651,7 @@ const market = client.Market()
 List entities matching the given criteria. Returns an array.
 
 ```ts
-const results = await client.Market().list()
+const results = await client.market.list()
 ```
 
 ### Common Methods
@@ -685,7 +685,7 @@ Return a copy of the entity options.
 ## MerchantEntity
 
 ```ts
-const merchant = client.Merchant()
+const merchant = client.merchant
 ```
 
 ### Fields
@@ -705,7 +705,7 @@ const merchant = client.Merchant()
 List entities matching the given criteria. Returns an array.
 
 ```ts
-const results = await client.Merchant().list()
+const results = await client.merchant.list()
 ```
 
 ### Common Methods
@@ -739,7 +739,7 @@ Return a copy of the entity options.
 ## OfferEntity
 
 ```ts
-const offer = client.Offer()
+const offer = client.offer
 ```
 
 ### Fields
@@ -772,7 +772,7 @@ const offer = client.Offer()
 List entities matching the given criteria. Returns an array.
 
 ```ts
-const results = await client.Offer().list()
+const results = await client.offer.list()
 ```
 
 #### `load(match: object, ctrl?: object)`
@@ -780,7 +780,7 @@ const results = await client.Offer().list()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.Offer().load({ id: 'offer_id' })
+const result = await client.offer.load({ id: 'offer_id' })
 ```
 
 ### Common Methods
@@ -814,7 +814,7 @@ Return a copy of the entity options.
 ## ReportDetailEntity
 
 ```ts
-const report_detail = client.ReportDetail()
+const report_detail = client.report_detail
 ```
 
 ### Fields
@@ -836,7 +836,7 @@ const report_detail = client.ReportDetail()
 List entities matching the given criteria. Returns an array.
 
 ```ts
-const results = await client.ReportDetail().list()
+const results = await client.report_detail.list()
 ```
 
 ### Common Methods
@@ -870,7 +870,7 @@ Return a copy of the entity options.
 ## ReportGeneralEntity
 
 ```ts
-const report_general = client.ReportGeneral()
+const report_general = client.report_general
 ```
 
 ### Fields
@@ -888,7 +888,7 @@ const report_general = client.ReportGeneral()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.ReportGeneral().load({ id: 'report_general_id' })
+const result = await client.report_general.load({ id: 'report_general_id' })
 ```
 
 ### Common Methods
@@ -922,7 +922,7 @@ Return a copy of the entity options.
 ## ReportModifiedEntity
 
 ```ts
-const report_modified = client.ReportModified()
+const report_modified = client.report_modified
 ```
 
 ### Fields
@@ -938,7 +938,7 @@ const report_modified = client.ReportModified()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.ReportModified().load({ id: 'report_modified_id' })
+const result = await client.report_modified.load({ id: 'report_modified_id' })
 ```
 
 ### Common Methods
@@ -972,7 +972,7 @@ Return a copy of the entity options.
 ## ReportStatusEntity
 
 ```ts
-const report_status = client.ReportStatus()
+const report_status = client.report_status
 ```
 
 ### Fields
@@ -988,7 +988,7 @@ const report_status = client.ReportStatus()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.ReportStatus().load({ id: 'report_status_id' })
+const result = await client.report_status.load({ id: 'report_status_id' })
 ```
 
 ### Common Methods

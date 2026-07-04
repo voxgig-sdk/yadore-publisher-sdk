@@ -45,6 +45,7 @@ class ConversionDetailMerchantEntity
     end
   end
 
+  # @return [ConversionDetailMerchant, Hash] the current ConversionDetailMerchant data
   def data_get
     @_utility.feature_hook.call(@_entctx, "GetData")
     VoxgigStruct.clone(@_data)
@@ -57,6 +58,7 @@ class ConversionDetailMerchantEntity
     end
   end
 
+  # @return [Hash] the current match filter (any subset of ConversionDetailMerchant fields)
   def match_get
     @_utility.feature_hook.call(@_entctx, "GetMatch")
     VoxgigStruct.clone(@_match)
@@ -65,6 +67,11 @@ class ConversionDetailMerchantEntity
   
 
   
+  # List ConversionDetailMerchant items matching the given filter.
+  #
+  # @param reqmatch [ConversionDetailMerchantListMatch, Hash, nil] match filter (any subset of ConversionDetailMerchant fields)
+  # @param ctrl [Object, nil] optional per-call control
+  # @return [Array<ConversionDetailMerchant>, Array] the matching ConversionDetailMerchant items; raises YadorePublisherError on failure
   def list(reqmatch, ctrl = nil)
     utility = @_utility
     ctx = utility.make_context.call({

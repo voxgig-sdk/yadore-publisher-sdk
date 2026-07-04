@@ -108,7 +108,10 @@ Return a copy of the SDK utility object.
 
 #### `direct(array $fetchargs = []): array`
 
-Make a direct HTTP request to any API endpoint. Returns `[$result, $err]`.
+Make a direct HTTP request to any API endpoint. This is the raw-HTTP escape
+hatch: it does **not** throw. It returns a result array
+`["ok" => bool, "status" => int, "headers" => array, "data" => mixed]`, or
+`["ok" => false, "err" => \Exception]` on failure. Branch on `$result["ok"]`.
 
 **Parameters:**
 
@@ -122,11 +125,12 @@ Make a direct HTTP request to any API endpoint. Returns `[$result, $err]`.
 | `$fetchargs["body"]` | `mixed` | Request body (arrays are JSON-serialized). |
 | `$fetchargs["ctrl"]` | `array` | Control options. |
 
-**Returns:** `array [$result, $err]`
+**Returns:** `array` — the result dict (see above); never throws.
 
-#### `prepare(array $fetchargs = []): array`
+#### `prepare(array $fetchargs = []): mixed`
 
-Prepare a fetch definition without sending the request. Returns `[$fetchdef, $err]`.
+Prepare a fetch definition without sending the request. Returns the
+`$fetchdef` array. Throws on error.
 
 
 ---
@@ -134,7 +138,7 @@ Prepare a fetch definition without sending the request. Returns `[$fetchdef, $er
 ## ConversionDetailEntity
 
 ```php
-$conversion_detail = $client->ConversionDetail();
+$conversion_detail = $client->conversion_detail();
 ```
 
 ### Fields
@@ -150,12 +154,12 @@ $conversion_detail = $client->ConversionDetail();
 
 ### Operations
 
-#### `list(array $reqmatch, ?array $ctrl = null): array`
+#### `list(array $reqmatch, ?array $ctrl = null): mixed`
 
-List entities matching the given criteria. Returns an array.
+List entities matching the given criteria. Returns an array. Throws on error.
 
 ```php
-[$results, $err] = $client->ConversionDetail()->list([]);
+$results = $client->conversion_detail()->list([]);
 ```
 
 ### Common Methods
@@ -191,7 +195,7 @@ Return the entity name.
 ## ConversionDetailMerchantEntity
 
 ```php
-$conversion_detail_merchant = $client->ConversionDetailMerchant();
+$conversion_detail_merchant = $client->conversion_detail_merchant();
 ```
 
 ### Fields
@@ -205,12 +209,12 @@ $conversion_detail_merchant = $client->ConversionDetailMerchant();
 
 ### Operations
 
-#### `list(array $reqmatch, ?array $ctrl = null): array`
+#### `list(array $reqmatch, ?array $ctrl = null): mixed`
 
-List entities matching the given criteria. Returns an array.
+List entities matching the given criteria. Returns an array. Throws on error.
 
 ```php
-[$results, $err] = $client->ConversionDetailMerchant()->list([]);
+$results = $client->conversion_detail_merchant()->list([]);
 ```
 
 ### Common Methods
@@ -246,7 +250,7 @@ Return the entity name.
 ## ConversionGeneralEntity
 
 ```php
-$conversion_general = $client->ConversionGeneral();
+$conversion_general = $client->conversion_general();
 ```
 
 ### Fields
@@ -259,12 +263,12 @@ $conversion_general = $client->ConversionGeneral();
 
 ### Operations
 
-#### `load(array $reqmatch, ?array $ctrl = null): array`
+#### `load(array $reqmatch, ?array $ctrl = null): mixed`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Throws on error.
 
 ```php
-[$result, $err] = $client->ConversionGeneral()->load(["id" => "conversion_general_id"]);
+$result = $client->conversion_general()->load(["id" => "conversion_general_id"]);
 ```
 
 ### Common Methods
@@ -300,7 +304,7 @@ Return the entity name.
 ## ConversionStatusEntity
 
 ```php
-$conversion_status = $client->ConversionStatus();
+$conversion_status = $client->conversion_status();
 ```
 
 ### Fields
@@ -311,12 +315,12 @@ $conversion_status = $client->ConversionStatus();
 
 ### Operations
 
-#### `load(array $reqmatch, ?array $ctrl = null): array`
+#### `load(array $reqmatch, ?array $ctrl = null): mixed`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Throws on error.
 
 ```php
-[$result, $err] = $client->ConversionStatus()->load(["id" => "conversion_status_id"]);
+$result = $client->conversion_status()->load(["id" => "conversion_status_id"]);
 ```
 
 ### Common Methods
@@ -352,7 +356,7 @@ Return the entity name.
 ## DeeplinkEntity
 
 ```php
-$deeplink = $client->Deeplink();
+$deeplink = $client->deeplink();
 ```
 
 ### Fields
@@ -367,12 +371,12 @@ $deeplink = $client->Deeplink();
 
 ### Operations
 
-#### `create(array $reqdata, ?array $ctrl = null): array`
+#### `create(array $reqdata, ?array $ctrl = null): mixed`
 
-Create a new entity with the given data.
+Create a new entity with the given data. Throws on error.
 
 ```php
-[$result, $err] = $client->Deeplink()->create([
+$result = $client->deeplink()->create([
   "market" => /* `$STRING` */,
   "url" => /* `$ARRAY` */,
 ]);
@@ -411,7 +415,7 @@ Return the entity name.
 ## DeeplinkMerchantEntity
 
 ```php
-$deeplink_merchant = $client->DeeplinkMerchant();
+$deeplink_merchant = $client->deeplink_merchant();
 ```
 
 ### Fields
@@ -430,12 +434,12 @@ $deeplink_merchant = $client->DeeplinkMerchant();
 
 ### Operations
 
-#### `list(array $reqmatch, ?array $ctrl = null): array`
+#### `list(array $reqmatch, ?array $ctrl = null): mixed`
 
-List entities matching the given criteria. Returns an array.
+List entities matching the given criteria. Returns an array. Throws on error.
 
 ```php
-[$results, $err] = $client->DeeplinkMerchant()->list([]);
+$results = $client->deeplink_merchant()->list([]);
 ```
 
 ### Common Methods
@@ -471,17 +475,17 @@ Return the entity name.
 ## DntEntity
 
 ```php
-$dnt = $client->Dnt();
+$dnt = $client->dnt();
 ```
 
 ### Operations
 
-#### `load(array $reqmatch, ?array $ctrl = null): array`
+#### `load(array $reqmatch, ?array $ctrl = null): mixed`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Throws on error.
 
 ```php
-[$result, $err] = $client->Dnt()->load(["id" => "dnt_id"]);
+$result = $client->dnt()->load(["id" => "dnt_id"]);
 ```
 
 ### Common Methods
@@ -517,7 +521,7 @@ Return the entity name.
 ## MarketEntity
 
 ```php
-$market = $client->Market();
+$market = $client->market();
 ```
 
 ### Fields
@@ -528,12 +532,12 @@ $market = $client->Market();
 
 ### Operations
 
-#### `list(array $reqmatch, ?array $ctrl = null): array`
+#### `list(array $reqmatch, ?array $ctrl = null): mixed`
 
-List entities matching the given criteria. Returns an array.
+List entities matching the given criteria. Returns an array. Throws on error.
 
 ```php
-[$results, $err] = $client->Market()->list([]);
+$results = $client->market()->list([]);
 ```
 
 ### Common Methods
@@ -569,7 +573,7 @@ Return the entity name.
 ## MerchantEntity
 
 ```php
-$merchant = $client->Merchant();
+$merchant = $client->merchant();
 ```
 
 ### Fields
@@ -584,12 +588,12 @@ $merchant = $client->Merchant();
 
 ### Operations
 
-#### `list(array $reqmatch, ?array $ctrl = null): array`
+#### `list(array $reqmatch, ?array $ctrl = null): mixed`
 
-List entities matching the given criteria. Returns an array.
+List entities matching the given criteria. Returns an array. Throws on error.
 
 ```php
-[$results, $err] = $client->Merchant()->list([]);
+$results = $client->merchant()->list([]);
 ```
 
 ### Common Methods
@@ -625,7 +629,7 @@ Return the entity name.
 ## OfferEntity
 
 ```php
-$offer = $client->Offer();
+$offer = $client->offer();
 ```
 
 ### Fields
@@ -653,20 +657,20 @@ $offer = $client->Offer();
 
 ### Operations
 
-#### `list(array $reqmatch, ?array $ctrl = null): array`
+#### `list(array $reqmatch, ?array $ctrl = null): mixed`
 
-List entities matching the given criteria. Returns an array.
+List entities matching the given criteria. Returns an array. Throws on error.
 
 ```php
-[$results, $err] = $client->Offer()->list([]);
+$results = $client->offer()->list([]);
 ```
 
-#### `load(array $reqmatch, ?array $ctrl = null): array`
+#### `load(array $reqmatch, ?array $ctrl = null): mixed`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Throws on error.
 
 ```php
-[$result, $err] = $client->Offer()->load(["id" => "offer_id"]);
+$result = $client->offer()->load(["id" => "offer_id"]);
 ```
 
 ### Common Methods
@@ -702,7 +706,7 @@ Return the entity name.
 ## ReportDetailEntity
 
 ```php
-$report_detail = $client->ReportDetail();
+$report_detail = $client->report_detail();
 ```
 
 ### Fields
@@ -719,12 +723,12 @@ $report_detail = $client->ReportDetail();
 
 ### Operations
 
-#### `list(array $reqmatch, ?array $ctrl = null): array`
+#### `list(array $reqmatch, ?array $ctrl = null): mixed`
 
-List entities matching the given criteria. Returns an array.
+List entities matching the given criteria. Returns an array. Throws on error.
 
 ```php
-[$results, $err] = $client->ReportDetail()->list([]);
+$results = $client->report_detail()->list([]);
 ```
 
 ### Common Methods
@@ -760,7 +764,7 @@ Return the entity name.
 ## ReportGeneralEntity
 
 ```php
-$report_general = $client->ReportGeneral();
+$report_general = $client->report_general();
 ```
 
 ### Fields
@@ -773,12 +777,12 @@ $report_general = $client->ReportGeneral();
 
 ### Operations
 
-#### `load(array $reqmatch, ?array $ctrl = null): array`
+#### `load(array $reqmatch, ?array $ctrl = null): mixed`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Throws on error.
 
 ```php
-[$result, $err] = $client->ReportGeneral()->load(["id" => "report_general_id"]);
+$result = $client->report_general()->load(["id" => "report_general_id"]);
 ```
 
 ### Common Methods
@@ -814,7 +818,7 @@ Return the entity name.
 ## ReportModifiedEntity
 
 ```php
-$report_modified = $client->ReportModified();
+$report_modified = $client->report_modified();
 ```
 
 ### Fields
@@ -825,12 +829,12 @@ $report_modified = $client->ReportModified();
 
 ### Operations
 
-#### `load(array $reqmatch, ?array $ctrl = null): array`
+#### `load(array $reqmatch, ?array $ctrl = null): mixed`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Throws on error.
 
 ```php
-[$result, $err] = $client->ReportModified()->load(["id" => "report_modified_id"]);
+$result = $client->report_modified()->load(["id" => "report_modified_id"]);
 ```
 
 ### Common Methods
@@ -866,7 +870,7 @@ Return the entity name.
 ## ReportStatusEntity
 
 ```php
-$report_status = $client->ReportStatus();
+$report_status = $client->report_status();
 ```
 
 ### Fields
@@ -877,12 +881,12 @@ $report_status = $client->ReportStatus();
 
 ### Operations
 
-#### `load(array $reqmatch, ?array $ctrl = null): array`
+#### `load(array $reqmatch, ?array $ctrl = null): mixed`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Throws on error.
 
 ```php
-[$result, $err] = $client->ReportStatus()->load(["id" => "report_status_id"]);
+$result = $client->report_status()->load(["id" => "report_status_id"]);
 ```
 
 ### Common Methods

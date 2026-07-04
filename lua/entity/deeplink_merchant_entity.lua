@@ -81,6 +81,10 @@ end
 
 
 
+---@param reqmatch DeeplinkMerchantListMatch
+---@param ctrl? table
+---@return DeeplinkMerchant[]
+---@return string? err
 function DeeplinkMerchantEntity:list(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({

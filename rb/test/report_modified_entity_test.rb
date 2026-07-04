@@ -42,8 +42,7 @@ class ReportModifiedEntityTest < Minitest::Test
     # LOAD
     report_modified_ref01_ent = client.ReportModified(nil)
     report_modified_ref01_match_dt0 = {}
-    report_modified_ref01_data_dt0_loaded, err = report_modified_ref01_ent.load(report_modified_ref01_match_dt0, nil)
-    assert_nil err
+    report_modified_ref01_data_dt0_loaded = report_modified_ref01_ent.load(report_modified_ref01_match_dt0, nil)
     assert !report_modified_ref01_data_dt0_loaded.nil?
 
   end

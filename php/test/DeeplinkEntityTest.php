@@ -43,8 +43,7 @@ class DeeplinkEntityTest extends TestCase
         $deeplink_ref01_data = Helpers::to_map(Vs::getprop(
             Vs::getpath($setup["data"], "new.deeplink"), "deeplink_ref01"));
 
-        [$deeplink_ref01_data_result, $err] = $deeplink_ref01_ent->create($deeplink_ref01_data, null);
-        $this->assertNull($err);
+        $deeplink_ref01_data_result = $deeplink_ref01_ent->create($deeplink_ref01_data, null);
         $deeplink_ref01_data = Helpers::to_map($deeplink_ref01_data_result);
         $this->assertNotNull($deeplink_ref01_data);
 
