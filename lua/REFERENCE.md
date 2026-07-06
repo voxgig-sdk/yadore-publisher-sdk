@@ -143,12 +143,12 @@ local conversion_detail = client:ConversionDetail(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `click_id` | ``$STRING`` | No |  |
-| `date` | ``$STRING`` | No |  |
-| `market` | ``$STRING`` | No |  |
-| `merchant` | ``$OBJECT`` | No |  |
-| `placement_id` | ``$STRING`` | No |  |
-| `sale` | ``$NUMBER`` | No |  |
+| `click_id` | `string` | No |  |
+| `date` | `string` | No |  |
+| `market` | `string` | No |  |
+| `merchant` | `table` | No |  |
+| `placement_id` | `string` | No |  |
+| `sale` | `number` | No |  |
 
 ### Operations
 
@@ -200,10 +200,10 @@ local conversion_detail_merchant = client:ConversionDetailMerchant(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `click` | ``$INTEGER`` | No |  |
-| `market` | ``$STRING`` | No |  |
-| `merchant` | ``$OBJECT`` | No |  |
-| `sale` | ``$INTEGER`` | No |  |
+| `click` | `number` | No |  |
+| `market` | `string` | No |  |
+| `merchant` | `table` | No |  |
+| `sale` | `number` | No |  |
 
 ### Operations
 
@@ -255,9 +255,9 @@ local conversion_general = client:ConversionGeneral(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `date` | ``$OBJECT`` | No |  |
-| `market` | ``$OBJECT`` | No |  |
-| `total` | ``$OBJECT`` | No |  |
+| `date` | `table` | No |  |
+| `market` | `table` | No |  |
+| `total` | `table` | No |  |
 
 ### Operations
 
@@ -266,7 +266,7 @@ local conversion_general = client:ConversionGeneral(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:ConversionGeneral():load({ id = "conversion_general_id" })
+local result, err = client:ConversionGeneral():load()
 ```
 
 ### Common Methods
@@ -309,7 +309,7 @@ local conversion_status = client:ConversionStatus(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `status` | ``$STRING`` | No |  |
+| `status` | `string` | No |  |
 
 ### Operations
 
@@ -318,7 +318,7 @@ local conversion_status = client:ConversionStatus(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:ConversionStatus():load({ id = "conversion_status_id" })
+local result, err = client:ConversionStatus():load()
 ```
 
 ### Common Methods
@@ -361,11 +361,11 @@ local deeplink = client:Deeplink(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `is_couponing` | ``$BOOLEAN`` | No |  |
-| `market` | ``$STRING`` | Yes |  |
-| `placement_id` | ``$STRING`` | No |  |
-| `result` | ``$OBJECT`` | No |  |
-| `url` | ``$ARRAY`` | Yes |  |
+| `is_couponing` | `boolean` | No |  |
+| `market` | `string` | Yes |  |
+| `placement_id` | `string` | No |  |
+| `result` | `table` | No |  |
+| `url` | `table` | Yes |  |
 
 ### Operations
 
@@ -375,8 +375,8 @@ Create a new entity with the given data.
 
 ```lua
 local result, err = client:Deeplink():create({
-  market = --[[ `$STRING` ]],
-  url = --[[ `$ARRAY` ]],
+  market = --[[ string ]],
+  url = --[[ table ]],
 })
 ```
 
@@ -420,15 +420,15 @@ local deeplink_merchant = client:DeeplinkMerchant(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `deeplink_count` | ``$INTEGER`` | No |  |
-| `estimated_cpc` | ``$OBJECT`` | No |  |
-| `has_external_homepage` | ``$BOOLEAN`` | No |  |
-| `has_smartlink_homepage` | ``$BOOLEAN`` | No |  |
-| `id` | ``$STRING`` | No |  |
-| `is_smartlink` | ``$BOOLEAN`` | No |  |
-| `logo` | ``$OBJECT`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `traffic_type` | ``$ARRAY`` | No |  |
+| `deeplink_count` | `number` | No |  |
+| `estimated_cpc` | `table` | No |  |
+| `has_external_homepage` | `boolean` | No |  |
+| `has_smartlink_homepage` | `boolean` | No |  |
+| `id` | `string` | No |  |
+| `is_smartlink` | `boolean` | No |  |
+| `logo` | `table` | No |  |
+| `name` | `string` | No |  |
+| `traffic_type` | `table` | No |  |
 
 ### Operations
 
@@ -483,7 +483,7 @@ local dnt = client:Dnt(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Dnt():load({ id = "dnt_id" })
+local result, err = client:Dnt():load()
 ```
 
 ### Common Methods
@@ -526,7 +526,7 @@ local market = client:Market(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `id` | ``$STRING`` | No |  |
+| `id` | `string` | No |  |
 
 ### Operations
 
@@ -578,11 +578,11 @@ local merchant = client:Merchant(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `id` | ``$STRING`` | No |  |
-| `logo` | ``$OBJECT`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `offer_count` | ``$INTEGER`` | No |  |
-| `traffic_type` | ``$ARRAY`` | No |  |
+| `id` | `string` | No |  |
+| `logo` | `table` | No |  |
+| `name` | `string` | No |  |
+| `offer_count` | `number` | No |  |
+| `traffic_type` | `table` | No |  |
 
 ### Operations
 
@@ -634,24 +634,24 @@ local offer = client:Offer(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `availability` | ``$STRING`` | No |  |
-| `brand` | ``$STRING`` | No |  |
-| `click_url` | ``$STRING`` | No |  |
-| `description` | ``$STRING`` | No |  |
-| `ean` | ``$OBJECT`` | No |  |
-| `eer` | ``$STRING`` | No |  |
-| `estimated_cpc` | ``$OBJECT`` | No |  |
-| `id` | ``$STRING`` | No |  |
-| `image` | ``$OBJECT`` | No |  |
-| `merchant` | ``$OBJECT`` | No |  |
-| `original_price` | ``$OBJECT`` | No |  |
-| `price` | ``$OBJECT`` | No |  |
-| `promo_text` | ``$STRING`` | No |  |
-| `shipping_price` | ``$OBJECT`` | No |  |
-| `shipping_time` | ``$OBJECT`` | No |  |
-| `thumbnail` | ``$OBJECT`` | No |  |
-| `title` | ``$STRING`` | No |  |
-| `unit_price` | ``$OBJECT`` | No |  |
+| `availability` | `string` | No |  |
+| `brand` | `string` | No |  |
+| `click_url` | `string` | No |  |
+| `description` | `string` | No |  |
+| `ean` | `table` | No |  |
+| `eer` | `string` | No |  |
+| `estimated_cpc` | `table` | No |  |
+| `id` | `string` | No |  |
+| `image` | `table` | No |  |
+| `merchant` | `table` | No |  |
+| `original_price` | `table` | No |  |
+| `price` | `table` | No |  |
+| `promo_text` | `string` | No |  |
+| `shipping_price` | `table` | No |  |
+| `shipping_time` | `table` | No |  |
+| `thumbnail` | `table` | No |  |
+| `title` | `string` | No |  |
+| `unit_price` | `table` | No |  |
 
 ### Operations
 
@@ -711,13 +711,13 @@ local report_detail = client:ReportDetail(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `click_id` | ``$STRING`` | No |  |
-| `currency` | ``$STRING`` | No |  |
-| `date` | ``$STRING`` | No |  |
-| `market` | ``$STRING`` | No |  |
-| `merchant` | ``$OBJECT`` | No |  |
-| `placement_id` | ``$STRING`` | No |  |
-| `revenue` | ``$NUMBER`` | No |  |
+| `click_id` | `string` | No |  |
+| `currency` | `string` | No |  |
+| `date` | `string` | No |  |
+| `market` | `string` | No |  |
+| `merchant` | `table` | No |  |
+| `placement_id` | `string` | No |  |
+| `revenue` | `number` | No |  |
 
 ### Operations
 
@@ -769,9 +769,9 @@ local report_general = client:ReportGeneral(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `date` | ``$OBJECT`` | No |  |
-| `market` | ``$OBJECT`` | No |  |
-| `total` | ``$OBJECT`` | No |  |
+| `date` | `table` | No |  |
+| `market` | `table` | No |  |
+| `total` | `table` | No |  |
 
 ### Operations
 
@@ -780,7 +780,7 @@ local report_general = client:ReportGeneral(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:ReportGeneral():load({ id = "report_general_id" })
+local result, err = client:ReportGeneral():load()
 ```
 
 ### Common Methods
@@ -823,7 +823,7 @@ local report_modified = client:ReportModified(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `market` | ``$OBJECT`` | No |  |
+| `market` | `table` | No |  |
 
 ### Operations
 
@@ -832,7 +832,7 @@ local report_modified = client:ReportModified(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:ReportModified():load({ id = "report_modified_id" })
+local result, err = client:ReportModified():load()
 ```
 
 ### Common Methods
@@ -875,7 +875,7 @@ local report_status = client:ReportStatus(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `status` | ``$STRING`` | No |  |
+| `status` | `string` | No |  |
 
 ### Operations
 
@@ -884,7 +884,7 @@ local report_status = client:ReportStatus(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:ReportStatus():load({ id = "report_status_id" })
+local result, err = client:ReportStatus():load()
 ```
 
 ### Common Methods

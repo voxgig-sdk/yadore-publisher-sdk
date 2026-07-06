@@ -273,12 +273,12 @@ const conversion_detail = client.ConversionDetail()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `click_id` | ``$STRING`` | No |  |
-| `date` | ``$STRING`` | No |  |
-| `market` | ``$STRING`` | No |  |
-| `merchant` | ``$OBJECT`` | No |  |
-| `placement_id` | ``$STRING`` | No |  |
-| `sale` | ``$NUMBER`` | No |  |
+| `click_id` | `string` | No |  |
+| `date` | `string` | No |  |
+| `market` | `string` | No |  |
+| `merchant` | `Record<string, any>` | No |  |
+| `placement_id` | `string` | No |  |
+| `sale` | `number` | No |  |
 
 ### Operations
 
@@ -328,10 +328,10 @@ const conversion_detail_merchant = client.ConversionDetailMerchant()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `click` | ``$INTEGER`` | No |  |
-| `market` | ``$STRING`` | No |  |
-| `merchant` | ``$OBJECT`` | No |  |
-| `sale` | ``$INTEGER`` | No |  |
+| `click` | `number` | No |  |
+| `market` | `string` | No |  |
+| `merchant` | `Record<string, any>` | No |  |
+| `sale` | `number` | No |  |
 
 ### Operations
 
@@ -381,9 +381,9 @@ const conversion_general = client.ConversionGeneral()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `date` | ``$OBJECT`` | No |  |
-| `market` | ``$OBJECT`` | No |  |
-| `total` | ``$OBJECT`` | No |  |
+| `date` | `Record<string, any>` | No |  |
+| `market` | `Record<string, any>` | No |  |
+| `total` | `Record<string, any>` | No |  |
 
 ### Operations
 
@@ -392,7 +392,7 @@ const conversion_general = client.ConversionGeneral()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.ConversionGeneral().load({ id: 'conversion_general_id' })
+const result = await client.ConversionGeneral().load()
 ```
 
 ### Common Methods
@@ -433,7 +433,7 @@ const conversion_status = client.ConversionStatus()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `status` | ``$STRING`` | No |  |
+| `status` | `string` | No |  |
 
 ### Operations
 
@@ -442,7 +442,7 @@ const conversion_status = client.ConversionStatus()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.ConversionStatus().load({ id: 'conversion_status_id' })
+const result = await client.ConversionStatus().load()
 ```
 
 ### Common Methods
@@ -483,11 +483,11 @@ const deeplink = client.Deeplink()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `is_couponing` | ``$BOOLEAN`` | No |  |
-| `market` | ``$STRING`` | Yes |  |
-| `placement_id` | ``$STRING`` | No |  |
-| `result` | ``$OBJECT`` | No |  |
-| `url` | ``$ARRAY`` | Yes |  |
+| `is_couponing` | `boolean` | No |  |
+| `market` | `string` | Yes |  |
+| `placement_id` | `string` | No |  |
+| `result` | `Record<string, any>` | No |  |
+| `url` | `any[]` | Yes |  |
 
 ### Operations
 
@@ -497,8 +497,8 @@ Create a new entity with the given data.
 
 ```ts
 const result = await client.Deeplink().create({
-  market: /* `$STRING` */,
-  url: /* `$ARRAY` */,
+  market: /* string */,
+  url: /* any[] */,
 })
 ```
 
@@ -540,15 +540,15 @@ const deeplink_merchant = client.DeeplinkMerchant()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `deeplink_count` | ``$INTEGER`` | No |  |
-| `estimated_cpc` | ``$OBJECT`` | No |  |
-| `has_external_homepage` | ``$BOOLEAN`` | No |  |
-| `has_smartlink_homepage` | ``$BOOLEAN`` | No |  |
-| `id` | ``$STRING`` | No |  |
-| `is_smartlink` | ``$BOOLEAN`` | No |  |
-| `logo` | ``$OBJECT`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `traffic_type` | ``$ARRAY`` | No |  |
+| `deeplink_count` | `number` | No |  |
+| `estimated_cpc` | `Record<string, any>` | No |  |
+| `has_external_homepage` | `boolean` | No |  |
+| `has_smartlink_homepage` | `boolean` | No |  |
+| `id` | `string` | No |  |
+| `is_smartlink` | `boolean` | No |  |
+| `logo` | `Record<string, any>` | No |  |
+| `name` | `string` | No |  |
+| `traffic_type` | `any[]` | No |  |
 
 ### Operations
 
@@ -601,7 +601,7 @@ const dnt = client.Dnt()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.Dnt().load({ id: 'dnt_id' })
+const result = await client.Dnt().load()
 ```
 
 ### Common Methods
@@ -642,7 +642,7 @@ const market = client.Market()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `id` | ``$STRING`` | No |  |
+| `id` | `string` | No |  |
 
 ### Operations
 
@@ -692,11 +692,11 @@ const merchant = client.Merchant()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `id` | ``$STRING`` | No |  |
-| `logo` | ``$OBJECT`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `offer_count` | ``$INTEGER`` | No |  |
-| `traffic_type` | ``$ARRAY`` | No |  |
+| `id` | `string` | No |  |
+| `logo` | `Record<string, any>` | No |  |
+| `name` | `string` | No |  |
+| `offer_count` | `number` | No |  |
+| `traffic_type` | `any[]` | No |  |
 
 ### Operations
 
@@ -746,24 +746,24 @@ const offer = client.Offer()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `availability` | ``$STRING`` | No |  |
-| `brand` | ``$STRING`` | No |  |
-| `click_url` | ``$STRING`` | No |  |
-| `description` | ``$STRING`` | No |  |
-| `ean` | ``$OBJECT`` | No |  |
-| `eer` | ``$STRING`` | No |  |
-| `estimated_cpc` | ``$OBJECT`` | No |  |
-| `id` | ``$STRING`` | No |  |
-| `image` | ``$OBJECT`` | No |  |
-| `merchant` | ``$OBJECT`` | No |  |
-| `original_price` | ``$OBJECT`` | No |  |
-| `price` | ``$OBJECT`` | No |  |
-| `promo_text` | ``$STRING`` | No |  |
-| `shipping_price` | ``$OBJECT`` | No |  |
-| `shipping_time` | ``$OBJECT`` | No |  |
-| `thumbnail` | ``$OBJECT`` | No |  |
-| `title` | ``$STRING`` | No |  |
-| `unit_price` | ``$OBJECT`` | No |  |
+| `availability` | `string` | No |  |
+| `brand` | `string` | No |  |
+| `click_url` | `string` | No |  |
+| `description` | `string` | No |  |
+| `ean` | `Record<string, any>` | No |  |
+| `eer` | `string` | No |  |
+| `estimated_cpc` | `Record<string, any>` | No |  |
+| `id` | `string` | No |  |
+| `image` | `Record<string, any>` | No |  |
+| `merchant` | `Record<string, any>` | No |  |
+| `original_price` | `Record<string, any>` | No |  |
+| `price` | `Record<string, any>` | No |  |
+| `promo_text` | `string` | No |  |
+| `shipping_price` | `Record<string, any>` | No |  |
+| `shipping_time` | `Record<string, any>` | No |  |
+| `thumbnail` | `Record<string, any>` | No |  |
+| `title` | `string` | No |  |
+| `unit_price` | `Record<string, any>` | No |  |
 
 ### Operations
 
@@ -821,13 +821,13 @@ const report_detail = client.ReportDetail()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `click_id` | ``$STRING`` | No |  |
-| `currency` | ``$STRING`` | No |  |
-| `date` | ``$STRING`` | No |  |
-| `market` | ``$STRING`` | No |  |
-| `merchant` | ``$OBJECT`` | No |  |
-| `placement_id` | ``$STRING`` | No |  |
-| `revenue` | ``$NUMBER`` | No |  |
+| `click_id` | `string` | No |  |
+| `currency` | `string` | No |  |
+| `date` | `string` | No |  |
+| `market` | `string` | No |  |
+| `merchant` | `Record<string, any>` | No |  |
+| `placement_id` | `string` | No |  |
+| `revenue` | `number` | No |  |
 
 ### Operations
 
@@ -877,9 +877,9 @@ const report_general = client.ReportGeneral()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `date` | ``$OBJECT`` | No |  |
-| `market` | ``$OBJECT`` | No |  |
-| `total` | ``$OBJECT`` | No |  |
+| `date` | `Record<string, any>` | No |  |
+| `market` | `Record<string, any>` | No |  |
+| `total` | `Record<string, any>` | No |  |
 
 ### Operations
 
@@ -888,7 +888,7 @@ const report_general = client.ReportGeneral()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.ReportGeneral().load({ id: 'report_general_id' })
+const result = await client.ReportGeneral().load()
 ```
 
 ### Common Methods
@@ -929,7 +929,7 @@ const report_modified = client.ReportModified()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `market` | ``$OBJECT`` | No |  |
+| `market` | `Record<string, any>` | No |  |
 
 ### Operations
 
@@ -938,7 +938,7 @@ const report_modified = client.ReportModified()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.ReportModified().load({ id: 'report_modified_id' })
+const result = await client.ReportModified().load()
 ```
 
 ### Common Methods
@@ -979,7 +979,7 @@ const report_status = client.ReportStatus()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `status` | ``$STRING`` | No |  |
+| `status` | `string` | No |  |
 
 ### Operations
 
@@ -988,7 +988,7 @@ const report_status = client.ReportStatus()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.ReportStatus().load({ id: 'report_status_id' })
+const result = await client.ReportStatus().load()
 ```
 
 ### Common Methods

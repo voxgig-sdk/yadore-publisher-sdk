@@ -18,8 +18,7 @@ type ConversionDetail struct {
 	Sale *float64 `json:"sale,omitempty"`
 }
 
-// ConversionDetailListMatch mirrors the conversion_detail fields as an all-optional match
-// filter (Go analog of Partial<ConversionDetail>).
+// ConversionDetailListMatch is the typed request payload for ConversionDetail.ListTyped.
 type ConversionDetailListMatch struct {
 	ClickId *string `json:"click_id,omitempty"`
 	Date *string `json:"date,omitempty"`
@@ -37,8 +36,7 @@ type ConversionDetailMerchant struct {
 	Sale *int `json:"sale,omitempty"`
 }
 
-// ConversionDetailMerchantListMatch mirrors the conversion_detail_merchant fields as an all-optional match
-// filter (Go analog of Partial<ConversionDetailMerchant>).
+// ConversionDetailMerchantListMatch is the typed request payload for ConversionDetailMerchant.ListTyped.
 type ConversionDetailMerchantListMatch struct {
 	Click *int `json:"click,omitempty"`
 	Market *string `json:"market,omitempty"`
@@ -53,8 +51,7 @@ type ConversionGeneral struct {
 	Total *map[string]any `json:"total,omitempty"`
 }
 
-// ConversionGeneralLoadMatch mirrors the conversion_general fields as an all-optional match
-// filter (Go analog of Partial<ConversionGeneral>).
+// ConversionGeneralLoadMatch is the typed request payload for ConversionGeneral.LoadTyped.
 type ConversionGeneralLoadMatch struct {
 	Date *map[string]any `json:"date,omitempty"`
 	Market *map[string]any `json:"market,omitempty"`
@@ -66,8 +63,7 @@ type ConversionStatus struct {
 	Status *string `json:"status,omitempty"`
 }
 
-// ConversionStatusLoadMatch mirrors the conversion_status fields as an all-optional match
-// filter (Go analog of Partial<ConversionStatus>).
+// ConversionStatusLoadMatch is the typed request payload for ConversionStatus.LoadTyped.
 type ConversionStatusLoadMatch struct {
 	Status *string `json:"status,omitempty"`
 }
@@ -81,14 +77,13 @@ type Deeplink struct {
 	Url []any `json:"url"`
 }
 
-// DeeplinkCreateData mirrors the deeplink fields as an all-optional match
-// filter (Go analog of Partial<Deeplink>).
+// DeeplinkCreateData is the typed request payload for Deeplink.CreateTyped.
 type DeeplinkCreateData struct {
 	IsCouponing *bool `json:"is_couponing,omitempty"`
-	Market *string `json:"market,omitempty"`
+	Market string `json:"market"`
 	PlacementId *string `json:"placement_id,omitempty"`
 	Result *map[string]any `json:"result,omitempty"`
-	Url *[]any `json:"url,omitempty"`
+	Url []any `json:"url"`
 }
 
 // DeeplinkMerchant is the typed data model for the deeplink_merchant entity.
@@ -104,8 +99,7 @@ type DeeplinkMerchant struct {
 	TrafficType *[]any `json:"traffic_type,omitempty"`
 }
 
-// DeeplinkMerchantListMatch mirrors the deeplink_merchant fields as an all-optional match
-// filter (Go analog of Partial<DeeplinkMerchant>).
+// DeeplinkMerchantListMatch is the typed request payload for DeeplinkMerchant.ListTyped.
 type DeeplinkMerchantListMatch struct {
 	DeeplinkCount *int `json:"deeplink_count,omitempty"`
 	EstimatedCpc *map[string]any `json:"estimated_cpc,omitempty"`
@@ -122,8 +116,7 @@ type DeeplinkMerchantListMatch struct {
 type Dnt struct {
 }
 
-// DntLoadMatch mirrors the dnt fields as an all-optional match
-// filter (Go analog of Partial<Dnt>).
+// DntLoadMatch is the typed request payload for Dnt.LoadTyped.
 type DntLoadMatch struct {
 }
 
@@ -132,8 +125,7 @@ type Market struct {
 	Id *string `json:"id,omitempty"`
 }
 
-// MarketListMatch mirrors the market fields as an all-optional match
-// filter (Go analog of Partial<Market>).
+// MarketListMatch is the typed request payload for Market.ListTyped.
 type MarketListMatch struct {
 	Id *string `json:"id,omitempty"`
 }
@@ -147,8 +139,7 @@ type Merchant struct {
 	TrafficType *[]any `json:"traffic_type,omitempty"`
 }
 
-// MerchantListMatch mirrors the merchant fields as an all-optional match
-// filter (Go analog of Partial<Merchant>).
+// MerchantListMatch is the typed request payload for Merchant.ListTyped.
 type MerchantListMatch struct {
 	Id *string `json:"id,omitempty"`
 	Logo *map[string]any `json:"logo,omitempty"`
@@ -179,8 +170,7 @@ type Offer struct {
 	UnitPrice *map[string]any `json:"unit_price,omitempty"`
 }
 
-// OfferLoadMatch mirrors the offer fields as an all-optional match
-// filter (Go analog of Partial<Offer>).
+// OfferLoadMatch is the typed request payload for Offer.LoadTyped.
 type OfferLoadMatch struct {
 	Availability *string `json:"availability,omitempty"`
 	Brand *string `json:"brand,omitempty"`
@@ -189,7 +179,7 @@ type OfferLoadMatch struct {
 	Ean *map[string]any `json:"ean,omitempty"`
 	Eer *string `json:"eer,omitempty"`
 	EstimatedCpc *map[string]any `json:"estimated_cpc,omitempty"`
-	Id *string `json:"id,omitempty"`
+	Id string `json:"id"`
 	Image *map[string]any `json:"image,omitempty"`
 	Merchant *map[string]any `json:"merchant,omitempty"`
 	OriginalPrice *map[string]any `json:"original_price,omitempty"`
@@ -202,8 +192,7 @@ type OfferLoadMatch struct {
 	UnitPrice *map[string]any `json:"unit_price,omitempty"`
 }
 
-// OfferListMatch mirrors the offer fields as an all-optional match
-// filter (Go analog of Partial<Offer>).
+// OfferListMatch is the typed request payload for Offer.ListTyped.
 type OfferListMatch struct {
 	Availability *string `json:"availability,omitempty"`
 	Brand *string `json:"brand,omitempty"`
@@ -236,8 +225,7 @@ type ReportDetail struct {
 	Revenue *float64 `json:"revenue,omitempty"`
 }
 
-// ReportDetailListMatch mirrors the report_detail fields as an all-optional match
-// filter (Go analog of Partial<ReportDetail>).
+// ReportDetailListMatch is the typed request payload for ReportDetail.ListTyped.
 type ReportDetailListMatch struct {
 	ClickId *string `json:"click_id,omitempty"`
 	Currency *string `json:"currency,omitempty"`
@@ -255,8 +243,7 @@ type ReportGeneral struct {
 	Total *map[string]any `json:"total,omitempty"`
 }
 
-// ReportGeneralLoadMatch mirrors the report_general fields as an all-optional match
-// filter (Go analog of Partial<ReportGeneral>).
+// ReportGeneralLoadMatch is the typed request payload for ReportGeneral.LoadTyped.
 type ReportGeneralLoadMatch struct {
 	Date *map[string]any `json:"date,omitempty"`
 	Market *map[string]any `json:"market,omitempty"`
@@ -268,8 +255,7 @@ type ReportModified struct {
 	Market *map[string]any `json:"market,omitempty"`
 }
 
-// ReportModifiedLoadMatch mirrors the report_modified fields as an all-optional match
-// filter (Go analog of Partial<ReportModified>).
+// ReportModifiedLoadMatch is the typed request payload for ReportModified.LoadTyped.
 type ReportModifiedLoadMatch struct {
 	Market *map[string]any `json:"market,omitempty"`
 }
@@ -279,8 +265,7 @@ type ReportStatus struct {
 	Status *string `json:"status,omitempty"`
 }
 
-// ReportStatusLoadMatch mirrors the report_status fields as an all-optional match
-// filter (Go analog of Partial<ReportStatus>).
+// ReportStatusLoadMatch is the typed request payload for ReportStatus.LoadTyped.
 type ReportStatusLoadMatch struct {
 	Status *string `json:"status,omitempty"`
 }

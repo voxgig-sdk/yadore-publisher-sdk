@@ -4,6 +4,8 @@
 
 The PHP SDK for the YadorePublisher API — an entity-oriented client using PHP conventions.
 
+The SDK exposes the API as capitalised, semantic **Entities** — for example `$client->ConversionDetail()` — with named operations (`list`/`load`/`create`) instead of raw URL paths and query strings. Working with resources and verbs keeps call sites self-describing and reduces cognitive load.
+
 > Other languages, the CLI, and MCP server live alongside this one — see
 > the [top-level README](../README.md).
 
@@ -38,10 +40,41 @@ try {
     // list() returns an array of ConversionDetail records — iterate directly.
     $conversiondetails = $client->ConversionDetail()->list();
     foreach ($conversiondetails as $item) {
-        echo $item["id"] . " " . $item["name"] . "\n";
+        echo $item["click_id"] . "\n";
     }
 } catch (\Throwable $err) {
     echo "Error: " . $err->getMessage();
+}
+```
+
+
+## Error handling
+
+Entity operations throw a `\Throwable` on failure, so wrap them in
+`try` / `catch`:
+
+```php
+try {
+    $conversiondetails = $client->ConversionDetail()->list();
+} catch (\Throwable $err) {
+    echo "Error: " . $err->getMessage();
+}
+```
+
+`direct()` does **not** throw — it returns the result array. Branch on
+`ok`; on failure `status` holds the HTTP status (for error responses) and
+`err` holds a transport error, so read both defensively:
+
+```php
+$result = $client->direct([
+    "path" => "/api/resource/{id}",
+    "method" => "GET",
+    "params" => ["id" => "example_id"],
+]);
+
+if (! $result["ok"]) {
+    $err = $result["err"] ?? null;
+    echo "request failed: " . ($err ? $err->getMessage() : "HTTP " . $result["status"]);
 }
 ```
 
@@ -65,7 +98,10 @@ if ($result["ok"]) {
     echo $result["status"];  // 200
     print_r($result["data"]);  // response body
 } else {
-    echo "Error: " . $result["err"]->getMessage();
+    // On an HTTP error status there is no err (only a transport failure sets
+    // it), so fall back to the status code.
+    $err = $result["err"] ?? null;
+    echo "Error: " . ($err ? $err->getMessage() : "HTTP " . $result["status"]);
 }
 ```
 
@@ -86,16 +122,13 @@ print_r($fetchdef["headers"]);
 
 ### Use test mode
 
-Create a mock client for unit testing — no server required. Seed fixture
-data via the `entity` option so offline calls resolve without a live server:
+Create a mock client for unit testing — no server required:
 
 ```php
-$client = YadorePublisherSDK::test([
-    "entity" => ["conversiondetail" => ["test01" => ["id" => "test01"]]],
-]);
+$client = YadorePublisherSDK::test();
 
-// load() returns the bare mock record (throws on error).
-$conversiondetail = $client->ConversionDetail()->load(["id" => "test01"]);
+// Entity ops return the bare mock record (throws on error).
+$conversiondetail = $client->ConversionDetail()->list();
 print_r($conversiondetail);
 ```
 
@@ -199,10 +232,8 @@ All entities share the same interface.
 | Method | Signature | Description |
 | --- | --- | --- |
 | `load` | `($reqmatch, $ctrl): array` | Load a single entity by match criteria. |
-| `list` | `($reqmatch, $ctrl): array` | List entities matching the criteria. |
+| `list` | `(?array $reqmatch = null, $ctrl): array` | List entities matching the criteria (call with no argument to list all). |
 | `create` | `($reqdata, $ctrl): array` | Create a new entity. |
-| `update` | `($reqdata, $ctrl): array` | Update an existing entity. |
-| `remove` | `($reqmatch, $ctrl): array` | Remove an entity. |
 | `data_get` | `(): array` | Get entity data. |
 | `data_set` | `($data): void` | Set entity data. |
 | `match_get` | `(): array` | Get entity match criteria. |
@@ -439,12 +470,12 @@ Create an instance: `$conversion_detail = $client->ConversionDetail();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `click_id` | ``$STRING`` |  |
-| `date` | ``$STRING`` |  |
-| `market` | ``$STRING`` |  |
-| `merchant` | ``$OBJECT`` |  |
-| `placement_id` | ``$STRING`` |  |
-| `sale` | ``$NUMBER`` |  |
+| `click_id` | `string` |  |
+| `date` | `string` |  |
+| `market` | `string` |  |
+| `merchant` | `array` |  |
+| `placement_id` | `string` |  |
+| `sale` | `float` |  |
 
 #### Example: List
 
@@ -468,10 +499,10 @@ Create an instance: `$conversion_detail_merchant = $client->ConversionDetailMerc
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `click` | ``$INTEGER`` |  |
-| `market` | ``$STRING`` |  |
-| `merchant` | ``$OBJECT`` |  |
-| `sale` | ``$INTEGER`` |  |
+| `click` | `int` |  |
+| `market` | `string` |  |
+| `merchant` | `array` |  |
+| `sale` | `int` |  |
 
 #### Example: List
 
@@ -495,15 +526,15 @@ Create an instance: `$conversion_general = $client->ConversionGeneral();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `date` | ``$OBJECT`` |  |
-| `market` | ``$OBJECT`` |  |
-| `total` | ``$OBJECT`` |  |
+| `date` | `array` |  |
+| `market` | `array` |  |
+| `total` | `array` |  |
 
 #### Example: Load
 
 ```php
 // load() returns the bare ConversionGeneral record (throws on error).
-$conversion_general = $client->ConversionGeneral()->load(["id" => "conversion_general_id"]);
+$conversion_general = $client->ConversionGeneral()->load();
 ```
 
 
@@ -521,13 +552,13 @@ Create an instance: `$conversion_status = $client->ConversionStatus();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `status` | ``$STRING`` |  |
+| `status` | `string` |  |
 
 #### Example: Load
 
 ```php
 // load() returns the bare ConversionStatus record (throws on error).
-$conversion_status = $client->ConversionStatus()->load(["id" => "conversion_status_id"]);
+$conversion_status = $client->ConversionStatus()->load();
 ```
 
 
@@ -545,18 +576,18 @@ Create an instance: `$deeplink = $client->Deeplink();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `is_couponing` | ``$BOOLEAN`` |  |
-| `market` | ``$STRING`` |  |
-| `placement_id` | ``$STRING`` |  |
-| `result` | ``$OBJECT`` |  |
-| `url` | ``$ARRAY`` |  |
+| `is_couponing` | `bool` |  |
+| `market` | `string` |  |
+| `placement_id` | `string` |  |
+| `result` | `array` |  |
+| `url` | `array` |  |
 
 #### Example: Create
 
 ```php
 $deeplink = $client->Deeplink()->create([
-    "market" => null, // `$STRING`
-    "url" => null, // `$ARRAY`
+    "market" => null, // string
+    "url" => null, // array
 ]);
 ```
 
@@ -575,15 +606,15 @@ Create an instance: `$deeplink_merchant = $client->DeeplinkMerchant();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `deeplink_count` | ``$INTEGER`` |  |
-| `estimated_cpc` | ``$OBJECT`` |  |
-| `has_external_homepage` | ``$BOOLEAN`` |  |
-| `has_smartlink_homepage` | ``$BOOLEAN`` |  |
-| `id` | ``$STRING`` |  |
-| `is_smartlink` | ``$BOOLEAN`` |  |
-| `logo` | ``$OBJECT`` |  |
-| `name` | ``$STRING`` |  |
-| `traffic_type` | ``$ARRAY`` |  |
+| `deeplink_count` | `int` |  |
+| `estimated_cpc` | `array` |  |
+| `has_external_homepage` | `bool` |  |
+| `has_smartlink_homepage` | `bool` |  |
+| `id` | `string` |  |
+| `is_smartlink` | `bool` |  |
+| `logo` | `array` |  |
+| `name` | `string` |  |
+| `traffic_type` | `array` |  |
 
 #### Example: List
 
@@ -607,7 +638,7 @@ Create an instance: `$dnt = $client->Dnt();`
 
 ```php
 // load() returns the bare Dnt record (throws on error).
-$dnt = $client->Dnt()->load(["id" => "dnt_id"]);
+$dnt = $client->Dnt()->load();
 ```
 
 
@@ -625,7 +656,7 @@ Create an instance: `$market = $client->Market();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `id` | ``$STRING`` |  |
+| `id` | `string` |  |
 
 #### Example: List
 
@@ -649,11 +680,11 @@ Create an instance: `$merchant = $client->Merchant();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `id` | ``$STRING`` |  |
-| `logo` | ``$OBJECT`` |  |
-| `name` | ``$STRING`` |  |
-| `offer_count` | ``$INTEGER`` |  |
-| `traffic_type` | ``$ARRAY`` |  |
+| `id` | `string` |  |
+| `logo` | `array` |  |
+| `name` | `string` |  |
+| `offer_count` | `int` |  |
+| `traffic_type` | `array` |  |
 
 #### Example: List
 
@@ -678,24 +709,24 @@ Create an instance: `$offer = $client->Offer();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `availability` | ``$STRING`` |  |
-| `brand` | ``$STRING`` |  |
-| `click_url` | ``$STRING`` |  |
-| `description` | ``$STRING`` |  |
-| `ean` | ``$OBJECT`` |  |
-| `eer` | ``$STRING`` |  |
-| `estimated_cpc` | ``$OBJECT`` |  |
-| `id` | ``$STRING`` |  |
-| `image` | ``$OBJECT`` |  |
-| `merchant` | ``$OBJECT`` |  |
-| `original_price` | ``$OBJECT`` |  |
-| `price` | ``$OBJECT`` |  |
-| `promo_text` | ``$STRING`` |  |
-| `shipping_price` | ``$OBJECT`` |  |
-| `shipping_time` | ``$OBJECT`` |  |
-| `thumbnail` | ``$OBJECT`` |  |
-| `title` | ``$STRING`` |  |
-| `unit_price` | ``$OBJECT`` |  |
+| `availability` | `string` |  |
+| `brand` | `string` |  |
+| `click_url` | `string` |  |
+| `description` | `string` |  |
+| `ean` | `array` |  |
+| `eer` | `string` |  |
+| `estimated_cpc` | `array` |  |
+| `id` | `string` |  |
+| `image` | `array` |  |
+| `merchant` | `array` |  |
+| `original_price` | `array` |  |
+| `price` | `array` |  |
+| `promo_text` | `string` |  |
+| `shipping_price` | `array` |  |
+| `shipping_time` | `array` |  |
+| `thumbnail` | `array` |  |
+| `title` | `string` |  |
+| `unit_price` | `array` |  |
 
 #### Example: Load
 
@@ -726,13 +757,13 @@ Create an instance: `$report_detail = $client->ReportDetail();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `click_id` | ``$STRING`` |  |
-| `currency` | ``$STRING`` |  |
-| `date` | ``$STRING`` |  |
-| `market` | ``$STRING`` |  |
-| `merchant` | ``$OBJECT`` |  |
-| `placement_id` | ``$STRING`` |  |
-| `revenue` | ``$NUMBER`` |  |
+| `click_id` | `string` |  |
+| `currency` | `string` |  |
+| `date` | `string` |  |
+| `market` | `string` |  |
+| `merchant` | `array` |  |
+| `placement_id` | `string` |  |
+| `revenue` | `float` |  |
 
 #### Example: List
 
@@ -756,15 +787,15 @@ Create an instance: `$report_general = $client->ReportGeneral();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `date` | ``$OBJECT`` |  |
-| `market` | ``$OBJECT`` |  |
-| `total` | ``$OBJECT`` |  |
+| `date` | `array` |  |
+| `market` | `array` |  |
+| `total` | `array` |  |
 
 #### Example: Load
 
 ```php
 // load() returns the bare ReportGeneral record (throws on error).
-$report_general = $client->ReportGeneral()->load(["id" => "report_general_id"]);
+$report_general = $client->ReportGeneral()->load();
 ```
 
 
@@ -782,13 +813,13 @@ Create an instance: `$report_modified = $client->ReportModified();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `market` | ``$OBJECT`` |  |
+| `market` | `array` |  |
 
 #### Example: Load
 
 ```php
 // load() returns the bare ReportModified record (throws on error).
-$report_modified = $client->ReportModified()->load(["id" => "report_modified_id"]);
+$report_modified = $client->ReportModified()->load();
 ```
 
 
@@ -806,22 +837,26 @@ Create an instance: `$report_status = $client->ReportStatus();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `status` | ``$STRING`` |  |
+| `status` | `string` |  |
 
 #### Example: Load
 
 ```php
 // load() returns the bare ReportStatus record (throws on error).
-$report_status = $client->ReportStatus()->load(["id" => "report_status_id"]);
+$report_status = $client->ReportStatus()->load();
 ```
 
 
-## Explanation
+## Advanced
+
+> The sections above cover everyday use. The material below explains the
+> SDK's internals — useful when extending it with custom features, but not
+> needed for normal use.
 
 ### The operation pipeline
 
-Every entity operation (load, list, create, update, remove) follows a
-six-stage pipeline. Each stage fires a feature hook before executing:
+Every entity operation follows a six-stage pipeline. Each stage fires a
+feature hook before executing:
 
 ```
 PrePoint → PreSpec → PreRequest → PreResponse → PreResult → PreDone
@@ -838,8 +873,9 @@ PrePoint → PreSpec → PreRequest → PreResponse → PreResult → PreDone
 - **PreDone**: Final stage before returning to the caller. Entity
   state (match, data) is updated here.
 
-If any stage returns an error, the pipeline short-circuits and the
-error is returned to the caller as the second element in the return array.
+If any stage errors, the pipeline short-circuits and the error surfaces
+to the caller — see [Error handling](#error-handling) for how that looks
+in this language.
 
 ### Features and hooks
 
@@ -883,15 +919,15 @@ when needed.
 
 ### Entity state
 
-Entity instances are stateful. After a successful `load`, the entity
+Entity instances are stateful. After a successful `list`, the entity
 stores the returned data and match criteria internally.
 
 ```php
 $conversiondetail = $client->ConversionDetail();
-$conversiondetail->load(["id" => "example_id"]);
+$conversiondetail->list();
 
-// $conversiondetail->dataGet() now returns the loaded conversiondetail data
-// $conversiondetail->matchGet() returns the last match criteria
+// $conversiondetail->data_get() now returns the conversiondetail data from the last list
+// $conversiondetail->match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

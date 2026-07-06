@@ -64,8 +64,13 @@ class ConversionStatusEntity:
         return vs.clone(self._match)
 
     
-    def load(self, reqmatch: ConversionStatusLoadMatch, ctrl=None) -> ConversionStatus:
+    def load(self, reqmatch=None, ctrl=None) -> ConversionStatus:
         utility = self._utility
+        # reqmatch is optional: an entity with no id-like key loads with no
+        # match. Treat None as an empty match so client.ConversionStatus().load()
+        # works with no args.
+        if reqmatch is None:
+            reqmatch = {}
         ctx = utility.make_context({
             "opname": "load",
             "ctrl": ctrl,

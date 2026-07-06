@@ -221,85 +221,85 @@ class YadorePublisherSDK:
 
 
     def ConversionDetail(self, data=None) -> "ConversionDetailEntity":
-        """Entity factory: client.ConversionDetail().list({}) / client.ConversionDetail().load({"id": ...})."""
+        """Entity factory: client.ConversionDetail().list() / client.ConversionDetail().load({"id": ...})."""
         from entity.conversion_detail_entity import ConversionDetailEntity
         return ConversionDetailEntity(self, data)
 
 
     def ConversionDetailMerchant(self, data=None) -> "ConversionDetailMerchantEntity":
-        """Entity factory: client.ConversionDetailMerchant().list({}) / client.ConversionDetailMerchant().load({"id": ...})."""
+        """Entity factory: client.ConversionDetailMerchant().list() / client.ConversionDetailMerchant().load({"id": ...})."""
         from entity.conversion_detail_merchant_entity import ConversionDetailMerchantEntity
         return ConversionDetailMerchantEntity(self, data)
 
 
     def ConversionGeneral(self, data=None) -> "ConversionGeneralEntity":
-        """Entity factory: client.ConversionGeneral().list({}) / client.ConversionGeneral().load({"id": ...})."""
+        """Entity factory: client.ConversionGeneral().list() / client.ConversionGeneral().load({"id": ...})."""
         from entity.conversion_general_entity import ConversionGeneralEntity
         return ConversionGeneralEntity(self, data)
 
 
     def ConversionStatus(self, data=None) -> "ConversionStatusEntity":
-        """Entity factory: client.ConversionStatus().list({}) / client.ConversionStatus().load({"id": ...})."""
+        """Entity factory: client.ConversionStatus().list() / client.ConversionStatus().load({"id": ...})."""
         from entity.conversion_status_entity import ConversionStatusEntity
         return ConversionStatusEntity(self, data)
 
 
     def Deeplink(self, data=None) -> "DeeplinkEntity":
-        """Entity factory: client.Deeplink().list({}) / client.Deeplink().load({"id": ...})."""
+        """Entity factory: client.Deeplink().list() / client.Deeplink().load({"id": ...})."""
         from entity.deeplink_entity import DeeplinkEntity
         return DeeplinkEntity(self, data)
 
 
     def DeeplinkMerchant(self, data=None) -> "DeeplinkMerchantEntity":
-        """Entity factory: client.DeeplinkMerchant().list({}) / client.DeeplinkMerchant().load({"id": ...})."""
+        """Entity factory: client.DeeplinkMerchant().list() / client.DeeplinkMerchant().load({"id": ...})."""
         from entity.deeplink_merchant_entity import DeeplinkMerchantEntity
         return DeeplinkMerchantEntity(self, data)
 
 
     def Dnt(self, data=None) -> "DntEntity":
-        """Entity factory: client.Dnt().list({}) / client.Dnt().load({"id": ...})."""
+        """Entity factory: client.Dnt().list() / client.Dnt().load({"id": ...})."""
         from entity.dnt_entity import DntEntity
         return DntEntity(self, data)
 
 
     def Market(self, data=None) -> "MarketEntity":
-        """Entity factory: client.Market().list({}) / client.Market().load({"id": ...})."""
+        """Entity factory: client.Market().list() / client.Market().load({"id": ...})."""
         from entity.market_entity import MarketEntity
         return MarketEntity(self, data)
 
 
     def Merchant(self, data=None) -> "MerchantEntity":
-        """Entity factory: client.Merchant().list({}) / client.Merchant().load({"id": ...})."""
+        """Entity factory: client.Merchant().list() / client.Merchant().load({"id": ...})."""
         from entity.merchant_entity import MerchantEntity
         return MerchantEntity(self, data)
 
 
     def Offer(self, data=None) -> "OfferEntity":
-        """Entity factory: client.Offer().list({}) / client.Offer().load({"id": ...})."""
+        """Entity factory: client.Offer().list() / client.Offer().load({"id": ...})."""
         from entity.offer_entity import OfferEntity
         return OfferEntity(self, data)
 
 
     def ReportDetail(self, data=None) -> "ReportDetailEntity":
-        """Entity factory: client.ReportDetail().list({}) / client.ReportDetail().load({"id": ...})."""
+        """Entity factory: client.ReportDetail().list() / client.ReportDetail().load({"id": ...})."""
         from entity.report_detail_entity import ReportDetailEntity
         return ReportDetailEntity(self, data)
 
 
     def ReportGeneral(self, data=None) -> "ReportGeneralEntity":
-        """Entity factory: client.ReportGeneral().list({}) / client.ReportGeneral().load({"id": ...})."""
+        """Entity factory: client.ReportGeneral().list() / client.ReportGeneral().load({"id": ...})."""
         from entity.report_general_entity import ReportGeneralEntity
         return ReportGeneralEntity(self, data)
 
 
     def ReportModified(self, data=None) -> "ReportModifiedEntity":
-        """Entity factory: client.ReportModified().list({}) / client.ReportModified().load({"id": ...})."""
+        """Entity factory: client.ReportModified().list() / client.ReportModified().load({"id": ...})."""
         from entity.report_modified_entity import ReportModifiedEntity
         return ReportModifiedEntity(self, data)
 
 
     def ReportStatus(self, data=None) -> "ReportStatusEntity":
-        """Entity factory: client.ReportStatus().list({}) / client.ReportStatus().load({"id": ...})."""
+        """Entity factory: client.ReportStatus().list() / client.ReportStatus().load({"id": ...})."""
         from entity.report_status_entity import ReportStatusEntity
         return ReportStatusEntity(self, data)
 

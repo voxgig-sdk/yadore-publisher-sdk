@@ -79,12 +79,15 @@ class Deeplink(DeeplinkRequired, total=False):
     result: dict
 
 
-class DeeplinkCreateData(TypedDict, total=False):
-    is_couponing: bool
+class DeeplinkCreateDataRequired(TypedDict):
     market: str
+    url: list
+
+
+class DeeplinkCreateData(DeeplinkCreateDataRequired, total=False):
+    is_couponing: bool
     placement_id: str
     result: dict
-    url: list
 
 
 class DeeplinkMerchant(TypedDict, total=False):
@@ -164,7 +167,11 @@ class Offer(TypedDict, total=False):
     unit_price: dict
 
 
-class OfferLoadMatch(TypedDict, total=False):
+class OfferLoadMatchRequired(TypedDict):
+    id: str
+
+
+class OfferLoadMatch(OfferLoadMatchRequired, total=False):
     availability: str
     brand: str
     click_url: str
@@ -172,7 +179,6 @@ class OfferLoadMatch(TypedDict, total=False):
     ean: dict
     eer: str
     estimated_cpc: dict
-    id: str
     image: dict
     merchant: dict
     original_price: dict

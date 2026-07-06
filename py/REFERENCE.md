@@ -8,7 +8,7 @@ Complete API reference for the YadorePublisher Python SDK.
 ### Constructor
 
 ```python
-from yadore-publisher_sdk import YadorePublisherSDK
+from yadorepublisher_sdk import YadorePublisherSDK
 
 client = YadorePublisherSDK(options)
 ```
@@ -140,21 +140,21 @@ conversion_detail = client.ConversionDetail()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `click_id` | ``$STRING`` | No |  |
-| `date` | ``$STRING`` | No |  |
-| `market` | ``$STRING`` | No |  |
-| `merchant` | ``$OBJECT`` | No |  |
-| `placement_id` | ``$STRING`` | No |  |
-| `sale` | ``$NUMBER`` | No |  |
+| `click_id` | `str` | No |  |
+| `date` | `str` | No |  |
+| `market` | `str` | No |  |
+| `merchant` | `dict` | No |  |
+| `placement_id` | `str` | No |  |
+| `sale` | `float` | No |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl=None) -> list`
+#### `list(reqmatch=None, ctrl=None) -> list`
 
-List entities matching the given criteria. Returns a list and raises on error.
+List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list and raises on error.
 
 ```python
-results = client.ConversionDetail().list({})
+results = client.ConversionDetail().list()
 for conversion_detail in results:
     print(conversion_detail)
 ```
@@ -198,19 +198,19 @@ conversion_detail_merchant = client.ConversionDetailMerchant()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `click` | ``$INTEGER`` | No |  |
-| `market` | ``$STRING`` | No |  |
-| `merchant` | ``$OBJECT`` | No |  |
-| `sale` | ``$INTEGER`` | No |  |
+| `click` | `int` | No |  |
+| `market` | `str` | No |  |
+| `merchant` | `dict` | No |  |
+| `sale` | `int` | No |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl=None) -> list`
+#### `list(reqmatch=None, ctrl=None) -> list`
 
-List entities matching the given criteria. Returns a list and raises on error.
+List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list and raises on error.
 
 ```python
-results = client.ConversionDetailMerchant().list({})
+results = client.ConversionDetailMerchant().list()
 for conversion_detail_merchant in results:
     print(conversion_detail_merchant)
 ```
@@ -254,9 +254,9 @@ conversion_general = client.ConversionGeneral()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `date` | ``$OBJECT`` | No |  |
-| `market` | ``$OBJECT`` | No |  |
-| `total` | ``$OBJECT`` | No |  |
+| `date` | `dict` | No |  |
+| `market` | `dict` | No |  |
+| `total` | `dict` | No |  |
 
 ### Operations
 
@@ -265,7 +265,7 @@ conversion_general = client.ConversionGeneral()
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.ConversionGeneral().load({"id": "conversion_general_id"})
+result = client.ConversionGeneral().load()
 ```
 
 ### Common Methods
@@ -307,7 +307,7 @@ conversion_status = client.ConversionStatus()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `status` | ``$STRING`` | No |  |
+| `status` | `str` | No |  |
 
 ### Operations
 
@@ -316,7 +316,7 @@ conversion_status = client.ConversionStatus()
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.ConversionStatus().load({"id": "conversion_status_id"})
+result = client.ConversionStatus().load()
 ```
 
 ### Common Methods
@@ -358,11 +358,11 @@ deeplink = client.Deeplink()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `is_couponing` | ``$BOOLEAN`` | No |  |
-| `market` | ``$STRING`` | Yes |  |
-| `placement_id` | ``$STRING`` | No |  |
-| `result` | ``$OBJECT`` | No |  |
-| `url` | ``$ARRAY`` | Yes |  |
+| `is_couponing` | `bool` | No |  |
+| `market` | `str` | Yes |  |
+| `placement_id` | `str` | No |  |
+| `result` | `dict` | No |  |
+| `url` | `list` | Yes |  |
 
 ### Operations
 
@@ -372,8 +372,8 @@ Create a new entity with the given data. Returns the created entity data and rai
 
 ```python
 result = client.Deeplink().create({
-    "market": ...,  # `$STRING`
-    "url": ...,  # `$ARRAY`
+    "market": "example",  # str
+    "url": [],  # list
 })
 ```
 
@@ -416,24 +416,24 @@ deeplink_merchant = client.DeeplinkMerchant()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `deeplink_count` | ``$INTEGER`` | No |  |
-| `estimated_cpc` | ``$OBJECT`` | No |  |
-| `has_external_homepage` | ``$BOOLEAN`` | No |  |
-| `has_smartlink_homepage` | ``$BOOLEAN`` | No |  |
-| `id` | ``$STRING`` | No |  |
-| `is_smartlink` | ``$BOOLEAN`` | No |  |
-| `logo` | ``$OBJECT`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `traffic_type` | ``$ARRAY`` | No |  |
+| `deeplink_count` | `int` | No |  |
+| `estimated_cpc` | `dict` | No |  |
+| `has_external_homepage` | `bool` | No |  |
+| `has_smartlink_homepage` | `bool` | No |  |
+| `id` | `str` | No |  |
+| `is_smartlink` | `bool` | No |  |
+| `logo` | `dict` | No |  |
+| `name` | `str` | No |  |
+| `traffic_type` | `list` | No |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl=None) -> list`
+#### `list(reqmatch=None, ctrl=None) -> list`
 
-List entities matching the given criteria. Returns a list and raises on error.
+List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list and raises on error.
 
 ```python
-results = client.DeeplinkMerchant().list({})
+results = client.DeeplinkMerchant().list()
 for deeplink_merchant in results:
     print(deeplink_merchant)
 ```
@@ -480,7 +480,7 @@ dnt = client.Dnt()
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.Dnt().load({"id": "dnt_id"})
+result = client.Dnt().load()
 ```
 
 ### Common Methods
@@ -522,16 +522,16 @@ market = client.Market()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `id` | ``$STRING`` | No |  |
+| `id` | `str` | No |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl=None) -> list`
+#### `list(reqmatch=None, ctrl=None) -> list`
 
-List entities matching the given criteria. Returns a list and raises on error.
+List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list and raises on error.
 
 ```python
-results = client.Market().list({})
+results = client.Market().list()
 for market in results:
     print(market)
 ```
@@ -575,20 +575,20 @@ merchant = client.Merchant()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `id` | ``$STRING`` | No |  |
-| `logo` | ``$OBJECT`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `offer_count` | ``$INTEGER`` | No |  |
-| `traffic_type` | ``$ARRAY`` | No |  |
+| `id` | `str` | No |  |
+| `logo` | `dict` | No |  |
+| `name` | `str` | No |  |
+| `offer_count` | `int` | No |  |
+| `traffic_type` | `list` | No |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl=None) -> list`
+#### `list(reqmatch=None, ctrl=None) -> list`
 
-List entities matching the given criteria. Returns a list and raises on error.
+List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list and raises on error.
 
 ```python
-results = client.Merchant().list({})
+results = client.Merchant().list()
 for merchant in results:
     print(merchant)
 ```
@@ -632,33 +632,33 @@ offer = client.Offer()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `availability` | ``$STRING`` | No |  |
-| `brand` | ``$STRING`` | No |  |
-| `click_url` | ``$STRING`` | No |  |
-| `description` | ``$STRING`` | No |  |
-| `ean` | ``$OBJECT`` | No |  |
-| `eer` | ``$STRING`` | No |  |
-| `estimated_cpc` | ``$OBJECT`` | No |  |
-| `id` | ``$STRING`` | No |  |
-| `image` | ``$OBJECT`` | No |  |
-| `merchant` | ``$OBJECT`` | No |  |
-| `original_price` | ``$OBJECT`` | No |  |
-| `price` | ``$OBJECT`` | No |  |
-| `promo_text` | ``$STRING`` | No |  |
-| `shipping_price` | ``$OBJECT`` | No |  |
-| `shipping_time` | ``$OBJECT`` | No |  |
-| `thumbnail` | ``$OBJECT`` | No |  |
-| `title` | ``$STRING`` | No |  |
-| `unit_price` | ``$OBJECT`` | No |  |
+| `availability` | `str` | No |  |
+| `brand` | `str` | No |  |
+| `click_url` | `str` | No |  |
+| `description` | `str` | No |  |
+| `ean` | `dict` | No |  |
+| `eer` | `str` | No |  |
+| `estimated_cpc` | `dict` | No |  |
+| `id` | `str` | No |  |
+| `image` | `dict` | No |  |
+| `merchant` | `dict` | No |  |
+| `original_price` | `dict` | No |  |
+| `price` | `dict` | No |  |
+| `promo_text` | `str` | No |  |
+| `shipping_price` | `dict` | No |  |
+| `shipping_time` | `dict` | No |  |
+| `thumbnail` | `dict` | No |  |
+| `title` | `str` | No |  |
+| `unit_price` | `dict` | No |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl=None) -> list`
+#### `list(reqmatch=None, ctrl=None) -> list`
 
-List entities matching the given criteria. Returns a list and raises on error.
+List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list and raises on error.
 
 ```python
-results = client.Offer().list({})
+results = client.Offer().list()
 for offer in results:
     print(offer)
 ```
@@ -710,22 +710,22 @@ report_detail = client.ReportDetail()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `click_id` | ``$STRING`` | No |  |
-| `currency` | ``$STRING`` | No |  |
-| `date` | ``$STRING`` | No |  |
-| `market` | ``$STRING`` | No |  |
-| `merchant` | ``$OBJECT`` | No |  |
-| `placement_id` | ``$STRING`` | No |  |
-| `revenue` | ``$NUMBER`` | No |  |
+| `click_id` | `str` | No |  |
+| `currency` | `str` | No |  |
+| `date` | `str` | No |  |
+| `market` | `str` | No |  |
+| `merchant` | `dict` | No |  |
+| `placement_id` | `str` | No |  |
+| `revenue` | `float` | No |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl=None) -> list`
+#### `list(reqmatch=None, ctrl=None) -> list`
 
-List entities matching the given criteria. Returns a list and raises on error.
+List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list and raises on error.
 
 ```python
-results = client.ReportDetail().list({})
+results = client.ReportDetail().list()
 for report_detail in results:
     print(report_detail)
 ```
@@ -769,9 +769,9 @@ report_general = client.ReportGeneral()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `date` | ``$OBJECT`` | No |  |
-| `market` | ``$OBJECT`` | No |  |
-| `total` | ``$OBJECT`` | No |  |
+| `date` | `dict` | No |  |
+| `market` | `dict` | No |  |
+| `total` | `dict` | No |  |
 
 ### Operations
 
@@ -780,7 +780,7 @@ report_general = client.ReportGeneral()
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.ReportGeneral().load({"id": "report_general_id"})
+result = client.ReportGeneral().load()
 ```
 
 ### Common Methods
@@ -822,7 +822,7 @@ report_modified = client.ReportModified()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `market` | ``$OBJECT`` | No |  |
+| `market` | `dict` | No |  |
 
 ### Operations
 
@@ -831,7 +831,7 @@ report_modified = client.ReportModified()
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.ReportModified().load({"id": "report_modified_id"})
+result = client.ReportModified().load()
 ```
 
 ### Common Methods
@@ -873,7 +873,7 @@ report_status = client.ReportStatus()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `status` | ``$STRING`` | No |  |
+| `status` | `str` | No |  |
 
 ### Operations
 
@@ -882,7 +882,7 @@ report_status = client.ReportStatus()
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.ReportStatus().load({"id": "report_status_id"})
+result = client.ReportStatus().load()
 ```
 
 ### Common Methods

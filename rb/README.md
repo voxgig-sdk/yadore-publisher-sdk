@@ -4,6 +4,8 @@
 
 The Ruby SDK for the YadorePublisher API — an entity-oriented client using idiomatic Ruby conventions.
 
+The SDK exposes the API as capitalised, semantic **Entities** — for example `client.ConversionDetail` — with named operations (`list`/`load`/`create`) instead of raw URL paths and query strings. Working with resources and verbs keeps call sites self-describing and reduces cognitive load.
+
 > Other languages, the CLI, and MCP server live alongside this one — see
 > the [top-level README](../README.md).
 
@@ -37,11 +39,38 @@ begin
   # list returns an Array of ConversionDetail records — iterate directly.
   conversiondetails = client.ConversionDetail.list
   conversiondetails.each do |item|
-    puts "#{item["id"]} #{item["name"]}"
+    puts "#{item["click_id"]}"
   end
 rescue => err
   warn "list failed: #{err}"
 end
+```
+
+
+## Error handling
+
+Entity operations raise on failure, so rescue them:
+
+```ruby
+begin
+  conversiondetails = client.ConversionDetail.list()
+rescue => err
+  warn "list failed: #{err}"
+end
+```
+
+`direct` does **not** raise — it returns the result hash. Branch on
+`ok`; on failure `status` holds the HTTP status (for error responses) and
+`err` holds a transport error, so read both defensively:
+
+```ruby
+result = client.direct({
+  "path" => "/api/resource/{id}",
+  "method" => "GET",
+  "params" => { "id" => "example_id" },
+})
+
+warn "request failed: #{result["err"] || "HTTP #{result["status"]}"}" unless result["ok"]
 ```
 
 
@@ -62,7 +91,9 @@ if result["ok"]
   puts result["status"]  # 200
   puts result["data"]    # response body
 else
-  warn result["err"]
+  # On an HTTP error status there is no err (only a transport failure sets
+  # it), so fall back to the status code.
+  warn(result["err"] || "HTTP #{result["status"]}")
 end
 ```
 
@@ -85,16 +116,13 @@ end
 
 ### Use test mode
 
-Create a mock client for unit testing — no server required. Seed fixture
-data via the `entity` option so offline calls resolve without a live server:
+Create a mock client for unit testing — no server required:
 
 ```ruby
-client = YadorePublisherSDK.test({
-  "entity" => { "conversiondetail" => { "test01" => { "id" => "test01" } } },
-})
+client = YadorePublisherSDK.test
 
-# load returns the bare mock record (raises on error).
-conversiondetail = client.ConversionDetail.load({ "id" => "test01" })
+# Entity ops return the bare mock record (raises on error).
+conversiondetail = client.ConversionDetail.list()
 puts conversiondetail
 ```
 
@@ -195,10 +223,8 @@ All entities share the same interface.
 | Method | Signature | Description |
 | --- | --- | --- |
 | `load` | `(reqmatch, ctrl) -> any` | Load a single entity by match criteria. Raises on error. |
-| `list` | `(reqmatch, ctrl) -> Array` | List entities matching the criteria. Raises on error. |
+| `list` | `(reqmatch = nil, ctrl) -> Array` | List entities matching the criteria (call with no argument to list all). Raises on error. |
 | `create` | `(reqdata, ctrl) -> any` | Create a new entity. Raises on error. |
-| `update` | `(reqdata, ctrl) -> any` | Update an existing entity. Raises on error. |
-| `remove` | `(reqmatch, ctrl) -> any` | Remove an entity. Raises on error. |
 | `data_get` | `() -> Hash` | Get entity data. |
 | `data_set` | `(data)` | Set entity data. |
 | `match_get` | `() -> Hash` | Get entity match criteria. |
@@ -434,12 +460,12 @@ Create an instance: `conversion_detail = client.ConversionDetail`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `click_id` | ``$STRING`` |  |
-| `date` | ``$STRING`` |  |
-| `market` | ``$STRING`` |  |
-| `merchant` | ``$OBJECT`` |  |
-| `placement_id` | ``$STRING`` |  |
-| `sale` | ``$NUMBER`` |  |
+| `click_id` | `String` |  |
+| `date` | `String` |  |
+| `market` | `String` |  |
+| `merchant` | `Hash` |  |
+| `placement_id` | `String` |  |
+| `sale` | `Float` |  |
 
 #### Example: List
 
@@ -463,10 +489,10 @@ Create an instance: `conversion_detail_merchant = client.ConversionDetailMerchan
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `click` | ``$INTEGER`` |  |
-| `market` | ``$STRING`` |  |
-| `merchant` | ``$OBJECT`` |  |
-| `sale` | ``$INTEGER`` |  |
+| `click` | `Integer` |  |
+| `market` | `String` |  |
+| `merchant` | `Hash` |  |
+| `sale` | `Integer` |  |
 
 #### Example: List
 
@@ -490,15 +516,15 @@ Create an instance: `conversion_general = client.ConversionGeneral`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `date` | ``$OBJECT`` |  |
-| `market` | ``$OBJECT`` |  |
-| `total` | ``$OBJECT`` |  |
+| `date` | `Hash` |  |
+| `market` | `Hash` |  |
+| `total` | `Hash` |  |
 
 #### Example: Load
 
 ```ruby
 # load returns the bare ConversionGeneral record (raises on error).
-conversion_general = client.ConversionGeneral.load({ "id" => "conversion_general_id" })
+conversion_general = client.ConversionGeneral.load()
 ```
 
 
@@ -516,13 +542,13 @@ Create an instance: `conversion_status = client.ConversionStatus`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `status` | ``$STRING`` |  |
+| `status` | `String` |  |
 
 #### Example: Load
 
 ```ruby
 # load returns the bare ConversionStatus record (raises on error).
-conversion_status = client.ConversionStatus.load({ "id" => "conversion_status_id" })
+conversion_status = client.ConversionStatus.load()
 ```
 
 
@@ -540,18 +566,18 @@ Create an instance: `deeplink = client.Deeplink`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `is_couponing` | ``$BOOLEAN`` |  |
-| `market` | ``$STRING`` |  |
-| `placement_id` | ``$STRING`` |  |
-| `result` | ``$OBJECT`` |  |
-| `url` | ``$ARRAY`` |  |
+| `is_couponing` | `Boolean` |  |
+| `market` | `String` |  |
+| `placement_id` | `String` |  |
+| `result` | `Hash` |  |
+| `url` | `Array` |  |
 
 #### Example: Create
 
 ```ruby
 deeplink = client.Deeplink.create({
-  "market" => nil, # `$STRING`
-  "url" => nil, # `$ARRAY`
+  "market" => "example", # String
+  "url" => [], # Array
 })
 ```
 
@@ -570,15 +596,15 @@ Create an instance: `deeplink_merchant = client.DeeplinkMerchant`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `deeplink_count` | ``$INTEGER`` |  |
-| `estimated_cpc` | ``$OBJECT`` |  |
-| `has_external_homepage` | ``$BOOLEAN`` |  |
-| `has_smartlink_homepage` | ``$BOOLEAN`` |  |
-| `id` | ``$STRING`` |  |
-| `is_smartlink` | ``$BOOLEAN`` |  |
-| `logo` | ``$OBJECT`` |  |
-| `name` | ``$STRING`` |  |
-| `traffic_type` | ``$ARRAY`` |  |
+| `deeplink_count` | `Integer` |  |
+| `estimated_cpc` | `Hash` |  |
+| `has_external_homepage` | `Boolean` |  |
+| `has_smartlink_homepage` | `Boolean` |  |
+| `id` | `String` |  |
+| `is_smartlink` | `Boolean` |  |
+| `logo` | `Hash` |  |
+| `name` | `String` |  |
+| `traffic_type` | `Array` |  |
 
 #### Example: List
 
@@ -602,7 +628,7 @@ Create an instance: `dnt = client.Dnt`
 
 ```ruby
 # load returns the bare Dnt record (raises on error).
-dnt = client.Dnt.load({ "id" => "dnt_id" })
+dnt = client.Dnt.load()
 ```
 
 
@@ -620,7 +646,7 @@ Create an instance: `market = client.Market`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `id` | ``$STRING`` |  |
+| `id` | `String` |  |
 
 #### Example: List
 
@@ -644,11 +670,11 @@ Create an instance: `merchant = client.Merchant`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `id` | ``$STRING`` |  |
-| `logo` | ``$OBJECT`` |  |
-| `name` | ``$STRING`` |  |
-| `offer_count` | ``$INTEGER`` |  |
-| `traffic_type` | ``$ARRAY`` |  |
+| `id` | `String` |  |
+| `logo` | `Hash` |  |
+| `name` | `String` |  |
+| `offer_count` | `Integer` |  |
+| `traffic_type` | `Array` |  |
 
 #### Example: List
 
@@ -673,24 +699,24 @@ Create an instance: `offer = client.Offer`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `availability` | ``$STRING`` |  |
-| `brand` | ``$STRING`` |  |
-| `click_url` | ``$STRING`` |  |
-| `description` | ``$STRING`` |  |
-| `ean` | ``$OBJECT`` |  |
-| `eer` | ``$STRING`` |  |
-| `estimated_cpc` | ``$OBJECT`` |  |
-| `id` | ``$STRING`` |  |
-| `image` | ``$OBJECT`` |  |
-| `merchant` | ``$OBJECT`` |  |
-| `original_price` | ``$OBJECT`` |  |
-| `price` | ``$OBJECT`` |  |
-| `promo_text` | ``$STRING`` |  |
-| `shipping_price` | ``$OBJECT`` |  |
-| `shipping_time` | ``$OBJECT`` |  |
-| `thumbnail` | ``$OBJECT`` |  |
-| `title` | ``$STRING`` |  |
-| `unit_price` | ``$OBJECT`` |  |
+| `availability` | `String` |  |
+| `brand` | `String` |  |
+| `click_url` | `String` |  |
+| `description` | `String` |  |
+| `ean` | `Hash` |  |
+| `eer` | `String` |  |
+| `estimated_cpc` | `Hash` |  |
+| `id` | `String` |  |
+| `image` | `Hash` |  |
+| `merchant` | `Hash` |  |
+| `original_price` | `Hash` |  |
+| `price` | `Hash` |  |
+| `promo_text` | `String` |  |
+| `shipping_price` | `Hash` |  |
+| `shipping_time` | `Hash` |  |
+| `thumbnail` | `Hash` |  |
+| `title` | `String` |  |
+| `unit_price` | `Hash` |  |
 
 #### Example: Load
 
@@ -721,13 +747,13 @@ Create an instance: `report_detail = client.ReportDetail`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `click_id` | ``$STRING`` |  |
-| `currency` | ``$STRING`` |  |
-| `date` | ``$STRING`` |  |
-| `market` | ``$STRING`` |  |
-| `merchant` | ``$OBJECT`` |  |
-| `placement_id` | ``$STRING`` |  |
-| `revenue` | ``$NUMBER`` |  |
+| `click_id` | `String` |  |
+| `currency` | `String` |  |
+| `date` | `String` |  |
+| `market` | `String` |  |
+| `merchant` | `Hash` |  |
+| `placement_id` | `String` |  |
+| `revenue` | `Float` |  |
 
 #### Example: List
 
@@ -751,15 +777,15 @@ Create an instance: `report_general = client.ReportGeneral`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `date` | ``$OBJECT`` |  |
-| `market` | ``$OBJECT`` |  |
-| `total` | ``$OBJECT`` |  |
+| `date` | `Hash` |  |
+| `market` | `Hash` |  |
+| `total` | `Hash` |  |
 
 #### Example: Load
 
 ```ruby
 # load returns the bare ReportGeneral record (raises on error).
-report_general = client.ReportGeneral.load({ "id" => "report_general_id" })
+report_general = client.ReportGeneral.load()
 ```
 
 
@@ -777,13 +803,13 @@ Create an instance: `report_modified = client.ReportModified`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `market` | ``$OBJECT`` |  |
+| `market` | `Hash` |  |
 
 #### Example: Load
 
 ```ruby
 # load returns the bare ReportModified record (raises on error).
-report_modified = client.ReportModified.load({ "id" => "report_modified_id" })
+report_modified = client.ReportModified.load()
 ```
 
 
@@ -801,22 +827,26 @@ Create an instance: `report_status = client.ReportStatus`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `status` | ``$STRING`` |  |
+| `status` | `String` |  |
 
 #### Example: Load
 
 ```ruby
 # load returns the bare ReportStatus record (raises on error).
-report_status = client.ReportStatus.load({ "id" => "report_status_id" })
+report_status = client.ReportStatus.load()
 ```
 
 
-## Explanation
+## Advanced
+
+> The sections above cover everyday use. The material below explains the
+> SDK's internals — useful when extending it with custom features, but not
+> needed for normal use.
 
 ### The operation pipeline
 
-Every entity operation (load, list, create, update, remove) follows a
-six-stage pipeline. Each stage fires a feature hook before executing:
+Every entity operation follows a six-stage pipeline. Each stage fires a
+feature hook before executing:
 
 ```
 PrePoint → PreSpec → PreRequest → PreResponse → PreResult → PreDone
@@ -833,8 +863,9 @@ PrePoint → PreSpec → PreRequest → PreResponse → PreResult → PreDone
 - **PreDone**: Final stage before returning to the caller. Entity
   state (match, data) is updated here.
 
-If any stage returns an error, the pipeline short-circuits and the
-error is returned to the caller as a second return value.
+If any stage errors, the pipeline short-circuits and the error surfaces
+to the caller — see [Error handling](#error-handling) for how that looks
+in this language.
 
 ### Features and hooks
 
@@ -878,14 +909,14 @@ when needed.
 
 ### Entity state
 
-Entity instances are stateful. After a successful `load`, the entity
+Entity instances are stateful. After a successful `list`, the entity
 stores the returned data and match criteria internally.
 
 ```ruby
 conversiondetail = client.ConversionDetail
-conversiondetail.load({ "id" => "example_id" })
+conversiondetail.list()
 
-# conversiondetail.data_get now returns the loaded conversiondetail data
+# conversiondetail.data_get now returns the conversiondetail data from the last list
 # conversiondetail.match_get returns the last match criteria
 ```
 

@@ -23,7 +23,7 @@ class ConversionDetail
     public ?float $sale = null;
 }
 
-/** Match filter for ConversionDetail#list (any subset of ConversionDetail fields). */
+/** Request payload for ConversionDetail#list. */
 class ConversionDetailListMatch
 {
     public ?string $click_id = null;
@@ -43,7 +43,7 @@ class ConversionDetailMerchant
     public ?int $sale = null;
 }
 
-/** Match filter for ConversionDetailMerchant#list (any subset of ConversionDetailMerchant fields). */
+/** Request payload for ConversionDetailMerchant#list. */
 class ConversionDetailMerchantListMatch
 {
     public ?int $click = null;
@@ -60,7 +60,7 @@ class ConversionGeneral
     public ?array $total = null;
 }
 
-/** Match filter for ConversionGeneral#load (any subset of ConversionGeneral fields). */
+/** Request payload for ConversionGeneral#load. */
 class ConversionGeneralLoadMatch
 {
     public ?array $date = null;
@@ -74,7 +74,7 @@ class ConversionStatus
     public ?string $status = null;
 }
 
-/** Match filter for ConversionStatus#load (any subset of ConversionStatus fields). */
+/** Request payload for ConversionStatus#load. */
 class ConversionStatusLoadMatch
 {
     public ?string $status = null;
@@ -90,14 +90,14 @@ class Deeplink
     public array $url;
 }
 
-/** Match filter for Deeplink#create (any subset of Deeplink fields). */
+/** Request payload for Deeplink#create. */
 class DeeplinkCreateData
 {
     public ?bool $is_couponing = null;
-    public ?string $market = null;
+    public string $market;
     public ?string $placement_id = null;
     public ?array $result = null;
-    public ?array $url = null;
+    public array $url;
 }
 
 /** DeeplinkMerchant entity data model. */
@@ -114,7 +114,7 @@ class DeeplinkMerchant
     public ?array $traffic_type = null;
 }
 
-/** Match filter for DeeplinkMerchant#list (any subset of DeeplinkMerchant fields). */
+/** Request payload for DeeplinkMerchant#list. */
 class DeeplinkMerchantListMatch
 {
     public ?int $deeplink_count = null;
@@ -133,7 +133,7 @@ class Dnt
 {
 }
 
-/** Match filter for Dnt#load (any subset of Dnt fields). */
+/** Request payload for Dnt#load. */
 class DntLoadMatch
 {
 }
@@ -144,7 +144,7 @@ class Market
     public ?string $id = null;
 }
 
-/** Match filter for Market#list (any subset of Market fields). */
+/** Request payload for Market#list. */
 class MarketListMatch
 {
     public ?string $id = null;
@@ -160,7 +160,7 @@ class Merchant
     public ?array $traffic_type = null;
 }
 
-/** Match filter for Merchant#list (any subset of Merchant fields). */
+/** Request payload for Merchant#list. */
 class MerchantListMatch
 {
     public ?string $id = null;
@@ -193,7 +193,7 @@ class Offer
     public ?array $unit_price = null;
 }
 
-/** Match filter for Offer#load (any subset of Offer fields). */
+/** Request payload for Offer#load. */
 class OfferLoadMatch
 {
     public ?string $availability = null;
@@ -203,7 +203,7 @@ class OfferLoadMatch
     public ?array $ean = null;
     public ?string $eer = null;
     public ?array $estimated_cpc = null;
-    public ?string $id = null;
+    public string $id;
     public ?array $image = null;
     public ?array $merchant = null;
     public ?array $original_price = null;
@@ -216,7 +216,7 @@ class OfferLoadMatch
     public ?array $unit_price = null;
 }
 
-/** Match filter for Offer#list (any subset of Offer fields). */
+/** Request payload for Offer#list. */
 class OfferListMatch
 {
     public ?string $availability = null;
@@ -251,7 +251,7 @@ class ReportDetail
     public ?float $revenue = null;
 }
 
-/** Match filter for ReportDetail#list (any subset of ReportDetail fields). */
+/** Request payload for ReportDetail#list. */
 class ReportDetailListMatch
 {
     public ?string $click_id = null;
@@ -271,7 +271,7 @@ class ReportGeneral
     public ?array $total = null;
 }
 
-/** Match filter for ReportGeneral#load (any subset of ReportGeneral fields). */
+/** Request payload for ReportGeneral#load. */
 class ReportGeneralLoadMatch
 {
     public ?array $date = null;
@@ -285,7 +285,7 @@ class ReportModified
     public ?array $market = null;
 }
 
-/** Match filter for ReportModified#load (any subset of ReportModified fields). */
+/** Request payload for ReportModified#load. */
 class ReportModifiedLoadMatch
 {
     public ?array $market = null;
@@ -297,7 +297,7 @@ class ReportStatus
     public ?string $status = null;
 }
 
-/** Match filter for ReportStatus#load (any subset of ReportStatus fields). */
+/** Request payload for ReportStatus#load. */
 class ReportStatusLoadMatch
 {
     public ?string $status = null;

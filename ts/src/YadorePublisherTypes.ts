@@ -14,7 +14,14 @@ export interface ConversionDetail {
   sale?: number
 }
 
-export type ConversionDetailListMatch = Partial<ConversionDetail>
+export interface ConversionDetailListMatch {
+  click_id?: string
+  date?: string
+  market?: string
+  merchant?: Record<string, any>
+  placement_id?: string
+  sale?: number
+}
 
 export interface ConversionDetailMerchant {
   click?: number
@@ -23,7 +30,12 @@ export interface ConversionDetailMerchant {
   sale?: number
 }
 
-export type ConversionDetailMerchantListMatch = Partial<ConversionDetailMerchant>
+export interface ConversionDetailMerchantListMatch {
+  click?: number
+  market?: string
+  merchant?: Record<string, any>
+  sale?: number
+}
 
 export interface ConversionGeneral {
   date?: Record<string, any>
@@ -31,13 +43,19 @@ export interface ConversionGeneral {
   total?: Record<string, any>
 }
 
-export type ConversionGeneralLoadMatch = Partial<ConversionGeneral>
+export interface ConversionGeneralLoadMatch {
+  date?: Record<string, any>
+  market?: Record<string, any>
+  total?: Record<string, any>
+}
 
 export interface ConversionStatus {
   status?: string
 }
 
-export type ConversionStatusLoadMatch = Partial<ConversionStatus>
+export interface ConversionStatusLoadMatch {
+  status?: string
+}
 
 export interface Deeplink {
   is_couponing?: boolean
@@ -47,7 +65,13 @@ export interface Deeplink {
   url: any[]
 }
 
-export type DeeplinkCreateData = Partial<Deeplink>
+export interface DeeplinkCreateData {
+  is_couponing?: boolean
+  market: string
+  placement_id?: string
+  result?: Record<string, any>
+  url: any[]
+}
 
 export interface DeeplinkMerchant {
   deeplink_count?: number
@@ -61,18 +85,31 @@ export interface DeeplinkMerchant {
   traffic_type?: any[]
 }
 
-export type DeeplinkMerchantListMatch = Partial<DeeplinkMerchant>
+export interface DeeplinkMerchantListMatch {
+  deeplink_count?: number
+  estimated_cpc?: Record<string, any>
+  has_external_homepage?: boolean
+  has_smartlink_homepage?: boolean
+  id?: string
+  is_smartlink?: boolean
+  logo?: Record<string, any>
+  name?: string
+  traffic_type?: any[]
+}
 
 export interface Dnt {
 }
 
-export type DntLoadMatch = Partial<Dnt>
+export interface DntLoadMatch {
+}
 
 export interface Market {
   id?: string
 }
 
-export type MarketListMatch = Partial<Market>
+export interface MarketListMatch {
+  id?: string
+}
 
 export interface Merchant {
   id?: string
@@ -82,7 +119,13 @@ export interface Merchant {
   traffic_type?: any[]
 }
 
-export type MerchantListMatch = Partial<Merchant>
+export interface MerchantListMatch {
+  id?: string
+  logo?: Record<string, any>
+  name?: string
+  offer_count?: number
+  traffic_type?: any[]
+}
 
 export interface Offer {
   availability?: string
@@ -105,9 +148,47 @@ export interface Offer {
   unit_price?: Record<string, any>
 }
 
-export type OfferLoadMatch = Partial<Offer>
+export interface OfferLoadMatch {
+  availability?: string
+  brand?: string
+  click_url?: string
+  description?: string
+  ean?: Record<string, any>
+  eer?: string
+  estimated_cpc?: Record<string, any>
+  id: string
+  image?: Record<string, any>
+  merchant?: Record<string, any>
+  original_price?: Record<string, any>
+  price?: Record<string, any>
+  promo_text?: string
+  shipping_price?: Record<string, any>
+  shipping_time?: Record<string, any>
+  thumbnail?: Record<string, any>
+  title?: string
+  unit_price?: Record<string, any>
+}
 
-export type OfferListMatch = Partial<Offer>
+export interface OfferListMatch {
+  availability?: string
+  brand?: string
+  click_url?: string
+  description?: string
+  ean?: Record<string, any>
+  eer?: string
+  estimated_cpc?: Record<string, any>
+  id?: string
+  image?: Record<string, any>
+  merchant?: Record<string, any>
+  original_price?: Record<string, any>
+  price?: Record<string, any>
+  promo_text?: string
+  shipping_price?: Record<string, any>
+  shipping_time?: Record<string, any>
+  thumbnail?: Record<string, any>
+  title?: string
+  unit_price?: Record<string, any>
+}
 
 export interface ReportDetail {
   click_id?: string
@@ -119,7 +200,15 @@ export interface ReportDetail {
   revenue?: number
 }
 
-export type ReportDetailListMatch = Partial<ReportDetail>
+export interface ReportDetailListMatch {
+  click_id?: string
+  currency?: string
+  date?: string
+  market?: string
+  merchant?: Record<string, any>
+  placement_id?: string
+  revenue?: number
+}
 
 export interface ReportGeneral {
   date?: Record<string, any>
@@ -127,17 +216,25 @@ export interface ReportGeneral {
   total?: Record<string, any>
 }
 
-export type ReportGeneralLoadMatch = Partial<ReportGeneral>
+export interface ReportGeneralLoadMatch {
+  date?: Record<string, any>
+  market?: Record<string, any>
+  total?: Record<string, any>
+}
 
 export interface ReportModified {
   market?: Record<string, any>
 }
 
-export type ReportModifiedLoadMatch = Partial<ReportModified>
+export interface ReportModifiedLoadMatch {
+  market?: Record<string, any>
+}
 
 export interface ReportStatus {
   status?: string
 }
 
-export type ReportStatusLoadMatch = Partial<ReportStatus>
+export interface ReportStatusLoadMatch {
+  status?: string
+}
 

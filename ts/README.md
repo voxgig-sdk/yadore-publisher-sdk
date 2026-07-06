@@ -4,6 +4,11 @@
 
 The TypeScript SDK for the YadorePublisher API — a type-safe, entity-oriented client with full async/await support.
 
+The API is exposed as capitalised, semantic **Entities** — e.g.
+`client.ConversionDetail()` — each with a small set of operations (`list`, `load`, `create`)
+instead of raw URL paths and query parameters. This keeps the surface
+predictable and low-friction for both humans and AI agents.
+
 > Other languages, the CLI, and MCP server live alongside this one — see
 > the [top-level README](../README.md).
 
@@ -39,6 +44,35 @@ const conversiondetails = await client.ConversionDetail().list()
 
 for (const conversiondetail of conversiondetails) {
   console.log(conversiondetail)
+}
+```
+
+
+## Error handling
+
+Entity operations reject on failure, so wrap them in `try` / `catch`:
+
+```ts
+try {
+  const conversiondetails = await client.ConversionDetail().list()
+  console.log(conversiondetails)
+} catch (err) {
+  console.error('list failed:', err)
+}
+```
+
+The low-level `direct()` method does **not** throw — it returns the
+value or an `Error`, so check the result before using it:
+
+```ts
+const result = await client.direct({
+  path: '/api/resource/{id}',
+  method: 'GET',
+  params: { id: 'example_id' },
+})
+
+if (result instanceof Error) {
+  throw result
 }
 ```
 
@@ -87,7 +121,7 @@ Create a mock client for unit testing — no server required:
 ```ts
 const client = YadorePublisherSDK.test()
 
-const conversiondetail = await client.ConversionDetail().load({ id: 'test01' })
+const conversiondetail = await client.ConversionDetail().list()
 // conversiondetail is a bare entity populated with mock response data
 console.log(conversiondetail)
 ```
@@ -106,12 +140,12 @@ Entity instances remember their last match and data:
 ```ts
 const entity = client.ConversionDetail()
 
-// First call sets internal match
-await entity.load({ id: 'example' })
+// First call runs the operation and stores its result
+await entity.list()
 
-// Subsequent calls reuse the stored match
+// Subsequent calls reuse the stored state
 const data = entity.data()
-console.log(data.id) // 'example'
+console.log(data)
 ```
 
 ### Add custom middleware
@@ -219,10 +253,8 @@ All entities share the same interface.
 | `load` | `load(reqmatch?, ctrl?): Promise<Entity>` | Load a single entity by match criteria. |
 | `list` | `list(reqmatch?, ctrl?): Promise<Entity[]>` | List entities matching the criteria. |
 | `create` | `create(reqdata?, ctrl?): Promise<Entity>` | Create a new entity. |
-| `update` | `update(reqdata?, ctrl?): Promise<Entity>` | Update an existing entity. |
-| `remove` | `remove(reqmatch?, ctrl?): Promise<void>` | Remove an entity. |
-| `data` | `data(data?): any` | Get or set entity data. |
-| `match` | `match(match?): any` | Get or set entity match criteria. |
+| `data` | `data(data?: Partial<Entity>): Entity` | Get or set entity data. |
+| `match` | `match(match?: Partial<Entity>): Partial<Entity>` | Get or set entity match criteria. |
 | `make` | `make(): Entity` | Create a new instance with the same options. |
 | `client` | `client(): YadorePublisherSDK` | Return the parent SDK client. |
 | `entopts` | `entopts(): object` | Return a copy of the entity options. |
@@ -232,10 +264,9 @@ All entities share the same interface.
 Entity operations resolve to the entity data directly — there is no
 result envelope:
 
-- `load`, `create` and `update` resolve to a single entity object.
+- `load` and `create` resolve to a single entity object.
 - `list` resolves to an **array** of entity objects (iterate it directly;
   there is no `.data` and no `.ok`).
-- `remove` resolves to `void`.
 
 On a failed request these methods **throw**, so wrap calls in
 `try`/`catch` to handle errors. Only `direct()` returns the result
@@ -480,12 +511,12 @@ Create an instance: `const conversion_detail = client.ConversionDetail()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `click_id` | ``$STRING`` |  |
-| `date` | ``$STRING`` |  |
-| `market` | ``$STRING`` |  |
-| `merchant` | ``$OBJECT`` |  |
-| `placement_id` | ``$STRING`` |  |
-| `sale` | ``$NUMBER`` |  |
+| `click_id` | `string` |  |
+| `date` | `string` |  |
+| `market` | `string` |  |
+| `merchant` | `Record<string, any>` |  |
+| `placement_id` | `string` |  |
+| `sale` | `number` |  |
 
 #### Example: List
 
@@ -508,10 +539,10 @@ Create an instance: `const conversion_detail_merchant = client.ConversionDetailM
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `click` | ``$INTEGER`` |  |
-| `market` | ``$STRING`` |  |
-| `merchant` | ``$OBJECT`` |  |
-| `sale` | ``$INTEGER`` |  |
+| `click` | `number` |  |
+| `market` | `string` |  |
+| `merchant` | `Record<string, any>` |  |
+| `sale` | `number` |  |
 
 #### Example: List
 
@@ -534,14 +565,14 @@ Create an instance: `const conversion_general = client.ConversionGeneral()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `date` | ``$OBJECT`` |  |
-| `market` | ``$OBJECT`` |  |
-| `total` | ``$OBJECT`` |  |
+| `date` | `Record<string, any>` |  |
+| `market` | `Record<string, any>` |  |
+| `total` | `Record<string, any>` |  |
 
 #### Example: Load
 
 ```ts
-const conversion_general = await client.ConversionGeneral().load({ id: 'conversion_general_id' })
+const conversion_general = await client.ConversionGeneral().load()
 ```
 
 
@@ -559,12 +590,12 @@ Create an instance: `const conversion_status = client.ConversionStatus()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `status` | ``$STRING`` |  |
+| `status` | `string` |  |
 
 #### Example: Load
 
 ```ts
-const conversion_status = await client.ConversionStatus().load({ id: 'conversion_status_id' })
+const conversion_status = await client.ConversionStatus().load()
 ```
 
 
@@ -582,18 +613,18 @@ Create an instance: `const deeplink = client.Deeplink()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `is_couponing` | ``$BOOLEAN`` |  |
-| `market` | ``$STRING`` |  |
-| `placement_id` | ``$STRING`` |  |
-| `result` | ``$OBJECT`` |  |
-| `url` | ``$ARRAY`` |  |
+| `is_couponing` | `boolean` |  |
+| `market` | `string` |  |
+| `placement_id` | `string` |  |
+| `result` | `Record<string, any>` |  |
+| `url` | `any[]` |  |
 
 #### Example: Create
 
 ```ts
 const deeplink = await client.Deeplink().create({
-  market: /* `$STRING` */,
-  url: /* `$ARRAY` */,
+  market: /* string */,
+  url: /* any[] */,
 })
 ```
 
@@ -612,15 +643,15 @@ Create an instance: `const deeplink_merchant = client.DeeplinkMerchant()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `deeplink_count` | ``$INTEGER`` |  |
-| `estimated_cpc` | ``$OBJECT`` |  |
-| `has_external_homepage` | ``$BOOLEAN`` |  |
-| `has_smartlink_homepage` | ``$BOOLEAN`` |  |
-| `id` | ``$STRING`` |  |
-| `is_smartlink` | ``$BOOLEAN`` |  |
-| `logo` | ``$OBJECT`` |  |
-| `name` | ``$STRING`` |  |
-| `traffic_type` | ``$ARRAY`` |  |
+| `deeplink_count` | `number` |  |
+| `estimated_cpc` | `Record<string, any>` |  |
+| `has_external_homepage` | `boolean` |  |
+| `has_smartlink_homepage` | `boolean` |  |
+| `id` | `string` |  |
+| `is_smartlink` | `boolean` |  |
+| `logo` | `Record<string, any>` |  |
+| `name` | `string` |  |
+| `traffic_type` | `any[]` |  |
 
 #### Example: List
 
@@ -642,7 +673,7 @@ Create an instance: `const dnt = client.Dnt()`
 #### Example: Load
 
 ```ts
-const dnt = await client.Dnt().load({ id: 'dnt_id' })
+const dnt = await client.Dnt().load()
 ```
 
 
@@ -660,7 +691,7 @@ Create an instance: `const market = client.Market()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `id` | ``$STRING`` |  |
+| `id` | `string` |  |
 
 #### Example: List
 
@@ -683,11 +714,11 @@ Create an instance: `const merchant = client.Merchant()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `id` | ``$STRING`` |  |
-| `logo` | ``$OBJECT`` |  |
-| `name` | ``$STRING`` |  |
-| `offer_count` | ``$INTEGER`` |  |
-| `traffic_type` | ``$ARRAY`` |  |
+| `id` | `string` |  |
+| `logo` | `Record<string, any>` |  |
+| `name` | `string` |  |
+| `offer_count` | `number` |  |
+| `traffic_type` | `any[]` |  |
 
 #### Example: List
 
@@ -711,24 +742,24 @@ Create an instance: `const offer = client.Offer()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `availability` | ``$STRING`` |  |
-| `brand` | ``$STRING`` |  |
-| `click_url` | ``$STRING`` |  |
-| `description` | ``$STRING`` |  |
-| `ean` | ``$OBJECT`` |  |
-| `eer` | ``$STRING`` |  |
-| `estimated_cpc` | ``$OBJECT`` |  |
-| `id` | ``$STRING`` |  |
-| `image` | ``$OBJECT`` |  |
-| `merchant` | ``$OBJECT`` |  |
-| `original_price` | ``$OBJECT`` |  |
-| `price` | ``$OBJECT`` |  |
-| `promo_text` | ``$STRING`` |  |
-| `shipping_price` | ``$OBJECT`` |  |
-| `shipping_time` | ``$OBJECT`` |  |
-| `thumbnail` | ``$OBJECT`` |  |
-| `title` | ``$STRING`` |  |
-| `unit_price` | ``$OBJECT`` |  |
+| `availability` | `string` |  |
+| `brand` | `string` |  |
+| `click_url` | `string` |  |
+| `description` | `string` |  |
+| `ean` | `Record<string, any>` |  |
+| `eer` | `string` |  |
+| `estimated_cpc` | `Record<string, any>` |  |
+| `id` | `string` |  |
+| `image` | `Record<string, any>` |  |
+| `merchant` | `Record<string, any>` |  |
+| `original_price` | `Record<string, any>` |  |
+| `price` | `Record<string, any>` |  |
+| `promo_text` | `string` |  |
+| `shipping_price` | `Record<string, any>` |  |
+| `shipping_time` | `Record<string, any>` |  |
+| `thumbnail` | `Record<string, any>` |  |
+| `title` | `string` |  |
+| `unit_price` | `Record<string, any>` |  |
 
 #### Example: Load
 
@@ -757,13 +788,13 @@ Create an instance: `const report_detail = client.ReportDetail()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `click_id` | ``$STRING`` |  |
-| `currency` | ``$STRING`` |  |
-| `date` | ``$STRING`` |  |
-| `market` | ``$STRING`` |  |
-| `merchant` | ``$OBJECT`` |  |
-| `placement_id` | ``$STRING`` |  |
-| `revenue` | ``$NUMBER`` |  |
+| `click_id` | `string` |  |
+| `currency` | `string` |  |
+| `date` | `string` |  |
+| `market` | `string` |  |
+| `merchant` | `Record<string, any>` |  |
+| `placement_id` | `string` |  |
+| `revenue` | `number` |  |
 
 #### Example: List
 
@@ -786,14 +817,14 @@ Create an instance: `const report_general = client.ReportGeneral()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `date` | ``$OBJECT`` |  |
-| `market` | ``$OBJECT`` |  |
-| `total` | ``$OBJECT`` |  |
+| `date` | `Record<string, any>` |  |
+| `market` | `Record<string, any>` |  |
+| `total` | `Record<string, any>` |  |
 
 #### Example: Load
 
 ```ts
-const report_general = await client.ReportGeneral().load({ id: 'report_general_id' })
+const report_general = await client.ReportGeneral().load()
 ```
 
 
@@ -811,12 +842,12 @@ Create an instance: `const report_modified = client.ReportModified()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `market` | ``$OBJECT`` |  |
+| `market` | `Record<string, any>` |  |
 
 #### Example: Load
 
 ```ts
-const report_modified = await client.ReportModified().load({ id: 'report_modified_id' })
+const report_modified = await client.ReportModified().load()
 ```
 
 
@@ -834,21 +865,25 @@ Create an instance: `const report_status = client.ReportStatus()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `status` | ``$STRING`` |  |
+| `status` | `string` |  |
 
 #### Example: Load
 
 ```ts
-const report_status = await client.ReportStatus().load({ id: 'report_status_id' })
+const report_status = await client.ReportStatus().load()
 ```
 
 
-## Explanation
+## Advanced
+
+> The sections above cover everyday use. The material below explains the
+> SDK's internals — useful when extending it with custom features, but not
+> needed for normal use.
 
 ### The operation pipeline
 
-Every entity operation (load, list, create, update, remove) follows a
-six-stage pipeline. Each stage fires a feature hook before executing:
+Every entity operation follows a six-stage pipeline. Each stage fires a
+feature hook before executing:
 
 ```
 PrePoint → PreSpec → PreRequest → PreResponse → PreResult → PreDone
@@ -865,11 +900,9 @@ PrePoint → PreSpec → PreRequest → PreResponse → PreResult → PreDone
 - **PreDone**: Final stage before returning to the caller. Entity
   state (match, data) is updated here.
 
-If any stage returns an error, the pipeline short-circuits and the
-error is returned to the caller.
-
-An unexpected exception triggers the `PreUnexpected` hook before
-propagating.
+If any stage errors, the pipeline short-circuits and the error surfaces
+to the caller — see [Error handling](#error-handling) for how that looks
+in this language.
 
 ### Features and hooks
 
@@ -905,16 +938,16 @@ import { YadorePublisherSDK } from '@voxgig-sdk/yadore-publisher'
 
 ### Entity state
 
-Entity instances are stateful. After a successful `load`, the entity
+Entity instances are stateful. After a successful `list`, the entity
 stores the returned data and match criteria internally. Subsequent
 calls on the same instance can rely on this state.
 
 ```ts
 const conversiondetail = client.ConversionDetail()
-await conversiondetail.load({ id: "example_id" })
+await conversiondetail.list()
 
-// conversiondetail.data() now returns the loaded conversiondetail data
-// conversiondetail.match() returns { id: "example_id" }
+// conversiondetail.data() now returns the conversiondetail data from the last `list`
+// conversiondetail.match() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

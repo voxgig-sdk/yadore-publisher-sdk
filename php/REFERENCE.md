@@ -8,7 +8,7 @@ Complete API reference for the YadorePublisher PHP SDK.
 ### Constructor
 
 ```php
-require_once __DIR__ . '/yadore-publisher_sdk.php';
+require_once __DIR__ . '/yadorepublisher_sdk.php';
 
 $client = new YadorePublisherSDK($options);
 ```
@@ -98,11 +98,11 @@ Create a new `ReportModifiedEntity` instance. Pass `null` for no initial data.
 
 Create a new `ReportStatusEntity` instance. Pass `null` for no initial data.
 
-#### `optionsMap(): array`
+#### `options_map(): array`
 
 Return a deep copy of the current SDK options.
 
-#### `getUtility(): ProjectNameUtility`
+#### `get_utility(): YadorePublisherUtility`
 
 Return a copy of the SDK utility object.
 
@@ -145,38 +145,38 @@ $conversion_detail = $client->ConversionDetail();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `click_id` | ``$STRING`` | No |  |
-| `date` | ``$STRING`` | No |  |
-| `market` | ``$STRING`` | No |  |
-| `merchant` | ``$OBJECT`` | No |  |
-| `placement_id` | ``$STRING`` | No |  |
-| `sale` | ``$NUMBER`` | No |  |
+| `click_id` | `string` | No |  |
+| `date` | `string` | No |  |
+| `market` | `string` | No |  |
+| `merchant` | `array` | No |  |
+| `placement_id` | `string` | No |  |
+| `sale` | `float` | No |  |
 
 ### Operations
 
-#### `list(array $reqmatch, ?array $ctrl = null): mixed`
+#### `list(?array $reqmatch = null, ?array $ctrl = null): mixed`
 
-List entities matching the given criteria. Returns an array. Throws on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array. Throws on error.
 
 ```php
-$results = $client->ConversionDetail()->list([]);
+$results = $client->ConversionDetail()->list();
 ```
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -185,7 +185,7 @@ Set the entity match criteria.
 Create a new `ConversionDetailEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 
@@ -202,36 +202,36 @@ $conversion_detail_merchant = $client->ConversionDetailMerchant();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `click` | ``$INTEGER`` | No |  |
-| `market` | ``$STRING`` | No |  |
-| `merchant` | ``$OBJECT`` | No |  |
-| `sale` | ``$INTEGER`` | No |  |
+| `click` | `int` | No |  |
+| `market` | `string` | No |  |
+| `merchant` | `array` | No |  |
+| `sale` | `int` | No |  |
 
 ### Operations
 
-#### `list(array $reqmatch, ?array $ctrl = null): mixed`
+#### `list(?array $reqmatch = null, ?array $ctrl = null): mixed`
 
-List entities matching the given criteria. Returns an array. Throws on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array. Throws on error.
 
 ```php
-$results = $client->ConversionDetailMerchant()->list([]);
+$results = $client->ConversionDetailMerchant()->list();
 ```
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -240,7 +240,7 @@ Set the entity match criteria.
 Create a new `ConversionDetailMerchantEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 
@@ -257,9 +257,9 @@ $conversion_general = $client->ConversionGeneral();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `date` | ``$OBJECT`` | No |  |
-| `market` | ``$OBJECT`` | No |  |
-| `total` | ``$OBJECT`` | No |  |
+| `date` | `array` | No |  |
+| `market` | `array` | No |  |
+| `total` | `array` | No |  |
 
 ### Operations
 
@@ -268,24 +268,24 @@ $conversion_general = $client->ConversionGeneral();
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->ConversionGeneral()->load(["id" => "conversion_general_id"]);
+$result = $client->ConversionGeneral()->load();
 ```
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -294,7 +294,7 @@ Set the entity match criteria.
 Create a new `ConversionGeneralEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 
@@ -311,7 +311,7 @@ $conversion_status = $client->ConversionStatus();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `status` | ``$STRING`` | No |  |
+| `status` | `string` | No |  |
 
 ### Operations
 
@@ -320,24 +320,24 @@ $conversion_status = $client->ConversionStatus();
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->ConversionStatus()->load(["id" => "conversion_status_id"]);
+$result = $client->ConversionStatus()->load();
 ```
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -346,7 +346,7 @@ Set the entity match criteria.
 Create a new `ConversionStatusEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 
@@ -363,11 +363,11 @@ $deeplink = $client->Deeplink();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `is_couponing` | ``$BOOLEAN`` | No |  |
-| `market` | ``$STRING`` | Yes |  |
-| `placement_id` | ``$STRING`` | No |  |
-| `result` | ``$OBJECT`` | No |  |
-| `url` | ``$ARRAY`` | Yes |  |
+| `is_couponing` | `bool` | No |  |
+| `market` | `string` | Yes |  |
+| `placement_id` | `string` | No |  |
+| `result` | `array` | No |  |
+| `url` | `array` | Yes |  |
 
 ### Operations
 
@@ -377,26 +377,26 @@ Create a new entity with the given data. Throws on error.
 
 ```php
 $result = $client->Deeplink()->create([
-  "market" => /* `$STRING` */,
-  "url" => /* `$ARRAY` */,
+  "market" => null, // string
+  "url" => null, // array
 ]);
 ```
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -405,7 +405,7 @@ Set the entity match criteria.
 Create a new `DeeplinkEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 
@@ -422,41 +422,41 @@ $deeplink_merchant = $client->DeeplinkMerchant();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `deeplink_count` | ``$INTEGER`` | No |  |
-| `estimated_cpc` | ``$OBJECT`` | No |  |
-| `has_external_homepage` | ``$BOOLEAN`` | No |  |
-| `has_smartlink_homepage` | ``$BOOLEAN`` | No |  |
-| `id` | ``$STRING`` | No |  |
-| `is_smartlink` | ``$BOOLEAN`` | No |  |
-| `logo` | ``$OBJECT`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `traffic_type` | ``$ARRAY`` | No |  |
+| `deeplink_count` | `int` | No |  |
+| `estimated_cpc` | `array` | No |  |
+| `has_external_homepage` | `bool` | No |  |
+| `has_smartlink_homepage` | `bool` | No |  |
+| `id` | `string` | No |  |
+| `is_smartlink` | `bool` | No |  |
+| `logo` | `array` | No |  |
+| `name` | `string` | No |  |
+| `traffic_type` | `array` | No |  |
 
 ### Operations
 
-#### `list(array $reqmatch, ?array $ctrl = null): mixed`
+#### `list(?array $reqmatch = null, ?array $ctrl = null): mixed`
 
-List entities matching the given criteria. Returns an array. Throws on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array. Throws on error.
 
 ```php
-$results = $client->DeeplinkMerchant()->list([]);
+$results = $client->DeeplinkMerchant()->list();
 ```
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -465,7 +465,7 @@ Set the entity match criteria.
 Create a new `DeeplinkMerchantEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 
@@ -485,24 +485,24 @@ $dnt = $client->Dnt();
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->Dnt()->load(["id" => "dnt_id"]);
+$result = $client->Dnt()->load();
 ```
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -511,7 +511,7 @@ Set the entity match criteria.
 Create a new `DntEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 
@@ -528,33 +528,33 @@ $market = $client->Market();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `id` | ``$STRING`` | No |  |
+| `id` | `string` | No |  |
 
 ### Operations
 
-#### `list(array $reqmatch, ?array $ctrl = null): mixed`
+#### `list(?array $reqmatch = null, ?array $ctrl = null): mixed`
 
-List entities matching the given criteria. Returns an array. Throws on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array. Throws on error.
 
 ```php
-$results = $client->Market()->list([]);
+$results = $client->Market()->list();
 ```
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -563,7 +563,7 @@ Set the entity match criteria.
 Create a new `MarketEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 
@@ -580,37 +580,37 @@ $merchant = $client->Merchant();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `id` | ``$STRING`` | No |  |
-| `logo` | ``$OBJECT`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `offer_count` | ``$INTEGER`` | No |  |
-| `traffic_type` | ``$ARRAY`` | No |  |
+| `id` | `string` | No |  |
+| `logo` | `array` | No |  |
+| `name` | `string` | No |  |
+| `offer_count` | `int` | No |  |
+| `traffic_type` | `array` | No |  |
 
 ### Operations
 
-#### `list(array $reqmatch, ?array $ctrl = null): mixed`
+#### `list(?array $reqmatch = null, ?array $ctrl = null): mixed`
 
-List entities matching the given criteria. Returns an array. Throws on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array. Throws on error.
 
 ```php
-$results = $client->Merchant()->list([]);
+$results = $client->Merchant()->list();
 ```
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -619,7 +619,7 @@ Set the entity match criteria.
 Create a new `MerchantEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 
@@ -636,33 +636,33 @@ $offer = $client->Offer();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `availability` | ``$STRING`` | No |  |
-| `brand` | ``$STRING`` | No |  |
-| `click_url` | ``$STRING`` | No |  |
-| `description` | ``$STRING`` | No |  |
-| `ean` | ``$OBJECT`` | No |  |
-| `eer` | ``$STRING`` | No |  |
-| `estimated_cpc` | ``$OBJECT`` | No |  |
-| `id` | ``$STRING`` | No |  |
-| `image` | ``$OBJECT`` | No |  |
-| `merchant` | ``$OBJECT`` | No |  |
-| `original_price` | ``$OBJECT`` | No |  |
-| `price` | ``$OBJECT`` | No |  |
-| `promo_text` | ``$STRING`` | No |  |
-| `shipping_price` | ``$OBJECT`` | No |  |
-| `shipping_time` | ``$OBJECT`` | No |  |
-| `thumbnail` | ``$OBJECT`` | No |  |
-| `title` | ``$STRING`` | No |  |
-| `unit_price` | ``$OBJECT`` | No |  |
+| `availability` | `string` | No |  |
+| `brand` | `string` | No |  |
+| `click_url` | `string` | No |  |
+| `description` | `string` | No |  |
+| `ean` | `array` | No |  |
+| `eer` | `string` | No |  |
+| `estimated_cpc` | `array` | No |  |
+| `id` | `string` | No |  |
+| `image` | `array` | No |  |
+| `merchant` | `array` | No |  |
+| `original_price` | `array` | No |  |
+| `price` | `array` | No |  |
+| `promo_text` | `string` | No |  |
+| `shipping_price` | `array` | No |  |
+| `shipping_time` | `array` | No |  |
+| `thumbnail` | `array` | No |  |
+| `title` | `string` | No |  |
+| `unit_price` | `array` | No |  |
 
 ### Operations
 
-#### `list(array $reqmatch, ?array $ctrl = null): mixed`
+#### `list(?array $reqmatch = null, ?array $ctrl = null): mixed`
 
-List entities matching the given criteria. Returns an array. Throws on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array. Throws on error.
 
 ```php
-$results = $client->Offer()->list([]);
+$results = $client->Offer()->list();
 ```
 
 #### `load(array $reqmatch, ?array $ctrl = null): mixed`
@@ -675,19 +675,19 @@ $result = $client->Offer()->load(["id" => "offer_id"]);
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -696,7 +696,7 @@ Set the entity match criteria.
 Create a new `OfferEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 
@@ -713,39 +713,39 @@ $report_detail = $client->ReportDetail();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `click_id` | ``$STRING`` | No |  |
-| `currency` | ``$STRING`` | No |  |
-| `date` | ``$STRING`` | No |  |
-| `market` | ``$STRING`` | No |  |
-| `merchant` | ``$OBJECT`` | No |  |
-| `placement_id` | ``$STRING`` | No |  |
-| `revenue` | ``$NUMBER`` | No |  |
+| `click_id` | `string` | No |  |
+| `currency` | `string` | No |  |
+| `date` | `string` | No |  |
+| `market` | `string` | No |  |
+| `merchant` | `array` | No |  |
+| `placement_id` | `string` | No |  |
+| `revenue` | `float` | No |  |
 
 ### Operations
 
-#### `list(array $reqmatch, ?array $ctrl = null): mixed`
+#### `list(?array $reqmatch = null, ?array $ctrl = null): mixed`
 
-List entities matching the given criteria. Returns an array. Throws on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array. Throws on error.
 
 ```php
-$results = $client->ReportDetail()->list([]);
+$results = $client->ReportDetail()->list();
 ```
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -754,7 +754,7 @@ Set the entity match criteria.
 Create a new `ReportDetailEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 
@@ -771,9 +771,9 @@ $report_general = $client->ReportGeneral();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `date` | ``$OBJECT`` | No |  |
-| `market` | ``$OBJECT`` | No |  |
-| `total` | ``$OBJECT`` | No |  |
+| `date` | `array` | No |  |
+| `market` | `array` | No |  |
+| `total` | `array` | No |  |
 
 ### Operations
 
@@ -782,24 +782,24 @@ $report_general = $client->ReportGeneral();
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->ReportGeneral()->load(["id" => "report_general_id"]);
+$result = $client->ReportGeneral()->load();
 ```
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -808,7 +808,7 @@ Set the entity match criteria.
 Create a new `ReportGeneralEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 
@@ -825,7 +825,7 @@ $report_modified = $client->ReportModified();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `market` | ``$OBJECT`` | No |  |
+| `market` | `array` | No |  |
 
 ### Operations
 
@@ -834,24 +834,24 @@ $report_modified = $client->ReportModified();
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->ReportModified()->load(["id" => "report_modified_id"]);
+$result = $client->ReportModified()->load();
 ```
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -860,7 +860,7 @@ Set the entity match criteria.
 Create a new `ReportModifiedEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 
@@ -877,7 +877,7 @@ $report_status = $client->ReportStatus();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `status` | ``$STRING`` | No |  |
+| `status` | `string` | No |  |
 
 ### Operations
 
@@ -886,24 +886,24 @@ $report_status = $client->ReportStatus();
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->ReportStatus()->load(["id" => "report_status_id"]);
+$result = $client->ReportStatus()->load();
 ```
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -912,7 +912,7 @@ Set the entity match criteria.
 Create a new `ReportStatusEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 

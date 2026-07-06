@@ -150,12 +150,12 @@ conversion_detail := client.ConversionDetail(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `click_id` | ``$STRING`` | No |  |
-| `date` | ``$STRING`` | No |  |
-| `market` | ``$STRING`` | No |  |
-| `merchant` | ``$OBJECT`` | No |  |
-| `placement_id` | ``$STRING`` | No |  |
-| `sale` | ``$NUMBER`` | No |  |
+| `click_id` | `string` | No |  |
+| `date` | `string` | No |  |
+| `market` | `string` | No |  |
+| `merchant` | `map[string]any` | No |  |
+| `placement_id` | `string` | No |  |
+| `sale` | `float64` | No |  |
 
 ### Operations
 
@@ -201,10 +201,10 @@ conversion_detail_merchant := client.ConversionDetailMerchant(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `click` | ``$INTEGER`` | No |  |
-| `market` | ``$STRING`` | No |  |
-| `merchant` | ``$OBJECT`` | No |  |
-| `sale` | ``$INTEGER`` | No |  |
+| `click` | `int` | No |  |
+| `market` | `string` | No |  |
+| `merchant` | `map[string]any` | No |  |
+| `sale` | `int` | No |  |
 
 ### Operations
 
@@ -250,9 +250,9 @@ conversion_general := client.ConversionGeneral(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `date` | ``$OBJECT`` | No |  |
-| `market` | ``$OBJECT`` | No |  |
-| `total` | ``$OBJECT`` | No |  |
+| `date` | `map[string]any` | No |  |
+| `market` | `map[string]any` | No |  |
+| `total` | `map[string]any` | No |  |
 
 ### Operations
 
@@ -261,7 +261,7 @@ conversion_general := client.ConversionGeneral(nil)
 Load a single entity matching the given criteria.
 
 ```go
-result, err := client.ConversionGeneral(nil).Load(map[string]any{"id": "conversion_general_id"}, nil)
+result, err := client.ConversionGeneral(nil).Load(nil, nil)
 ```
 
 ### Common Methods
@@ -298,7 +298,7 @@ conversion_status := client.ConversionStatus(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `status` | ``$STRING`` | No |  |
+| `status` | `string` | No |  |
 
 ### Operations
 
@@ -307,7 +307,7 @@ conversion_status := client.ConversionStatus(nil)
 Load a single entity matching the given criteria.
 
 ```go
-result, err := client.ConversionStatus(nil).Load(map[string]any{"id": "conversion_status_id"}, nil)
+result, err := client.ConversionStatus(nil).Load(nil, nil)
 ```
 
 ### Common Methods
@@ -344,11 +344,11 @@ deeplink := client.Deeplink(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `is_couponing` | ``$BOOLEAN`` | No |  |
-| `market` | ``$STRING`` | Yes |  |
-| `placement_id` | ``$STRING`` | No |  |
-| `result` | ``$OBJECT`` | No |  |
-| `url` | ``$ARRAY`` | Yes |  |
+| `is_couponing` | `bool` | No |  |
+| `market` | `string` | Yes |  |
+| `placement_id` | `string` | No |  |
+| `result` | `map[string]any` | No |  |
+| `url` | `[]any` | Yes |  |
 
 ### Operations
 
@@ -358,8 +358,8 @@ Create a new entity with the given data.
 
 ```go
 result, err := client.Deeplink(nil).Create(map[string]any{
-    "market": /* `$STRING` */,
-    "url": /* `$ARRAY` */,
+    "market": /* string */,
+    "url": /* []any */,
 }, nil)
 ```
 
@@ -397,15 +397,15 @@ deeplink_merchant := client.DeeplinkMerchant(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `deeplink_count` | ``$INTEGER`` | No |  |
-| `estimated_cpc` | ``$OBJECT`` | No |  |
-| `has_external_homepage` | ``$BOOLEAN`` | No |  |
-| `has_smartlink_homepage` | ``$BOOLEAN`` | No |  |
-| `id` | ``$STRING`` | No |  |
-| `is_smartlink` | ``$BOOLEAN`` | No |  |
-| `logo` | ``$OBJECT`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `traffic_type` | ``$ARRAY`` | No |  |
+| `deeplink_count` | `int` | No |  |
+| `estimated_cpc` | `map[string]any` | No |  |
+| `has_external_homepage` | `bool` | No |  |
+| `has_smartlink_homepage` | `bool` | No |  |
+| `id` | `string` | No |  |
+| `is_smartlink` | `bool` | No |  |
+| `logo` | `map[string]any` | No |  |
+| `name` | `string` | No |  |
+| `traffic_type` | `[]any` | No |  |
 
 ### Operations
 
@@ -454,7 +454,7 @@ dnt := client.Dnt(nil)
 Load a single entity matching the given criteria.
 
 ```go
-result, err := client.Dnt(nil).Load(map[string]any{"id": "dnt_id"}, nil)
+result, err := client.Dnt(nil).Load(nil, nil)
 ```
 
 ### Common Methods
@@ -491,7 +491,7 @@ market := client.Market(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `id` | ``$STRING`` | No |  |
+| `id` | `string` | No |  |
 
 ### Operations
 
@@ -537,11 +537,11 @@ merchant := client.Merchant(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `id` | ``$STRING`` | No |  |
-| `logo` | ``$OBJECT`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `offer_count` | ``$INTEGER`` | No |  |
-| `traffic_type` | ``$ARRAY`` | No |  |
+| `id` | `string` | No |  |
+| `logo` | `map[string]any` | No |  |
+| `name` | `string` | No |  |
+| `offer_count` | `int` | No |  |
+| `traffic_type` | `[]any` | No |  |
 
 ### Operations
 
@@ -587,24 +587,24 @@ offer := client.Offer(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `availability` | ``$STRING`` | No |  |
-| `brand` | ``$STRING`` | No |  |
-| `click_url` | ``$STRING`` | No |  |
-| `description` | ``$STRING`` | No |  |
-| `ean` | ``$OBJECT`` | No |  |
-| `eer` | ``$STRING`` | No |  |
-| `estimated_cpc` | ``$OBJECT`` | No |  |
-| `id` | ``$STRING`` | No |  |
-| `image` | ``$OBJECT`` | No |  |
-| `merchant` | ``$OBJECT`` | No |  |
-| `original_price` | ``$OBJECT`` | No |  |
-| `price` | ``$OBJECT`` | No |  |
-| `promo_text` | ``$STRING`` | No |  |
-| `shipping_price` | ``$OBJECT`` | No |  |
-| `shipping_time` | ``$OBJECT`` | No |  |
-| `thumbnail` | ``$OBJECT`` | No |  |
-| `title` | ``$STRING`` | No |  |
-| `unit_price` | ``$OBJECT`` | No |  |
+| `availability` | `string` | No |  |
+| `brand` | `string` | No |  |
+| `click_url` | `string` | No |  |
+| `description` | `string` | No |  |
+| `ean` | `map[string]any` | No |  |
+| `eer` | `string` | No |  |
+| `estimated_cpc` | `map[string]any` | No |  |
+| `id` | `string` | No |  |
+| `image` | `map[string]any` | No |  |
+| `merchant` | `map[string]any` | No |  |
+| `original_price` | `map[string]any` | No |  |
+| `price` | `map[string]any` | No |  |
+| `promo_text` | `string` | No |  |
+| `shipping_price` | `map[string]any` | No |  |
+| `shipping_time` | `map[string]any` | No |  |
+| `thumbnail` | `map[string]any` | No |  |
+| `title` | `string` | No |  |
+| `unit_price` | `map[string]any` | No |  |
 
 ### Operations
 
@@ -658,13 +658,13 @@ report_detail := client.ReportDetail(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `click_id` | ``$STRING`` | No |  |
-| `currency` | ``$STRING`` | No |  |
-| `date` | ``$STRING`` | No |  |
-| `market` | ``$STRING`` | No |  |
-| `merchant` | ``$OBJECT`` | No |  |
-| `placement_id` | ``$STRING`` | No |  |
-| `revenue` | ``$NUMBER`` | No |  |
+| `click_id` | `string` | No |  |
+| `currency` | `string` | No |  |
+| `date` | `string` | No |  |
+| `market` | `string` | No |  |
+| `merchant` | `map[string]any` | No |  |
+| `placement_id` | `string` | No |  |
+| `revenue` | `float64` | No |  |
 
 ### Operations
 
@@ -710,9 +710,9 @@ report_general := client.ReportGeneral(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `date` | ``$OBJECT`` | No |  |
-| `market` | ``$OBJECT`` | No |  |
-| `total` | ``$OBJECT`` | No |  |
+| `date` | `map[string]any` | No |  |
+| `market` | `map[string]any` | No |  |
+| `total` | `map[string]any` | No |  |
 
 ### Operations
 
@@ -721,7 +721,7 @@ report_general := client.ReportGeneral(nil)
 Load a single entity matching the given criteria.
 
 ```go
-result, err := client.ReportGeneral(nil).Load(map[string]any{"id": "report_general_id"}, nil)
+result, err := client.ReportGeneral(nil).Load(nil, nil)
 ```
 
 ### Common Methods
@@ -758,7 +758,7 @@ report_modified := client.ReportModified(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `market` | ``$OBJECT`` | No |  |
+| `market` | `map[string]any` | No |  |
 
 ### Operations
 
@@ -767,7 +767,7 @@ report_modified := client.ReportModified(nil)
 Load a single entity matching the given criteria.
 
 ```go
-result, err := client.ReportModified(nil).Load(map[string]any{"id": "report_modified_id"}, nil)
+result, err := client.ReportModified(nil).Load(nil, nil)
 ```
 
 ### Common Methods
@@ -804,7 +804,7 @@ report_status := client.ReportStatus(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `status` | ``$STRING`` | No |  |
+| `status` | `string` | No |  |
 
 ### Operations
 
@@ -813,7 +813,7 @@ report_status := client.ReportStatus(nil)
 Load a single entity matching the given criteria.
 
 ```go
-result, err := client.ReportStatus(nil).Load(map[string]any{"id": "report_status_id"}, nil)
+result, err := client.ReportStatus(nil).Load(nil, nil)
 ```
 
 ### Common Methods

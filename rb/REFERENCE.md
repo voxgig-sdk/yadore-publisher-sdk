@@ -8,7 +8,7 @@ Complete API reference for the YadorePublisher Ruby SDK.
 ### Constructor
 
 ```ruby
-require_relative 'yadore-publisher_sdk'
+require_relative 'YadorePublisher_sdk'
 
 client = YadorePublisherSDK.new(options)
 ```
@@ -146,21 +146,21 @@ conversion_detail = client.ConversionDetail
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `click_id` | ``$STRING`` | No |  |
-| `date` | ``$STRING`` | No |  |
-| `market` | ``$STRING`` | No |  |
-| `merchant` | ``$OBJECT`` | No |  |
-| `placement_id` | ``$STRING`` | No |  |
-| `sale` | ``$NUMBER`` | No |  |
+| `click_id` | `String` | No |  |
+| `date` | `String` | No |  |
+| `market` | `String` | No |  |
+| `merchant` | `Hash` | No |  |
+| `placement_id` | `String` | No |  |
+| `sale` | `Float` | No |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl = nil) -> Array`
+#### `list(reqmatch = nil, ctrl = nil) -> Array`
 
-List entities matching the given criteria. Returns an array. Raises on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array. Raises on error.
 
 ```ruby
-results = client.ConversionDetail.list(nil)
+results = client.ConversionDetail.list
 ```
 
 ### Common Methods
@@ -203,19 +203,19 @@ conversion_detail_merchant = client.ConversionDetailMerchant
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `click` | ``$INTEGER`` | No |  |
-| `market` | ``$STRING`` | No |  |
-| `merchant` | ``$OBJECT`` | No |  |
-| `sale` | ``$INTEGER`` | No |  |
+| `click` | `Integer` | No |  |
+| `market` | `String` | No |  |
+| `merchant` | `Hash` | No |  |
+| `sale` | `Integer` | No |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl = nil) -> Array`
+#### `list(reqmatch = nil, ctrl = nil) -> Array`
 
-List entities matching the given criteria. Returns an array. Raises on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array. Raises on error.
 
 ```ruby
-results = client.ConversionDetailMerchant.list(nil)
+results = client.ConversionDetailMerchant.list
 ```
 
 ### Common Methods
@@ -258,9 +258,9 @@ conversion_general = client.ConversionGeneral
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `date` | ``$OBJECT`` | No |  |
-| `market` | ``$OBJECT`` | No |  |
-| `total` | ``$OBJECT`` | No |  |
+| `date` | `Hash` | No |  |
+| `market` | `Hash` | No |  |
+| `total` | `Hash` | No |  |
 
 ### Operations
 
@@ -269,7 +269,7 @@ conversion_general = client.ConversionGeneral
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.ConversionGeneral.load({ "id" => "conversion_general_id" })
+result = client.ConversionGeneral.load()
 ```
 
 ### Common Methods
@@ -312,7 +312,7 @@ conversion_status = client.ConversionStatus
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `status` | ``$STRING`` | No |  |
+| `status` | `String` | No |  |
 
 ### Operations
 
@@ -321,7 +321,7 @@ conversion_status = client.ConversionStatus
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.ConversionStatus.load({ "id" => "conversion_status_id" })
+result = client.ConversionStatus.load()
 ```
 
 ### Common Methods
@@ -364,11 +364,11 @@ deeplink = client.Deeplink
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `is_couponing` | ``$BOOLEAN`` | No |  |
-| `market` | ``$STRING`` | Yes |  |
-| `placement_id` | ``$STRING`` | No |  |
-| `result` | ``$OBJECT`` | No |  |
-| `url` | ``$ARRAY`` | Yes |  |
+| `is_couponing` | `Boolean` | No |  |
+| `market` | `String` | Yes |  |
+| `placement_id` | `String` | No |  |
+| `result` | `Hash` | No |  |
+| `url` | `Array` | Yes |  |
 
 ### Operations
 
@@ -378,8 +378,8 @@ Create a new entity with the given data. Raises on error.
 
 ```ruby
 result = client.Deeplink.create({
-  "market" => # `$STRING`,
-  "url" => # `$ARRAY`,
+  "market" => "example", # String
+  "url" => [], # Array
 })
 ```
 
@@ -423,24 +423,24 @@ deeplink_merchant = client.DeeplinkMerchant
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `deeplink_count` | ``$INTEGER`` | No |  |
-| `estimated_cpc` | ``$OBJECT`` | No |  |
-| `has_external_homepage` | ``$BOOLEAN`` | No |  |
-| `has_smartlink_homepage` | ``$BOOLEAN`` | No |  |
-| `id` | ``$STRING`` | No |  |
-| `is_smartlink` | ``$BOOLEAN`` | No |  |
-| `logo` | ``$OBJECT`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `traffic_type` | ``$ARRAY`` | No |  |
+| `deeplink_count` | `Integer` | No |  |
+| `estimated_cpc` | `Hash` | No |  |
+| `has_external_homepage` | `Boolean` | No |  |
+| `has_smartlink_homepage` | `Boolean` | No |  |
+| `id` | `String` | No |  |
+| `is_smartlink` | `Boolean` | No |  |
+| `logo` | `Hash` | No |  |
+| `name` | `String` | No |  |
+| `traffic_type` | `Array` | No |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl = nil) -> Array`
+#### `list(reqmatch = nil, ctrl = nil) -> Array`
 
-List entities matching the given criteria. Returns an array. Raises on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array. Raises on error.
 
 ```ruby
-results = client.DeeplinkMerchant.list(nil)
+results = client.DeeplinkMerchant.list
 ```
 
 ### Common Methods
@@ -486,7 +486,7 @@ dnt = client.Dnt
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.Dnt.load({ "id" => "dnt_id" })
+result = client.Dnt.load()
 ```
 
 ### Common Methods
@@ -529,16 +529,16 @@ market = client.Market
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `id` | ``$STRING`` | No |  |
+| `id` | `String` | No |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl = nil) -> Array`
+#### `list(reqmatch = nil, ctrl = nil) -> Array`
 
-List entities matching the given criteria. Returns an array. Raises on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array. Raises on error.
 
 ```ruby
-results = client.Market.list(nil)
+results = client.Market.list
 ```
 
 ### Common Methods
@@ -581,20 +581,20 @@ merchant = client.Merchant
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `id` | ``$STRING`` | No |  |
-| `logo` | ``$OBJECT`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `offer_count` | ``$INTEGER`` | No |  |
-| `traffic_type` | ``$ARRAY`` | No |  |
+| `id` | `String` | No |  |
+| `logo` | `Hash` | No |  |
+| `name` | `String` | No |  |
+| `offer_count` | `Integer` | No |  |
+| `traffic_type` | `Array` | No |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl = nil) -> Array`
+#### `list(reqmatch = nil, ctrl = nil) -> Array`
 
-List entities matching the given criteria. Returns an array. Raises on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array. Raises on error.
 
 ```ruby
-results = client.Merchant.list(nil)
+results = client.Merchant.list
 ```
 
 ### Common Methods
@@ -637,33 +637,33 @@ offer = client.Offer
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `availability` | ``$STRING`` | No |  |
-| `brand` | ``$STRING`` | No |  |
-| `click_url` | ``$STRING`` | No |  |
-| `description` | ``$STRING`` | No |  |
-| `ean` | ``$OBJECT`` | No |  |
-| `eer` | ``$STRING`` | No |  |
-| `estimated_cpc` | ``$OBJECT`` | No |  |
-| `id` | ``$STRING`` | No |  |
-| `image` | ``$OBJECT`` | No |  |
-| `merchant` | ``$OBJECT`` | No |  |
-| `original_price` | ``$OBJECT`` | No |  |
-| `price` | ``$OBJECT`` | No |  |
-| `promo_text` | ``$STRING`` | No |  |
-| `shipping_price` | ``$OBJECT`` | No |  |
-| `shipping_time` | ``$OBJECT`` | No |  |
-| `thumbnail` | ``$OBJECT`` | No |  |
-| `title` | ``$STRING`` | No |  |
-| `unit_price` | ``$OBJECT`` | No |  |
+| `availability` | `String` | No |  |
+| `brand` | `String` | No |  |
+| `click_url` | `String` | No |  |
+| `description` | `String` | No |  |
+| `ean` | `Hash` | No |  |
+| `eer` | `String` | No |  |
+| `estimated_cpc` | `Hash` | No |  |
+| `id` | `String` | No |  |
+| `image` | `Hash` | No |  |
+| `merchant` | `Hash` | No |  |
+| `original_price` | `Hash` | No |  |
+| `price` | `Hash` | No |  |
+| `promo_text` | `String` | No |  |
+| `shipping_price` | `Hash` | No |  |
+| `shipping_time` | `Hash` | No |  |
+| `thumbnail` | `Hash` | No |  |
+| `title` | `String` | No |  |
+| `unit_price` | `Hash` | No |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl = nil) -> Array`
+#### `list(reqmatch = nil, ctrl = nil) -> Array`
 
-List entities matching the given criteria. Returns an array. Raises on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array. Raises on error.
 
 ```ruby
-results = client.Offer.list(nil)
+results = client.Offer.list
 ```
 
 #### `load(reqmatch, ctrl = nil) -> result`
@@ -714,22 +714,22 @@ report_detail = client.ReportDetail
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `click_id` | ``$STRING`` | No |  |
-| `currency` | ``$STRING`` | No |  |
-| `date` | ``$STRING`` | No |  |
-| `market` | ``$STRING`` | No |  |
-| `merchant` | ``$OBJECT`` | No |  |
-| `placement_id` | ``$STRING`` | No |  |
-| `revenue` | ``$NUMBER`` | No |  |
+| `click_id` | `String` | No |  |
+| `currency` | `String` | No |  |
+| `date` | `String` | No |  |
+| `market` | `String` | No |  |
+| `merchant` | `Hash` | No |  |
+| `placement_id` | `String` | No |  |
+| `revenue` | `Float` | No |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl = nil) -> Array`
+#### `list(reqmatch = nil, ctrl = nil) -> Array`
 
-List entities matching the given criteria. Returns an array. Raises on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array. Raises on error.
 
 ```ruby
-results = client.ReportDetail.list(nil)
+results = client.ReportDetail.list
 ```
 
 ### Common Methods
@@ -772,9 +772,9 @@ report_general = client.ReportGeneral
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `date` | ``$OBJECT`` | No |  |
-| `market` | ``$OBJECT`` | No |  |
-| `total` | ``$OBJECT`` | No |  |
+| `date` | `Hash` | No |  |
+| `market` | `Hash` | No |  |
+| `total` | `Hash` | No |  |
 
 ### Operations
 
@@ -783,7 +783,7 @@ report_general = client.ReportGeneral
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.ReportGeneral.load({ "id" => "report_general_id" })
+result = client.ReportGeneral.load()
 ```
 
 ### Common Methods
@@ -826,7 +826,7 @@ report_modified = client.ReportModified
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `market` | ``$OBJECT`` | No |  |
+| `market` | `Hash` | No |  |
 
 ### Operations
 
@@ -835,7 +835,7 @@ report_modified = client.ReportModified
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.ReportModified.load({ "id" => "report_modified_id" })
+result = client.ReportModified.load()
 ```
 
 ### Common Methods
@@ -878,7 +878,7 @@ report_status = client.ReportStatus
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `status` | ``$STRING`` | No |  |
+| `status` | `String` | No |  |
 
 ### Operations
 
@@ -887,7 +887,7 @@ report_status = client.ReportStatus
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.ReportStatus.load({ "id" => "report_status_id" })
+result = client.ReportStatus.load()
 ```
 
 ### Common Methods

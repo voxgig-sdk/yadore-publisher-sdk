@@ -4,6 +4,11 @@
 
 The Python SDK for the YadorePublisher API — an entity-oriented client following Pythonic conventions.
 
+The SDK exposes the API as capitalised, semantic **Entities** — for example `client.ConversionDetail()` — each
+carrying a small, uniform set of operations (`list`, `load`, `create`) instead of raw URL
+paths and query strings. You work with named resources and verbs, which
+keeps the cognitive load low.
+
 > Other languages, the CLI, and MCP server live alongside this one — see
 > the [top-level README](../README.md).
 
@@ -41,11 +46,39 @@ error — iterate it directly.
 
 ```python
 try:
-    conversiondetails = client.ConversionDetail().list({})
+    conversiondetails = client.ConversionDetail().list()
     for conversiondetail in conversiondetails:
         print(conversiondetail)
 except Exception as err:
     print(f"list failed: {err}")
+```
+
+
+## Error handling
+
+Entity operations raise on failure, so wrap them in `try` / `except`:
+
+```python
+try:
+    conversiondetails = client.ConversionDetail().list()
+    print(conversiondetails)
+except Exception as err:
+    print(f"list failed: {err}")
+```
+
+`direct()` does **not** raise — it returns the result envelope. Branch
+on `ok`; on failure `status` holds the HTTP status (for error responses)
+and `err` holds a transport error, so read both defensively:
+
+```python
+result = client.direct({
+    "path": "/api/resource/{id}",
+    "method": "GET",
+    "params": {"id": "example_id"},
+})
+
+if not result["ok"]:
+    print("request failed:", result.get("status"), result.get("err"))
 ```
 
 
@@ -66,7 +99,10 @@ if result["ok"]:
     print(result["status"])  # 200
     print(result["data"])    # response body
 else:
-    print(result["err"])     # error value
+    # A non-2xx response carries status + data (the error body); a
+    # transport-level failure carries err instead. Only one is present, so
+    # read both with .get() rather than indexing a key that may be absent.
+    print(result.get("status"), result.get("err"))
 ```
 
 ### Prepare a request without sending it
@@ -92,7 +128,7 @@ Create a mock client for unit testing — no server required:
 client = YadorePublisherSDK.test()
 
 # Entity ops return the bare record and raise on error.
-conversiondetail = client.ConversionDetail().load({"id": "test01"})
+conversiondetail = client.ConversionDetail().list()
 # conversiondetail contains the mock response record
 ```
 
@@ -195,8 +231,6 @@ All entities share the same interface.
 | `load` | `(reqmatch, ctrl) -> any` | Load a single entity by match criteria. Raises on error. |
 | `list` | `(reqmatch, ctrl) -> list` | List entities matching the criteria. Raises on error. |
 | `create` | `(reqdata, ctrl) -> any` | Create a new entity. Raises on error. |
-| `update` | `(reqdata, ctrl) -> any` | Update an existing entity. Raises on error. |
-| `remove` | `(reqmatch, ctrl) -> any` | Remove an entity. Raises on error. |
 | `data_get` | `() -> dict` | Get entity data. |
 | `data_set` | `(data)` | Set entity data. |
 | `match_get` | `() -> dict` | Get entity match criteria. |
@@ -427,23 +461,23 @@ Create an instance: `conversion_detail = client.ConversionDetail()`
 
 | Method | Description |
 | --- | --- |
-| `list(match)` | List entities matching the criteria. |
+| `list()` | List entities, optionally matching the given criteria. |
 
 #### Fields
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `click_id` | ``$STRING`` |  |
-| `date` | ``$STRING`` |  |
-| `market` | ``$STRING`` |  |
-| `merchant` | ``$OBJECT`` |  |
-| `placement_id` | ``$STRING`` |  |
-| `sale` | ``$NUMBER`` |  |
+| `click_id` | `str` |  |
+| `date` | `str` |  |
+| `market` | `str` |  |
+| `merchant` | `dict` |  |
+| `placement_id` | `str` |  |
+| `sale` | `float` |  |
 
 #### Example: List
 
 ```python
-conversion_details = client.ConversionDetail().list({})
+conversion_details = client.ConversionDetail().list()
 ```
 
 
@@ -455,21 +489,21 @@ Create an instance: `conversion_detail_merchant = client.ConversionDetailMerchan
 
 | Method | Description |
 | --- | --- |
-| `list(match)` | List entities matching the criteria. |
+| `list()` | List entities, optionally matching the given criteria. |
 
 #### Fields
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `click` | ``$INTEGER`` |  |
-| `market` | ``$STRING`` |  |
-| `merchant` | ``$OBJECT`` |  |
-| `sale` | ``$INTEGER`` |  |
+| `click` | `int` |  |
+| `market` | `str` |  |
+| `merchant` | `dict` |  |
+| `sale` | `int` |  |
 
 #### Example: List
 
 ```python
-conversion_detail_merchants = client.ConversionDetailMerchant().list({})
+conversion_detail_merchants = client.ConversionDetailMerchant().list()
 ```
 
 
@@ -487,14 +521,14 @@ Create an instance: `conversion_general = client.ConversionGeneral()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `date` | ``$OBJECT`` |  |
-| `market` | ``$OBJECT`` |  |
-| `total` | ``$OBJECT`` |  |
+| `date` | `dict` |  |
+| `market` | `dict` |  |
+| `total` | `dict` |  |
 
 #### Example: Load
 
 ```python
-conversion_general = client.ConversionGeneral().load({"id": "conversion_general_id"})
+conversion_general = client.ConversionGeneral().load()
 ```
 
 
@@ -512,12 +546,12 @@ Create an instance: `conversion_status = client.ConversionStatus()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `status` | ``$STRING`` |  |
+| `status` | `str` |  |
 
 #### Example: Load
 
 ```python
-conversion_status = client.ConversionStatus().load({"id": "conversion_status_id"})
+conversion_status = client.ConversionStatus().load()
 ```
 
 
@@ -535,18 +569,18 @@ Create an instance: `deeplink = client.Deeplink()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `is_couponing` | ``$BOOLEAN`` |  |
-| `market` | ``$STRING`` |  |
-| `placement_id` | ``$STRING`` |  |
-| `result` | ``$OBJECT`` |  |
-| `url` | ``$ARRAY`` |  |
+| `is_couponing` | `bool` |  |
+| `market` | `str` |  |
+| `placement_id` | `str` |  |
+| `result` | `dict` |  |
+| `url` | `list` |  |
 
 #### Example: Create
 
 ```python
 deeplink = client.Deeplink().create({
-    "market": ...,  # `$STRING`
-    "url": ...,  # `$ARRAY`
+    "market": "example",  # str
+    "url": [],  # list
 })
 ```
 
@@ -559,26 +593,26 @@ Create an instance: `deeplink_merchant = client.DeeplinkMerchant()`
 
 | Method | Description |
 | --- | --- |
-| `list(match)` | List entities matching the criteria. |
+| `list()` | List entities, optionally matching the given criteria. |
 
 #### Fields
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `deeplink_count` | ``$INTEGER`` |  |
-| `estimated_cpc` | ``$OBJECT`` |  |
-| `has_external_homepage` | ``$BOOLEAN`` |  |
-| `has_smartlink_homepage` | ``$BOOLEAN`` |  |
-| `id` | ``$STRING`` |  |
-| `is_smartlink` | ``$BOOLEAN`` |  |
-| `logo` | ``$OBJECT`` |  |
-| `name` | ``$STRING`` |  |
-| `traffic_type` | ``$ARRAY`` |  |
+| `deeplink_count` | `int` |  |
+| `estimated_cpc` | `dict` |  |
+| `has_external_homepage` | `bool` |  |
+| `has_smartlink_homepage` | `bool` |  |
+| `id` | `str` |  |
+| `is_smartlink` | `bool` |  |
+| `logo` | `dict` |  |
+| `name` | `str` |  |
+| `traffic_type` | `list` |  |
 
 #### Example: List
 
 ```python
-deeplink_merchants = client.DeeplinkMerchant().list({})
+deeplink_merchants = client.DeeplinkMerchant().list()
 ```
 
 
@@ -595,7 +629,7 @@ Create an instance: `dnt = client.Dnt()`
 #### Example: Load
 
 ```python
-dnt = client.Dnt().load({"id": "dnt_id"})
+dnt = client.Dnt().load()
 ```
 
 
@@ -607,18 +641,18 @@ Create an instance: `market = client.Market()`
 
 | Method | Description |
 | --- | --- |
-| `list(match)` | List entities matching the criteria. |
+| `list()` | List entities, optionally matching the given criteria. |
 
 #### Fields
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `id` | ``$STRING`` |  |
+| `id` | `str` |  |
 
 #### Example: List
 
 ```python
-markets = client.Market().list({})
+markets = client.Market().list()
 ```
 
 
@@ -630,22 +664,22 @@ Create an instance: `merchant = client.Merchant()`
 
 | Method | Description |
 | --- | --- |
-| `list(match)` | List entities matching the criteria. |
+| `list()` | List entities, optionally matching the given criteria. |
 
 #### Fields
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `id` | ``$STRING`` |  |
-| `logo` | ``$OBJECT`` |  |
-| `name` | ``$STRING`` |  |
-| `offer_count` | ``$INTEGER`` |  |
-| `traffic_type` | ``$ARRAY`` |  |
+| `id` | `str` |  |
+| `logo` | `dict` |  |
+| `name` | `str` |  |
+| `offer_count` | `int` |  |
+| `traffic_type` | `list` |  |
 
 #### Example: List
 
 ```python
-merchants = client.Merchant().list({})
+merchants = client.Merchant().list()
 ```
 
 
@@ -657,31 +691,31 @@ Create an instance: `offer = client.Offer()`
 
 | Method | Description |
 | --- | --- |
-| `list(match)` | List entities matching the criteria. |
+| `list()` | List entities, optionally matching the given criteria. |
 | `load(match)` | Load a single entity by match criteria. |
 
 #### Fields
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `availability` | ``$STRING`` |  |
-| `brand` | ``$STRING`` |  |
-| `click_url` | ``$STRING`` |  |
-| `description` | ``$STRING`` |  |
-| `ean` | ``$OBJECT`` |  |
-| `eer` | ``$STRING`` |  |
-| `estimated_cpc` | ``$OBJECT`` |  |
-| `id` | ``$STRING`` |  |
-| `image` | ``$OBJECT`` |  |
-| `merchant` | ``$OBJECT`` |  |
-| `original_price` | ``$OBJECT`` |  |
-| `price` | ``$OBJECT`` |  |
-| `promo_text` | ``$STRING`` |  |
-| `shipping_price` | ``$OBJECT`` |  |
-| `shipping_time` | ``$OBJECT`` |  |
-| `thumbnail` | ``$OBJECT`` |  |
-| `title` | ``$STRING`` |  |
-| `unit_price` | ``$OBJECT`` |  |
+| `availability` | `str` |  |
+| `brand` | `str` |  |
+| `click_url` | `str` |  |
+| `description` | `str` |  |
+| `ean` | `dict` |  |
+| `eer` | `str` |  |
+| `estimated_cpc` | `dict` |  |
+| `id` | `str` |  |
+| `image` | `dict` |  |
+| `merchant` | `dict` |  |
+| `original_price` | `dict` |  |
+| `price` | `dict` |  |
+| `promo_text` | `str` |  |
+| `shipping_price` | `dict` |  |
+| `shipping_time` | `dict` |  |
+| `thumbnail` | `dict` |  |
+| `title` | `str` |  |
+| `unit_price` | `dict` |  |
 
 #### Example: Load
 
@@ -692,7 +726,7 @@ offer = client.Offer().load({"id": "offer_id"})
 #### Example: List
 
 ```python
-offers = client.Offer().list({})
+offers = client.Offer().list()
 ```
 
 
@@ -704,24 +738,24 @@ Create an instance: `report_detail = client.ReportDetail()`
 
 | Method | Description |
 | --- | --- |
-| `list(match)` | List entities matching the criteria. |
+| `list()` | List entities, optionally matching the given criteria. |
 
 #### Fields
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `click_id` | ``$STRING`` |  |
-| `currency` | ``$STRING`` |  |
-| `date` | ``$STRING`` |  |
-| `market` | ``$STRING`` |  |
-| `merchant` | ``$OBJECT`` |  |
-| `placement_id` | ``$STRING`` |  |
-| `revenue` | ``$NUMBER`` |  |
+| `click_id` | `str` |  |
+| `currency` | `str` |  |
+| `date` | `str` |  |
+| `market` | `str` |  |
+| `merchant` | `dict` |  |
+| `placement_id` | `str` |  |
+| `revenue` | `float` |  |
 
 #### Example: List
 
 ```python
-report_details = client.ReportDetail().list({})
+report_details = client.ReportDetail().list()
 ```
 
 
@@ -739,14 +773,14 @@ Create an instance: `report_general = client.ReportGeneral()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `date` | ``$OBJECT`` |  |
-| `market` | ``$OBJECT`` |  |
-| `total` | ``$OBJECT`` |  |
+| `date` | `dict` |  |
+| `market` | `dict` |  |
+| `total` | `dict` |  |
 
 #### Example: Load
 
 ```python
-report_general = client.ReportGeneral().load({"id": "report_general_id"})
+report_general = client.ReportGeneral().load()
 ```
 
 
@@ -764,12 +798,12 @@ Create an instance: `report_modified = client.ReportModified()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `market` | ``$OBJECT`` |  |
+| `market` | `dict` |  |
 
 #### Example: Load
 
 ```python
-report_modified = client.ReportModified().load({"id": "report_modified_id"})
+report_modified = client.ReportModified().load()
 ```
 
 
@@ -787,21 +821,25 @@ Create an instance: `report_status = client.ReportStatus()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `status` | ``$STRING`` |  |
+| `status` | `str` |  |
 
 #### Example: Load
 
 ```python
-report_status = client.ReportStatus().load({"id": "report_status_id"})
+report_status = client.ReportStatus().load()
 ```
 
 
-## Explanation
+## Advanced
+
+> The sections above cover everyday use. The material below explains the
+> SDK's internals — useful when extending it with custom features, but not
+> needed for normal use.
 
 ### The operation pipeline
 
-Every entity operation (load, list, create, update, remove) follows a
-six-stage pipeline. Each stage fires a feature hook before executing:
+Every entity operation follows a six-stage pipeline. Each stage fires a
+feature hook before executing:
 
 ```
 PrePoint → PreSpec → PreRequest → PreResponse → PreResult → PreDone
@@ -818,8 +856,9 @@ PrePoint → PreSpec → PreRequest → PreResponse → PreResult → PreDone
 - **PreDone**: Final stage before returning to the caller. Entity
   state (match, data) is updated here.
 
-If any stage returns an error, the pipeline short-circuits and the
-error is returned to the caller as the second element in the return tuple.
+If any stage errors, the pipeline short-circuits and the error surfaces
+to the caller — see [Error handling](#error-handling) for how that looks
+in this language.
 
 ### Features and hooks
 
@@ -862,14 +901,14 @@ Import entity or utility modules directly only when needed.
 
 ### Entity state
 
-Entity instances are stateful. After a successful `load`, the entity
+Entity instances are stateful. After a successful `list`, the entity
 stores the returned data and match criteria internally.
 
 ```python
 conversiondetail = client.ConversionDetail()
-conversiondetail.load({"id": "example_id"})
+conversiondetail.list()
 
-# conversiondetail.data_get() now returns the loaded conversiondetail data
+# conversiondetail.data_get() now returns the conversiondetail data from the last list
 # conversiondetail.match_get() returns the last match criteria
 ```
 

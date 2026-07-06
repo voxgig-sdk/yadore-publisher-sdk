@@ -37,7 +37,7 @@ ConversionDetail = Struct.new(
   keyword_init: true
 )
 
-# Match filter for ConversionDetail#list (any subset of ConversionDetail fields).
+# Request payload for ConversionDetail#list.
 #
 # @!attribute [rw] click_id
 #   @return [String, nil]
@@ -87,7 +87,7 @@ ConversionDetailMerchant = Struct.new(
   keyword_init: true
 )
 
-# Match filter for ConversionDetailMerchant#list (any subset of ConversionDetailMerchant fields).
+# Request payload for ConversionDetailMerchant#list.
 #
 # @!attribute [rw] click
 #   @return [Integer, nil]
@@ -125,7 +125,7 @@ ConversionGeneral = Struct.new(
   keyword_init: true
 )
 
-# Match filter for ConversionGeneral#load (any subset of ConversionGeneral fields).
+# Request payload for ConversionGeneral#load.
 #
 # @!attribute [rw] date
 #   @return [Hash, nil]
@@ -151,7 +151,7 @@ ConversionStatus = Struct.new(
   keyword_init: true
 )
 
-# Match filter for ConversionStatus#load (any subset of ConversionStatus fields).
+# Request payload for ConversionStatus#load.
 #
 # @!attribute [rw] status
 #   @return [String, nil]
@@ -185,13 +185,13 @@ Deeplink = Struct.new(
   keyword_init: true
 )
 
-# Match filter for Deeplink#create (any subset of Deeplink fields).
+# Request payload for Deeplink#create.
 #
 # @!attribute [rw] is_couponing
 #   @return [Boolean, nil]
 #
 # @!attribute [rw] market
-#   @return [String, nil]
+#   @return [String]
 #
 # @!attribute [rw] placement_id
 #   @return [String, nil]
@@ -200,7 +200,7 @@ Deeplink = Struct.new(
 #   @return [Hash, nil]
 #
 # @!attribute [rw] url
-#   @return [Array, nil]
+#   @return [Array]
 DeeplinkCreateData = Struct.new(
   :is_couponing,
   :market,
@@ -251,7 +251,7 @@ DeeplinkMerchant = Struct.new(
   keyword_init: true
 )
 
-# Match filter for DeeplinkMerchant#list (any subset of DeeplinkMerchant fields).
+# Request payload for DeeplinkMerchant#list.
 #
 # @!attribute [rw] deeplink_count
 #   @return [Integer, nil]
@@ -296,7 +296,7 @@ DeeplinkMerchantListMatch = Struct.new(
 class Dnt
 end
 
-# Match filter for Dnt#load (any subset of Dnt fields).
+# Request payload for Dnt#load.
 class DntLoadMatch
 end
 
@@ -309,7 +309,7 @@ Market = Struct.new(
   keyword_init: true
 )
 
-# Match filter for Market#list (any subset of Market fields).
+# Request payload for Market#list.
 #
 # @!attribute [rw] id
 #   @return [String, nil]
@@ -343,7 +343,7 @@ Merchant = Struct.new(
   keyword_init: true
 )
 
-# Match filter for Merchant#list (any subset of Merchant fields).
+# Request payload for Merchant#list.
 #
 # @!attribute [rw] id
 #   @return [String, nil]
@@ -445,7 +445,7 @@ Offer = Struct.new(
   keyword_init: true
 )
 
-# Match filter for Offer#load (any subset of Offer fields).
+# Request payload for Offer#load.
 #
 # @!attribute [rw] availability
 #   @return [String, nil]
@@ -469,7 +469,7 @@ Offer = Struct.new(
 #   @return [Hash, nil]
 #
 # @!attribute [rw] id
-#   @return [String, nil]
+#   @return [String]
 #
 # @!attribute [rw] image
 #   @return [Hash, nil]
@@ -522,7 +522,7 @@ OfferLoadMatch = Struct.new(
   keyword_init: true
 )
 
-# Match filter for Offer#list (any subset of Offer fields).
+# Request payload for Offer#list.
 #
 # @!attribute [rw] availability
 #   @return [String, nil]
@@ -632,7 +632,7 @@ ReportDetail = Struct.new(
   keyword_init: true
 )
 
-# Match filter for ReportDetail#list (any subset of ReportDetail fields).
+# Request payload for ReportDetail#list.
 #
 # @!attribute [rw] click_id
 #   @return [String, nil]
@@ -682,7 +682,7 @@ ReportGeneral = Struct.new(
   keyword_init: true
 )
 
-# Match filter for ReportGeneral#load (any subset of ReportGeneral fields).
+# Request payload for ReportGeneral#load.
 #
 # @!attribute [rw] date
 #   @return [Hash, nil]
@@ -708,7 +708,7 @@ ReportModified = Struct.new(
   keyword_init: true
 )
 
-# Match filter for ReportModified#load (any subset of ReportModified fields).
+# Request payload for ReportModified#load.
 #
 # @!attribute [rw] market
 #   @return [Hash, nil]
@@ -726,7 +726,7 @@ ReportStatus = Struct.new(
   keyword_init: true
 )
 
-# Match filter for ReportStatus#load (any subset of ReportStatus fields).
+# Request payload for ReportStatus#load.
 #
 # @!attribute [rw] status
 #   @return [String, nil]

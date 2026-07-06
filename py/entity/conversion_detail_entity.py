@@ -66,8 +66,12 @@ class ConversionDetailEntity:
     
 
     
-    def list(self, reqmatch: ConversionDetailListMatch, ctrl=None) -> list[ConversionDetail]:
+    def list(self, reqmatch=None, ctrl=None) -> list[ConversionDetail]:
         utility = self._utility
+        # reqmatch is optional: an omitted match lists all records. Treat None
+        # as an empty match so client.ConversionDetail().list() works with no args.
+        if reqmatch is None:
+            reqmatch = {}
         ctx = utility.make_context({
             "opname": "list",
             "ctrl": ctrl,

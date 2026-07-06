@@ -4,6 +4,8 @@
 
 The Golang SDK for the YadorePublisher API — an entity-oriented client using standard Go conventions. No generics required; data flows as `map[string]any`.
 
+It exposes the API as capitalised, semantic **Entities** — e.g. `client.ConversionDetail(nil)` — each with the same small set of operations (`List`, `Load`, `Create`) instead of raw URL paths and query strings. You call meaning, not endpoints, which keeps the cognitive load low.
+
 > Other languages, the CLI, and MCP server live alongside this one — see
 > the [top-level README](../README.md).
 
@@ -63,6 +65,35 @@ func main() {
 ```
 
 
+## Error handling
+
+Every entity operation returns `(value, error)`. Check `err` before
+using the value — there is no exception to catch:
+
+```go
+conversiondetails, err := client.ConversionDetail(nil).List(nil, nil)
+if err != nil {
+    // handle err
+    return
+}
+_ = conversiondetails
+```
+
+`Direct` follows the same `(value, error)` convention:
+
+```go
+result, err := client.Direct(map[string]any{
+    "path":   "/api/resource/{id}",
+    "method": "GET",
+    "params": map[string]any{"id": "example_id"},
+})
+if err != nil {
+    // handle err
+}
+_ = result
+```
+
+
 ## How-to guides
 
 ### Make a direct HTTP request
@@ -109,13 +140,13 @@ Create a mock client for unit testing — no server required:
 ```go
 client := sdk.Test()
 
-conversiondetail, err := client.ConversionDetail(nil).Load(
-    map[string]any{"id": "test01"}, nil,
+conversiondetail, err := client.ConversionDetail(nil).List(
+    nil, nil,
 )
 if err != nil {
     panic(err)
 }
-fmt.Println(conversiondetail) // the loaded mock data
+fmt.Println(conversiondetail) // the returned mock data
 ```
 
 ### Use a custom fetch function
@@ -218,8 +249,6 @@ All entities implement the `YadorePublisherEntity` interface.
 | `Load` | `(reqmatch, ctrl map[string]any) (any, error)` | Load a single entity by match criteria. |
 | `List` | `(reqmatch, ctrl map[string]any) (any, error)` | List entities matching the criteria. |
 | `Create` | `(reqdata, ctrl map[string]any) (any, error)` | Create a new entity. |
-| `Update` | `(reqdata, ctrl map[string]any) (any, error)` | Update an existing entity. |
-| `Remove` | `(reqmatch, ctrl map[string]any) (any, error)` | Remove an entity. |
 | `Data` | `(args ...any) any` | Get or set entity data. |
 | `Match` | `(args ...any) any` | Get or set entity match criteria. |
 | `Make` | `() Entity` | Create a new instance with the same options. |
@@ -232,16 +261,16 @@ operation's data **directly** — there is no wrapper:
 
 | Operation | `value` |
 | --- | --- |
-| `Load` / `Create` / `Update` / `Remove` | the entity record (`map[string]any`) |
+| `Load` / `Create` | the entity record (`map[string]any`) |
 | `List` | a `[]any` of entity records |
 
 Check `err` first, then use the value directly (or the typed
 `...Typed` variants, which return the entity's model struct and a typed
 slice):
 
-    conversiondetail, err := client.ConversionDetail(nil).Load(map[string]any{"id": "example_id"}, nil)
+    conversiondetail, err := client.ConversionDetail(nil).List(map[string]any{/* fields */}, nil)
     if err != nil { /* handle */ }
-    // conversiondetail is the loaded record
+    // conversiondetail is the returned record
 
 Only `Direct()` returns a response envelope — a `map[string]any` with
 `"ok"`, `"status"`, `"headers"`, and `"data"` keys.
@@ -457,12 +486,12 @@ Create an instance: `conversion_detail := client.ConversionDetail(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `click_id` | ``$STRING`` |  |
-| `date` | ``$STRING`` |  |
-| `market` | ``$STRING`` |  |
-| `merchant` | ``$OBJECT`` |  |
-| `placement_id` | ``$STRING`` |  |
-| `sale` | ``$NUMBER`` |  |
+| `click_id` | `string` |  |
+| `date` | `string` |  |
+| `market` | `string` |  |
+| `merchant` | `map[string]any` |  |
+| `placement_id` | `string` |  |
+| `sale` | `float64` |  |
 
 #### Example: List
 
@@ -489,10 +518,10 @@ Create an instance: `conversion_detail_merchant := client.ConversionDetailMercha
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `click` | ``$INTEGER`` |  |
-| `market` | ``$STRING`` |  |
-| `merchant` | ``$OBJECT`` |  |
-| `sale` | ``$INTEGER`` |  |
+| `click` | `int` |  |
+| `market` | `string` |  |
+| `merchant` | `map[string]any` |  |
+| `sale` | `int` |  |
 
 #### Example: List
 
@@ -519,14 +548,14 @@ Create an instance: `conversion_general := client.ConversionGeneral(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `date` | ``$OBJECT`` |  |
-| `market` | ``$OBJECT`` |  |
-| `total` | ``$OBJECT`` |  |
+| `date` | `map[string]any` |  |
+| `market` | `map[string]any` |  |
+| `total` | `map[string]any` |  |
 
 #### Example: Load
 
 ```go
-conversion_general, err := client.ConversionGeneral(nil).Load(map[string]any{"id": "conversion_general_id"}, nil)
+conversion_general, err := client.ConversionGeneral(nil).Load(nil, nil)
 if err != nil {
     panic(err)
 }
@@ -548,12 +577,12 @@ Create an instance: `conversion_status := client.ConversionStatus(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `status` | ``$STRING`` |  |
+| `status` | `string` |  |
 
 #### Example: Load
 
 ```go
-conversion_status, err := client.ConversionStatus(nil).Load(map[string]any{"id": "conversion_status_id"}, nil)
+conversion_status, err := client.ConversionStatus(nil).Load(nil, nil)
 if err != nil {
     panic(err)
 }
@@ -575,18 +604,18 @@ Create an instance: `deeplink := client.Deeplink(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `is_couponing` | ``$BOOLEAN`` |  |
-| `market` | ``$STRING`` |  |
-| `placement_id` | ``$STRING`` |  |
-| `result` | ``$OBJECT`` |  |
-| `url` | ``$ARRAY`` |  |
+| `is_couponing` | `bool` |  |
+| `market` | `string` |  |
+| `placement_id` | `string` |  |
+| `result` | `map[string]any` |  |
+| `url` | `[]any` |  |
 
 #### Example: Create
 
 ```go
 result, err := client.Deeplink(nil).Create(map[string]any{
-    "market": /* `$STRING` */,
-    "url": /* `$ARRAY` */,
+    "market": /* string */,
+    "url": /* []any */,
 }, nil)
 ```
 
@@ -605,15 +634,15 @@ Create an instance: `deeplink_merchant := client.DeeplinkMerchant(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `deeplink_count` | ``$INTEGER`` |  |
-| `estimated_cpc` | ``$OBJECT`` |  |
-| `has_external_homepage` | ``$BOOLEAN`` |  |
-| `has_smartlink_homepage` | ``$BOOLEAN`` |  |
-| `id` | ``$STRING`` |  |
-| `is_smartlink` | ``$BOOLEAN`` |  |
-| `logo` | ``$OBJECT`` |  |
-| `name` | ``$STRING`` |  |
-| `traffic_type` | ``$ARRAY`` |  |
+| `deeplink_count` | `int` |  |
+| `estimated_cpc` | `map[string]any` |  |
+| `has_external_homepage` | `bool` |  |
+| `has_smartlink_homepage` | `bool` |  |
+| `id` | `string` |  |
+| `is_smartlink` | `bool` |  |
+| `logo` | `map[string]any` |  |
+| `name` | `string` |  |
+| `traffic_type` | `[]any` |  |
 
 #### Example: List
 
@@ -639,7 +668,7 @@ Create an instance: `dnt := client.Dnt(nil)`
 #### Example: Load
 
 ```go
-dnt, err := client.Dnt(nil).Load(map[string]any{"id": "dnt_id"}, nil)
+dnt, err := client.Dnt(nil).Load(nil, nil)
 if err != nil {
     panic(err)
 }
@@ -661,7 +690,7 @@ Create an instance: `market := client.Market(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `id` | ``$STRING`` |  |
+| `id` | `string` |  |
 
 #### Example: List
 
@@ -688,11 +717,11 @@ Create an instance: `merchant := client.Merchant(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `id` | ``$STRING`` |  |
-| `logo` | ``$OBJECT`` |  |
-| `name` | ``$STRING`` |  |
-| `offer_count` | ``$INTEGER`` |  |
-| `traffic_type` | ``$ARRAY`` |  |
+| `id` | `string` |  |
+| `logo` | `map[string]any` |  |
+| `name` | `string` |  |
+| `offer_count` | `int` |  |
+| `traffic_type` | `[]any` |  |
 
 #### Example: List
 
@@ -720,24 +749,24 @@ Create an instance: `offer := client.Offer(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `availability` | ``$STRING`` |  |
-| `brand` | ``$STRING`` |  |
-| `click_url` | ``$STRING`` |  |
-| `description` | ``$STRING`` |  |
-| `ean` | ``$OBJECT`` |  |
-| `eer` | ``$STRING`` |  |
-| `estimated_cpc` | ``$OBJECT`` |  |
-| `id` | ``$STRING`` |  |
-| `image` | ``$OBJECT`` |  |
-| `merchant` | ``$OBJECT`` |  |
-| `original_price` | ``$OBJECT`` |  |
-| `price` | ``$OBJECT`` |  |
-| `promo_text` | ``$STRING`` |  |
-| `shipping_price` | ``$OBJECT`` |  |
-| `shipping_time` | ``$OBJECT`` |  |
-| `thumbnail` | ``$OBJECT`` |  |
-| `title` | ``$STRING`` |  |
-| `unit_price` | ``$OBJECT`` |  |
+| `availability` | `string` |  |
+| `brand` | `string` |  |
+| `click_url` | `string` |  |
+| `description` | `string` |  |
+| `ean` | `map[string]any` |  |
+| `eer` | `string` |  |
+| `estimated_cpc` | `map[string]any` |  |
+| `id` | `string` |  |
+| `image` | `map[string]any` |  |
+| `merchant` | `map[string]any` |  |
+| `original_price` | `map[string]any` |  |
+| `price` | `map[string]any` |  |
+| `promo_text` | `string` |  |
+| `shipping_price` | `map[string]any` |  |
+| `shipping_time` | `map[string]any` |  |
+| `thumbnail` | `map[string]any` |  |
+| `title` | `string` |  |
+| `unit_price` | `map[string]any` |  |
 
 #### Example: Load
 
@@ -774,13 +803,13 @@ Create an instance: `report_detail := client.ReportDetail(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `click_id` | ``$STRING`` |  |
-| `currency` | ``$STRING`` |  |
-| `date` | ``$STRING`` |  |
-| `market` | ``$STRING`` |  |
-| `merchant` | ``$OBJECT`` |  |
-| `placement_id` | ``$STRING`` |  |
-| `revenue` | ``$NUMBER`` |  |
+| `click_id` | `string` |  |
+| `currency` | `string` |  |
+| `date` | `string` |  |
+| `market` | `string` |  |
+| `merchant` | `map[string]any` |  |
+| `placement_id` | `string` |  |
+| `revenue` | `float64` |  |
 
 #### Example: List
 
@@ -807,14 +836,14 @@ Create an instance: `report_general := client.ReportGeneral(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `date` | ``$OBJECT`` |  |
-| `market` | ``$OBJECT`` |  |
-| `total` | ``$OBJECT`` |  |
+| `date` | `map[string]any` |  |
+| `market` | `map[string]any` |  |
+| `total` | `map[string]any` |  |
 
 #### Example: Load
 
 ```go
-report_general, err := client.ReportGeneral(nil).Load(map[string]any{"id": "report_general_id"}, nil)
+report_general, err := client.ReportGeneral(nil).Load(nil, nil)
 if err != nil {
     panic(err)
 }
@@ -836,12 +865,12 @@ Create an instance: `report_modified := client.ReportModified(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `market` | ``$OBJECT`` |  |
+| `market` | `map[string]any` |  |
 
 #### Example: Load
 
 ```go
-report_modified, err := client.ReportModified(nil).Load(map[string]any{"id": "report_modified_id"}, nil)
+report_modified, err := client.ReportModified(nil).Load(nil, nil)
 if err != nil {
     panic(err)
 }
@@ -863,12 +892,12 @@ Create an instance: `report_status := client.ReportStatus(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `status` | ``$STRING`` |  |
+| `status` | `string` |  |
 
 #### Example: Load
 
 ```go
-report_status, err := client.ReportStatus(nil).Load(map[string]any{"id": "report_status_id"}, nil)
+report_status, err := client.ReportStatus(nil).Load(nil, nil)
 if err != nil {
     panic(err)
 }
@@ -876,12 +905,16 @@ fmt.Println(report_status) // the loaded record
 ```
 
 
-## Explanation
+## Advanced
+
+> The sections above cover everyday use. The material below explains the
+> SDK's internals — useful when extending it with custom features, but not
+> needed for normal use.
 
 ### The operation pipeline
 
-Every entity operation (load, list, create, update, remove) follows a
-six-stage pipeline. Each stage fires a feature hook before executing:
+Every entity operation follows a six-stage pipeline. Each stage fires a
+feature hook before executing:
 
 ```
 PrePoint → PreSpec → PreRequest → PreResponse → PreResult → PreDone
@@ -898,9 +931,9 @@ PrePoint → PreSpec → PreRequest → PreResponse → PreResult → PreDone
 - **PreDone**: Final stage before returning to the caller. Entity
   state (match, data) is updated here.
 
-If any stage returns an error, the pipeline short-circuits and the
-error is returned to the caller. An unexpected panic triggers the
-`PreUnexpected` hook.
+If any stage errors, the pipeline short-circuits and the error surfaces
+to the caller — see [Error handling](#error-handling) for how that looks
+in this language.
 
 ### Features and hooks
 
@@ -941,14 +974,14 @@ like `core.ToMapAny`.
 
 ### Entity state
 
-Entity instances are stateful. After a successful `Load`, the entity
+Entity instances are stateful. After a successful `List`, the entity
 stores the returned data and match criteria internally.
 
 ```go
 conversiondetail := client.ConversionDetail(nil)
-conversiondetail.Load(map[string]any{"id": "example_id"}, nil)
+conversiondetail.List(nil, nil)
 
-// conversiondetail.Data() now returns the loaded conversiondetail data
+// conversiondetail.Data() now returns the conversiondetail data from the last list
 // conversiondetail.Match() returns the last match criteria
 ```
 
