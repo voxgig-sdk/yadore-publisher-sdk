@@ -6,9 +6,6 @@
     },
     "kit": {
       "config": {
-        "auth": {
-          "prefix": "Bearer"
-        },
         "docs_order": [
           "ts",
           "py",
@@ -1958,13 +1955,23 @@
       },
       "info": {
         "description": "This is an overview of all the available API endpoints.\nEach API is grouped and you can unfold the different endpoints to get detailed information on how to use them.\n\nYou can use this actionable documentation or an application of your choice (e.g. [Postman](https://www.postman.com/)) to browse the API.\n\n## Endpoints\nThe API servers are available under the URL: `https://api.yadore.com/`. You must use this URL for all API requests.\nFor example to search for offers, you must send your request to `https://api.yadore.com/v2/offer`.\n\nThis doesn't concern you when you are using this documentation. You can use the endpoints here by clicking on `Try it out`.\n\n## Authentication\nYou must add your API-Key as header `API-Key` to all requests in the application of your choice.\n\nFor authorizing your requests in this actionable documentation, you must use the `Authorize` button below and enter your API-Key.\n\n## FAQ\n\n1. What Yadore understands as **offer** – for us an offer is a product offer from a specific merchant, example would be a specific washing machine from e.g. _Mediamarkt.de_.\n\n2. What Yadore understands as **deeplink** – for us a deeplink is a specific product landing page from a merchant, so the deep link request must look like `shopdomain.de/category/specific_product.html`.\n\n3. What Yadore understands as **smartlink** – for us a smartlink merchant is a merchant, where the publisher can send the user anywhere, means home page, category page, product page, etc. However, you must specify exactly where you want to send the user (i.e. homepage, category, ..) as the API will not automatically generate this for you.\n\n4. All monetary values are always in **Euro**.\n\n5. All dates returned from any endpoint are in **UTC time**.\n\n6. All API parameters are **case sensitive**.\n\n7. The estimated CPC in all APIs is 100% Yadore, to calculate your revenue you have to adapt your share.\n\n8. We classify publishers in _“no couponing”_, _“couponing”_ and _“mixed”_. This is important as _“mixed”_ publishers need to use a parameter to inform if a click is couponing or not. If you feel wrongly classified just speak to your account manager.\n\n9. If there are any further questions, please contact your account manager or send an email to [mail@yadore.com](mailto:mail@yadore.com).\n",
+        "meta_source": "https://www.freepublicapis.com",
+        "security": {
+          "in": "header",
+          "name": "API-Key",
+          "prefix": "",
+          "scheme": "ApiKeyAuth",
+          "type": "apiKey"
+        },
         "servers": [
           {
             "url": "https://api.yadore.com/"
           }
         ],
+        "summary": "This is an overview of all the available API endpoints.",
         "title": "Yadore Publisher API",
-        "version": "2.0.0"
+        "version": "2.0.0",
+        "website": "https://yadore.com"
       },
       "option": {},
       "target": {
@@ -2017,6 +2024,9 @@
           },
           "name": "go-cli",
           "phase": {
+            "agentguide": {
+              "active": false
+            },
             "entity": {
               "active": false
             },
@@ -2067,6 +2077,9 @@
           },
           "name": "go-mcp",
           "phase": {
+            "agentguide": {
+              "active": false
+            },
             "entity": {
               "active": false
             },

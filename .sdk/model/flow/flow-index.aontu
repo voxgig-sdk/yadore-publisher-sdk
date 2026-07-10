@@ -1,0 +1,16 @@
+# Flows
+
+@"BasicConversionDetailFlow.aontu"
+@"BasicConversionDetailMerchantFlow.aontu"
+@"BasicConversionGeneralFlow.aontu"
+@"BasicConversionStatusFlow.aontu"
+@"BasicDeeplinkFlow.aontu"
+@"BasicDeeplinkMerchantFlow.aontu"
+@"BasicDntFlow.aontu"
+@"BasicMarketFlow.aontu"
+@"BasicMerchantFlow.aontu"
+@"BasicOfferFlow.aontu"
+@"BasicReportDetailFlow.aontu"
+@"BasicReportGeneralFlow.aontu"
+@"BasicReportModifiedFlow.aontu"
+@"BasicReportStatusFlow.aontu"

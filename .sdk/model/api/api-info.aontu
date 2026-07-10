@@ -40,14 +40,21 @@ For authorizing your requests in this actionable documentation, you must use the
 
 9. If there are any further questions, please contact your account manager or send an email to [mail@yadore.com](mailto:mail@yadore.com).
 `
+      security: {
+        in: "header"
+        name: "API-Key"
+        prefix: ""
+        scheme: "ApiKeyAuth"
+        type: "apiKey"
+      }
       servers: [
         {
           url: "https://api.yadore.com/"
         }
       ]
+      summary: "This is an overview of all the available API endpoints."
       title: "Yadore Publisher API"
       version: "2.0.0"
+      website: "https://yadore.com"
     }
   }
-}
-

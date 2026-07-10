@@ -497,8 +497,8 @@ Create a new entity with the given data.
 
 ```ts
 const result = await client.Deeplink().create({
-  market: /* string */,
-  url: /* any[] */,
+  market: 'example_market',
+  url: [],
 })
 ```
 

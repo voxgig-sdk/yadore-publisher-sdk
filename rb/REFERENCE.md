@@ -378,7 +378,7 @@ Create a new entity with the given data. Raises on error.
 
 ```ruby
 result = client.Deeplink.create({
-  "market" => "example", # String
+  "market" => "example_market", # String
   "url" => [], # Array
 })
 ```

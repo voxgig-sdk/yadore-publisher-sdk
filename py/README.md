@@ -579,7 +579,7 @@ Create an instance: `deeplink = client.Deeplink()`
 
 ```python
 deeplink = client.Deeplink().create({
-    "market": "example",  # str
+    "market": "example_market",  # str
     "url": [],  # list
 })
 ```

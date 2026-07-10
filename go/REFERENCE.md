@@ -143,7 +143,8 @@ same parameters as `Direct()`.
 ## ConversionDetailEntity
 
 ```go
-conversion_detail := client.ConversionDetail(nil)
+conversionDetail := client.ConversionDetail(nil)
+fmt.Println(conversionDetail.GetName()) // "conversion_detail"
 ```
 
 ### Fields
@@ -165,6 +166,10 @@ List entities matching the given criteria. Returns an array.
 
 ```go
 results, err := client.ConversionDetail(nil).List(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(results)
 ```
 
 ### Common Methods
@@ -194,7 +199,8 @@ Return the entity name.
 ## ConversionDetailMerchantEntity
 
 ```go
-conversion_detail_merchant := client.ConversionDetailMerchant(nil)
+conversionDetailMerchant := client.ConversionDetailMerchant(nil)
+fmt.Println(conversionDetailMerchant.GetName()) // "conversion_detail_merchant"
 ```
 
 ### Fields
@@ -214,6 +220,10 @@ List entities matching the given criteria. Returns an array.
 
 ```go
 results, err := client.ConversionDetailMerchant(nil).List(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(results)
 ```
 
 ### Common Methods
@@ -243,7 +253,8 @@ Return the entity name.
 ## ConversionGeneralEntity
 
 ```go
-conversion_general := client.ConversionGeneral(nil)
+conversionGeneral := client.ConversionGeneral(nil)
+fmt.Println(conversionGeneral.GetName()) // "conversion_general"
 ```
 
 ### Fields
@@ -262,6 +273,10 @@ Load a single entity matching the given criteria.
 
 ```go
 result, err := client.ConversionGeneral(nil).Load(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 ### Common Methods
@@ -291,7 +306,8 @@ Return the entity name.
 ## ConversionStatusEntity
 
 ```go
-conversion_status := client.ConversionStatus(nil)
+conversionStatus := client.ConversionStatus(nil)
+fmt.Println(conversionStatus.GetName()) // "conversion_status"
 ```
 
 ### Fields
@@ -308,6 +324,10 @@ Load a single entity matching the given criteria.
 
 ```go
 result, err := client.ConversionStatus(nil).Load(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 ### Common Methods
@@ -338,6 +358,7 @@ Return the entity name.
 
 ```go
 deeplink := client.Deeplink(nil)
+fmt.Println(deeplink.GetName()) // "deeplink"
 ```
 
 ### Fields
@@ -358,9 +379,13 @@ Create a new entity with the given data.
 
 ```go
 result, err := client.Deeplink(nil).Create(map[string]any{
-    "market": /* string */,
-    "url": /* []any */,
+    "market": "example_market",
+    "url": []any{},
 }, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 ### Common Methods
@@ -390,7 +415,8 @@ Return the entity name.
 ## DeeplinkMerchantEntity
 
 ```go
-deeplink_merchant := client.DeeplinkMerchant(nil)
+deeplinkMerchant := client.DeeplinkMerchant(nil)
+fmt.Println(deeplinkMerchant.GetName()) // "deeplink_merchant"
 ```
 
 ### Fields
@@ -415,6 +441,10 @@ List entities matching the given criteria. Returns an array.
 
 ```go
 results, err := client.DeeplinkMerchant(nil).List(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(results)
 ```
 
 ### Common Methods
@@ -445,6 +475,7 @@ Return the entity name.
 
 ```go
 dnt := client.Dnt(nil)
+fmt.Println(dnt.GetName()) // "dnt"
 ```
 
 ### Operations
@@ -455,6 +486,10 @@ Load a single entity matching the given criteria.
 
 ```go
 result, err := client.Dnt(nil).Load(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 ### Common Methods
@@ -485,6 +520,7 @@ Return the entity name.
 
 ```go
 market := client.Market(nil)
+fmt.Println(market.GetName()) // "market"
 ```
 
 ### Fields
@@ -501,6 +537,10 @@ List entities matching the given criteria. Returns an array.
 
 ```go
 results, err := client.Market(nil).List(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(results)
 ```
 
 ### Common Methods
@@ -531,6 +571,7 @@ Return the entity name.
 
 ```go
 merchant := client.Merchant(nil)
+fmt.Println(merchant.GetName()) // "merchant"
 ```
 
 ### Fields
@@ -551,6 +592,10 @@ List entities matching the given criteria. Returns an array.
 
 ```go
 results, err := client.Merchant(nil).List(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(results)
 ```
 
 ### Common Methods
@@ -581,6 +626,7 @@ Return the entity name.
 
 ```go
 offer := client.Offer(nil)
+fmt.Println(offer.GetName()) // "offer"
 ```
 
 ### Fields
@@ -614,6 +660,10 @@ List entities matching the given criteria. Returns an array.
 
 ```go
 results, err := client.Offer(nil).List(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(results)
 ```
 
 #### `Load(reqmatch, ctrl map[string]any) (any, error)`
@@ -622,6 +672,10 @@ Load a single entity matching the given criteria.
 
 ```go
 result, err := client.Offer(nil).Load(map[string]any{"id": "offer_id"}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 ### Common Methods
@@ -651,7 +705,8 @@ Return the entity name.
 ## ReportDetailEntity
 
 ```go
-report_detail := client.ReportDetail(nil)
+reportDetail := client.ReportDetail(nil)
+fmt.Println(reportDetail.GetName()) // "report_detail"
 ```
 
 ### Fields
@@ -674,6 +729,10 @@ List entities matching the given criteria. Returns an array.
 
 ```go
 results, err := client.ReportDetail(nil).List(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(results)
 ```
 
 ### Common Methods
@@ -703,7 +762,8 @@ Return the entity name.
 ## ReportGeneralEntity
 
 ```go
-report_general := client.ReportGeneral(nil)
+reportGeneral := client.ReportGeneral(nil)
+fmt.Println(reportGeneral.GetName()) // "report_general"
 ```
 
 ### Fields
@@ -722,6 +782,10 @@ Load a single entity matching the given criteria.
 
 ```go
 result, err := client.ReportGeneral(nil).Load(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 ### Common Methods
@@ -751,7 +815,8 @@ Return the entity name.
 ## ReportModifiedEntity
 
 ```go
-report_modified := client.ReportModified(nil)
+reportModified := client.ReportModified(nil)
+fmt.Println(reportModified.GetName()) // "report_modified"
 ```
 
 ### Fields
@@ -768,6 +833,10 @@ Load a single entity matching the given criteria.
 
 ```go
 result, err := client.ReportModified(nil).Load(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 ### Common Methods
@@ -797,7 +866,8 @@ Return the entity name.
 ## ReportStatusEntity
 
 ```go
-report_status := client.ReportStatus(nil)
+reportStatus := client.ReportStatus(nil)
+fmt.Println(reportStatus.GetName()) // "report_status"
 ```
 
 ### Fields
@@ -814,6 +884,10 @@ Load a single entity matching the given criteria.
 
 ```go
 result, err := client.ReportStatus(nil).Load(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 ### Common Methods

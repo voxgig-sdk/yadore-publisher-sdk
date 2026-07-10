@@ -53,12 +53,12 @@ func main() {
         "apikey": os.Getenv("YADORE_PUBLISHER_APIKEY"),
     })
 
-    // List conversiondetail records — the value is the array of records itself.
-    conversiondetails, err := client.ConversionDetail(nil).List(nil, nil)
+    // List conversionDetail records — the value is the array of records itself.
+    conversionDetails, err := client.ConversionDetail(nil).List(nil, nil)
     if err != nil {
         panic(err)
     }
-    for _, item := range conversiondetails.([]any) {
+    for _, item := range conversionDetails.([]any) {
         fmt.Println(item)
     }
 }
@@ -140,13 +140,13 @@ Create a mock client for unit testing — no server required:
 ```go
 client := sdk.Test()
 
-conversiondetail, err := client.ConversionDetail(nil).List(
+conversionDetail, err := client.ConversionDetail(nil).List(
     nil, nil,
 )
 if err != nil {
     panic(err)
 }
-fmt.Println(conversiondetail) // the returned mock data
+fmt.Println(conversionDetail) // the returned mock data
 ```
 
 ### Use a custom fetch function
@@ -268,9 +268,9 @@ Check `err` first, then use the value directly (or the typed
 `...Typed` variants, which return the entity's model struct and a typed
 slice):
 
-    conversiondetail, err := client.ConversionDetail(nil).List(map[string]any{/* fields */}, nil)
+    conversionDetail, err := client.ConversionDetail(nil).List(map[string]any{/* fields */}, nil)
     if err != nil { /* handle */ }
-    // conversiondetail is the returned record
+    // conversionDetail is the returned record
 
 Only `Direct()` returns a response envelope — a `map[string]any` with
 `"ok"`, `"status"`, `"headers"`, and `"data"` keys.
@@ -474,7 +474,7 @@ API path: `/v2/report/status`
 
 ### ConversionDetail
 
-Create an instance: `conversion_detail := client.ConversionDetail(nil)`
+Create an instance: `conversionDetail := client.ConversionDetail(nil)`
 
 #### Operations
 
@@ -496,17 +496,17 @@ Create an instance: `conversion_detail := client.ConversionDetail(nil)`
 #### Example: List
 
 ```go
-conversion_details, err := client.ConversionDetail(nil).List(nil, nil)
+conversionDetails, err := client.ConversionDetail(nil).List(nil, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(conversion_details) // the array of records
+fmt.Println(conversionDetails) // the array of records
 ```
 
 
 ### ConversionDetailMerchant
 
-Create an instance: `conversion_detail_merchant := client.ConversionDetailMerchant(nil)`
+Create an instance: `conversionDetailMerchant := client.ConversionDetailMerchant(nil)`
 
 #### Operations
 
@@ -526,17 +526,17 @@ Create an instance: `conversion_detail_merchant := client.ConversionDetailMercha
 #### Example: List
 
 ```go
-conversion_detail_merchants, err := client.ConversionDetailMerchant(nil).List(nil, nil)
+conversionDetailMerchants, err := client.ConversionDetailMerchant(nil).List(nil, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(conversion_detail_merchants) // the array of records
+fmt.Println(conversionDetailMerchants) // the array of records
 ```
 
 
 ### ConversionGeneral
 
-Create an instance: `conversion_general := client.ConversionGeneral(nil)`
+Create an instance: `conversionGeneral := client.ConversionGeneral(nil)`
 
 #### Operations
 
@@ -555,17 +555,17 @@ Create an instance: `conversion_general := client.ConversionGeneral(nil)`
 #### Example: Load
 
 ```go
-conversion_general, err := client.ConversionGeneral(nil).Load(nil, nil)
+conversionGeneral, err := client.ConversionGeneral(nil).Load(nil, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(conversion_general) // the loaded record
+fmt.Println(conversionGeneral) // the loaded record
 ```
 
 
 ### ConversionStatus
 
-Create an instance: `conversion_status := client.ConversionStatus(nil)`
+Create an instance: `conversionStatus := client.ConversionStatus(nil)`
 
 #### Operations
 
@@ -582,11 +582,11 @@ Create an instance: `conversion_status := client.ConversionStatus(nil)`
 #### Example: Load
 
 ```go
-conversion_status, err := client.ConversionStatus(nil).Load(nil, nil)
+conversionStatus, err := client.ConversionStatus(nil).Load(nil, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(conversion_status) // the loaded record
+fmt.Println(conversionStatus) // the loaded record
 ```
 
 
@@ -614,15 +614,19 @@ Create an instance: `deeplink := client.Deeplink(nil)`
 
 ```go
 result, err := client.Deeplink(nil).Create(map[string]any{
-    "market": /* string */,
-    "url": /* []any */,
+    "market": "example_market",
+    "url": []any{},
 }, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 
 ### DeeplinkMerchant
 
-Create an instance: `deeplink_merchant := client.DeeplinkMerchant(nil)`
+Create an instance: `deeplinkMerchant := client.DeeplinkMerchant(nil)`
 
 #### Operations
 
@@ -647,11 +651,11 @@ Create an instance: `deeplink_merchant := client.DeeplinkMerchant(nil)`
 #### Example: List
 
 ```go
-deeplink_merchants, err := client.DeeplinkMerchant(nil).List(nil, nil)
+deeplinkMerchants, err := client.DeeplinkMerchant(nil).List(nil, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(deeplink_merchants) // the array of records
+fmt.Println(deeplinkMerchants) // the array of records
 ```
 
 
@@ -791,7 +795,7 @@ fmt.Println(offers) // the array of records
 
 ### ReportDetail
 
-Create an instance: `report_detail := client.ReportDetail(nil)`
+Create an instance: `reportDetail := client.ReportDetail(nil)`
 
 #### Operations
 
@@ -814,17 +818,17 @@ Create an instance: `report_detail := client.ReportDetail(nil)`
 #### Example: List
 
 ```go
-report_details, err := client.ReportDetail(nil).List(nil, nil)
+reportDetails, err := client.ReportDetail(nil).List(nil, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(report_details) // the array of records
+fmt.Println(reportDetails) // the array of records
 ```
 
 
 ### ReportGeneral
 
-Create an instance: `report_general := client.ReportGeneral(nil)`
+Create an instance: `reportGeneral := client.ReportGeneral(nil)`
 
 #### Operations
 
@@ -843,17 +847,17 @@ Create an instance: `report_general := client.ReportGeneral(nil)`
 #### Example: Load
 
 ```go
-report_general, err := client.ReportGeneral(nil).Load(nil, nil)
+reportGeneral, err := client.ReportGeneral(nil).Load(nil, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(report_general) // the loaded record
+fmt.Println(reportGeneral) // the loaded record
 ```
 
 
 ### ReportModified
 
-Create an instance: `report_modified := client.ReportModified(nil)`
+Create an instance: `reportModified := client.ReportModified(nil)`
 
 #### Operations
 
@@ -870,17 +874,17 @@ Create an instance: `report_modified := client.ReportModified(nil)`
 #### Example: Load
 
 ```go
-report_modified, err := client.ReportModified(nil).Load(nil, nil)
+reportModified, err := client.ReportModified(nil).Load(nil, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(report_modified) // the loaded record
+fmt.Println(reportModified) // the loaded record
 ```
 
 
 ### ReportStatus
 
-Create an instance: `report_status := client.ReportStatus(nil)`
+Create an instance: `reportStatus := client.ReportStatus(nil)`
 
 #### Operations
 
@@ -897,11 +901,11 @@ Create an instance: `report_status := client.ReportStatus(nil)`
 #### Example: Load
 
 ```go
-report_status, err := client.ReportStatus(nil).Load(nil, nil)
+reportStatus, err := client.ReportStatus(nil).Load(nil, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(report_status) // the loaded record
+fmt.Println(reportStatus) // the loaded record
 ```
 
 

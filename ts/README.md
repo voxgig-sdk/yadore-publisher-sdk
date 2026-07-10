@@ -623,8 +623,8 @@ Create an instance: `const deeplink = client.Deeplink()`
 
 ```ts
 const deeplink = await client.Deeplink().create({
-  market: /* string */,
-  url: /* any[] */,
+  market: 'example_market',
+  url: [],
 })
 ```
 

@@ -39,7 +39,7 @@ class Config {
     base: 'https://api.yadore.com/',
 
     auth: {
-      prefix: 'Bearer',
+      prefix: '',
     },
 
     headers: {

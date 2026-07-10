@@ -372,7 +372,7 @@ Create a new entity with the given data. Returns the created entity data and rai
 
 ```python
 result = client.Deeplink().create({
-    "market": "example",  # str
+    "market": "example_market",  # str
     "url": [],  # list
 })
 ```

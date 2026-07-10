@@ -568,8 +568,8 @@ Create an instance: `local deeplink = client:Deeplink(nil)`
 
 ```lua
 local deeplink, err = client:Deeplink():create({
-  market = nil, -- string
-  url = nil, -- table
+  market = "example_market", -- string
+  url = {}, -- table
 })
 ```
 

@@ -576,7 +576,7 @@ Create an instance: `deeplink = client.Deeplink`
 
 ```ruby
 deeplink = client.Deeplink.create({
-  "market" => "example", # String
+  "market" => "example_market", # String
   "url" => [], # Array
 })
 ```
