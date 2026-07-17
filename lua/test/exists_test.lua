@@ -1,4 +1,4 @@
--- ProjectName SDK exists test
+-- YadorePublisher SDK exists test
 
 local sdk = require("yadore-publisher_sdk")
 
