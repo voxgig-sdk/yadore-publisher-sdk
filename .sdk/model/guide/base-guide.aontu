@@ -8,6 +8,7 @@ guide: {
   entity: conversion_detail: {
     path: "/v2/conversion/detail": {
       op: list: method: *GET
+      op: list: transform: res: *("`body.clicks`")|top
     }
   }
 
@@ -32,12 +33,14 @@ guide: {
   entity: deeplink: {
     path: "/v2/deeplink": {
       op: create: method: *POST
+      op: create: transform: res: *("`body.result`")|top
     }
   }
 
   entity: deeplink_merchant: {
     path: "/v2/deeplink/merchant": {
       op: list: method: *GET
+      op: list: transform: res: *("`body.merchants`")|top
     }
   }
 
@@ -50,28 +53,33 @@ guide: {
   entity: market: {
     path: "/v2/markets": {
       op: list: method: *GET
+      op: list: transform: res: *("`body.markets`")|top
     }
   }
 
   entity: merchant: {
     path: "/v2/merchant": {
       op: list: method: *GET
+      op: list: transform: res: *("`body.merchants`")|top
     }
   }
 
   entity: offer: {
     path: "/v2/offer": {
       op: list: method: *GET
+      op: list: transform: res: *("`body.offers`")|top
     }
     path: "/v2/offer/bulk": {
       action: "bulk": {}
       op: load: method: *GET
+      op: load: transform: res: *("`body.ean`")|top
     }
   }
 
   entity: report_detail: {
     path: "/v2/report/detail": {
       op: list: method: *GET
+      op: list: transform: res: *("`body.clicks`")|top
     }
   }
 
@@ -84,6 +92,7 @@ guide: {
   entity: report_modified: {
     path: "/v2/report/modified": {
       op: load: method: *GET
+      op: load: transform: res: *("`body.market`")|top
     }
   }
 

@@ -2,40 +2,40 @@
   "existing": {
     "conversion_detail": {
       "CONVERSION_DETAIL00": {
-        "click_id": "CLICK01",
+        "clickId": "s3c",
         "date": "s3d",
         "market": "s3e",
         "merchant": {},
-        "placement_id": "PLACEMENT01",
-        "sale": 65
+        "placementId": "s40",
+        "sales": 65
       },
       "CONVERSION_DETAIL01": {
-        "click_id": "CLICK01",
+        "clickId": "s78",
         "date": "s79",
         "market": "s7a",
         "merchant": {},
-        "placement_id": "PLACEMENT01",
-        "sale": 125
+        "placementId": "s7c",
+        "sales": 125
       },
       "CONVERSION_DETAIL02": {
-        "click_id": "CLICK01",
+        "clickId": "sb4",
         "date": "sb5",
         "market": "sb6",
         "merchant": {},
-        "placement_id": "PLACEMENT01",
-        "sale": 185
+        "placementId": "sb8",
+        "sales": 185
       }
     }
   },
   "new": {
     "conversion_detail": {
       "conversion_detail_ref01": {
-        "click_id": "CLICK01",
+        "clickId": "sf0",
         "date": "sf1",
         "market": "sf2",
         "merchant": {},
-        "placement_id": "PLACEMENT01",
-        "sale": 245
+        "placementId": "sf4",
+        "sales": 245
       }
     }
   }

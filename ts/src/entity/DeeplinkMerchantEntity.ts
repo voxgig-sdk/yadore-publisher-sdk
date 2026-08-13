@@ -37,7 +37,7 @@ class DeeplinkMerchantEntity extends YadorePublisherEntityBase<DeeplinkMerchant>
 
 
 
-  async list(this: any, reqmatch?: DeeplinkMerchantListMatch, ctrl?: Control): Promise<DeeplinkMerchant[]> {
+  async list(this: any, reqmatch?: DeeplinkMerchantListMatch, ctrl?: Control): Promise<DeeplinkMerchantEntity[]> {
 
     const utility = this._utility
 

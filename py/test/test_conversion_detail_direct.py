@@ -3,9 +3,9 @@
 import json
 import pytest
 
-from utility.voxgig_struct import voxgig_struct as vs
+from yadorepublisher_sdk.utility.voxgig_struct import voxgig_struct as vs
 from yadorepublisher_sdk import YadorePublisherSDK
-from core import helpers
+from yadorepublisher_sdk.core import helpers
 from test import runner
 
 
@@ -58,16 +58,16 @@ def _conversion_detail_direct_setup(mockres):
     calls = []
 
     env = runner.env_override({
-        "YADOREPUBLISHER_TEST_CONVERSION_DETAIL_ENTID": {},
-        "YADOREPUBLISHER_TEST_LIVE": "FALSE",
-        "YADOREPUBLISHER_APIKEY": "NONE",
+        "YADORE_PUBLISHER_TEST_CONVERSION_DETAIL_ENTID": {},
+        "YADORE_PUBLISHER_TEST_LIVE": "FALSE",
+        "YADORE_PUBLISHER_APIKEY": "NONE",
     })
 
-    live = env.get("YADOREPUBLISHER_TEST_LIVE") == "TRUE"
+    live = env.get("YADORE_PUBLISHER_TEST_LIVE") == "TRUE"
 
     if live:
         merged_opts = {
-            "apikey": env.get("YADOREPUBLISHER_APIKEY"),
+            "apikey": env.get("YADORE_PUBLISHER_APIKEY"),
         }
         client = YadorePublisherSDK(merged_opts)
         return {

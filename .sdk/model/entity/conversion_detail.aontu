@@ -6,7 +6,7 @@ main: kit: entity: conversion_detail: {
 
   fields: [
     {
-      name: "click_id"
+      name: "clickId"
       req: false
       type: "`$STRING`"
     }
@@ -26,12 +26,12 @@ main: kit: entity: conversion_detail: {
       type: "`$OBJECT`"
     }
     {
-      name: "placement_id"
+      name: "placementId"
       req: false
       type: "`$STRING`"
     }
     {
-      name: "sale"
+      name: "sales"
       req: false
       type: "`$NUMBER`"
     }
@@ -84,7 +84,7 @@ main: kit: entity: conversion_detail: {
           }
           transform: {
             req: "`reqdata`"
-            res: "`body`"
+            res: "`body.clicks`"
           }
         }
       ]

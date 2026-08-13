@@ -37,7 +37,9 @@ const client = new YadorePublisherSDK({
 
 ### 2. List conversiondetail records
 
-`list()` resolves to an array of ConversionDetail objects — iterate it directly:
+`list()` resolves to an array of ConversionDetail ENTITIES — every operation
+resolves to entities, not raw records. Iterate them directly, and call
+`.data()` on one for the record it holds:
 
 ```ts
 const conversiondetails = await client.ConversionDetail().list()
@@ -54,10 +56,10 @@ Entity operations reject on failure, so wrap them in `try` / `catch`:
 
 ```ts
 try {
-  const conversiondetails = await client.ConversionDetail().list()
-  console.log(conversiondetails)
+  const reportgeneral = await client.ReportGeneral().load()
+  console.log(reportgeneral)
 } catch (err) {
-  console.error('list failed:', err)
+  console.error('load failed:', err)
 }
 ```
 
@@ -121,9 +123,10 @@ Create a mock client for unit testing — no server required:
 ```ts
 const client = YadorePublisherSDK.test()
 
-const conversiondetail = await client.ConversionDetail().list()
-// conversiondetail is a bare entity populated with mock response data
-console.log(conversiondetail)
+const reportgeneral = await client.ReportGeneral().load()
+// reportgeneral is the entity, populated with mock response data
+// — call reportgeneral.data() for the record itself
+console.log(reportgeneral)
 ```
 
 You can also use the instance method:
@@ -138,10 +141,10 @@ const testClient = client.tester()
 Entity instances remember their last match and data:
 
 ```ts
-const entity = client.ConversionDetail()
+const entity = client.ReportGeneral()
 
 // First call runs the operation and stores its result
-await entity.list()
+await entity.load()
 
 // Subsequent calls reuse the stored state
 const data = entity.data()
@@ -306,12 +309,12 @@ The `prepare()` method returns:
 
 | Field | Description |
 | --- | --- |
-| `click_id` |  |
+| `clickId` |  |
 | `date` |  |
 | `market` |  |
 | `merchant` |  |
-| `placement_id` |  |
-| `sale` |  |
+| `placementId` |  |
+| `sales` |  |
 
 Operations: list.
 
@@ -321,10 +324,10 @@ API path: `/v2/conversion/detail`
 
 | Field | Description |
 | --- | --- |
-| `click` |  |
+| `clicks` |  |
 | `market` |  |
 | `merchant` |  |
-| `sale` |  |
+| `sales` |  |
 
 Operations: list.
 
@@ -356,11 +359,13 @@ API path: `/v2/conversion/status`
 
 | Field | Description |
 | --- | --- |
-| `is_couponing` |  |
+| `deeplinks` |  |
+| `found` |  |
+| `isCouponing` |  |
 | `market` |  |
-| `placement_id` |  |
-| `result` |  |
-| `url` |  |
+| `placementId` |  |
+| `total` |  |
+| `urls` |  |
 
 Operations: create.
 
@@ -370,15 +375,15 @@ API path: `/v2/deeplink`
 
 | Field | Description |
 | --- | --- |
-| `deeplink_count` |  |
-| `estimated_cpc` |  |
-| `has_external_homepage` |  |
-| `has_smartlink_homepage` |  |
+| `deeplinkCount` |  |
+| `estimatedCpc` |  |
+| `hasExternalHomepage` |  |
+| `hasSmartlinkHomepage` |  |
 | `id` |  |
-| `is_smartlink` |  |
+| `isSmartlink` |  |
 | `logo` |  |
 | `name` |  |
-| `traffic_type` |  |
+| `trafficTypes` |  |
 
 Operations: list.
 
@@ -410,8 +415,8 @@ API path: `/v2/markets`
 | `id` |  |
 | `logo` |  |
 | `name` |  |
-| `offer_count` |  |
-| `traffic_type` |  |
+| `offerCount` |  |
+| `trafficTypes` |  |
 
 Operations: list.
 
@@ -423,22 +428,23 @@ API path: `/v2/merchant`
 | --- | --- |
 | `availability` |  |
 | `brand` |  |
-| `click_url` |  |
+| `clickUrl` |  |
+| `count` |  |
 | `description` |  |
-| `ean` |  |
 | `eer` |  |
-| `estimated_cpc` |  |
+| `estimatedCpc` |  |
 | `id` |  |
 | `image` |  |
 | `merchant` |  |
-| `original_price` |  |
+| `offers` |  |
+| `originalPrice` |  |
 | `price` |  |
-| `promo_text` |  |
-| `shipping_price` |  |
-| `shipping_time` |  |
+| `promoText` |  |
+| `shippingPrice` |  |
+| `shippingTime` |  |
 | `thumbnail` |  |
 | `title` |  |
-| `unit_price` |  |
+| `unitPrice` |  |
 
 Operations: list, load.
 
@@ -448,12 +454,12 @@ API path: `/v2/offer`
 
 | Field | Description |
 | --- | --- |
-| `click_id` |  |
+| `clickId` |  |
 | `currency` |  |
 | `date` |  |
 | `market` |  |
 | `merchant` |  |
-| `placement_id` |  |
+| `placementId` |  |
 | `revenue` |  |
 
 Operations: list.
@@ -476,7 +482,8 @@ API path: `/v2/report/general`
 
 | Field | Description |
 | --- | --- |
-| `market` |  |
+| `date` |  |
+| `modifiedDate` |  |
 
 Operations: load.
 
@@ -511,12 +518,12 @@ Create an instance: `const conversion_detail = client.ConversionDetail()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `click_id` | `string` |  |
+| `clickId` | `string` |  |
 | `date` | `string` |  |
 | `market` | `string` |  |
 | `merchant` | `Record<string, any>` |  |
-| `placement_id` | `string` |  |
-| `sale` | `number` |  |
+| `placementId` | `string` |  |
+| `sales` | `number` |  |
 
 #### Example: List
 
@@ -539,10 +546,10 @@ Create an instance: `const conversion_detail_merchant = client.ConversionDetailM
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `click` | `number` |  |
+| `clicks` | `number` |  |
 | `market` | `string` |  |
 | `merchant` | `Record<string, any>` |  |
-| `sale` | `number` |  |
+| `sales` | `number` |  |
 
 #### Example: List
 
@@ -613,18 +620,20 @@ Create an instance: `const deeplink = client.Deeplink()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `is_couponing` | `boolean` |  |
+| `deeplinks` | `any[]` |  |
+| `found` | `number` |  |
+| `isCouponing` | `boolean` |  |
 | `market` | `string` |  |
-| `placement_id` | `string` |  |
-| `result` | `Record<string, any>` |  |
-| `url` | `any[]` |  |
+| `placementId` | `string` |  |
+| `total` | `number` |  |
+| `urls` | `any[]` |  |
 
 #### Example: Create
 
 ```ts
 const deeplink = await client.Deeplink().create({
   market: 'example_market',
-  url: [],
+  urls: [],
 })
 ```
 
@@ -643,15 +652,15 @@ Create an instance: `const deeplink_merchant = client.DeeplinkMerchant()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `deeplink_count` | `number` |  |
-| `estimated_cpc` | `Record<string, any>` |  |
-| `has_external_homepage` | `boolean` |  |
-| `has_smartlink_homepage` | `boolean` |  |
+| `deeplinkCount` | `number` |  |
+| `estimatedCpc` | `Record<string, any>` |  |
+| `hasExternalHomepage` | `boolean` |  |
+| `hasSmartlinkHomepage` | `boolean` |  |
 | `id` | `string` |  |
-| `is_smartlink` | `boolean` |  |
+| `isSmartlink` | `boolean` |  |
 | `logo` | `Record<string, any>` |  |
 | `name` | `string` |  |
-| `traffic_type` | `any[]` |  |
+| `trafficTypes` | `any[]` |  |
 
 #### Example: List
 
@@ -717,8 +726,8 @@ Create an instance: `const merchant = client.Merchant()`
 | `id` | `string` |  |
 | `logo` | `Record<string, any>` |  |
 | `name` | `string` |  |
-| `offer_count` | `number` |  |
-| `traffic_type` | `any[]` |  |
+| `offerCount` | `number` |  |
+| `trafficTypes` | `any[]` |  |
 
 #### Example: List
 
@@ -744,22 +753,23 @@ Create an instance: `const offer = client.Offer()`
 | --- | --- | --- |
 | `availability` | `string` |  |
 | `brand` | `string` |  |
-| `click_url` | `string` |  |
+| `clickUrl` | `string` |  |
+| `count` | `number` |  |
 | `description` | `string` |  |
-| `ean` | `Record<string, any>` |  |
 | `eer` | `string` |  |
-| `estimated_cpc` | `Record<string, any>` |  |
+| `estimatedCpc` | `Record<string, any>` |  |
 | `id` | `string` |  |
 | `image` | `Record<string, any>` |  |
 | `merchant` | `Record<string, any>` |  |
-| `original_price` | `Record<string, any>` |  |
+| `offers` | `any[]` |  |
+| `originalPrice` | `Record<string, any>` |  |
 | `price` | `Record<string, any>` |  |
-| `promo_text` | `string` |  |
-| `shipping_price` | `Record<string, any>` |  |
-| `shipping_time` | `Record<string, any>` |  |
+| `promoText` | `string` |  |
+| `shippingPrice` | `Record<string, any>` |  |
+| `shippingTime` | `Record<string, any>` |  |
 | `thumbnail` | `Record<string, any>` |  |
 | `title` | `string` |  |
-| `unit_price` | `Record<string, any>` |  |
+| `unitPrice` | `Record<string, any>` |  |
 
 #### Example: Load
 
@@ -788,12 +798,12 @@ Create an instance: `const report_detail = client.ReportDetail()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `click_id` | `string` |  |
+| `clickId` | `string` |  |
 | `currency` | `string` |  |
 | `date` | `string` |  |
 | `market` | `string` |  |
 | `merchant` | `Record<string, any>` |  |
-| `placement_id` | `string` |  |
+| `placementId` | `string` |  |
 | `revenue` | `number` |  |
 
 #### Example: List
@@ -842,7 +852,8 @@ Create an instance: `const report_modified = client.ReportModified()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `market` | `Record<string, any>` |  |
+| `date` | `string` |  |
+| `modifiedDate` | `string` |  |
 
 #### Example: Load
 
@@ -938,16 +949,16 @@ import { YadorePublisherSDK } from '@voxgig-sdk/yadore-publisher'
 
 ### Entity state
 
-Entity instances are stateful. After a successful `list`, the entity
+Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally. Subsequent
 calls on the same instance can rely on this state.
 
 ```ts
-const conversiondetail = client.ConversionDetail()
-await conversiondetail.list()
+const reportgeneral = client.ReportGeneral()
+await reportgeneral.load()
 
-// conversiondetail.data() now returns the conversiondetail data from the last `list`
-// conversiondetail.match() returns the last match criteria
+// reportgeneral.data() now returns the reportgeneral data from the last `load`
+// reportgeneral.match() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

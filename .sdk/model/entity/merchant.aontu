@@ -21,12 +21,12 @@ main: kit: entity: merchant: {
       type: "`$STRING`"
     }
     {
-      name: "offer_count"
+      name: "offerCount"
       req: false
       type: "`$INTEGER`"
     }
     {
-      name: "traffic_type"
+      name: "trafficTypes"
       req: false
       type: "`$ARRAY`"
     }
@@ -75,7 +75,7 @@ main: kit: entity: merchant: {
           }
           transform: {
             req: "`reqdata`"
-            res: "`body`"
+            res: "`body.merchants`"
           }
         }
       ]

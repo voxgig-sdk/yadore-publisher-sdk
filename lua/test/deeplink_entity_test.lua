@@ -29,7 +29,7 @@ describe("DeeplinkEntity", function()
     -- The basic flow consumes synthetic IDs from the fixture. In live mode
     -- without an *_ENTID env override, those IDs hit the live API and 4xx.
     if setup.synthetic_only then
-      pending("live entity test uses synthetic IDs from fixture — set YADOREPUBLISHER_TEST_DEEPLINK_ENTID JSON to run live")
+      pending("live entity test uses synthetic IDs from fixture — set YADORE_PUBLISHER_TEST_DEEPLINK_ENTID JSON to run live")
       return
     end
     local client = setup.client
@@ -41,7 +41,7 @@ describe("DeeplinkEntity", function()
 
     local deeplink_ref01_data_result, err = deeplink_ref01_ent:create(deeplink_ref01_data, nil)
     assert.is_nil(err)
-    deeplink_ref01_data = helpers.to_map(deeplink_ref01_data_result)
+    deeplink_ref01_data = helpers.to_map(type(deeplink_ref01_data_result) == 'table' and deeplink_ref01_data_result.data_get and deeplink_ref01_data_result:data_get() or deeplink_ref01_data_result)
     assert.is_not_nil(deeplink_ref01_data)
 
   end)
@@ -79,39 +79,39 @@ function deeplink_basic_setup(extra)
   -- Detect ENTID env override before envOverride consumes it. When live
   -- mode is on without a real override, the basic test runs against synthetic
   -- IDs from the fixture and 4xx's. Surface this so the test can skip.
-  local entid_env_raw = os.getenv("YADOREPUBLISHER_TEST_DEEPLINK_ENTID")
+  local entid_env_raw = os.getenv("YADORE_PUBLISHER_TEST_DEEPLINK_ENTID")
   local idmap_overridden = entid_env_raw ~= nil and entid_env_raw:match("^%s*{") ~= nil
 
   local env = runner.env_override({
-    ["YADOREPUBLISHER_TEST_DEEPLINK_ENTID"] = idmap,
-    ["YADOREPUBLISHER_TEST_LIVE"] = "FALSE",
-    ["YADOREPUBLISHER_TEST_EXPLAIN"] = "FALSE",
-    ["YADOREPUBLISHER_APIKEY"] = "NONE",
+    ["YADORE_PUBLISHER_TEST_DEEPLINK_ENTID"] = idmap,
+    ["YADORE_PUBLISHER_TEST_LIVE"] = "FALSE",
+    ["YADORE_PUBLISHER_TEST_EXPLAIN"] = "FALSE",
+    ["YADORE_PUBLISHER_APIKEY"] = "NONE",
   })
 
   local idmap_resolved = helpers.to_map(
-    env["YADOREPUBLISHER_TEST_DEEPLINK_ENTID"])
+    env["YADORE_PUBLISHER_TEST_DEEPLINK_ENTID"])
   if idmap_resolved == nil then
     idmap_resolved = helpers.to_map(idmap)
   end
 
-  if env["YADOREPUBLISHER_TEST_LIVE"] == "TRUE" then
+  if env["YADORE_PUBLISHER_TEST_LIVE"] == "TRUE" then
     local merged_opts = vs.merge({
       {
-        apikey = env["YADOREPUBLISHER_APIKEY"],
+        apikey = env["YADORE_PUBLISHER_APIKEY"],
       },
       extra or {},
     })
     client = sdk.new(helpers.to_map(merged_opts))
   end
 
-  local live = env["YADOREPUBLISHER_TEST_LIVE"] == "TRUE"
+  local live = env["YADORE_PUBLISHER_TEST_LIVE"] == "TRUE"
   return {
     client = client,
     data = entity_data,
     idmap = idmap_resolved,
     env = env,
-    explain = env["YADOREPUBLISHER_TEST_EXPLAIN"] == "TRUE",
+    explain = env["YADORE_PUBLISHER_TEST_EXPLAIN"] == "TRUE",
     live = live,
     synthetic_only = live and not idmap_overridden,
     now = os.time() * 1000,

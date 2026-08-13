@@ -66,16 +66,16 @@ function market_direct_setup($mockres)
     $calls = new \ArrayObject();
 
     $env = Runner::env_override([
-        "YADOREPUBLISHER_TEST_MARKET_ENTID" => [],
-        "YADOREPUBLISHER_TEST_LIVE" => "FALSE",
-        "YADOREPUBLISHER_APIKEY" => "NONE",
+        "YADORE_PUBLISHER_TEST_MARKET_ENTID" => [],
+        "YADORE_PUBLISHER_TEST_LIVE" => "FALSE",
+        "YADORE_PUBLISHER_APIKEY" => "NONE",
     ]);
 
-    $live = $env["YADOREPUBLISHER_TEST_LIVE"] === "TRUE";
+    $live = $env["YADORE_PUBLISHER_TEST_LIVE"] === "TRUE";
 
     if ($live) {
         $merged_opts = [
-            "apikey" => $env["YADOREPUBLISHER_APIKEY"],
+            "apikey" => $env["YADORE_PUBLISHER_APIKEY"],
         ];
         $client = new YadorePublisherSDK($merged_opts);
         return [

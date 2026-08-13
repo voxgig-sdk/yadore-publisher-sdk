@@ -23,6 +23,7 @@ require_once __DIR__ . '/MakeUrl.php';
 require_once __DIR__ . '/Param.php';
 require_once __DIR__ . '/PrepareAuth.php';
 require_once __DIR__ . '/PrepareBody.php';
+require_once __DIR__ . '/Graphql.php';
 require_once __DIR__ . '/PrepareHeaders.php';
 require_once __DIR__ . '/PrepareMethod.php';
 require_once __DIR__ . '/PrepareParams.php';
@@ -59,6 +60,8 @@ YadorePublisherUtility::setRegistrar(function (YadorePublisherUtility $u): void 
     $u->prepare_params = [YadorePublisherPrepareParams::class, 'call'];
     $u->prepare_path = [YadorePublisherPreparePath::class, 'call'];
     $u->prepare_query = [YadorePublisherPrepareQuery::class, 'call'];
+    $u->graphql_body = [YadorePublisherGraphql::class, 'body'];
+    $u->graphql_errors = [YadorePublisherGraphql::class, 'errors'];
     $u->result_basic = [YadorePublisherResultBasic::class, 'call'];
     $u->result_body = [YadorePublisherResultBody::class, 'call'];
     $u->result_headers = [YadorePublisherResultHeaders::class, 'call'];

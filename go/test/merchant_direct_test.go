@@ -36,9 +36,10 @@ func TestMerchantDirect(t *testing.T) {
 			"params": map[string]any{},
 		})
 		if setup.live {
-			// Live mode is lenient: synthetic IDs frequently 4xx and the
-			// list-response shape varies wildly across public APIs. Skip
-			// rather than fail when the call doesn't return a usable list.
+			// Live-mode leniency is a model decision
+			// (main.kit.test.live.strict): synthetic IDs 4xx constantly
+			// against an arbitrary public API, so the default SKIPS here.
+			// A project that owns its test server sets strict and FAILS.
 			if err != nil {
 				t.Skipf("list call failed (likely synthetic IDs against live API): %v", err)
 			}
@@ -91,21 +92,21 @@ func merchantDirectSetup(mockres any) *merchantDirectSetupResult {
 	calls := &[]map[string]any{}
 
 	env := envOverride(map[string]any{
-		"YADOREPUBLISHER_TEST_MERCHANT_ENTID": map[string]any{},
-		"YADOREPUBLISHER_TEST_LIVE":    "FALSE",
-		"YADOREPUBLISHER_APIKEY":       "NONE",
+		"YADORE_PUBLISHER_TEST_MERCHANT_ENTID": map[string]any{},
+		"YADORE_PUBLISHER_TEST_LIVE":    "FALSE",
+		"YADORE_PUBLISHER_APIKEY":       "NONE",
 	})
 
-	live := env["YADOREPUBLISHER_TEST_LIVE"] == "TRUE"
+	live := env["YADORE_PUBLISHER_TEST_LIVE"] == "TRUE"
 
 	if live {
 		mergedOpts := map[string]any{
-			"apikey": env["YADOREPUBLISHER_APIKEY"],
+			"apikey": env["YADORE_PUBLISHER_APIKEY"],
 		}
 		client := sdk.NewYadorePublisherSDK(mergedOpts)
 
 		idmap := map[string]any{}
-		if entidRaw, ok := env["YADOREPUBLISHER_TEST_MERCHANT_ENTID"]; ok {
+		if entidRaw, ok := env["YADORE_PUBLISHER_TEST_MERCHANT_ENTID"]; ok {
 			if entidStr, ok := entidRaw.(string); ok && strings.HasPrefix(entidStr, "{") {
 				json.Unmarshal([]byte(entidStr), &idmap)
 			} else if entidMap, ok := entidRaw.(map[string]any); ok {

@@ -42,7 +42,7 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"active": true,
-						"name": "click_id",
+						"name": "clickId",
 						"req": false,
 						"type": "`$STRING`",
 						"index$": 0,
@@ -70,14 +70,14 @@ func MakeConfig() map[string]any {
 					},
 					map[string]any{
 						"active": true,
-						"name": "placement_id",
+						"name": "placementId",
 						"req": false,
 						"type": "`$STRING`",
 						"index$": 4,
 					},
 					map[string]any{
 						"active": true,
-						"name": "sale",
+						"name": "sales",
 						"req": false,
 						"type": "`$NUMBER`",
 						"index$": 5,
@@ -119,6 +119,7 @@ func MakeConfig() map[string]any {
 										},
 									},
 								},
+								"kind": "http",
 								"method": "GET",
 								"orig": "/v2/conversion/detail",
 								"parts": []any{
@@ -135,12 +136,11 @@ func MakeConfig() map[string]any {
 								},
 								"transform": map[string]any{
 									"req": "`reqdata`",
-									"res": "`body`",
+									"res": "`body.clicks`",
 								},
 								"index$": 0,
 							},
 						},
-						"key$": "list",
 					},
 				},
 				"relations": map[string]any{
@@ -151,7 +151,7 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"active": true,
-						"name": "click",
+						"name": "clicks",
 						"req": false,
 						"type": "`$INTEGER`",
 						"index$": 0,
@@ -172,7 +172,7 @@ func MakeConfig() map[string]any {
 					},
 					map[string]any{
 						"active": true,
-						"name": "sale",
+						"name": "sales",
 						"req": false,
 						"type": "`$INTEGER`",
 						"index$": 3,
@@ -222,6 +222,7 @@ func MakeConfig() map[string]any {
 										},
 									},
 								},
+								"kind": "http",
 								"method": "GET",
 								"orig": "/v2/conversion/detail/merchant",
 								"parts": []any{
@@ -245,7 +246,6 @@ func MakeConfig() map[string]any {
 								"index$": 0,
 							},
 						},
-						"key$": "list",
 					},
 				},
 				"relations": map[string]any{
@@ -312,6 +312,7 @@ func MakeConfig() map[string]any {
 										},
 									},
 								},
+								"kind": "http",
 								"method": "GET",
 								"orig": "/v2/conversion/general",
 								"parts": []any{
@@ -333,7 +334,6 @@ func MakeConfig() map[string]any {
 								"index$": 0,
 							},
 						},
-						"key$": "load",
 					},
 				},
 				"relations": map[string]any{
@@ -370,6 +370,7 @@ func MakeConfig() map[string]any {
 										},
 									},
 								},
+								"kind": "http",
 								"method": "GET",
 								"orig": "/v2/conversion/status",
 								"parts": []any{
@@ -389,7 +390,6 @@ func MakeConfig() map[string]any {
 								"index$": 0,
 							},
 						},
-						"key$": "load",
 					},
 				},
 				"relations": map[string]any{
@@ -400,38 +400,52 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"active": true,
-						"name": "is_couponing",
+						"name": "deeplinks",
+						"req": false,
+						"type": "`$ARRAY`",
+						"index$": 0,
+					},
+					map[string]any{
+						"active": true,
+						"name": "found",
+						"req": false,
+						"type": "`$INTEGER`",
+						"index$": 1,
+					},
+					map[string]any{
+						"active": true,
+						"name": "isCouponing",
 						"req": false,
 						"type": "`$BOOLEAN`",
-						"index$": 0,
+						"index$": 2,
 					},
 					map[string]any{
 						"active": true,
 						"name": "market",
 						"req": true,
 						"type": "`$STRING`",
-						"index$": 1,
-					},
-					map[string]any{
-						"active": true,
-						"name": "placement_id",
-						"req": false,
-						"type": "`$STRING`",
-						"index$": 2,
-					},
-					map[string]any{
-						"active": true,
-						"name": "result",
-						"req": false,
-						"type": "`$OBJECT`",
 						"index$": 3,
 					},
 					map[string]any{
 						"active": true,
-						"name": "url",
+						"name": "placementId",
+						"req": false,
+						"type": "`$STRING`",
+						"index$": 4,
+					},
+					map[string]any{
+						"active": true,
+						"name": "total",
+						"req": false,
+						"type": "`$INTEGER`",
+						"index$": 5,
+					},
+					map[string]any{
+						"active": true,
+						"name": "urls",
 						"req": true,
 						"type": "`$ARRAY`",
-						"index$": 4,
+						"index$": 6,
 					},
 				},
 				"name": "deeplink",
@@ -443,6 +457,7 @@ func MakeConfig() map[string]any {
 							map[string]any{
 								"active": true,
 								"args": map[string]any{},
+								"kind": "http",
 								"method": "POST",
 								"orig": "/v2/deeplink",
 								"parts": []any{
@@ -452,12 +467,11 @@ func MakeConfig() map[string]any {
 								"select": map[string]any{},
 								"transform": map[string]any{
 									"req": "`reqdata`",
-									"res": "`body`",
+									"res": "`body.result`",
 								},
 								"index$": 0,
 							},
 						},
-						"key$": "create",
 					},
 				},
 				"relations": map[string]any{
@@ -468,28 +482,28 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"active": true,
-						"name": "deeplink_count",
+						"name": "deeplinkCount",
 						"req": false,
 						"type": "`$INTEGER`",
 						"index$": 0,
 					},
 					map[string]any{
 						"active": true,
-						"name": "estimated_cpc",
+						"name": "estimatedCpc",
 						"req": false,
 						"type": "`$OBJECT`",
 						"index$": 1,
 					},
 					map[string]any{
 						"active": true,
-						"name": "has_external_homepage",
+						"name": "hasExternalHomepage",
 						"req": false,
 						"type": "`$BOOLEAN`",
 						"index$": 2,
 					},
 					map[string]any{
 						"active": true,
-						"name": "has_smartlink_homepage",
+						"name": "hasSmartlinkHomepage",
 						"req": false,
 						"type": "`$BOOLEAN`",
 						"index$": 3,
@@ -503,7 +517,7 @@ func MakeConfig() map[string]any {
 					},
 					map[string]any{
 						"active": true,
-						"name": "is_smartlink",
+						"name": "isSmartlink",
 						"req": false,
 						"type": "`$BOOLEAN`",
 						"index$": 5,
@@ -524,7 +538,7 @@ func MakeConfig() map[string]any {
 					},
 					map[string]any{
 						"active": true,
-						"name": "traffic_type",
+						"name": "trafficTypes",
 						"req": false,
 						"type": "`$ARRAY`",
 						"index$": 8,
@@ -574,6 +588,7 @@ func MakeConfig() map[string]any {
 										},
 									},
 								},
+								"kind": "http",
 								"method": "GET",
 								"orig": "/v2/deeplink/merchant",
 								"parts": []any{
@@ -591,12 +606,11 @@ func MakeConfig() map[string]any {
 								},
 								"transform": map[string]any{
 									"req": "`reqdata`",
-									"res": "`body`",
+									"res": "`body.merchants`",
 								},
 								"index$": 0,
 							},
 						},
-						"key$": "list",
 					},
 				},
 				"relations": map[string]any{
@@ -673,6 +687,7 @@ func MakeConfig() map[string]any {
 										},
 									},
 								},
+								"kind": "http",
 								"method": "GET",
 								"orig": "/v2/d",
 								"parts": []any{
@@ -697,7 +712,6 @@ func MakeConfig() map[string]any {
 								"index$": 0,
 							},
 						},
-						"key$": "load",
 					},
 				},
 				"relations": map[string]any{
@@ -723,6 +737,7 @@ func MakeConfig() map[string]any {
 							map[string]any{
 								"active": true,
 								"args": map[string]any{},
+								"kind": "http",
 								"method": "GET",
 								"orig": "/v2/markets",
 								"parts": []any{
@@ -732,12 +747,11 @@ func MakeConfig() map[string]any {
 								"select": map[string]any{},
 								"transform": map[string]any{
 									"req": "`reqdata`",
-									"res": "`body`",
+									"res": "`body.markets`",
 								},
 								"index$": 0,
 							},
 						},
-						"key$": "list",
 					},
 				},
 				"relations": map[string]any{
@@ -769,14 +783,14 @@ func MakeConfig() map[string]any {
 					},
 					map[string]any{
 						"active": true,
-						"name": "offer_count",
+						"name": "offerCount",
 						"req": false,
 						"type": "`$INTEGER`",
 						"index$": 3,
 					},
 					map[string]any{
 						"active": true,
-						"name": "traffic_type",
+						"name": "trafficTypes",
 						"req": false,
 						"type": "`$ARRAY`",
 						"index$": 4,
@@ -810,6 +824,7 @@ func MakeConfig() map[string]any {
 										},
 									},
 								},
+								"kind": "http",
 								"method": "GET",
 								"orig": "/v2/merchant",
 								"parts": []any{
@@ -824,12 +839,11 @@ func MakeConfig() map[string]any {
 								},
 								"transform": map[string]any{
 									"req": "`reqdata`",
-									"res": "`body`",
+									"res": "`body.merchants`",
 								},
 								"index$": 0,
 							},
 						},
-						"key$": "list",
 					},
 				},
 				"relations": map[string]any{
@@ -854,23 +868,23 @@ func MakeConfig() map[string]any {
 					},
 					map[string]any{
 						"active": true,
-						"name": "click_url",
+						"name": "clickUrl",
 						"req": false,
 						"type": "`$STRING`",
 						"index$": 2,
 					},
 					map[string]any{
 						"active": true,
-						"name": "description",
+						"name": "count",
 						"req": false,
-						"type": "`$STRING`",
+						"type": "`$INTEGER`",
 						"index$": 3,
 					},
 					map[string]any{
 						"active": true,
-						"name": "ean",
+						"name": "description",
 						"req": false,
-						"type": "`$OBJECT`",
+						"type": "`$STRING`",
 						"index$": 4,
 					},
 					map[string]any{
@@ -882,7 +896,7 @@ func MakeConfig() map[string]any {
 					},
 					map[string]any{
 						"active": true,
-						"name": "estimated_cpc",
+						"name": "estimatedCpc",
 						"req": false,
 						"type": "`$OBJECT`",
 						"index$": 6,
@@ -910,59 +924,66 @@ func MakeConfig() map[string]any {
 					},
 					map[string]any{
 						"active": true,
-						"name": "original_price",
+						"name": "offers",
 						"req": false,
-						"type": "`$OBJECT`",
+						"type": "`$ARRAY`",
 						"index$": 10,
 					},
 					map[string]any{
 						"active": true,
-						"name": "price",
+						"name": "originalPrice",
 						"req": false,
 						"type": "`$OBJECT`",
 						"index$": 11,
 					},
 					map[string]any{
 						"active": true,
-						"name": "promo_text",
+						"name": "price",
 						"req": false,
-						"type": "`$STRING`",
+						"type": "`$OBJECT`",
 						"index$": 12,
 					},
 					map[string]any{
 						"active": true,
-						"name": "shipping_price",
+						"name": "promoText",
 						"req": false,
-						"type": "`$OBJECT`",
+						"type": "`$STRING`",
 						"index$": 13,
 					},
 					map[string]any{
 						"active": true,
-						"name": "shipping_time",
+						"name": "shippingPrice",
 						"req": false,
 						"type": "`$OBJECT`",
 						"index$": 14,
 					},
 					map[string]any{
 						"active": true,
-						"name": "thumbnail",
+						"name": "shippingTime",
 						"req": false,
 						"type": "`$OBJECT`",
 						"index$": 15,
 					},
 					map[string]any{
 						"active": true,
-						"name": "title",
+						"name": "thumbnail",
 						"req": false,
-						"type": "`$STRING`",
+						"type": "`$OBJECT`",
 						"index$": 16,
 					},
 					map[string]any{
 						"active": true,
-						"name": "unit_price",
+						"name": "title",
+						"req": false,
+						"type": "`$STRING`",
+						"index$": 17,
+					},
+					map[string]any{
+						"active": true,
+						"name": "unitPrice",
 						"req": false,
 						"type": "`$OBJECT`",
-						"index$": 17,
+						"index$": 18,
 					},
 				},
 				"name": "offer",
@@ -1059,6 +1080,7 @@ func MakeConfig() map[string]any {
 										},
 									},
 								},
+								"kind": "http",
 								"method": "GET",
 								"orig": "/v2/offer",
 								"parts": []any{
@@ -1081,12 +1103,11 @@ func MakeConfig() map[string]any {
 								},
 								"transform": map[string]any{
 									"req": "`reqdata`",
-									"res": "`body`",
+									"res": "`body.offers`",
 								},
 								"index$": 0,
 							},
 						},
-						"key$": "list",
 					},
 					"load": map[string]any{
 						"input": "data",
@@ -1139,6 +1160,7 @@ func MakeConfig() map[string]any {
 										},
 									},
 								},
+								"kind": "http",
 								"method": "GET",
 								"orig": "/v2/offer/bulk",
 								"parts": []any{
@@ -1158,12 +1180,11 @@ func MakeConfig() map[string]any {
 								},
 								"transform": map[string]any{
 									"req": "`reqdata`",
-									"res": "`body`",
+									"res": "`body.ean`",
 								},
 								"index$": 0,
 							},
 						},
-						"key$": "load",
 					},
 				},
 				"relations": map[string]any{
@@ -1174,7 +1195,7 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"active": true,
-						"name": "click_id",
+						"name": "clickId",
 						"req": false,
 						"type": "`$STRING`",
 						"index$": 0,
@@ -1209,7 +1230,7 @@ func MakeConfig() map[string]any {
 					},
 					map[string]any{
 						"active": true,
-						"name": "placement_id",
+						"name": "placementId",
 						"req": false,
 						"type": "`$STRING`",
 						"index$": 5,
@@ -1258,6 +1279,7 @@ func MakeConfig() map[string]any {
 										},
 									},
 								},
+								"kind": "http",
 								"method": "GET",
 								"orig": "/v2/report/detail",
 								"parts": []any{
@@ -1274,12 +1296,11 @@ func MakeConfig() map[string]any {
 								},
 								"transform": map[string]any{
 									"req": "`reqdata`",
-									"res": "`body`",
+									"res": "`body.clicks`",
 								},
 								"index$": 0,
 							},
 						},
-						"key$": "list",
 					},
 				},
 				"relations": map[string]any{
@@ -1338,6 +1359,7 @@ func MakeConfig() map[string]any {
 										},
 									},
 								},
+								"kind": "http",
 								"method": "GET",
 								"orig": "/v2/report/general",
 								"parts": []any{
@@ -1358,7 +1380,6 @@ func MakeConfig() map[string]any {
 								"index$": 0,
 							},
 						},
-						"key$": "load",
 					},
 				},
 				"relations": map[string]any{
@@ -1369,10 +1390,17 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"active": true,
-						"name": "market",
+						"name": "date",
 						"req": false,
-						"type": "`$OBJECT`",
+						"type": "`$STRING`",
 						"index$": 0,
+					},
+					map[string]any{
+						"active": true,
+						"name": "modifiedDate",
+						"req": false,
+						"type": "`$STRING`",
+						"index$": 1,
 					},
 				},
 				"name": "report_modified",
@@ -1411,6 +1439,7 @@ func MakeConfig() map[string]any {
 										},
 									},
 								},
+								"kind": "http",
 								"method": "GET",
 								"orig": "/v2/report/modified",
 								"parts": []any{
@@ -1427,12 +1456,11 @@ func MakeConfig() map[string]any {
 								},
 								"transform": map[string]any{
 									"req": "`reqdata`",
-									"res": "`body`",
+									"res": "`body.market`",
 								},
 								"index$": 0,
 							},
 						},
-						"key$": "load",
 					},
 				},
 				"relations": map[string]any{
@@ -1469,6 +1497,7 @@ func MakeConfig() map[string]any {
 										},
 									},
 								},
+								"kind": "http",
 								"method": "GET",
 								"orig": "/v2/report/status",
 								"parts": []any{
@@ -1488,7 +1517,6 @@ func MakeConfig() map[string]any {
 								"index$": 0,
 							},
 						},
-						"key$": "load",
 					},
 				},
 				"relations": map[string]any{

@@ -159,8 +159,29 @@ class YadorePublisherSDK {
   }
 
 
+  // Raw endpoint access is operator-controllable, like every entity op.
+  // Blocking it means denying BOTH the 'direct' and 'graphql' tokens, since
+  // either one reaches the same endpoint.
   async direct(fetchargs?: any) {
+    if (!this._options.allow.op.includes('direct')) {
+      return {
+        ok: false,
+        err: new Error('YadorePublisherSDK: direct: operation not allowed by' +
+          ' SDK option allow.op value: "' + this._options.allow.op + '"'),
+      }
+    }
+
+    return this._rawRequest(fetchargs)
+  }
+
+
+  // Ungated request path shared by direct() and graphql(), each of which
+  // checks its own allow.op token first. Private, rather than a flag on
+  // fetchargs: a caller-supplied marker would let anyone opt straight back
+  // out of the gate by passing it.
+  async _rawRequest(fetchargs?: any) {
     const utility = this._utility
+
     const fetcher = utility.fetcher
     const makeContext = utility.makeContext
 
@@ -221,101 +242,183 @@ class YadorePublisherSDK {
 
 
 
+  // Raw GraphQL access: the pressure valve that makes the generated
+  // surface's deliberate omissions (per-call selection sets, typed filter
+  // builders, batching, subscriptions) livable — the whole schema stays
+  // reachable.
+  //
+  // Thin wrapper over the same prepare/fetch path `direct` uses, with the
+  // one thing raw `direct` cannot do for GraphQL: a GraphQL failure rides
+  // HTTP 200 as a top-level `errors` array, so status alone would report a
+  // failed query as ok.
+  //
+  // NOTE: like `direct`, this bypasses the feature pipeline — no retry,
+  // ratelimit or paging features apply.
+  async graphql(query: string, variables?: any, ctrl?: any) {
+    const options = this._options
+
+    if (!options.allow.op.includes('graphql')) {
+      return {
+        ok: false,
+        err: new Error('YadorePublisherSDK: graphql: operation not allowed by' +
+          ' SDK option allow.op value: "' + options.allow.op + '"'),
+      }
+    }
+
+    const res: any = await this._rawRequest({
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: { query, variables: variables || {} },
+      ctrl,
+    })
+
+    if (res instanceof Error) {
+      return res
+    }
+
+    // Errors are read BEFORE any status check: a GraphQL parse or validation
+    // failure comes back as HTTP 400 carrying the standard { errors: [...] }
+    // body, and the raw path represents a non-2xx as { ok: false } with no
+    // err — so returning early on status would discard the server's own
+    // diagnostics, which are the only useful part of that response.
+    const errors = null == res.data ? undefined : res.data.errors
+
+    if (null != errors && Array.isArray(errors) && 0 < errors.length) {
+      const first = errors[0] || {}
+      const err: any = new Error('YadorePublisherSDK: graphql: ' +
+        (first.message || 'graphql error'))
+      err.graphql = errors
+      return { ok: false, status: res.status, headers: res.headers, err, data: res.data }
+    }
+
+    return res
+  }
+
+
+
   // Entity access: `client.ConversionDetail().list()` / `client.ConversionDetail().load({ id })`.
-  ConversionDetail(data?: any) {
+  // The argument is the entity OPTIONS object (passed to the entity
+  // constructor as entopts), not initial entity data.
+  ConversionDetail(entopts?: Record<string, any>) {
     const self = this
-    return new ConversionDetailEntity(self,data)
+    return new ConversionDetailEntity(self, entopts)
   }
 
 
   // Entity access: `client.ConversionDetailMerchant().list()` / `client.ConversionDetailMerchant().load({ id })`.
-  ConversionDetailMerchant(data?: any) {
+  // The argument is the entity OPTIONS object (passed to the entity
+  // constructor as entopts), not initial entity data.
+  ConversionDetailMerchant(entopts?: Record<string, any>) {
     const self = this
-    return new ConversionDetailMerchantEntity(self,data)
+    return new ConversionDetailMerchantEntity(self, entopts)
   }
 
 
   // Entity access: `client.ConversionGeneral().list()` / `client.ConversionGeneral().load({ id })`.
-  ConversionGeneral(data?: any) {
+  // The argument is the entity OPTIONS object (passed to the entity
+  // constructor as entopts), not initial entity data.
+  ConversionGeneral(entopts?: Record<string, any>) {
     const self = this
-    return new ConversionGeneralEntity(self,data)
+    return new ConversionGeneralEntity(self, entopts)
   }
 
 
   // Entity access: `client.ConversionStatus().list()` / `client.ConversionStatus().load({ id })`.
-  ConversionStatus(data?: any) {
+  // The argument is the entity OPTIONS object (passed to the entity
+  // constructor as entopts), not initial entity data.
+  ConversionStatus(entopts?: Record<string, any>) {
     const self = this
-    return new ConversionStatusEntity(self,data)
+    return new ConversionStatusEntity(self, entopts)
   }
 
 
   // Entity access: `client.Deeplink().list()` / `client.Deeplink().load({ id })`.
-  Deeplink(data?: any) {
+  // The argument is the entity OPTIONS object (passed to the entity
+  // constructor as entopts), not initial entity data.
+  Deeplink(entopts?: Record<string, any>) {
     const self = this
-    return new DeeplinkEntity(self,data)
+    return new DeeplinkEntity(self, entopts)
   }
 
 
   // Entity access: `client.DeeplinkMerchant().list()` / `client.DeeplinkMerchant().load({ id })`.
-  DeeplinkMerchant(data?: any) {
+  // The argument is the entity OPTIONS object (passed to the entity
+  // constructor as entopts), not initial entity data.
+  DeeplinkMerchant(entopts?: Record<string, any>) {
     const self = this
-    return new DeeplinkMerchantEntity(self,data)
+    return new DeeplinkMerchantEntity(self, entopts)
   }
 
 
   // Entity access: `client.Dnt().list()` / `client.Dnt().load({ id })`.
-  Dnt(data?: any) {
+  // The argument is the entity OPTIONS object (passed to the entity
+  // constructor as entopts), not initial entity data.
+  Dnt(entopts?: Record<string, any>) {
     const self = this
-    return new DntEntity(self,data)
+    return new DntEntity(self, entopts)
   }
 
 
   // Entity access: `client.Market().list()` / `client.Market().load({ id })`.
-  Market(data?: any) {
+  // The argument is the entity OPTIONS object (passed to the entity
+  // constructor as entopts), not initial entity data.
+  Market(entopts?: Record<string, any>) {
     const self = this
-    return new MarketEntity(self,data)
+    return new MarketEntity(self, entopts)
   }
 
 
   // Entity access: `client.Merchant().list()` / `client.Merchant().load({ id })`.
-  Merchant(data?: any) {
+  // The argument is the entity OPTIONS object (passed to the entity
+  // constructor as entopts), not initial entity data.
+  Merchant(entopts?: Record<string, any>) {
     const self = this
-    return new MerchantEntity(self,data)
+    return new MerchantEntity(self, entopts)
   }
 
 
   // Entity access: `client.Offer().list()` / `client.Offer().load({ id })`.
-  Offer(data?: any) {
+  // The argument is the entity OPTIONS object (passed to the entity
+  // constructor as entopts), not initial entity data.
+  Offer(entopts?: Record<string, any>) {
     const self = this
-    return new OfferEntity(self,data)
+    return new OfferEntity(self, entopts)
   }
 
 
   // Entity access: `client.ReportDetail().list()` / `client.ReportDetail().load({ id })`.
-  ReportDetail(data?: any) {
+  // The argument is the entity OPTIONS object (passed to the entity
+  // constructor as entopts), not initial entity data.
+  ReportDetail(entopts?: Record<string, any>) {
     const self = this
-    return new ReportDetailEntity(self,data)
+    return new ReportDetailEntity(self, entopts)
   }
 
 
   // Entity access: `client.ReportGeneral().list()` / `client.ReportGeneral().load({ id })`.
-  ReportGeneral(data?: any) {
+  // The argument is the entity OPTIONS object (passed to the entity
+  // constructor as entopts), not initial entity data.
+  ReportGeneral(entopts?: Record<string, any>) {
     const self = this
-    return new ReportGeneralEntity(self,data)
+    return new ReportGeneralEntity(self, entopts)
   }
 
 
   // Entity access: `client.ReportModified().list()` / `client.ReportModified().load({ id })`.
-  ReportModified(data?: any) {
+  // The argument is the entity OPTIONS object (passed to the entity
+  // constructor as entopts), not initial entity data.
+  ReportModified(entopts?: Record<string, any>) {
     const self = this
-    return new ReportModifiedEntity(self,data)
+    return new ReportModifiedEntity(self, entopts)
   }
 
 
   // Entity access: `client.ReportStatus().list()` / `client.ReportStatus().load({ id })`.
-  ReportStatus(data?: any) {
+  // The argument is the entity OPTIONS object (passed to the entity
+  // constructor as entopts), not initial entity data.
+  ReportStatus(entopts?: Record<string, any>) {
     const self = this
-    return new ReportStatusEntity(self,data)
+    return new ReportStatusEntity(self, entopts)
   }
 
 

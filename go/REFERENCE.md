@@ -151,12 +151,12 @@ fmt.Println(conversionDetail.GetName()) // "conversion_detail"
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `click_id` | `string` | No |  |
+| `clickId` | `string` | No |  |
 | `date` | `string` | No |  |
 | `market` | `string` | No |  |
 | `merchant` | `map[string]any` | No |  |
-| `placement_id` | `string` | No |  |
-| `sale` | `float64` | No |  |
+| `placementId` | `string` | No |  |
+| `sales` | `float64` | No |  |
 
 ### Operations
 
@@ -207,10 +207,10 @@ fmt.Println(conversionDetailMerchant.GetName()) // "conversion_detail_merchant"
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `click` | `int` | No |  |
+| `clicks` | `int` | No |  |
 | `market` | `string` | No |  |
 | `merchant` | `map[string]any` | No |  |
-| `sale` | `int` | No |  |
+| `sales` | `int` | No |  |
 
 ### Operations
 
@@ -365,11 +365,13 @@ fmt.Println(deeplink.GetName()) // "deeplink"
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `is_couponing` | `bool` | No |  |
+| `deeplinks` | `[]any` | No |  |
+| `found` | `int` | No |  |
+| `isCouponing` | `bool` | No |  |
 | `market` | `string` | Yes |  |
-| `placement_id` | `string` | No |  |
-| `result` | `map[string]any` | No |  |
-| `url` | `[]any` | Yes |  |
+| `placementId` | `string` | No |  |
+| `total` | `int` | No |  |
+| `urls` | `[]any` | Yes |  |
 
 ### Operations
 
@@ -380,7 +382,7 @@ Create a new entity with the given data.
 ```go
 result, err := client.Deeplink(nil).Create(map[string]any{
     "market": "example_market",
-    "url": []any{},
+    "urls": []any{},
 }, nil)
 if err != nil {
     panic(err)
@@ -423,15 +425,15 @@ fmt.Println(deeplinkMerchant.GetName()) // "deeplink_merchant"
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `deeplink_count` | `int` | No |  |
-| `estimated_cpc` | `map[string]any` | No |  |
-| `has_external_homepage` | `bool` | No |  |
-| `has_smartlink_homepage` | `bool` | No |  |
+| `deeplinkCount` | `int` | No |  |
+| `estimatedCpc` | `map[string]any` | No |  |
+| `hasExternalHomepage` | `bool` | No |  |
+| `hasSmartlinkHomepage` | `bool` | No |  |
 | `id` | `string` | No |  |
-| `is_smartlink` | `bool` | No |  |
+| `isSmartlink` | `bool` | No |  |
 | `logo` | `map[string]any` | No |  |
 | `name` | `string` | No |  |
-| `traffic_type` | `[]any` | No |  |
+| `trafficTypes` | `[]any` | No |  |
 
 ### Operations
 
@@ -581,8 +583,8 @@ fmt.Println(merchant.GetName()) // "merchant"
 | `id` | `string` | No |  |
 | `logo` | `map[string]any` | No |  |
 | `name` | `string` | No |  |
-| `offer_count` | `int` | No |  |
-| `traffic_type` | `[]any` | No |  |
+| `offerCount` | `int` | No |  |
+| `trafficTypes` | `[]any` | No |  |
 
 ### Operations
 
@@ -635,22 +637,23 @@ fmt.Println(offer.GetName()) // "offer"
 | --- | --- | --- | --- |
 | `availability` | `string` | No |  |
 | `brand` | `string` | No |  |
-| `click_url` | `string` | No |  |
+| `clickUrl` | `string` | No |  |
+| `count` | `int` | No |  |
 | `description` | `string` | No |  |
-| `ean` | `map[string]any` | No |  |
 | `eer` | `string` | No |  |
-| `estimated_cpc` | `map[string]any` | No |  |
+| `estimatedCpc` | `map[string]any` | No |  |
 | `id` | `string` | No |  |
 | `image` | `map[string]any` | No |  |
 | `merchant` | `map[string]any` | No |  |
-| `original_price` | `map[string]any` | No |  |
+| `offers` | `[]any` | No |  |
+| `originalPrice` | `map[string]any` | No |  |
 | `price` | `map[string]any` | No |  |
-| `promo_text` | `string` | No |  |
-| `shipping_price` | `map[string]any` | No |  |
-| `shipping_time` | `map[string]any` | No |  |
+| `promoText` | `string` | No |  |
+| `shippingPrice` | `map[string]any` | No |  |
+| `shippingTime` | `map[string]any` | No |  |
 | `thumbnail` | `map[string]any` | No |  |
 | `title` | `string` | No |  |
-| `unit_price` | `map[string]any` | No |  |
+| `unitPrice` | `map[string]any` | No |  |
 
 ### Operations
 
@@ -713,12 +716,12 @@ fmt.Println(reportDetail.GetName()) // "report_detail"
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `click_id` | `string` | No |  |
+| `clickId` | `string` | No |  |
 | `currency` | `string` | No |  |
 | `date` | `string` | No |  |
 | `market` | `string` | No |  |
 | `merchant` | `map[string]any` | No |  |
-| `placement_id` | `string` | No |  |
+| `placementId` | `string` | No |  |
 | `revenue` | `float64` | No |  |
 
 ### Operations
@@ -823,7 +826,8 @@ fmt.Println(reportModified.GetName()) // "report_modified"
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `market` | `map[string]any` | No |  |
+| `date` | `string` | No |  |
+| `modifiedDate` | `string` | No |  |
 
 ### Operations
 

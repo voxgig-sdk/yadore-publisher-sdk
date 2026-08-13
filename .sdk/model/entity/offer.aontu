@@ -16,9 +16,14 @@ main: kit: entity: offer: {
       type: "`$STRING`"
     }
     {
-      name: "click_url"
+      name: "clickUrl"
       req: false
       type: "`$STRING`"
+    }
+    {
+      name: "count"
+      req: false
+      type: "`$INTEGER`"
     }
     {
       name: "description"
@@ -26,17 +31,12 @@ main: kit: entity: offer: {
       type: "`$STRING`"
     }
     {
-      name: "ean"
-      req: false
-      type: "`$OBJECT`"
-    }
-    {
       name: "eer"
       req: false
       type: "`$STRING`"
     }
     {
-      name: "estimated_cpc"
+      name: "estimatedCpc"
       req: false
       type: "`$OBJECT`"
     }
@@ -56,7 +56,12 @@ main: kit: entity: offer: {
       type: "`$OBJECT`"
     }
     {
-      name: "original_price"
+      name: "offers"
+      req: false
+      type: "`$ARRAY`"
+    }
+    {
+      name: "originalPrice"
       req: false
       type: "`$OBJECT`"
     }
@@ -66,17 +71,17 @@ main: kit: entity: offer: {
       type: "`$OBJECT`"
     }
     {
-      name: "promo_text"
+      name: "promoText"
       req: false
       type: "`$STRING`"
     }
     {
-      name: "shipping_price"
+      name: "shippingPrice"
       req: false
       type: "`$OBJECT`"
     }
     {
-      name: "shipping_time"
+      name: "shippingTime"
       req: false
       type: "`$OBJECT`"
     }
@@ -91,7 +96,7 @@ main: kit: entity: offer: {
       type: "`$STRING`"
     }
     {
-      name: "unit_price"
+      name: "unitPrice"
       req: false
       type: "`$OBJECT`"
     }
@@ -206,7 +211,7 @@ main: kit: entity: offer: {
           }
           transform: {
             req: "`reqdata`"
-            res: "`body`"
+            res: "`body.offers`"
           }
         }
       ]
@@ -274,7 +279,7 @@ main: kit: entity: offer: {
           }
           transform: {
             req: "`reqdata`"
-            res: "`body`"
+            res: "`body.ean`"
           }
         }
       ]

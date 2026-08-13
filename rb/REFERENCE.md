@@ -146,12 +146,12 @@ conversion_detail = client.ConversionDetail
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `click_id` | `String` | No |  |
+| `clickId` | `String` | No |  |
 | `date` | `String` | No |  |
 | `market` | `String` | No |  |
 | `merchant` | `Hash` | No |  |
-| `placement_id` | `String` | No |  |
-| `sale` | `Float` | No |  |
+| `placementId` | `String` | No |  |
+| `sales` | `Float` | No |  |
 
 ### Operations
 
@@ -203,10 +203,10 @@ conversion_detail_merchant = client.ConversionDetailMerchant
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `click` | `Integer` | No |  |
+| `clicks` | `Integer` | No |  |
 | `market` | `String` | No |  |
 | `merchant` | `Hash` | No |  |
-| `sale` | `Integer` | No |  |
+| `sales` | `Integer` | No |  |
 
 ### Operations
 
@@ -364,11 +364,13 @@ deeplink = client.Deeplink
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `is_couponing` | `Boolean` | No |  |
+| `deeplinks` | `Array` | No |  |
+| `found` | `Integer` | No |  |
+| `isCouponing` | `Boolean` | No |  |
 | `market` | `String` | Yes |  |
-| `placement_id` | `String` | No |  |
-| `result` | `Hash` | No |  |
-| `url` | `Array` | Yes |  |
+| `placementId` | `String` | No |  |
+| `total` | `Integer` | No |  |
+| `urls` | `Array` | Yes |  |
 
 ### Operations
 
@@ -379,7 +381,7 @@ Create a new entity with the given data. Raises on error.
 ```ruby
 result = client.Deeplink.create({
   "market" => "example_market", # String
-  "url" => [], # Array
+  "urls" => [], # Array
 })
 ```
 
@@ -423,15 +425,15 @@ deeplink_merchant = client.DeeplinkMerchant
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `deeplink_count` | `Integer` | No |  |
-| `estimated_cpc` | `Hash` | No |  |
-| `has_external_homepage` | `Boolean` | No |  |
-| `has_smartlink_homepage` | `Boolean` | No |  |
+| `deeplinkCount` | `Integer` | No |  |
+| `estimatedCpc` | `Hash` | No |  |
+| `hasExternalHomepage` | `Boolean` | No |  |
+| `hasSmartlinkHomepage` | `Boolean` | No |  |
 | `id` | `String` | No |  |
-| `is_smartlink` | `Boolean` | No |  |
+| `isSmartlink` | `Boolean` | No |  |
 | `logo` | `Hash` | No |  |
 | `name` | `String` | No |  |
-| `traffic_type` | `Array` | No |  |
+| `trafficTypes` | `Array` | No |  |
 
 ### Operations
 
@@ -584,8 +586,8 @@ merchant = client.Merchant
 | `id` | `String` | No |  |
 | `logo` | `Hash` | No |  |
 | `name` | `String` | No |  |
-| `offer_count` | `Integer` | No |  |
-| `traffic_type` | `Array` | No |  |
+| `offerCount` | `Integer` | No |  |
+| `trafficTypes` | `Array` | No |  |
 
 ### Operations
 
@@ -639,22 +641,23 @@ offer = client.Offer
 | --- | --- | --- | --- |
 | `availability` | `String` | No |  |
 | `brand` | `String` | No |  |
-| `click_url` | `String` | No |  |
+| `clickUrl` | `String` | No |  |
+| `count` | `Integer` | No |  |
 | `description` | `String` | No |  |
-| `ean` | `Hash` | No |  |
 | `eer` | `String` | No |  |
-| `estimated_cpc` | `Hash` | No |  |
+| `estimatedCpc` | `Hash` | No |  |
 | `id` | `String` | No |  |
 | `image` | `Hash` | No |  |
 | `merchant` | `Hash` | No |  |
-| `original_price` | `Hash` | No |  |
+| `offers` | `Array` | No |  |
+| `originalPrice` | `Hash` | No |  |
 | `price` | `Hash` | No |  |
-| `promo_text` | `String` | No |  |
-| `shipping_price` | `Hash` | No |  |
-| `shipping_time` | `Hash` | No |  |
+| `promoText` | `String` | No |  |
+| `shippingPrice` | `Hash` | No |  |
+| `shippingTime` | `Hash` | No |  |
 | `thumbnail` | `Hash` | No |  |
 | `title` | `String` | No |  |
-| `unit_price` | `Hash` | No |  |
+| `unitPrice` | `Hash` | No |  |
 
 ### Operations
 
@@ -714,12 +717,12 @@ report_detail = client.ReportDetail
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `click_id` | `String` | No |  |
+| `clickId` | `String` | No |  |
 | `currency` | `String` | No |  |
 | `date` | `String` | No |  |
 | `market` | `String` | No |  |
 | `merchant` | `Hash` | No |  |
-| `placement_id` | `String` | No |  |
+| `placementId` | `String` | No |  |
 | `revenue` | `Float` | No |  |
 
 ### Operations
@@ -826,7 +829,8 @@ report_modified = client.ReportModified
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `market` | `Hash` | No |  |
+| `date` | `String` | No |  |
+| `modifiedDate` | `String` | No |  |
 
 ### Operations
 

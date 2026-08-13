@@ -26,8 +26,8 @@ import {
 describe('DntEntity', async () => {
 
   // Per-test live pacing. Delay is read from sdk-test-control.json's
-  // `test.live.delayMs`; only sleeps when YADOREPUBLISHER_TEST_LIVE=TRUE.
-  afterEach(liveDelay('YADOREPUBLISHER_TEST_LIVE'))
+  // `test.live.delayMs`; only sleeps when YADORE_PUBLISHER_TEST_LIVE=TRUE.
+  afterEach(liveDelay('YADORE_PUBLISHER_TEST_LIVE'))
 
   test('instance', async () => {
     const testsdk = YadorePublisherSDK.test()
@@ -62,7 +62,7 @@ describe('DntEntity', async () => {
     // LOAD
     const dnt_ref01_ent = client.Dnt()
     const dnt_ref01_match_dt0: any = {}
-    const dnt_ref01_data_dt0 = await dnt_ref01_ent.load(dnt_ref01_match_dt0)
+    const dnt_ref01_data_dt0 = (await dnt_ref01_ent.load(dnt_ref01_match_dt0)).data()
     assert(null != dnt_ref01_data_dt0)
 
 

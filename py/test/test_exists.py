@@ -1,4 +1,4 @@
-# ProjectName SDK exists test
+# YadorePublisher SDK exists test
 
 import pytest
 from yadorepublisher_sdk import YadorePublisherSDK

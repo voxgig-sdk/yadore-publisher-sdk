@@ -37,7 +37,7 @@ class MarketEntity extends YadorePublisherEntityBase<Market> {
 
 
 
-  async list(this: any, reqmatch?: MarketListMatch, ctrl?: Control): Promise<Market[]> {
+  async list(this: any, reqmatch?: MarketListMatch, ctrl?: Control): Promise<MarketEntity[]> {
 
     const utility = this._utility
 

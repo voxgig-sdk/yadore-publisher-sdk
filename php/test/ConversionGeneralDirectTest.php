@@ -65,16 +65,16 @@ function conversion_general_direct_setup($mockres)
     $calls = new \ArrayObject();
 
     $env = Runner::env_override([
-        "YADOREPUBLISHER_TEST_CONVERSION_GENERAL_ENTID" => [],
-        "YADOREPUBLISHER_TEST_LIVE" => "FALSE",
-        "YADOREPUBLISHER_APIKEY" => "NONE",
+        "YADORE_PUBLISHER_TEST_CONVERSION_GENERAL_ENTID" => [],
+        "YADORE_PUBLISHER_TEST_LIVE" => "FALSE",
+        "YADORE_PUBLISHER_APIKEY" => "NONE",
     ]);
 
-    $live = $env["YADOREPUBLISHER_TEST_LIVE"] === "TRUE";
+    $live = $env["YADORE_PUBLISHER_TEST_LIVE"] === "TRUE";
 
     if ($live) {
         $merged_opts = [
-            "apikey" => $env["YADOREPUBLISHER_APIKEY"],
+            "apikey" => $env["YADORE_PUBLISHER_APIKEY"],
         ];
         $client = new YadorePublisherSDK($merged_opts);
         return [

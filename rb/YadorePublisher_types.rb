@@ -10,7 +10,7 @@
 
 # ConversionDetail entity data model.
 #
-# @!attribute [rw] click_id
+# @!attribute [rw] clickId
 #   @return [String, nil]
 #
 # @!attribute [rw] date
@@ -22,24 +22,24 @@
 # @!attribute [rw] merchant
 #   @return [Hash, nil]
 #
-# @!attribute [rw] placement_id
+# @!attribute [rw] placementId
 #   @return [String, nil]
 #
-# @!attribute [rw] sale
+# @!attribute [rw] sales
 #   @return [Float, nil]
 ConversionDetail = Struct.new(
-  :click_id,
+  :clickId,
   :date,
   :market,
   :merchant,
-  :placement_id,
-  :sale,
+  :placementId,
+  :sales,
   keyword_init: true
 )
 
 # Request payload for ConversionDetail#list.
 #
-# @!attribute [rw] click_id
+# @!attribute [rw] clickId
 #   @return [String, nil]
 #
 # @!attribute [rw] date
@@ -51,24 +51,24 @@ ConversionDetail = Struct.new(
 # @!attribute [rw] merchant
 #   @return [Hash, nil]
 #
-# @!attribute [rw] placement_id
+# @!attribute [rw] placementId
 #   @return [String, nil]
 #
-# @!attribute [rw] sale
+# @!attribute [rw] sales
 #   @return [Float, nil]
 ConversionDetailListMatch = Struct.new(
-  :click_id,
+  :clickId,
   :date,
   :market,
   :merchant,
-  :placement_id,
-  :sale,
+  :placementId,
+  :sales,
   keyword_init: true
 )
 
 # ConversionDetailMerchant entity data model.
 #
-# @!attribute [rw] click
+# @!attribute [rw] clicks
 #   @return [Integer, nil]
 #
 # @!attribute [rw] market
@@ -77,19 +77,19 @@ ConversionDetailListMatch = Struct.new(
 # @!attribute [rw] merchant
 #   @return [Hash, nil]
 #
-# @!attribute [rw] sale
+# @!attribute [rw] sales
 #   @return [Integer, nil]
 ConversionDetailMerchant = Struct.new(
-  :click,
+  :clicks,
   :market,
   :merchant,
-  :sale,
+  :sales,
   keyword_init: true
 )
 
 # Request payload for ConversionDetailMerchant#list.
 #
-# @!attribute [rw] click
+# @!attribute [rw] clicks
 #   @return [Integer, nil]
 #
 # @!attribute [rw] market
@@ -98,13 +98,13 @@ ConversionDetailMerchant = Struct.new(
 # @!attribute [rw] merchant
 #   @return [Hash, nil]
 #
-# @!attribute [rw] sale
+# @!attribute [rw] sales
 #   @return [Integer, nil]
 ConversionDetailMerchantListMatch = Struct.new(
-  :click,
+  :clicks,
   :market,
   :merchant,
-  :sale,
+  :sales,
   keyword_init: true
 )
 
@@ -162,72 +162,88 @@ ConversionStatusLoadMatch = Struct.new(
 
 # Deeplink entity data model.
 #
-# @!attribute [rw] is_couponing
+# @!attribute [rw] deeplinks
+#   @return [Array, nil]
+#
+# @!attribute [rw] found
+#   @return [Integer, nil]
+#
+# @!attribute [rw] isCouponing
 #   @return [Boolean, nil]
 #
 # @!attribute [rw] market
 #   @return [String]
 #
-# @!attribute [rw] placement_id
+# @!attribute [rw] placementId
 #   @return [String, nil]
 #
-# @!attribute [rw] result
-#   @return [Hash, nil]
+# @!attribute [rw] total
+#   @return [Integer, nil]
 #
-# @!attribute [rw] url
+# @!attribute [rw] urls
 #   @return [Array]
 Deeplink = Struct.new(
-  :is_couponing,
+  :deeplinks,
+  :found,
+  :isCouponing,
   :market,
-  :placement_id,
-  :result,
-  :url,
+  :placementId,
+  :total,
+  :urls,
   keyword_init: true
 )
 
 # Request payload for Deeplink#create.
 #
-# @!attribute [rw] is_couponing
+# @!attribute [rw] deeplinks
+#   @return [Array, nil]
+#
+# @!attribute [rw] found
+#   @return [Integer, nil]
+#
+# @!attribute [rw] isCouponing
 #   @return [Boolean, nil]
 #
 # @!attribute [rw] market
 #   @return [String]
 #
-# @!attribute [rw] placement_id
+# @!attribute [rw] placementId
 #   @return [String, nil]
 #
-# @!attribute [rw] result
-#   @return [Hash, nil]
+# @!attribute [rw] total
+#   @return [Integer, nil]
 #
-# @!attribute [rw] url
+# @!attribute [rw] urls
 #   @return [Array]
 DeeplinkCreateData = Struct.new(
-  :is_couponing,
+  :deeplinks,
+  :found,
+  :isCouponing,
   :market,
-  :placement_id,
-  :result,
-  :url,
+  :placementId,
+  :total,
+  :urls,
   keyword_init: true
 )
 
 # DeeplinkMerchant entity data model.
 #
-# @!attribute [rw] deeplink_count
+# @!attribute [rw] deeplinkCount
 #   @return [Integer, nil]
 #
-# @!attribute [rw] estimated_cpc
+# @!attribute [rw] estimatedCpc
 #   @return [Hash, nil]
 #
-# @!attribute [rw] has_external_homepage
+# @!attribute [rw] hasExternalHomepage
 #   @return [Boolean, nil]
 #
-# @!attribute [rw] has_smartlink_homepage
+# @!attribute [rw] hasSmartlinkHomepage
 #   @return [Boolean, nil]
 #
 # @!attribute [rw] id
 #   @return [String, nil]
 #
-# @!attribute [rw] is_smartlink
+# @!attribute [rw] isSmartlink
 #   @return [Boolean, nil]
 #
 # @!attribute [rw] logo
@@ -236,39 +252,39 @@ DeeplinkCreateData = Struct.new(
 # @!attribute [rw] name
 #   @return [String, nil]
 #
-# @!attribute [rw] traffic_type
+# @!attribute [rw] trafficTypes
 #   @return [Array, nil]
 DeeplinkMerchant = Struct.new(
-  :deeplink_count,
-  :estimated_cpc,
-  :has_external_homepage,
-  :has_smartlink_homepage,
+  :deeplinkCount,
+  :estimatedCpc,
+  :hasExternalHomepage,
+  :hasSmartlinkHomepage,
   :id,
-  :is_smartlink,
+  :isSmartlink,
   :logo,
   :name,
-  :traffic_type,
+  :trafficTypes,
   keyword_init: true
 )
 
 # Request payload for DeeplinkMerchant#list.
 #
-# @!attribute [rw] deeplink_count
+# @!attribute [rw] deeplinkCount
 #   @return [Integer, nil]
 #
-# @!attribute [rw] estimated_cpc
+# @!attribute [rw] estimatedCpc
 #   @return [Hash, nil]
 #
-# @!attribute [rw] has_external_homepage
+# @!attribute [rw] hasExternalHomepage
 #   @return [Boolean, nil]
 #
-# @!attribute [rw] has_smartlink_homepage
+# @!attribute [rw] hasSmartlinkHomepage
 #   @return [Boolean, nil]
 #
 # @!attribute [rw] id
 #   @return [String, nil]
 #
-# @!attribute [rw] is_smartlink
+# @!attribute [rw] isSmartlink
 #   @return [Boolean, nil]
 #
 # @!attribute [rw] logo
@@ -277,18 +293,18 @@ DeeplinkMerchant = Struct.new(
 # @!attribute [rw] name
 #   @return [String, nil]
 #
-# @!attribute [rw] traffic_type
+# @!attribute [rw] trafficTypes
 #   @return [Array, nil]
 DeeplinkMerchantListMatch = Struct.new(
-  :deeplink_count,
-  :estimated_cpc,
-  :has_external_homepage,
-  :has_smartlink_homepage,
+  :deeplinkCount,
+  :estimatedCpc,
+  :hasExternalHomepage,
+  :hasSmartlinkHomepage,
   :id,
-  :is_smartlink,
+  :isSmartlink,
   :logo,
   :name,
-  :traffic_type,
+  :trafficTypes,
   keyword_init: true
 )
 
@@ -329,17 +345,17 @@ MarketListMatch = Struct.new(
 # @!attribute [rw] name
 #   @return [String, nil]
 #
-# @!attribute [rw] offer_count
+# @!attribute [rw] offerCount
 #   @return [Integer, nil]
 #
-# @!attribute [rw] traffic_type
+# @!attribute [rw] trafficTypes
 #   @return [Array, nil]
 Merchant = Struct.new(
   :id,
   :logo,
   :name,
-  :offer_count,
-  :traffic_type,
+  :offerCount,
+  :trafficTypes,
   keyword_init: true
 )
 
@@ -354,17 +370,17 @@ Merchant = Struct.new(
 # @!attribute [rw] name
 #   @return [String, nil]
 #
-# @!attribute [rw] offer_count
+# @!attribute [rw] offerCount
 #   @return [Integer, nil]
 #
-# @!attribute [rw] traffic_type
+# @!attribute [rw] trafficTypes
 #   @return [Array, nil]
 MerchantListMatch = Struct.new(
   :id,
   :logo,
   :name,
-  :offer_count,
-  :traffic_type,
+  :offerCount,
+  :trafficTypes,
   keyword_init: true
 )
 
@@ -376,19 +392,19 @@ MerchantListMatch = Struct.new(
 # @!attribute [rw] brand
 #   @return [String, nil]
 #
-# @!attribute [rw] click_url
+# @!attribute [rw] clickUrl
 #   @return [String, nil]
+#
+# @!attribute [rw] count
+#   @return [Integer, nil]
 #
 # @!attribute [rw] description
 #   @return [String, nil]
 #
-# @!attribute [rw] ean
-#   @return [Hash, nil]
-#
 # @!attribute [rw] eer
 #   @return [String, nil]
 #
-# @!attribute [rw] estimated_cpc
+# @!attribute [rw] estimatedCpc
 #   @return [Hash, nil]
 #
 # @!attribute [rw] id
@@ -400,19 +416,22 @@ MerchantListMatch = Struct.new(
 # @!attribute [rw] merchant
 #   @return [Hash, nil]
 #
-# @!attribute [rw] original_price
+# @!attribute [rw] offers
+#   @return [Array, nil]
+#
+# @!attribute [rw] originalPrice
 #   @return [Hash, nil]
 #
 # @!attribute [rw] price
 #   @return [Hash, nil]
 #
-# @!attribute [rw] promo_text
+# @!attribute [rw] promoText
 #   @return [String, nil]
 #
-# @!attribute [rw] shipping_price
+# @!attribute [rw] shippingPrice
 #   @return [Hash, nil]
 #
-# @!attribute [rw] shipping_time
+# @!attribute [rw] shippingTime
 #   @return [Hash, nil]
 #
 # @!attribute [rw] thumbnail
@@ -421,27 +440,28 @@ MerchantListMatch = Struct.new(
 # @!attribute [rw] title
 #   @return [String, nil]
 #
-# @!attribute [rw] unit_price
+# @!attribute [rw] unitPrice
 #   @return [Hash, nil]
 Offer = Struct.new(
   :availability,
   :brand,
-  :click_url,
+  :clickUrl,
+  :count,
   :description,
-  :ean,
   :eer,
-  :estimated_cpc,
+  :estimatedCpc,
   :id,
   :image,
   :merchant,
-  :original_price,
+  :offers,
+  :originalPrice,
   :price,
-  :promo_text,
-  :shipping_price,
-  :shipping_time,
+  :promoText,
+  :shippingPrice,
+  :shippingTime,
   :thumbnail,
   :title,
-  :unit_price,
+  :unitPrice,
   keyword_init: true
 )
 
@@ -453,19 +473,19 @@ Offer = Struct.new(
 # @!attribute [rw] brand
 #   @return [String, nil]
 #
-# @!attribute [rw] click_url
+# @!attribute [rw] clickUrl
 #   @return [String, nil]
+#
+# @!attribute [rw] count
+#   @return [Integer, nil]
 #
 # @!attribute [rw] description
 #   @return [String, nil]
 #
-# @!attribute [rw] ean
-#   @return [Hash, nil]
-#
 # @!attribute [rw] eer
 #   @return [String, nil]
 #
-# @!attribute [rw] estimated_cpc
+# @!attribute [rw] estimatedCpc
 #   @return [Hash, nil]
 #
 # @!attribute [rw] id
@@ -477,19 +497,22 @@ Offer = Struct.new(
 # @!attribute [rw] merchant
 #   @return [Hash, nil]
 #
-# @!attribute [rw] original_price
+# @!attribute [rw] offers
+#   @return [Array, nil]
+#
+# @!attribute [rw] originalPrice
 #   @return [Hash, nil]
 #
 # @!attribute [rw] price
 #   @return [Hash, nil]
 #
-# @!attribute [rw] promo_text
+# @!attribute [rw] promoText
 #   @return [String, nil]
 #
-# @!attribute [rw] shipping_price
+# @!attribute [rw] shippingPrice
 #   @return [Hash, nil]
 #
-# @!attribute [rw] shipping_time
+# @!attribute [rw] shippingTime
 #   @return [Hash, nil]
 #
 # @!attribute [rw] thumbnail
@@ -498,27 +521,28 @@ Offer = Struct.new(
 # @!attribute [rw] title
 #   @return [String, nil]
 #
-# @!attribute [rw] unit_price
+# @!attribute [rw] unitPrice
 #   @return [Hash, nil]
 OfferLoadMatch = Struct.new(
   :availability,
   :brand,
-  :click_url,
+  :clickUrl,
+  :count,
   :description,
-  :ean,
   :eer,
-  :estimated_cpc,
+  :estimatedCpc,
   :id,
   :image,
   :merchant,
-  :original_price,
+  :offers,
+  :originalPrice,
   :price,
-  :promo_text,
-  :shipping_price,
-  :shipping_time,
+  :promoText,
+  :shippingPrice,
+  :shippingTime,
   :thumbnail,
   :title,
-  :unit_price,
+  :unitPrice,
   keyword_init: true
 )
 
@@ -530,19 +554,19 @@ OfferLoadMatch = Struct.new(
 # @!attribute [rw] brand
 #   @return [String, nil]
 #
-# @!attribute [rw] click_url
+# @!attribute [rw] clickUrl
 #   @return [String, nil]
+#
+# @!attribute [rw] count
+#   @return [Integer, nil]
 #
 # @!attribute [rw] description
 #   @return [String, nil]
 #
-# @!attribute [rw] ean
-#   @return [Hash, nil]
-#
 # @!attribute [rw] eer
 #   @return [String, nil]
 #
-# @!attribute [rw] estimated_cpc
+# @!attribute [rw] estimatedCpc
 #   @return [Hash, nil]
 #
 # @!attribute [rw] id
@@ -554,19 +578,22 @@ OfferLoadMatch = Struct.new(
 # @!attribute [rw] merchant
 #   @return [Hash, nil]
 #
-# @!attribute [rw] original_price
+# @!attribute [rw] offers
+#   @return [Array, nil]
+#
+# @!attribute [rw] originalPrice
 #   @return [Hash, nil]
 #
 # @!attribute [rw] price
 #   @return [Hash, nil]
 #
-# @!attribute [rw] promo_text
+# @!attribute [rw] promoText
 #   @return [String, nil]
 #
-# @!attribute [rw] shipping_price
+# @!attribute [rw] shippingPrice
 #   @return [Hash, nil]
 #
-# @!attribute [rw] shipping_time
+# @!attribute [rw] shippingTime
 #   @return [Hash, nil]
 #
 # @!attribute [rw] thumbnail
@@ -575,33 +602,34 @@ OfferLoadMatch = Struct.new(
 # @!attribute [rw] title
 #   @return [String, nil]
 #
-# @!attribute [rw] unit_price
+# @!attribute [rw] unitPrice
 #   @return [Hash, nil]
 OfferListMatch = Struct.new(
   :availability,
   :brand,
-  :click_url,
+  :clickUrl,
+  :count,
   :description,
-  :ean,
   :eer,
-  :estimated_cpc,
+  :estimatedCpc,
   :id,
   :image,
   :merchant,
-  :original_price,
+  :offers,
+  :originalPrice,
   :price,
-  :promo_text,
-  :shipping_price,
-  :shipping_time,
+  :promoText,
+  :shippingPrice,
+  :shippingTime,
   :thumbnail,
   :title,
-  :unit_price,
+  :unitPrice,
   keyword_init: true
 )
 
 # ReportDetail entity data model.
 #
-# @!attribute [rw] click_id
+# @!attribute [rw] clickId
 #   @return [String, nil]
 #
 # @!attribute [rw] currency
@@ -616,25 +644,25 @@ OfferListMatch = Struct.new(
 # @!attribute [rw] merchant
 #   @return [Hash, nil]
 #
-# @!attribute [rw] placement_id
+# @!attribute [rw] placementId
 #   @return [String, nil]
 #
 # @!attribute [rw] revenue
 #   @return [Float, nil]
 ReportDetail = Struct.new(
-  :click_id,
+  :clickId,
   :currency,
   :date,
   :market,
   :merchant,
-  :placement_id,
+  :placementId,
   :revenue,
   keyword_init: true
 )
 
 # Request payload for ReportDetail#list.
 #
-# @!attribute [rw] click_id
+# @!attribute [rw] clickId
 #   @return [String, nil]
 #
 # @!attribute [rw] currency
@@ -649,18 +677,18 @@ ReportDetail = Struct.new(
 # @!attribute [rw] merchant
 #   @return [Hash, nil]
 #
-# @!attribute [rw] placement_id
+# @!attribute [rw] placementId
 #   @return [String, nil]
 #
 # @!attribute [rw] revenue
 #   @return [Float, nil]
 ReportDetailListMatch = Struct.new(
-  :click_id,
+  :clickId,
   :currency,
   :date,
   :market,
   :merchant,
-  :placement_id,
+  :placementId,
   :revenue,
   keyword_init: true
 )
@@ -701,19 +729,27 @@ ReportGeneralLoadMatch = Struct.new(
 
 # ReportModified entity data model.
 #
-# @!attribute [rw] market
-#   @return [Hash, nil]
+# @!attribute [rw] date
+#   @return [String, nil]
+#
+# @!attribute [rw] modifiedDate
+#   @return [String, nil]
 ReportModified = Struct.new(
-  :market,
+  :date,
+  :modifiedDate,
   keyword_init: true
 )
 
 # Request payload for ReportModified#load.
 #
-# @!attribute [rw] market
-#   @return [Hash, nil]
+# @!attribute [rw] date
+#   @return [String, nil]
+#
+# @!attribute [rw] modifiedDate
+#   @return [String, nil]
 ReportModifiedLoadMatch = Struct.new(
-  :market,
+  :date,
+  :modifiedDate,
   keyword_init: true
 )
 

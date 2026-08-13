@@ -26,8 +26,8 @@ import {
 describe('MarketEntity', async () => {
 
   // Per-test live pacing. Delay is read from sdk-test-control.json's
-  // `test.live.delayMs`; only sleeps when YADOREPUBLISHER_TEST_LIVE=TRUE.
-  afterEach(liveDelay('YADOREPUBLISHER_TEST_LIVE'))
+  // `test.live.delayMs`; only sleeps when YADORE_PUBLISHER_TEST_LIVE=TRUE.
+  afterEach(liveDelay('YADORE_PUBLISHER_TEST_LIVE'))
 
   test('instance', async () => {
     const testsdk = YadorePublisherSDK.test()
@@ -63,7 +63,7 @@ describe('MarketEntity', async () => {
     const market_ref01_ent = client.Market()
     const market_ref01_match: any = {}
 
-    const market_ref01_list = await market_ref01_ent.list(market_ref01_match)
+    const market_ref01_list = (await market_ref01_ent.list(market_ref01_match)).map((e: any) => e.data())
 
 
   })

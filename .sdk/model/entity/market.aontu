@@ -31,7 +31,7 @@ main: kit: entity: market: {
           ]
           transform: {
             req: "`reqdata`"
-            res: "`body`"
+            res: "`body.markets`"
           }
         }
       ]

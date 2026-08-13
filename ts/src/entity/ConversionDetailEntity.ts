@@ -37,7 +37,7 @@ class ConversionDetailEntity extends YadorePublisherEntityBase<ConversionDetail>
 
 
 
-  async list(this: any, reqmatch?: ConversionDetailListMatch, ctrl?: Control): Promise<ConversionDetail[]> {
+  async list(this: any, reqmatch?: ConversionDetailListMatch, ctrl?: Control): Promise<ConversionDetailEntity[]> {
 
     const utility = this._utility
 

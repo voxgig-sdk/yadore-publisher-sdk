@@ -23,8 +23,8 @@ module YadorePublisherTestRunner
   end
 
   def self.env_override(m)
-    live = getenv("YADOREPUBLISHER_TEST_LIVE")
-    override = getenv("YADOREPUBLISHER_TEST_OVERRIDE")
+    live = getenv("YADORE_PUBLISHER_TEST_LIVE")
+    override = getenv("YADORE_PUBLISHER_TEST_OVERRIDE")
 
     if live == "TRUE" || override == "TRUE"
       m.each_key do |key|
@@ -44,8 +44,8 @@ module YadorePublisherTestRunner
       end
     end
 
-    explain = getenv("YADOREPUBLISHER_TEST_EXPLAIN")
-    m["YADOREPUBLISHER_TEST_EXPLAIN"] = explain if explain && !explain.empty?
+    explain = getenv("YADORE_PUBLISHER_TEST_EXPLAIN")
+    m["YADORE_PUBLISHER_TEST_EXPLAIN"] = explain if explain && !explain.empty?
 
     m
   end

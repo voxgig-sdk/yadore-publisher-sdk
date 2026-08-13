@@ -71,12 +71,12 @@ Every entity operation returns `(value, error)`. Check `err` before
 using the value — there is no exception to catch:
 
 ```go
-conversiondetails, err := client.ConversionDetail(nil).List(nil, nil)
+reportgeneral, err := client.ReportGeneral(nil).Load(nil, nil)
 if err != nil {
     // handle err
     return
 }
-_ = conversiondetails
+_ = reportgeneral
 ```
 
 `Direct` follows the same `(value, error)` convention:
@@ -140,13 +140,13 @@ Create a mock client for unit testing — no server required:
 ```go
 client := sdk.Test()
 
-conversionDetail, err := client.ConversionDetail(nil).List(
+reportGeneral, err := client.ReportGeneral(nil).Load(
     nil, nil,
 )
 if err != nil {
     panic(err)
 }
-fmt.Println(conversionDetail) // the returned mock data
+fmt.Println(reportGeneral) // the returned mock data
 ```
 
 ### Use a custom fetch function
@@ -281,12 +281,12 @@ Only `Direct()` returns a response envelope — a `map[string]any` with
 
 | Field | Description |
 | --- | --- |
-| `"click_id"` |  |
+| `"clickId"` |  |
 | `"date"` |  |
 | `"market"` |  |
 | `"merchant"` |  |
-| `"placement_id"` |  |
-| `"sale"` |  |
+| `"placementId"` |  |
+| `"sales"` |  |
 
 Operations: List.
 
@@ -296,10 +296,10 @@ API path: `/v2/conversion/detail`
 
 | Field | Description |
 | --- | --- |
-| `"click"` |  |
+| `"clicks"` |  |
 | `"market"` |  |
 | `"merchant"` |  |
-| `"sale"` |  |
+| `"sales"` |  |
 
 Operations: List.
 
@@ -331,11 +331,13 @@ API path: `/v2/conversion/status`
 
 | Field | Description |
 | --- | --- |
-| `"is_couponing"` |  |
+| `"deeplinks"` |  |
+| `"found"` |  |
+| `"isCouponing"` |  |
 | `"market"` |  |
-| `"placement_id"` |  |
-| `"result"` |  |
-| `"url"` |  |
+| `"placementId"` |  |
+| `"total"` |  |
+| `"urls"` |  |
 
 Operations: Create.
 
@@ -345,15 +347,15 @@ API path: `/v2/deeplink`
 
 | Field | Description |
 | --- | --- |
-| `"deeplink_count"` |  |
-| `"estimated_cpc"` |  |
-| `"has_external_homepage"` |  |
-| `"has_smartlink_homepage"` |  |
+| `"deeplinkCount"` |  |
+| `"estimatedCpc"` |  |
+| `"hasExternalHomepage"` |  |
+| `"hasSmartlinkHomepage"` |  |
 | `"id"` |  |
-| `"is_smartlink"` |  |
+| `"isSmartlink"` |  |
 | `"logo"` |  |
 | `"name"` |  |
-| `"traffic_type"` |  |
+| `"trafficTypes"` |  |
 
 Operations: List.
 
@@ -385,8 +387,8 @@ API path: `/v2/markets`
 | `"id"` |  |
 | `"logo"` |  |
 | `"name"` |  |
-| `"offer_count"` |  |
-| `"traffic_type"` |  |
+| `"offerCount"` |  |
+| `"trafficTypes"` |  |
 
 Operations: List.
 
@@ -398,22 +400,23 @@ API path: `/v2/merchant`
 | --- | --- |
 | `"availability"` |  |
 | `"brand"` |  |
-| `"click_url"` |  |
+| `"clickUrl"` |  |
+| `"count"` |  |
 | `"description"` |  |
-| `"ean"` |  |
 | `"eer"` |  |
-| `"estimated_cpc"` |  |
+| `"estimatedCpc"` |  |
 | `"id"` |  |
 | `"image"` |  |
 | `"merchant"` |  |
-| `"original_price"` |  |
+| `"offers"` |  |
+| `"originalPrice"` |  |
 | `"price"` |  |
-| `"promo_text"` |  |
-| `"shipping_price"` |  |
-| `"shipping_time"` |  |
+| `"promoText"` |  |
+| `"shippingPrice"` |  |
+| `"shippingTime"` |  |
 | `"thumbnail"` |  |
 | `"title"` |  |
-| `"unit_price"` |  |
+| `"unitPrice"` |  |
 
 Operations: List, Load.
 
@@ -423,12 +426,12 @@ API path: `/v2/offer`
 
 | Field | Description |
 | --- | --- |
-| `"click_id"` |  |
+| `"clickId"` |  |
 | `"currency"` |  |
 | `"date"` |  |
 | `"market"` |  |
 | `"merchant"` |  |
-| `"placement_id"` |  |
+| `"placementId"` |  |
 | `"revenue"` |  |
 
 Operations: List.
@@ -451,7 +454,8 @@ API path: `/v2/report/general`
 
 | Field | Description |
 | --- | --- |
-| `"market"` |  |
+| `"date"` |  |
+| `"modifiedDate"` |  |
 
 Operations: Load.
 
@@ -486,12 +490,12 @@ Create an instance: `conversionDetail := client.ConversionDetail(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `click_id` | `string` |  |
+| `clickId` | `string` |  |
 | `date` | `string` |  |
 | `market` | `string` |  |
 | `merchant` | `map[string]any` |  |
-| `placement_id` | `string` |  |
-| `sale` | `float64` |  |
+| `placementId` | `string` |  |
+| `sales` | `float64` |  |
 
 #### Example: List
 
@@ -518,10 +522,10 @@ Create an instance: `conversionDetailMerchant := client.ConversionDetailMerchant
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `click` | `int` |  |
+| `clicks` | `int` |  |
 | `market` | `string` |  |
 | `merchant` | `map[string]any` |  |
-| `sale` | `int` |  |
+| `sales` | `int` |  |
 
 #### Example: List
 
@@ -604,18 +608,20 @@ Create an instance: `deeplink := client.Deeplink(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `is_couponing` | `bool` |  |
+| `deeplinks` | `[]any` |  |
+| `found` | `int` |  |
+| `isCouponing` | `bool` |  |
 | `market` | `string` |  |
-| `placement_id` | `string` |  |
-| `result` | `map[string]any` |  |
-| `url` | `[]any` |  |
+| `placementId` | `string` |  |
+| `total` | `int` |  |
+| `urls` | `[]any` |  |
 
 #### Example: Create
 
 ```go
 result, err := client.Deeplink(nil).Create(map[string]any{
     "market": "example_market",
-    "url": []any{},
+    "urls": []any{},
 }, nil)
 if err != nil {
     panic(err)
@@ -638,15 +644,15 @@ Create an instance: `deeplinkMerchant := client.DeeplinkMerchant(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `deeplink_count` | `int` |  |
-| `estimated_cpc` | `map[string]any` |  |
-| `has_external_homepage` | `bool` |  |
-| `has_smartlink_homepage` | `bool` |  |
+| `deeplinkCount` | `int` |  |
+| `estimatedCpc` | `map[string]any` |  |
+| `hasExternalHomepage` | `bool` |  |
+| `hasSmartlinkHomepage` | `bool` |  |
 | `id` | `string` |  |
-| `is_smartlink` | `bool` |  |
+| `isSmartlink` | `bool` |  |
 | `logo` | `map[string]any` |  |
 | `name` | `string` |  |
-| `traffic_type` | `[]any` |  |
+| `trafficTypes` | `[]any` |  |
 
 #### Example: List
 
@@ -724,8 +730,8 @@ Create an instance: `merchant := client.Merchant(nil)`
 | `id` | `string` |  |
 | `logo` | `map[string]any` |  |
 | `name` | `string` |  |
-| `offer_count` | `int` |  |
-| `traffic_type` | `[]any` |  |
+| `offerCount` | `int` |  |
+| `trafficTypes` | `[]any` |  |
 
 #### Example: List
 
@@ -755,22 +761,23 @@ Create an instance: `offer := client.Offer(nil)`
 | --- | --- | --- |
 | `availability` | `string` |  |
 | `brand` | `string` |  |
-| `click_url` | `string` |  |
+| `clickUrl` | `string` |  |
+| `count` | `int` |  |
 | `description` | `string` |  |
-| `ean` | `map[string]any` |  |
 | `eer` | `string` |  |
-| `estimated_cpc` | `map[string]any` |  |
+| `estimatedCpc` | `map[string]any` |  |
 | `id` | `string` |  |
 | `image` | `map[string]any` |  |
 | `merchant` | `map[string]any` |  |
-| `original_price` | `map[string]any` |  |
+| `offers` | `[]any` |  |
+| `originalPrice` | `map[string]any` |  |
 | `price` | `map[string]any` |  |
-| `promo_text` | `string` |  |
-| `shipping_price` | `map[string]any` |  |
-| `shipping_time` | `map[string]any` |  |
+| `promoText` | `string` |  |
+| `shippingPrice` | `map[string]any` |  |
+| `shippingTime` | `map[string]any` |  |
 | `thumbnail` | `map[string]any` |  |
 | `title` | `string` |  |
-| `unit_price` | `map[string]any` |  |
+| `unitPrice` | `map[string]any` |  |
 
 #### Example: Load
 
@@ -807,12 +814,12 @@ Create an instance: `reportDetail := client.ReportDetail(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `click_id` | `string` |  |
+| `clickId` | `string` |  |
 | `currency` | `string` |  |
 | `date` | `string` |  |
 | `market` | `string` |  |
 | `merchant` | `map[string]any` |  |
-| `placement_id` | `string` |  |
+| `placementId` | `string` |  |
 | `revenue` | `float64` |  |
 
 #### Example: List
@@ -869,7 +876,8 @@ Create an instance: `reportModified := client.ReportModified(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `market` | `map[string]any` |  |
+| `date` | `string` |  |
+| `modifiedDate` | `string` |  |
 
 #### Example: Load
 
@@ -978,15 +986,15 @@ like `core.ToMapAny`.
 
 ### Entity state
 
-Entity instances are stateful. After a successful `List`, the entity
+Entity instances are stateful. After a successful `Load`, the entity
 stores the returned data and match criteria internally.
 
 ```go
-conversiondetail := client.ConversionDetail(nil)
-conversiondetail.List(nil, nil)
+reportgeneral := client.ReportGeneral(nil)
+reportgeneral.Load(nil, nil)
 
-// conversiondetail.Data() now returns the conversiondetail data from the last list
-// conversiondetail.Match() returns the last match criteria
+// reportgeneral.Data() now returns the reportgeneral data from the last load
+// reportgeneral.Match() returns the last match criteria
 ```
 
 Call `Make()` to create a fresh instance with the same configuration

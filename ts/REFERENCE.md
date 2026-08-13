@@ -273,12 +273,12 @@ const conversion_detail = client.ConversionDetail()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `click_id` | `string` | No |  |
+| `clickId` | `string` | No |  |
 | `date` | `string` | No |  |
 | `market` | `string` | No |  |
 | `merchant` | `Record<string, any>` | No |  |
-| `placement_id` | `string` | No |  |
-| `sale` | `number` | No |  |
+| `placementId` | `string` | No |  |
+| `sales` | `number` | No |  |
 
 ### Operations
 
@@ -328,10 +328,10 @@ const conversion_detail_merchant = client.ConversionDetailMerchant()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `click` | `number` | No |  |
+| `clicks` | `number` | No |  |
 | `market` | `string` | No |  |
 | `merchant` | `Record<string, any>` | No |  |
-| `sale` | `number` | No |  |
+| `sales` | `number` | No |  |
 
 ### Operations
 
@@ -483,11 +483,13 @@ const deeplink = client.Deeplink()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `is_couponing` | `boolean` | No |  |
+| `deeplinks` | `any[]` | No |  |
+| `found` | `number` | No |  |
+| `isCouponing` | `boolean` | No |  |
 | `market` | `string` | Yes |  |
-| `placement_id` | `string` | No |  |
-| `result` | `Record<string, any>` | No |  |
-| `url` | `any[]` | Yes |  |
+| `placementId` | `string` | No |  |
+| `total` | `number` | No |  |
+| `urls` | `any[]` | Yes |  |
 
 ### Operations
 
@@ -498,7 +500,7 @@ Create a new entity with the given data.
 ```ts
 const result = await client.Deeplink().create({
   market: 'example_market',
-  url: [],
+  urls: [],
 })
 ```
 
@@ -540,15 +542,15 @@ const deeplink_merchant = client.DeeplinkMerchant()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `deeplink_count` | `number` | No |  |
-| `estimated_cpc` | `Record<string, any>` | No |  |
-| `has_external_homepage` | `boolean` | No |  |
-| `has_smartlink_homepage` | `boolean` | No |  |
+| `deeplinkCount` | `number` | No |  |
+| `estimatedCpc` | `Record<string, any>` | No |  |
+| `hasExternalHomepage` | `boolean` | No |  |
+| `hasSmartlinkHomepage` | `boolean` | No |  |
 | `id` | `string` | No |  |
-| `is_smartlink` | `boolean` | No |  |
+| `isSmartlink` | `boolean` | No |  |
 | `logo` | `Record<string, any>` | No |  |
 | `name` | `string` | No |  |
-| `traffic_type` | `any[]` | No |  |
+| `trafficTypes` | `any[]` | No |  |
 
 ### Operations
 
@@ -695,8 +697,8 @@ const merchant = client.Merchant()
 | `id` | `string` | No |  |
 | `logo` | `Record<string, any>` | No |  |
 | `name` | `string` | No |  |
-| `offer_count` | `number` | No |  |
-| `traffic_type` | `any[]` | No |  |
+| `offerCount` | `number` | No |  |
+| `trafficTypes` | `any[]` | No |  |
 
 ### Operations
 
@@ -748,22 +750,43 @@ const offer = client.Offer()
 | --- | --- | --- | --- |
 | `availability` | `string` | No |  |
 | `brand` | `string` | No |  |
-| `click_url` | `string` | No |  |
+| `clickUrl` | `string` | No |  |
+| `count` | `number` | No |  |
 | `description` | `string` | No |  |
-| `ean` | `Record<string, any>` | No |  |
 | `eer` | `string` | No |  |
-| `estimated_cpc` | `Record<string, any>` | No |  |
+| `estimatedCpc` | `Record<string, any>` | No |  |
 | `id` | `string` | No |  |
 | `image` | `Record<string, any>` | No |  |
 | `merchant` | `Record<string, any>` | No |  |
-| `original_price` | `Record<string, any>` | No |  |
+| `offers` | `any[]` | No |  |
+| `originalPrice` | `Record<string, any>` | No |  |
 | `price` | `Record<string, any>` | No |  |
-| `promo_text` | `string` | No |  |
-| `shipping_price` | `Record<string, any>` | No |  |
-| `shipping_time` | `Record<string, any>` | No |  |
+| `promoText` | `string` | No |  |
+| `shippingPrice` | `Record<string, any>` | No |  |
+| `shippingTime` | `Record<string, any>` | No |  |
 | `thumbnail` | `Record<string, any>` | No |  |
 | `title` | `string` | No |  |
-| `unit_price` | `Record<string, any>` | No |  |
+| `unitPrice` | `Record<string, any>` | No |  |
+
+### Actions
+
+This entity exposes custom API actions in addition to the standard
+operations. Select one with `$action` in the call's argument; the
+remaining keys are sent as that action's payload.
+
+| Action | Route | Call |
+| --- | --- | --- |
+| `bulk` | `/v2/offer/bulk` | `client.Offer().load({ $action: 'bulk', ... })` |
+
+An action returns that action's OWN response, which is not necessarily a
+Offer record — check the API definition for its shape.
+
+```ts
+const result = await client.Offer().load({
+  $action: 'bulk',
+  /* ...the action's own arguments */
+})
+```
 
 ### Operations
 
@@ -821,12 +844,12 @@ const report_detail = client.ReportDetail()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `click_id` | `string` | No |  |
+| `clickId` | `string` | No |  |
 | `currency` | `string` | No |  |
 | `date` | `string` | No |  |
 | `market` | `string` | No |  |
 | `merchant` | `Record<string, any>` | No |  |
-| `placement_id` | `string` | No |  |
+| `placementId` | `string` | No |  |
 | `revenue` | `number` | No |  |
 
 ### Operations
@@ -929,7 +952,8 @@ const report_modified = client.ReportModified()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `market` | `Record<string, any>` | No |  |
+| `date` | `string` | No |  |
+| `modifiedDate` | `string` | No |  |
 
 ### Operations
 

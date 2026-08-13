@@ -143,12 +143,12 @@ local conversion_detail = client:ConversionDetail(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `click_id` | `string` | No |  |
+| `clickId` | `string` | No |  |
 | `date` | `string` | No |  |
 | `market` | `string` | No |  |
 | `merchant` | `table` | No |  |
-| `placement_id` | `string` | No |  |
-| `sale` | `number` | No |  |
+| `placementId` | `string` | No |  |
+| `sales` | `number` | No |  |
 
 ### Operations
 
@@ -200,10 +200,10 @@ local conversion_detail_merchant = client:ConversionDetailMerchant(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `click` | `number` | No |  |
+| `clicks` | `number` | No |  |
 | `market` | `string` | No |  |
 | `merchant` | `table` | No |  |
-| `sale` | `number` | No |  |
+| `sales` | `number` | No |  |
 
 ### Operations
 
@@ -361,11 +361,13 @@ local deeplink = client:Deeplink(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `is_couponing` | `boolean` | No |  |
+| `deeplinks` | `table` | No |  |
+| `found` | `number` | No |  |
+| `isCouponing` | `boolean` | No |  |
 | `market` | `string` | Yes |  |
-| `placement_id` | `string` | No |  |
-| `result` | `table` | No |  |
-| `url` | `table` | Yes |  |
+| `placementId` | `string` | No |  |
+| `total` | `number` | No |  |
+| `urls` | `table` | Yes |  |
 
 ### Operations
 
@@ -376,7 +378,7 @@ Create a new entity with the given data.
 ```lua
 local result, err = client:Deeplink():create({
   market = --[[ string ]],
-  url = --[[ table ]],
+  urls = --[[ table ]],
 })
 ```
 
@@ -420,15 +422,15 @@ local deeplink_merchant = client:DeeplinkMerchant(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `deeplink_count` | `number` | No |  |
-| `estimated_cpc` | `table` | No |  |
-| `has_external_homepage` | `boolean` | No |  |
-| `has_smartlink_homepage` | `boolean` | No |  |
+| `deeplinkCount` | `number` | No |  |
+| `estimatedCpc` | `table` | No |  |
+| `hasExternalHomepage` | `boolean` | No |  |
+| `hasSmartlinkHomepage` | `boolean` | No |  |
 | `id` | `string` | No |  |
-| `is_smartlink` | `boolean` | No |  |
+| `isSmartlink` | `boolean` | No |  |
 | `logo` | `table` | No |  |
 | `name` | `string` | No |  |
-| `traffic_type` | `table` | No |  |
+| `trafficTypes` | `table` | No |  |
 
 ### Operations
 
@@ -581,8 +583,8 @@ local merchant = client:Merchant(nil)
 | `id` | `string` | No |  |
 | `logo` | `table` | No |  |
 | `name` | `string` | No |  |
-| `offer_count` | `number` | No |  |
-| `traffic_type` | `table` | No |  |
+| `offerCount` | `number` | No |  |
+| `trafficTypes` | `table` | No |  |
 
 ### Operations
 
@@ -636,22 +638,23 @@ local offer = client:Offer(nil)
 | --- | --- | --- | --- |
 | `availability` | `string` | No |  |
 | `brand` | `string` | No |  |
-| `click_url` | `string` | No |  |
+| `clickUrl` | `string` | No |  |
+| `count` | `number` | No |  |
 | `description` | `string` | No |  |
-| `ean` | `table` | No |  |
 | `eer` | `string` | No |  |
-| `estimated_cpc` | `table` | No |  |
+| `estimatedCpc` | `table` | No |  |
 | `id` | `string` | No |  |
 | `image` | `table` | No |  |
 | `merchant` | `table` | No |  |
-| `original_price` | `table` | No |  |
+| `offers` | `table` | No |  |
+| `originalPrice` | `table` | No |  |
 | `price` | `table` | No |  |
-| `promo_text` | `string` | No |  |
-| `shipping_price` | `table` | No |  |
-| `shipping_time` | `table` | No |  |
+| `promoText` | `string` | No |  |
+| `shippingPrice` | `table` | No |  |
+| `shippingTime` | `table` | No |  |
 | `thumbnail` | `table` | No |  |
 | `title` | `string` | No |  |
-| `unit_price` | `table` | No |  |
+| `unitPrice` | `table` | No |  |
 
 ### Operations
 
@@ -711,12 +714,12 @@ local report_detail = client:ReportDetail(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `click_id` | `string` | No |  |
+| `clickId` | `string` | No |  |
 | `currency` | `string` | No |  |
 | `date` | `string` | No |  |
 | `market` | `string` | No |  |
 | `merchant` | `table` | No |  |
-| `placement_id` | `string` | No |  |
+| `placementId` | `string` | No |  |
 | `revenue` | `number` | No |  |
 
 ### Operations
@@ -823,7 +826,8 @@ local report_modified = client:ReportModified(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `market` | `table` | No |  |
+| `date` | `string` | No |  |
+| `modifiedDate` | `string` | No |  |
 
 ### Operations
 

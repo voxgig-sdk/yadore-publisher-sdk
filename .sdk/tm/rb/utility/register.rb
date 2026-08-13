@@ -24,6 +24,7 @@ require_relative 'prepare_method'
 require_relative 'prepare_params'
 require_relative 'prepare_path'
 require_relative 'prepare_query'
+require_relative 'graphql'
 require_relative 'result_basic'
 require_relative 'result_body'
 require_relative 'result_headers'
@@ -55,6 +56,8 @@ YadorePublisherUtility.registrar = ->(u) {
   u.prepare_params = YadorePublisherUtilities::PrepareParams
   u.prepare_path = YadorePublisherUtilities::PreparePath
   u.prepare_query = YadorePublisherUtilities::PrepareQuery
+  u.graphql_body = YadorePublisherUtilities::GraphqlBody
+  u.graphql_errors = YadorePublisherUtilities::GraphqlErrors
   u.result_basic = YadorePublisherUtilities::ResultBasic
   u.result_body = YadorePublisherUtilities::ResultBody
   u.result_headers = YadorePublisherUtilities::ResultHeaders

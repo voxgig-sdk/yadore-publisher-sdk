@@ -37,7 +37,7 @@ class MerchantEntity extends YadorePublisherEntityBase<Merchant> {
 
 
 
-  async list(this: any, reqmatch?: MerchantListMatch, ctrl?: Control): Promise<Merchant[]> {
+  async list(this: any, reqmatch?: MerchantListMatch, ctrl?: Control): Promise<MerchantEntity[]> {
 
     const utility = this._utility
 

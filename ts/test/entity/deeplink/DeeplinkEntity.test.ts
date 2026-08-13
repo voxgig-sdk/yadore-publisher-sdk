@@ -26,8 +26,8 @@ import {
 describe('DeeplinkEntity', async () => {
 
   // Per-test live pacing. Delay is read from sdk-test-control.json's
-  // `test.live.delayMs`; only sleeps when YADOREPUBLISHER_TEST_LIVE=TRUE.
-  afterEach(liveDelay('YADOREPUBLISHER_TEST_LIVE'))
+  // `test.live.delayMs`; only sleeps when YADORE_PUBLISHER_TEST_LIVE=TRUE.
+  afterEach(liveDelay('YADORE_PUBLISHER_TEST_LIVE'))
 
   test('instance', async () => {
     const testsdk = YadorePublisherSDK.test()
@@ -62,7 +62,7 @@ describe('DeeplinkEntity', async () => {
     const deeplink_ref01_ent = client.Deeplink()
     let deeplink_ref01_data = setup.data.new.deeplink['deeplink_ref01']
 
-    deeplink_ref01_data = await deeplink_ref01_ent.create(deeplink_ref01_data)
+    deeplink_ref01_data = (await deeplink_ref01_ent.create(deeplink_ref01_data)).data()
     assert(null != deeplink_ref01_data)
 
 

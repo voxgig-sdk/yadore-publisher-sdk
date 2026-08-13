@@ -5,22 +5,22 @@
         "id": "MERCHANT00",
         "logo": {},
         "name": "s34",
-        "offer_count": "s35",
-        "traffic_type": []
+        "offerCount": "s35",
+        "trafficTypes": []
       },
       "MERCHANT01": {
         "id": "MERCHANT01",
         "logo": {},
         "name": "s66",
-        "offer_count": "s67",
-        "traffic_type": []
+        "offerCount": "s67",
+        "trafficTypes": []
       },
       "MERCHANT02": {
         "id": "MERCHANT02",
         "logo": {},
         "name": "s98",
-        "offer_count": "s99",
-        "traffic_type": []
+        "offerCount": "s99",
+        "trafficTypes": []
       }
     }
   },
@@ -29,8 +29,8 @@
       "merchant_ref01": {
         "logo": {},
         "name": "sca",
-        "offer_count": "scb",
-        "traffic_type": []
+        "offerCount": "scb",
+        "trafficTypes": []
       }
     }
   }

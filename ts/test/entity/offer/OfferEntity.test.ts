@@ -26,8 +26,8 @@ import {
 describe('OfferEntity', async () => {
 
   // Per-test live pacing. Delay is read from sdk-test-control.json's
-  // `test.live.delayMs`; only sleeps when YADOREPUBLISHER_TEST_LIVE=TRUE.
-  afterEach(liveDelay('YADOREPUBLISHER_TEST_LIVE'))
+  // `test.live.delayMs`; only sleeps when YADORE_PUBLISHER_TEST_LIVE=TRUE.
+  afterEach(liveDelay('YADORE_PUBLISHER_TEST_LIVE'))
 
   test('instance', async () => {
     const testsdk = YadorePublisherSDK.test()
@@ -63,13 +63,13 @@ describe('OfferEntity', async () => {
     const offer_ref01_ent = client.Offer()
     const offer_ref01_match: any = {}
 
-    const offer_ref01_list = await offer_ref01_ent.list(offer_ref01_match)
+    const offer_ref01_list = (await offer_ref01_ent.list(offer_ref01_match)).map((e: any) => e.data())
 
 
     // LOAD
     const offer_ref01_match_dt0: any = {}
     offer_ref01_match_dt0.id = offer_ref01_data.id
-    const offer_ref01_data_dt0 = await offer_ref01_ent.load(offer_ref01_match_dt0)
+    const offer_ref01_data_dt0 = (await offer_ref01_ent.load(offer_ref01_match_dt0)).data()
     assert(offer_ref01_data_dt0.id === offer_ref01_data.id)
 
 

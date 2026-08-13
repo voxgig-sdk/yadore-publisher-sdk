@@ -39,7 +39,7 @@ begin
   # list returns an Array of ConversionDetail records — iterate directly.
   conversiondetails = client.ConversionDetail.list
   conversiondetails.each do |item|
-    puts "#{item["click_id"]}"
+    puts "#{item["clickId"]}"
   end
 rescue => err
   warn "list failed: #{err}"
@@ -53,9 +53,9 @@ Entity operations raise on failure, so rescue them:
 
 ```ruby
 begin
-  conversiondetails = client.ConversionDetail.list()
+  reportgeneral = client.ReportGeneral.load()
 rescue => err
-  warn "list failed: #{err}"
+  warn "load failed: #{err}"
 end
 ```
 
@@ -121,9 +121,10 @@ Create a mock client for unit testing — no server required:
 ```ruby
 client = YadorePublisherSDK.test
 
-# Entity ops return the bare mock record (raises on error).
-conversiondetail = client.ConversionDetail.list()
-puts conversiondetail
+# Entity ops return the ENTITY (raises on error);
+# call data_get for the mock record.
+reportgeneral = client.ReportGeneral.load()
+puts reportgeneral
 ```
 
 ### Use a custom fetch function
@@ -255,12 +256,12 @@ returns a result `Hash` with these keys:
 
 | Field | Description |
 | --- | --- |
-| `click_id` |  |
+| `clickId` |  |
 | `date` |  |
 | `market` |  |
 | `merchant` |  |
-| `placement_id` |  |
-| `sale` |  |
+| `placementId` |  |
+| `sales` |  |
 
 Operations: List.
 
@@ -270,10 +271,10 @@ API path: `/v2/conversion/detail`
 
 | Field | Description |
 | --- | --- |
-| `click` |  |
+| `clicks` |  |
 | `market` |  |
 | `merchant` |  |
-| `sale` |  |
+| `sales` |  |
 
 Operations: List.
 
@@ -305,11 +306,13 @@ API path: `/v2/conversion/status`
 
 | Field | Description |
 | --- | --- |
-| `is_couponing` |  |
+| `deeplinks` |  |
+| `found` |  |
+| `isCouponing` |  |
 | `market` |  |
-| `placement_id` |  |
-| `result` |  |
-| `url` |  |
+| `placementId` |  |
+| `total` |  |
+| `urls` |  |
 
 Operations: Create.
 
@@ -319,15 +322,15 @@ API path: `/v2/deeplink`
 
 | Field | Description |
 | --- | --- |
-| `deeplink_count` |  |
-| `estimated_cpc` |  |
-| `has_external_homepage` |  |
-| `has_smartlink_homepage` |  |
+| `deeplinkCount` |  |
+| `estimatedCpc` |  |
+| `hasExternalHomepage` |  |
+| `hasSmartlinkHomepage` |  |
 | `id` |  |
-| `is_smartlink` |  |
+| `isSmartlink` |  |
 | `logo` |  |
 | `name` |  |
-| `traffic_type` |  |
+| `trafficTypes` |  |
 
 Operations: List.
 
@@ -359,8 +362,8 @@ API path: `/v2/markets`
 | `id` |  |
 | `logo` |  |
 | `name` |  |
-| `offer_count` |  |
-| `traffic_type` |  |
+| `offerCount` |  |
+| `trafficTypes` |  |
 
 Operations: List.
 
@@ -372,22 +375,23 @@ API path: `/v2/merchant`
 | --- | --- |
 | `availability` |  |
 | `brand` |  |
-| `click_url` |  |
+| `clickUrl` |  |
+| `count` |  |
 | `description` |  |
-| `ean` |  |
 | `eer` |  |
-| `estimated_cpc` |  |
+| `estimatedCpc` |  |
 | `id` |  |
 | `image` |  |
 | `merchant` |  |
-| `original_price` |  |
+| `offers` |  |
+| `originalPrice` |  |
 | `price` |  |
-| `promo_text` |  |
-| `shipping_price` |  |
-| `shipping_time` |  |
+| `promoText` |  |
+| `shippingPrice` |  |
+| `shippingTime` |  |
 | `thumbnail` |  |
 | `title` |  |
-| `unit_price` |  |
+| `unitPrice` |  |
 
 Operations: List, Load.
 
@@ -397,12 +401,12 @@ API path: `/v2/offer`
 
 | Field | Description |
 | --- | --- |
-| `click_id` |  |
+| `clickId` |  |
 | `currency` |  |
 | `date` |  |
 | `market` |  |
 | `merchant` |  |
-| `placement_id` |  |
+| `placementId` |  |
 | `revenue` |  |
 
 Operations: List.
@@ -425,7 +429,8 @@ API path: `/v2/report/general`
 
 | Field | Description |
 | --- | --- |
-| `market` |  |
+| `date` |  |
+| `modifiedDate` |  |
 
 Operations: Load.
 
@@ -460,12 +465,12 @@ Create an instance: `conversion_detail = client.ConversionDetail`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `click_id` | `String` |  |
+| `clickId` | `String` |  |
 | `date` | `String` |  |
 | `market` | `String` |  |
 | `merchant` | `Hash` |  |
-| `placement_id` | `String` |  |
-| `sale` | `Float` |  |
+| `placementId` | `String` |  |
+| `sales` | `Float` |  |
 
 #### Example: List
 
@@ -489,10 +494,10 @@ Create an instance: `conversion_detail_merchant = client.ConversionDetailMerchan
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `click` | `Integer` |  |
+| `clicks` | `Integer` |  |
 | `market` | `String` |  |
 | `merchant` | `Hash` |  |
-| `sale` | `Integer` |  |
+| `sales` | `Integer` |  |
 
 #### Example: List
 
@@ -523,7 +528,7 @@ Create an instance: `conversion_general = client.ConversionGeneral`
 #### Example: Load
 
 ```ruby
-# load returns the bare ConversionGeneral record (raises on error).
+# load returns the ENTITY — call data_get for the ConversionGeneral record (raises on error).
 conversion_general = client.ConversionGeneral.load()
 ```
 
@@ -547,7 +552,7 @@ Create an instance: `conversion_status = client.ConversionStatus`
 #### Example: Load
 
 ```ruby
-# load returns the bare ConversionStatus record (raises on error).
+# load returns the ENTITY — call data_get for the ConversionStatus record (raises on error).
 conversion_status = client.ConversionStatus.load()
 ```
 
@@ -566,18 +571,20 @@ Create an instance: `deeplink = client.Deeplink`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `is_couponing` | `Boolean` |  |
+| `deeplinks` | `Array` |  |
+| `found` | `Integer` |  |
+| `isCouponing` | `Boolean` |  |
 | `market` | `String` |  |
-| `placement_id` | `String` |  |
-| `result` | `Hash` |  |
-| `url` | `Array` |  |
+| `placementId` | `String` |  |
+| `total` | `Integer` |  |
+| `urls` | `Array` |  |
 
 #### Example: Create
 
 ```ruby
 deeplink = client.Deeplink.create({
   "market" => "example_market", # String
-  "url" => [], # Array
+  "urls" => [], # Array
 })
 ```
 
@@ -596,15 +603,15 @@ Create an instance: `deeplink_merchant = client.DeeplinkMerchant`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `deeplink_count` | `Integer` |  |
-| `estimated_cpc` | `Hash` |  |
-| `has_external_homepage` | `Boolean` |  |
-| `has_smartlink_homepage` | `Boolean` |  |
+| `deeplinkCount` | `Integer` |  |
+| `estimatedCpc` | `Hash` |  |
+| `hasExternalHomepage` | `Boolean` |  |
+| `hasSmartlinkHomepage` | `Boolean` |  |
 | `id` | `String` |  |
-| `is_smartlink` | `Boolean` |  |
+| `isSmartlink` | `Boolean` |  |
 | `logo` | `Hash` |  |
 | `name` | `String` |  |
-| `traffic_type` | `Array` |  |
+| `trafficTypes` | `Array` |  |
 
 #### Example: List
 
@@ -627,7 +634,7 @@ Create an instance: `dnt = client.Dnt`
 #### Example: Load
 
 ```ruby
-# load returns the bare Dnt record (raises on error).
+# load returns the ENTITY — call data_get for the Dnt record (raises on error).
 dnt = client.Dnt.load()
 ```
 
@@ -673,8 +680,8 @@ Create an instance: `merchant = client.Merchant`
 | `id` | `String` |  |
 | `logo` | `Hash` |  |
 | `name` | `String` |  |
-| `offer_count` | `Integer` |  |
-| `traffic_type` | `Array` |  |
+| `offerCount` | `Integer` |  |
+| `trafficTypes` | `Array` |  |
 
 #### Example: List
 
@@ -701,27 +708,28 @@ Create an instance: `offer = client.Offer`
 | --- | --- | --- |
 | `availability` | `String` |  |
 | `brand` | `String` |  |
-| `click_url` | `String` |  |
+| `clickUrl` | `String` |  |
+| `count` | `Integer` |  |
 | `description` | `String` |  |
-| `ean` | `Hash` |  |
 | `eer` | `String` |  |
-| `estimated_cpc` | `Hash` |  |
+| `estimatedCpc` | `Hash` |  |
 | `id` | `String` |  |
 | `image` | `Hash` |  |
 | `merchant` | `Hash` |  |
-| `original_price` | `Hash` |  |
+| `offers` | `Array` |  |
+| `originalPrice` | `Hash` |  |
 | `price` | `Hash` |  |
-| `promo_text` | `String` |  |
-| `shipping_price` | `Hash` |  |
-| `shipping_time` | `Hash` |  |
+| `promoText` | `String` |  |
+| `shippingPrice` | `Hash` |  |
+| `shippingTime` | `Hash` |  |
 | `thumbnail` | `Hash` |  |
 | `title` | `String` |  |
-| `unit_price` | `Hash` |  |
+| `unitPrice` | `Hash` |  |
 
 #### Example: Load
 
 ```ruby
-# load returns the bare Offer record (raises on error).
+# load returns the ENTITY — call data_get for the Offer record (raises on error).
 offer = client.Offer.load({ "id" => "offer_id" })
 ```
 
@@ -747,12 +755,12 @@ Create an instance: `report_detail = client.ReportDetail`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `click_id` | `String` |  |
+| `clickId` | `String` |  |
 | `currency` | `String` |  |
 | `date` | `String` |  |
 | `market` | `String` |  |
 | `merchant` | `Hash` |  |
-| `placement_id` | `String` |  |
+| `placementId` | `String` |  |
 | `revenue` | `Float` |  |
 
 #### Example: List
@@ -784,7 +792,7 @@ Create an instance: `report_general = client.ReportGeneral`
 #### Example: Load
 
 ```ruby
-# load returns the bare ReportGeneral record (raises on error).
+# load returns the ENTITY — call data_get for the ReportGeneral record (raises on error).
 report_general = client.ReportGeneral.load()
 ```
 
@@ -803,12 +811,13 @@ Create an instance: `report_modified = client.ReportModified`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `market` | `Hash` |  |
+| `date` | `String` |  |
+| `modifiedDate` | `String` |  |
 
 #### Example: Load
 
 ```ruby
-# load returns the bare ReportModified record (raises on error).
+# load returns the ENTITY — call data_get for the ReportModified record (raises on error).
 report_modified = client.ReportModified.load()
 ```
 
@@ -832,7 +841,7 @@ Create an instance: `report_status = client.ReportStatus`
 #### Example: Load
 
 ```ruby
-# load returns the bare ReportStatus record (raises on error).
+# load returns the ENTITY — call data_get for the ReportStatus record (raises on error).
 report_status = client.ReportStatus.load()
 ```
 
@@ -909,15 +918,15 @@ when needed.
 
 ### Entity state
 
-Entity instances are stateful. After a successful `list`, the entity
+Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```ruby
-conversiondetail = client.ConversionDetail
-conversiondetail.list()
+reportgeneral = client.ReportGeneral
+reportgeneral.load()
 
-# conversiondetail.data_get now returns the conversiondetail data from the last list
-# conversiondetail.match_get returns the last match criteria
+# reportgeneral.data_get now returns the reportgeneral data from the last load
+# reportgeneral.match_get returns the last match criteria
 ```
 
 Call `make` to create a fresh instance with the same configuration

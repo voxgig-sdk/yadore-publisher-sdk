@@ -37,7 +37,7 @@ class ReportDetailEntity extends YadorePublisherEntityBase<ReportDetail> {
 
 
 
-  async list(this: any, reqmatch?: ReportDetailListMatch, ctrl?: Control): Promise<ReportDetail[]> {
+  async list(this: any, reqmatch?: ReportDetailListMatch, ctrl?: Control): Promise<ReportDetailEntity[]> {
 
     const utility = this._utility
 

@@ -45,7 +45,7 @@ local conversiondetails, err = client:ConversionDetail():list()
 if err then error(err) end
 
 for _, item in ipairs(conversiondetails) do
-  print(item["click_id"])
+  print(item["clickId"])
 end
 ```
 
@@ -56,7 +56,7 @@ Entity operations return `(value, err)`. Check `err` before using
 the value:
 
 ```lua
-local conversiondetails, err = client:ConversionDetail():list()
+local reportgeneral, err = client:ReportGeneral():load()
 if err then error(err) end
 ```
 
@@ -114,7 +114,7 @@ Create a mock client for unit testing — no server required:
 ```lua
 local client = sdk.test()
 
-local result, err = client:ConversionDetail():list()
+local result, err = client:ReportGeneral():load()
 -- result is the returned data; err is set on failure
 ```
 
@@ -238,9 +238,9 @@ data **directly** — there is no wrapper:
 
 Check `err` first (it is non-`nil` on failure), then use `value`:
 
-    local conversion_detail, err = client:ConversionDetail():load()
+    local conversion_general, err = client:ConversionGeneral():load()
     if err then error(err) end
-    -- conversion_detail is the loaded record
+    -- conversion_general is the loaded record
 
 Only `direct()` returns a response envelope — a `table` with `ok`,
 `status`, `headers`, and `data` keys.
@@ -251,12 +251,12 @@ Only `direct()` returns a response envelope — a `table` with `ok`,
 
 | Field | Description |
 | --- | --- |
-| `click_id` |  |
+| `clickId` |  |
 | `date` |  |
 | `market` |  |
 | `merchant` |  |
-| `placement_id` |  |
-| `sale` |  |
+| `placementId` |  |
+| `sales` |  |
 
 Operations: List.
 
@@ -266,10 +266,10 @@ API path: `/v2/conversion/detail`
 
 | Field | Description |
 | --- | --- |
-| `click` |  |
+| `clicks` |  |
 | `market` |  |
 | `merchant` |  |
-| `sale` |  |
+| `sales` |  |
 
 Operations: List.
 
@@ -301,11 +301,13 @@ API path: `/v2/conversion/status`
 
 | Field | Description |
 | --- | --- |
-| `is_couponing` |  |
+| `deeplinks` |  |
+| `found` |  |
+| `isCouponing` |  |
 | `market` |  |
-| `placement_id` |  |
-| `result` |  |
-| `url` |  |
+| `placementId` |  |
+| `total` |  |
+| `urls` |  |
 
 Operations: Create.
 
@@ -315,15 +317,15 @@ API path: `/v2/deeplink`
 
 | Field | Description |
 | --- | --- |
-| `deeplink_count` |  |
-| `estimated_cpc` |  |
-| `has_external_homepage` |  |
-| `has_smartlink_homepage` |  |
+| `deeplinkCount` |  |
+| `estimatedCpc` |  |
+| `hasExternalHomepage` |  |
+| `hasSmartlinkHomepage` |  |
 | `id` |  |
-| `is_smartlink` |  |
+| `isSmartlink` |  |
 | `logo` |  |
 | `name` |  |
-| `traffic_type` |  |
+| `trafficTypes` |  |
 
 Operations: List.
 
@@ -355,8 +357,8 @@ API path: `/v2/markets`
 | `id` |  |
 | `logo` |  |
 | `name` |  |
-| `offer_count` |  |
-| `traffic_type` |  |
+| `offerCount` |  |
+| `trafficTypes` |  |
 
 Operations: List.
 
@@ -368,22 +370,23 @@ API path: `/v2/merchant`
 | --- | --- |
 | `availability` |  |
 | `brand` |  |
-| `click_url` |  |
+| `clickUrl` |  |
+| `count` |  |
 | `description` |  |
-| `ean` |  |
 | `eer` |  |
-| `estimated_cpc` |  |
+| `estimatedCpc` |  |
 | `id` |  |
 | `image` |  |
 | `merchant` |  |
-| `original_price` |  |
+| `offers` |  |
+| `originalPrice` |  |
 | `price` |  |
-| `promo_text` |  |
-| `shipping_price` |  |
-| `shipping_time` |  |
+| `promoText` |  |
+| `shippingPrice` |  |
+| `shippingTime` |  |
 | `thumbnail` |  |
 | `title` |  |
-| `unit_price` |  |
+| `unitPrice` |  |
 
 Operations: List, Load.
 
@@ -393,12 +396,12 @@ API path: `/v2/offer`
 
 | Field | Description |
 | --- | --- |
-| `click_id` |  |
+| `clickId` |  |
 | `currency` |  |
 | `date` |  |
 | `market` |  |
 | `merchant` |  |
-| `placement_id` |  |
+| `placementId` |  |
 | `revenue` |  |
 
 Operations: List.
@@ -421,7 +424,8 @@ API path: `/v2/report/general`
 
 | Field | Description |
 | --- | --- |
-| `market` |  |
+| `date` |  |
+| `modifiedDate` |  |
 
 Operations: Load.
 
@@ -456,12 +460,12 @@ Create an instance: `local conversion_detail = client:ConversionDetail(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `click_id` | `string` |  |
+| `clickId` | `string` |  |
 | `date` | `string` |  |
 | `market` | `string` |  |
 | `merchant` | `table` |  |
-| `placement_id` | `string` |  |
-| `sale` | `number` |  |
+| `placementId` | `string` |  |
+| `sales` | `number` |  |
 
 #### Example: List
 
@@ -484,10 +488,10 @@ Create an instance: `local conversion_detail_merchant = client:ConversionDetailM
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `click` | `number` |  |
+| `clicks` | `number` |  |
 | `market` | `string` |  |
 | `merchant` | `table` |  |
-| `sale` | `number` |  |
+| `sales` | `number` |  |
 
 #### Example: List
 
@@ -558,18 +562,20 @@ Create an instance: `local deeplink = client:Deeplink(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `is_couponing` | `boolean` |  |
+| `deeplinks` | `table` |  |
+| `found` | `number` |  |
+| `isCouponing` | `boolean` |  |
 | `market` | `string` |  |
-| `placement_id` | `string` |  |
-| `result` | `table` |  |
-| `url` | `table` |  |
+| `placementId` | `string` |  |
+| `total` | `number` |  |
+| `urls` | `table` |  |
 
 #### Example: Create
 
 ```lua
 local deeplink, err = client:Deeplink():create({
   market = "example_market", -- string
-  url = {}, -- table
+  urls = {}, -- table
 })
 ```
 
@@ -588,15 +594,15 @@ Create an instance: `local deeplink_merchant = client:DeeplinkMerchant(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `deeplink_count` | `number` |  |
-| `estimated_cpc` | `table` |  |
-| `has_external_homepage` | `boolean` |  |
-| `has_smartlink_homepage` | `boolean` |  |
+| `deeplinkCount` | `number` |  |
+| `estimatedCpc` | `table` |  |
+| `hasExternalHomepage` | `boolean` |  |
+| `hasSmartlinkHomepage` | `boolean` |  |
 | `id` | `string` |  |
-| `is_smartlink` | `boolean` |  |
+| `isSmartlink` | `boolean` |  |
 | `logo` | `table` |  |
 | `name` | `string` |  |
-| `traffic_type` | `table` |  |
+| `trafficTypes` | `table` |  |
 
 #### Example: List
 
@@ -662,8 +668,8 @@ Create an instance: `local merchant = client:Merchant(nil)`
 | `id` | `string` |  |
 | `logo` | `table` |  |
 | `name` | `string` |  |
-| `offer_count` | `number` |  |
-| `traffic_type` | `table` |  |
+| `offerCount` | `number` |  |
+| `trafficTypes` | `table` |  |
 
 #### Example: List
 
@@ -689,22 +695,23 @@ Create an instance: `local offer = client:Offer(nil)`
 | --- | --- | --- |
 | `availability` | `string` |  |
 | `brand` | `string` |  |
-| `click_url` | `string` |  |
+| `clickUrl` | `string` |  |
+| `count` | `number` |  |
 | `description` | `string` |  |
-| `ean` | `table` |  |
 | `eer` | `string` |  |
-| `estimated_cpc` | `table` |  |
+| `estimatedCpc` | `table` |  |
 | `id` | `string` |  |
 | `image` | `table` |  |
 | `merchant` | `table` |  |
-| `original_price` | `table` |  |
+| `offers` | `table` |  |
+| `originalPrice` | `table` |  |
 | `price` | `table` |  |
-| `promo_text` | `string` |  |
-| `shipping_price` | `table` |  |
-| `shipping_time` | `table` |  |
+| `promoText` | `string` |  |
+| `shippingPrice` | `table` |  |
+| `shippingTime` | `table` |  |
 | `thumbnail` | `table` |  |
 | `title` | `string` |  |
-| `unit_price` | `table` |  |
+| `unitPrice` | `table` |  |
 
 #### Example: Load
 
@@ -733,12 +740,12 @@ Create an instance: `local report_detail = client:ReportDetail(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `click_id` | `string` |  |
+| `clickId` | `string` |  |
 | `currency` | `string` |  |
 | `date` | `string` |  |
 | `market` | `string` |  |
 | `merchant` | `table` |  |
-| `placement_id` | `string` |  |
+| `placementId` | `string` |  |
 | `revenue` | `number` |  |
 
 #### Example: List
@@ -787,7 +794,8 @@ Create an instance: `local report_modified = client:ReportModified(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `market` | `table` |  |
+| `date` | `string` |  |
+| `modifiedDate` | `string` |  |
 
 #### Example: Load
 
@@ -891,15 +899,15 @@ when needed.
 
 ### Entity state
 
-Entity instances are stateful. After a successful `list`, the entity
+Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```lua
-local conversiondetail = client:ConversionDetail()
-conversiondetail:list()
+local reportgeneral = client:ReportGeneral()
+reportgeneral:load()
 
--- conversiondetail:data_get() now returns the conversiondetail data from the last list
--- conversiondetail:match_get() returns the last match criteria
+-- reportgeneral:data_get() now returns the reportgeneral data from the last load
+-- reportgeneral:match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

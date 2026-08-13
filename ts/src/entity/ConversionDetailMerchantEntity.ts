@@ -37,7 +37,7 @@ class ConversionDetailMerchantEntity extends YadorePublisherEntityBase<Conversio
 
 
 
-  async list(this: any, reqmatch?: ConversionDetailMerchantListMatch, ctrl?: Control): Promise<ConversionDetailMerchant[]> {
+  async list(this: any, reqmatch?: ConversionDetailMerchantListMatch, ctrl?: Control): Promise<ConversionDetailMerchantEntity[]> {
 
     const utility = this._utility
 

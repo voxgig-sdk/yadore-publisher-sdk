@@ -43,8 +43,8 @@ class YadorePublisherTestRunner
 
     public static function env_override(array $m): array
     {
-        $live = self::getenv('YADOREPUBLISHER_TEST_LIVE');
-        $override = self::getenv('YADOREPUBLISHER_TEST_OVERRIDE');
+        $live = self::getenv('YADORE_PUBLISHER_TEST_LIVE');
+        $override = self::getenv('YADORE_PUBLISHER_TEST_OVERRIDE');
 
         if ($live === 'TRUE' || $override === 'TRUE') {
             foreach (array_keys($m) as $key) {
@@ -63,9 +63,9 @@ class YadorePublisherTestRunner
             }
         }
 
-        $explain = self::getenv('YADOREPUBLISHER_TEST_EXPLAIN');
+        $explain = self::getenv('YADORE_PUBLISHER_TEST_EXPLAIN');
         if ($explain !== null && $explain !== '') {
-            $m['YADOREPUBLISHER_TEST_EXPLAIN'] = $explain;
+            $m['YADORE_PUBLISHER_TEST_EXPLAIN'] = $explain;
         }
 
         return $m;

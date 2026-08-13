@@ -2,15 +2,18 @@
   "existing": {
     "report_modified": {
       "REPORT_MODIFIED00": {
-        "market": {},
+        "date": "s14",
+        "modifiedDate": "s15",
         "id": "REPORT_MODIFIED00"
       },
       "REPORT_MODIFIED01": {
-        "market": {},
+        "date": "s28",
+        "modifiedDate": "s29",
         "id": "REPORT_MODIFIED01"
       },
       "REPORT_MODIFIED02": {
-        "market": {},
+        "date": "s3c",
+        "modifiedDate": "s3d",
         "id": "REPORT_MODIFIED02"
       }
     }
@@ -18,7 +21,8 @@
   "new": {
     "report_modified": {
       "report_modified_ref01": {
-        "market": {}
+        "date": "s50",
+        "modifiedDate": "s51"
       }
     }
   }

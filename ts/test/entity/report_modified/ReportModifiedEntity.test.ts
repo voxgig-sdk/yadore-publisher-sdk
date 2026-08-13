@@ -26,8 +26,8 @@ import {
 describe('ReportModifiedEntity', async () => {
 
   // Per-test live pacing. Delay is read from sdk-test-control.json's
-  // `test.live.delayMs`; only sleeps when YADOREPUBLISHER_TEST_LIVE=TRUE.
-  afterEach(liveDelay('YADOREPUBLISHER_TEST_LIVE'))
+  // `test.live.delayMs`; only sleeps when YADORE_PUBLISHER_TEST_LIVE=TRUE.
+  afterEach(liveDelay('YADORE_PUBLISHER_TEST_LIVE'))
 
   test('instance', async () => {
     const testsdk = YadorePublisherSDK.test()
@@ -62,7 +62,7 @@ describe('ReportModifiedEntity', async () => {
     // LOAD
     const report_modified_ref01_ent = client.ReportModified()
     const report_modified_ref01_match_dt0: any = {}
-    const report_modified_ref01_data_dt0 = await report_modified_ref01_ent.load(report_modified_ref01_match_dt0)
+    const report_modified_ref01_data_dt0 = (await report_modified_ref01_ent.load(report_modified_ref01_match_dt0)).data()
     assert(null != report_modified_ref01_data_dt0)
 
 

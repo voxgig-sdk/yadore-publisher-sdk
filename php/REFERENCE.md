@@ -145,12 +145,12 @@ $conversion_detail = $client->ConversionDetail();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `click_id` | `string` | No |  |
+| `clickId` | `string` | No |  |
 | `date` | `string` | No |  |
 | `market` | `string` | No |  |
 | `merchant` | `array` | No |  |
-| `placement_id` | `string` | No |  |
-| `sale` | `float` | No |  |
+| `placementId` | `string` | No |  |
+| `sales` | `float` | No |  |
 
 ### Operations
 
@@ -202,10 +202,10 @@ $conversion_detail_merchant = $client->ConversionDetailMerchant();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `click` | `int` | No |  |
+| `clicks` | `int` | No |  |
 | `market` | `string` | No |  |
 | `merchant` | `array` | No |  |
-| `sale` | `int` | No |  |
+| `sales` | `int` | No |  |
 
 ### Operations
 
@@ -363,11 +363,13 @@ $deeplink = $client->Deeplink();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `is_couponing` | `bool` | No |  |
+| `deeplinks` | `array` | No |  |
+| `found` | `int` | No |  |
+| `isCouponing` | `bool` | No |  |
 | `market` | `string` | Yes |  |
-| `placement_id` | `string` | No |  |
-| `result` | `array` | No |  |
-| `url` | `array` | Yes |  |
+| `placementId` | `string` | No |  |
+| `total` | `int` | No |  |
+| `urls` | `array` | Yes |  |
 
 ### Operations
 
@@ -378,7 +380,7 @@ Create a new entity with the given data. Throws on error.
 ```php
 $result = $client->Deeplink()->create([
   "market" => null, // string
-  "url" => null, // array
+  "urls" => null, // array
 ]);
 ```
 
@@ -422,15 +424,15 @@ $deeplink_merchant = $client->DeeplinkMerchant();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `deeplink_count` | `int` | No |  |
-| `estimated_cpc` | `array` | No |  |
-| `has_external_homepage` | `bool` | No |  |
-| `has_smartlink_homepage` | `bool` | No |  |
+| `deeplinkCount` | `int` | No |  |
+| `estimatedCpc` | `array` | No |  |
+| `hasExternalHomepage` | `bool` | No |  |
+| `hasSmartlinkHomepage` | `bool` | No |  |
 | `id` | `string` | No |  |
-| `is_smartlink` | `bool` | No |  |
+| `isSmartlink` | `bool` | No |  |
 | `logo` | `array` | No |  |
 | `name` | `string` | No |  |
-| `traffic_type` | `array` | No |  |
+| `trafficTypes` | `array` | No |  |
 
 ### Operations
 
@@ -583,8 +585,8 @@ $merchant = $client->Merchant();
 | `id` | `string` | No |  |
 | `logo` | `array` | No |  |
 | `name` | `string` | No |  |
-| `offer_count` | `int` | No |  |
-| `traffic_type` | `array` | No |  |
+| `offerCount` | `int` | No |  |
+| `trafficTypes` | `array` | No |  |
 
 ### Operations
 
@@ -638,22 +640,23 @@ $offer = $client->Offer();
 | --- | --- | --- | --- |
 | `availability` | `string` | No |  |
 | `brand` | `string` | No |  |
-| `click_url` | `string` | No |  |
+| `clickUrl` | `string` | No |  |
+| `count` | `int` | No |  |
 | `description` | `string` | No |  |
-| `ean` | `array` | No |  |
 | `eer` | `string` | No |  |
-| `estimated_cpc` | `array` | No |  |
+| `estimatedCpc` | `array` | No |  |
 | `id` | `string` | No |  |
 | `image` | `array` | No |  |
 | `merchant` | `array` | No |  |
-| `original_price` | `array` | No |  |
+| `offers` | `array` | No |  |
+| `originalPrice` | `array` | No |  |
 | `price` | `array` | No |  |
-| `promo_text` | `string` | No |  |
-| `shipping_price` | `array` | No |  |
-| `shipping_time` | `array` | No |  |
+| `promoText` | `string` | No |  |
+| `shippingPrice` | `array` | No |  |
+| `shippingTime` | `array` | No |  |
 | `thumbnail` | `array` | No |  |
 | `title` | `string` | No |  |
-| `unit_price` | `array` | No |  |
+| `unitPrice` | `array` | No |  |
 
 ### Operations
 
@@ -713,12 +716,12 @@ $report_detail = $client->ReportDetail();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `click_id` | `string` | No |  |
+| `clickId` | `string` | No |  |
 | `currency` | `string` | No |  |
 | `date` | `string` | No |  |
 | `market` | `string` | No |  |
 | `merchant` | `array` | No |  |
-| `placement_id` | `string` | No |  |
+| `placementId` | `string` | No |  |
 | `revenue` | `float` | No |  |
 
 ### Operations
@@ -825,7 +828,8 @@ $report_modified = $client->ReportModified();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `market` | `array` | No |  |
+| `date` | `string` | No |  |
+| `modifiedDate` | `string` | No |  |
 
 ### Operations
 

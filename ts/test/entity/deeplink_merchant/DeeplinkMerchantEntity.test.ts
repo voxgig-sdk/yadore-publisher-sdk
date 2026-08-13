@@ -26,8 +26,8 @@ import {
 describe('DeeplinkMerchantEntity', async () => {
 
   // Per-test live pacing. Delay is read from sdk-test-control.json's
-  // `test.live.delayMs`; only sleeps when YADOREPUBLISHER_TEST_LIVE=TRUE.
-  afterEach(liveDelay('YADOREPUBLISHER_TEST_LIVE'))
+  // `test.live.delayMs`; only sleeps when YADORE_PUBLISHER_TEST_LIVE=TRUE.
+  afterEach(liveDelay('YADORE_PUBLISHER_TEST_LIVE'))
 
   test('instance', async () => {
     const testsdk = YadorePublisherSDK.test()
@@ -63,7 +63,7 @@ describe('DeeplinkMerchantEntity', async () => {
     const deeplink_merchant_ref01_ent = client.DeeplinkMerchant()
     const deeplink_merchant_ref01_match: any = {}
 
-    const deeplink_merchant_ref01_list = await deeplink_merchant_ref01_ent.list(deeplink_merchant_ref01_match)
+    const deeplink_merchant_ref01_list = (await deeplink_merchant_ref01_ent.list(deeplink_merchant_ref01_match)).map((e: any) => e.data())
 
 
   })

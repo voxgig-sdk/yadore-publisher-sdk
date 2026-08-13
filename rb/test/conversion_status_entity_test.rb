@@ -26,7 +26,7 @@ class ConversionStatusEntityTest < Minitest::Test
     # The basic flow consumes synthetic IDs from the fixture. In live mode
     # without an *_ENTID env override, those IDs hit the live API and 4xx.
     if setup[:synthetic_only]
-      skip "live entity test uses synthetic IDs from fixture — set YADOREPUBLISHER_TEST_CONVERSION_STATUS_ENTID JSON to run live"
+      skip "live entity test uses synthetic IDs from fixture — set YADORE_PUBLISHER_TEST_CONVERSION_STATUS_ENTID JSON to run live"
       return
     end
     client = setup[:client]
@@ -74,39 +74,39 @@ def conversion_status_basic_setup(extra)
   # Detect ENTID env override before envOverride consumes it. When live
   # mode is on without a real override, the basic test runs against synthetic
   # IDs from the fixture and 4xx's. Surface this so the test can skip.
-  entid_env_raw = ENV["YADOREPUBLISHER_TEST_CONVERSION_STATUS_ENTID"]
+  entid_env_raw = ENV["YADORE_PUBLISHER_TEST_CONVERSION_STATUS_ENTID"]
   idmap_overridden = !entid_env_raw.nil? && entid_env_raw.strip.start_with?("{")
 
   env = Runner.env_override({
-    "YADOREPUBLISHER_TEST_CONVERSION_STATUS_ENTID" => idmap,
-    "YADOREPUBLISHER_TEST_LIVE" => "FALSE",
-    "YADOREPUBLISHER_TEST_EXPLAIN" => "FALSE",
-    "YADOREPUBLISHER_APIKEY" => "NONE",
+    "YADORE_PUBLISHER_TEST_CONVERSION_STATUS_ENTID" => idmap,
+    "YADORE_PUBLISHER_TEST_LIVE" => "FALSE",
+    "YADORE_PUBLISHER_TEST_EXPLAIN" => "FALSE",
+    "YADORE_PUBLISHER_APIKEY" => "NONE",
   })
 
   idmap_resolved = Helpers.to_map(
-    env["YADOREPUBLISHER_TEST_CONVERSION_STATUS_ENTID"])
+    env["YADORE_PUBLISHER_TEST_CONVERSION_STATUS_ENTID"])
   if idmap_resolved.nil?
     idmap_resolved = Helpers.to_map(idmap)
   end
 
-  if env["YADOREPUBLISHER_TEST_LIVE"] == "TRUE"
+  if env["YADORE_PUBLISHER_TEST_LIVE"] == "TRUE"
     merged_opts = Vs.merge([
       {
-        "apikey" => env["YADOREPUBLISHER_APIKEY"],
+        "apikey" => env["YADORE_PUBLISHER_APIKEY"],
       },
       extra || {},
     ])
     client = YadorePublisherSDK.new(Helpers.to_map(merged_opts))
   end
 
-  live = env["YADOREPUBLISHER_TEST_LIVE"] == "TRUE"
+  live = env["YADORE_PUBLISHER_TEST_LIVE"] == "TRUE"
   {
     client: client,
     data: entity_data,
     idmap: idmap_resolved,
     env: env,
-    explain: env["YADOREPUBLISHER_TEST_EXPLAIN"] == "TRUE",
+    explain: env["YADORE_PUBLISHER_TEST_EXPLAIN"] == "TRUE",
     live: live,
     synthetic_only: live && !idmap_overridden,
     now: (Time.now.to_f * 1000).to_i,

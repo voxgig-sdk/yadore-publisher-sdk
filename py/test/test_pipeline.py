@@ -16,11 +16,11 @@
 import pytest
 
 from yadorepublisher_sdk import YadorePublisherSDK
-from core.error import YadorePublisherError
-from core.result import YadorePublisherResult
-from core.response import YadorePublisherResponse
-from core.spec import YadorePublisherSpec
-from feature.base_feature import YadorePublisherBaseFeature
+from yadorepublisher_sdk.core.error import YadorePublisherError
+from yadorepublisher_sdk.core.result import YadorePublisherResult
+from yadorepublisher_sdk.core.response import YadorePublisherResponse
+from yadorepublisher_sdk.core.spec import YadorePublisherSpec
+from yadorepublisher_sdk.feature.base_feature import YadorePublisherBaseFeature
 
 
 def _client():

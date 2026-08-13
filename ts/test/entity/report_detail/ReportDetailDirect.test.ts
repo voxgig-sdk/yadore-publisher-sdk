@@ -19,11 +19,15 @@ import {
 describe('ReportDetailDirect', async () => {
 
   // Per-test live pacing. Delay is read from sdk-test-control.json's
-  // `test.live.delayMs`; only sleeps when YADOREPUBLISHER_TEST_LIVE=TRUE.
-  afterEach(liveDelay('YADOREPUBLISHER_TEST_LIVE'))
+  // `test.live.delayMs`; only sleeps when YADORE_PUBLISHER_TEST_LIVE=TRUE.
+  afterEach(liveDelay('YADORE_PUBLISHER_TEST_LIVE'))
 
   test('direct-exists', async () => {
     const sdk = new YadorePublisherSDK({
+      // Concrete base: a live construction must satisfy any server
+      // variables a templated base URL declares; overriding base with a
+      // literal (as the direct flow tests do) sidesteps the requirement.
+      base: 'http://localhost:8080',
       system: { fetch: async () => ({}) }
     })
     assert('function' === typeof sdk.direct)
@@ -77,19 +81,19 @@ function directSetup(mockres?: any) {
   const calls: any[] = []
 
   const env = envOverride({
-    'YADOREPUBLISHER_TEST_REPORT_DETAIL_ENTID': {},
-    'YADOREPUBLISHER_TEST_LIVE': 'FALSE',
-    'YADOREPUBLISHER_APIKEY': 'NONE',
+    'YADORE_PUBLISHER_TEST_REPORT_DETAIL_ENTID': {},
+    'YADORE_PUBLISHER_TEST_LIVE': 'FALSE',
+    'YADORE_PUBLISHER_APIKEY': 'NONE',
   })
 
-  const live = 'TRUE' === env.YADOREPUBLISHER_TEST_LIVE
+  const live = 'TRUE' === env.YADORE_PUBLISHER_TEST_LIVE
 
   if (live) {
     const client = new YadorePublisherSDK({
-      apikey: env.YADOREPUBLISHER_APIKEY,
+      apikey: env.YADORE_PUBLISHER_APIKEY,
     })
 
-    let idmap: any = env['YADOREPUBLISHER_TEST_REPORT_DETAIL_ENTID']
+    let idmap: any = env['YADORE_PUBLISHER_TEST_REPORT_DETAIL_ENTID']
     if ('string' === typeof idmap && idmap.startsWith('{')) {
       idmap = JSON.parse(idmap)
     }

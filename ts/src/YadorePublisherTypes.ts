@@ -6,35 +6,35 @@
 // @voxgig/apidef VALID_CANON). Do not edit by hand.
 
 export interface ConversionDetail {
-  click_id?: string
+  clickId?: string
   date?: string
   market?: string
   merchant?: Record<string, any>
-  placement_id?: string
-  sale?: number
+  placementId?: string
+  sales?: number
 }
 
 export interface ConversionDetailListMatch {
-  click_id?: string
+  clickId?: string
   date?: string
   market?: string
   merchant?: Record<string, any>
-  placement_id?: string
-  sale?: number
+  placementId?: string
+  sales?: number
 }
 
 export interface ConversionDetailMerchant {
-  click?: number
+  clicks?: number
   market?: string
   merchant?: Record<string, any>
-  sale?: number
+  sales?: number
 }
 
 export interface ConversionDetailMerchantListMatch {
-  click?: number
+  clicks?: number
   market?: string
   merchant?: Record<string, any>
-  sale?: number
+  sales?: number
 }
 
 export interface ConversionGeneral {
@@ -58,43 +58,47 @@ export interface ConversionStatusLoadMatch {
 }
 
 export interface Deeplink {
-  is_couponing?: boolean
+  deeplinks?: any[]
+  found?: number
+  isCouponing?: boolean
   market: string
-  placement_id?: string
-  result?: Record<string, any>
-  url: any[]
+  placementId?: string
+  total?: number
+  urls: any[]
 }
 
 export interface DeeplinkCreateData {
-  is_couponing?: boolean
+  deeplinks?: any[]
+  found?: number
+  isCouponing?: boolean
   market: string
-  placement_id?: string
-  result?: Record<string, any>
-  url: any[]
+  placementId?: string
+  total?: number
+  urls: any[]
 }
 
 export interface DeeplinkMerchant {
-  deeplink_count?: number
-  estimated_cpc?: Record<string, any>
-  has_external_homepage?: boolean
-  has_smartlink_homepage?: boolean
+  deeplinkCount?: number
+  estimatedCpc?: Record<string, any>
+  hasExternalHomepage?: boolean
+  hasSmartlinkHomepage?: boolean
   id?: string
-  is_smartlink?: boolean
+  isSmartlink?: boolean
   logo?: Record<string, any>
   name?: string
-  traffic_type?: any[]
+  trafficTypes?: any[]
 }
 
 export interface DeeplinkMerchantListMatch {
-  deeplink_count?: number
-  estimated_cpc?: Record<string, any>
-  has_external_homepage?: boolean
-  has_smartlink_homepage?: boolean
+  deeplinkCount?: number
+  estimatedCpc?: Record<string, any>
+  hasExternalHomepage?: boolean
+  hasSmartlinkHomepage?: boolean
   id?: string
-  is_smartlink?: boolean
+  isSmartlink?: boolean
   logo?: Record<string, any>
   name?: string
-  traffic_type?: any[]
+  trafficTypes?: any[]
 }
 
 export interface Dnt {
@@ -115,98 +119,107 @@ export interface Merchant {
   id?: string
   logo?: Record<string, any>
   name?: string
-  offer_count?: number
-  traffic_type?: any[]
+  offerCount?: number
+  trafficTypes?: any[]
 }
 
 export interface MerchantListMatch {
   id?: string
   logo?: Record<string, any>
   name?: string
-  offer_count?: number
-  traffic_type?: any[]
+  offerCount?: number
+  trafficTypes?: any[]
 }
 
 export interface Offer {
   availability?: string
   brand?: string
-  click_url?: string
+  clickUrl?: string
+  count?: number
   description?: string
-  ean?: Record<string, any>
   eer?: string
-  estimated_cpc?: Record<string, any>
+  estimatedCpc?: Record<string, any>
   id?: string
   image?: Record<string, any>
   merchant?: Record<string, any>
-  original_price?: Record<string, any>
+  offers?: any[]
+  originalPrice?: Record<string, any>
   price?: Record<string, any>
-  promo_text?: string
-  shipping_price?: Record<string, any>
-  shipping_time?: Record<string, any>
+  promoText?: string
+  shippingPrice?: Record<string, any>
+  shippingTime?: Record<string, any>
   thumbnail?: Record<string, any>
   title?: string
-  unit_price?: Record<string, any>
+  unitPrice?: Record<string, any>
 }
 
 export interface OfferLoadMatch {
   availability?: string
   brand?: string
-  click_url?: string
+  clickUrl?: string
+  count?: number
   description?: string
-  ean?: Record<string, any>
   eer?: string
-  estimated_cpc?: Record<string, any>
+  estimatedCpc?: Record<string, any>
   id: string
   image?: Record<string, any>
   merchant?: Record<string, any>
-  original_price?: Record<string, any>
+  offers?: any[]
+  originalPrice?: Record<string, any>
   price?: Record<string, any>
-  promo_text?: string
-  shipping_price?: Record<string, any>
-  shipping_time?: Record<string, any>
+  promoText?: string
+  shippingPrice?: Record<string, any>
+  shippingTime?: Record<string, any>
   thumbnail?: Record<string, any>
   title?: string
-  unit_price?: Record<string, any>
+  unitPrice?: Record<string, any>
+
+  // Selects a custom action instead of the plain load:
+  //   'bulk'
+  // The remaining keys are that action's own payload.
+  $action?: string
+  [action: string]: any
 }
 
 export interface OfferListMatch {
   availability?: string
   brand?: string
-  click_url?: string
+  clickUrl?: string
+  count?: number
   description?: string
-  ean?: Record<string, any>
   eer?: string
-  estimated_cpc?: Record<string, any>
+  estimatedCpc?: Record<string, any>
   id?: string
   image?: Record<string, any>
   merchant?: Record<string, any>
-  original_price?: Record<string, any>
+  offers?: any[]
+  originalPrice?: Record<string, any>
   price?: Record<string, any>
-  promo_text?: string
-  shipping_price?: Record<string, any>
-  shipping_time?: Record<string, any>
+  promoText?: string
+  shippingPrice?: Record<string, any>
+  shippingTime?: Record<string, any>
   thumbnail?: Record<string, any>
   title?: string
-  unit_price?: Record<string, any>
+  unitPrice?: Record<string, any>
 }
 
 export interface ReportDetail {
-  click_id?: string
+  clickId?: string
   currency?: string
   date?: string
   market?: string
   merchant?: Record<string, any>
-  placement_id?: string
+  placementId?: string
   revenue?: number
 }
 
 export interface ReportDetailListMatch {
-  click_id?: string
+  clickId?: string
   currency?: string
   date?: string
   market?: string
   merchant?: Record<string, any>
-  placement_id?: string
+  placementId?: string
   revenue?: number
 }
 
@@ -223,11 +236,13 @@ export interface ReportGeneralLoadMatch {
 }
 
 export interface ReportModified {
-  market?: Record<string, any>
+  date?: string
+  modifiedDate?: string
 }
 
 export interface ReportModifiedLoadMatch {
-  market?: Record<string, any>
+  date?: string
+  modifiedDate?: string
 }
 
 export interface ReportStatus {

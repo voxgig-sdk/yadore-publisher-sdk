@@ -6,9 +6,14 @@ main: kit: entity: report_modified: {
 
   fields: [
     {
-      name: "market"
+      name: "date"
       req: false
-      type: "`$OBJECT`"
+      type: "`$STRING`"
+    }
+    {
+      name: "modifiedDate"
+      req: false
+      type: "`$STRING`"
     }
   ]
 
@@ -59,7 +64,7 @@ main: kit: entity: report_modified: {
           }
           transform: {
             req: "`reqdata`"
-            res: "`body`"
+            res: "`body.market`"
           }
         }
       ]

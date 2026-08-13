@@ -38,18 +38,27 @@ network, and no credentials:
 ### TypeScript
 
 ```ts
-const client = YadorePublisherSDK.test()
-const conversiondetails = await client.ConversionDetail().list()
-// conversiondetails is an array of bare ConversionDetail records populated with mock data
-console.log(conversiondetails)
+// The offline mock starts EMPTY — seed it with the records the test needs.
+// Shape: { entity: { <entity-name>: { <id>: <record> } } }
+const client = YadorePublisherSDK.test({
+  entity: {
+    report_general: {
+      test01: { id: 'test01' },
+    },
+  },
+})
+const reportgeneral = await client.ReportGeneral().load()
+// reportgeneral is the ReportGeneral entity, populated with mock data
+// — call reportgeneral.data() for the record itself
+console.log(reportgeneral)
 ```
 
 ### Python
 
 ```python
 client = YadorePublisherSDK.test()
-conversiondetails = client.ConversionDetail().list()
-print(conversiondetails)
+reportgeneral = client.ReportGeneral().load()
+print(reportgeneral)
 ```
 
 ### PHP
@@ -57,16 +66,16 @@ print(conversiondetails)
 ```php
 // Seed fixture data so offline calls resolve without a live server.
 $client = YadorePublisherSDK::test([
-    "entity" => ["conversiondetail" => ["test01" => []]],
+    "entity" => ["reportgeneral" => ["test01" => []]],
 ]);
-$conversiondetails = $client->ConversionDetail()->list();
+$reportgeneral = $client->ReportGeneral()->load();
 ```
 
 ### Golang
 
 ```go
 client := sdk.Test()
-result, err := client.ConversionDetail(nil).List(
+result, err := client.ReportGeneral(nil).Load(
     nil, nil,
 )
 ```
@@ -76,16 +85,16 @@ result, err := client.ConversionDetail(nil).List(
 ```ruby
 # Seed fixture data so offline calls resolve without a live server.
 client = YadorePublisherSDK.test({
-  "entity" => { "conversiondetail" => { "test01" => {} } },
+  "entity" => { "reportgeneral" => { "test01" => {} } },
 })
-conversiondetails = client.ConversionDetail.list()
+reportgeneral = client.ReportGeneral.load()
 ```
 
 ### Lua
 
 ```lua
 local client = sdk.test()
-local results, err = client:ConversionDetail():list()
+local result, err = client:ReportGeneral():load()
 ```
 
 ## Packages
@@ -112,7 +121,7 @@ const client = new YadorePublisherSDK({
   apikey: process.env.YADORE_PUBLISHER_APIKEY,
 })
 
-// List all conversiondetails (returns ConversionDetail[])
+// List all conversiondetails (returns ConversionDetailEntity[] — .data() for the record)
 const conversiondetails = await client.ConversionDetail().list()
 for (const conversiondetail of conversiondetails) {
   console.log(conversiondetail)
@@ -369,6 +378,9 @@ Pass custom features via the `extend` option at construction time.
 
 This SDK is generated from the upstream OpenAPI specification. It is an
 unofficial client and is not affiliated with the API provider.
+
+The OpenAPI spec(s) this SDK was generated from are kept in the
+[`.sdk/def/`](.sdk/def/) folder.
 
 - Upstream API: [https://api.yadore.com/](https://api.yadore.com/)
 

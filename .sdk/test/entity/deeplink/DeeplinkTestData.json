@@ -2,27 +2,33 @@
   "existing": {
     "deeplink": {
       "DEEPLINK00": {
-        "is_couponing": true,
-        "market": "s33",
-        "placement_id": "PLACEMENT01",
-        "result": {},
-        "url": [],
+        "deeplinks": [],
+        "found": "s47",
+        "isCouponing": true,
+        "market": "s49",
+        "placementId": "s4a",
+        "total": "s4b",
+        "urls": [],
         "id": "DEEPLINK00"
       },
       "DEEPLINK01": {
-        "is_couponing": true,
-        "market": "s65",
-        "placement_id": "PLACEMENT01",
-        "result": {},
-        "url": [],
+        "deeplinks": [],
+        "found": "s8d",
+        "isCouponing": true,
+        "market": "s8f",
+        "placementId": "s90",
+        "total": "s91",
+        "urls": [],
         "id": "DEEPLINK01"
       },
       "DEEPLINK02": {
-        "is_couponing": true,
-        "market": "s97",
-        "placement_id": "PLACEMENT01",
-        "result": {},
-        "url": [],
+        "deeplinks": [],
+        "found": "sd3",
+        "isCouponing": true,
+        "market": "sd5",
+        "placementId": "sd6",
+        "total": "sd7",
+        "urls": [],
         "id": "DEEPLINK02"
       }
     }
@@ -30,11 +36,13 @@
   "new": {
     "deeplink": {
       "deeplink_ref01": {
-        "is_couponing": true,
-        "market": "sc9",
-        "placement_id": "PLACEMENT01",
-        "result": {},
-        "url": []
+        "deeplinks": [],
+        "found": "s119",
+        "isCouponing": true,
+        "market": "s11b",
+        "placementId": "s11c",
+        "total": "s11d",
+        "urls": []
       }
     }
   }

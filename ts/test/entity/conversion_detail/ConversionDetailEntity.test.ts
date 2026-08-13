@@ -26,8 +26,8 @@ import {
 describe('ConversionDetailEntity', async () => {
 
   // Per-test live pacing. Delay is read from sdk-test-control.json's
-  // `test.live.delayMs`; only sleeps when YADOREPUBLISHER_TEST_LIVE=TRUE.
-  afterEach(liveDelay('YADOREPUBLISHER_TEST_LIVE'))
+  // `test.live.delayMs`; only sleeps when YADORE_PUBLISHER_TEST_LIVE=TRUE.
+  afterEach(liveDelay('YADORE_PUBLISHER_TEST_LIVE'))
 
   test('instance', async () => {
     const testsdk = YadorePublisherSDK.test()
@@ -63,7 +63,7 @@ describe('ConversionDetailEntity', async () => {
     const conversion_detail_ref01_ent = client.ConversionDetail()
     const conversion_detail_ref01_match: any = {}
 
-    const conversion_detail_ref01_list = await conversion_detail_ref01_ent.list(conversion_detail_ref01_match)
+    const conversion_detail_ref01_list = (await conversion_detail_ref01_ent.list(conversion_detail_ref01_match)).map((e: any) => e.data())
 
 
   })

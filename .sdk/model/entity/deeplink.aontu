@@ -6,7 +6,17 @@ main: kit: entity: deeplink: {
 
   fields: [
     {
-      name: "is_couponing"
+      name: "deeplinks"
+      req: false
+      type: "`$ARRAY`"
+    }
+    {
+      name: "found"
+      req: false
+      type: "`$INTEGER`"
+    }
+    {
+      name: "isCouponing"
       req: false
       type: "`$BOOLEAN`"
     }
@@ -16,17 +26,17 @@ main: kit: entity: deeplink: {
       type: "`$STRING`"
     }
     {
-      name: "placement_id"
+      name: "placementId"
       req: false
       type: "`$STRING`"
     }
     {
-      name: "result"
+      name: "total"
       req: false
-      type: "`$OBJECT`"
+      type: "`$INTEGER`"
     }
     {
-      name: "url"
+      name: "urls"
       req: true
       type: "`$ARRAY`"
     }
@@ -46,7 +56,7 @@ main: kit: entity: deeplink: {
           ]
           transform: {
             req: "`reqdata`"
-            res: "`body`"
+            res: "`body.result`"
           }
         }
       ]

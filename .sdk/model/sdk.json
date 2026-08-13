@@ -5,6 +5,10 @@
       "desc": ""
     },
     "kit": {
+      "author": {
+        "name": "",
+        "url": ""
+      },
       "config": {
         "docs_order": [
           "ts",
@@ -18,6 +22,7 @@
           "content-type": "application/json"
         }
       },
+      "contributor": {},
       "entity": {
         "conversion_detail": {
           "active": true,
@@ -27,7 +32,7 @@
           "fields": [
             {
               "active": true,
-              "name": "click_id",
+              "name": "clickId",
               "req": false,
               "type": "`$STRING`"
             },
@@ -51,13 +56,13 @@
             },
             {
               "active": true,
-              "name": "placement_id",
+              "name": "placementId",
               "req": false,
               "type": "`$STRING`"
             },
             {
               "active": true,
-              "name": "sale",
+              "name": "sales",
               "req": false,
               "type": "`$NUMBER`"
             }
@@ -98,6 +103,7 @@
                       }
                     ]
                   },
+                  "kind": "http",
                   "method": "GET",
                   "orig": "/v2/conversion/detail",
                   "parts": [
@@ -114,7 +120,7 @@
                   },
                   "transform": {
                     "req": "`reqdata`",
-                    "res": "`body`"
+                    "res": "`body.clicks`"
                   }
                 }
               ]
@@ -132,7 +138,7 @@
           "fields": [
             {
               "active": true,
-              "name": "click",
+              "name": "clicks",
               "req": false,
               "type": "`$INTEGER`"
             },
@@ -150,7 +156,7 @@
             },
             {
               "active": true,
-              "name": "sale",
+              "name": "sales",
               "req": false,
               "type": "`$INTEGER`"
             }
@@ -199,6 +205,7 @@
                       }
                     ]
                   },
+                  "kind": "http",
                   "method": "GET",
                   "orig": "/v2/conversion/detail/merchant",
                   "parts": [
@@ -288,6 +295,7 @@
                       }
                     ]
                   },
+                  "kind": "http",
                   "method": "GET",
                   "orig": "/v2/conversion/general",
                   "parts": [
@@ -347,6 +355,7 @@
                       }
                     ]
                   },
+                  "kind": "http",
                   "method": "GET",
                   "orig": "/v2/conversion/status",
                   "parts": [
@@ -379,7 +388,19 @@
           "fields": [
             {
               "active": true,
-              "name": "is_couponing",
+              "name": "deeplinks",
+              "req": false,
+              "type": "`$ARRAY`"
+            },
+            {
+              "active": true,
+              "name": "found",
+              "req": false,
+              "type": "`$INTEGER`"
+            },
+            {
+              "active": true,
+              "name": "isCouponing",
               "req": false,
               "type": "`$BOOLEAN`"
             },
@@ -391,19 +412,19 @@
             },
             {
               "active": true,
-              "name": "placement_id",
+              "name": "placementId",
               "req": false,
               "type": "`$STRING`"
             },
             {
               "active": true,
-              "name": "result",
+              "name": "total",
               "req": false,
-              "type": "`$OBJECT`"
+              "type": "`$INTEGER`"
             },
             {
               "active": true,
-              "name": "url",
+              "name": "urls",
               "req": true,
               "type": "`$ARRAY`"
             }
@@ -417,6 +438,7 @@
                 {
                   "active": true,
                   "args": {},
+                  "kind": "http",
                   "method": "POST",
                   "orig": "/v2/deeplink",
                   "parts": [
@@ -426,7 +448,7 @@
                   "select": {},
                   "transform": {
                     "req": "`reqdata`",
-                    "res": "`body`"
+                    "res": "`body.result`"
                   }
                 }
               ]
@@ -444,25 +466,25 @@
           "fields": [
             {
               "active": true,
-              "name": "deeplink_count",
+              "name": "deeplinkCount",
               "req": false,
               "type": "`$INTEGER`"
             },
             {
               "active": true,
-              "name": "estimated_cpc",
+              "name": "estimatedCpc",
               "req": false,
               "type": "`$OBJECT`"
             },
             {
               "active": true,
-              "name": "has_external_homepage",
+              "name": "hasExternalHomepage",
               "req": false,
               "type": "`$BOOLEAN`"
             },
             {
               "active": true,
-              "name": "has_smartlink_homepage",
+              "name": "hasSmartlinkHomepage",
               "req": false,
               "type": "`$BOOLEAN`"
             },
@@ -474,7 +496,7 @@
             },
             {
               "active": true,
-              "name": "is_smartlink",
+              "name": "isSmartlink",
               "req": false,
               "type": "`$BOOLEAN`"
             },
@@ -492,7 +514,7 @@
             },
             {
               "active": true,
-              "name": "traffic_type",
+              "name": "trafficTypes",
               "req": false,
               "type": "`$ARRAY`"
             }
@@ -545,6 +567,7 @@
                       }
                     ]
                   },
+                  "kind": "http",
                   "method": "GET",
                   "orig": "/v2/deeplink/merchant",
                   "parts": [
@@ -562,7 +585,7 @@
                   },
                   "transform": {
                     "req": "`reqdata`",
-                    "res": "`body`"
+                    "res": "`body.merchants`"
                   }
                 }
               ]
@@ -646,6 +669,7 @@
                       }
                     ]
                   },
+                  "kind": "http",
                   "method": "GET",
                   "orig": "/v2/d",
                   "parts": [
@@ -701,6 +725,7 @@
                 {
                   "active": true,
                   "args": {},
+                  "kind": "http",
                   "method": "GET",
                   "orig": "/v2/markets",
                   "parts": [
@@ -710,7 +735,7 @@
                   "select": {},
                   "transform": {
                     "req": "`reqdata`",
-                    "res": "`body`"
+                    "res": "`body.markets`"
                   }
                 }
               ]
@@ -746,13 +771,13 @@
             },
             {
               "active": true,
-              "name": "offer_count",
+              "name": "offerCount",
               "req": false,
               "type": "`$INTEGER`"
             },
             {
               "active": true,
-              "name": "traffic_type",
+              "name": "trafficTypes",
               "req": false,
               "type": "`$ARRAY`"
             }
@@ -789,6 +814,7 @@
                       }
                     ]
                   },
+                  "kind": "http",
                   "method": "GET",
                   "orig": "/v2/merchant",
                   "parts": [
@@ -803,7 +829,7 @@
                   },
                   "transform": {
                     "req": "`reqdata`",
-                    "res": "`body`"
+                    "res": "`body.merchants`"
                   }
                 }
               ]
@@ -833,9 +859,15 @@
             },
             {
               "active": true,
-              "name": "click_url",
+              "name": "clickUrl",
               "req": false,
               "type": "`$STRING`"
+            },
+            {
+              "active": true,
+              "name": "count",
+              "req": false,
+              "type": "`$INTEGER`"
             },
             {
               "active": true,
@@ -845,19 +877,13 @@
             },
             {
               "active": true,
-              "name": "ean",
-              "req": false,
-              "type": "`$OBJECT`"
-            },
-            {
-              "active": true,
               "name": "eer",
               "req": false,
               "type": "`$STRING`"
             },
             {
               "active": true,
-              "name": "estimated_cpc",
+              "name": "estimatedCpc",
               "req": false,
               "type": "`$OBJECT`"
             },
@@ -881,7 +907,13 @@
             },
             {
               "active": true,
-              "name": "original_price",
+              "name": "offers",
+              "req": false,
+              "type": "`$ARRAY`"
+            },
+            {
+              "active": true,
+              "name": "originalPrice",
               "req": false,
               "type": "`$OBJECT`"
             },
@@ -893,19 +925,19 @@
             },
             {
               "active": true,
-              "name": "promo_text",
+              "name": "promoText",
               "req": false,
               "type": "`$STRING`"
             },
             {
               "active": true,
-              "name": "shipping_price",
+              "name": "shippingPrice",
               "req": false,
               "type": "`$OBJECT`"
             },
             {
               "active": true,
-              "name": "shipping_time",
+              "name": "shippingTime",
               "req": false,
               "type": "`$OBJECT`"
             },
@@ -923,7 +955,7 @@
             },
             {
               "active": true,
-              "name": "unit_price",
+              "name": "unitPrice",
               "req": false,
               "type": "`$OBJECT`"
             }
@@ -1026,6 +1058,7 @@
                       }
                     ]
                   },
+                  "kind": "http",
                   "method": "GET",
                   "orig": "/v2/offer",
                   "parts": [
@@ -1048,7 +1081,7 @@
                   },
                   "transform": {
                     "req": "`reqdata`",
-                    "res": "`body`"
+                    "res": "`body.offers`"
                   }
                 }
               ]
@@ -1104,6 +1137,7 @@
                       }
                     ]
                   },
+                  "kind": "http",
                   "method": "GET",
                   "orig": "/v2/offer/bulk",
                   "parts": [
@@ -1123,7 +1157,7 @@
                   },
                   "transform": {
                     "req": "`reqdata`",
-                    "res": "`body`"
+                    "res": "`body.ean`"
                   }
                 }
               ]
@@ -1141,7 +1175,7 @@
           "fields": [
             {
               "active": true,
-              "name": "click_id",
+              "name": "clickId",
               "req": false,
               "type": "`$STRING`"
             },
@@ -1171,7 +1205,7 @@
             },
             {
               "active": true,
-              "name": "placement_id",
+              "name": "placementId",
               "req": false,
               "type": "`$STRING`"
             },
@@ -1218,6 +1252,7 @@
                       }
                     ]
                   },
+                  "kind": "http",
                   "method": "GET",
                   "orig": "/v2/report/detail",
                   "parts": [
@@ -1234,7 +1269,7 @@
                   },
                   "transform": {
                     "req": "`reqdata`",
-                    "res": "`body`"
+                    "res": "`body.clicks`"
                   }
                 }
               ]
@@ -1297,6 +1332,7 @@
                       }
                     ]
                   },
+                  "kind": "http",
                   "method": "GET",
                   "orig": "/v2/report/general",
                   "parts": [
@@ -1330,9 +1366,15 @@
           "fields": [
             {
               "active": true,
-              "name": "market",
+              "name": "date",
               "req": false,
-              "type": "`$OBJECT`"
+              "type": "`$STRING`"
+            },
+            {
+              "active": true,
+              "name": "modifiedDate",
+              "req": false,
+              "type": "`$STRING`"
             }
           ],
           "name": "report_modified",
@@ -1371,6 +1413,7 @@
                       }
                     ]
                   },
+                  "kind": "http",
                   "method": "GET",
                   "orig": "/v2/report/modified",
                   "parts": [
@@ -1387,7 +1430,7 @@
                   },
                   "transform": {
                     "req": "`reqdata`",
-                    "res": "`body`"
+                    "res": "`body.market`"
                   }
                 }
               ]
@@ -1430,6 +1473,7 @@
                       }
                     ]
                   },
+                  "kind": "http",
                   "method": "GET",
                   "orig": "/v2/report/status",
                   "parts": [
@@ -1974,18 +2018,41 @@
         "website": "https://yadore.com"
       },
       "option": {},
+      "repo": {
+        "host": "github.com",
+        "path": ""
+      },
       "target": {
         "go": {
           "active": true,
+          "author": {
+            "name": "",
+            "url": ""
+          },
           "comment": {
             "line": "//"
           },
           "deps": {},
           "ext": "go",
+          "feature": {
+            "fullset": [
+              "test/feature_test.go"
+            ],
+            "trim": true
+          },
           "module": {
-            "name": "yadore-publisher"
+            "goversion": "",
+            "name": "yadore-publisher",
+            "package": "",
+            "path": ""
           },
           "name": "go",
+          "output": {
+            "adopt": false,
+            "path": "",
+            "repo": "",
+            "sdkrel": ""
+          },
           "publish": {
             "registry": {
               "active": false,
@@ -2007,22 +2074,40 @@
                 "recipe": "github"
               },
               "via": "port"
-            }
+            },
+            "version": "0.0.1"
           },
           "srcfeature": false,
           "title": "Golang"
         },
         "go-cli": {
           "active": true,
+          "author": {
+            "name": "",
+            "url": ""
+          },
           "comment": {
             "line": "//"
           },
           "deps": {},
           "ext": "go",
+          "feature": {
+            "fullset": [],
+            "trim": true
+          },
           "module": {
-            "name": "yadore-publisher"
+            "goversion": "",
+            "name": "yadore-publisher",
+            "package": "",
+            "path": ""
           },
           "name": "go-cli",
+          "output": {
+            "adopt": false,
+            "path": "",
+            "repo": "",
+            "sdkrel": ""
+          },
           "phase": {
             "agentguide": {
               "active": false
@@ -2061,21 +2146,39 @@
                 "recipe": "github"
               },
               "via": "root"
-            }
+            },
+            "version": "0.0.1"
           },
           "title": "Go CLI"
         },
         "go-mcp": {
           "active": true,
+          "author": {
+            "name": "",
+            "url": ""
+          },
           "comment": {
             "line": "//"
           },
           "deps": {},
           "ext": "go",
+          "feature": {
+            "fullset": [],
+            "trim": true
+          },
           "module": {
-            "name": "yadore-publisher"
+            "goversion": "",
+            "name": "yadore-publisher",
+            "package": "",
+            "path": ""
           },
           "name": "go-mcp",
+          "output": {
+            "adopt": false,
+            "path": "",
+            "repo": "",
+            "sdkrel": ""
+          },
           "phase": {
             "agentguide": {
               "active": false
@@ -2114,12 +2217,17 @@
                 "recipe": "github"
               },
               "via": "root"
-            }
+            },
+            "version": "0.0.1"
           },
           "title": "Go MCP server"
         },
         "lua": {
           "active": true,
+          "author": {
+            "name": "",
+            "url": ""
+          },
           "comment": {
             "line": "--"
           },
@@ -2131,10 +2239,23 @@
             }
           },
           "ext": "lua",
+          "feature": {
+            "fullset": [],
+            "trim": true
+          },
           "module": {
-            "name": "yadore-publisher"
+            "goversion": "",
+            "name": "yadore-publisher",
+            "package": "",
+            "path": ""
           },
           "name": "lua",
+          "output": {
+            "adopt": false,
+            "path": "",
+            "repo": "",
+            "sdkrel": ""
+          },
           "publish": {
             "registry": {
               "active": false,
@@ -2156,22 +2277,40 @@
                 "recipe": "github"
               },
               "via": "port"
-            }
+            },
+            "version": "0.0.1"
           },
           "srcfeature": false,
           "title": "Lua"
         },
         "php": {
           "active": true,
+          "author": {
+            "name": "",
+            "url": ""
+          },
           "comment": {
             "line": "//"
           },
           "deps": {},
           "ext": "php",
+          "feature": {
+            "fullset": [],
+            "trim": true
+          },
           "module": {
-            "name": "yadore-publisher"
+            "goversion": "",
+            "name": "yadore-publisher",
+            "package": "",
+            "path": ""
           },
           "name": "php",
+          "output": {
+            "adopt": false,
+            "path": "",
+            "repo": "",
+            "sdkrel": ""
+          },
           "publish": {
             "registry": {
               "active": false,
@@ -2193,13 +2332,18 @@
                 "recipe": "github"
               },
               "via": "port"
-            }
+            },
+            "version": "0.0.1"
           },
           "srcfeature": false,
           "title": "PHP"
         },
         "py": {
           "active": true,
+          "author": {
+            "name": "",
+            "url": ""
+          },
           "comment": {
             "line": "#"
           },
@@ -2211,10 +2355,23 @@
             }
           },
           "ext": "py",
+          "feature": {
+            "fullset": [],
+            "trim": true
+          },
           "module": {
-            "name": "yadore-publisher"
+            "goversion": "",
+            "name": "yadore-publisher",
+            "package": "",
+            "path": ""
           },
           "name": "py",
+          "output": {
+            "adopt": false,
+            "path": "",
+            "repo": "",
+            "sdkrel": ""
+          },
           "publish": {
             "registry": {
               "active": false,
@@ -2236,13 +2393,18 @@
                 "recipe": "github"
               },
               "via": "port"
-            }
+            },
+            "version": "0.0.1"
           },
           "srcfeature": false,
           "title": "Python"
         },
         "rb": {
           "active": true,
+          "author": {
+            "name": "",
+            "url": ""
+          },
           "comment": {
             "line": "#"
           },
@@ -2259,10 +2421,23 @@
             }
           },
           "ext": "rb",
+          "feature": {
+            "fullset": [],
+            "trim": true
+          },
           "module": {
-            "name": "yadore-publisher"
+            "goversion": "",
+            "name": "yadore-publisher",
+            "package": "",
+            "path": ""
           },
           "name": "rb",
+          "output": {
+            "adopt": false,
+            "path": "",
+            "repo": "",
+            "sdkrel": ""
+          },
           "publish": {
             "registry": {
               "active": false,
@@ -2284,13 +2459,18 @@
                 "recipe": "github"
               },
               "via": "port"
-            }
+            },
+            "version": "0.0.1"
           },
           "srcfeature": false,
           "title": "Ruby"
         },
         "ts": {
           "active": true,
+          "author": {
+            "name": "",
+            "url": ""
+          },
           "base": "node_modules/@voxgig/sdkgen/project/.sdk",
           "comment": {
             "line": "//"
@@ -2313,10 +2493,23 @@
             }
           },
           "ext": "ts",
+          "feature": {
+            "fullset": [],
+            "trim": true
+          },
           "module": {
-            "name": "yadore-publisher"
+            "goversion": "",
+            "name": "yadore-publisher",
+            "package": "",
+            "path": ""
           },
           "name": "ts",
+          "output": {
+            "adopt": false,
+            "path": "",
+            "repo": "",
+            "sdkrel": ""
+          },
           "publish": {
             "registry": {
               "active": false,
@@ -2338,9 +2531,17 @@
                 "recipe": "github"
               },
               "via": "port"
-            }
+            },
+            "version": "0.0.1"
           },
           "title": "TypeScript"
+        }
+      },
+      "test": {
+        "live": {
+          "app": false,
+          "base": "",
+          "strict": false
         }
       }
     }

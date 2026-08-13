@@ -15,41 +15,41 @@ declare(strict_types=1);
 /** ConversionDetail entity data model. */
 class ConversionDetail
 {
-    public ?string $click_id = null;
+    public ?string $clickId = null;
     public ?string $date = null;
     public ?string $market = null;
     public ?array $merchant = null;
-    public ?string $placement_id = null;
-    public ?float $sale = null;
+    public ?string $placementId = null;
+    public ?float $sales = null;
 }
 
 /** Request payload for ConversionDetail#list. */
 class ConversionDetailListMatch
 {
-    public ?string $click_id = null;
+    public ?string $clickId = null;
     public ?string $date = null;
     public ?string $market = null;
     public ?array $merchant = null;
-    public ?string $placement_id = null;
-    public ?float $sale = null;
+    public ?string $placementId = null;
+    public ?float $sales = null;
 }
 
 /** ConversionDetailMerchant entity data model. */
 class ConversionDetailMerchant
 {
-    public ?int $click = null;
+    public ?int $clicks = null;
     public ?string $market = null;
     public ?array $merchant = null;
-    public ?int $sale = null;
+    public ?int $sales = null;
 }
 
 /** Request payload for ConversionDetailMerchant#list. */
 class ConversionDetailMerchantListMatch
 {
-    public ?int $click = null;
+    public ?int $clicks = null;
     public ?string $market = null;
     public ?array $merchant = null;
-    public ?int $sale = null;
+    public ?int $sales = null;
 }
 
 /** ConversionGeneral entity data model. */
@@ -83,49 +83,53 @@ class ConversionStatusLoadMatch
 /** Deeplink entity data model. */
 class Deeplink
 {
-    public ?bool $is_couponing = null;
+    public ?array $deeplinks = null;
+    public ?int $found = null;
+    public ?bool $isCouponing = null;
     public string $market;
-    public ?string $placement_id = null;
-    public ?array $result = null;
-    public array $url;
+    public ?string $placementId = null;
+    public ?int $total = null;
+    public array $urls;
 }
 
 /** Request payload for Deeplink#create. */
 class DeeplinkCreateData
 {
-    public ?bool $is_couponing = null;
+    public ?array $deeplinks = null;
+    public ?int $found = null;
+    public ?bool $isCouponing = null;
     public string $market;
-    public ?string $placement_id = null;
-    public ?array $result = null;
-    public array $url;
+    public ?string $placementId = null;
+    public ?int $total = null;
+    public array $urls;
 }
 
 /** DeeplinkMerchant entity data model. */
 class DeeplinkMerchant
 {
-    public ?int $deeplink_count = null;
-    public ?array $estimated_cpc = null;
-    public ?bool $has_external_homepage = null;
-    public ?bool $has_smartlink_homepage = null;
+    public ?int $deeplinkCount = null;
+    public ?array $estimatedCpc = null;
+    public ?bool $hasExternalHomepage = null;
+    public ?bool $hasSmartlinkHomepage = null;
     public ?string $id = null;
-    public ?bool $is_smartlink = null;
+    public ?bool $isSmartlink = null;
     public ?array $logo = null;
     public ?string $name = null;
-    public ?array $traffic_type = null;
+    public ?array $trafficTypes = null;
 }
 
 /** Request payload for DeeplinkMerchant#list. */
 class DeeplinkMerchantListMatch
 {
-    public ?int $deeplink_count = null;
-    public ?array $estimated_cpc = null;
-    public ?bool $has_external_homepage = null;
-    public ?bool $has_smartlink_homepage = null;
+    public ?int $deeplinkCount = null;
+    public ?array $estimatedCpc = null;
+    public ?bool $hasExternalHomepage = null;
+    public ?bool $hasSmartlinkHomepage = null;
     public ?string $id = null;
-    public ?bool $is_smartlink = null;
+    public ?bool $isSmartlink = null;
     public ?array $logo = null;
     public ?string $name = null;
-    public ?array $traffic_type = null;
+    public ?array $trafficTypes = null;
 }
 
 /** Dnt entity data model. */
@@ -156,8 +160,8 @@ class Merchant
     public ?string $id = null;
     public ?array $logo = null;
     public ?string $name = null;
-    public ?int $offer_count = null;
-    public ?array $traffic_type = null;
+    public ?int $offerCount = null;
+    public ?array $trafficTypes = null;
 }
 
 /** Request payload for Merchant#list. */
@@ -166,8 +170,8 @@ class MerchantListMatch
     public ?string $id = null;
     public ?array $logo = null;
     public ?string $name = null;
-    public ?int $offer_count = null;
-    public ?array $traffic_type = null;
+    public ?int $offerCount = null;
+    public ?array $trafficTypes = null;
 }
 
 /** Offer entity data model. */
@@ -175,22 +179,23 @@ class Offer
 {
     public ?string $availability = null;
     public ?string $brand = null;
-    public ?string $click_url = null;
+    public ?string $clickUrl = null;
+    public ?int $count = null;
     public ?string $description = null;
-    public ?array $ean = null;
     public ?string $eer = null;
-    public ?array $estimated_cpc = null;
+    public ?array $estimatedCpc = null;
     public ?string $id = null;
     public ?array $image = null;
     public ?array $merchant = null;
-    public ?array $original_price = null;
+    public ?array $offers = null;
+    public ?array $originalPrice = null;
     public ?array $price = null;
-    public ?string $promo_text = null;
-    public ?array $shipping_price = null;
-    public ?array $shipping_time = null;
+    public ?string $promoText = null;
+    public ?array $shippingPrice = null;
+    public ?array $shippingTime = null;
     public ?array $thumbnail = null;
     public ?string $title = null;
-    public ?array $unit_price = null;
+    public ?array $unitPrice = null;
 }
 
 /** Request payload for Offer#load. */
@@ -198,22 +203,23 @@ class OfferLoadMatch
 {
     public ?string $availability = null;
     public ?string $brand = null;
-    public ?string $click_url = null;
+    public ?string $clickUrl = null;
+    public ?int $count = null;
     public ?string $description = null;
-    public ?array $ean = null;
     public ?string $eer = null;
-    public ?array $estimated_cpc = null;
+    public ?array $estimatedCpc = null;
     public string $id;
     public ?array $image = null;
     public ?array $merchant = null;
-    public ?array $original_price = null;
+    public ?array $offers = null;
+    public ?array $originalPrice = null;
     public ?array $price = null;
-    public ?string $promo_text = null;
-    public ?array $shipping_price = null;
-    public ?array $shipping_time = null;
+    public ?string $promoText = null;
+    public ?array $shippingPrice = null;
+    public ?array $shippingTime = null;
     public ?array $thumbnail = null;
     public ?string $title = null;
-    public ?array $unit_price = null;
+    public ?array $unitPrice = null;
 }
 
 /** Request payload for Offer#list. */
@@ -221,45 +227,46 @@ class OfferListMatch
 {
     public ?string $availability = null;
     public ?string $brand = null;
-    public ?string $click_url = null;
+    public ?string $clickUrl = null;
+    public ?int $count = null;
     public ?string $description = null;
-    public ?array $ean = null;
     public ?string $eer = null;
-    public ?array $estimated_cpc = null;
+    public ?array $estimatedCpc = null;
     public ?string $id = null;
     public ?array $image = null;
     public ?array $merchant = null;
-    public ?array $original_price = null;
+    public ?array $offers = null;
+    public ?array $originalPrice = null;
     public ?array $price = null;
-    public ?string $promo_text = null;
-    public ?array $shipping_price = null;
-    public ?array $shipping_time = null;
+    public ?string $promoText = null;
+    public ?array $shippingPrice = null;
+    public ?array $shippingTime = null;
     public ?array $thumbnail = null;
     public ?string $title = null;
-    public ?array $unit_price = null;
+    public ?array $unitPrice = null;
 }
 
 /** ReportDetail entity data model. */
 class ReportDetail
 {
-    public ?string $click_id = null;
+    public ?string $clickId = null;
     public ?string $currency = null;
     public ?string $date = null;
     public ?string $market = null;
     public ?array $merchant = null;
-    public ?string $placement_id = null;
+    public ?string $placementId = null;
     public ?float $revenue = null;
 }
 
 /** Request payload for ReportDetail#list. */
 class ReportDetailListMatch
 {
-    public ?string $click_id = null;
+    public ?string $clickId = null;
     public ?string $currency = null;
     public ?string $date = null;
     public ?string $market = null;
     public ?array $merchant = null;
-    public ?string $placement_id = null;
+    public ?string $placementId = null;
     public ?float $revenue = null;
 }
 
@@ -282,13 +289,15 @@ class ReportGeneralLoadMatch
 /** ReportModified entity data model. */
 class ReportModified
 {
-    public ?array $market = null;
+    public ?string $date = null;
+    public ?string $modifiedDate = null;
 }
 
 /** Request payload for ReportModified#load. */
 class ReportModifiedLoadMatch
 {
-    public ?array $market = null;
+    public ?string $date = null;
+    public ?string $modifiedDate = null;
 }
 
 /** ReportStatus entity data model. */

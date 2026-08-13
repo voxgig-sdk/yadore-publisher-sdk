@@ -72,7 +72,7 @@ class MerchantEntityTest extends TestCase
         // The basic flow consumes synthetic IDs from the fixture. In live mode
         // without an *_ENTID env override, those IDs hit the live API and 4xx.
         if (!empty($setup["synthetic_only"])) {
-            $this->markTestSkipped("live entity test uses synthetic IDs from fixture — set YADOREPUBLISHER_TEST_MERCHANT_ENTID JSON to run live");
+            $this->markTestSkipped("live entity test uses synthetic IDs from fixture — set YADORE_PUBLISHER_TEST_MERCHANT_ENTID JSON to run live");
             return;
         }
         $client = $setup["client"];
@@ -117,39 +117,39 @@ function merchant_basic_setup($extra)
     // Detect ENTID env override before envOverride consumes it. When live
     // mode is on without a real override, the basic test runs against synthetic
     // IDs from the fixture and 4xx's. Surface this so the test can skip.
-    $entid_env_raw = getenv("YADOREPUBLISHER_TEST_MERCHANT_ENTID");
+    $entid_env_raw = getenv("YADORE_PUBLISHER_TEST_MERCHANT_ENTID");
     $idmap_overridden = $entid_env_raw !== false && str_starts_with(trim($entid_env_raw), "{");
 
     $env = Runner::env_override([
-        "YADOREPUBLISHER_TEST_MERCHANT_ENTID" => $idmap,
-        "YADOREPUBLISHER_TEST_LIVE" => "FALSE",
-        "YADOREPUBLISHER_TEST_EXPLAIN" => "FALSE",
-        "YADOREPUBLISHER_APIKEY" => "NONE",
+        "YADORE_PUBLISHER_TEST_MERCHANT_ENTID" => $idmap,
+        "YADORE_PUBLISHER_TEST_LIVE" => "FALSE",
+        "YADORE_PUBLISHER_TEST_EXPLAIN" => "FALSE",
+        "YADORE_PUBLISHER_APIKEY" => "NONE",
     ]);
 
     $idmap_resolved = Helpers::to_map(
-        $env["YADOREPUBLISHER_TEST_MERCHANT_ENTID"]);
+        $env["YADORE_PUBLISHER_TEST_MERCHANT_ENTID"]);
     if ($idmap_resolved === null) {
         $idmap_resolved = Helpers::to_map($idmap);
     }
 
-    if ($env["YADOREPUBLISHER_TEST_LIVE"] === "TRUE") {
+    if ($env["YADORE_PUBLISHER_TEST_LIVE"] === "TRUE") {
         $merged_opts = Vs::merge([
             [
-                "apikey" => $env["YADOREPUBLISHER_APIKEY"],
+                "apikey" => $env["YADORE_PUBLISHER_APIKEY"],
             ],
             $extra ?? [],
         ]);
         $client = new YadorePublisherSDK(Helpers::to_map($merged_opts));
     }
 
-    $live = $env["YADOREPUBLISHER_TEST_LIVE"] === "TRUE";
+    $live = $env["YADORE_PUBLISHER_TEST_LIVE"] === "TRUE";
     return [
         "client" => $client,
         "data" => $entity_data,
         "idmap" => $idmap_resolved,
         "env" => $env,
-        "explain" => $env["YADOREPUBLISHER_TEST_EXPLAIN"] === "TRUE",
+        "explain" => $env["YADORE_PUBLISHER_TEST_EXPLAIN"] === "TRUE",
         "live" => $live,
         "synthetic_only" => $live && !$idmap_overridden,
         "now" => (int)(microtime(true) * 1000),

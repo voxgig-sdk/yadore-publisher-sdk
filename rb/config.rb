@@ -43,7 +43,7 @@ module YadorePublisherConfig
           "fields" => [
             {
               "active" => true,
-              "name" => "click_id",
+              "name" => "clickId",
               "req" => false,
               "type" => "`$STRING`",
               "index$" => 0,
@@ -71,14 +71,14 @@ module YadorePublisherConfig
             },
             {
               "active" => true,
-              "name" => "placement_id",
+              "name" => "placementId",
               "req" => false,
               "type" => "`$STRING`",
               "index$" => 4,
             },
             {
               "active" => true,
-              "name" => "sale",
+              "name" => "sales",
               "req" => false,
               "type" => "`$NUMBER`",
               "index$" => 5,
@@ -120,6 +120,7 @@ module YadorePublisherConfig
                       },
                     ],
                   },
+                  "kind" => "http",
                   "method" => "GET",
                   "orig" => "/v2/conversion/detail",
                   "parts" => [
@@ -136,7 +137,7 @@ module YadorePublisherConfig
                   },
                   "transform" => {
                     "req" => "`reqdata`",
-                    "res" => "`body`",
+                    "res" => "`body.clicks`",
                   },
                   "index$" => 0,
                 },
@@ -152,7 +153,7 @@ module YadorePublisherConfig
           "fields" => [
             {
               "active" => true,
-              "name" => "click",
+              "name" => "clicks",
               "req" => false,
               "type" => "`$INTEGER`",
               "index$" => 0,
@@ -173,7 +174,7 @@ module YadorePublisherConfig
             },
             {
               "active" => true,
-              "name" => "sale",
+              "name" => "sales",
               "req" => false,
               "type" => "`$INTEGER`",
               "index$" => 3,
@@ -223,6 +224,7 @@ module YadorePublisherConfig
                       },
                     ],
                   },
+                  "kind" => "http",
                   "method" => "GET",
                   "orig" => "/v2/conversion/detail/merchant",
                   "parts" => [
@@ -313,6 +315,7 @@ module YadorePublisherConfig
                       },
                     ],
                   },
+                  "kind" => "http",
                   "method" => "GET",
                   "orig" => "/v2/conversion/general",
                   "parts" => [
@@ -371,6 +374,7 @@ module YadorePublisherConfig
                       },
                     ],
                   },
+                  "kind" => "http",
                   "method" => "GET",
                   "orig" => "/v2/conversion/status",
                   "parts" => [
@@ -401,38 +405,52 @@ module YadorePublisherConfig
           "fields" => [
             {
               "active" => true,
-              "name" => "is_couponing",
+              "name" => "deeplinks",
+              "req" => false,
+              "type" => "`$ARRAY`",
+              "index$" => 0,
+            },
+            {
+              "active" => true,
+              "name" => "found",
+              "req" => false,
+              "type" => "`$INTEGER`",
+              "index$" => 1,
+            },
+            {
+              "active" => true,
+              "name" => "isCouponing",
               "req" => false,
               "type" => "`$BOOLEAN`",
-              "index$" => 0,
+              "index$" => 2,
             },
             {
               "active" => true,
               "name" => "market",
               "req" => true,
               "type" => "`$STRING`",
-              "index$" => 1,
-            },
-            {
-              "active" => true,
-              "name" => "placement_id",
-              "req" => false,
-              "type" => "`$STRING`",
-              "index$" => 2,
-            },
-            {
-              "active" => true,
-              "name" => "result",
-              "req" => false,
-              "type" => "`$OBJECT`",
               "index$" => 3,
             },
             {
               "active" => true,
-              "name" => "url",
+              "name" => "placementId",
+              "req" => false,
+              "type" => "`$STRING`",
+              "index$" => 4,
+            },
+            {
+              "active" => true,
+              "name" => "total",
+              "req" => false,
+              "type" => "`$INTEGER`",
+              "index$" => 5,
+            },
+            {
+              "active" => true,
+              "name" => "urls",
               "req" => true,
               "type" => "`$ARRAY`",
-              "index$" => 4,
+              "index$" => 6,
             },
           ],
           "name" => "deeplink",
@@ -444,6 +462,7 @@ module YadorePublisherConfig
                 {
                   "active" => true,
                   "args" => {},
+                  "kind" => "http",
                   "method" => "POST",
                   "orig" => "/v2/deeplink",
                   "parts" => [
@@ -453,7 +472,7 @@ module YadorePublisherConfig
                   "select" => {},
                   "transform" => {
                     "req" => "`reqdata`",
-                    "res" => "`body`",
+                    "res" => "`body.result`",
                   },
                   "index$" => 0,
                 },
@@ -469,28 +488,28 @@ module YadorePublisherConfig
           "fields" => [
             {
               "active" => true,
-              "name" => "deeplink_count",
+              "name" => "deeplinkCount",
               "req" => false,
               "type" => "`$INTEGER`",
               "index$" => 0,
             },
             {
               "active" => true,
-              "name" => "estimated_cpc",
+              "name" => "estimatedCpc",
               "req" => false,
               "type" => "`$OBJECT`",
               "index$" => 1,
             },
             {
               "active" => true,
-              "name" => "has_external_homepage",
+              "name" => "hasExternalHomepage",
               "req" => false,
               "type" => "`$BOOLEAN`",
               "index$" => 2,
             },
             {
               "active" => true,
-              "name" => "has_smartlink_homepage",
+              "name" => "hasSmartlinkHomepage",
               "req" => false,
               "type" => "`$BOOLEAN`",
               "index$" => 3,
@@ -504,7 +523,7 @@ module YadorePublisherConfig
             },
             {
               "active" => true,
-              "name" => "is_smartlink",
+              "name" => "isSmartlink",
               "req" => false,
               "type" => "`$BOOLEAN`",
               "index$" => 5,
@@ -525,7 +544,7 @@ module YadorePublisherConfig
             },
             {
               "active" => true,
-              "name" => "traffic_type",
+              "name" => "trafficTypes",
               "req" => false,
               "type" => "`$ARRAY`",
               "index$" => 8,
@@ -575,6 +594,7 @@ module YadorePublisherConfig
                       },
                     ],
                   },
+                  "kind" => "http",
                   "method" => "GET",
                   "orig" => "/v2/deeplink/merchant",
                   "parts" => [
@@ -592,7 +612,7 @@ module YadorePublisherConfig
                   },
                   "transform" => {
                     "req" => "`reqdata`",
-                    "res" => "`body`",
+                    "res" => "`body.merchants`",
                   },
                   "index$" => 0,
                 },
@@ -674,6 +694,7 @@ module YadorePublisherConfig
                       },
                     ],
                   },
+                  "kind" => "http",
                   "method" => "GET",
                   "orig" => "/v2/d",
                   "parts" => [
@@ -724,6 +745,7 @@ module YadorePublisherConfig
                 {
                   "active" => true,
                   "args" => {},
+                  "kind" => "http",
                   "method" => "GET",
                   "orig" => "/v2/markets",
                   "parts" => [
@@ -733,7 +755,7 @@ module YadorePublisherConfig
                   "select" => {},
                   "transform" => {
                     "req" => "`reqdata`",
-                    "res" => "`body`",
+                    "res" => "`body.markets`",
                   },
                   "index$" => 0,
                 },
@@ -770,14 +792,14 @@ module YadorePublisherConfig
             },
             {
               "active" => true,
-              "name" => "offer_count",
+              "name" => "offerCount",
               "req" => false,
               "type" => "`$INTEGER`",
               "index$" => 3,
             },
             {
               "active" => true,
-              "name" => "traffic_type",
+              "name" => "trafficTypes",
               "req" => false,
               "type" => "`$ARRAY`",
               "index$" => 4,
@@ -811,6 +833,7 @@ module YadorePublisherConfig
                       },
                     ],
                   },
+                  "kind" => "http",
                   "method" => "GET",
                   "orig" => "/v2/merchant",
                   "parts" => [
@@ -825,7 +848,7 @@ module YadorePublisherConfig
                   },
                   "transform" => {
                     "req" => "`reqdata`",
-                    "res" => "`body`",
+                    "res" => "`body.merchants`",
                   },
                   "index$" => 0,
                 },
@@ -855,23 +878,23 @@ module YadorePublisherConfig
             },
             {
               "active" => true,
-              "name" => "click_url",
+              "name" => "clickUrl",
               "req" => false,
               "type" => "`$STRING`",
               "index$" => 2,
             },
             {
               "active" => true,
-              "name" => "description",
+              "name" => "count",
               "req" => false,
-              "type" => "`$STRING`",
+              "type" => "`$INTEGER`",
               "index$" => 3,
             },
             {
               "active" => true,
-              "name" => "ean",
+              "name" => "description",
               "req" => false,
-              "type" => "`$OBJECT`",
+              "type" => "`$STRING`",
               "index$" => 4,
             },
             {
@@ -883,7 +906,7 @@ module YadorePublisherConfig
             },
             {
               "active" => true,
-              "name" => "estimated_cpc",
+              "name" => "estimatedCpc",
               "req" => false,
               "type" => "`$OBJECT`",
               "index$" => 6,
@@ -911,59 +934,66 @@ module YadorePublisherConfig
             },
             {
               "active" => true,
-              "name" => "original_price",
+              "name" => "offers",
               "req" => false,
-              "type" => "`$OBJECT`",
+              "type" => "`$ARRAY`",
               "index$" => 10,
             },
             {
               "active" => true,
-              "name" => "price",
+              "name" => "originalPrice",
               "req" => false,
               "type" => "`$OBJECT`",
               "index$" => 11,
             },
             {
               "active" => true,
-              "name" => "promo_text",
+              "name" => "price",
               "req" => false,
-              "type" => "`$STRING`",
+              "type" => "`$OBJECT`",
               "index$" => 12,
             },
             {
               "active" => true,
-              "name" => "shipping_price",
+              "name" => "promoText",
               "req" => false,
-              "type" => "`$OBJECT`",
+              "type" => "`$STRING`",
               "index$" => 13,
             },
             {
               "active" => true,
-              "name" => "shipping_time",
+              "name" => "shippingPrice",
               "req" => false,
               "type" => "`$OBJECT`",
               "index$" => 14,
             },
             {
               "active" => true,
-              "name" => "thumbnail",
+              "name" => "shippingTime",
               "req" => false,
               "type" => "`$OBJECT`",
               "index$" => 15,
             },
             {
               "active" => true,
-              "name" => "title",
+              "name" => "thumbnail",
               "req" => false,
-              "type" => "`$STRING`",
+              "type" => "`$OBJECT`",
               "index$" => 16,
             },
             {
               "active" => true,
-              "name" => "unit_price",
+              "name" => "title",
+              "req" => false,
+              "type" => "`$STRING`",
+              "index$" => 17,
+            },
+            {
+              "active" => true,
+              "name" => "unitPrice",
               "req" => false,
               "type" => "`$OBJECT`",
-              "index$" => 17,
+              "index$" => 18,
             },
           ],
           "name" => "offer",
@@ -1060,6 +1090,7 @@ module YadorePublisherConfig
                       },
                     ],
                   },
+                  "kind" => "http",
                   "method" => "GET",
                   "orig" => "/v2/offer",
                   "parts" => [
@@ -1082,7 +1113,7 @@ module YadorePublisherConfig
                   },
                   "transform" => {
                     "req" => "`reqdata`",
-                    "res" => "`body`",
+                    "res" => "`body.offers`",
                   },
                   "index$" => 0,
                 },
@@ -1140,6 +1171,7 @@ module YadorePublisherConfig
                       },
                     ],
                   },
+                  "kind" => "http",
                   "method" => "GET",
                   "orig" => "/v2/offer/bulk",
                   "parts" => [
@@ -1159,7 +1191,7 @@ module YadorePublisherConfig
                   },
                   "transform" => {
                     "req" => "`reqdata`",
-                    "res" => "`body`",
+                    "res" => "`body.ean`",
                   },
                   "index$" => 0,
                 },
@@ -1175,7 +1207,7 @@ module YadorePublisherConfig
           "fields" => [
             {
               "active" => true,
-              "name" => "click_id",
+              "name" => "clickId",
               "req" => false,
               "type" => "`$STRING`",
               "index$" => 0,
@@ -1210,7 +1242,7 @@ module YadorePublisherConfig
             },
             {
               "active" => true,
-              "name" => "placement_id",
+              "name" => "placementId",
               "req" => false,
               "type" => "`$STRING`",
               "index$" => 5,
@@ -1259,6 +1291,7 @@ module YadorePublisherConfig
                       },
                     ],
                   },
+                  "kind" => "http",
                   "method" => "GET",
                   "orig" => "/v2/report/detail",
                   "parts" => [
@@ -1275,7 +1308,7 @@ module YadorePublisherConfig
                   },
                   "transform" => {
                     "req" => "`reqdata`",
-                    "res" => "`body`",
+                    "res" => "`body.clicks`",
                   },
                   "index$" => 0,
                 },
@@ -1339,6 +1372,7 @@ module YadorePublisherConfig
                       },
                     ],
                   },
+                  "kind" => "http",
                   "method" => "GET",
                   "orig" => "/v2/report/general",
                   "parts" => [
@@ -1370,10 +1404,17 @@ module YadorePublisherConfig
           "fields" => [
             {
               "active" => true,
-              "name" => "market",
+              "name" => "date",
               "req" => false,
-              "type" => "`$OBJECT`",
+              "type" => "`$STRING`",
               "index$" => 0,
+            },
+            {
+              "active" => true,
+              "name" => "modifiedDate",
+              "req" => false,
+              "type" => "`$STRING`",
+              "index$" => 1,
             },
           ],
           "name" => "report_modified",
@@ -1412,6 +1453,7 @@ module YadorePublisherConfig
                       },
                     ],
                   },
+                  "kind" => "http",
                   "method" => "GET",
                   "orig" => "/v2/report/modified",
                   "parts" => [
@@ -1428,7 +1470,7 @@ module YadorePublisherConfig
                   },
                   "transform" => {
                     "req" => "`reqdata`",
-                    "res" => "`body`",
+                    "res" => "`body.market`",
                   },
                   "index$" => 0,
                 },
@@ -1470,6 +1512,7 @@ module YadorePublisherConfig
                       },
                     ],
                   },
+                  "kind" => "http",
                   "method" => "GET",
                   "orig" => "/v2/report/status",
                   "parts" => [

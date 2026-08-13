@@ -6,22 +6,22 @@ main: kit: entity: deeplink_merchant: {
 
   fields: [
     {
-      name: "deeplink_count"
+      name: "deeplinkCount"
       req: false
       type: "`$INTEGER`"
     }
     {
-      name: "estimated_cpc"
+      name: "estimatedCpc"
       req: false
       type: "`$OBJECT`"
     }
     {
-      name: "has_external_homepage"
+      name: "hasExternalHomepage"
       req: false
       type: "`$BOOLEAN`"
     }
     {
-      name: "has_smartlink_homepage"
+      name: "hasSmartlinkHomepage"
       req: false
       type: "`$BOOLEAN`"
     }
@@ -31,7 +31,7 @@ main: kit: entity: deeplink_merchant: {
       type: "`$STRING`"
     }
     {
-      name: "is_smartlink"
+      name: "isSmartlink"
       req: false
       type: "`$BOOLEAN`"
     }
@@ -46,7 +46,7 @@ main: kit: entity: deeplink_merchant: {
       type: "`$STRING`"
     }
     {
-      name: "traffic_type"
+      name: "trafficTypes"
       req: false
       type: "`$ARRAY`"
     }
@@ -112,7 +112,7 @@ main: kit: entity: deeplink_merchant: {
           }
           transform: {
             req: "`reqdata`"
-            res: "`body`"
+            res: "`body.merchants`"
           }
         }
       ]

@@ -6,42 +6,46 @@
 // @voxgig/apidef VALID_CANON). Do not edit by hand.
 package entity
 
-import "encoding/json"
+import (
+	"encoding/json"
+
+	"github.com/voxgig-sdk/yadore-publisher-sdk/go/core"
+)
 
 // ConversionDetail is the typed data model for the conversion_detail entity.
 type ConversionDetail struct {
-	ClickId *string `json:"click_id,omitempty"`
+	ClickId *string `json:"clickId,omitempty"`
 	Date *string `json:"date,omitempty"`
 	Market *string `json:"market,omitempty"`
 	Merchant *map[string]any `json:"merchant,omitempty"`
-	PlacementId *string `json:"placement_id,omitempty"`
-	Sale *float64 `json:"sale,omitempty"`
+	PlacementId *string `json:"placementId,omitempty"`
+	Sales *float64 `json:"sales,omitempty"`
 }
 
 // ConversionDetailListMatch is the typed request payload for ConversionDetail.ListTyped.
 type ConversionDetailListMatch struct {
-	ClickId *string `json:"click_id,omitempty"`
+	ClickId *string `json:"clickId,omitempty"`
 	Date *string `json:"date,omitempty"`
 	Market *string `json:"market,omitempty"`
 	Merchant *map[string]any `json:"merchant,omitempty"`
-	PlacementId *string `json:"placement_id,omitempty"`
-	Sale *float64 `json:"sale,omitempty"`
+	PlacementId *string `json:"placementId,omitempty"`
+	Sales *float64 `json:"sales,omitempty"`
 }
 
 // ConversionDetailMerchant is the typed data model for the conversion_detail_merchant entity.
 type ConversionDetailMerchant struct {
-	Click *int `json:"click,omitempty"`
+	Clicks *int `json:"clicks,omitempty"`
 	Market *string `json:"market,omitempty"`
 	Merchant *map[string]any `json:"merchant,omitempty"`
-	Sale *int `json:"sale,omitempty"`
+	Sales *int `json:"sales,omitempty"`
 }
 
 // ConversionDetailMerchantListMatch is the typed request payload for ConversionDetailMerchant.ListTyped.
 type ConversionDetailMerchantListMatch struct {
-	Click *int `json:"click,omitempty"`
+	Clicks *int `json:"clicks,omitempty"`
 	Market *string `json:"market,omitempty"`
 	Merchant *map[string]any `json:"merchant,omitempty"`
-	Sale *int `json:"sale,omitempty"`
+	Sales *int `json:"sales,omitempty"`
 }
 
 // ConversionGeneral is the typed data model for the conversion_general entity.
@@ -70,46 +74,50 @@ type ConversionStatusLoadMatch struct {
 
 // Deeplink is the typed data model for the deeplink entity.
 type Deeplink struct {
-	IsCouponing *bool `json:"is_couponing,omitempty"`
+	Deeplinks *[]any `json:"deeplinks,omitempty"`
+	Found *int `json:"found,omitempty"`
+	IsCouponing *bool `json:"isCouponing,omitempty"`
 	Market string `json:"market"`
-	PlacementId *string `json:"placement_id,omitempty"`
-	Result *map[string]any `json:"result,omitempty"`
-	Url []any `json:"url"`
+	PlacementId *string `json:"placementId,omitempty"`
+	Total *int `json:"total,omitempty"`
+	Urls []any `json:"urls"`
 }
 
 // DeeplinkCreateData is the typed request payload for Deeplink.CreateTyped.
 type DeeplinkCreateData struct {
-	IsCouponing *bool `json:"is_couponing,omitempty"`
+	Deeplinks *[]any `json:"deeplinks,omitempty"`
+	Found *int `json:"found,omitempty"`
+	IsCouponing *bool `json:"isCouponing,omitempty"`
 	Market string `json:"market"`
-	PlacementId *string `json:"placement_id,omitempty"`
-	Result *map[string]any `json:"result,omitempty"`
-	Url []any `json:"url"`
+	PlacementId *string `json:"placementId,omitempty"`
+	Total *int `json:"total,omitempty"`
+	Urls []any `json:"urls"`
 }
 
 // DeeplinkMerchant is the typed data model for the deeplink_merchant entity.
 type DeeplinkMerchant struct {
-	DeeplinkCount *int `json:"deeplink_count,omitempty"`
-	EstimatedCpc *map[string]any `json:"estimated_cpc,omitempty"`
-	HasExternalHomepage *bool `json:"has_external_homepage,omitempty"`
-	HasSmartlinkHomepage *bool `json:"has_smartlink_homepage,omitempty"`
+	DeeplinkCount *int `json:"deeplinkCount,omitempty"`
+	EstimatedCpc *map[string]any `json:"estimatedCpc,omitempty"`
+	HasExternalHomepage *bool `json:"hasExternalHomepage,omitempty"`
+	HasSmartlinkHomepage *bool `json:"hasSmartlinkHomepage,omitempty"`
 	Id *string `json:"id,omitempty"`
-	IsSmartlink *bool `json:"is_smartlink,omitempty"`
+	IsSmartlink *bool `json:"isSmartlink,omitempty"`
 	Logo *map[string]any `json:"logo,omitempty"`
 	Name *string `json:"name,omitempty"`
-	TrafficType *[]any `json:"traffic_type,omitempty"`
+	TrafficTypes *[]any `json:"trafficTypes,omitempty"`
 }
 
 // DeeplinkMerchantListMatch is the typed request payload for DeeplinkMerchant.ListTyped.
 type DeeplinkMerchantListMatch struct {
-	DeeplinkCount *int `json:"deeplink_count,omitempty"`
-	EstimatedCpc *map[string]any `json:"estimated_cpc,omitempty"`
-	HasExternalHomepage *bool `json:"has_external_homepage,omitempty"`
-	HasSmartlinkHomepage *bool `json:"has_smartlink_homepage,omitempty"`
+	DeeplinkCount *int `json:"deeplinkCount,omitempty"`
+	EstimatedCpc *map[string]any `json:"estimatedCpc,omitempty"`
+	HasExternalHomepage *bool `json:"hasExternalHomepage,omitempty"`
+	HasSmartlinkHomepage *bool `json:"hasSmartlinkHomepage,omitempty"`
 	Id *string `json:"id,omitempty"`
-	IsSmartlink *bool `json:"is_smartlink,omitempty"`
+	IsSmartlink *bool `json:"isSmartlink,omitempty"`
 	Logo *map[string]any `json:"logo,omitempty"`
 	Name *string `json:"name,omitempty"`
-	TrafficType *[]any `json:"traffic_type,omitempty"`
+	TrafficTypes *[]any `json:"trafficTypes,omitempty"`
 }
 
 // Dnt is the typed data model for the dnt entity.
@@ -135,8 +143,8 @@ type Merchant struct {
 	Id *string `json:"id,omitempty"`
 	Logo *map[string]any `json:"logo,omitempty"`
 	Name *string `json:"name,omitempty"`
-	OfferCount *int `json:"offer_count,omitempty"`
-	TrafficType *[]any `json:"traffic_type,omitempty"`
+	OfferCount *int `json:"offerCount,omitempty"`
+	TrafficTypes *[]any `json:"trafficTypes,omitempty"`
 }
 
 // MerchantListMatch is the typed request payload for Merchant.ListTyped.
@@ -144,95 +152,98 @@ type MerchantListMatch struct {
 	Id *string `json:"id,omitempty"`
 	Logo *map[string]any `json:"logo,omitempty"`
 	Name *string `json:"name,omitempty"`
-	OfferCount *int `json:"offer_count,omitempty"`
-	TrafficType *[]any `json:"traffic_type,omitempty"`
+	OfferCount *int `json:"offerCount,omitempty"`
+	TrafficTypes *[]any `json:"trafficTypes,omitempty"`
 }
 
 // Offer is the typed data model for the offer entity.
 type Offer struct {
 	Availability *string `json:"availability,omitempty"`
 	Brand *string `json:"brand,omitempty"`
-	ClickUrl *string `json:"click_url,omitempty"`
+	ClickUrl *string `json:"clickUrl,omitempty"`
+	Count *int `json:"count,omitempty"`
 	Description *string `json:"description,omitempty"`
-	Ean *map[string]any `json:"ean,omitempty"`
 	Eer *string `json:"eer,omitempty"`
-	EstimatedCpc *map[string]any `json:"estimated_cpc,omitempty"`
+	EstimatedCpc *map[string]any `json:"estimatedCpc,omitempty"`
 	Id *string `json:"id,omitempty"`
 	Image *map[string]any `json:"image,omitempty"`
 	Merchant *map[string]any `json:"merchant,omitempty"`
-	OriginalPrice *map[string]any `json:"original_price,omitempty"`
+	Offers *[]any `json:"offers,omitempty"`
+	OriginalPrice *map[string]any `json:"originalPrice,omitempty"`
 	Price *map[string]any `json:"price,omitempty"`
-	PromoText *string `json:"promo_text,omitempty"`
-	ShippingPrice *map[string]any `json:"shipping_price,omitempty"`
-	ShippingTime *map[string]any `json:"shipping_time,omitempty"`
+	PromoText *string `json:"promoText,omitempty"`
+	ShippingPrice *map[string]any `json:"shippingPrice,omitempty"`
+	ShippingTime *map[string]any `json:"shippingTime,omitempty"`
 	Thumbnail *map[string]any `json:"thumbnail,omitempty"`
 	Title *string `json:"title,omitempty"`
-	UnitPrice *map[string]any `json:"unit_price,omitempty"`
+	UnitPrice *map[string]any `json:"unitPrice,omitempty"`
 }
 
 // OfferLoadMatch is the typed request payload for Offer.LoadTyped.
 type OfferLoadMatch struct {
 	Availability *string `json:"availability,omitempty"`
 	Brand *string `json:"brand,omitempty"`
-	ClickUrl *string `json:"click_url,omitempty"`
+	ClickUrl *string `json:"clickUrl,omitempty"`
+	Count *int `json:"count,omitempty"`
 	Description *string `json:"description,omitempty"`
-	Ean *map[string]any `json:"ean,omitempty"`
 	Eer *string `json:"eer,omitempty"`
-	EstimatedCpc *map[string]any `json:"estimated_cpc,omitempty"`
+	EstimatedCpc *map[string]any `json:"estimatedCpc,omitempty"`
 	Id string `json:"id"`
 	Image *map[string]any `json:"image,omitempty"`
 	Merchant *map[string]any `json:"merchant,omitempty"`
-	OriginalPrice *map[string]any `json:"original_price,omitempty"`
+	Offers *[]any `json:"offers,omitempty"`
+	OriginalPrice *map[string]any `json:"originalPrice,omitempty"`
 	Price *map[string]any `json:"price,omitempty"`
-	PromoText *string `json:"promo_text,omitempty"`
-	ShippingPrice *map[string]any `json:"shipping_price,omitempty"`
-	ShippingTime *map[string]any `json:"shipping_time,omitempty"`
+	PromoText *string `json:"promoText,omitempty"`
+	ShippingPrice *map[string]any `json:"shippingPrice,omitempty"`
+	ShippingTime *map[string]any `json:"shippingTime,omitempty"`
 	Thumbnail *map[string]any `json:"thumbnail,omitempty"`
 	Title *string `json:"title,omitempty"`
-	UnitPrice *map[string]any `json:"unit_price,omitempty"`
+	UnitPrice *map[string]any `json:"unitPrice,omitempty"`
 }
 
 // OfferListMatch is the typed request payload for Offer.ListTyped.
 type OfferListMatch struct {
 	Availability *string `json:"availability,omitempty"`
 	Brand *string `json:"brand,omitempty"`
-	ClickUrl *string `json:"click_url,omitempty"`
+	ClickUrl *string `json:"clickUrl,omitempty"`
+	Count *int `json:"count,omitempty"`
 	Description *string `json:"description,omitempty"`
-	Ean *map[string]any `json:"ean,omitempty"`
 	Eer *string `json:"eer,omitempty"`
-	EstimatedCpc *map[string]any `json:"estimated_cpc,omitempty"`
+	EstimatedCpc *map[string]any `json:"estimatedCpc,omitempty"`
 	Id *string `json:"id,omitempty"`
 	Image *map[string]any `json:"image,omitempty"`
 	Merchant *map[string]any `json:"merchant,omitempty"`
-	OriginalPrice *map[string]any `json:"original_price,omitempty"`
+	Offers *[]any `json:"offers,omitempty"`
+	OriginalPrice *map[string]any `json:"originalPrice,omitempty"`
 	Price *map[string]any `json:"price,omitempty"`
-	PromoText *string `json:"promo_text,omitempty"`
-	ShippingPrice *map[string]any `json:"shipping_price,omitempty"`
-	ShippingTime *map[string]any `json:"shipping_time,omitempty"`
+	PromoText *string `json:"promoText,omitempty"`
+	ShippingPrice *map[string]any `json:"shippingPrice,omitempty"`
+	ShippingTime *map[string]any `json:"shippingTime,omitempty"`
 	Thumbnail *map[string]any `json:"thumbnail,omitempty"`
 	Title *string `json:"title,omitempty"`
-	UnitPrice *map[string]any `json:"unit_price,omitempty"`
+	UnitPrice *map[string]any `json:"unitPrice,omitempty"`
 }
 
 // ReportDetail is the typed data model for the report_detail entity.
 type ReportDetail struct {
-	ClickId *string `json:"click_id,omitempty"`
+	ClickId *string `json:"clickId,omitempty"`
 	Currency *string `json:"currency,omitempty"`
 	Date *string `json:"date,omitempty"`
 	Market *string `json:"market,omitempty"`
 	Merchant *map[string]any `json:"merchant,omitempty"`
-	PlacementId *string `json:"placement_id,omitempty"`
+	PlacementId *string `json:"placementId,omitempty"`
 	Revenue *float64 `json:"revenue,omitempty"`
 }
 
 // ReportDetailListMatch is the typed request payload for ReportDetail.ListTyped.
 type ReportDetailListMatch struct {
-	ClickId *string `json:"click_id,omitempty"`
+	ClickId *string `json:"clickId,omitempty"`
 	Currency *string `json:"currency,omitempty"`
 	Date *string `json:"date,omitempty"`
 	Market *string `json:"market,omitempty"`
 	Merchant *map[string]any `json:"merchant,omitempty"`
-	PlacementId *string `json:"placement_id,omitempty"`
+	PlacementId *string `json:"placementId,omitempty"`
 	Revenue *float64 `json:"revenue,omitempty"`
 }
 
@@ -252,12 +263,14 @@ type ReportGeneralLoadMatch struct {
 
 // ReportModified is the typed data model for the report_modified entity.
 type ReportModified struct {
-	Market *map[string]any `json:"market,omitempty"`
+	Date *string `json:"date,omitempty"`
+	ModifiedDate *string `json:"modifiedDate,omitempty"`
 }
 
 // ReportModifiedLoadMatch is the typed request payload for ReportModified.LoadTyped.
 type ReportModifiedLoadMatch struct {
-	Market *map[string]any `json:"market,omitempty"`
+	Date *string `json:"date,omitempty"`
+	ModifiedDate *string `json:"modifiedDate,omitempty"`
 }
 
 // ReportStatus is the typed data model for the report_status entity.
@@ -282,12 +295,26 @@ func asMap(v any) map[string]any {
 	return out
 }
 
-// typedFrom decodes a runtime value (a map[string]any produced by the op
-// pipeline) into a typed model T via a JSON round-trip. On any error it
-// returns the zero value of T; the op's own (value, error) tuple carries the
-// real error.
+// entityData unwraps an entity to its data map.
+//
+// Operations resolve to the ENTITY, not the raw data (see AGENTS.md), and an
+// entity's fields are UNEXPORTED — marshalling one directly yields `{}`, so
+// every typed accessor would silently hand back a zero-valued struct. The
+// typed boundary therefore takes the data hop first.
+func entityData(v any) any {
+	if ent, ok := v.(core.Entity); ok {
+		return ent.Data()
+	}
+	return v
+}
+
+// typedFrom decodes a runtime value (an entity, or the map[string]any the op
+// pipeline produced) into a typed model T via a JSON round-trip. On any error
+// it returns the zero value of T; the op's own (value, error) tuple carries
+// the real error.
 func typedFrom[T any](v any) T {
 	var out T
+	v = entityData(v)
 	if v == nil {
 		return out
 	}
@@ -299,12 +326,20 @@ func typedFrom[T any](v any) T {
 	return out
 }
 
-// typedSliceFrom decodes a runtime list value ([]any of maps) into a typed
-// slice []T via a JSON round-trip, for list ops.
+// typedSliceFrom decodes a runtime list value into a typed slice []T via a
+// JSON round-trip, for list ops. `list` resolves to a slice of ENTITY
+// instances, so each element takes the data hop.
 func typedSliceFrom[T any](v any) []T {
 	var out []T
 	if v == nil {
 		return out
+	}
+	if list, ok := v.([]any); ok {
+		unwrapped := make([]any, 0, len(list))
+		for _, item := range list {
+			unwrapped = append(unwrapped, entityData(item))
+		}
+		v = unwrapped
 	}
 	b, err := json.Marshal(v)
 	if err != nil {

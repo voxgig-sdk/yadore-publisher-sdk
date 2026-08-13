@@ -60,10 +60,10 @@ Entity operations raise on failure, so wrap them in `try` / `except`:
 
 ```python
 try:
-    conversiondetails = client.ConversionDetail().list()
-    print(conversiondetails)
+    reportgeneral = client.ReportGeneral().load()
+    print(reportgeneral)
 except Exception as err:
-    print(f"list failed: {err}")
+    print(f"load failed: {err}")
 ```
 
 `direct()` does **not** raise — it returns the result envelope. Branch
@@ -127,9 +127,10 @@ Create a mock client for unit testing — no server required:
 ```python
 client = YadorePublisherSDK.test()
 
-# Entity ops return the bare record and raise on error.
-conversiondetail = client.ConversionDetail().list()
-# conversiondetail contains the mock response record
+# Entity ops return the ENTITY and raises on error;
+# call data_get() for the record.
+reportgeneral = client.ReportGeneral().load()
+# reportgeneral contains the mock response record
 ```
 
 ### Use a custom fetch function
@@ -240,7 +241,7 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return the bare result data (a `dict` for single-entity
+Entity operations return the ENTITY (call data_get() for the record) (a `dict` for single-entity
 ops, a `list` for `list`) and raise on error. Wrap calls in
 `try`/`except` to handle failures.
 
@@ -262,12 +263,12 @@ On error, `ok` is `False` and `err` contains the error value.
 
 | Field | Description |
 | --- | --- |
-| `click_id` |  |
+| `clickId` |  |
 | `date` |  |
 | `market` |  |
 | `merchant` |  |
-| `placement_id` |  |
-| `sale` |  |
+| `placementId` |  |
+| `sales` |  |
 
 Operations: List.
 
@@ -277,10 +278,10 @@ API path: `/v2/conversion/detail`
 
 | Field | Description |
 | --- | --- |
-| `click` |  |
+| `clicks` |  |
 | `market` |  |
 | `merchant` |  |
-| `sale` |  |
+| `sales` |  |
 
 Operations: List.
 
@@ -312,11 +313,13 @@ API path: `/v2/conversion/status`
 
 | Field | Description |
 | --- | --- |
-| `is_couponing` |  |
+| `deeplinks` |  |
+| `found` |  |
+| `isCouponing` |  |
 | `market` |  |
-| `placement_id` |  |
-| `result` |  |
-| `url` |  |
+| `placementId` |  |
+| `total` |  |
+| `urls` |  |
 
 Operations: Create.
 
@@ -326,15 +329,15 @@ API path: `/v2/deeplink`
 
 | Field | Description |
 | --- | --- |
-| `deeplink_count` |  |
-| `estimated_cpc` |  |
-| `has_external_homepage` |  |
-| `has_smartlink_homepage` |  |
+| `deeplinkCount` |  |
+| `estimatedCpc` |  |
+| `hasExternalHomepage` |  |
+| `hasSmartlinkHomepage` |  |
 | `id` |  |
-| `is_smartlink` |  |
+| `isSmartlink` |  |
 | `logo` |  |
 | `name` |  |
-| `traffic_type` |  |
+| `trafficTypes` |  |
 
 Operations: List.
 
@@ -366,8 +369,8 @@ API path: `/v2/markets`
 | `id` |  |
 | `logo` |  |
 | `name` |  |
-| `offer_count` |  |
-| `traffic_type` |  |
+| `offerCount` |  |
+| `trafficTypes` |  |
 
 Operations: List.
 
@@ -379,22 +382,23 @@ API path: `/v2/merchant`
 | --- | --- |
 | `availability` |  |
 | `brand` |  |
-| `click_url` |  |
+| `clickUrl` |  |
+| `count` |  |
 | `description` |  |
-| `ean` |  |
 | `eer` |  |
-| `estimated_cpc` |  |
+| `estimatedCpc` |  |
 | `id` |  |
 | `image` |  |
 | `merchant` |  |
-| `original_price` |  |
+| `offers` |  |
+| `originalPrice` |  |
 | `price` |  |
-| `promo_text` |  |
-| `shipping_price` |  |
-| `shipping_time` |  |
+| `promoText` |  |
+| `shippingPrice` |  |
+| `shippingTime` |  |
 | `thumbnail` |  |
 | `title` |  |
-| `unit_price` |  |
+| `unitPrice` |  |
 
 Operations: List, Load.
 
@@ -404,12 +408,12 @@ API path: `/v2/offer`
 
 | Field | Description |
 | --- | --- |
-| `click_id` |  |
+| `clickId` |  |
 | `currency` |  |
 | `date` |  |
 | `market` |  |
 | `merchant` |  |
-| `placement_id` |  |
+| `placementId` |  |
 | `revenue` |  |
 
 Operations: List.
@@ -432,7 +436,8 @@ API path: `/v2/report/general`
 
 | Field | Description |
 | --- | --- |
-| `market` |  |
+| `date` |  |
+| `modifiedDate` |  |
 
 Operations: Load.
 
@@ -467,12 +472,12 @@ Create an instance: `conversion_detail = client.ConversionDetail()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `click_id` | `str` |  |
+| `clickId` | `str` |  |
 | `date` | `str` |  |
 | `market` | `str` |  |
 | `merchant` | `dict` |  |
-| `placement_id` | `str` |  |
-| `sale` | `float` |  |
+| `placementId` | `str` |  |
+| `sales` | `float` |  |
 
 #### Example: List
 
@@ -495,10 +500,10 @@ Create an instance: `conversion_detail_merchant = client.ConversionDetailMerchan
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `click` | `int` |  |
+| `clicks` | `int` |  |
 | `market` | `str` |  |
 | `merchant` | `dict` |  |
-| `sale` | `int` |  |
+| `sales` | `int` |  |
 
 #### Example: List
 
@@ -569,18 +574,20 @@ Create an instance: `deeplink = client.Deeplink()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `is_couponing` | `bool` |  |
+| `deeplinks` | `list` |  |
+| `found` | `int` |  |
+| `isCouponing` | `bool` |  |
 | `market` | `str` |  |
-| `placement_id` | `str` |  |
-| `result` | `dict` |  |
-| `url` | `list` |  |
+| `placementId` | `str` |  |
+| `total` | `int` |  |
+| `urls` | `list` |  |
 
 #### Example: Create
 
 ```python
 deeplink = client.Deeplink().create({
     "market": "example_market",  # str
-    "url": [],  # list
+    "urls": [],  # list
 })
 ```
 
@@ -599,15 +606,15 @@ Create an instance: `deeplink_merchant = client.DeeplinkMerchant()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `deeplink_count` | `int` |  |
-| `estimated_cpc` | `dict` |  |
-| `has_external_homepage` | `bool` |  |
-| `has_smartlink_homepage` | `bool` |  |
+| `deeplinkCount` | `int` |  |
+| `estimatedCpc` | `dict` |  |
+| `hasExternalHomepage` | `bool` |  |
+| `hasSmartlinkHomepage` | `bool` |  |
 | `id` | `str` |  |
-| `is_smartlink` | `bool` |  |
+| `isSmartlink` | `bool` |  |
 | `logo` | `dict` |  |
 | `name` | `str` |  |
-| `traffic_type` | `list` |  |
+| `trafficTypes` | `list` |  |
 
 #### Example: List
 
@@ -673,8 +680,8 @@ Create an instance: `merchant = client.Merchant()`
 | `id` | `str` |  |
 | `logo` | `dict` |  |
 | `name` | `str` |  |
-| `offer_count` | `int` |  |
-| `traffic_type` | `list` |  |
+| `offerCount` | `int` |  |
+| `trafficTypes` | `list` |  |
 
 #### Example: List
 
@@ -700,22 +707,23 @@ Create an instance: `offer = client.Offer()`
 | --- | --- | --- |
 | `availability` | `str` |  |
 | `brand` | `str` |  |
-| `click_url` | `str` |  |
+| `clickUrl` | `str` |  |
+| `count` | `int` |  |
 | `description` | `str` |  |
-| `ean` | `dict` |  |
 | `eer` | `str` |  |
-| `estimated_cpc` | `dict` |  |
+| `estimatedCpc` | `dict` |  |
 | `id` | `str` |  |
 | `image` | `dict` |  |
 | `merchant` | `dict` |  |
-| `original_price` | `dict` |  |
+| `offers` | `list` |  |
+| `originalPrice` | `dict` |  |
 | `price` | `dict` |  |
-| `promo_text` | `str` |  |
-| `shipping_price` | `dict` |  |
-| `shipping_time` | `dict` |  |
+| `promoText` | `str` |  |
+| `shippingPrice` | `dict` |  |
+| `shippingTime` | `dict` |  |
 | `thumbnail` | `dict` |  |
 | `title` | `str` |  |
-| `unit_price` | `dict` |  |
+| `unitPrice` | `dict` |  |
 
 #### Example: Load
 
@@ -744,12 +752,12 @@ Create an instance: `report_detail = client.ReportDetail()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `click_id` | `str` |  |
+| `clickId` | `str` |  |
 | `currency` | `str` |  |
 | `date` | `str` |  |
 | `market` | `str` |  |
 | `merchant` | `dict` |  |
-| `placement_id` | `str` |  |
+| `placementId` | `str` |  |
 | `revenue` | `float` |  |
 
 #### Example: List
@@ -798,7 +806,8 @@ Create an instance: `report_modified = client.ReportModified()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `market` | `dict` |  |
+| `date` | `str` |  |
+| `modifiedDate` | `str` |  |
 
 #### Example: Load
 
@@ -901,15 +910,15 @@ Import entity or utility modules directly only when needed.
 
 ### Entity state
 
-Entity instances are stateful. After a successful `list`, the entity
+Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```python
-conversiondetail = client.ConversionDetail()
-conversiondetail.list()
+reportgeneral = client.ReportGeneral()
+reportgeneral.load()
 
-# conversiondetail.data_get() now returns the conversiondetail data from the last list
-# conversiondetail.match_get() returns the last match criteria
+# reportgeneral.data_get() now returns the reportgeneral data from the last load
+# reportgeneral.match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

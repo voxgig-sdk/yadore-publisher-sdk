@@ -140,12 +140,12 @@ conversion_detail = client.ConversionDetail()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `click_id` | `str` | No |  |
+| `clickId` | `str` | No |  |
 | `date` | `str` | No |  |
 | `market` | `str` | No |  |
 | `merchant` | `dict` | No |  |
-| `placement_id` | `str` | No |  |
-| `sale` | `float` | No |  |
+| `placementId` | `str` | No |  |
+| `sales` | `float` | No |  |
 
 ### Operations
 
@@ -198,10 +198,10 @@ conversion_detail_merchant = client.ConversionDetailMerchant()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `click` | `int` | No |  |
+| `clicks` | `int` | No |  |
 | `market` | `str` | No |  |
 | `merchant` | `dict` | No |  |
-| `sale` | `int` | No |  |
+| `sales` | `int` | No |  |
 
 ### Operations
 
@@ -358,11 +358,13 @@ deeplink = client.Deeplink()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `is_couponing` | `bool` | No |  |
+| `deeplinks` | `list` | No |  |
+| `found` | `int` | No |  |
+| `isCouponing` | `bool` | No |  |
 | `market` | `str` | Yes |  |
-| `placement_id` | `str` | No |  |
-| `result` | `dict` | No |  |
-| `url` | `list` | Yes |  |
+| `placementId` | `str` | No |  |
+| `total` | `int` | No |  |
+| `urls` | `list` | Yes |  |
 
 ### Operations
 
@@ -373,7 +375,7 @@ Create a new entity with the given data. Returns the created entity data and rai
 ```python
 result = client.Deeplink().create({
     "market": "example_market",  # str
-    "url": [],  # list
+    "urls": [],  # list
 })
 ```
 
@@ -416,15 +418,15 @@ deeplink_merchant = client.DeeplinkMerchant()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `deeplink_count` | `int` | No |  |
-| `estimated_cpc` | `dict` | No |  |
-| `has_external_homepage` | `bool` | No |  |
-| `has_smartlink_homepage` | `bool` | No |  |
+| `deeplinkCount` | `int` | No |  |
+| `estimatedCpc` | `dict` | No |  |
+| `hasExternalHomepage` | `bool` | No |  |
+| `hasSmartlinkHomepage` | `bool` | No |  |
 | `id` | `str` | No |  |
-| `is_smartlink` | `bool` | No |  |
+| `isSmartlink` | `bool` | No |  |
 | `logo` | `dict` | No |  |
 | `name` | `str` | No |  |
-| `traffic_type` | `list` | No |  |
+| `trafficTypes` | `list` | No |  |
 
 ### Operations
 
@@ -578,8 +580,8 @@ merchant = client.Merchant()
 | `id` | `str` | No |  |
 | `logo` | `dict` | No |  |
 | `name` | `str` | No |  |
-| `offer_count` | `int` | No |  |
-| `traffic_type` | `list` | No |  |
+| `offerCount` | `int` | No |  |
+| `trafficTypes` | `list` | No |  |
 
 ### Operations
 
@@ -634,22 +636,23 @@ offer = client.Offer()
 | --- | --- | --- | --- |
 | `availability` | `str` | No |  |
 | `brand` | `str` | No |  |
-| `click_url` | `str` | No |  |
+| `clickUrl` | `str` | No |  |
+| `count` | `int` | No |  |
 | `description` | `str` | No |  |
-| `ean` | `dict` | No |  |
 | `eer` | `str` | No |  |
-| `estimated_cpc` | `dict` | No |  |
+| `estimatedCpc` | `dict` | No |  |
 | `id` | `str` | No |  |
 | `image` | `dict` | No |  |
 | `merchant` | `dict` | No |  |
-| `original_price` | `dict` | No |  |
+| `offers` | `list` | No |  |
+| `originalPrice` | `dict` | No |  |
 | `price` | `dict` | No |  |
-| `promo_text` | `str` | No |  |
-| `shipping_price` | `dict` | No |  |
-| `shipping_time` | `dict` | No |  |
+| `promoText` | `str` | No |  |
+| `shippingPrice` | `dict` | No |  |
+| `shippingTime` | `dict` | No |  |
 | `thumbnail` | `dict` | No |  |
 | `title` | `str` | No |  |
-| `unit_price` | `dict` | No |  |
+| `unitPrice` | `dict` | No |  |
 
 ### Operations
 
@@ -710,12 +713,12 @@ report_detail = client.ReportDetail()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `click_id` | `str` | No |  |
+| `clickId` | `str` | No |  |
 | `currency` | `str` | No |  |
 | `date` | `str` | No |  |
 | `market` | `str` | No |  |
 | `merchant` | `dict` | No |  |
-| `placement_id` | `str` | No |  |
+| `placementId` | `str` | No |  |
 | `revenue` | `float` | No |  |
 
 ### Operations
@@ -822,7 +825,8 @@ report_modified = client.ReportModified()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `market` | `dict` | No |  |
+| `date` | `str` | No |  |
+| `modifiedDate` | `str` | No |  |
 
 ### Operations
 
