@@ -36,7 +36,7 @@ class Config {
 
 
   options = {
-    base: 'https://api.yadore.com/',
+    base: "https://api.yadore.com/",
 
     auth: {
       prefix: '',
@@ -98,46 +98,28 @@ class Config {
     "conversion_detail": {
       "fields": [
         {
-          "active": true,
           "name": "clickId",
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 0
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "date",
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 1
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "market",
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 2
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "merchant",
-          "req": false,
-          "type": "`$OBJECT`",
-          "index$": 3
+          "type": "`$OBJECT`"
         },
         {
-          "active": true,
           "name": "placementId",
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 4
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "sales",
-          "req": false,
-          "type": "`$NUMBER`",
-          "index$": 5
+          "type": "`$NUMBER`"
         }
       ],
       "name": "conversion_detail",
@@ -147,11 +129,9 @@ class Config {
           "name": "list",
           "points": [
             {
-              "active": true,
               "args": {
                 "query": [
                   {
-                    "active": true,
                     "kind": "query",
                     "name": "date",
                     "orig": "date",
@@ -159,7 +139,6 @@ class Config {
                     "type": "`$STRING`"
                   },
                   {
-                    "active": true,
                     "kind": "query",
                     "name": "format",
                     "orig": "format",
@@ -167,11 +146,9 @@ class Config {
                     "type": "`$STRING`"
                   },
                   {
-                    "active": true,
                     "kind": "query",
                     "name": "market",
                     "orig": "market",
-                    "reqd": false,
                     "type": "`$STRING`"
                   }
                 ]
@@ -194,11 +171,9 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body.clicks`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "list"
+          ]
         }
       },
       "relations": {
@@ -208,32 +183,20 @@ class Config {
     "conversion_detail_merchant": {
       "fields": [
         {
-          "active": true,
           "name": "clicks",
-          "req": false,
-          "type": "`$INTEGER`",
-          "index$": 0
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "market",
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 1
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "merchant",
-          "req": false,
-          "type": "`$OBJECT`",
-          "index$": 2
+          "type": "`$OBJECT`"
         },
         {
-          "active": true,
           "name": "sales",
-          "req": false,
-          "type": "`$INTEGER`",
-          "index$": 3
+          "type": "`$INTEGER`"
         }
       ],
       "name": "conversion_detail_merchant",
@@ -243,11 +206,9 @@ class Config {
           "name": "list",
           "points": [
             {
-              "active": true,
               "args": {
                 "query": [
                   {
-                    "active": true,
                     "kind": "query",
                     "name": "format",
                     "orig": "format",
@@ -255,7 +216,6 @@ class Config {
                     "type": "`$STRING`"
                   },
                   {
-                    "active": true,
                     "kind": "query",
                     "name": "from",
                     "orig": "from",
@@ -263,15 +223,12 @@ class Config {
                     "type": "`$STRING`"
                   },
                   {
-                    "active": true,
                     "kind": "query",
                     "name": "market",
                     "orig": "market",
-                    "reqd": false,
                     "type": "`$STRING`"
                   },
                   {
-                    "active": true,
                     "kind": "query",
                     "name": "to",
                     "orig": "to",
@@ -300,11 +257,9 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "list"
+          ]
         }
       },
       "relations": {
@@ -314,25 +269,16 @@ class Config {
     "conversion_general": {
       "fields": [
         {
-          "active": true,
           "name": "date",
-          "req": false,
-          "type": "`$OBJECT`",
-          "index$": 0
+          "type": "`$OBJECT`"
         },
         {
-          "active": true,
           "name": "market",
-          "req": false,
-          "type": "`$OBJECT`",
-          "index$": 1
+          "type": "`$OBJECT`"
         },
         {
-          "active": true,
           "name": "total",
-          "req": false,
-          "type": "`$OBJECT`",
-          "index$": 2
+          "type": "`$OBJECT`"
         }
       ],
       "name": "conversion_general",
@@ -342,11 +288,9 @@ class Config {
           "name": "load",
           "points": [
             {
-              "active": true,
               "args": {
                 "query": [
                   {
-                    "active": true,
                     "kind": "query",
                     "name": "format",
                     "orig": "format",
@@ -354,7 +298,6 @@ class Config {
                     "type": "`$STRING`"
                   },
                   {
-                    "active": true,
                     "kind": "query",
                     "name": "from",
                     "orig": "from",
@@ -362,7 +305,6 @@ class Config {
                     "type": "`$STRING`"
                   },
                   {
-                    "active": true,
                     "kind": "query",
                     "name": "to",
                     "orig": "to",
@@ -389,11 +331,9 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "load"
+          ]
         }
       },
       "relations": {
@@ -403,11 +343,8 @@ class Config {
     "conversion_status": {
       "fields": [
         {
-          "active": true,
           "name": "status",
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 0
+          "type": "`$STRING`"
         }
       ],
       "name": "conversion_status",
@@ -417,11 +354,9 @@ class Config {
           "name": "load",
           "points": [
             {
-              "active": true,
               "args": {
                 "query": [
                   {
-                    "active": true,
                     "kind": "query",
                     "name": "date",
                     "orig": "date",
@@ -446,11 +381,9 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "load"
+          ]
         }
       },
       "relations": {
@@ -460,53 +393,34 @@ class Config {
     "deeplink": {
       "fields": [
         {
-          "active": true,
           "name": "deeplinks",
-          "req": false,
-          "type": "`$ARRAY`",
-          "index$": 0
+          "type": "`$ARRAY`"
         },
         {
-          "active": true,
           "name": "found",
-          "req": false,
-          "type": "`$INTEGER`",
-          "index$": 1
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "isCouponing",
-          "req": false,
-          "type": "`$BOOLEAN`",
-          "index$": 2
+          "type": "`$BOOLEAN`"
         },
         {
-          "active": true,
           "name": "market",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 3
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "placementId",
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 4
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "total",
-          "req": false,
-          "type": "`$INTEGER`",
-          "index$": 5
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "urls",
           "req": true,
-          "type": "`$ARRAY`",
-          "index$": 6
+          "type": "`$ARRAY`"
         }
       ],
       "name": "deeplink",
@@ -516,7 +430,6 @@ class Config {
           "name": "create",
           "points": [
             {
-              "active": true,
               "args": {},
               "kind": "http",
               "method": "POST",
@@ -529,11 +442,9 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body.result`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "create"
+          ]
         }
       },
       "relations": {
@@ -543,67 +454,40 @@ class Config {
     "deeplink_merchant": {
       "fields": [
         {
-          "active": true,
           "name": "deeplinkCount",
-          "req": false,
-          "type": "`$INTEGER`",
-          "index$": 0
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "estimatedCpc",
-          "req": false,
-          "type": "`$OBJECT`",
-          "index$": 1
+          "type": "`$OBJECT`"
         },
         {
-          "active": true,
           "name": "hasExternalHomepage",
-          "req": false,
-          "type": "`$BOOLEAN`",
-          "index$": 2
+          "type": "`$BOOLEAN`"
         },
         {
-          "active": true,
           "name": "hasSmartlinkHomepage",
-          "req": false,
-          "type": "`$BOOLEAN`",
-          "index$": 3
+          "type": "`$BOOLEAN`"
         },
         {
-          "active": true,
           "name": "id",
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 4
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "isSmartlink",
-          "req": false,
-          "type": "`$BOOLEAN`",
-          "index$": 5
+          "type": "`$BOOLEAN`"
         },
         {
-          "active": true,
           "name": "logo",
-          "req": false,
-          "type": "`$OBJECT`",
-          "index$": 6
+          "type": "`$OBJECT`"
         },
         {
-          "active": true,
           "name": "name",
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 7
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "trafficTypes",
-          "req": false,
-          "type": "`$ARRAY`",
-          "index$": 8
+          "type": "`$ARRAY`"
         }
       ],
       "name": "deeplink_merchant",
@@ -613,35 +497,27 @@ class Config {
           "name": "list",
           "points": [
             {
-              "active": true,
               "args": {
                 "query": [
                   {
-                    "active": true,
                     "kind": "query",
                     "name": "has_homepage",
                     "orig": "has_homepage",
-                    "reqd": false,
                     "type": "`$BOOLEAN`"
                   },
                   {
-                    "active": true,
                     "kind": "query",
                     "name": "is_couponing",
                     "orig": "is_couponing",
-                    "reqd": false,
                     "type": "`$BOOLEAN`"
                   },
                   {
-                    "active": true,
                     "kind": "query",
                     "name": "is_smartlink",
                     "orig": "is_smartlink",
-                    "reqd": false,
                     "type": "`$BOOLEAN`"
                   },
                   {
-                    "active": true,
                     "kind": "query",
                     "name": "market",
                     "orig": "market",
@@ -669,11 +545,9 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body.merchants`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "list"
+          ]
         }
       },
       "relations": {
@@ -689,27 +563,21 @@ class Config {
           "name": "load",
           "points": [
             {
-              "active": true,
               "args": {
                 "query": [
                   {
-                    "active": true,
                     "kind": "query",
                     "name": "callback_url",
                     "orig": "callback_url",
-                    "reqd": false,
                     "type": "`$STRING`"
                   },
                   {
-                    "active": true,
                     "kind": "query",
                     "name": "is_couponing",
                     "orig": "is_couponing",
-                    "reqd": false,
                     "type": "`$BOOLEAN`"
                   },
                   {
-                    "active": true,
                     "kind": "query",
                     "name": "market",
                     "orig": "market",
@@ -717,23 +585,18 @@ class Config {
                     "type": "`$STRING`"
                   },
                   {
-                    "active": true,
                     "kind": "query",
                     "name": "merchant_id",
                     "orig": "merchant_id",
-                    "reqd": false,
                     "type": "`$STRING`"
                   },
                   {
-                    "active": true,
                     "kind": "query",
                     "name": "placement_id",
                     "orig": "placement_id",
-                    "reqd": false,
                     "type": "`$STRING`"
                   },
                   {
-                    "active": true,
                     "kind": "query",
                     "name": "project_id",
                     "orig": "project_id",
@@ -741,7 +604,6 @@ class Config {
                     "type": "`$STRING`"
                   },
                   {
-                    "active": true,
                     "kind": "query",
                     "name": "url",
                     "orig": "url",
@@ -771,11 +633,9 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "load"
+          ]
         }
       },
       "relations": {
@@ -785,11 +645,8 @@ class Config {
     "market": {
       "fields": [
         {
-          "active": true,
           "name": "id",
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 0
+          "type": "`$STRING`"
         }
       ],
       "name": "market",
@@ -799,7 +656,6 @@ class Config {
           "name": "list",
           "points": [
             {
-              "active": true,
               "args": {},
               "kind": "http",
               "method": "GET",
@@ -812,11 +668,9 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body.markets`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "list"
+          ]
         }
       },
       "relations": {
@@ -826,39 +680,24 @@ class Config {
     "merchant": {
       "fields": [
         {
-          "active": true,
           "name": "id",
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 0
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "logo",
-          "req": false,
-          "type": "`$OBJECT`",
-          "index$": 1
+          "type": "`$OBJECT`"
         },
         {
-          "active": true,
           "name": "name",
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 2
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "offerCount",
-          "req": false,
-          "type": "`$INTEGER`",
-          "index$": 3
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "trafficTypes",
-          "req": false,
-          "type": "`$ARRAY`",
-          "index$": 4
+          "type": "`$ARRAY`"
         }
       ],
       "name": "merchant",
@@ -868,19 +707,15 @@ class Config {
           "name": "list",
           "points": [
             {
-              "active": true,
               "args": {
                 "query": [
                   {
-                    "active": true,
                     "kind": "query",
                     "name": "is_couponing",
                     "orig": "is_couponing",
-                    "reqd": false,
                     "type": "`$BOOLEAN`"
                   },
                   {
-                    "active": true,
                     "kind": "query",
                     "name": "market",
                     "orig": "market",
@@ -905,11 +740,9 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body.merchants`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "list"
+          ]
         }
       },
       "relations": {
@@ -919,137 +752,80 @@ class Config {
     "offer": {
       "fields": [
         {
-          "active": true,
           "name": "availability",
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 0
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "brand",
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 1
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "clickUrl",
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 2
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "count",
-          "req": false,
-          "type": "`$INTEGER`",
-          "index$": 3
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "description",
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 4
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "eer",
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 5
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "estimatedCpc",
-          "req": false,
-          "type": "`$OBJECT`",
-          "index$": 6
+          "type": "`$OBJECT`"
         },
         {
-          "active": true,
           "name": "id",
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 7
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "image",
-          "req": false,
-          "type": "`$OBJECT`",
-          "index$": 8
+          "type": "`$OBJECT`"
         },
         {
-          "active": true,
           "name": "merchant",
-          "req": false,
-          "type": "`$OBJECT`",
-          "index$": 9
+          "type": "`$OBJECT`"
         },
         {
-          "active": true,
           "name": "offers",
-          "req": false,
-          "type": "`$ARRAY`",
-          "index$": 10
+          "type": "`$ARRAY`"
         },
         {
-          "active": true,
           "name": "originalPrice",
-          "req": false,
-          "type": "`$OBJECT`",
-          "index$": 11
+          "type": "`$OBJECT`"
         },
         {
-          "active": true,
           "name": "price",
-          "req": false,
-          "type": "`$OBJECT`",
-          "index$": 12
+          "type": "`$OBJECT`"
         },
         {
-          "active": true,
           "name": "promoText",
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 13
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "shippingPrice",
-          "req": false,
-          "type": "`$OBJECT`",
-          "index$": 14
+          "type": "`$OBJECT`"
         },
         {
-          "active": true,
           "name": "shippingTime",
-          "req": false,
-          "type": "`$OBJECT`",
-          "index$": 15
+          "type": "`$OBJECT`"
         },
         {
-          "active": true,
           "name": "thumbnail",
-          "req": false,
-          "type": "`$OBJECT`",
-          "index$": 16
+          "type": "`$OBJECT`"
         },
         {
-          "active": true,
           "name": "title",
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 17
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "unitPrice",
-          "req": false,
-          "type": "`$OBJECT`",
-          "index$": 18
+          "type": "`$OBJECT`"
         }
       ],
       "name": "offer",
@@ -1059,43 +835,33 @@ class Config {
           "name": "list",
           "points": [
             {
-              "active": true,
               "args": {
                 "query": [
                   {
-                    "active": true,
                     "kind": "query",
                     "name": "ean",
                     "orig": "ean",
-                    "reqd": false,
                     "type": "`$STRING`"
                   },
                   {
-                    "active": true,
                     "kind": "query",
                     "name": "is_couponing",
                     "orig": "is_couponing",
-                    "reqd": false,
                     "type": "`$BOOLEAN`"
                   },
                   {
-                    "active": true,
                     "kind": "query",
                     "name": "keyword",
                     "orig": "keyword",
-                    "reqd": false,
                     "type": "`$STRING`"
                   },
                   {
-                    "active": true,
                     "kind": "query",
                     "name": "limit",
                     "orig": "limit",
-                    "reqd": false,
                     "type": "`$INTEGER`"
                   },
                   {
-                    "active": true,
                     "kind": "query",
                     "name": "market",
                     "orig": "market",
@@ -1103,45 +869,35 @@ class Config {
                     "type": "`$STRING`"
                   },
                   {
-                    "active": true,
                     "kind": "query",
                     "name": "merchant_id",
                     "orig": "merchant_id",
-                    "reqd": false,
                     "type": "`$STRING`"
                   },
                   {
-                    "active": true,
                     "kind": "query",
                     "name": "offer_id",
                     "orig": "offer_id",
-                    "reqd": false,
                     "type": "`$STRING`"
                   },
                   {
-                    "active": true,
                     "kind": "query",
                     "name": "placement_id",
                     "orig": "placement_id",
-                    "reqd": false,
                     "type": "`$STRING`"
                   },
                   {
-                    "active": true,
                     "example": "fuzzy",
                     "kind": "query",
                     "name": "precision",
                     "orig": "precision",
-                    "reqd": false,
                     "type": "`$STRING`"
                   },
                   {
-                    "active": true,
                     "example": "rel_desc",
                     "kind": "query",
                     "name": "sort",
                     "orig": "sort",
-                    "reqd": false,
                     "type": "`$STRING`"
                   }
                 ]
@@ -1170,22 +926,18 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body.offers`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "list"
+          ]
         },
         "load": {
           "input": "data",
           "name": "load",
           "points": [
             {
-              "active": true,
               "args": {
                 "query": [
                   {
-                    "active": true,
                     "example": "12345678,87654321",
                     "kind": "query",
                     "name": "ean",
@@ -1194,15 +946,12 @@ class Config {
                     "type": "`$STRING`"
                   },
                   {
-                    "active": true,
                     "kind": "query",
                     "name": "is_couponing",
                     "orig": "is_couponing",
-                    "reqd": false,
                     "type": "`$BOOLEAN`"
                   },
                   {
-                    "active": true,
                     "kind": "query",
                     "name": "market",
                     "orig": "market",
@@ -1210,19 +959,15 @@ class Config {
                     "type": "`$STRING`"
                   },
                   {
-                    "active": true,
                     "kind": "query",
                     "name": "merchant_id",
                     "orig": "merchant_id",
-                    "reqd": false,
                     "type": "`$STRING`"
                   },
                   {
-                    "active": true,
                     "kind": "query",
                     "name": "placement_id",
                     "orig": "placement_id",
-                    "reqd": false,
                     "type": "`$STRING`"
                   }
                 ]
@@ -1248,11 +993,9 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body.ean`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "load"
+          ]
         }
       },
       "relations": {
@@ -1262,53 +1005,32 @@ class Config {
     "report_detail": {
       "fields": [
         {
-          "active": true,
           "name": "clickId",
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 0
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "currency",
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 1
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "date",
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 2
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "market",
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 3
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "merchant",
-          "req": false,
-          "type": "`$OBJECT`",
-          "index$": 4
+          "type": "`$OBJECT`"
         },
         {
-          "active": true,
           "name": "placementId",
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 5
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "revenue",
-          "req": false,
-          "type": "`$NUMBER`",
-          "index$": 6
+          "type": "`$NUMBER`"
         }
       ],
       "name": "report_detail",
@@ -1318,11 +1040,9 @@ class Config {
           "name": "list",
           "points": [
             {
-              "active": true,
               "args": {
                 "query": [
                   {
-                    "active": true,
                     "kind": "query",
                     "name": "date",
                     "orig": "date",
@@ -1330,7 +1050,6 @@ class Config {
                     "type": "`$STRING`"
                   },
                   {
-                    "active": true,
                     "kind": "query",
                     "name": "format",
                     "orig": "format",
@@ -1338,11 +1057,9 @@ class Config {
                     "type": "`$STRING`"
                   },
                   {
-                    "active": true,
                     "kind": "query",
                     "name": "market",
                     "orig": "market",
-                    "reqd": false,
                     "type": "`$STRING`"
                   }
                 ]
@@ -1365,11 +1082,9 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body.clicks`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "list"
+          ]
         }
       },
       "relations": {
@@ -1379,25 +1094,16 @@ class Config {
     "report_general": {
       "fields": [
         {
-          "active": true,
           "name": "date",
-          "req": false,
-          "type": "`$OBJECT`",
-          "index$": 0
+          "type": "`$OBJECT`"
         },
         {
-          "active": true,
           "name": "market",
-          "req": false,
-          "type": "`$OBJECT`",
-          "index$": 1
+          "type": "`$OBJECT`"
         },
         {
-          "active": true,
           "name": "total",
-          "req": false,
-          "type": "`$OBJECT`",
-          "index$": 2
+          "type": "`$OBJECT`"
         }
       ],
       "name": "report_general",
@@ -1407,11 +1113,9 @@ class Config {
           "name": "load",
           "points": [
             {
-              "active": true,
               "args": {
                 "query": [
                   {
-                    "active": true,
                     "kind": "query",
                     "name": "date",
                     "orig": "date",
@@ -1419,7 +1123,6 @@ class Config {
                     "type": "`$STRING`"
                   },
                   {
-                    "active": true,
                     "kind": "query",
                     "name": "format",
                     "orig": "format",
@@ -1445,11 +1148,9 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "load"
+          ]
         }
       },
       "relations": {
@@ -1459,18 +1160,12 @@ class Config {
     "report_modified": {
       "fields": [
         {
-          "active": true,
           "name": "date",
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 0
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "modifiedDate",
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 1
+          "type": "`$STRING`"
         }
       ],
       "name": "report_modified",
@@ -1480,11 +1175,9 @@ class Config {
           "name": "load",
           "points": [
             {
-              "active": true,
               "args": {
                 "query": [
                   {
-                    "active": true,
                     "kind": "query",
                     "name": "from",
                     "orig": "from",
@@ -1492,15 +1185,12 @@ class Config {
                     "type": "`$STRING`"
                   },
                   {
-                    "active": true,
                     "kind": "query",
                     "name": "market",
                     "orig": "market",
-                    "reqd": false,
                     "type": "`$STRING`"
                   },
                   {
-                    "active": true,
                     "kind": "query",
                     "name": "to",
                     "orig": "to",
@@ -1527,11 +1217,9 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body.market`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "load"
+          ]
         }
       },
       "relations": {
@@ -1541,11 +1229,8 @@ class Config {
     "report_status": {
       "fields": [
         {
-          "active": true,
           "name": "status",
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 0
+          "type": "`$STRING`"
         }
       ],
       "name": "report_status",
@@ -1555,11 +1240,9 @@ class Config {
           "name": "load",
           "points": [
             {
-              "active": true,
               "args": {
                 "query": [
                   {
-                    "active": true,
                     "kind": "query",
                     "name": "date",
                     "orig": "date",
@@ -1584,11 +1267,9 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "load"
+          ]
         }
       },
       "relations": {

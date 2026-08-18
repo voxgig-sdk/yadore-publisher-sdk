@@ -15,7 +15,7 @@ require_relative "../YadorePublisher_sdk"
 module YadorePublisherFeatureHarness
   # True when this SDK was generated with the named feature.
   def self.has_feature?(name)
-    f = YadorePublisherConfig.make_config["feature"]
+    f = YadorePublisherConfig.shared_config["feature"]
     f.is_a?(Hash) && !f[name].nil?
   end
 

@@ -33,7 +33,7 @@ class DeeplinkMerchantEntityTest < Minitest::Test
     assert_equal 3, seen.length
 
     # Inbound: streaming active -> yields each item from the feature.
-    cfg = YadorePublisherConfig.make_config
+    cfg = YadorePublisherConfig.shared_config
     if cfg["feature"].is_a?(Hash) && cfg["feature"].key?("streaming")
       sdk = YadorePublisherSDK.test(seed, { "feature" => { "streaming" => { "active" => true } } })
       got = []

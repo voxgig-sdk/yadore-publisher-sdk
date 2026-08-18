@@ -1,7 +1,30 @@
 # YadorePublisher SDK configuration
 
 
+_shared_config = None
+
+
+def shared_config():
+    """Return the process-wide config, built once on first use.
+
+    The SDK reads the config on every request and never writes to it, so one
+    instance is shared by every client rather than rebuilt per client.
+
+    The returned dict is shared: treat it as read-only. Callers that need to
+    mutate should use make_config, which always returns a fresh copy.
+    """
+    global _shared_config
+    if _shared_config is None:
+        _shared_config = make_config()
+    return _shared_config
+
+
 def make_config():
+    """Build a fresh, fully materialised config dict.
+
+    Every call rebuilds the whole structure, so prefer shared_config unless
+    you need a private copy you intend to mutate.
+    """
     return {
         "main": {
             "name": "YadorePublisher",
@@ -42,46 +65,28 @@ def make_config():
       "conversion_detail": {
         "fields": [
           {
-            "active": True,
             "name": "clickId",
-            "req": False,
             "type": "`$STRING`",
-            "index$": 0,
           },
           {
-            "active": True,
             "name": "date",
-            "req": False,
             "type": "`$STRING`",
-            "index$": 1,
           },
           {
-            "active": True,
             "name": "market",
-            "req": False,
             "type": "`$STRING`",
-            "index$": 2,
           },
           {
-            "active": True,
             "name": "merchant",
-            "req": False,
             "type": "`$OBJECT`",
-            "index$": 3,
           },
           {
-            "active": True,
             "name": "placementId",
-            "req": False,
             "type": "`$STRING`",
-            "index$": 4,
           },
           {
-            "active": True,
             "name": "sales",
-            "req": False,
             "type": "`$NUMBER`",
-            "index$": 5,
           },
         ],
         "name": "conversion_detail",
@@ -91,11 +96,9 @@ def make_config():
             "name": "list",
             "points": [
               {
-                "active": True,
                 "args": {
                   "query": [
                     {
-                      "active": True,
                       "kind": "query",
                       "name": "date",
                       "orig": "date",
@@ -103,7 +106,6 @@ def make_config():
                       "type": "`$STRING`",
                     },
                     {
-                      "active": True,
                       "kind": "query",
                       "name": "format",
                       "orig": "format",
@@ -111,11 +113,9 @@ def make_config():
                       "type": "`$STRING`",
                     },
                     {
-                      "active": True,
                       "kind": "query",
                       "name": "market",
                       "orig": "market",
-                      "reqd": False,
                       "type": "`$STRING`",
                     },
                   ],
@@ -139,10 +139,8 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body.clicks`",
                 },
-                "index$": 0,
               },
             ],
-            "key$": "list",
           },
         },
         "relations": {
@@ -152,32 +150,20 @@ def make_config():
       "conversion_detail_merchant": {
         "fields": [
           {
-            "active": True,
             "name": "clicks",
-            "req": False,
             "type": "`$INTEGER`",
-            "index$": 0,
           },
           {
-            "active": True,
             "name": "market",
-            "req": False,
             "type": "`$STRING`",
-            "index$": 1,
           },
           {
-            "active": True,
             "name": "merchant",
-            "req": False,
             "type": "`$OBJECT`",
-            "index$": 2,
           },
           {
-            "active": True,
             "name": "sales",
-            "req": False,
             "type": "`$INTEGER`",
-            "index$": 3,
           },
         ],
         "name": "conversion_detail_merchant",
@@ -187,11 +173,9 @@ def make_config():
             "name": "list",
             "points": [
               {
-                "active": True,
                 "args": {
                   "query": [
                     {
-                      "active": True,
                       "kind": "query",
                       "name": "format",
                       "orig": "format",
@@ -199,7 +183,6 @@ def make_config():
                       "type": "`$STRING`",
                     },
                     {
-                      "active": True,
                       "kind": "query",
                       "name": "from",
                       "orig": "from",
@@ -207,15 +190,12 @@ def make_config():
                       "type": "`$STRING`",
                     },
                     {
-                      "active": True,
                       "kind": "query",
                       "name": "market",
                       "orig": "market",
-                      "reqd": False,
                       "type": "`$STRING`",
                     },
                     {
-                      "active": True,
                       "kind": "query",
                       "name": "to",
                       "orig": "to",
@@ -245,10 +225,8 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
-                "index$": 0,
               },
             ],
-            "key$": "list",
           },
         },
         "relations": {
@@ -258,25 +236,16 @@ def make_config():
       "conversion_general": {
         "fields": [
           {
-            "active": True,
             "name": "date",
-            "req": False,
             "type": "`$OBJECT`",
-            "index$": 0,
           },
           {
-            "active": True,
             "name": "market",
-            "req": False,
             "type": "`$OBJECT`",
-            "index$": 1,
           },
           {
-            "active": True,
             "name": "total",
-            "req": False,
             "type": "`$OBJECT`",
-            "index$": 2,
           },
         ],
         "name": "conversion_general",
@@ -286,11 +255,9 @@ def make_config():
             "name": "load",
             "points": [
               {
-                "active": True,
                 "args": {
                   "query": [
                     {
-                      "active": True,
                       "kind": "query",
                       "name": "format",
                       "orig": "format",
@@ -298,7 +265,6 @@ def make_config():
                       "type": "`$STRING`",
                     },
                     {
-                      "active": True,
                       "kind": "query",
                       "name": "from",
                       "orig": "from",
@@ -306,7 +272,6 @@ def make_config():
                       "type": "`$STRING`",
                     },
                     {
-                      "active": True,
                       "kind": "query",
                       "name": "to",
                       "orig": "to",
@@ -334,10 +299,8 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
-                "index$": 0,
               },
             ],
-            "key$": "load",
           },
         },
         "relations": {
@@ -347,11 +310,8 @@ def make_config():
       "conversion_status": {
         "fields": [
           {
-            "active": True,
             "name": "status",
-            "req": False,
             "type": "`$STRING`",
-            "index$": 0,
           },
         ],
         "name": "conversion_status",
@@ -361,11 +321,9 @@ def make_config():
             "name": "load",
             "points": [
               {
-                "active": True,
                 "args": {
                   "query": [
                     {
-                      "active": True,
                       "kind": "query",
                       "name": "date",
                       "orig": "date",
@@ -391,10 +349,8 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
-                "index$": 0,
               },
             ],
-            "key$": "load",
           },
         },
         "relations": {
@@ -404,53 +360,34 @@ def make_config():
       "deeplink": {
         "fields": [
           {
-            "active": True,
             "name": "deeplinks",
-            "req": False,
             "type": "`$ARRAY`",
-            "index$": 0,
           },
           {
-            "active": True,
             "name": "found",
-            "req": False,
             "type": "`$INTEGER`",
-            "index$": 1,
           },
           {
-            "active": True,
             "name": "isCouponing",
-            "req": False,
             "type": "`$BOOLEAN`",
-            "index$": 2,
           },
           {
-            "active": True,
             "name": "market",
             "req": True,
             "type": "`$STRING`",
-            "index$": 3,
           },
           {
-            "active": True,
             "name": "placementId",
-            "req": False,
             "type": "`$STRING`",
-            "index$": 4,
           },
           {
-            "active": True,
             "name": "total",
-            "req": False,
             "type": "`$INTEGER`",
-            "index$": 5,
           },
           {
-            "active": True,
             "name": "urls",
             "req": True,
             "type": "`$ARRAY`",
-            "index$": 6,
           },
         ],
         "name": "deeplink",
@@ -460,7 +397,6 @@ def make_config():
             "name": "create",
             "points": [
               {
-                "active": True,
                 "args": {},
                 "kind": "http",
                 "method": "POST",
@@ -474,10 +410,8 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body.result`",
                 },
-                "index$": 0,
               },
             ],
-            "key$": "create",
           },
         },
         "relations": {
@@ -487,67 +421,40 @@ def make_config():
       "deeplink_merchant": {
         "fields": [
           {
-            "active": True,
             "name": "deeplinkCount",
-            "req": False,
             "type": "`$INTEGER`",
-            "index$": 0,
           },
           {
-            "active": True,
             "name": "estimatedCpc",
-            "req": False,
             "type": "`$OBJECT`",
-            "index$": 1,
           },
           {
-            "active": True,
             "name": "hasExternalHomepage",
-            "req": False,
             "type": "`$BOOLEAN`",
-            "index$": 2,
           },
           {
-            "active": True,
             "name": "hasSmartlinkHomepage",
-            "req": False,
             "type": "`$BOOLEAN`",
-            "index$": 3,
           },
           {
-            "active": True,
             "name": "id",
-            "req": False,
             "type": "`$STRING`",
-            "index$": 4,
           },
           {
-            "active": True,
             "name": "isSmartlink",
-            "req": False,
             "type": "`$BOOLEAN`",
-            "index$": 5,
           },
           {
-            "active": True,
             "name": "logo",
-            "req": False,
             "type": "`$OBJECT`",
-            "index$": 6,
           },
           {
-            "active": True,
             "name": "name",
-            "req": False,
             "type": "`$STRING`",
-            "index$": 7,
           },
           {
-            "active": True,
             "name": "trafficTypes",
-            "req": False,
             "type": "`$ARRAY`",
-            "index$": 8,
           },
         ],
         "name": "deeplink_merchant",
@@ -557,35 +464,27 @@ def make_config():
             "name": "list",
             "points": [
               {
-                "active": True,
                 "args": {
                   "query": [
                     {
-                      "active": True,
                       "kind": "query",
                       "name": "has_homepage",
                       "orig": "has_homepage",
-                      "reqd": False,
                       "type": "`$BOOLEAN`",
                     },
                     {
-                      "active": True,
                       "kind": "query",
                       "name": "is_couponing",
                       "orig": "is_couponing",
-                      "reqd": False,
                       "type": "`$BOOLEAN`",
                     },
                     {
-                      "active": True,
                       "kind": "query",
                       "name": "is_smartlink",
                       "orig": "is_smartlink",
-                      "reqd": False,
                       "type": "`$BOOLEAN`",
                     },
                     {
-                      "active": True,
                       "kind": "query",
                       "name": "market",
                       "orig": "market",
@@ -614,10 +513,8 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body.merchants`",
                 },
-                "index$": 0,
               },
             ],
-            "key$": "list",
           },
         },
         "relations": {
@@ -633,27 +530,21 @@ def make_config():
             "name": "load",
             "points": [
               {
-                "active": True,
                 "args": {
                   "query": [
                     {
-                      "active": True,
                       "kind": "query",
                       "name": "callback_url",
                       "orig": "callback_url",
-                      "reqd": False,
                       "type": "`$STRING`",
                     },
                     {
-                      "active": True,
                       "kind": "query",
                       "name": "is_couponing",
                       "orig": "is_couponing",
-                      "reqd": False,
                       "type": "`$BOOLEAN`",
                     },
                     {
-                      "active": True,
                       "kind": "query",
                       "name": "market",
                       "orig": "market",
@@ -661,23 +552,18 @@ def make_config():
                       "type": "`$STRING`",
                     },
                     {
-                      "active": True,
                       "kind": "query",
                       "name": "merchant_id",
                       "orig": "merchant_id",
-                      "reqd": False,
                       "type": "`$STRING`",
                     },
                     {
-                      "active": True,
                       "kind": "query",
                       "name": "placement_id",
                       "orig": "placement_id",
-                      "reqd": False,
                       "type": "`$STRING`",
                     },
                     {
-                      "active": True,
                       "kind": "query",
                       "name": "project_id",
                       "orig": "project_id",
@@ -685,7 +571,6 @@ def make_config():
                       "type": "`$STRING`",
                     },
                     {
-                      "active": True,
                       "kind": "query",
                       "name": "url",
                       "orig": "url",
@@ -716,10 +601,8 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
-                "index$": 0,
               },
             ],
-            "key$": "load",
           },
         },
         "relations": {
@@ -729,11 +612,8 @@ def make_config():
       "market": {
         "fields": [
           {
-            "active": True,
             "name": "id",
-            "req": False,
             "type": "`$STRING`",
-            "index$": 0,
           },
         ],
         "name": "market",
@@ -743,7 +623,6 @@ def make_config():
             "name": "list",
             "points": [
               {
-                "active": True,
                 "args": {},
                 "kind": "http",
                 "method": "GET",
@@ -757,10 +636,8 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body.markets`",
                 },
-                "index$": 0,
               },
             ],
-            "key$": "list",
           },
         },
         "relations": {
@@ -770,39 +647,24 @@ def make_config():
       "merchant": {
         "fields": [
           {
-            "active": True,
             "name": "id",
-            "req": False,
             "type": "`$STRING`",
-            "index$": 0,
           },
           {
-            "active": True,
             "name": "logo",
-            "req": False,
             "type": "`$OBJECT`",
-            "index$": 1,
           },
           {
-            "active": True,
             "name": "name",
-            "req": False,
             "type": "`$STRING`",
-            "index$": 2,
           },
           {
-            "active": True,
             "name": "offerCount",
-            "req": False,
             "type": "`$INTEGER`",
-            "index$": 3,
           },
           {
-            "active": True,
             "name": "trafficTypes",
-            "req": False,
             "type": "`$ARRAY`",
-            "index$": 4,
           },
         ],
         "name": "merchant",
@@ -812,19 +674,15 @@ def make_config():
             "name": "list",
             "points": [
               {
-                "active": True,
                 "args": {
                   "query": [
                     {
-                      "active": True,
                       "kind": "query",
                       "name": "is_couponing",
                       "orig": "is_couponing",
-                      "reqd": False,
                       "type": "`$BOOLEAN`",
                     },
                     {
-                      "active": True,
                       "kind": "query",
                       "name": "market",
                       "orig": "market",
@@ -850,10 +708,8 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body.merchants`",
                 },
-                "index$": 0,
               },
             ],
-            "key$": "list",
           },
         },
         "relations": {
@@ -863,137 +719,80 @@ def make_config():
       "offer": {
         "fields": [
           {
-            "active": True,
             "name": "availability",
-            "req": False,
             "type": "`$STRING`",
-            "index$": 0,
           },
           {
-            "active": True,
             "name": "brand",
-            "req": False,
             "type": "`$STRING`",
-            "index$": 1,
           },
           {
-            "active": True,
             "name": "clickUrl",
-            "req": False,
             "type": "`$STRING`",
-            "index$": 2,
           },
           {
-            "active": True,
             "name": "count",
-            "req": False,
             "type": "`$INTEGER`",
-            "index$": 3,
           },
           {
-            "active": True,
             "name": "description",
-            "req": False,
             "type": "`$STRING`",
-            "index$": 4,
           },
           {
-            "active": True,
             "name": "eer",
-            "req": False,
             "type": "`$STRING`",
-            "index$": 5,
           },
           {
-            "active": True,
             "name": "estimatedCpc",
-            "req": False,
             "type": "`$OBJECT`",
-            "index$": 6,
           },
           {
-            "active": True,
             "name": "id",
-            "req": False,
             "type": "`$STRING`",
-            "index$": 7,
           },
           {
-            "active": True,
             "name": "image",
-            "req": False,
             "type": "`$OBJECT`",
-            "index$": 8,
           },
           {
-            "active": True,
             "name": "merchant",
-            "req": False,
             "type": "`$OBJECT`",
-            "index$": 9,
           },
           {
-            "active": True,
             "name": "offers",
-            "req": False,
             "type": "`$ARRAY`",
-            "index$": 10,
           },
           {
-            "active": True,
             "name": "originalPrice",
-            "req": False,
             "type": "`$OBJECT`",
-            "index$": 11,
           },
           {
-            "active": True,
             "name": "price",
-            "req": False,
             "type": "`$OBJECT`",
-            "index$": 12,
           },
           {
-            "active": True,
             "name": "promoText",
-            "req": False,
             "type": "`$STRING`",
-            "index$": 13,
           },
           {
-            "active": True,
             "name": "shippingPrice",
-            "req": False,
             "type": "`$OBJECT`",
-            "index$": 14,
           },
           {
-            "active": True,
             "name": "shippingTime",
-            "req": False,
             "type": "`$OBJECT`",
-            "index$": 15,
           },
           {
-            "active": True,
             "name": "thumbnail",
-            "req": False,
             "type": "`$OBJECT`",
-            "index$": 16,
           },
           {
-            "active": True,
             "name": "title",
-            "req": False,
             "type": "`$STRING`",
-            "index$": 17,
           },
           {
-            "active": True,
             "name": "unitPrice",
-            "req": False,
             "type": "`$OBJECT`",
-            "index$": 18,
           },
         ],
         "name": "offer",
@@ -1003,43 +802,33 @@ def make_config():
             "name": "list",
             "points": [
               {
-                "active": True,
                 "args": {
                   "query": [
                     {
-                      "active": True,
                       "kind": "query",
                       "name": "ean",
                       "orig": "ean",
-                      "reqd": False,
                       "type": "`$STRING`",
                     },
                     {
-                      "active": True,
                       "kind": "query",
                       "name": "is_couponing",
                       "orig": "is_couponing",
-                      "reqd": False,
                       "type": "`$BOOLEAN`",
                     },
                     {
-                      "active": True,
                       "kind": "query",
                       "name": "keyword",
                       "orig": "keyword",
-                      "reqd": False,
                       "type": "`$STRING`",
                     },
                     {
-                      "active": True,
                       "kind": "query",
                       "name": "limit",
                       "orig": "limit",
-                      "reqd": False,
                       "type": "`$INTEGER`",
                     },
                     {
-                      "active": True,
                       "kind": "query",
                       "name": "market",
                       "orig": "market",
@@ -1047,45 +836,35 @@ def make_config():
                       "type": "`$STRING`",
                     },
                     {
-                      "active": True,
                       "kind": "query",
                       "name": "merchant_id",
                       "orig": "merchant_id",
-                      "reqd": False,
                       "type": "`$STRING`",
                     },
                     {
-                      "active": True,
                       "kind": "query",
                       "name": "offer_id",
                       "orig": "offer_id",
-                      "reqd": False,
                       "type": "`$STRING`",
                     },
                     {
-                      "active": True,
                       "kind": "query",
                       "name": "placement_id",
                       "orig": "placement_id",
-                      "reqd": False,
                       "type": "`$STRING`",
                     },
                     {
-                      "active": True,
                       "example": "fuzzy",
                       "kind": "query",
                       "name": "precision",
                       "orig": "precision",
-                      "reqd": False,
                       "type": "`$STRING`",
                     },
                     {
-                      "active": True,
                       "example": "rel_desc",
                       "kind": "query",
                       "name": "sort",
                       "orig": "sort",
-                      "reqd": False,
                       "type": "`$STRING`",
                     },
                   ],
@@ -1115,21 +894,17 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body.offers`",
                 },
-                "index$": 0,
               },
             ],
-            "key$": "list",
           },
           "load": {
             "input": "data",
             "name": "load",
             "points": [
               {
-                "active": True,
                 "args": {
                   "query": [
                     {
-                      "active": True,
                       "example": "12345678,87654321",
                       "kind": "query",
                       "name": "ean",
@@ -1138,15 +913,12 @@ def make_config():
                       "type": "`$STRING`",
                     },
                     {
-                      "active": True,
                       "kind": "query",
                       "name": "is_couponing",
                       "orig": "is_couponing",
-                      "reqd": False,
                       "type": "`$BOOLEAN`",
                     },
                     {
-                      "active": True,
                       "kind": "query",
                       "name": "market",
                       "orig": "market",
@@ -1154,19 +926,15 @@ def make_config():
                       "type": "`$STRING`",
                     },
                     {
-                      "active": True,
                       "kind": "query",
                       "name": "merchant_id",
                       "orig": "merchant_id",
-                      "reqd": False,
                       "type": "`$STRING`",
                     },
                     {
-                      "active": True,
                       "kind": "query",
                       "name": "placement_id",
                       "orig": "placement_id",
-                      "reqd": False,
                       "type": "`$STRING`",
                     },
                   ],
@@ -1193,10 +961,8 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body.ean`",
                 },
-                "index$": 0,
               },
             ],
-            "key$": "load",
           },
         },
         "relations": {
@@ -1206,53 +972,32 @@ def make_config():
       "report_detail": {
         "fields": [
           {
-            "active": True,
             "name": "clickId",
-            "req": False,
             "type": "`$STRING`",
-            "index$": 0,
           },
           {
-            "active": True,
             "name": "currency",
-            "req": False,
             "type": "`$STRING`",
-            "index$": 1,
           },
           {
-            "active": True,
             "name": "date",
-            "req": False,
             "type": "`$STRING`",
-            "index$": 2,
           },
           {
-            "active": True,
             "name": "market",
-            "req": False,
             "type": "`$STRING`",
-            "index$": 3,
           },
           {
-            "active": True,
             "name": "merchant",
-            "req": False,
             "type": "`$OBJECT`",
-            "index$": 4,
           },
           {
-            "active": True,
             "name": "placementId",
-            "req": False,
             "type": "`$STRING`",
-            "index$": 5,
           },
           {
-            "active": True,
             "name": "revenue",
-            "req": False,
             "type": "`$NUMBER`",
-            "index$": 6,
           },
         ],
         "name": "report_detail",
@@ -1262,11 +1007,9 @@ def make_config():
             "name": "list",
             "points": [
               {
-                "active": True,
                 "args": {
                   "query": [
                     {
-                      "active": True,
                       "kind": "query",
                       "name": "date",
                       "orig": "date",
@@ -1274,7 +1017,6 @@ def make_config():
                       "type": "`$STRING`",
                     },
                     {
-                      "active": True,
                       "kind": "query",
                       "name": "format",
                       "orig": "format",
@@ -1282,11 +1024,9 @@ def make_config():
                       "type": "`$STRING`",
                     },
                     {
-                      "active": True,
                       "kind": "query",
                       "name": "market",
                       "orig": "market",
-                      "reqd": False,
                       "type": "`$STRING`",
                     },
                   ],
@@ -1310,10 +1050,8 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body.clicks`",
                 },
-                "index$": 0,
               },
             ],
-            "key$": "list",
           },
         },
         "relations": {
@@ -1323,25 +1061,16 @@ def make_config():
       "report_general": {
         "fields": [
           {
-            "active": True,
             "name": "date",
-            "req": False,
             "type": "`$OBJECT`",
-            "index$": 0,
           },
           {
-            "active": True,
             "name": "market",
-            "req": False,
             "type": "`$OBJECT`",
-            "index$": 1,
           },
           {
-            "active": True,
             "name": "total",
-            "req": False,
             "type": "`$OBJECT`",
-            "index$": 2,
           },
         ],
         "name": "report_general",
@@ -1351,11 +1080,9 @@ def make_config():
             "name": "load",
             "points": [
               {
-                "active": True,
                 "args": {
                   "query": [
                     {
-                      "active": True,
                       "kind": "query",
                       "name": "date",
                       "orig": "date",
@@ -1363,7 +1090,6 @@ def make_config():
                       "type": "`$STRING`",
                     },
                     {
-                      "active": True,
                       "kind": "query",
                       "name": "format",
                       "orig": "format",
@@ -1390,10 +1116,8 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
-                "index$": 0,
               },
             ],
-            "key$": "load",
           },
         },
         "relations": {
@@ -1403,18 +1127,12 @@ def make_config():
       "report_modified": {
         "fields": [
           {
-            "active": True,
             "name": "date",
-            "req": False,
             "type": "`$STRING`",
-            "index$": 0,
           },
           {
-            "active": True,
             "name": "modifiedDate",
-            "req": False,
             "type": "`$STRING`",
-            "index$": 1,
           },
         ],
         "name": "report_modified",
@@ -1424,11 +1142,9 @@ def make_config():
             "name": "load",
             "points": [
               {
-                "active": True,
                 "args": {
                   "query": [
                     {
-                      "active": True,
                       "kind": "query",
                       "name": "from",
                       "orig": "from",
@@ -1436,15 +1152,12 @@ def make_config():
                       "type": "`$STRING`",
                     },
                     {
-                      "active": True,
                       "kind": "query",
                       "name": "market",
                       "orig": "market",
-                      "reqd": False,
                       "type": "`$STRING`",
                     },
                     {
-                      "active": True,
                       "kind": "query",
                       "name": "to",
                       "orig": "to",
@@ -1472,10 +1185,8 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body.market`",
                 },
-                "index$": 0,
               },
             ],
-            "key$": "load",
           },
         },
         "relations": {
@@ -1485,11 +1196,8 @@ def make_config():
       "report_status": {
         "fields": [
           {
-            "active": True,
             "name": "status",
-            "req": False,
             "type": "`$STRING`",
-            "index$": 0,
           },
         ],
         "name": "report_status",
@@ -1499,11 +1207,9 @@ def make_config():
             "name": "load",
             "points": [
               {
-                "active": True,
                 "args": {
                   "query": [
                     {
-                      "active": True,
                       "kind": "query",
                       "name": "date",
                       "orig": "date",
@@ -1529,10 +1235,8 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
-                "index$": 0,
               },
             ],
-            "key$": "load",
           },
         },
         "relations": {

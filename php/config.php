@@ -5,6 +5,29 @@ declare(strict_types=1);
 
 class YadorePublisherConfig
 {
+    /** @var array<string,mixed>|null */
+    private static ?array $shared_config = null;
+
+    /**
+     * Return the process-wide config, built once on first use. The SDK reads
+     * the config on every request and never writes to it, so one instance is
+     * shared by every client rather than rebuilt per client.
+     *
+     * PHP arrays are copy-on-write, so callers that do mutate the result get
+     * their own copy and cannot disturb the shared one.
+     */
+    public static function shared_config(): array
+    {
+        if (self::$shared_config === null) {
+            self::$shared_config = self::make_config();
+        }
+        return self::$shared_config;
+    }
+
+    /**
+     * Build a fresh, fully materialised config array. Every call rebuilds the
+     * whole structure, so prefer shared_config unless you need a private copy.
+     */
     public static function make_config(): array
     {
         return [
@@ -47,46 +70,28 @@ class YadorePublisherConfig
         'conversion_detail' => [
           'fields' => [
             [
-              'active' => true,
               'name' => 'clickId',
-              'req' => false,
               'type' => '`$STRING`',
-              'index$' => 0,
             ],
             [
-              'active' => true,
               'name' => 'date',
-              'req' => false,
               'type' => '`$STRING`',
-              'index$' => 1,
             ],
             [
-              'active' => true,
               'name' => 'market',
-              'req' => false,
               'type' => '`$STRING`',
-              'index$' => 2,
             ],
             [
-              'active' => true,
               'name' => 'merchant',
-              'req' => false,
               'type' => '`$OBJECT`',
-              'index$' => 3,
             ],
             [
-              'active' => true,
               'name' => 'placementId',
-              'req' => false,
               'type' => '`$STRING`',
-              'index$' => 4,
             ],
             [
-              'active' => true,
               'name' => 'sales',
-              'req' => false,
               'type' => '`$NUMBER`',
-              'index$' => 5,
             ],
           ],
           'name' => 'conversion_detail',
@@ -96,11 +101,9 @@ class YadorePublisherConfig
               'name' => 'list',
               'points' => [
                 [
-                  'active' => true,
                   'args' => [
                     'query' => [
                       [
-                        'active' => true,
                         'kind' => 'query',
                         'name' => 'date',
                         'orig' => 'date',
@@ -108,7 +111,6 @@ class YadorePublisherConfig
                         'type' => '`$STRING`',
                       ],
                       [
-                        'active' => true,
                         'kind' => 'query',
                         'name' => 'format',
                         'orig' => 'format',
@@ -116,11 +118,9 @@ class YadorePublisherConfig
                         'type' => '`$STRING`',
                       ],
                       [
-                        'active' => true,
                         'kind' => 'query',
                         'name' => 'market',
                         'orig' => 'market',
-                        'reqd' => false,
                         'type' => '`$STRING`',
                       ],
                     ],
@@ -144,10 +144,8 @@ class YadorePublisherConfig
                     'req' => '`reqdata`',
                     'res' => '`body.clicks`',
                   ],
-                  'index$' => 0,
                 ],
               ],
-              'key$' => 'list',
             ],
           ],
           'relations' => [
@@ -157,32 +155,20 @@ class YadorePublisherConfig
         'conversion_detail_merchant' => [
           'fields' => [
             [
-              'active' => true,
               'name' => 'clicks',
-              'req' => false,
               'type' => '`$INTEGER`',
-              'index$' => 0,
             ],
             [
-              'active' => true,
               'name' => 'market',
-              'req' => false,
               'type' => '`$STRING`',
-              'index$' => 1,
             ],
             [
-              'active' => true,
               'name' => 'merchant',
-              'req' => false,
               'type' => '`$OBJECT`',
-              'index$' => 2,
             ],
             [
-              'active' => true,
               'name' => 'sales',
-              'req' => false,
               'type' => '`$INTEGER`',
-              'index$' => 3,
             ],
           ],
           'name' => 'conversion_detail_merchant',
@@ -192,11 +178,9 @@ class YadorePublisherConfig
               'name' => 'list',
               'points' => [
                 [
-                  'active' => true,
                   'args' => [
                     'query' => [
                       [
-                        'active' => true,
                         'kind' => 'query',
                         'name' => 'format',
                         'orig' => 'format',
@@ -204,7 +188,6 @@ class YadorePublisherConfig
                         'type' => '`$STRING`',
                       ],
                       [
-                        'active' => true,
                         'kind' => 'query',
                         'name' => 'from',
                         'orig' => 'from',
@@ -212,15 +195,12 @@ class YadorePublisherConfig
                         'type' => '`$STRING`',
                       ],
                       [
-                        'active' => true,
                         'kind' => 'query',
                         'name' => 'market',
                         'orig' => 'market',
-                        'reqd' => false,
                         'type' => '`$STRING`',
                       ],
                       [
-                        'active' => true,
                         'kind' => 'query',
                         'name' => 'to',
                         'orig' => 'to',
@@ -250,10 +230,8 @@ class YadorePublisherConfig
                     'req' => '`reqdata`',
                     'res' => '`body`',
                   ],
-                  'index$' => 0,
                 ],
               ],
-              'key$' => 'list',
             ],
           ],
           'relations' => [
@@ -263,25 +241,16 @@ class YadorePublisherConfig
         'conversion_general' => [
           'fields' => [
             [
-              'active' => true,
               'name' => 'date',
-              'req' => false,
               'type' => '`$OBJECT`',
-              'index$' => 0,
             ],
             [
-              'active' => true,
               'name' => 'market',
-              'req' => false,
               'type' => '`$OBJECT`',
-              'index$' => 1,
             ],
             [
-              'active' => true,
               'name' => 'total',
-              'req' => false,
               'type' => '`$OBJECT`',
-              'index$' => 2,
             ],
           ],
           'name' => 'conversion_general',
@@ -291,11 +260,9 @@ class YadorePublisherConfig
               'name' => 'load',
               'points' => [
                 [
-                  'active' => true,
                   'args' => [
                     'query' => [
                       [
-                        'active' => true,
                         'kind' => 'query',
                         'name' => 'format',
                         'orig' => 'format',
@@ -303,7 +270,6 @@ class YadorePublisherConfig
                         'type' => '`$STRING`',
                       ],
                       [
-                        'active' => true,
                         'kind' => 'query',
                         'name' => 'from',
                         'orig' => 'from',
@@ -311,7 +277,6 @@ class YadorePublisherConfig
                         'type' => '`$STRING`',
                       ],
                       [
-                        'active' => true,
                         'kind' => 'query',
                         'name' => 'to',
                         'orig' => 'to',
@@ -339,10 +304,8 @@ class YadorePublisherConfig
                     'req' => '`reqdata`',
                     'res' => '`body`',
                   ],
-                  'index$' => 0,
                 ],
               ],
-              'key$' => 'load',
             ],
           ],
           'relations' => [
@@ -352,11 +315,8 @@ class YadorePublisherConfig
         'conversion_status' => [
           'fields' => [
             [
-              'active' => true,
               'name' => 'status',
-              'req' => false,
               'type' => '`$STRING`',
-              'index$' => 0,
             ],
           ],
           'name' => 'conversion_status',
@@ -366,11 +326,9 @@ class YadorePublisherConfig
               'name' => 'load',
               'points' => [
                 [
-                  'active' => true,
                   'args' => [
                     'query' => [
                       [
-                        'active' => true,
                         'kind' => 'query',
                         'name' => 'date',
                         'orig' => 'date',
@@ -396,10 +354,8 @@ class YadorePublisherConfig
                     'req' => '`reqdata`',
                     'res' => '`body`',
                   ],
-                  'index$' => 0,
                 ],
               ],
-              'key$' => 'load',
             ],
           ],
           'relations' => [
@@ -409,53 +365,34 @@ class YadorePublisherConfig
         'deeplink' => [
           'fields' => [
             [
-              'active' => true,
               'name' => 'deeplinks',
-              'req' => false,
               'type' => '`$ARRAY`',
-              'index$' => 0,
             ],
             [
-              'active' => true,
               'name' => 'found',
-              'req' => false,
               'type' => '`$INTEGER`',
-              'index$' => 1,
             ],
             [
-              'active' => true,
               'name' => 'isCouponing',
-              'req' => false,
               'type' => '`$BOOLEAN`',
-              'index$' => 2,
             ],
             [
-              'active' => true,
               'name' => 'market',
               'req' => true,
               'type' => '`$STRING`',
-              'index$' => 3,
             ],
             [
-              'active' => true,
               'name' => 'placementId',
-              'req' => false,
               'type' => '`$STRING`',
-              'index$' => 4,
             ],
             [
-              'active' => true,
               'name' => 'total',
-              'req' => false,
               'type' => '`$INTEGER`',
-              'index$' => 5,
             ],
             [
-              'active' => true,
               'name' => 'urls',
               'req' => true,
               'type' => '`$ARRAY`',
-              'index$' => 6,
             ],
           ],
           'name' => 'deeplink',
@@ -465,7 +402,6 @@ class YadorePublisherConfig
               'name' => 'create',
               'points' => [
                 [
-                  'active' => true,
                   'args' => [],
                   'kind' => 'http',
                   'method' => 'POST',
@@ -479,10 +415,8 @@ class YadorePublisherConfig
                     'req' => '`reqdata`',
                     'res' => '`body.result`',
                   ],
-                  'index$' => 0,
                 ],
               ],
-              'key$' => 'create',
             ],
           ],
           'relations' => [
@@ -492,67 +426,40 @@ class YadorePublisherConfig
         'deeplink_merchant' => [
           'fields' => [
             [
-              'active' => true,
               'name' => 'deeplinkCount',
-              'req' => false,
               'type' => '`$INTEGER`',
-              'index$' => 0,
             ],
             [
-              'active' => true,
               'name' => 'estimatedCpc',
-              'req' => false,
               'type' => '`$OBJECT`',
-              'index$' => 1,
             ],
             [
-              'active' => true,
               'name' => 'hasExternalHomepage',
-              'req' => false,
               'type' => '`$BOOLEAN`',
-              'index$' => 2,
             ],
             [
-              'active' => true,
               'name' => 'hasSmartlinkHomepage',
-              'req' => false,
               'type' => '`$BOOLEAN`',
-              'index$' => 3,
             ],
             [
-              'active' => true,
               'name' => 'id',
-              'req' => false,
               'type' => '`$STRING`',
-              'index$' => 4,
             ],
             [
-              'active' => true,
               'name' => 'isSmartlink',
-              'req' => false,
               'type' => '`$BOOLEAN`',
-              'index$' => 5,
             ],
             [
-              'active' => true,
               'name' => 'logo',
-              'req' => false,
               'type' => '`$OBJECT`',
-              'index$' => 6,
             ],
             [
-              'active' => true,
               'name' => 'name',
-              'req' => false,
               'type' => '`$STRING`',
-              'index$' => 7,
             ],
             [
-              'active' => true,
               'name' => 'trafficTypes',
-              'req' => false,
               'type' => '`$ARRAY`',
-              'index$' => 8,
             ],
           ],
           'name' => 'deeplink_merchant',
@@ -562,35 +469,27 @@ class YadorePublisherConfig
               'name' => 'list',
               'points' => [
                 [
-                  'active' => true,
                   'args' => [
                     'query' => [
                       [
-                        'active' => true,
                         'kind' => 'query',
                         'name' => 'has_homepage',
                         'orig' => 'has_homepage',
-                        'reqd' => false,
                         'type' => '`$BOOLEAN`',
                       ],
                       [
-                        'active' => true,
                         'kind' => 'query',
                         'name' => 'is_couponing',
                         'orig' => 'is_couponing',
-                        'reqd' => false,
                         'type' => '`$BOOLEAN`',
                       ],
                       [
-                        'active' => true,
                         'kind' => 'query',
                         'name' => 'is_smartlink',
                         'orig' => 'is_smartlink',
-                        'reqd' => false,
                         'type' => '`$BOOLEAN`',
                       ],
                       [
-                        'active' => true,
                         'kind' => 'query',
                         'name' => 'market',
                         'orig' => 'market',
@@ -619,10 +518,8 @@ class YadorePublisherConfig
                     'req' => '`reqdata`',
                     'res' => '`body.merchants`',
                   ],
-                  'index$' => 0,
                 ],
               ],
-              'key$' => 'list',
             ],
           ],
           'relations' => [
@@ -638,27 +535,21 @@ class YadorePublisherConfig
               'name' => 'load',
               'points' => [
                 [
-                  'active' => true,
                   'args' => [
                     'query' => [
                       [
-                        'active' => true,
                         'kind' => 'query',
                         'name' => 'callback_url',
                         'orig' => 'callback_url',
-                        'reqd' => false,
                         'type' => '`$STRING`',
                       ],
                       [
-                        'active' => true,
                         'kind' => 'query',
                         'name' => 'is_couponing',
                         'orig' => 'is_couponing',
-                        'reqd' => false,
                         'type' => '`$BOOLEAN`',
                       ],
                       [
-                        'active' => true,
                         'kind' => 'query',
                         'name' => 'market',
                         'orig' => 'market',
@@ -666,23 +557,18 @@ class YadorePublisherConfig
                         'type' => '`$STRING`',
                       ],
                       [
-                        'active' => true,
                         'kind' => 'query',
                         'name' => 'merchant_id',
                         'orig' => 'merchant_id',
-                        'reqd' => false,
                         'type' => '`$STRING`',
                       ],
                       [
-                        'active' => true,
                         'kind' => 'query',
                         'name' => 'placement_id',
                         'orig' => 'placement_id',
-                        'reqd' => false,
                         'type' => '`$STRING`',
                       ],
                       [
-                        'active' => true,
                         'kind' => 'query',
                         'name' => 'project_id',
                         'orig' => 'project_id',
@@ -690,7 +576,6 @@ class YadorePublisherConfig
                         'type' => '`$STRING`',
                       ],
                       [
-                        'active' => true,
                         'kind' => 'query',
                         'name' => 'url',
                         'orig' => 'url',
@@ -721,10 +606,8 @@ class YadorePublisherConfig
                     'req' => '`reqdata`',
                     'res' => '`body`',
                   ],
-                  'index$' => 0,
                 ],
               ],
-              'key$' => 'load',
             ],
           ],
           'relations' => [
@@ -734,11 +617,8 @@ class YadorePublisherConfig
         'market' => [
           'fields' => [
             [
-              'active' => true,
               'name' => 'id',
-              'req' => false,
               'type' => '`$STRING`',
-              'index$' => 0,
             ],
           ],
           'name' => 'market',
@@ -748,7 +628,6 @@ class YadorePublisherConfig
               'name' => 'list',
               'points' => [
                 [
-                  'active' => true,
                   'args' => [],
                   'kind' => 'http',
                   'method' => 'GET',
@@ -762,10 +641,8 @@ class YadorePublisherConfig
                     'req' => '`reqdata`',
                     'res' => '`body.markets`',
                   ],
-                  'index$' => 0,
                 ],
               ],
-              'key$' => 'list',
             ],
           ],
           'relations' => [
@@ -775,39 +652,24 @@ class YadorePublisherConfig
         'merchant' => [
           'fields' => [
             [
-              'active' => true,
               'name' => 'id',
-              'req' => false,
               'type' => '`$STRING`',
-              'index$' => 0,
             ],
             [
-              'active' => true,
               'name' => 'logo',
-              'req' => false,
               'type' => '`$OBJECT`',
-              'index$' => 1,
             ],
             [
-              'active' => true,
               'name' => 'name',
-              'req' => false,
               'type' => '`$STRING`',
-              'index$' => 2,
             ],
             [
-              'active' => true,
               'name' => 'offerCount',
-              'req' => false,
               'type' => '`$INTEGER`',
-              'index$' => 3,
             ],
             [
-              'active' => true,
               'name' => 'trafficTypes',
-              'req' => false,
               'type' => '`$ARRAY`',
-              'index$' => 4,
             ],
           ],
           'name' => 'merchant',
@@ -817,19 +679,15 @@ class YadorePublisherConfig
               'name' => 'list',
               'points' => [
                 [
-                  'active' => true,
                   'args' => [
                     'query' => [
                       [
-                        'active' => true,
                         'kind' => 'query',
                         'name' => 'is_couponing',
                         'orig' => 'is_couponing',
-                        'reqd' => false,
                         'type' => '`$BOOLEAN`',
                       ],
                       [
-                        'active' => true,
                         'kind' => 'query',
                         'name' => 'market',
                         'orig' => 'market',
@@ -855,10 +713,8 @@ class YadorePublisherConfig
                     'req' => '`reqdata`',
                     'res' => '`body.merchants`',
                   ],
-                  'index$' => 0,
                 ],
               ],
-              'key$' => 'list',
             ],
           ],
           'relations' => [
@@ -868,137 +724,80 @@ class YadorePublisherConfig
         'offer' => [
           'fields' => [
             [
-              'active' => true,
               'name' => 'availability',
-              'req' => false,
               'type' => '`$STRING`',
-              'index$' => 0,
             ],
             [
-              'active' => true,
               'name' => 'brand',
-              'req' => false,
               'type' => '`$STRING`',
-              'index$' => 1,
             ],
             [
-              'active' => true,
               'name' => 'clickUrl',
-              'req' => false,
               'type' => '`$STRING`',
-              'index$' => 2,
             ],
             [
-              'active' => true,
               'name' => 'count',
-              'req' => false,
               'type' => '`$INTEGER`',
-              'index$' => 3,
             ],
             [
-              'active' => true,
               'name' => 'description',
-              'req' => false,
               'type' => '`$STRING`',
-              'index$' => 4,
             ],
             [
-              'active' => true,
               'name' => 'eer',
-              'req' => false,
               'type' => '`$STRING`',
-              'index$' => 5,
             ],
             [
-              'active' => true,
               'name' => 'estimatedCpc',
-              'req' => false,
               'type' => '`$OBJECT`',
-              'index$' => 6,
             ],
             [
-              'active' => true,
               'name' => 'id',
-              'req' => false,
               'type' => '`$STRING`',
-              'index$' => 7,
             ],
             [
-              'active' => true,
               'name' => 'image',
-              'req' => false,
               'type' => '`$OBJECT`',
-              'index$' => 8,
             ],
             [
-              'active' => true,
               'name' => 'merchant',
-              'req' => false,
               'type' => '`$OBJECT`',
-              'index$' => 9,
             ],
             [
-              'active' => true,
               'name' => 'offers',
-              'req' => false,
               'type' => '`$ARRAY`',
-              'index$' => 10,
             ],
             [
-              'active' => true,
               'name' => 'originalPrice',
-              'req' => false,
               'type' => '`$OBJECT`',
-              'index$' => 11,
             ],
             [
-              'active' => true,
               'name' => 'price',
-              'req' => false,
               'type' => '`$OBJECT`',
-              'index$' => 12,
             ],
             [
-              'active' => true,
               'name' => 'promoText',
-              'req' => false,
               'type' => '`$STRING`',
-              'index$' => 13,
             ],
             [
-              'active' => true,
               'name' => 'shippingPrice',
-              'req' => false,
               'type' => '`$OBJECT`',
-              'index$' => 14,
             ],
             [
-              'active' => true,
               'name' => 'shippingTime',
-              'req' => false,
               'type' => '`$OBJECT`',
-              'index$' => 15,
             ],
             [
-              'active' => true,
               'name' => 'thumbnail',
-              'req' => false,
               'type' => '`$OBJECT`',
-              'index$' => 16,
             ],
             [
-              'active' => true,
               'name' => 'title',
-              'req' => false,
               'type' => '`$STRING`',
-              'index$' => 17,
             ],
             [
-              'active' => true,
               'name' => 'unitPrice',
-              'req' => false,
               'type' => '`$OBJECT`',
-              'index$' => 18,
             ],
           ],
           'name' => 'offer',
@@ -1008,43 +807,33 @@ class YadorePublisherConfig
               'name' => 'list',
               'points' => [
                 [
-                  'active' => true,
                   'args' => [
                     'query' => [
                       [
-                        'active' => true,
                         'kind' => 'query',
                         'name' => 'ean',
                         'orig' => 'ean',
-                        'reqd' => false,
                         'type' => '`$STRING`',
                       ],
                       [
-                        'active' => true,
                         'kind' => 'query',
                         'name' => 'is_couponing',
                         'orig' => 'is_couponing',
-                        'reqd' => false,
                         'type' => '`$BOOLEAN`',
                       ],
                       [
-                        'active' => true,
                         'kind' => 'query',
                         'name' => 'keyword',
                         'orig' => 'keyword',
-                        'reqd' => false,
                         'type' => '`$STRING`',
                       ],
                       [
-                        'active' => true,
                         'kind' => 'query',
                         'name' => 'limit',
                         'orig' => 'limit',
-                        'reqd' => false,
                         'type' => '`$INTEGER`',
                       ],
                       [
-                        'active' => true,
                         'kind' => 'query',
                         'name' => 'market',
                         'orig' => 'market',
@@ -1052,45 +841,35 @@ class YadorePublisherConfig
                         'type' => '`$STRING`',
                       ],
                       [
-                        'active' => true,
                         'kind' => 'query',
                         'name' => 'merchant_id',
                         'orig' => 'merchant_id',
-                        'reqd' => false,
                         'type' => '`$STRING`',
                       ],
                       [
-                        'active' => true,
                         'kind' => 'query',
                         'name' => 'offer_id',
                         'orig' => 'offer_id',
-                        'reqd' => false,
                         'type' => '`$STRING`',
                       ],
                       [
-                        'active' => true,
                         'kind' => 'query',
                         'name' => 'placement_id',
                         'orig' => 'placement_id',
-                        'reqd' => false,
                         'type' => '`$STRING`',
                       ],
                       [
-                        'active' => true,
                         'example' => 'fuzzy',
                         'kind' => 'query',
                         'name' => 'precision',
                         'orig' => 'precision',
-                        'reqd' => false,
                         'type' => '`$STRING`',
                       ],
                       [
-                        'active' => true,
                         'example' => 'rel_desc',
                         'kind' => 'query',
                         'name' => 'sort',
                         'orig' => 'sort',
-                        'reqd' => false,
                         'type' => '`$STRING`',
                       ],
                     ],
@@ -1120,21 +899,17 @@ class YadorePublisherConfig
                     'req' => '`reqdata`',
                     'res' => '`body.offers`',
                   ],
-                  'index$' => 0,
                 ],
               ],
-              'key$' => 'list',
             ],
             'load' => [
               'input' => 'data',
               'name' => 'load',
               'points' => [
                 [
-                  'active' => true,
                   'args' => [
                     'query' => [
                       [
-                        'active' => true,
                         'example' => '12345678,87654321',
                         'kind' => 'query',
                         'name' => 'ean',
@@ -1143,15 +918,12 @@ class YadorePublisherConfig
                         'type' => '`$STRING`',
                       ],
                       [
-                        'active' => true,
                         'kind' => 'query',
                         'name' => 'is_couponing',
                         'orig' => 'is_couponing',
-                        'reqd' => false,
                         'type' => '`$BOOLEAN`',
                       ],
                       [
-                        'active' => true,
                         'kind' => 'query',
                         'name' => 'market',
                         'orig' => 'market',
@@ -1159,19 +931,15 @@ class YadorePublisherConfig
                         'type' => '`$STRING`',
                       ],
                       [
-                        'active' => true,
                         'kind' => 'query',
                         'name' => 'merchant_id',
                         'orig' => 'merchant_id',
-                        'reqd' => false,
                         'type' => '`$STRING`',
                       ],
                       [
-                        'active' => true,
                         'kind' => 'query',
                         'name' => 'placement_id',
                         'orig' => 'placement_id',
-                        'reqd' => false,
                         'type' => '`$STRING`',
                       ],
                     ],
@@ -1198,10 +966,8 @@ class YadorePublisherConfig
                     'req' => '`reqdata`',
                     'res' => '`body.ean`',
                   ],
-                  'index$' => 0,
                 ],
               ],
-              'key$' => 'load',
             ],
           ],
           'relations' => [
@@ -1211,53 +977,32 @@ class YadorePublisherConfig
         'report_detail' => [
           'fields' => [
             [
-              'active' => true,
               'name' => 'clickId',
-              'req' => false,
               'type' => '`$STRING`',
-              'index$' => 0,
             ],
             [
-              'active' => true,
               'name' => 'currency',
-              'req' => false,
               'type' => '`$STRING`',
-              'index$' => 1,
             ],
             [
-              'active' => true,
               'name' => 'date',
-              'req' => false,
               'type' => '`$STRING`',
-              'index$' => 2,
             ],
             [
-              'active' => true,
               'name' => 'market',
-              'req' => false,
               'type' => '`$STRING`',
-              'index$' => 3,
             ],
             [
-              'active' => true,
               'name' => 'merchant',
-              'req' => false,
               'type' => '`$OBJECT`',
-              'index$' => 4,
             ],
             [
-              'active' => true,
               'name' => 'placementId',
-              'req' => false,
               'type' => '`$STRING`',
-              'index$' => 5,
             ],
             [
-              'active' => true,
               'name' => 'revenue',
-              'req' => false,
               'type' => '`$NUMBER`',
-              'index$' => 6,
             ],
           ],
           'name' => 'report_detail',
@@ -1267,11 +1012,9 @@ class YadorePublisherConfig
               'name' => 'list',
               'points' => [
                 [
-                  'active' => true,
                   'args' => [
                     'query' => [
                       [
-                        'active' => true,
                         'kind' => 'query',
                         'name' => 'date',
                         'orig' => 'date',
@@ -1279,7 +1022,6 @@ class YadorePublisherConfig
                         'type' => '`$STRING`',
                       ],
                       [
-                        'active' => true,
                         'kind' => 'query',
                         'name' => 'format',
                         'orig' => 'format',
@@ -1287,11 +1029,9 @@ class YadorePublisherConfig
                         'type' => '`$STRING`',
                       ],
                       [
-                        'active' => true,
                         'kind' => 'query',
                         'name' => 'market',
                         'orig' => 'market',
-                        'reqd' => false,
                         'type' => '`$STRING`',
                       ],
                     ],
@@ -1315,10 +1055,8 @@ class YadorePublisherConfig
                     'req' => '`reqdata`',
                     'res' => '`body.clicks`',
                   ],
-                  'index$' => 0,
                 ],
               ],
-              'key$' => 'list',
             ],
           ],
           'relations' => [
@@ -1328,25 +1066,16 @@ class YadorePublisherConfig
         'report_general' => [
           'fields' => [
             [
-              'active' => true,
               'name' => 'date',
-              'req' => false,
               'type' => '`$OBJECT`',
-              'index$' => 0,
             ],
             [
-              'active' => true,
               'name' => 'market',
-              'req' => false,
               'type' => '`$OBJECT`',
-              'index$' => 1,
             ],
             [
-              'active' => true,
               'name' => 'total',
-              'req' => false,
               'type' => '`$OBJECT`',
-              'index$' => 2,
             ],
           ],
           'name' => 'report_general',
@@ -1356,11 +1085,9 @@ class YadorePublisherConfig
               'name' => 'load',
               'points' => [
                 [
-                  'active' => true,
                   'args' => [
                     'query' => [
                       [
-                        'active' => true,
                         'kind' => 'query',
                         'name' => 'date',
                         'orig' => 'date',
@@ -1368,7 +1095,6 @@ class YadorePublisherConfig
                         'type' => '`$STRING`',
                       ],
                       [
-                        'active' => true,
                         'kind' => 'query',
                         'name' => 'format',
                         'orig' => 'format',
@@ -1395,10 +1121,8 @@ class YadorePublisherConfig
                     'req' => '`reqdata`',
                     'res' => '`body`',
                   ],
-                  'index$' => 0,
                 ],
               ],
-              'key$' => 'load',
             ],
           ],
           'relations' => [
@@ -1408,18 +1132,12 @@ class YadorePublisherConfig
         'report_modified' => [
           'fields' => [
             [
-              'active' => true,
               'name' => 'date',
-              'req' => false,
               'type' => '`$STRING`',
-              'index$' => 0,
             ],
             [
-              'active' => true,
               'name' => 'modifiedDate',
-              'req' => false,
               'type' => '`$STRING`',
-              'index$' => 1,
             ],
           ],
           'name' => 'report_modified',
@@ -1429,11 +1147,9 @@ class YadorePublisherConfig
               'name' => 'load',
               'points' => [
                 [
-                  'active' => true,
                   'args' => [
                     'query' => [
                       [
-                        'active' => true,
                         'kind' => 'query',
                         'name' => 'from',
                         'orig' => 'from',
@@ -1441,15 +1157,12 @@ class YadorePublisherConfig
                         'type' => '`$STRING`',
                       ],
                       [
-                        'active' => true,
                         'kind' => 'query',
                         'name' => 'market',
                         'orig' => 'market',
-                        'reqd' => false,
                         'type' => '`$STRING`',
                       ],
                       [
-                        'active' => true,
                         'kind' => 'query',
                         'name' => 'to',
                         'orig' => 'to',
@@ -1477,10 +1190,8 @@ class YadorePublisherConfig
                     'req' => '`reqdata`',
                     'res' => '`body.market`',
                   ],
-                  'index$' => 0,
                 ],
               ],
-              'key$' => 'load',
             ],
           ],
           'relations' => [
@@ -1490,11 +1201,8 @@ class YadorePublisherConfig
         'report_status' => [
           'fields' => [
             [
-              'active' => true,
               'name' => 'status',
-              'req' => false,
               'type' => '`$STRING`',
-              'index$' => 0,
             ],
           ],
           'name' => 'report_status',
@@ -1504,11 +1212,9 @@ class YadorePublisherConfig
               'name' => 'load',
               'points' => [
                 [
-                  'active' => true,
                   'args' => [
                     'query' => [
                       [
-                        'active' => true,
                         'kind' => 'query',
                         'name' => 'date',
                         'orig' => 'date',
@@ -1534,10 +1240,8 @@ class YadorePublisherConfig
                     'req' => '`reqdata`',
                     'res' => '`body`',
                   ],
-                  'index$' => 0,
                 ],
               ],
-              'key$' => 'load',
             ],
           ],
           'relations' => [

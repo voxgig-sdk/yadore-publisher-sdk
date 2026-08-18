@@ -40,7 +40,7 @@ class YadorePublisherSDK
         $utility = new YadorePublisherUtility();
         $this->_utility = $utility;
 
-        $config = YadorePublisherConfig::make_config();
+        $config = YadorePublisherConfig::shared_config();
 
         $this->_rootctx = ($utility->make_context)([
             "client" => $this,
