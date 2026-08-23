@@ -19,6 +19,9 @@ module YadorePublisherConfig
     {
       "main" => {
         "name" => "YadorePublisher",
+        "slug" => "yadore-publisher",
+        "version" => "0.0.1",
+        "target" => "rb",
       },
       "feature" => {
         "test" => {
@@ -146,6 +149,7 @@ module YadorePublisherConfig
             },
             {
               "name" => "market",
+              "short" => "Two character form of a country, in all lower-case",
               "type" => "`$STRING`",
             },
             {
@@ -360,15 +364,18 @@ module YadorePublisherConfig
             },
             {
               "name" => "isCouponing",
+              "short" => "If your project has in parts couponing traffic, you must use this parameter to tell the API if the click is a couponing click or not.",
               "type" => "`$BOOLEAN`",
             },
             {
               "name" => "market",
               "req" => true,
+              "short" => "The market to query.",
               "type" => "`$STRING`",
             },
             {
               "name" => "placementId",
+              "short" => "Your own subID for your click-tracking.",
               "type" => "`$STRING`",
             },
             {
@@ -378,6 +385,7 @@ module YadorePublisherConfig
             {
               "name" => "urls",
               "req" => true,
+              "short" => "An array of URLs",
               "type" => "`$ARRAY`",
             },
           ],
@@ -413,6 +421,7 @@ module YadorePublisherConfig
           "fields" => [
             {
               "name" => "deeplinkCount",
+              "short" => "Even when a merchant has no deeplinks, it might still have smartlinks.",
               "type" => "`$INTEGER`",
             },
             {
@@ -421,10 +430,12 @@ module YadorePublisherConfig
             },
             {
               "name" => "hasExternalHomepage",
+              "short" => "If the merchant accept homepage deeplinks.",
               "type" => "`$BOOLEAN`",
             },
             {
               "name" => "hasSmartlinkHomepage",
+              "short" => "If the merchant accept homepage smartlinks.",
               "type" => "`$BOOLEAN`",
             },
             {
@@ -433,6 +444,7 @@ module YadorePublisherConfig
             },
             {
               "name" => "isSmartlink",
+              "short" => "If the merchant has one or more smartlinks.",
               "type" => "`$BOOLEAN`",
             },
             {
@@ -735,6 +747,7 @@ module YadorePublisherConfig
             },
             {
               "name" => "estimatedCpc",
+              "short" => "estimatedCPC means the gross revenue per click Yadore gets from its merchants, you have to use your revenue share to get your estimatedCPC.",
               "type" => "`$OBJECT`",
             },
             {

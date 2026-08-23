@@ -6,7 +6,7 @@ The Golang SDK for the YadorePublisher API — an entity-oriented client using s
 
 It exposes the API as capitalised, semantic **Entities** — e.g. `client.ConversionDetail(nil)` — each with the same small set of operations (`List`, `Load`, `Create`) instead of raw URL paths and query strings. You call meaning, not endpoints, which keeps the cognitive load low.
 
-> Other languages, the CLI, and MCP server live alongside this one — see
+> Also generated from this model: `go-cli`, `go-mcp`, `lua`, `php`, `py`, `rb`, `ts` — see
 > the [top-level README](../README.md).
 
 
@@ -297,7 +297,7 @@ API path: `/v2/conversion/detail`
 | Field | Description |
 | --- | --- |
 | `"clicks"` |  |
-| `"market"` |  |
+| `"market"` | Two character form of a country, in all lower-case |
 | `"merchant"` |  |
 | `"sales"` |  |
 
@@ -333,11 +333,11 @@ API path: `/v2/conversion/status`
 | --- | --- |
 | `"deeplinks"` |  |
 | `"found"` |  |
-| `"isCouponing"` |  |
-| `"market"` |  |
-| `"placementId"` |  |
+| `"isCouponing"` | If your project has in parts couponing traffic, you must use this parameter to tell the API if the click is a couponing click or not. |
+| `"market"` | The market to query. |
+| `"placementId"` | Your own subID for your click-tracking. |
 | `"total"` |  |
-| `"urls"` |  |
+| `"urls"` | An array of URLs |
 
 Operations: Create.
 
@@ -347,12 +347,12 @@ API path: `/v2/deeplink`
 
 | Field | Description |
 | --- | --- |
-| `"deeplinkCount"` |  |
+| `"deeplinkCount"` | Even when a merchant has no deeplinks, it might still have smartlinks. |
 | `"estimatedCpc"` |  |
-| `"hasExternalHomepage"` |  |
-| `"hasSmartlinkHomepage"` |  |
+| `"hasExternalHomepage"` | If the merchant accept homepage deeplinks. |
+| `"hasSmartlinkHomepage"` | If the merchant accept homepage smartlinks. |
 | `"id"` |  |
-| `"isSmartlink"` |  |
+| `"isSmartlink"` | If the merchant has one or more smartlinks. |
 | `"logo"` |  |
 | `"name"` |  |
 | `"trafficTypes"` |  |
@@ -404,7 +404,7 @@ API path: `/v2/merchant`
 | `"count"` |  |
 | `"description"` |  |
 | `"eer"` |  |
-| `"estimatedCpc"` |  |
+| `"estimatedCpc"` | estimatedCPC means the gross revenue per click Yadore gets from its merchants, you have to use your revenue share to get your estimatedCPC. |
 | `"id"` |  |
 | `"image"` |  |
 | `"merchant"` |  |
@@ -523,7 +523,7 @@ Create an instance: `conversionDetailMerchant := client.ConversionDetailMerchant
 | Field | Type | Description |
 | --- | --- | --- |
 | `clicks` | `int` |  |
-| `market` | `string` |  |
+| `market` | `string` | Two character form of a country, in all lower-case |
 | `merchant` | `map[string]any` |  |
 | `sales` | `int` |  |
 
@@ -610,11 +610,11 @@ Create an instance: `deeplink := client.Deeplink(nil)`
 | --- | --- | --- |
 | `deeplinks` | `[]any` |  |
 | `found` | `int` |  |
-| `isCouponing` | `bool` |  |
-| `market` | `string` |  |
-| `placementId` | `string` |  |
+| `isCouponing` | `bool` | If your project has in parts couponing traffic, you must use this parameter to tell the API if the click is a couponing click or not. |
+| `market` | `string` | The market to query. |
+| `placementId` | `string` | Your own subID for your click-tracking. |
 | `total` | `int` |  |
-| `urls` | `[]any` |  |
+| `urls` | `[]any` | An array of URLs |
 
 #### Example: Create
 
@@ -644,12 +644,12 @@ Create an instance: `deeplinkMerchant := client.DeeplinkMerchant(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `deeplinkCount` | `int` |  |
+| `deeplinkCount` | `int` | Even when a merchant has no deeplinks, it might still have smartlinks. |
 | `estimatedCpc` | `map[string]any` |  |
-| `hasExternalHomepage` | `bool` |  |
-| `hasSmartlinkHomepage` | `bool` |  |
+| `hasExternalHomepage` | `bool` | If the merchant accept homepage deeplinks. |
+| `hasSmartlinkHomepage` | `bool` | If the merchant accept homepage smartlinks. |
 | `id` | `string` |  |
-| `isSmartlink` | `bool` |  |
+| `isSmartlink` | `bool` | If the merchant has one or more smartlinks. |
 | `logo` | `map[string]any` |  |
 | `name` | `string` |  |
 | `trafficTypes` | `[]any` |  |
@@ -765,7 +765,7 @@ Create an instance: `offer := client.Offer(nil)`
 | `count` | `int` |  |
 | `description` | `string` |  |
 | `eer` | `string` |  |
-| `estimatedCpc` | `map[string]any` |  |
+| `estimatedCpc` | `map[string]any` | estimatedCPC means the gross revenue per click Yadore gets from its merchants, you have to use your revenue share to get your estimatedCPC. |
 | `id` | `string` |  |
 | `image` | `map[string]any` |  |
 | `merchant` | `map[string]any` |  |

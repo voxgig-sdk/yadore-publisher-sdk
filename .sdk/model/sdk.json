@@ -148,6 +148,7 @@
               "active": true,
               "name": "market",
               "req": false,
+              "short": "Two character form of a country, in all lower-case",
               "type": "`$STRING`"
             },
             {
@@ -404,18 +405,21 @@
               "active": true,
               "name": "isCouponing",
               "req": false,
+              "short": "If your project has in parts couponing traffic, you must use this parameter to tell the API if the click is a couponing click or not.",
               "type": "`$BOOLEAN`"
             },
             {
               "active": true,
               "name": "market",
               "req": true,
+              "short": "The market to query.",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "placementId",
               "req": false,
+              "short": "Your own subID for your click-tracking.",
               "type": "`$STRING`"
             },
             {
@@ -428,6 +432,7 @@
               "active": true,
               "name": "urls",
               "req": true,
+              "short": "An array of URLs",
               "type": "`$ARRAY`"
             }
           ],
@@ -470,6 +475,7 @@
               "active": true,
               "name": "deeplinkCount",
               "req": false,
+              "short": "Even when a merchant has no deeplinks, it might still have smartlinks.",
               "type": "`$INTEGER`"
             },
             {
@@ -482,12 +488,14 @@
               "active": true,
               "name": "hasExternalHomepage",
               "req": false,
+              "short": "If the merchant accept homepage deeplinks.",
               "type": "`$BOOLEAN`"
             },
             {
               "active": true,
               "name": "hasSmartlinkHomepage",
               "req": false,
+              "short": "If the merchant accept homepage smartlinks.",
               "type": "`$BOOLEAN`"
             },
             {
@@ -500,6 +508,7 @@
               "active": true,
               "name": "isSmartlink",
               "req": false,
+              "short": "If the merchant has one or more smartlinks.",
               "type": "`$BOOLEAN`"
             },
             {
@@ -887,6 +896,7 @@
               "active": true,
               "name": "estimatedCpc",
               "req": false,
+              "short": "estimatedCPC means the gross revenue per click Yadore gets from its merchants, you have to use your revenue share to get your estimatedCPC.",
               "type": "`$OBJECT`"
             },
             {

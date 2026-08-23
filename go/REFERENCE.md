@@ -208,7 +208,7 @@ fmt.Println(conversionDetailMerchant.GetName()) // "conversion_detail_merchant"
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `clicks` | `int` | No |  |
-| `market` | `string` | No |  |
+| `market` | `string` | No | Two character form of a country, in all lower-case |
 | `merchant` | `map[string]any` | No |  |
 | `sales` | `int` | No |  |
 
@@ -367,11 +367,11 @@ fmt.Println(deeplink.GetName()) // "deeplink"
 | --- | --- | --- | --- |
 | `deeplinks` | `[]any` | No |  |
 | `found` | `int` | No |  |
-| `isCouponing` | `bool` | No |  |
-| `market` | `string` | Yes |  |
-| `placementId` | `string` | No |  |
+| `isCouponing` | `bool` | No | If your project has in parts couponing traffic, you must use this parameter to tell the API if the click is a couponing click or not. |
+| `market` | `string` | Yes | The market to query. |
+| `placementId` | `string` | No | Your own subID for your click-tracking. |
 | `total` | `int` | No |  |
-| `urls` | `[]any` | Yes |  |
+| `urls` | `[]any` | Yes | An array of URLs |
 
 ### Operations
 
@@ -425,12 +425,12 @@ fmt.Println(deeplinkMerchant.GetName()) // "deeplink_merchant"
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `deeplinkCount` | `int` | No |  |
+| `deeplinkCount` | `int` | No | Even when a merchant has no deeplinks, it might still have smartlinks. |
 | `estimatedCpc` | `map[string]any` | No |  |
-| `hasExternalHomepage` | `bool` | No |  |
-| `hasSmartlinkHomepage` | `bool` | No |  |
+| `hasExternalHomepage` | `bool` | No | If the merchant accept homepage deeplinks. |
+| `hasSmartlinkHomepage` | `bool` | No | If the merchant accept homepage smartlinks. |
 | `id` | `string` | No |  |
-| `isSmartlink` | `bool` | No |  |
+| `isSmartlink` | `bool` | No | If the merchant has one or more smartlinks. |
 | `logo` | `map[string]any` | No |  |
 | `name` | `string` | No |  |
 | `trafficTypes` | `[]any` | No |  |
@@ -641,7 +641,7 @@ fmt.Println(offer.GetName()) // "offer"
 | `count` | `int` | No |  |
 | `description` | `string` | No |  |
 | `eer` | `string` | No |  |
-| `estimatedCpc` | `map[string]any` | No |  |
+| `estimatedCpc` | `map[string]any` | No | estimatedCPC means the gross revenue per click Yadore gets from its merchants, you have to use your revenue share to get your estimatedCPC. |
 | `id` | `string` | No |  |
 | `image` | `map[string]any` | No |  |
 | `merchant` | `map[string]any` | No |  |

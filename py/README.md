@@ -279,7 +279,7 @@ API path: `/v2/conversion/detail`
 | Field | Description |
 | --- | --- |
 | `clicks` |  |
-| `market` |  |
+| `market` | Two character form of a country, in all lower-case |
 | `merchant` |  |
 | `sales` |  |
 
@@ -315,11 +315,11 @@ API path: `/v2/conversion/status`
 | --- | --- |
 | `deeplinks` |  |
 | `found` |  |
-| `isCouponing` |  |
-| `market` |  |
-| `placementId` |  |
+| `isCouponing` | If your project has in parts couponing traffic, you must use this parameter to tell the API if the click is a couponing click or not. |
+| `market` | The market to query. |
+| `placementId` | Your own subID for your click-tracking. |
 | `total` |  |
-| `urls` |  |
+| `urls` | An array of URLs |
 
 Operations: Create.
 
@@ -329,12 +329,12 @@ API path: `/v2/deeplink`
 
 | Field | Description |
 | --- | --- |
-| `deeplinkCount` |  |
+| `deeplinkCount` | Even when a merchant has no deeplinks, it might still have smartlinks. |
 | `estimatedCpc` |  |
-| `hasExternalHomepage` |  |
-| `hasSmartlinkHomepage` |  |
+| `hasExternalHomepage` | If the merchant accept homepage deeplinks. |
+| `hasSmartlinkHomepage` | If the merchant accept homepage smartlinks. |
 | `id` |  |
-| `isSmartlink` |  |
+| `isSmartlink` | If the merchant has one or more smartlinks. |
 | `logo` |  |
 | `name` |  |
 | `trafficTypes` |  |
@@ -386,7 +386,7 @@ API path: `/v2/merchant`
 | `count` |  |
 | `description` |  |
 | `eer` |  |
-| `estimatedCpc` |  |
+| `estimatedCpc` | estimatedCPC means the gross revenue per click Yadore gets from its merchants, you have to use your revenue share to get your estimatedCPC. |
 | `id` |  |
 | `image` |  |
 | `merchant` |  |
@@ -501,7 +501,7 @@ Create an instance: `conversion_detail_merchant = client.ConversionDetailMerchan
 | Field | Type | Description |
 | --- | --- | --- |
 | `clicks` | `int` |  |
-| `market` | `str` |  |
+| `market` | `str` | Two character form of a country, in all lower-case |
 | `merchant` | `dict` |  |
 | `sales` | `int` |  |
 
@@ -576,11 +576,11 @@ Create an instance: `deeplink = client.Deeplink()`
 | --- | --- | --- |
 | `deeplinks` | `list` |  |
 | `found` | `int` |  |
-| `isCouponing` | `bool` |  |
-| `market` | `str` |  |
-| `placementId` | `str` |  |
+| `isCouponing` | `bool` | If your project has in parts couponing traffic, you must use this parameter to tell the API if the click is a couponing click or not. |
+| `market` | `str` | The market to query. |
+| `placementId` | `str` | Your own subID for your click-tracking. |
 | `total` | `int` |  |
-| `urls` | `list` |  |
+| `urls` | `list` | An array of URLs |
 
 #### Example: Create
 
@@ -606,12 +606,12 @@ Create an instance: `deeplink_merchant = client.DeeplinkMerchant()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `deeplinkCount` | `int` |  |
+| `deeplinkCount` | `int` | Even when a merchant has no deeplinks, it might still have smartlinks. |
 | `estimatedCpc` | `dict` |  |
-| `hasExternalHomepage` | `bool` |  |
-| `hasSmartlinkHomepage` | `bool` |  |
+| `hasExternalHomepage` | `bool` | If the merchant accept homepage deeplinks. |
+| `hasSmartlinkHomepage` | `bool` | If the merchant accept homepage smartlinks. |
 | `id` | `str` |  |
-| `isSmartlink` | `bool` |  |
+| `isSmartlink` | `bool` | If the merchant has one or more smartlinks. |
 | `logo` | `dict` |  |
 | `name` | `str` |  |
 | `trafficTypes` | `list` |  |
@@ -711,7 +711,7 @@ Create an instance: `offer = client.Offer()`
 | `count` | `int` |  |
 | `description` | `str` |  |
 | `eer` | `str` |  |
-| `estimatedCpc` | `dict` |  |
+| `estimatedCpc` | `dict` | estimatedCPC means the gross revenue per click Yadore gets from its merchants, you have to use your revenue share to get your estimatedCPC. |
 | `id` | `str` |  |
 | `image` | `dict` |  |
 | `merchant` | `dict` |  |

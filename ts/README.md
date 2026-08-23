@@ -9,7 +9,7 @@ The API is exposed as capitalised, semantic **Entities** — e.g.
 instead of raw URL paths and query parameters. This keeps the surface
 predictable and low-friction for both humans and AI agents.
 
-> Other languages, the CLI, and MCP server live alongside this one — see
+> Also generated from this model: `go`, `go-cli`, `go-mcp`, `lua`, `php`, `py`, `rb` — see
 > the [top-level README](../README.md).
 
 
@@ -325,7 +325,7 @@ API path: `/v2/conversion/detail`
 | Field | Description |
 | --- | --- |
 | `clicks` |  |
-| `market` |  |
+| `market` | Two character form of a country, in all lower-case |
 | `merchant` |  |
 | `sales` |  |
 
@@ -361,11 +361,11 @@ API path: `/v2/conversion/status`
 | --- | --- |
 | `deeplinks` |  |
 | `found` |  |
-| `isCouponing` |  |
-| `market` |  |
-| `placementId` |  |
+| `isCouponing` | If your project has in parts couponing traffic, you must use this parameter to tell the API if the click is a couponing click or not. |
+| `market` | The market to query. |
+| `placementId` | Your own subID for your click-tracking. |
 | `total` |  |
-| `urls` |  |
+| `urls` | An array of URLs |
 
 Operations: create.
 
@@ -375,12 +375,12 @@ API path: `/v2/deeplink`
 
 | Field | Description |
 | --- | --- |
-| `deeplinkCount` |  |
+| `deeplinkCount` | Even when a merchant has no deeplinks, it might still have smartlinks. |
 | `estimatedCpc` |  |
-| `hasExternalHomepage` |  |
-| `hasSmartlinkHomepage` |  |
+| `hasExternalHomepage` | If the merchant accept homepage deeplinks. |
+| `hasSmartlinkHomepage` | If the merchant accept homepage smartlinks. |
 | `id` |  |
-| `isSmartlink` |  |
+| `isSmartlink` | If the merchant has one or more smartlinks. |
 | `logo` |  |
 | `name` |  |
 | `trafficTypes` |  |
@@ -432,7 +432,7 @@ API path: `/v2/merchant`
 | `count` |  |
 | `description` |  |
 | `eer` |  |
-| `estimatedCpc` |  |
+| `estimatedCpc` | estimatedCPC means the gross revenue per click Yadore gets from its merchants, you have to use your revenue share to get your estimatedCPC. |
 | `id` |  |
 | `image` |  |
 | `merchant` |  |
@@ -547,7 +547,7 @@ Create an instance: `const conversion_detail_merchant = client.ConversionDetailM
 | Field | Type | Description |
 | --- | --- | --- |
 | `clicks` | `number` |  |
-| `market` | `string` |  |
+| `market` | `string` | Two character form of a country, in all lower-case |
 | `merchant` | `Record<string, any>` |  |
 | `sales` | `number` |  |
 
@@ -622,11 +622,11 @@ Create an instance: `const deeplink = client.Deeplink()`
 | --- | --- | --- |
 | `deeplinks` | `any[]` |  |
 | `found` | `number` |  |
-| `isCouponing` | `boolean` |  |
-| `market` | `string` |  |
-| `placementId` | `string` |  |
+| `isCouponing` | `boolean` | If your project has in parts couponing traffic, you must use this parameter to tell the API if the click is a couponing click or not. |
+| `market` | `string` | The market to query. |
+| `placementId` | `string` | Your own subID for your click-tracking. |
 | `total` | `number` |  |
-| `urls` | `any[]` |  |
+| `urls` | `any[]` | An array of URLs |
 
 #### Example: Create
 
@@ -652,12 +652,12 @@ Create an instance: `const deeplink_merchant = client.DeeplinkMerchant()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `deeplinkCount` | `number` |  |
+| `deeplinkCount` | `number` | Even when a merchant has no deeplinks, it might still have smartlinks. |
 | `estimatedCpc` | `Record<string, any>` |  |
-| `hasExternalHomepage` | `boolean` |  |
-| `hasSmartlinkHomepage` | `boolean` |  |
+| `hasExternalHomepage` | `boolean` | If the merchant accept homepage deeplinks. |
+| `hasSmartlinkHomepage` | `boolean` | If the merchant accept homepage smartlinks. |
 | `id` | `string` |  |
-| `isSmartlink` | `boolean` |  |
+| `isSmartlink` | `boolean` | If the merchant has one or more smartlinks. |
 | `logo` | `Record<string, any>` |  |
 | `name` | `string` |  |
 | `trafficTypes` | `any[]` |  |
@@ -757,7 +757,7 @@ Create an instance: `const offer = client.Offer()`
 | `count` | `number` |  |
 | `description` | `string` |  |
 | `eer` | `string` |  |
-| `estimatedCpc` | `Record<string, any>` |  |
+| `estimatedCpc` | `Record<string, any>` | estimatedCPC means the gross revenue per click Yadore gets from its merchants, you have to use your revenue share to get your estimatedCPC. |
 | `id` | `string` |  |
 | `image` | `Record<string, any>` |  |
 | `merchant` | `Record<string, any>` |  |

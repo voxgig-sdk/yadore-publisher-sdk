@@ -199,7 +199,7 @@ conversion_detail_merchant = client.ConversionDetailMerchant()
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `clicks` | `int` | No |  |
-| `market` | `str` | No |  |
+| `market` | `str` | No | Two character form of a country, in all lower-case |
 | `merchant` | `dict` | No |  |
 | `sales` | `int` | No |  |
 
@@ -360,11 +360,11 @@ deeplink = client.Deeplink()
 | --- | --- | --- | --- |
 | `deeplinks` | `list` | No |  |
 | `found` | `int` | No |  |
-| `isCouponing` | `bool` | No |  |
-| `market` | `str` | Yes |  |
-| `placementId` | `str` | No |  |
+| `isCouponing` | `bool` | No | If your project has in parts couponing traffic, you must use this parameter to tell the API if the click is a couponing click or not. |
+| `market` | `str` | Yes | The market to query. |
+| `placementId` | `str` | No | Your own subID for your click-tracking. |
 | `total` | `int` | No |  |
-| `urls` | `list` | Yes |  |
+| `urls` | `list` | Yes | An array of URLs |
 
 ### Operations
 
@@ -418,12 +418,12 @@ deeplink_merchant = client.DeeplinkMerchant()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `deeplinkCount` | `int` | No |  |
+| `deeplinkCount` | `int` | No | Even when a merchant has no deeplinks, it might still have smartlinks. |
 | `estimatedCpc` | `dict` | No |  |
-| `hasExternalHomepage` | `bool` | No |  |
-| `hasSmartlinkHomepage` | `bool` | No |  |
+| `hasExternalHomepage` | `bool` | No | If the merchant accept homepage deeplinks. |
+| `hasSmartlinkHomepage` | `bool` | No | If the merchant accept homepage smartlinks. |
 | `id` | `str` | No |  |
-| `isSmartlink` | `bool` | No |  |
+| `isSmartlink` | `bool` | No | If the merchant has one or more smartlinks. |
 | `logo` | `dict` | No |  |
 | `name` | `str` | No |  |
 | `trafficTypes` | `list` | No |  |
@@ -640,7 +640,7 @@ offer = client.Offer()
 | `count` | `int` | No |  |
 | `description` | `str` | No |  |
 | `eer` | `str` | No |  |
-| `estimatedCpc` | `dict` | No |  |
+| `estimatedCpc` | `dict` | No | estimatedCPC means the gross revenue per click Yadore gets from its merchants, you have to use your revenue share to get your estimatedCPC. |
 | `id` | `str` | No |  |
 | `image` | `dict` | No |  |
 | `merchant` | `dict` | No |  |

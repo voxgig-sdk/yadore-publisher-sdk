@@ -1,0 +1,96 @@
+# Entity: conversion_detail_merchant
+
+main: kit: entity: conversion_detail_merchant: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "clicks"
+      req: false
+      type: "`$INTEGER`"
+    }
+    {
+      name: "market"
+      req: false
+      short: "Two character form of a country, in all lower-case"
+      type: "`$STRING`"
+    }
+    {
+      name: "merchant"
+      req: false
+      type: "`$OBJECT`"
+    }
+    {
+      name: "sales"
+      req: false
+      type: "`$INTEGER`"
+    }
+  ]
+
+  name: "conversion_detail_merchant"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          args: {
+            query: [
+              {
+                kind: "query"
+                name: "format"
+                orig: "format"
+                reqd: true
+                type: "`$STRING`"
+              }
+              {
+                kind: "query"
+                name: "from"
+                orig: "from"
+                reqd: true
+                type: "`$STRING`"
+              }
+              {
+                kind: "query"
+                name: "market"
+                orig: "market"
+                reqd: false
+                type: "`$STRING`"
+              }
+              {
+                kind: "query"
+                name: "to"
+                orig: "to"
+                reqd: true
+                type: "`$STRING`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/v2/conversion/detail/merchant"
+          parts: [
+            "v2"
+            "conversion"
+            "detail"
+            "merchant"
+          ]
+          select: {
+            exist: [
+              "format"
+              "from"
+              "market"
+              "to"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

@@ -1,0 +1,292 @@
+# Entity: offer
+
+main: kit: entity: offer: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "availability"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "brand"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "clickUrl"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "count"
+      req: false
+      type: "`$INTEGER`"
+    }
+    {
+      name: "description"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "eer"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "estimatedCpc"
+      req: false
+      short: "estimatedCPC means the gross revenue per click Yadore gets from its merchants, you have to use your revenue share to get your estimatedCPC."
+      type: "`$OBJECT`"
+    }
+    {
+      name: "id"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "image"
+      req: false
+      type: "`$OBJECT`"
+    }
+    {
+      name: "merchant"
+      req: false
+      type: "`$OBJECT`"
+    }
+    {
+      name: "offers"
+      req: false
+      type: "`$ARRAY`"
+    }
+    {
+      name: "originalPrice"
+      req: false
+      type: "`$OBJECT`"
+    }
+    {
+      name: "price"
+      req: false
+      type: "`$OBJECT`"
+    }
+    {
+      name: "promoText"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "shippingPrice"
+      req: false
+      type: "`$OBJECT`"
+    }
+    {
+      name: "shippingTime"
+      req: false
+      type: "`$OBJECT`"
+    }
+    {
+      name: "thumbnail"
+      req: false
+      type: "`$OBJECT`"
+    }
+    {
+      name: "title"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "unitPrice"
+      req: false
+      type: "`$OBJECT`"
+    }
+  ]
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "offer"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          args: {
+            query: [
+              {
+                kind: "query"
+                name: "ean"
+                orig: "ean"
+                reqd: false
+                type: "`$STRING`"
+              }
+              {
+                kind: "query"
+                name: "is_couponing"
+                orig: "is_couponing"
+                reqd: false
+                type: "`$BOOLEAN`"
+              }
+              {
+                kind: "query"
+                name: "keyword"
+                orig: "keyword"
+                reqd: false
+                type: "`$STRING`"
+              }
+              {
+                kind: "query"
+                name: "limit"
+                orig: "limit"
+                reqd: false
+                type: "`$INTEGER`"
+              }
+              {
+                kind: "query"
+                name: "market"
+                orig: "market"
+                reqd: true
+                type: "`$STRING`"
+              }
+              {
+                kind: "query"
+                name: "merchant_id"
+                orig: "merchant_id"
+                reqd: false
+                type: "`$STRING`"
+              }
+              {
+                kind: "query"
+                name: "offer_id"
+                orig: "offer_id"
+                reqd: false
+                type: "`$STRING`"
+              }
+              {
+                kind: "query"
+                name: "placement_id"
+                orig: "placement_id"
+                reqd: false
+                type: "`$STRING`"
+              }
+              {
+                example: "fuzzy"
+                kind: "query"
+                name: "precision"
+                orig: "precision"
+                reqd: false
+                type: "`$STRING`"
+              }
+              {
+                example: "rel_desc"
+                kind: "query"
+                name: "sort"
+                orig: "sort"
+                reqd: false
+                type: "`$STRING`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/v2/offer"
+          parts: [
+            "v2"
+            "offer"
+          ]
+          select: {
+            exist: [
+              "ean"
+              "is_couponing"
+              "keyword"
+              "limit"
+              "market"
+              "merchant_id"
+              "offer_id"
+              "placement_id"
+              "precision"
+              "sort"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body.offers`"
+          }
+        }
+      ]
+    }
+    load: {
+      name: "load"
+      points: [
+        {
+          args: {
+            query: [
+              {
+                example: "12345678,87654321"
+                kind: "query"
+                name: "ean"
+                orig: "ean"
+                reqd: true
+                type: "`$STRING`"
+              }
+              {
+                kind: "query"
+                name: "is_couponing"
+                orig: "is_couponing"
+                reqd: false
+                type: "`$BOOLEAN`"
+              }
+              {
+                kind: "query"
+                name: "market"
+                orig: "market"
+                reqd: true
+                type: "`$STRING`"
+              }
+              {
+                kind: "query"
+                name: "merchant_id"
+                orig: "merchant_id"
+                reqd: false
+                type: "`$STRING`"
+              }
+              {
+                kind: "query"
+                name: "placement_id"
+                orig: "placement_id"
+                reqd: false
+                type: "`$STRING`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/v2/offer/bulk"
+          parts: [
+            "v2"
+            "offer"
+            "bulk"
+          ]
+          select: {
+            "$action": "bulk"
+            exist: [
+              "ean"
+              "is_couponing"
+              "market"
+              "merchant_id"
+              "placement_id"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body.ean`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

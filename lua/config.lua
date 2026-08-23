@@ -7,6 +7,9 @@ local function make_config()
   return {
     main = {
       name = "YadorePublisher",
+      slug = "yadore-publisher",
+      version = "0.0.1",
+      target = "lua",
     },
     feature = {
       ["test"] = {
@@ -134,6 +137,7 @@ local function make_config()
           },
           {
             ["name"] = "market",
+            ["short"] = "Two character form of a country, in all lower-case",
             ["type"] = "`$STRING`",
           },
           {
@@ -348,15 +352,18 @@ local function make_config()
           },
           {
             ["name"] = "isCouponing",
+            ["short"] = "If your project has in parts couponing traffic, you must use this parameter to tell the API if the click is a couponing click or not.",
             ["type"] = "`$BOOLEAN`",
           },
           {
             ["name"] = "market",
             ["req"] = true,
+            ["short"] = "The market to query.",
             ["type"] = "`$STRING`",
           },
           {
             ["name"] = "placementId",
+            ["short"] = "Your own subID for your click-tracking.",
             ["type"] = "`$STRING`",
           },
           {
@@ -366,6 +373,7 @@ local function make_config()
           {
             ["name"] = "urls",
             ["req"] = true,
+            ["short"] = "An array of URLs",
             ["type"] = "`$ARRAY`",
           },
         },
@@ -401,6 +409,7 @@ local function make_config()
         ["fields"] = {
           {
             ["name"] = "deeplinkCount",
+            ["short"] = "Even when a merchant has no deeplinks, it might still have smartlinks.",
             ["type"] = "`$INTEGER`",
           },
           {
@@ -409,10 +418,12 @@ local function make_config()
           },
           {
             ["name"] = "hasExternalHomepage",
+            ["short"] = "If the merchant accept homepage deeplinks.",
             ["type"] = "`$BOOLEAN`",
           },
           {
             ["name"] = "hasSmartlinkHomepage",
+            ["short"] = "If the merchant accept homepage smartlinks.",
             ["type"] = "`$BOOLEAN`",
           },
           {
@@ -421,6 +432,7 @@ local function make_config()
           },
           {
             ["name"] = "isSmartlink",
+            ["short"] = "If the merchant has one or more smartlinks.",
             ["type"] = "`$BOOLEAN`",
           },
           {
@@ -723,6 +735,7 @@ local function make_config()
           },
           {
             ["name"] = "estimatedCpc",
+            ["short"] = "estimatedCPC means the gross revenue per click Yadore gets from its merchants, you have to use your revenue share to get your estimatedCPC.",
             ["type"] = "`$OBJECT`",
           },
           {

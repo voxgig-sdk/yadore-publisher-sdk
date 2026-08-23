@@ -11,6 +11,9 @@ func MakeConfig() map[string]any {
 	return map[string]any{
 		"main": map[string]any{
 			"name": "YadorePublisher",
+			"slug": "yadore-publisher",
+			"version": "0.0.1",
+			"target": "go",
 		},
 		"feature": map[string]any{
 			"test": map[string]any{
@@ -138,6 +141,7 @@ func MakeConfig() map[string]any {
 					},
 					map[string]any{
 						"name": "market",
+						"short": "Two character form of a country, in all lower-case",
 						"type": "`$STRING`",
 					},
 					map[string]any{
@@ -352,15 +356,18 @@ func MakeConfig() map[string]any {
 					},
 					map[string]any{
 						"name": "isCouponing",
+						"short": "If your project has in parts couponing traffic, you must use this parameter to tell the API if the click is a couponing click or not.",
 						"type": "`$BOOLEAN`",
 					},
 					map[string]any{
 						"name": "market",
 						"req": true,
+						"short": "The market to query.",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "placementId",
+						"short": "Your own subID for your click-tracking.",
 						"type": "`$STRING`",
 					},
 					map[string]any{
@@ -370,6 +377,7 @@ func MakeConfig() map[string]any {
 					map[string]any{
 						"name": "urls",
 						"req": true,
+						"short": "An array of URLs",
 						"type": "`$ARRAY`",
 					},
 				},
@@ -405,6 +413,7 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"name": "deeplinkCount",
+						"short": "Even when a merchant has no deeplinks, it might still have smartlinks.",
 						"type": "`$INTEGER`",
 					},
 					map[string]any{
@@ -413,10 +422,12 @@ func MakeConfig() map[string]any {
 					},
 					map[string]any{
 						"name": "hasExternalHomepage",
+						"short": "If the merchant accept homepage deeplinks.",
 						"type": "`$BOOLEAN`",
 					},
 					map[string]any{
 						"name": "hasSmartlinkHomepage",
+						"short": "If the merchant accept homepage smartlinks.",
 						"type": "`$BOOLEAN`",
 					},
 					map[string]any{
@@ -425,6 +436,7 @@ func MakeConfig() map[string]any {
 					},
 					map[string]any{
 						"name": "isSmartlink",
+						"short": "If the merchant has one or more smartlinks.",
 						"type": "`$BOOLEAN`",
 					},
 					map[string]any{
@@ -727,6 +739,7 @@ func MakeConfig() map[string]any {
 					},
 					map[string]any{
 						"name": "estimatedCpc",
+						"short": "estimatedCPC means the gross revenue per click Yadore gets from its merchants, you have to use your revenue share to get your estimatedCPC.",
 						"type": "`$OBJECT`",
 					},
 					map[string]any{

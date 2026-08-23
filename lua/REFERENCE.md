@@ -201,7 +201,7 @@ local conversion_detail_merchant = client:ConversionDetailMerchant(nil)
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `clicks` | `number` | No |  |
-| `market` | `string` | No |  |
+| `market` | `string` | No | Two character form of a country, in all lower-case |
 | `merchant` | `table` | No |  |
 | `sales` | `number` | No |  |
 
@@ -363,11 +363,11 @@ local deeplink = client:Deeplink(nil)
 | --- | --- | --- | --- |
 | `deeplinks` | `table` | No |  |
 | `found` | `number` | No |  |
-| `isCouponing` | `boolean` | No |  |
-| `market` | `string` | Yes |  |
-| `placementId` | `string` | No |  |
+| `isCouponing` | `boolean` | No | If your project has in parts couponing traffic, you must use this parameter to tell the API if the click is a couponing click or not. |
+| `market` | `string` | Yes | The market to query. |
+| `placementId` | `string` | No | Your own subID for your click-tracking. |
 | `total` | `number` | No |  |
-| `urls` | `table` | Yes |  |
+| `urls` | `table` | Yes | An array of URLs |
 
 ### Operations
 
@@ -422,12 +422,12 @@ local deeplink_merchant = client:DeeplinkMerchant(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `deeplinkCount` | `number` | No |  |
+| `deeplinkCount` | `number` | No | Even when a merchant has no deeplinks, it might still have smartlinks. |
 | `estimatedCpc` | `table` | No |  |
-| `hasExternalHomepage` | `boolean` | No |  |
-| `hasSmartlinkHomepage` | `boolean` | No |  |
+| `hasExternalHomepage` | `boolean` | No | If the merchant accept homepage deeplinks. |
+| `hasSmartlinkHomepage` | `boolean` | No | If the merchant accept homepage smartlinks. |
 | `id` | `string` | No |  |
-| `isSmartlink` | `boolean` | No |  |
+| `isSmartlink` | `boolean` | No | If the merchant has one or more smartlinks. |
 | `logo` | `table` | No |  |
 | `name` | `string` | No |  |
 | `trafficTypes` | `table` | No |  |
@@ -642,7 +642,7 @@ local offer = client:Offer(nil)
 | `count` | `number` | No |  |
 | `description` | `string` | No |  |
 | `eer` | `string` | No |  |
-| `estimatedCpc` | `table` | No |  |
+| `estimatedCpc` | `table` | No | estimatedCPC means the gross revenue per click Yadore gets from its merchants, you have to use your revenue share to get your estimatedCPC. |
 | `id` | `string` | No |  |
 | `image` | `table` | No |  |
 | `merchant` | `table` | No |  |
