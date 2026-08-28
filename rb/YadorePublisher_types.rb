@@ -39,30 +39,18 @@ ConversionDetail = Struct.new(
 
 # Request payload for ConversionDetail#list.
 #
-# @!attribute [rw] clickId
-#   @return [String, nil]
-#
 # @!attribute [rw] date
-#   @return [String, nil]
+#   @return [String]
+#
+# @!attribute [rw] format
+#   @return [String]
 #
 # @!attribute [rw] market
 #   @return [String, nil]
-#
-# @!attribute [rw] merchant
-#   @return [Hash, nil]
-#
-# @!attribute [rw] placementId
-#   @return [String, nil]
-#
-# @!attribute [rw] sales
-#   @return [Float, nil]
 ConversionDetailListMatch = Struct.new(
-  :clickId,
   :date,
+  :format,
   :market,
-  :merchant,
-  :placementId,
-  :sales,
   keyword_init: true
 )
 
@@ -89,22 +77,22 @@ ConversionDetailMerchant = Struct.new(
 
 # Request payload for ConversionDetailMerchant#list.
 #
-# @!attribute [rw] clicks
-#   @return [Integer, nil]
+# @!attribute [rw] format
+#   @return [String]
+#
+# @!attribute [rw] from
+#   @return [String]
 #
 # @!attribute [rw] market
 #   @return [String, nil]
 #
-# @!attribute [rw] merchant
-#   @return [Hash, nil]
-#
-# @!attribute [rw] sales
-#   @return [Integer, nil]
+# @!attribute [rw] to
+#   @return [String]
 ConversionDetailMerchantListMatch = Struct.new(
-  :clicks,
+  :format,
+  :from,
   :market,
-  :merchant,
-  :sales,
+  :to,
   keyword_init: true
 )
 
@@ -127,18 +115,18 @@ ConversionGeneral = Struct.new(
 
 # Request payload for ConversionGeneral#load.
 #
-# @!attribute [rw] date
-#   @return [Hash, nil]
+# @!attribute [rw] format
+#   @return [String]
 #
-# @!attribute [rw] market
-#   @return [Hash, nil]
+# @!attribute [rw] from
+#   @return [String]
 #
-# @!attribute [rw] total
-#   @return [Hash, nil]
+# @!attribute [rw] to
+#   @return [String]
 ConversionGeneralLoadMatch = Struct.new(
-  :date,
-  :market,
-  :total,
+  :format,
+  :from,
+  :to,
   keyword_init: true
 )
 
@@ -153,10 +141,10 @@ ConversionStatus = Struct.new(
 
 # Request payload for ConversionStatus#load.
 #
-# @!attribute [rw] status
-#   @return [String, nil]
+# @!attribute [rw] date
+#   @return [String]
 ConversionStatusLoadMatch = Struct.new(
-  :status,
+  :date,
   keyword_init: true
 )
 
@@ -269,42 +257,22 @@ DeeplinkMerchant = Struct.new(
 
 # Request payload for DeeplinkMerchant#list.
 #
-# @!attribute [rw] deeplinkCount
-#   @return [Integer, nil]
-#
-# @!attribute [rw] estimatedCpc
-#   @return [Hash, nil]
-#
-# @!attribute [rw] hasExternalHomepage
+# @!attribute [rw] has_homepage
 #   @return [Boolean, nil]
 #
-# @!attribute [rw] hasSmartlinkHomepage
+# @!attribute [rw] is_couponing
 #   @return [Boolean, nil]
 #
-# @!attribute [rw] id
-#   @return [String, nil]
-#
-# @!attribute [rw] isSmartlink
+# @!attribute [rw] is_smartlink
 #   @return [Boolean, nil]
 #
-# @!attribute [rw] logo
-#   @return [Hash, nil]
-#
-# @!attribute [rw] name
-#   @return [String, nil]
-#
-# @!attribute [rw] trafficTypes
-#   @return [Array, nil]
+# @!attribute [rw] market
+#   @return [String]
 DeeplinkMerchantListMatch = Struct.new(
-  :deeplinkCount,
-  :estimatedCpc,
-  :hasExternalHomepage,
-  :hasSmartlinkHomepage,
-  :id,
-  :isSmartlink,
-  :logo,
-  :name,
-  :trafficTypes,
+  :has_homepage,
+  :is_couponing,
+  :is_smartlink,
+  :market,
   keyword_init: true
 )
 
@@ -313,8 +281,37 @@ class Dnt
 end
 
 # Request payload for Dnt#load.
-class DntLoadMatch
-end
+#
+# @!attribute [rw] callback_url
+#   @return [String, nil]
+#
+# @!attribute [rw] is_couponing
+#   @return [Boolean, nil]
+#
+# @!attribute [rw] market
+#   @return [String]
+#
+# @!attribute [rw] merchant_id
+#   @return [String, nil]
+#
+# @!attribute [rw] placement_id
+#   @return [String, nil]
+#
+# @!attribute [rw] project_id
+#   @return [String]
+#
+# @!attribute [rw] url
+#   @return [String]
+DntLoadMatch = Struct.new(
+  :callback_url,
+  :is_couponing,
+  :market,
+  :merchant_id,
+  :placement_id,
+  :project_id,
+  :url,
+  keyword_init: true
+)
 
 # Market entity data model.
 #
@@ -361,26 +358,14 @@ Merchant = Struct.new(
 
 # Request payload for Merchant#list.
 #
-# @!attribute [rw] id
-#   @return [String, nil]
+# @!attribute [rw] is_couponing
+#   @return [Boolean, nil]
 #
-# @!attribute [rw] logo
-#   @return [Hash, nil]
-#
-# @!attribute [rw] name
-#   @return [String, nil]
-#
-# @!attribute [rw] offerCount
-#   @return [Integer, nil]
-#
-# @!attribute [rw] trafficTypes
-#   @return [Array, nil]
+# @!attribute [rw] market
+#   @return [String]
 MerchantListMatch = Struct.new(
-  :id,
-  :logo,
-  :name,
-  :offerCount,
-  :trafficTypes,
+  :is_couponing,
+  :market,
   keyword_init: true
 )
 
@@ -467,163 +452,71 @@ Offer = Struct.new(
 
 # Request payload for Offer#load.
 #
-# @!attribute [rw] availability
-#   @return [String, nil]
-#
-# @!attribute [rw] brand
-#   @return [String, nil]
-#
-# @!attribute [rw] clickUrl
-#   @return [String, nil]
-#
-# @!attribute [rw] count
-#   @return [Integer, nil]
-#
-# @!attribute [rw] description
-#   @return [String, nil]
-#
-# @!attribute [rw] eer
-#   @return [String, nil]
-#
-# @!attribute [rw] estimatedCpc
-#   @return [Hash, nil]
-#
-# @!attribute [rw] id
+# @!attribute [rw] ean
 #   @return [String]
 #
-# @!attribute [rw] image
-#   @return [Hash, nil]
+# @!attribute [rw] is_couponing
+#   @return [Boolean, nil]
 #
-# @!attribute [rw] merchant
-#   @return [Hash, nil]
+# @!attribute [rw] market
+#   @return [String]
 #
-# @!attribute [rw] offers
-#   @return [Array, nil]
-#
-# @!attribute [rw] originalPrice
-#   @return [Hash, nil]
-#
-# @!attribute [rw] price
-#   @return [Hash, nil]
-#
-# @!attribute [rw] promoText
+# @!attribute [rw] merchant_id
 #   @return [String, nil]
 #
-# @!attribute [rw] shippingPrice
-#   @return [Hash, nil]
-#
-# @!attribute [rw] shippingTime
-#   @return [Hash, nil]
-#
-# @!attribute [rw] thumbnail
-#   @return [Hash, nil]
-#
-# @!attribute [rw] title
+# @!attribute [rw] placement_id
 #   @return [String, nil]
-#
-# @!attribute [rw] unitPrice
-#   @return [Hash, nil]
 OfferLoadMatch = Struct.new(
-  :availability,
-  :brand,
-  :clickUrl,
-  :count,
-  :description,
-  :eer,
-  :estimatedCpc,
-  :id,
-  :image,
-  :merchant,
-  :offers,
-  :originalPrice,
-  :price,
-  :promoText,
-  :shippingPrice,
-  :shippingTime,
-  :thumbnail,
-  :title,
-  :unitPrice,
+  :ean,
+  :is_couponing,
+  :market,
+  :merchant_id,
+  :placement_id,
   keyword_init: true
 )
 
 # Request payload for Offer#list.
 #
-# @!attribute [rw] availability
+# @!attribute [rw] ean
 #   @return [String, nil]
 #
-# @!attribute [rw] brand
+# @!attribute [rw] is_couponing
+#   @return [Boolean, nil]
+#
+# @!attribute [rw] keyword
 #   @return [String, nil]
 #
-# @!attribute [rw] clickUrl
-#   @return [String, nil]
-#
-# @!attribute [rw] count
+# @!attribute [rw] limit
 #   @return [Integer, nil]
 #
-# @!attribute [rw] description
+# @!attribute [rw] market
+#   @return [String]
+#
+# @!attribute [rw] merchant_id
 #   @return [String, nil]
 #
-# @!attribute [rw] eer
+# @!attribute [rw] offer_id
 #   @return [String, nil]
 #
-# @!attribute [rw] estimatedCpc
-#   @return [Hash, nil]
-#
-# @!attribute [rw] id
+# @!attribute [rw] placement_id
 #   @return [String, nil]
 #
-# @!attribute [rw] image
-#   @return [Hash, nil]
-#
-# @!attribute [rw] merchant
-#   @return [Hash, nil]
-#
-# @!attribute [rw] offers
-#   @return [Array, nil]
-#
-# @!attribute [rw] originalPrice
-#   @return [Hash, nil]
-#
-# @!attribute [rw] price
-#   @return [Hash, nil]
-#
-# @!attribute [rw] promoText
+# @!attribute [rw] precision
 #   @return [String, nil]
 #
-# @!attribute [rw] shippingPrice
-#   @return [Hash, nil]
-#
-# @!attribute [rw] shippingTime
-#   @return [Hash, nil]
-#
-# @!attribute [rw] thumbnail
-#   @return [Hash, nil]
-#
-# @!attribute [rw] title
+# @!attribute [rw] sort
 #   @return [String, nil]
-#
-# @!attribute [rw] unitPrice
-#   @return [Hash, nil]
 OfferListMatch = Struct.new(
-  :availability,
-  :brand,
-  :clickUrl,
-  :count,
-  :description,
-  :eer,
-  :estimatedCpc,
-  :id,
-  :image,
-  :merchant,
-  :offers,
-  :originalPrice,
-  :price,
-  :promoText,
-  :shippingPrice,
-  :shippingTime,
-  :thumbnail,
-  :title,
-  :unitPrice,
+  :ean,
+  :is_couponing,
+  :keyword,
+  :limit,
+  :market,
+  :merchant_id,
+  :offer_id,
+  :placement_id,
+  :precision,
+  :sort,
   keyword_init: true
 )
 
@@ -662,34 +555,18 @@ ReportDetail = Struct.new(
 
 # Request payload for ReportDetail#list.
 #
-# @!attribute [rw] clickId
-#   @return [String, nil]
-#
-# @!attribute [rw] currency
-#   @return [String, nil]
-#
 # @!attribute [rw] date
-#   @return [String, nil]
+#   @return [String]
+#
+# @!attribute [rw] format
+#   @return [String]
 #
 # @!attribute [rw] market
 #   @return [String, nil]
-#
-# @!attribute [rw] merchant
-#   @return [Hash, nil]
-#
-# @!attribute [rw] placementId
-#   @return [String, nil]
-#
-# @!attribute [rw] revenue
-#   @return [Float, nil]
 ReportDetailListMatch = Struct.new(
-  :clickId,
-  :currency,
   :date,
+  :format,
   :market,
-  :merchant,
-  :placementId,
-  :revenue,
   keyword_init: true
 )
 
@@ -713,17 +590,13 @@ ReportGeneral = Struct.new(
 # Request payload for ReportGeneral#load.
 #
 # @!attribute [rw] date
-#   @return [Hash, nil]
+#   @return [String]
 #
-# @!attribute [rw] market
-#   @return [Hash, nil]
-#
-# @!attribute [rw] total
-#   @return [Hash, nil]
+# @!attribute [rw] format
+#   @return [String]
 ReportGeneralLoadMatch = Struct.new(
   :date,
-  :market,
-  :total,
+  :format,
   keyword_init: true
 )
 
@@ -742,14 +615,18 @@ ReportModified = Struct.new(
 
 # Request payload for ReportModified#load.
 #
-# @!attribute [rw] date
+# @!attribute [rw] from
+#   @return [String]
+#
+# @!attribute [rw] market
 #   @return [String, nil]
 #
-# @!attribute [rw] modifiedDate
-#   @return [String, nil]
+# @!attribute [rw] to
+#   @return [String]
 ReportModifiedLoadMatch = Struct.new(
-  :date,
-  :modifiedDate,
+  :from,
+  :market,
+  :to,
   keyword_init: true
 )
 
@@ -764,10 +641,10 @@ ReportStatus = Struct.new(
 
 # Request payload for ReportStatus#load.
 #
-# @!attribute [rw] status
-#   @return [String, nil]
+# @!attribute [rw] date
+#   @return [String]
 ReportStatusLoadMatch = Struct.new(
-  :status,
+  :date,
   keyword_init: true
 )
 

@@ -26,12 +26,9 @@ class ConversionDetail
 /** Request payload for ConversionDetail#list. */
 class ConversionDetailListMatch
 {
-    public ?string $clickId = null;
-    public ?string $date = null;
+    public string $date;
+    public string $format;
     public ?string $market = null;
-    public ?array $merchant = null;
-    public ?string $placementId = null;
-    public ?float $sales = null;
 }
 
 /** ConversionDetailMerchant entity data model. */
@@ -46,10 +43,10 @@ class ConversionDetailMerchant
 /** Request payload for ConversionDetailMerchant#list. */
 class ConversionDetailMerchantListMatch
 {
-    public ?int $clicks = null;
+    public string $format;
+    public string $from;
     public ?string $market = null;
-    public ?array $merchant = null;
-    public ?int $sales = null;
+    public string $to;
 }
 
 /** ConversionGeneral entity data model. */
@@ -63,9 +60,9 @@ class ConversionGeneral
 /** Request payload for ConversionGeneral#load. */
 class ConversionGeneralLoadMatch
 {
-    public ?array $date = null;
-    public ?array $market = null;
-    public ?array $total = null;
+    public string $format;
+    public string $from;
+    public string $to;
 }
 
 /** ConversionStatus entity data model. */
@@ -77,7 +74,7 @@ class ConversionStatus
 /** Request payload for ConversionStatus#load. */
 class ConversionStatusLoadMatch
 {
-    public ?string $status = null;
+    public string $date;
 }
 
 /** Deeplink entity data model. */
@@ -121,15 +118,10 @@ class DeeplinkMerchant
 /** Request payload for DeeplinkMerchant#list. */
 class DeeplinkMerchantListMatch
 {
-    public ?int $deeplinkCount = null;
-    public ?array $estimatedCpc = null;
-    public ?bool $hasExternalHomepage = null;
-    public ?bool $hasSmartlinkHomepage = null;
-    public ?string $id = null;
-    public ?bool $isSmartlink = null;
-    public ?array $logo = null;
-    public ?string $name = null;
-    public ?array $trafficTypes = null;
+    public ?bool $has_homepage = null;
+    public ?bool $is_couponing = null;
+    public ?bool $is_smartlink = null;
+    public string $market;
 }
 
 /** Dnt entity data model. */
@@ -140,6 +132,13 @@ class Dnt
 /** Request payload for Dnt#load. */
 class DntLoadMatch
 {
+    public ?string $callback_url = null;
+    public ?bool $is_couponing = null;
+    public string $market;
+    public ?string $merchant_id = null;
+    public ?string $placement_id = null;
+    public string $project_id;
+    public string $url;
 }
 
 /** Market entity data model. */
@@ -167,11 +166,8 @@ class Merchant
 /** Request payload for Merchant#list. */
 class MerchantListMatch
 {
-    public ?string $id = null;
-    public ?array $logo = null;
-    public ?string $name = null;
-    public ?int $offerCount = null;
-    public ?array $trafficTypes = null;
+    public ?bool $is_couponing = null;
+    public string $market;
 }
 
 /** Offer entity data model. */
@@ -201,49 +197,26 @@ class Offer
 /** Request payload for Offer#load. */
 class OfferLoadMatch
 {
-    public ?string $availability = null;
-    public ?string $brand = null;
-    public ?string $clickUrl = null;
-    public ?int $count = null;
-    public ?string $description = null;
-    public ?string $eer = null;
-    public ?array $estimatedCpc = null;
-    public string $id;
-    public ?array $image = null;
-    public ?array $merchant = null;
-    public ?array $offers = null;
-    public ?array $originalPrice = null;
-    public ?array $price = null;
-    public ?string $promoText = null;
-    public ?array $shippingPrice = null;
-    public ?array $shippingTime = null;
-    public ?array $thumbnail = null;
-    public ?string $title = null;
-    public ?array $unitPrice = null;
+    public string $ean;
+    public ?bool $is_couponing = null;
+    public string $market;
+    public ?string $merchant_id = null;
+    public ?string $placement_id = null;
 }
 
 /** Request payload for Offer#list. */
 class OfferListMatch
 {
-    public ?string $availability = null;
-    public ?string $brand = null;
-    public ?string $clickUrl = null;
-    public ?int $count = null;
-    public ?string $description = null;
-    public ?string $eer = null;
-    public ?array $estimatedCpc = null;
-    public ?string $id = null;
-    public ?array $image = null;
-    public ?array $merchant = null;
-    public ?array $offers = null;
-    public ?array $originalPrice = null;
-    public ?array $price = null;
-    public ?string $promoText = null;
-    public ?array $shippingPrice = null;
-    public ?array $shippingTime = null;
-    public ?array $thumbnail = null;
-    public ?string $title = null;
-    public ?array $unitPrice = null;
+    public ?string $ean = null;
+    public ?bool $is_couponing = null;
+    public ?string $keyword = null;
+    public ?int $limit = null;
+    public string $market;
+    public ?string $merchant_id = null;
+    public ?string $offer_id = null;
+    public ?string $placement_id = null;
+    public ?string $precision = null;
+    public ?string $sort = null;
 }
 
 /** ReportDetail entity data model. */
@@ -261,13 +234,9 @@ class ReportDetail
 /** Request payload for ReportDetail#list. */
 class ReportDetailListMatch
 {
-    public ?string $clickId = null;
-    public ?string $currency = null;
-    public ?string $date = null;
+    public string $date;
+    public string $format;
     public ?string $market = null;
-    public ?array $merchant = null;
-    public ?string $placementId = null;
-    public ?float $revenue = null;
 }
 
 /** ReportGeneral entity data model. */
@@ -281,9 +250,8 @@ class ReportGeneral
 /** Request payload for ReportGeneral#load. */
 class ReportGeneralLoadMatch
 {
-    public ?array $date = null;
-    public ?array $market = null;
-    public ?array $total = null;
+    public string $date;
+    public string $format;
 }
 
 /** ReportModified entity data model. */
@@ -296,8 +264,9 @@ class ReportModified
 /** Request payload for ReportModified#load. */
 class ReportModifiedLoadMatch
 {
-    public ?string $date = null;
-    public ?string $modifiedDate = null;
+    public string $from;
+    public ?string $market = null;
+    public string $to;
 }
 
 /** ReportStatus entity data model. */
@@ -309,6 +278,6 @@ class ReportStatus
 /** Request payload for ReportStatus#load. */
 class ReportStatusLoadMatch
 {
-    public ?string $status = null;
+    public string $date;
 }
 

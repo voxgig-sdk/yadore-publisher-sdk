@@ -46,7 +46,7 @@ error — iterate it directly.
 
 ```python
 try:
-    conversiondetails = client.ConversionDetail().list()
+    conversiondetails = client.ConversionDetail().list({"date": "example", "format": "example"})
     for conversiondetail in conversiondetails:
         print(conversiondetail)
 except Exception as err:
@@ -60,7 +60,7 @@ Entity operations raise on failure, so wrap them in `try` / `except`:
 
 ```python
 try:
-    reportgeneral = client.ReportGeneral().load()
+    reportgeneral = client.ReportGeneral().load({"date": "example", "format": "example"})
     print(reportgeneral)
 except Exception as err:
     print(f"load failed: {err}")
@@ -129,7 +129,7 @@ client = YadorePublisherSDK.test()
 
 # Entity ops return the ENTITY and raises on error;
 # call data_get() for the record.
-reportgeneral = client.ReportGeneral().load()
+reportgeneral = client.ReportGeneral().load({"date": "example", "format": "example"})
 # reportgeneral contains the mock response record
 ```
 
@@ -482,7 +482,7 @@ Create an instance: `conversion_detail = client.ConversionDetail()`
 #### Example: List
 
 ```python
-conversion_details = client.ConversionDetail().list()
+conversion_details = client.ConversionDetail().list({"date": "example", "format": "example"})
 ```
 
 
@@ -508,7 +508,7 @@ Create an instance: `conversion_detail_merchant = client.ConversionDetailMerchan
 #### Example: List
 
 ```python
-conversion_detail_merchants = client.ConversionDetailMerchant().list()
+conversion_detail_merchants = client.ConversionDetailMerchant().list({"format": "example", "from": "example", "to": "example"})
 ```
 
 
@@ -533,7 +533,7 @@ Create an instance: `conversion_general = client.ConversionGeneral()`
 #### Example: Load
 
 ```python
-conversion_general = client.ConversionGeneral().load()
+conversion_general = client.ConversionGeneral().load({"format": "format", "from": "from", "to": "to"})
 ```
 
 
@@ -556,7 +556,7 @@ Create an instance: `conversion_status = client.ConversionStatus()`
 #### Example: Load
 
 ```python
-conversion_status = client.ConversionStatus().load()
+conversion_status = client.ConversionStatus().load({"date": "date"})
 ```
 
 
@@ -619,7 +619,7 @@ Create an instance: `deeplink_merchant = client.DeeplinkMerchant()`
 #### Example: List
 
 ```python
-deeplink_merchants = client.DeeplinkMerchant().list()
+deeplink_merchants = client.DeeplinkMerchant().list({"market": "example"})
 ```
 
 
@@ -636,7 +636,7 @@ Create an instance: `dnt = client.Dnt()`
 #### Example: Load
 
 ```python
-dnt = client.Dnt().load()
+dnt = client.Dnt().load({"market": "market", "project_id": "project_id", "url": "url"})
 ```
 
 
@@ -686,7 +686,7 @@ Create an instance: `merchant = client.Merchant()`
 #### Example: List
 
 ```python
-merchants = client.Merchant().list()
+merchants = client.Merchant().list({"market": "example"})
 ```
 
 
@@ -728,13 +728,13 @@ Create an instance: `offer = client.Offer()`
 #### Example: Load
 
 ```python
-offer = client.Offer().load({"id": "offer_id"})
+offer = client.Offer().load({"ean": "ean", "market": "market"})
 ```
 
 #### Example: List
 
 ```python
-offers = client.Offer().list()
+offers = client.Offer().list({"market": "example"})
 ```
 
 
@@ -763,7 +763,7 @@ Create an instance: `report_detail = client.ReportDetail()`
 #### Example: List
 
 ```python
-report_details = client.ReportDetail().list()
+report_details = client.ReportDetail().list({"date": "example", "format": "example"})
 ```
 
 
@@ -788,7 +788,7 @@ Create an instance: `report_general = client.ReportGeneral()`
 #### Example: Load
 
 ```python
-report_general = client.ReportGeneral().load()
+report_general = client.ReportGeneral().load({"date": "date", "format": "format"})
 ```
 
 
@@ -812,7 +812,7 @@ Create an instance: `report_modified = client.ReportModified()`
 #### Example: Load
 
 ```python
-report_modified = client.ReportModified().load()
+report_modified = client.ReportModified().load({"from": "from", "to": "to"})
 ```
 
 
@@ -835,8 +835,31 @@ Create an instance: `report_status = client.ReportStatus()`
 #### Example: Load
 
 ```python
-report_status = client.ReportStatus().load()
+report_status = client.ReportStatus().load({"date": "date"})
 ```
+
+## Features
+
+This SDK ships 1 optional features. Each is **inactive until you
+switch it on**, so an SDK you have not configured behaves exactly as if none of
+them existed — no retries, no cache, no logging, no measurable overhead.
+
+Activate a feature by name in the client options, alongside the options shown
+above:
+
+| Feature | What it does |
+|---|---|
+| [`test`](#test) | In-memory mock transport for testing without a live server |
+
+### test
+
+In-memory mock transport for testing without a live server.
+
+| Option | Default |
+|---|---|
+| `active` | `false` |
+
+Set `feature.test.active` to enable it, then override any of the options above.
 
 
 ## Advanced
@@ -915,7 +938,7 @@ stores the returned data and match criteria internally.
 
 ```python
 reportgeneral = client.ReportGeneral()
-reportgeneral.load()
+reportgeneral.load({"date": "example", "format": "example"})
 
 # reportgeneral.data_get() now returns the reportgeneral data from the last load
 # reportgeneral.match_get() returns the last match criteria

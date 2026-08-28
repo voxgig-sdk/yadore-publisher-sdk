@@ -42,7 +42,7 @@ resolves to entities, not raw records. Iterate them directly, and call
 `.data()` on one for the record it holds:
 
 ```ts
-const conversiondetails = await client.ConversionDetail().list()
+const conversiondetails = await client.ConversionDetail().list({ date: "example", format: "example" })
 
 for (const conversiondetail of conversiondetails) {
   console.log(conversiondetail)
@@ -56,7 +56,7 @@ Entity operations reject on failure, so wrap them in `try` / `catch`:
 
 ```ts
 try {
-  const reportgeneral = await client.ReportGeneral().load()
+  const reportgeneral = await client.ReportGeneral().load({ date: "example", format: "example" })
   console.log(reportgeneral)
 } catch (err) {
   console.error('load failed:', err)
@@ -123,7 +123,7 @@ Create a mock client for unit testing — no server required:
 ```ts
 const client = YadorePublisherSDK.test()
 
-const reportgeneral = await client.ReportGeneral().load()
+const reportgeneral = await client.ReportGeneral().load({ date: 'example_date', format: 'example_format' })
 // reportgeneral is the entity, populated with mock response data
 // — call reportgeneral.data() for the record itself
 console.log(reportgeneral)
@@ -144,7 +144,7 @@ Entity instances remember their last match and data:
 const entity = client.ReportGeneral()
 
 // First call runs the operation and stores its result
-await entity.load()
+await entity.load({ date: 'example_date', format: 'example_format' })
 
 // Subsequent calls reuse the stored state
 const data = entity.data()
@@ -528,7 +528,7 @@ Create an instance: `const conversion_detail = client.ConversionDetail()`
 #### Example: List
 
 ```ts
-const conversion_details = await client.ConversionDetail().list()
+const conversion_details = await client.ConversionDetail().list({ date: "example", format: "example" })
 ```
 
 
@@ -554,7 +554,7 @@ Create an instance: `const conversion_detail_merchant = client.ConversionDetailM
 #### Example: List
 
 ```ts
-const conversion_detail_merchants = await client.ConversionDetailMerchant().list()
+const conversion_detail_merchants = await client.ConversionDetailMerchant().list({ format: "example", from: "example", to: "example" })
 ```
 
 
@@ -579,7 +579,7 @@ Create an instance: `const conversion_general = client.ConversionGeneral()`
 #### Example: Load
 
 ```ts
-const conversion_general = await client.ConversionGeneral().load()
+const conversion_general = await client.ConversionGeneral().load({ format: 'format', from: 'from', to: 'to' })
 ```
 
 
@@ -602,7 +602,7 @@ Create an instance: `const conversion_status = client.ConversionStatus()`
 #### Example: Load
 
 ```ts
-const conversion_status = await client.ConversionStatus().load()
+const conversion_status = await client.ConversionStatus().load({ date: 'date' })
 ```
 
 
@@ -665,7 +665,7 @@ Create an instance: `const deeplink_merchant = client.DeeplinkMerchant()`
 #### Example: List
 
 ```ts
-const deeplink_merchants = await client.DeeplinkMerchant().list()
+const deeplink_merchants = await client.DeeplinkMerchant().list({ market: "example" })
 ```
 
 
@@ -682,7 +682,7 @@ Create an instance: `const dnt = client.Dnt()`
 #### Example: Load
 
 ```ts
-const dnt = await client.Dnt().load()
+const dnt = await client.Dnt().load({ market: 'market', project_id: 'project_id', url: 'url' })
 ```
 
 
@@ -732,7 +732,7 @@ Create an instance: `const merchant = client.Merchant()`
 #### Example: List
 
 ```ts
-const merchants = await client.Merchant().list()
+const merchants = await client.Merchant().list({ market: "example" })
 ```
 
 
@@ -774,13 +774,13 @@ Create an instance: `const offer = client.Offer()`
 #### Example: Load
 
 ```ts
-const offer = await client.Offer().load({ id: 'offer_id' })
+const offer = await client.Offer().load({ ean: 'ean', market: 'market' })
 ```
 
 #### Example: List
 
 ```ts
-const offers = await client.Offer().list()
+const offers = await client.Offer().list({ market: "example" })
 ```
 
 
@@ -809,7 +809,7 @@ Create an instance: `const report_detail = client.ReportDetail()`
 #### Example: List
 
 ```ts
-const report_details = await client.ReportDetail().list()
+const report_details = await client.ReportDetail().list({ date: "example", format: "example" })
 ```
 
 
@@ -834,7 +834,7 @@ Create an instance: `const report_general = client.ReportGeneral()`
 #### Example: Load
 
 ```ts
-const report_general = await client.ReportGeneral().load()
+const report_general = await client.ReportGeneral().load({ date: 'date', format: 'format' })
 ```
 
 
@@ -858,7 +858,7 @@ Create an instance: `const report_modified = client.ReportModified()`
 #### Example: Load
 
 ```ts
-const report_modified = await client.ReportModified().load()
+const report_modified = await client.ReportModified().load({ from: 'from', to: 'to' })
 ```
 
 
@@ -881,8 +881,31 @@ Create an instance: `const report_status = client.ReportStatus()`
 #### Example: Load
 
 ```ts
-const report_status = await client.ReportStatus().load()
+const report_status = await client.ReportStatus().load({ date: 'date' })
 ```
+
+## Features
+
+This SDK ships 1 optional features. Each is **inactive until you
+switch it on**, so an SDK you have not configured behaves exactly as if none of
+them existed — no retries, no cache, no logging, no measurable overhead.
+
+Activate a feature by name in the client options, alongside the options shown
+above:
+
+| Feature | What it does |
+|---|---|
+| [`test`](#test) | In-memory mock transport for testing without a live server |
+
+### test
+
+In-memory mock transport for testing without a live server.
+
+| Option | Default |
+|---|---|
+| `active` | `false` |
+
+Set `feature.test.active` to enable it, then override any of the options above.
 
 
 ## Advanced
@@ -955,7 +978,7 @@ calls on the same instance can rely on this state.
 
 ```ts
 const reportgeneral = client.ReportGeneral()
-await reportgeneral.load()
+await reportgeneral.load({ date: "example", format: "example" })
 
 // reportgeneral.data() now returns the reportgeneral data from the last `load`
 // reportgeneral.match() returns the last match criteria

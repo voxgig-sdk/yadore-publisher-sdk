@@ -25,13 +25,13 @@ class ConversionDetail(TypedDict, total=False):
     sales: float
 
 
-class ConversionDetailListMatch(TypedDict, total=False):
-    clickId: str
+class ConversionDetailListMatchRequired(TypedDict):
     date: str
+    format: str
+
+
+class ConversionDetailListMatch(ConversionDetailListMatchRequired, total=False):
     market: str
-    merchant: dict
-    placementId: str
-    sales: float
 
 
 class ConversionDetailMerchant(TypedDict, total=False):
@@ -41,11 +41,13 @@ class ConversionDetailMerchant(TypedDict, total=False):
     sales: int
 
 
-class ConversionDetailMerchantListMatch(TypedDict, total=False):
-    clicks: int
+class ConversionDetailMerchantListMatchRequired(TypedDict):
+    format: str
+    to: str
+
+
+class ConversionDetailMerchantListMatch(ConversionDetailMerchantListMatchRequired, total=False):
     market: str
-    merchant: dict
-    sales: int
 
 
 class ConversionGeneral(TypedDict, total=False):
@@ -54,18 +56,17 @@ class ConversionGeneral(TypedDict, total=False):
     total: dict
 
 
-class ConversionGeneralLoadMatch(TypedDict, total=False):
-    date: dict
-    market: dict
-    total: dict
+class ConversionGeneralLoadMatch(TypedDict):
+    format: str
+    to: str
 
 
 class ConversionStatus(TypedDict, total=False):
     status: str
 
 
-class ConversionStatusLoadMatch(TypedDict, total=False):
-    status: str
+class ConversionStatusLoadMatch(TypedDict):
+    date: str
 
 
 class DeeplinkRequired(TypedDict):
@@ -106,24 +107,31 @@ class DeeplinkMerchant(TypedDict, total=False):
     trafficTypes: list
 
 
-class DeeplinkMerchantListMatch(TypedDict, total=False):
-    deeplinkCount: int
-    estimatedCpc: dict
-    hasExternalHomepage: bool
-    hasSmartlinkHomepage: bool
-    id: str
-    isSmartlink: bool
-    logo: dict
-    name: str
-    trafficTypes: list
+class DeeplinkMerchantListMatchRequired(TypedDict):
+    market: str
+
+
+class DeeplinkMerchantListMatch(DeeplinkMerchantListMatchRequired, total=False):
+    has_homepage: bool
+    is_couponing: bool
+    is_smartlink: bool
 
 
 class Dnt(TypedDict):
     pass
 
 
-class DntLoadMatch(TypedDict):
-    pass
+class DntLoadMatchRequired(TypedDict):
+    market: str
+    project_id: str
+    url: str
+
+
+class DntLoadMatch(DntLoadMatchRequired, total=False):
+    callback_url: str
+    is_couponing: bool
+    merchant_id: str
+    placement_id: str
 
 
 class Market(TypedDict, total=False):
@@ -142,12 +150,12 @@ class Merchant(TypedDict, total=False):
     trafficTypes: list
 
 
-class MerchantListMatch(TypedDict, total=False):
-    id: str
-    logo: dict
-    name: str
-    offerCount: int
-    trafficTypes: list
+class MerchantListMatchRequired(TypedDict):
+    market: str
+
+
+class MerchantListMatch(MerchantListMatchRequired, total=False):
+    is_couponing: bool
 
 
 class Offer(TypedDict, total=False):
@@ -173,50 +181,30 @@ class Offer(TypedDict, total=False):
 
 
 class OfferLoadMatchRequired(TypedDict):
-    id: str
+    ean: str
+    market: str
 
 
 class OfferLoadMatch(OfferLoadMatchRequired, total=False):
-    availability: str
-    brand: str
-    clickUrl: str
-    count: int
-    description: str
-    eer: str
-    estimatedCpc: dict
-    image: dict
-    merchant: dict
-    offers: list
-    originalPrice: dict
-    price: dict
-    promoText: str
-    shippingPrice: dict
-    shippingTime: dict
-    thumbnail: dict
-    title: str
-    unitPrice: dict
+    is_couponing: bool
+    merchant_id: str
+    placement_id: str
 
 
-class OfferListMatch(TypedDict, total=False):
-    availability: str
-    brand: str
-    clickUrl: str
-    count: int
-    description: str
-    eer: str
-    estimatedCpc: dict
-    id: str
-    image: dict
-    merchant: dict
-    offers: list
-    originalPrice: dict
-    price: dict
-    promoText: str
-    shippingPrice: dict
-    shippingTime: dict
-    thumbnail: dict
-    title: str
-    unitPrice: dict
+class OfferListMatchRequired(TypedDict):
+    market: str
+
+
+class OfferListMatch(OfferListMatchRequired, total=False):
+    ean: str
+    is_couponing: bool
+    keyword: str
+    limit: int
+    merchant_id: str
+    offer_id: str
+    placement_id: str
+    precision: str
+    sort: str
 
 
 class ReportDetail(TypedDict, total=False):
@@ -229,14 +217,13 @@ class ReportDetail(TypedDict, total=False):
     revenue: float
 
 
-class ReportDetailListMatch(TypedDict, total=False):
-    clickId: str
-    currency: str
+class ReportDetailListMatchRequired(TypedDict):
     date: str
+    format: str
+
+
+class ReportDetailListMatch(ReportDetailListMatchRequired, total=False):
     market: str
-    merchant: dict
-    placementId: str
-    revenue: float
 
 
 class ReportGeneral(TypedDict, total=False):
@@ -245,10 +232,9 @@ class ReportGeneral(TypedDict, total=False):
     total: dict
 
 
-class ReportGeneralLoadMatch(TypedDict, total=False):
-    date: dict
-    market: dict
-    total: dict
+class ReportGeneralLoadMatch(TypedDict):
+    date: str
+    format: str
 
 
 class ReportModified(TypedDict, total=False):
@@ -256,14 +242,17 @@ class ReportModified(TypedDict, total=False):
     modifiedDate: str
 
 
-class ReportModifiedLoadMatch(TypedDict, total=False):
-    date: str
-    modifiedDate: str
+class ReportModifiedLoadMatchRequired(TypedDict):
+    to: str
+
+
+class ReportModifiedLoadMatch(ReportModifiedLoadMatchRequired, total=False):
+    market: str
 
 
 class ReportStatus(TypedDict, total=False):
     status: str
 
 
-class ReportStatusLoadMatch(TypedDict, total=False):
-    status: str
+class ReportStatusLoadMatch(TypedDict):
+    date: str

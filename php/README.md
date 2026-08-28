@@ -55,7 +55,7 @@ Entity operations throw a `\Throwable` on failure, so wrap them in
 
 ```php
 try {
-    $reportgeneral = $client->ReportGeneral()->load();
+    $reportgeneral = $client->ReportGeneral()->load(["date" => "example", "format" => "example"]);
 } catch (\Throwable $err) {
     echo "Error: " . $err->getMessage();
 }
@@ -129,7 +129,7 @@ $client = YadorePublisherSDK::test();
 
 // Entity ops return the ENTITY (throws on error);
 // call data_get() for the mock record.
-$reportgeneral = $client->ReportGeneral()->load();
+$reportgeneral = $client->ReportGeneral()->load(["date" => "example", "format" => "example"]);
 print_r($reportgeneral);
 ```
 
@@ -539,7 +539,7 @@ Create an instance: `$conversion_general = $client->ConversionGeneral();`
 
 ```php
 // load() returns the ENTITY — call data_get() for the ConversionGeneral record (throws on error).
-$conversion_general = $client->ConversionGeneral()->load();
+$conversion_general = $client->ConversionGeneral()->load(["format" => "format", "from" => "from", "to" => "to"]);
 ```
 
 
@@ -563,7 +563,7 @@ Create an instance: `$conversion_status = $client->ConversionStatus();`
 
 ```php
 // load() returns the ENTITY — call data_get() for the ConversionStatus record (throws on error).
-$conversion_status = $client->ConversionStatus()->load();
+$conversion_status = $client->ConversionStatus()->load(["date" => "date"]);
 ```
 
 
@@ -645,7 +645,7 @@ Create an instance: `$dnt = $client->Dnt();`
 
 ```php
 // load() returns the ENTITY — call data_get() for the Dnt record (throws on error).
-$dnt = $client->Dnt()->load();
+$dnt = $client->Dnt()->load(["market" => "market", "project_id" => "project_id", "url" => "url"]);
 ```
 
 
@@ -740,7 +740,7 @@ Create an instance: `$offer = $client->Offer();`
 
 ```php
 // load() returns the ENTITY — call data_get() for the Offer record (throws on error).
-$offer = $client->Offer()->load(["id" => "offer_id"]);
+$offer = $client->Offer()->load(["ean" => "ean", "market" => "market"]);
 ```
 
 #### Example: List
@@ -803,7 +803,7 @@ Create an instance: `$report_general = $client->ReportGeneral();`
 
 ```php
 // load() returns the ENTITY — call data_get() for the ReportGeneral record (throws on error).
-$report_general = $client->ReportGeneral()->load();
+$report_general = $client->ReportGeneral()->load(["date" => "date", "format" => "format"]);
 ```
 
 
@@ -828,7 +828,7 @@ Create an instance: `$report_modified = $client->ReportModified();`
 
 ```php
 // load() returns the ENTITY — call data_get() for the ReportModified record (throws on error).
-$report_modified = $client->ReportModified()->load();
+$report_modified = $client->ReportModified()->load(["from" => "from", "to" => "to"]);
 ```
 
 
@@ -852,8 +852,31 @@ Create an instance: `$report_status = $client->ReportStatus();`
 
 ```php
 // load() returns the ENTITY — call data_get() for the ReportStatus record (throws on error).
-$report_status = $client->ReportStatus()->load();
+$report_status = $client->ReportStatus()->load(["date" => "date"]);
 ```
+
+## Features
+
+This SDK ships 1 optional features. Each is **inactive until you
+switch it on**, so an SDK you have not configured behaves exactly as if none of
+them existed — no retries, no cache, no logging, no measurable overhead.
+
+Activate a feature by name in the client options, alongside the options shown
+above:
+
+| Feature | What it does |
+|---|---|
+| [`test`](#test) | In-memory mock transport for testing without a live server |
+
+### test
+
+In-memory mock transport for testing without a live server.
+
+| Option | Default |
+|---|---|
+| `active` | `false` |
+
+Set `feature.test.active` to enable it, then override any of the options above.
 
 
 ## Advanced
@@ -933,7 +956,7 @@ stores the returned data and match criteria internally.
 
 ```php
 $reportgeneral = $client->ReportGeneral();
-$reportgeneral->load();
+$reportgeneral->load(["date" => "example", "format" => "example"]);
 
 // $reportgeneral->data_get() now returns the reportgeneral data from the last load
 // $reportgeneral->match_get() returns the last match criteria

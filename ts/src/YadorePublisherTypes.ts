@@ -15,12 +15,9 @@ export interface ConversionDetail {
 }
 
 export interface ConversionDetailListMatch {
-  clickId?: string
-  date?: string
+  date: string
+  format: string
   market?: string
-  merchant?: Record<string, any>
-  placementId?: string
-  sales?: number
 }
 
 export interface ConversionDetailMerchant {
@@ -31,10 +28,10 @@ export interface ConversionDetailMerchant {
 }
 
 export interface ConversionDetailMerchantListMatch {
-  clicks?: number
+  format: string
+  from: string
   market?: string
-  merchant?: Record<string, any>
-  sales?: number
+  to: string
 }
 
 export interface ConversionGeneral {
@@ -44,9 +41,9 @@ export interface ConversionGeneral {
 }
 
 export interface ConversionGeneralLoadMatch {
-  date?: Record<string, any>
-  market?: Record<string, any>
-  total?: Record<string, any>
+  format: string
+  from: string
+  to: string
 }
 
 export interface ConversionStatus {
@@ -54,7 +51,7 @@ export interface ConversionStatus {
 }
 
 export interface ConversionStatusLoadMatch {
-  status?: string
+  date: string
 }
 
 export interface Deeplink {
@@ -90,21 +87,23 @@ export interface DeeplinkMerchant {
 }
 
 export interface DeeplinkMerchantListMatch {
-  deeplinkCount?: number
-  estimatedCpc?: Record<string, any>
-  hasExternalHomepage?: boolean
-  hasSmartlinkHomepage?: boolean
-  id?: string
-  isSmartlink?: boolean
-  logo?: Record<string, any>
-  name?: string
-  trafficTypes?: any[]
+  has_homepage?: boolean
+  is_couponing?: boolean
+  is_smartlink?: boolean
+  market: string
 }
 
 export interface Dnt {
 }
 
 export interface DntLoadMatch {
+  callback_url?: string
+  is_couponing?: boolean
+  market: string
+  merchant_id?: string
+  placement_id?: string
+  project_id: string
+  url: string
 }
 
 export interface Market {
@@ -124,11 +123,8 @@ export interface Merchant {
 }
 
 export interface MerchantListMatch {
-  id?: string
-  logo?: Record<string, any>
-  name?: string
-  offerCount?: number
-  trafficTypes?: any[]
+  is_couponing?: boolean
+  market: string
 }
 
 export interface Offer {
@@ -154,25 +150,11 @@ export interface Offer {
 }
 
 export interface OfferLoadMatch {
-  availability?: string
-  brand?: string
-  clickUrl?: string
-  count?: number
-  description?: string
-  eer?: string
-  estimatedCpc?: Record<string, any>
-  id: string
-  image?: Record<string, any>
-  merchant?: Record<string, any>
-  offers?: any[]
-  originalPrice?: Record<string, any>
-  price?: Record<string, any>
-  promoText?: string
-  shippingPrice?: Record<string, any>
-  shippingTime?: Record<string, any>
-  thumbnail?: Record<string, any>
-  title?: string
-  unitPrice?: Record<string, any>
+  ean: string
+  is_couponing?: boolean
+  market: string
+  merchant_id?: string
+  placement_id?: string
 
   // Selects a custom action instead of the plain load:
   //   'bulk'
@@ -182,25 +164,16 @@ export interface OfferLoadMatch {
 }
 
 export interface OfferListMatch {
-  availability?: string
-  brand?: string
-  clickUrl?: string
-  count?: number
-  description?: string
-  eer?: string
-  estimatedCpc?: Record<string, any>
-  id?: string
-  image?: Record<string, any>
-  merchant?: Record<string, any>
-  offers?: any[]
-  originalPrice?: Record<string, any>
-  price?: Record<string, any>
-  promoText?: string
-  shippingPrice?: Record<string, any>
-  shippingTime?: Record<string, any>
-  thumbnail?: Record<string, any>
-  title?: string
-  unitPrice?: Record<string, any>
+  ean?: string
+  is_couponing?: boolean
+  keyword?: string
+  limit?: number
+  market: string
+  merchant_id?: string
+  offer_id?: string
+  placement_id?: string
+  precision?: string
+  sort?: string
 }
 
 export interface ReportDetail {
@@ -214,13 +187,9 @@ export interface ReportDetail {
 }
 
 export interface ReportDetailListMatch {
-  clickId?: string
-  currency?: string
-  date?: string
+  date: string
+  format: string
   market?: string
-  merchant?: Record<string, any>
-  placementId?: string
-  revenue?: number
 }
 
 export interface ReportGeneral {
@@ -230,9 +199,8 @@ export interface ReportGeneral {
 }
 
 export interface ReportGeneralLoadMatch {
-  date?: Record<string, any>
-  market?: Record<string, any>
-  total?: Record<string, any>
+  date: string
+  format: string
 }
 
 export interface ReportModified {
@@ -241,8 +209,9 @@ export interface ReportModified {
 }
 
 export interface ReportModifiedLoadMatch {
-  date?: string
-  modifiedDate?: string
+  from: string
+  market?: string
+  to: string
 }
 
 export interface ReportStatus {
@@ -250,6 +219,6 @@ export interface ReportStatus {
 }
 
 export interface ReportStatusLoadMatch {
-  status?: string
+  date: string
 }
 

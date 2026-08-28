@@ -287,7 +287,7 @@ const conversion_detail = client.ConversionDetail()
 List entities matching the given criteria. Returns an array.
 
 ```ts
-const results = await client.ConversionDetail().list()
+const results = await client.ConversionDetail().list({ date: "example", format: "example" })
 ```
 
 ### Common Methods
@@ -340,7 +340,7 @@ const conversion_detail_merchant = client.ConversionDetailMerchant()
 List entities matching the given criteria. Returns an array.
 
 ```ts
-const results = await client.ConversionDetailMerchant().list()
+const results = await client.ConversionDetailMerchant().list({ format: "example", from: "example", to: "example" })
 ```
 
 ### Common Methods
@@ -392,7 +392,7 @@ const conversion_general = client.ConversionGeneral()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.ConversionGeneral().load()
+const result = await client.ConversionGeneral().load({ format: 'format', from: 'from', to: 'to' })
 ```
 
 ### Common Methods
@@ -442,7 +442,7 @@ const conversion_status = client.ConversionStatus()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.ConversionStatus().load()
+const result = await client.ConversionStatus().load({ date: 'date' })
 ```
 
 ### Common Methods
@@ -559,7 +559,7 @@ const deeplink_merchant = client.DeeplinkMerchant()
 List entities matching the given criteria. Returns an array.
 
 ```ts
-const results = await client.DeeplinkMerchant().list()
+const results = await client.DeeplinkMerchant().list({ market: "example" })
 ```
 
 ### Common Methods
@@ -603,7 +603,7 @@ const dnt = client.Dnt()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.Dnt().load()
+const result = await client.Dnt().load({ market: 'market', project_id: 'project_id', url: 'url' })
 ```
 
 ### Common Methods
@@ -707,7 +707,7 @@ const merchant = client.Merchant()
 List entities matching the given criteria. Returns an array.
 
 ```ts
-const results = await client.Merchant().list()
+const results = await client.Merchant().list({ market: "example" })
 ```
 
 ### Common Methods
@@ -795,7 +795,7 @@ const result = await client.Offer().load({
 List entities matching the given criteria. Returns an array.
 
 ```ts
-const results = await client.Offer().list()
+const results = await client.Offer().list({ market: "example" })
 ```
 
 #### `load(match: object, ctrl?: object)`
@@ -803,7 +803,7 @@ const results = await client.Offer().list()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.Offer().load({ id: 'offer_id' })
+const result = await client.Offer().load({ ean: 'ean', market: 'market' })
 ```
 
 ### Common Methods
@@ -859,7 +859,7 @@ const report_detail = client.ReportDetail()
 List entities matching the given criteria. Returns an array.
 
 ```ts
-const results = await client.ReportDetail().list()
+const results = await client.ReportDetail().list({ date: "example", format: "example" })
 ```
 
 ### Common Methods
@@ -911,7 +911,7 @@ const report_general = client.ReportGeneral()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.ReportGeneral().load()
+const result = await client.ReportGeneral().load({ date: 'date', format: 'format' })
 ```
 
 ### Common Methods
@@ -962,7 +962,7 @@ const report_modified = client.ReportModified()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.ReportModified().load()
+const result = await client.ReportModified().load({ from: 'from', to: 'to' })
 ```
 
 ### Common Methods
@@ -1012,7 +1012,7 @@ const report_status = client.ReportStatus()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.ReportStatus().load()
+const result = await client.ReportStatus().load({ date: 'date' })
 ```
 
 ### Common Methods
@@ -1059,4 +1059,42 @@ const client = new YadorePublisherSDK({
   }
 })
 ```
+
+
+### Configuring features
+
+Each feature is inactive until switched on, and an SDK with no feature
+configured does no feature work at all. Every option below keeps its default
+unless you name it.
+
+The array form of \`feature\` is significant: several features wrap the
+transport, and the order you list them in is the order they nest.
+
+#### `test`
+
+In-memory mock transport for testing without a live server.
+
+**Configuration**
+
+| Option | Default |
+|---|---|
+| `active` | `false` |
+
+Options above are those the model carries a default for. A feature may
+also accept callback options — a `sink` to receive each record, for
+instance — which have no default and are covered in the full feature
+reference.
+
+**Usage**
+
+Set `feature.test.active` to true in the client options, and override any option above in the same entry. Every option keeps
+its default unless you name it.
+
+**Considerations**
+
+- Attaches to pipeline hooks, not the transport, so activation order does
+  not change what it observes.
+- Installs the BASE transport that the wrapping features wrap, so it must be
+  activated before them.
+- Inactive by default: leaving it out costs nothing at runtime.
 

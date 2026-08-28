@@ -266,7 +266,7 @@ local conversion_general = client:ConversionGeneral(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:ConversionGeneral():load()
+local result, err = client:ConversionGeneral():load({ format = "format", from = "from", to = "to" })
 ```
 
 ### Common Methods
@@ -318,7 +318,7 @@ local conversion_status = client:ConversionStatus(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:ConversionStatus():load()
+local result, err = client:ConversionStatus():load({ date = "date" })
 ```
 
 ### Common Methods
@@ -485,7 +485,7 @@ local dnt = client:Dnt(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Dnt():load()
+local result, err = client:Dnt():load({ market = "market", project_id = "project_id", url = "url" })
 ```
 
 ### Common Methods
@@ -671,7 +671,7 @@ local results, err = client:Offer():list()
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Offer():load({ id = "offer_id" })
+local result, err = client:Offer():load({ ean = "ean", market = "market" })
 ```
 
 ### Common Methods
@@ -783,7 +783,7 @@ local report_general = client:ReportGeneral(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:ReportGeneral():load()
+local result, err = client:ReportGeneral():load({ date = "date", format = "format" })
 ```
 
 ### Common Methods
@@ -836,7 +836,7 @@ local report_modified = client:ReportModified(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:ReportModified():load()
+local result, err = client:ReportModified():load({ from = "from", to = "to" })
 ```
 
 ### Common Methods
@@ -888,7 +888,7 @@ local report_status = client:ReportStatus(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:ReportStatus():load()
+local result, err = client:ReportStatus():load({ date = "date" })
 ```
 
 ### Common Methods
@@ -937,4 +937,42 @@ local client = sdk.new({
   },
 })
 ```
+
+
+### Configuring features
+
+Each feature is inactive until switched on, and an SDK with no feature
+configured does no feature work at all. Every option below keeps its default
+unless you name it.
+
+The array form of \`feature\` is significant: several features wrap the
+transport, and the order you list them in is the order they nest.
+
+#### `test`
+
+In-memory mock transport for testing without a live server.
+
+**Configuration**
+
+| Option | Default |
+|---|---|
+| `active` | `false` |
+
+Options above are those the model carries a default for. A feature may
+also accept callback options — a `sink` to receive each record, for
+instance — which have no default and are covered in the full feature
+reference.
+
+**Usage**
+
+Set `feature.test.active` to true in the client options, and override any option above in the same entry. Every option keeps
+its default unless you name it.
+
+**Considerations**
+
+- Attaches to pipeline hooks, not the transport, so activation order does
+  not change what it observes.
+- Installs the BASE transport that the wrapping features wrap, so it must be
+  activated before them.
+- Inactive by default: leaving it out costs nothing at runtime.
 

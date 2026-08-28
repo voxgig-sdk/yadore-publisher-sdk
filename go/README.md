@@ -71,7 +71,7 @@ Every entity operation returns `(value, error)`. Check `err` before
 using the value — there is no exception to catch:
 
 ```go
-reportgeneral, err := client.ReportGeneral(nil).Load(nil, nil)
+reportgeneral, err := client.ReportGeneral(nil).Load(map[string]any{"date": "example", "format": "example"}, nil)
 if err != nil {
     // handle err
     return
@@ -141,7 +141,7 @@ Create a mock client for unit testing — no server required:
 client := sdk.Test()
 
 reportGeneral, err := client.ReportGeneral(nil).Load(
-    nil, nil,
+    map[string]any{"date": "example", "format": "example"}, nil,
 )
 if err != nil {
     panic(err)
@@ -559,7 +559,7 @@ Create an instance: `conversionGeneral := client.ConversionGeneral(nil)`
 #### Example: Load
 
 ```go
-conversionGeneral, err := client.ConversionGeneral(nil).Load(nil, nil)
+conversionGeneral, err := client.ConversionGeneral(nil).Load(map[string]any{"format": "format", "from": "from", "to": "to"}, nil)
 if err != nil {
     panic(err)
 }
@@ -586,7 +586,7 @@ Create an instance: `conversionStatus := client.ConversionStatus(nil)`
 #### Example: Load
 
 ```go
-conversionStatus, err := client.ConversionStatus(nil).Load(nil, nil)
+conversionStatus, err := client.ConversionStatus(nil).Load(map[string]any{"date": "date"}, nil)
 if err != nil {
     panic(err)
 }
@@ -678,7 +678,7 @@ Create an instance: `dnt := client.Dnt(nil)`
 #### Example: Load
 
 ```go
-dnt, err := client.Dnt(nil).Load(nil, nil)
+dnt, err := client.Dnt(nil).Load(map[string]any{"market": "market", "project_id": "project_id", "url": "url"}, nil)
 if err != nil {
     panic(err)
 }
@@ -782,7 +782,7 @@ Create an instance: `offer := client.Offer(nil)`
 #### Example: Load
 
 ```go
-offer, err := client.Offer(nil).Load(map[string]any{"id": "offer_id"}, nil)
+offer, err := client.Offer(nil).Load(map[string]any{"ean": "ean", "market": "market"}, nil)
 if err != nil {
     panic(err)
 }
@@ -854,7 +854,7 @@ Create an instance: `reportGeneral := client.ReportGeneral(nil)`
 #### Example: Load
 
 ```go
-reportGeneral, err := client.ReportGeneral(nil).Load(nil, nil)
+reportGeneral, err := client.ReportGeneral(nil).Load(map[string]any{"date": "date", "format": "format"}, nil)
 if err != nil {
     panic(err)
 }
@@ -882,7 +882,7 @@ Create an instance: `reportModified := client.ReportModified(nil)`
 #### Example: Load
 
 ```go
-reportModified, err := client.ReportModified(nil).Load(nil, nil)
+reportModified, err := client.ReportModified(nil).Load(map[string]any{"from": "from", "to": "to"}, nil)
 if err != nil {
     panic(err)
 }
@@ -909,12 +909,35 @@ Create an instance: `reportStatus := client.ReportStatus(nil)`
 #### Example: Load
 
 ```go
-reportStatus, err := client.ReportStatus(nil).Load(nil, nil)
+reportStatus, err := client.ReportStatus(nil).Load(map[string]any{"date": "date"}, nil)
 if err != nil {
     panic(err)
 }
 fmt.Println(reportStatus) // the loaded record
 ```
+
+## Features
+
+This SDK ships 1 optional features. Each is **inactive until you
+switch it on**, so an SDK you have not configured behaves exactly as if none of
+them existed — no retries, no cache, no logging, no measurable overhead.
+
+Activate a feature by name in the client options, alongside the options shown
+above:
+
+| Feature | What it does |
+|---|---|
+| [`test`](#test) | In-memory mock transport for testing without a live server |
+
+### test
+
+In-memory mock transport for testing without a live server.
+
+| Option | Default |
+|---|---|
+| `active` | `false` |
+
+Set `feature.test.active` to enable it, then override any of the options above.
 
 
 ## Advanced
@@ -991,7 +1014,7 @@ stores the returned data and match criteria internally.
 
 ```go
 reportgeneral := client.ReportGeneral(nil)
-reportgeneral.Load(nil, nil)
+reportgeneral.Load(map[string]any{"date": "example", "format": "example"}, nil)
 
 // reportgeneral.Data() now returns the reportgeneral data from the last load
 // reportgeneral.Match() returns the last match criteria

@@ -15,12 +15,9 @@
 ---@field sales? number
 
 ---@class ConversionDetailListMatch
----@field clickId? string
----@field date? string
+---@field date string
+---@field format string
 ---@field market? string
----@field merchant? table
----@field placementId? string
----@field sales? number
 
 ---@class ConversionDetailMerchant
 ---@field clicks? number
@@ -29,10 +26,10 @@
 ---@field sales? number
 
 ---@class ConversionDetailMerchantListMatch
----@field clicks? number
+---@field format string
+---@field from string
 ---@field market? string
----@field merchant? table
----@field sales? number
+---@field to string
 
 ---@class ConversionGeneral
 ---@field date? table
@@ -40,15 +37,15 @@
 ---@field total? table
 
 ---@class ConversionGeneralLoadMatch
----@field date? table
----@field market? table
----@field total? table
+---@field format string
+---@field from string
+---@field to string
 
 ---@class ConversionStatus
 ---@field status? string
 
 ---@class ConversionStatusLoadMatch
----@field status? string
+---@field date string
 
 ---@class Deeplink
 ---@field deeplinks? table
@@ -80,19 +77,21 @@
 ---@field trafficTypes? table
 
 ---@class DeeplinkMerchantListMatch
----@field deeplinkCount? number
----@field estimatedCpc? table
----@field hasExternalHomepage? boolean
----@field hasSmartlinkHomepage? boolean
----@field id? string
----@field isSmartlink? boolean
----@field logo? table
----@field name? string
----@field trafficTypes? table
+---@field has_homepage? boolean
+---@field is_couponing? boolean
+---@field is_smartlink? boolean
+---@field market string
 
 ---@class Dnt
 
 ---@class DntLoadMatch
+---@field callback_url? string
+---@field is_couponing? boolean
+---@field market string
+---@field merchant_id? string
+---@field placement_id? string
+---@field project_id string
+---@field url string
 
 ---@class Market
 ---@field id? string
@@ -108,11 +107,8 @@
 ---@field trafficTypes? table
 
 ---@class MerchantListMatch
----@field id? string
----@field logo? table
----@field name? string
----@field offerCount? number
----@field trafficTypes? table
+---@field is_couponing? boolean
+---@field market string
 
 ---@class Offer
 ---@field availability? string
@@ -136,46 +132,23 @@
 ---@field unitPrice? table
 
 ---@class OfferLoadMatch
----@field availability? string
----@field brand? string
----@field clickUrl? string
----@field count? number
----@field description? string
----@field eer? string
----@field estimatedCpc? table
----@field id string
----@field image? table
----@field merchant? table
----@field offers? table
----@field originalPrice? table
----@field price? table
----@field promoText? string
----@field shippingPrice? table
----@field shippingTime? table
----@field thumbnail? table
----@field title? string
----@field unitPrice? table
+---@field ean string
+---@field is_couponing? boolean
+---@field market string
+---@field merchant_id? string
+---@field placement_id? string
 
 ---@class OfferListMatch
----@field availability? string
----@field brand? string
----@field clickUrl? string
----@field count? number
----@field description? string
----@field eer? string
----@field estimatedCpc? table
----@field id? string
----@field image? table
----@field merchant? table
----@field offers? table
----@field originalPrice? table
----@field price? table
----@field promoText? string
----@field shippingPrice? table
----@field shippingTime? table
----@field thumbnail? table
----@field title? string
----@field unitPrice? table
+---@field ean? string
+---@field is_couponing? boolean
+---@field keyword? string
+---@field limit? number
+---@field market string
+---@field merchant_id? string
+---@field offer_id? string
+---@field placement_id? string
+---@field precision? string
+---@field sort? string
 
 ---@class ReportDetail
 ---@field clickId? string
@@ -187,13 +160,9 @@
 ---@field revenue? number
 
 ---@class ReportDetailListMatch
----@field clickId? string
----@field currency? string
----@field date? string
+---@field date string
+---@field format string
 ---@field market? string
----@field merchant? table
----@field placementId? string
----@field revenue? number
 
 ---@class ReportGeneral
 ---@field date? table
@@ -201,23 +170,23 @@
 ---@field total? table
 
 ---@class ReportGeneralLoadMatch
----@field date? table
----@field market? table
----@field total? table
+---@field date string
+---@field format string
 
 ---@class ReportModified
 ---@field date? string
 ---@field modifiedDate? string
 
 ---@class ReportModifiedLoadMatch
----@field date? string
----@field modifiedDate? string
+---@field from string
+---@field market? string
+---@field to string
 
 ---@class ReportStatus
 ---@field status? string
 
 ---@class ReportStatusLoadMatch
----@field status? string
+---@field date string
 
 local M = {}
 

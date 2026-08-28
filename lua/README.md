@@ -56,7 +56,7 @@ Entity operations return `(value, err)`. Check `err` before using
 the value:
 
 ```lua
-local reportgeneral, err = client:ReportGeneral():load()
+local reportgeneral, err = client:ReportGeneral():load({ date = "example", format = "example" })
 if err then error(err) end
 ```
 
@@ -114,7 +114,7 @@ Create a mock client for unit testing — no server required:
 ```lua
 local client = sdk.test()
 
-local result, err = client:ReportGeneral():load()
+local result, err = client:ReportGeneral():load({ date = "example", format = "example" })
 -- result is the returned data; err is set on failure
 ```
 
@@ -521,7 +521,7 @@ Create an instance: `local conversion_general = client:ConversionGeneral(nil)`
 #### Example: Load
 
 ```lua
-local conversion_general, err = client:ConversionGeneral():load()
+local conversion_general, err = client:ConversionGeneral():load({ format = "format", from = "from", to = "to" })
 ```
 
 
@@ -544,7 +544,7 @@ Create an instance: `local conversion_status = client:ConversionStatus(nil)`
 #### Example: Load
 
 ```lua
-local conversion_status, err = client:ConversionStatus():load()
+local conversion_status, err = client:ConversionStatus():load({ date = "date" })
 ```
 
 
@@ -624,7 +624,7 @@ Create an instance: `local dnt = client:Dnt(nil)`
 #### Example: Load
 
 ```lua
-local dnt, err = client:Dnt():load()
+local dnt, err = client:Dnt():load({ market = "market", project_id = "project_id", url = "url" })
 ```
 
 
@@ -716,7 +716,7 @@ Create an instance: `local offer = client:Offer(nil)`
 #### Example: Load
 
 ```lua
-local offer, err = client:Offer():load({ id = "offer_id" })
+local offer, err = client:Offer():load({ ean = "ean", market = "market" })
 ```
 
 #### Example: List
@@ -776,7 +776,7 @@ Create an instance: `local report_general = client:ReportGeneral(nil)`
 #### Example: Load
 
 ```lua
-local report_general, err = client:ReportGeneral():load()
+local report_general, err = client:ReportGeneral():load({ date = "date", format = "format" })
 ```
 
 
@@ -800,7 +800,7 @@ Create an instance: `local report_modified = client:ReportModified(nil)`
 #### Example: Load
 
 ```lua
-local report_modified, err = client:ReportModified():load()
+local report_modified, err = client:ReportModified():load({ from = "from", to = "to" })
 ```
 
 
@@ -823,8 +823,31 @@ Create an instance: `local report_status = client:ReportStatus(nil)`
 #### Example: Load
 
 ```lua
-local report_status, err = client:ReportStatus():load()
+local report_status, err = client:ReportStatus():load({ date = "date" })
 ```
+
+## Features
+
+This SDK ships 1 optional features. Each is **inactive until you
+switch it on**, so an SDK you have not configured behaves exactly as if none of
+them existed — no retries, no cache, no logging, no measurable overhead.
+
+Activate a feature by name in the client options, alongside the options shown
+above:
+
+| Feature | What it does |
+|---|---|
+| [`test`](#test) | In-memory mock transport for testing without a live server |
+
+### test
+
+In-memory mock transport for testing without a live server.
+
+| Option | Default |
+|---|---|
+| `active` | `false` |
+
+Set `feature.test.active` to enable it, then override any of the options above.
 
 
 ## Advanced
@@ -904,7 +927,7 @@ stores the returned data and match criteria internally.
 
 ```lua
 local reportgeneral = client:ReportGeneral()
-reportgeneral:load()
+reportgeneral:load({ date = "example", format = "example" })
 
 -- reportgeneral:data_get() now returns the reportgeneral data from the last load
 -- reportgeneral:match_get() returns the last match criteria
