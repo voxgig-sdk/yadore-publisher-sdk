@@ -1,0 +1,83 @@
+import { ConversionDetailEntity } from './entity/ConversionDetailEntity';
+import { ConversionDetailMerchantEntity } from './entity/ConversionDetailMerchantEntity';
+import { ConversionGeneralEntity } from './entity/ConversionGeneralEntity';
+import { ConversionStatusEntity } from './entity/ConversionStatusEntity';
+import { DeeplinkEntity } from './entity/DeeplinkEntity';
+import { DeeplinkMerchantEntity } from './entity/DeeplinkMerchantEntity';
+import { DntEntity } from './entity/DntEntity';
+import { MarketEntity } from './entity/MarketEntity';
+import { MerchantEntity } from './entity/MerchantEntity';
+import { OfferEntity } from './entity/OfferEntity';
+import { ReportDetailEntity } from './entity/ReportDetailEntity';
+import { ReportGeneralEntity } from './entity/ReportGeneralEntity';
+import { ReportModifiedEntity } from './entity/ReportModifiedEntity';
+import { ReportStatusEntity } from './entity/ReportStatusEntity';
+export type * from './YadorePublisherTypes';
+import { inspect } from 'node:util';
+import type { Context, Feature } from './types';
+import { config } from './Config';
+import { YadorePublisherEntityBase } from './YadorePublisherEntityBase';
+import { Utility } from './utility/Utility';
+import { BaseFeature } from './feature/base/BaseFeature';
+declare const stdutil: Utility;
+declare class YadorePublisherSDK {
+    _mode: string;
+    _options: any;
+    _utility: Utility;
+    _features: Feature[];
+    _rootctx: Context;
+    constructor(options?: any);
+    options(): any;
+    utility(): any;
+    prepare(fetchargs?: any): Promise<any>;
+    direct(fetchargs?: any): Promise<Error | {
+        ok: boolean;
+        status: number;
+        headers: any;
+        data: any;
+        err?: undefined;
+    } | {
+        ok: boolean;
+        err: any;
+        status?: undefined;
+        headers?: undefined;
+        data?: undefined;
+    }>;
+    _rawRequest(fetchargs?: any): Promise<Error | {
+        ok: boolean;
+        status: number;
+        headers: any;
+        data: any;
+        err?: undefined;
+    } | {
+        ok: boolean;
+        err: any;
+        status?: undefined;
+        headers?: undefined;
+        data?: undefined;
+    }>;
+    graphql(query: string, variables?: any, ctrl?: any): Promise<any>;
+    ConversionDetail(entopts?: Record<string, any>): ConversionDetailEntity;
+    ConversionDetailMerchant(entopts?: Record<string, any>): ConversionDetailMerchantEntity;
+    ConversionGeneral(entopts?: Record<string, any>): ConversionGeneralEntity;
+    ConversionStatus(entopts?: Record<string, any>): ConversionStatusEntity;
+    Deeplink(entopts?: Record<string, any>): DeeplinkEntity;
+    DeeplinkMerchant(entopts?: Record<string, any>): DeeplinkMerchantEntity;
+    Dnt(entopts?: Record<string, any>): DntEntity;
+    Market(entopts?: Record<string, any>): MarketEntity;
+    Merchant(entopts?: Record<string, any>): MerchantEntity;
+    Offer(entopts?: Record<string, any>): OfferEntity;
+    ReportDetail(entopts?: Record<string, any>): ReportDetailEntity;
+    ReportGeneral(entopts?: Record<string, any>): ReportGeneralEntity;
+    ReportModified(entopts?: Record<string, any>): ReportModifiedEntity;
+    ReportStatus(entopts?: Record<string, any>): ReportStatusEntity;
+    static test(testoptsarg?: any, sdkoptsarg?: any): YadorePublisherSDK;
+    tester(testopts?: any, sdkopts?: any): YadorePublisherSDK;
+    toJSON(): {
+        name: string;
+    };
+    toString(): string;
+    [inspect.custom](): string;
+}
+declare const SDK: typeof YadorePublisherSDK;
+export { stdutil, config, BaseFeature, YadorePublisherEntityBase, YadorePublisherSDK, SDK, };

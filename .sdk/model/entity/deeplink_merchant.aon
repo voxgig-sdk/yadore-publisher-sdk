@@ -101,10 +101,16 @@ main: kit: entity: deeplink_merchant: {
           }
           method: "GET"
           orig: "/v2/deeplink/merchant"
-          parts: [
-            "v2"
-            "deeplink"
-            "merchant"
+          segments: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "deeplink"
+            }
+            {
+              lit: "merchant"
+            }
           ]
           select: {
             exist: [

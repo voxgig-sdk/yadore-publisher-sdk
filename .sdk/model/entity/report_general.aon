@@ -48,10 +48,16 @@ main: kit: entity: report_general: {
           }
           method: "GET"
           orig: "/v2/report/general"
-          parts: [
-            "v2"
-            "report"
-            "general"
+          segments: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "report"
+            }
+            {
+              lit: "general"
+            }
           ]
           select: {
             exist: [

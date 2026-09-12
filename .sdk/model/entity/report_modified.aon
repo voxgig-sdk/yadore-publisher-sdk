@@ -6,11 +6,13 @@ main: kit: entity: report_modified: {
 
   fields: [
     {
+      format: "date"
       name: "date"
       req: false
       type: "`$STRING`"
     }
     {
+      format: "date-time"
       name: "modifiedDate"
       req: false
       type: "`$STRING`"
@@ -50,10 +52,16 @@ main: kit: entity: report_modified: {
           }
           method: "GET"
           orig: "/v2/report/modified"
-          parts: [
-            "v2"
-            "report"
-            "modified"
+          segments: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "report"
+            }
+            {
+              lit: "modified"
+            }
           ]
           select: {
             exist: [

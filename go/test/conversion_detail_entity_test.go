@@ -98,7 +98,7 @@ func TestConversionDetailEntity(t *testing.T) {
 		client := setup.client
 
 		// Bootstrap entity data from existing test data (no create step in flow).
-		conversionDetailRef01DataRaw := vs.Items(core.ToMapAny(vs.GetPath("existing.conversion_detail", setup.data)))
+		conversionDetailRef01DataRaw := vs.Items(core.ToMapAny(vs.GetPath(setup.data, "existing.conversion_detail")))
 		var conversionDetailRef01Data map[string]any
 		if len(conversionDetailRef01DataRaw) > 0 {
 			conversionDetailRef01Data = core.ToMapAny(conversionDetailRef01DataRaw[0][1])
@@ -147,7 +147,7 @@ func conversion_detailBasicSetup(extra map[string]any) *entityTestSetup {
 	client := sdk.TestSDK(options, extra)
 
 	// Generate idmap via transform, matching TS pattern.
-	idmap := vs.Transform(
+	idmap, _ := vs.Transform(
 		[]any{"conversion_detail01", "conversion_detail02", "conversion_detail03"},
 		map[string]any{
 			"`$PACK`": []any{"", map[string]any{
@@ -167,7 +167,7 @@ func conversion_detailBasicSetup(extra map[string]any) *entityTestSetup {
 		"YADORE_PUBLISHER_TEST_CONVERSION_DETAIL_ENTID": idmap,
 		"YADORE_PUBLISHER_TEST_LIVE":      "FALSE",
 		"YADORE_PUBLISHER_TEST_EXPLAIN":   "FALSE",
-		"YADORE_PUBLISHER_APIKEY":         "NONE",
+		"YADORE_PUBLISHER_APIKEY":         "",
 	})
 
 	idmapResolved := core.ToMapAny(env["YADORE_PUBLISHER_TEST_CONVERSION_DETAIL_ENTID"])
@@ -176,11 +176,23 @@ func conversion_detailBasicSetup(extra map[string]any) *entityTestSetup {
 	}
 
 	if env["YADORE_PUBLISHER_TEST_LIVE"] == "TRUE" {
+		// An empty map, not a nil one: Merge returns nil when its last entry
+		// is nil, and BasicSetup is normally called with no extras - so a
+		// bare nil silently discarded the apikey and server values below.
+		extraOpts := extra
+		if extraOpts == nil {
+			extraOpts = map[string]any{}
+		}
+
 		mergedOpts := vs.Merge([]any{
+			// liveClientOptions() FIRST, so the generated fields below win:
+			// sdk-test-control.json's test.client.options adds to the live
+			// client, it does not redirect it.
+			liveClientOptions(),
 			map[string]any{
 				"apikey": env["YADORE_PUBLISHER_APIKEY"],
 			},
-			extra,
+			extraOpts,
 		})
 		client = sdk.NewYadorePublisherSDK(core.ToMapAny(mergedOpts))
 	}

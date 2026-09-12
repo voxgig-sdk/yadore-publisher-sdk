@@ -54,9 +54,13 @@ main: kit: entity: deeplink: {
         {
           method: "POST"
           orig: "/v2/deeplink"
-          parts: [
-            "v2"
-            "deeplink"
+          segments: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "deeplink"
+            }
           ]
           transform: {
             req: "`reqdata`"

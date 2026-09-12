@@ -25,9 +25,13 @@ main: kit: entity: market: {
         {
           method: "GET"
           orig: "/v2/markets"
-          parts: [
-            "v2"
-            "markets"
+          segments: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "markets"
+            }
           ]
           transform: {
             req: "`reqdata`"

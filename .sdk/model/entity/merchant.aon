@@ -63,9 +63,13 @@ main: kit: entity: merchant: {
           }
           method: "GET"
           orig: "/v2/merchant"
-          parts: [
-            "v2"
-            "merchant"
+          segments: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "merchant"
+            }
           ]
           select: {
             exist: [

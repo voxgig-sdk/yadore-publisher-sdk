@@ -55,10 +55,16 @@ main: kit: entity: conversion_general: {
           }
           method: "GET"
           orig: "/v2/conversion/general"
-          parts: [
-            "v2"
-            "conversion"
-            "general"
+          segments: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "conversion"
+            }
+            {
+              lit: "general"
+            }
           ]
           select: {
             exist: [

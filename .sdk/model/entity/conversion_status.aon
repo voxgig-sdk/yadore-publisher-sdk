@@ -31,10 +31,16 @@ main: kit: entity: conversion_status: {
           }
           method: "GET"
           orig: "/v2/conversion/status"
-          parts: [
-            "v2"
-            "conversion"
-            "status"
+          segments: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "conversion"
+            }
+            {
+              lit: "status"
+            }
           ]
           select: {
             exist: [

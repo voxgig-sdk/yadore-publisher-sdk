@@ -31,10 +31,16 @@ main: kit: entity: report_status: {
           }
           method: "GET"
           orig: "/v2/report/status"
-          parts: [
-            "v2"
-            "report"
-            "status"
+          segments: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "report"
+            }
+            {
+              lit: "status"
+            }
           ]
           select: {
             exist: [

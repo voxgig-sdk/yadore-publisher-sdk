@@ -16,6 +16,7 @@ main: kit: entity: report_detail: {
       type: "`$STRING`"
     }
     {
+      format: "date-time"
       name: "date"
       req: false
       type: "`$STRING`"
@@ -75,10 +76,16 @@ main: kit: entity: report_detail: {
           }
           method: "GET"
           orig: "/v2/report/detail"
-          parts: [
-            "v2"
-            "report"
-            "detail"
+          segments: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "report"
+            }
+            {
+              lit: "detail"
+            }
           ]
           select: {
             exist: [

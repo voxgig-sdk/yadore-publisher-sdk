@@ -67,15 +67,17 @@ function conversion_general_direct_setup($mockres)
     $env = Runner::env_override([
         "YADORE_PUBLISHER_TEST_CONVERSION_GENERAL_ENTID" => [],
         "YADORE_PUBLISHER_TEST_LIVE" => "FALSE",
-        "YADORE_PUBLISHER_APIKEY" => "NONE",
+        "YADORE_PUBLISHER_APIKEY" => "",
     ]);
 
     $live = $env["YADORE_PUBLISHER_TEST_LIVE"] === "TRUE";
 
     if ($live) {
-        $merged_opts = [
+        // Merged so the generated fields win: sdk-test-control.json's
+        // test.client.options adds to the live client, it does not redirect it.
+        $merged_opts = array_merge(Runner::live_client_options(), [
             "apikey" => $env["YADORE_PUBLISHER_APIKEY"],
-        ];
+        ]);
         $client = new YadorePublisherSDK($merged_opts);
         return [
             "client" => $client,

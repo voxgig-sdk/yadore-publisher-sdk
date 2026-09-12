@@ -65,9 +65,13 @@ main: kit: entity: dnt: {
           }
           method: "GET"
           orig: "/v2/d"
-          parts: [
-            "v2"
-            "d"
+          segments: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "d"
+            }
           ]
           select: {
             exist: [

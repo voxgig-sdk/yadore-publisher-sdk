@@ -64,6 +64,7 @@ module YadorePublisherConfig
               "type" => "`$STRING`",
             },
             {
+              "format" => "date-time",
               "name" => "date",
               "type" => "`$STRING`",
             },
@@ -118,10 +119,16 @@ module YadorePublisherConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/v2/conversion/detail",
-                  "parts" => [
-                    "v2",
-                    "conversion",
-                    "detail",
+                  "segments" => [
+                    {
+                      "lit" => "v2",
+                    },
+                    {
+                      "lit" => "conversion",
+                    },
+                    {
+                      "lit" => "detail",
+                    },
                   ],
                   "select" => {
                     "exist" => [
@@ -134,6 +141,11 @@ module YadorePublisherConfig
                     "req" => "`reqdata`",
                     "res" => "`body.clicks`",
                   },
+                  "parts" => [
+                    "v2",
+                    "conversion",
+                    "detail",
+                  ],
                 },
               ],
             },
@@ -149,6 +161,7 @@ module YadorePublisherConfig
               "type" => "`$INTEGER`",
             },
             {
+              "format" => "ISO 3166 Alpha-2",
               "name" => "market",
               "short" => "Two character form of a country, in all lower-case",
               "type" => "`$STRING`",
@@ -203,11 +216,19 @@ module YadorePublisherConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/v2/conversion/detail/merchant",
-                  "parts" => [
-                    "v2",
-                    "conversion",
-                    "detail",
-                    "merchant",
+                  "segments" => [
+                    {
+                      "lit" => "v2",
+                    },
+                    {
+                      "lit" => "conversion",
+                    },
+                    {
+                      "lit" => "detail",
+                    },
+                    {
+                      "lit" => "merchant",
+                    },
                   ],
                   "select" => {
                     "exist" => [
@@ -221,6 +242,12 @@ module YadorePublisherConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "v2",
+                    "conversion",
+                    "detail",
+                    "merchant",
+                  ],
                 },
               ],
             },
@@ -279,10 +306,16 @@ module YadorePublisherConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/v2/conversion/general",
-                  "parts" => [
-                    "v2",
-                    "conversion",
-                    "general",
+                  "segments" => [
+                    {
+                      "lit" => "v2",
+                    },
+                    {
+                      "lit" => "conversion",
+                    },
+                    {
+                      "lit" => "general",
+                    },
                   ],
                   "select" => {
                     "exist" => [
@@ -295,6 +328,11 @@ module YadorePublisherConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "v2",
+                    "conversion",
+                    "general",
+                  ],
                 },
               ],
             },
@@ -331,10 +369,16 @@ module YadorePublisherConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/v2/conversion/status",
-                  "parts" => [
-                    "v2",
-                    "conversion",
-                    "status",
+                  "segments" => [
+                    {
+                      "lit" => "v2",
+                    },
+                    {
+                      "lit" => "conversion",
+                    },
+                    {
+                      "lit" => "status",
+                    },
                   ],
                   "select" => {
                     "exist" => [
@@ -345,6 +389,11 @@ module YadorePublisherConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "v2",
+                    "conversion",
+                    "status",
+                  ],
                 },
               ],
             },
@@ -401,15 +450,23 @@ module YadorePublisherConfig
                   "kind" => "http",
                   "method" => "POST",
                   "orig" => "/v2/deeplink",
-                  "parts" => [
-                    "v2",
-                    "deeplink",
+                  "segments" => [
+                    {
+                      "lit" => "v2",
+                    },
+                    {
+                      "lit" => "deeplink",
+                    },
                   ],
                   "select" => {},
                   "transform" => {
                     "req" => "`reqdata`",
                     "res" => "`body.result`",
                   },
+                  "parts" => [
+                    "v2",
+                    "deeplink",
+                  ],
                 },
               ],
             },
@@ -461,6 +518,10 @@ module YadorePublisherConfig
               "type" => "`$ARRAY`",
             },
           ],
+          "id" => {
+            "field" => "id",
+            "name" => "id",
+          },
           "name" => "deeplink_merchant",
           "op" => {
             "list" => {
@@ -500,10 +561,16 @@ module YadorePublisherConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/v2/deeplink/merchant",
-                  "parts" => [
-                    "v2",
-                    "deeplink",
-                    "merchant",
+                  "segments" => [
+                    {
+                      "lit" => "v2",
+                    },
+                    {
+                      "lit" => "deeplink",
+                    },
+                    {
+                      "lit" => "merchant",
+                    },
                   ],
                   "select" => {
                     "exist" => [
@@ -517,6 +584,11 @@ module YadorePublisherConfig
                     "req" => "`reqdata`",
                     "res" => "`body.merchants`",
                   },
+                  "parts" => [
+                    "v2",
+                    "deeplink",
+                    "merchant",
+                  ],
                 },
               ],
             },
@@ -586,9 +658,13 @@ module YadorePublisherConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/v2/d",
-                  "parts" => [
-                    "v2",
-                    "d",
+                  "segments" => [
+                    {
+                      "lit" => "v2",
+                    },
+                    {
+                      "lit" => "d",
+                    },
                   ],
                   "select" => {
                     "exist" => [
@@ -605,6 +681,10 @@ module YadorePublisherConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "v2",
+                    "d",
+                  ],
                 },
               ],
             },
@@ -620,6 +700,10 @@ module YadorePublisherConfig
               "type" => "`$STRING`",
             },
           ],
+          "id" => {
+            "field" => "id",
+            "name" => "id",
+          },
           "name" => "market",
           "op" => {
             "list" => {
@@ -631,15 +715,23 @@ module YadorePublisherConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/v2/markets",
-                  "parts" => [
-                    "v2",
-                    "markets",
+                  "segments" => [
+                    {
+                      "lit" => "v2",
+                    },
+                    {
+                      "lit" => "markets",
+                    },
                   ],
                   "select" => {},
                   "transform" => {
                     "req" => "`reqdata`",
                     "res" => "`body.markets`",
                   },
+                  "parts" => [
+                    "v2",
+                    "markets",
+                  ],
                 },
               ],
             },
@@ -671,6 +763,10 @@ module YadorePublisherConfig
               "type" => "`$ARRAY`",
             },
           ],
+          "id" => {
+            "field" => "id",
+            "name" => "id",
+          },
           "name" => "merchant",
           "op" => {
             "list" => {
@@ -698,9 +794,13 @@ module YadorePublisherConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/v2/merchant",
-                  "parts" => [
-                    "v2",
-                    "merchant",
+                  "segments" => [
+                    {
+                      "lit" => "v2",
+                    },
+                    {
+                      "lit" => "merchant",
+                    },
                   ],
                   "select" => {
                     "exist" => [
@@ -712,6 +812,10 @@ module YadorePublisherConfig
                     "req" => "`reqdata`",
                     "res" => "`body.merchants`",
                   },
+                  "parts" => [
+                    "v2",
+                    "merchant",
+                  ],
                 },
               ],
             },
@@ -800,6 +904,10 @@ module YadorePublisherConfig
               "type" => "`$OBJECT`",
             },
           ],
+          "id" => {
+            "field" => "id",
+            "name" => "id",
+          },
           "name" => "offer",
           "op" => {
             "list" => {
@@ -877,9 +985,13 @@ module YadorePublisherConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/v2/offer",
-                  "parts" => [
-                    "v2",
-                    "offer",
+                  "segments" => [
+                    {
+                      "lit" => "v2",
+                    },
+                    {
+                      "lit" => "offer",
+                    },
                   ],
                   "select" => {
                     "exist" => [
@@ -899,6 +1011,10 @@ module YadorePublisherConfig
                     "req" => "`reqdata`",
                     "res" => "`body.offers`",
                   },
+                  "parts" => [
+                    "v2",
+                    "offer",
+                  ],
                 },
               ],
             },
@@ -947,10 +1063,16 @@ module YadorePublisherConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/v2/offer/bulk",
-                  "parts" => [
-                    "v2",
-                    "offer",
-                    "bulk",
+                  "segments" => [
+                    {
+                      "lit" => "v2",
+                    },
+                    {
+                      "lit" => "offer",
+                    },
+                    {
+                      "lit" => "bulk",
+                    },
                   ],
                   "select" => {
                     "$action" => "bulk",
@@ -966,6 +1088,11 @@ module YadorePublisherConfig
                     "req" => "`reqdata`",
                     "res" => "`body.ean`",
                   },
+                  "parts" => [
+                    "v2",
+                    "offer",
+                    "bulk",
+                  ],
                 },
               ],
             },
@@ -985,6 +1112,7 @@ module YadorePublisherConfig
               "type" => "`$STRING`",
             },
             {
+              "format" => "date-time",
               "name" => "date",
               "type" => "`$STRING`",
             },
@@ -1039,10 +1167,16 @@ module YadorePublisherConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/v2/report/detail",
-                  "parts" => [
-                    "v2",
-                    "report",
-                    "detail",
+                  "segments" => [
+                    {
+                      "lit" => "v2",
+                    },
+                    {
+                      "lit" => "report",
+                    },
+                    {
+                      "lit" => "detail",
+                    },
                   ],
                   "select" => {
                     "exist" => [
@@ -1055,6 +1189,11 @@ module YadorePublisherConfig
                     "req" => "`reqdata`",
                     "res" => "`body.clicks`",
                   },
+                  "parts" => [
+                    "v2",
+                    "report",
+                    "detail",
+                  ],
                 },
               ],
             },
@@ -1106,10 +1245,16 @@ module YadorePublisherConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/v2/report/general",
-                  "parts" => [
-                    "v2",
-                    "report",
-                    "general",
+                  "segments" => [
+                    {
+                      "lit" => "v2",
+                    },
+                    {
+                      "lit" => "report",
+                    },
+                    {
+                      "lit" => "general",
+                    },
                   ],
                   "select" => {
                     "exist" => [
@@ -1121,6 +1266,11 @@ module YadorePublisherConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "v2",
+                    "report",
+                    "general",
+                  ],
                 },
               ],
             },
@@ -1132,10 +1282,12 @@ module YadorePublisherConfig
         "report_modified" => {
           "fields" => [
             {
+              "format" => "date",
               "name" => "date",
               "type" => "`$STRING`",
             },
             {
+              "format" => "date-time",
               "name" => "modifiedDate",
               "type" => "`$STRING`",
             },
@@ -1174,10 +1326,16 @@ module YadorePublisherConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/v2/report/modified",
-                  "parts" => [
-                    "v2",
-                    "report",
-                    "modified",
+                  "segments" => [
+                    {
+                      "lit" => "v2",
+                    },
+                    {
+                      "lit" => "report",
+                    },
+                    {
+                      "lit" => "modified",
+                    },
                   ],
                   "select" => {
                     "exist" => [
@@ -1190,6 +1348,11 @@ module YadorePublisherConfig
                     "req" => "`reqdata`",
                     "res" => "`body.market`",
                   },
+                  "parts" => [
+                    "v2",
+                    "report",
+                    "modified",
+                  ],
                 },
               ],
             },
@@ -1226,10 +1389,16 @@ module YadorePublisherConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/v2/report/status",
-                  "parts" => [
-                    "v2",
-                    "report",
-                    "status",
+                  "segments" => [
+                    {
+                      "lit" => "v2",
+                    },
+                    {
+                      "lit" => "report",
+                    },
+                    {
+                      "lit" => "status",
+                    },
                   ],
                   "select" => {
                     "exist" => [
@@ -1240,6 +1409,11 @@ module YadorePublisherConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "v2",
+                    "report",
+                    "status",
+                  ],
                 },
               ],
             },

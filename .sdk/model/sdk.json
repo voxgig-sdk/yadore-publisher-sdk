@@ -40,6 +40,7 @@
             },
             {
               "active": true,
+              "format": "date-time",
               "name": "date",
               "req": false,
               "type": "`$STRING`"
@@ -108,10 +109,16 @@
                   "kind": "http",
                   "method": "GET",
                   "orig": "/v2/conversion/detail",
-                  "parts": [
-                    "v2",
-                    "conversion",
-                    "detail"
+                  "segments": [
+                    {
+                      "lit": "v2"
+                    },
+                    {
+                      "lit": "conversion"
+                    },
+                    {
+                      "lit": "detail"
+                    }
                   ],
                   "select": {
                     "exist": [
@@ -146,6 +153,7 @@
             },
             {
               "active": true,
+              "format": "ISO 3166 Alpha-2",
               "name": "market",
               "req": false,
               "short": "Two character form of a country, in all lower-case",
@@ -211,11 +219,19 @@
                   "kind": "http",
                   "method": "GET",
                   "orig": "/v2/conversion/detail/merchant",
-                  "parts": [
-                    "v2",
-                    "conversion",
-                    "detail",
-                    "merchant"
+                  "segments": [
+                    {
+                      "lit": "v2"
+                    },
+                    {
+                      "lit": "conversion"
+                    },
+                    {
+                      "lit": "detail"
+                    },
+                    {
+                      "lit": "merchant"
+                    }
                   ],
                   "select": {
                     "exist": [
@@ -301,10 +317,16 @@
                   "kind": "http",
                   "method": "GET",
                   "orig": "/v2/conversion/general",
-                  "parts": [
-                    "v2",
-                    "conversion",
-                    "general"
+                  "segments": [
+                    {
+                      "lit": "v2"
+                    },
+                    {
+                      "lit": "conversion"
+                    },
+                    {
+                      "lit": "general"
+                    }
                   ],
                   "select": {
                     "exist": [
@@ -361,10 +383,16 @@
                   "kind": "http",
                   "method": "GET",
                   "orig": "/v2/conversion/status",
-                  "parts": [
-                    "v2",
-                    "conversion",
-                    "status"
+                  "segments": [
+                    {
+                      "lit": "v2"
+                    },
+                    {
+                      "lit": "conversion"
+                    },
+                    {
+                      "lit": "status"
+                    }
                   ],
                   "select": {
                     "exist": [
@@ -448,9 +476,13 @@
                   "kind": "http",
                   "method": "POST",
                   "orig": "/v2/deeplink",
-                  "parts": [
-                    "v2",
-                    "deeplink"
+                  "segments": [
+                    {
+                      "lit": "v2"
+                    },
+                    {
+                      "lit": "deeplink"
+                    }
                   ],
                   "select": {},
                   "transform": {
@@ -581,10 +613,16 @@
                   "kind": "http",
                   "method": "GET",
                   "orig": "/v2/deeplink/merchant",
-                  "parts": [
-                    "v2",
-                    "deeplink",
-                    "merchant"
+                  "segments": [
+                    {
+                      "lit": "v2"
+                    },
+                    {
+                      "lit": "deeplink"
+                    },
+                    {
+                      "lit": "merchant"
+                    }
                   ],
                   "select": {
                     "exist": [
@@ -683,9 +721,13 @@
                   "kind": "http",
                   "method": "GET",
                   "orig": "/v2/d",
-                  "parts": [
-                    "v2",
-                    "d"
+                  "segments": [
+                    {
+                      "lit": "v2"
+                    },
+                    {
+                      "lit": "d"
+                    }
                   ],
                   "select": {
                     "exist": [
@@ -739,9 +781,13 @@
                   "kind": "http",
                   "method": "GET",
                   "orig": "/v2/markets",
-                  "parts": [
-                    "v2",
-                    "markets"
+                  "segments": [
+                    {
+                      "lit": "v2"
+                    },
+                    {
+                      "lit": "markets"
+                    }
                   ],
                   "select": {},
                   "transform": {
@@ -828,9 +874,13 @@
                   "kind": "http",
                   "method": "GET",
                   "orig": "/v2/merchant",
-                  "parts": [
-                    "v2",
-                    "merchant"
+                  "segments": [
+                    {
+                      "lit": "v2"
+                    },
+                    {
+                      "lit": "merchant"
+                    }
                   ],
                   "select": {
                     "exist": [
@@ -1073,9 +1123,13 @@
                   "kind": "http",
                   "method": "GET",
                   "orig": "/v2/offer",
-                  "parts": [
-                    "v2",
-                    "offer"
+                  "segments": [
+                    {
+                      "lit": "v2"
+                    },
+                    {
+                      "lit": "offer"
+                    }
                   ],
                   "select": {
                     "exist": [
@@ -1152,10 +1206,16 @@
                   "kind": "http",
                   "method": "GET",
                   "orig": "/v2/offer/bulk",
-                  "parts": [
-                    "v2",
-                    "offer",
-                    "bulk"
+                  "segments": [
+                    {
+                      "lit": "v2"
+                    },
+                    {
+                      "lit": "offer"
+                    },
+                    {
+                      "lit": "bulk"
+                    }
                   ],
                   "select": {
                     "$action": "bulk",
@@ -1199,6 +1259,7 @@
             },
             {
               "active": true,
+              "format": "date-time",
               "name": "date",
               "req": false,
               "type": "`$STRING`"
@@ -1267,10 +1328,16 @@
                   "kind": "http",
                   "method": "GET",
                   "orig": "/v2/report/detail",
-                  "parts": [
-                    "v2",
-                    "report",
-                    "detail"
+                  "segments": [
+                    {
+                      "lit": "v2"
+                    },
+                    {
+                      "lit": "report"
+                    },
+                    {
+                      "lit": "detail"
+                    }
                   ],
                   "select": {
                     "exist": [
@@ -1347,10 +1414,16 @@
                   "kind": "http",
                   "method": "GET",
                   "orig": "/v2/report/general",
-                  "parts": [
-                    "v2",
-                    "report",
-                    "general"
+                  "segments": [
+                    {
+                      "lit": "v2"
+                    },
+                    {
+                      "lit": "report"
+                    },
+                    {
+                      "lit": "general"
+                    }
                   ],
                   "select": {
                     "exist": [
@@ -1378,12 +1451,14 @@
           "fields": [
             {
               "active": true,
+              "format": "date",
               "name": "date",
               "req": false,
               "type": "`$STRING`"
             },
             {
               "active": true,
+              "format": "date-time",
               "name": "modifiedDate",
               "req": false,
               "type": "`$STRING`"
@@ -1428,10 +1503,16 @@
                   "kind": "http",
                   "method": "GET",
                   "orig": "/v2/report/modified",
-                  "parts": [
-                    "v2",
-                    "report",
-                    "modified"
+                  "segments": [
+                    {
+                      "lit": "v2"
+                    },
+                    {
+                      "lit": "report"
+                    },
+                    {
+                      "lit": "modified"
+                    }
                   ],
                   "select": {
                     "exist": [
@@ -1488,10 +1569,16 @@
                   "kind": "http",
                   "method": "GET",
                   "orig": "/v2/report/status",
-                  "parts": [
-                    "v2",
-                    "report",
-                    "status"
+                  "segments": [
+                    {
+                      "lit": "v2"
+                    },
+                    {
+                      "lit": "report"
+                    },
+                    {
+                      "lit": "status"
+                    }
                   ],
                   "select": {
                     "exist": [
@@ -1575,8 +1662,11 @@
             }
           },
           "name": "test",
+          "needs": {},
           "origname": "",
           "package": "@voxgig/sdkgen",
+          "plugin": {},
+          "spec": {},
           "target": {
             "go": {
               "deps": {}
@@ -2073,6 +2163,9 @@
             "sdkrel": ""
           },
           "package": "@voxgig/sdkgen",
+          "provides": {
+            "sekreto": true
+          },
           "publish": {
             "registry": {
               "active": false,
@@ -2098,6 +2191,10 @@
             "version": "0.0.1"
           },
           "srcfeature": false,
+          "superseded": [
+            "test/runner_test.go",
+            "test/struct_runner_test.go"
+          ],
           "title": "Golang"
         },
         "go-cli": {
@@ -2149,6 +2246,7 @@
               "active": false
             }
           },
+          "provides": {},
           "publish": {
             "registry": {
               "active": false,
@@ -2173,6 +2271,7 @@
             },
             "version": "0.0.1"
           },
+          "superseded": [],
           "title": "Go CLI"
         },
         "go-mcp": {
@@ -2224,6 +2323,7 @@
               "active": false
             }
           },
+          "provides": {},
           "publish": {
             "registry": {
               "active": false,
@@ -2248,6 +2348,7 @@
             },
             "version": "0.0.1"
           },
+          "superseded": [],
           "title": "Go MCP server"
         },
         "lua": {
@@ -2288,6 +2389,9 @@
             "sdkrel": ""
           },
           "package": "@voxgig/sdkgen",
+          "provides": {
+            "sekreto": true
+          },
           "publish": {
             "registry": {
               "active": false,
@@ -2313,6 +2417,9 @@
             "version": "0.0.1"
           },
           "srcfeature": false,
+          "superseded": [
+            "test/struct_runner.lua"
+          ],
           "title": "Lua"
         },
         "php": {
@@ -2347,6 +2454,9 @@
             "sdkrel": ""
           },
           "package": "@voxgig/sdkgen",
+          "provides": {
+            "sekreto": true
+          },
           "publish": {
             "registry": {
               "active": false,
@@ -2372,6 +2482,9 @@
             "version": "0.0.1"
           },
           "srcfeature": false,
+          "superseded": [
+            "test/StructRunner.php"
+          ],
           "title": "PHP"
         },
         "py": {
@@ -2412,6 +2525,9 @@
             "sdkrel": ""
           },
           "package": "@voxgig/sdkgen",
+          "provides": {
+            "sekreto": true
+          },
           "publish": {
             "registry": {
               "active": false,
@@ -2437,6 +2553,9 @@
             "version": "0.0.1"
           },
           "srcfeature": false,
+          "superseded": [
+            "test/struct_runner.py"
+          ],
           "title": "Python"
         },
         "rb": {
@@ -2482,6 +2601,9 @@
             "sdkrel": ""
           },
           "package": "@voxgig/sdkgen",
+          "provides": {
+            "sekreto": true
+          },
           "publish": {
             "registry": {
               "active": false,
@@ -2507,6 +2629,9 @@
             "version": "0.0.1"
           },
           "srcfeature": false,
+          "superseded": [
+            "test/struct_runner.rb"
+          ],
           "title": "Ruby"
         },
         "ts": {
@@ -2524,11 +2649,6 @@
               "active": true,
               "kind": "dev",
               "version": "^25.6.0"
-            },
-            "dotenv": {
-              "active": true,
-              "kind": "dev",
-              "version": "^17.4.2"
             },
             "typescript": {
               "active": true,
@@ -2557,6 +2677,9 @@
             "sdkrel": ""
           },
           "package": "@voxgig/sdkgen",
+          "provides": {
+            "sekreto": true
+          },
           "publish": {
             "registry": {
               "active": false,
@@ -2581,6 +2704,14 @@
             },
             "version": "0.0.1"
           },
+          "superseded": [
+            "test/runner.ts",
+            "test/vendor/omni/compat.ts",
+            "src/feature/secrets/sekreto/Providers.ts",
+            "src/feature/secrets/sekreto/Sigv4.ts",
+            "src/feature/secrets/sekreto/provider/Registry.ts",
+            "src/feature/secrets/sekreto/provider/http.ts"
+          ],
           "title": "TypeScript"
         }
       },

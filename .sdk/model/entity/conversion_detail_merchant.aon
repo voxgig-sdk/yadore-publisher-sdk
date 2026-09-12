@@ -11,6 +11,7 @@ main: kit: entity: conversion_detail_merchant: {
       type: "`$INTEGER`"
     }
     {
+      format: "ISO 3166 Alpha-2"
       name: "market"
       req: false
       short: "Two character form of a country, in all lower-case"
@@ -68,11 +69,19 @@ main: kit: entity: conversion_detail_merchant: {
           }
           method: "GET"
           orig: "/v2/conversion/detail/merchant"
-          parts: [
-            "v2"
-            "conversion"
-            "detail"
-            "merchant"
+          segments: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "conversion"
+            }
+            {
+              lit: "detail"
+            }
+            {
+              lit: "merchant"
+            }
           ]
           select: {
             exist: [

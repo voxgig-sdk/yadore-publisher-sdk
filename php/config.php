@@ -78,6 +78,7 @@ class YadorePublisherConfig
               'type' => '`$STRING`',
             ],
             [
+              'format' => 'date-time',
               'name' => 'date',
               'type' => '`$STRING`',
             ],
@@ -132,10 +133,16 @@ class YadorePublisherConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/v2/conversion/detail',
-                  'parts' => [
-                    'v2',
-                    'conversion',
-                    'detail',
+                  'segments' => [
+                    [
+                      'lit' => 'v2',
+                    ],
+                    [
+                      'lit' => 'conversion',
+                    ],
+                    [
+                      'lit' => 'detail',
+                    ],
                   ],
                   'select' => [
                     'exist' => [
@@ -147,6 +154,11 @@ class YadorePublisherConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body.clicks`',
+                  ],
+                  'parts' => [
+                    'v2',
+                    'conversion',
+                    'detail',
                   ],
                 ],
               ],
@@ -163,6 +175,7 @@ class YadorePublisherConfig
               'type' => '`$INTEGER`',
             ],
             [
+              'format' => 'ISO 3166 Alpha-2',
               'name' => 'market',
               'short' => 'Two character form of a country, in all lower-case',
               'type' => '`$STRING`',
@@ -217,11 +230,19 @@ class YadorePublisherConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/v2/conversion/detail/merchant',
-                  'parts' => [
-                    'v2',
-                    'conversion',
-                    'detail',
-                    'merchant',
+                  'segments' => [
+                    [
+                      'lit' => 'v2',
+                    ],
+                    [
+                      'lit' => 'conversion',
+                    ],
+                    [
+                      'lit' => 'detail',
+                    ],
+                    [
+                      'lit' => 'merchant',
+                    ],
                   ],
                   'select' => [
                     'exist' => [
@@ -234,6 +255,12 @@ class YadorePublisherConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body`',
+                  ],
+                  'parts' => [
+                    'v2',
+                    'conversion',
+                    'detail',
+                    'merchant',
                   ],
                 ],
               ],
@@ -293,10 +320,16 @@ class YadorePublisherConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/v2/conversion/general',
-                  'parts' => [
-                    'v2',
-                    'conversion',
-                    'general',
+                  'segments' => [
+                    [
+                      'lit' => 'v2',
+                    ],
+                    [
+                      'lit' => 'conversion',
+                    ],
+                    [
+                      'lit' => 'general',
+                    ],
                   ],
                   'select' => [
                     'exist' => [
@@ -308,6 +341,11 @@ class YadorePublisherConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body`',
+                  ],
+                  'parts' => [
+                    'v2',
+                    'conversion',
+                    'general',
                   ],
                 ],
               ],
@@ -345,10 +383,16 @@ class YadorePublisherConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/v2/conversion/status',
-                  'parts' => [
-                    'v2',
-                    'conversion',
-                    'status',
+                  'segments' => [
+                    [
+                      'lit' => 'v2',
+                    ],
+                    [
+                      'lit' => 'conversion',
+                    ],
+                    [
+                      'lit' => 'status',
+                    ],
                   ],
                   'select' => [
                     'exist' => [
@@ -358,6 +402,11 @@ class YadorePublisherConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body`',
+                  ],
+                  'parts' => [
+                    'v2',
+                    'conversion',
+                    'status',
                   ],
                 ],
               ],
@@ -415,14 +464,22 @@ class YadorePublisherConfig
                   'kind' => 'http',
                   'method' => 'POST',
                   'orig' => '/v2/deeplink',
-                  'parts' => [
-                    'v2',
-                    'deeplink',
+                  'segments' => [
+                    [
+                      'lit' => 'v2',
+                    ],
+                    [
+                      'lit' => 'deeplink',
+                    ],
                   ],
                   'select' => [],
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body.result`',
+                  ],
+                  'parts' => [
+                    'v2',
+                    'deeplink',
                   ],
                 ],
               ],
@@ -475,6 +532,10 @@ class YadorePublisherConfig
               'type' => '`$ARRAY`',
             ],
           ],
+          'id' => [
+            'field' => 'id',
+            'name' => 'id',
+          ],
           'name' => 'deeplink_merchant',
           'op' => [
             'list' => [
@@ -514,10 +575,16 @@ class YadorePublisherConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/v2/deeplink/merchant',
-                  'parts' => [
-                    'v2',
-                    'deeplink',
-                    'merchant',
+                  'segments' => [
+                    [
+                      'lit' => 'v2',
+                    ],
+                    [
+                      'lit' => 'deeplink',
+                    ],
+                    [
+                      'lit' => 'merchant',
+                    ],
                   ],
                   'select' => [
                     'exist' => [
@@ -530,6 +597,11 @@ class YadorePublisherConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body.merchants`',
+                  ],
+                  'parts' => [
+                    'v2',
+                    'deeplink',
+                    'merchant',
                   ],
                 ],
               ],
@@ -600,9 +672,13 @@ class YadorePublisherConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/v2/d',
-                  'parts' => [
-                    'v2',
-                    'd',
+                  'segments' => [
+                    [
+                      'lit' => 'v2',
+                    ],
+                    [
+                      'lit' => 'd',
+                    ],
                   ],
                   'select' => [
                     'exist' => [
@@ -619,6 +695,10 @@ class YadorePublisherConfig
                     'req' => '`reqdata`',
                     'res' => '`body`',
                   ],
+                  'parts' => [
+                    'v2',
+                    'd',
+                  ],
                 ],
               ],
             ],
@@ -634,6 +714,10 @@ class YadorePublisherConfig
               'type' => '`$STRING`',
             ],
           ],
+          'id' => [
+            'field' => 'id',
+            'name' => 'id',
+          ],
           'name' => 'market',
           'op' => [
             'list' => [
@@ -645,14 +729,22 @@ class YadorePublisherConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/v2/markets',
-                  'parts' => [
-                    'v2',
-                    'markets',
+                  'segments' => [
+                    [
+                      'lit' => 'v2',
+                    ],
+                    [
+                      'lit' => 'markets',
+                    ],
                   ],
                   'select' => [],
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body.markets`',
+                  ],
+                  'parts' => [
+                    'v2',
+                    'markets',
                   ],
                 ],
               ],
@@ -685,6 +777,10 @@ class YadorePublisherConfig
               'type' => '`$ARRAY`',
             ],
           ],
+          'id' => [
+            'field' => 'id',
+            'name' => 'id',
+          ],
           'name' => 'merchant',
           'op' => [
             'list' => [
@@ -712,9 +808,13 @@ class YadorePublisherConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/v2/merchant',
-                  'parts' => [
-                    'v2',
-                    'merchant',
+                  'segments' => [
+                    [
+                      'lit' => 'v2',
+                    ],
+                    [
+                      'lit' => 'merchant',
+                    ],
                   ],
                   'select' => [
                     'exist' => [
@@ -725,6 +825,10 @@ class YadorePublisherConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body.merchants`',
+                  ],
+                  'parts' => [
+                    'v2',
+                    'merchant',
                   ],
                 ],
               ],
@@ -814,6 +918,10 @@ class YadorePublisherConfig
               'type' => '`$OBJECT`',
             ],
           ],
+          'id' => [
+            'field' => 'id',
+            'name' => 'id',
+          ],
           'name' => 'offer',
           'op' => [
             'list' => [
@@ -891,9 +999,13 @@ class YadorePublisherConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/v2/offer',
-                  'parts' => [
-                    'v2',
-                    'offer',
+                  'segments' => [
+                    [
+                      'lit' => 'v2',
+                    ],
+                    [
+                      'lit' => 'offer',
+                    ],
                   ],
                   'select' => [
                     'exist' => [
@@ -912,6 +1024,10 @@ class YadorePublisherConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body.offers`',
+                  ],
+                  'parts' => [
+                    'v2',
+                    'offer',
                   ],
                 ],
               ],
@@ -961,10 +1077,16 @@ class YadorePublisherConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/v2/offer/bulk',
-                  'parts' => [
-                    'v2',
-                    'offer',
-                    'bulk',
+                  'segments' => [
+                    [
+                      'lit' => 'v2',
+                    ],
+                    [
+                      'lit' => 'offer',
+                    ],
+                    [
+                      'lit' => 'bulk',
+                    ],
                   ],
                   'select' => [
                     '$action' => 'bulk',
@@ -979,6 +1101,11 @@ class YadorePublisherConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body.ean`',
+                  ],
+                  'parts' => [
+                    'v2',
+                    'offer',
+                    'bulk',
                   ],
                 ],
               ],
@@ -999,6 +1126,7 @@ class YadorePublisherConfig
               'type' => '`$STRING`',
             ],
             [
+              'format' => 'date-time',
               'name' => 'date',
               'type' => '`$STRING`',
             ],
@@ -1053,10 +1181,16 @@ class YadorePublisherConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/v2/report/detail',
-                  'parts' => [
-                    'v2',
-                    'report',
-                    'detail',
+                  'segments' => [
+                    [
+                      'lit' => 'v2',
+                    ],
+                    [
+                      'lit' => 'report',
+                    ],
+                    [
+                      'lit' => 'detail',
+                    ],
                   ],
                   'select' => [
                     'exist' => [
@@ -1068,6 +1202,11 @@ class YadorePublisherConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body.clicks`',
+                  ],
+                  'parts' => [
+                    'v2',
+                    'report',
+                    'detail',
                   ],
                 ],
               ],
@@ -1120,10 +1259,16 @@ class YadorePublisherConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/v2/report/general',
-                  'parts' => [
-                    'v2',
-                    'report',
-                    'general',
+                  'segments' => [
+                    [
+                      'lit' => 'v2',
+                    ],
+                    [
+                      'lit' => 'report',
+                    ],
+                    [
+                      'lit' => 'general',
+                    ],
                   ],
                   'select' => [
                     'exist' => [
@@ -1134,6 +1279,11 @@ class YadorePublisherConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body`',
+                  ],
+                  'parts' => [
+                    'v2',
+                    'report',
+                    'general',
                   ],
                 ],
               ],
@@ -1146,10 +1296,12 @@ class YadorePublisherConfig
         'report_modified' => [
           'fields' => [
             [
+              'format' => 'date',
               'name' => 'date',
               'type' => '`$STRING`',
             ],
             [
+              'format' => 'date-time',
               'name' => 'modifiedDate',
               'type' => '`$STRING`',
             ],
@@ -1188,10 +1340,16 @@ class YadorePublisherConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/v2/report/modified',
-                  'parts' => [
-                    'v2',
-                    'report',
-                    'modified',
+                  'segments' => [
+                    [
+                      'lit' => 'v2',
+                    ],
+                    [
+                      'lit' => 'report',
+                    ],
+                    [
+                      'lit' => 'modified',
+                    ],
                   ],
                   'select' => [
                     'exist' => [
@@ -1203,6 +1361,11 @@ class YadorePublisherConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body.market`',
+                  ],
+                  'parts' => [
+                    'v2',
+                    'report',
+                    'modified',
                   ],
                 ],
               ],
@@ -1240,10 +1403,16 @@ class YadorePublisherConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/v2/report/status',
-                  'parts' => [
-                    'v2',
-                    'report',
-                    'status',
+                  'segments' => [
+                    [
+                      'lit' => 'v2',
+                    ],
+                    [
+                      'lit' => 'report',
+                    ],
+                    [
+                      'lit' => 'status',
+                    ],
                   ],
                   'select' => [
                     'exist' => [
@@ -1253,6 +1422,11 @@ class YadorePublisherConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body`',
+                  ],
+                  'parts' => [
+                    'v2',
+                    'report',
+                    'status',
                   ],
                 ],
               ],

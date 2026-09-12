@@ -11,6 +11,7 @@ main: kit: entity: conversion_detail: {
       type: "`$STRING`"
     }
     {
+      format: "date-time"
       name: "date"
       req: false
       type: "`$STRING`"
@@ -70,10 +71,16 @@ main: kit: entity: conversion_detail: {
           }
           method: "GET"
           orig: "/v2/conversion/detail"
-          parts: [
-            "v2"
-            "conversion"
-            "detail"
+          segments: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "conversion"
+            }
+            {
+              lit: "detail"
+            }
           ]
           select: {
             exist: [

@@ -192,9 +192,13 @@ main: kit: entity: offer: {
           }
           method: "GET"
           orig: "/v2/offer"
-          parts: [
-            "v2"
-            "offer"
+          segments: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "offer"
+            }
           ]
           select: {
             exist: [
@@ -263,10 +267,16 @@ main: kit: entity: offer: {
           }
           method: "GET"
           orig: "/v2/offer/bulk"
-          parts: [
-            "v2"
-            "offer"
-            "bulk"
+          segments: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "offer"
+            }
+            {
+              lit: "bulk"
+            }
           ]
           select: {
             "$action": "bulk"
