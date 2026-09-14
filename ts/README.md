@@ -28,7 +28,7 @@ loading a specific record.
 ### 1. Create a client
 
 ```ts
-import { YadorePublisherSDK } from '@voxgig-sdk/yadore-publisher'
+import { YadorePublisherSDK } from '@voxgig-sdk/yadore-publisher-sdk'
 
 const client = new YadorePublisherSDK({
   apikey: process.env.YADORE_PUBLISHER_APIKEY,
@@ -967,7 +967,7 @@ yadore-publisher/
 Import the SDK from the package root:
 
 ```ts
-import { YadorePublisherSDK } from '@voxgig-sdk/yadore-publisher'
+import { YadorePublisherSDK } from '@voxgig-sdk/yadore-publisher-sdk'
 ```
 
 ### Entity state

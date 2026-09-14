@@ -105,7 +105,7 @@ local result, err = client:ReportGeneral():load({ date = "example", format = "ex
 
 | Language | Package | Install |
 | --- | --- | --- |
-| TypeScript | `@voxgig-sdk/yadore-publisher` | publish pending — [install from git tag](https://github.com/voxgig-sdk/yadore-publisher-sdk/releases) |
+| TypeScript | `@voxgig-sdk/yadore-publisher-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/yadore-publisher-sdk/releases) |
 | Python | `voxgig-sdk-yadore-publisher` | publish pending — [install from git tag](https://github.com/voxgig-sdk/yadore-publisher-sdk/releases) |
 | PHP | `voxgig-sdk/yadore-publisher` | publish pending — [install from git tag](https://github.com/voxgig-sdk/yadore-publisher-sdk/releases) |
 | Golang | `github.com/voxgig-sdk/yadore-publisher-sdk/go` | `go get github.com/voxgig-sdk/yadore-publisher-sdk/go@latest` |
@@ -119,7 +119,7 @@ local result, err = client:ReportGeneral():load({ date = "example", format = "ex
 ### TypeScript
 
 ```ts
-import { YadorePublisherSDK } from '@voxgig-sdk/yadore-publisher'
+import { YadorePublisherSDK } from '@voxgig-sdk/yadore-publisher-sdk'
 
 const client = new YadorePublisherSDK({
   apikey: process.env.YADORE_PUBLISHER_APIKEY,
