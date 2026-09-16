@@ -50,6 +50,12 @@ main: kit: entity: report_modified: {
               }
             ]
           }
+          contract: {
+            id: "GET /v2/report/modified"
+            json: "{\"operationId\":\"getReportModifiedDetail\",\"parameters\":[{\"description\":\"Starting date for which to generate list of modified reports dates. This parameter has to be in format `YYYY-mm-dd`\",\"in\":\"query\",\"name\":\"from\",\"required\":true,\"schema\":{\"format\":\"date\",\"type\":\"string\"}},{\"description\":\"Ending date for which to generate list of modified reports dates. This parameter has to be in format `YYYY-mm-dd`\",\"in\":\"query\",\"name\":\"to\",\"required\":true,\"schema\":{\"format\":\"date\",\"type\":\"string\"}},{\"description\":\"Market to search. You will receive a list with valid Markets along with your account information and keys.\",\"in\":\"query\",\"name\":\"market\",\"required\":false,\"schema\":{\"format\":\"ISO 3166 Alpha-2\",\"type\":\"string\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"market\":{\"properties\":{\"date\":{\"format\":\"date\",\"type\":\"string\"},\"modifiedDate\":{\"format\":\"date-time\",\"type\":\"string\"}},\"type\":\"object\"}},\"type\":\"object\"}}},\"description\":\"Report Modified Response\"}},\"security\":[{\"ApiKeyAuth\":[]}],\"securitySchemes\":{\"ApiKeyAuth\":{\"description\":\"Your project's API-Key.\",\"in\":\"header\",\"name\":\"API-Key\",\"type\":\"apiKey\"}},\"securitySource\":\"operation\"}"
+            source: "openapi3"
+            version: 1
+          }
           method: "GET"
           orig: "/v2/report/modified"
           segments: [

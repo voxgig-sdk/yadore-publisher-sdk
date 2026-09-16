@@ -46,6 +46,12 @@ main: kit: entity: report_general: {
               }
             ]
           }
+          contract: {
+            id: "GET /v2/report/general"
+            json: "{\"operationId\":\"getReportGeneral\",\"parameters\":[{\"description\":\"Date for which to generate a report. This date is in the UTC timezone. This parameter has to be in format `YYYY-mm-dd`, for example `2018-01-31`.\",\"in\":\"query\",\"name\":\"date\",\"required\":true,\"schema\":{\"format\":\"date\",\"type\":\"string\"}},{\"description\":\"A format to generate the reports. Available formats are `json` and `csv`.\",\"in\":\"query\",\"name\":\"format\",\"required\":true,\"schema\":{\"enum\":[\"json\",\"csv\"],\"type\":\"string\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"date\":{\"properties\":{\"from\":{\"type\":\"string\"},\"to\":{\"type\":\"string\"}},\"type\":\"object\"},\"market\":{\"properties\":{\"de\":{\"properties\":{\"total\":{\"properties\":{\"clicks\":{\"type\":\"integer\"},\"currency\":{\"type\":\"string\"},\"revenue\":{\"example\":0,\"type\":\"number\"}},\"type\":\"object\"}},\"type\":\"object\"}},\"type\":\"object\"},\"total\":{\"properties\":{\"clicks\":{\"type\":\"integer\"},\"currency\":{\"type\":\"string\"},\"revenue\":{\"type\":\"integer\"}},\"type\":\"object\"}},\"type\":\"object\"}},\"text/csv\":{\"schema\":{\"example\":\"\\\"date\\\",\\\"market\\\",\\\"clicks\\\",\\\"revenue\\\",\\\"currency\\\"\\n\\\"2018-01-01\\\",\\\"de\\\",\\\"1000\\\",\\\"100.1234\\\",\\\"EUR\\\"\\n\\\"2018-01-01\\\",\\\"fr\\\",\\\"2000\\\",\\\"150.5678\\\",\\\"EUR\\\"\\n\\\"2018-01-01\\\",\\\"it\\\",\\\"1500\\\",\\\"125.6542\\\",\\\"EUR\\\"\\n\",\"type\":\"string\"}}},\"description\":\"Report General Response\"}},\"security\":[{\"ApiKeyAuth\":[]}],\"securitySchemes\":{\"ApiKeyAuth\":{\"description\":\"Your project's API-Key.\",\"in\":\"header\",\"name\":\"API-Key\",\"type\":\"apiKey\"}},\"securitySource\":\"operation\"}"
+            source: "openapi3"
+            version: 1
+          }
           method: "GET"
           orig: "/v2/report/general"
           segments: [

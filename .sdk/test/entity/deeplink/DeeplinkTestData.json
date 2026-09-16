@@ -3,31 +3,31 @@
     "deeplink": {
       "DEEPLINK00": {
         "deeplinks": [],
-        "found": "s47",
+        "found": 71,
         "isCouponing": true,
         "market": "s49",
         "placementId": "s4a",
-        "total": "s4b",
+        "total": 75,
         "urls": [],
         "id": "DEEPLINK00"
       },
       "DEEPLINK01": {
         "deeplinks": [],
-        "found": "s8d",
+        "found": 141,
         "isCouponing": true,
         "market": "s8f",
         "placementId": "s90",
-        "total": "s91",
+        "total": 145,
         "urls": [],
         "id": "DEEPLINK01"
       },
       "DEEPLINK02": {
         "deeplinks": [],
-        "found": "sd3",
+        "found": 211,
         "isCouponing": true,
         "market": "sd5",
         "placementId": "sd6",
-        "total": "sd7",
+        "total": 215,
         "urls": [],
         "id": "DEEPLINK02"
       }
@@ -37,12 +37,151 @@
     "deeplink": {
       "deeplink_ref01": {
         "deeplinks": [],
-        "found": "s119",
+        "found": 281,
         "isCouponing": true,
         "market": "s11b",
         "placementId": "s11c",
-        "total": "s11d",
+        "total": 285,
         "urls": []
+      }
+    }
+  },
+  "requests": {
+    "POST /v2/deeplink": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "postDeeplink",
+        "parameters": [],
+        "protocol": "http",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "isCouponing": {
+                    "description": "If your project has in parts couponing traffic, you must use this parameter to tell the API if the click is a couponing click or not. If you don’t use this parameter when your project is labeled _“mixed”_ your traffic will not get paid. If you want to find out the label, please ask your account manager. You only must use this parameter if you have mixed traffic. If you have either couponing or no couponing traffic, this parameter is not important for you.\n",
+                    "name": "isCouponing",
+                    "required": false,
+                    "type": "boolean"
+                  },
+                  "market": {
+                    "description": "The market to query.",
+                    "required": true,
+                    "type": "string"
+                  },
+                  "placementId": {
+                    "description": "Your own subID for your click-tracking. Must be at most 128 characters long. Only printable ASCII-characters are allowed. Defaults to null.",
+                    "required": false,
+                    "type": "string"
+                  },
+                  "urls": {
+                    "description": "An array of URLs",
+                    "items": {
+                      "properties": {
+                        "url": {
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "required": true,
+                    "type": "array"
+                  }
+                },
+                "type": "object"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "result": {
+                      "properties": {
+                        "deeplinks": {
+                          "items": {
+                            "properties": {
+                              "clickUrl": {
+                                "description": "The clickUrl is only valid for 14 days.",
+                                "nullable": true,
+                                "type": "string"
+                              },
+                              "estimatedCpc": {
+                                "properties": {
+                                  "amount": {
+                                    "nullable": true,
+                                    "type": "string"
+                                  },
+                                  "currency": {
+                                    "nullable": true,
+                                    "type": "string"
+                                  }
+                                },
+                                "type": "object"
+                              },
+                              "found": {
+                                "type": "boolean"
+                              },
+                              "merchant": {
+                                "nullable": true,
+                                "properties": {
+                                  "logo": {
+                                    "properties": {
+                                      "exists": {
+                                        "type": "boolean"
+                                      },
+                                      "url": {
+                                        "type": "string"
+                                      }
+                                    },
+                                    "type": "object"
+                                  }
+                                },
+                                "type": "object"
+                              },
+                              "url": {
+                                "type": "string"
+                              }
+                            },
+                            "type": "object"
+                          },
+                          "type": "array"
+                        },
+                        "found": {
+                          "type": "integer"
+                        },
+                        "total": {
+                          "type": "integer"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Deeplink Response"
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "securitySchemes": {
+          "ApiKeyAuth": {
+            "description": "Your project's API-Key.",
+            "in": "header",
+            "name": "API-Key",
+            "type": "apiKey"
+          }
+        },
+        "securitySource": "operation"
       }
     }
   }

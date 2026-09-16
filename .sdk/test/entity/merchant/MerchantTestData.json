@@ -5,21 +5,21 @@
         "id": "MERCHANT00",
         "logo": {},
         "name": "s34",
-        "offerCount": "s35",
+        "offerCount": 53,
         "trafficTypes": []
       },
       "MERCHANT01": {
         "id": "MERCHANT01",
         "logo": {},
         "name": "s66",
-        "offerCount": "s67",
+        "offerCount": 103,
         "trafficTypes": []
       },
       "MERCHANT02": {
         "id": "MERCHANT02",
         "logo": {},
         "name": "s98",
-        "offerCount": "s99",
+        "offerCount": 153,
         "trafficTypes": []
       }
     }
@@ -29,8 +29,114 @@
       "merchant_ref01": {
         "logo": {},
         "name": "sca",
-        "offerCount": "scb",
+        "offerCount": 203,
         "trafficTypes": []
+      }
+    }
+  },
+  "requests": {
+    "GET /v2/merchant": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "getMerchant",
+        "parameters": [
+          {
+            "description": "Market to search. You can get the markets you are activated for with the Markets API.",
+            "in": "query",
+            "name": "market",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "If your project has mixed traffic, you can filter the merchants by using this parameter.",
+            "in": "query",
+            "name": "isCouponing",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "protocol": "http",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "merchants": {
+                      "items": {
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          },
+                          "logo": {
+                            "properties": {
+                              "exists": {
+                                "type": "boolean"
+                              },
+                              "url": {
+                                "type": "string"
+                              }
+                            },
+                            "type": "object"
+                          },
+                          "name": {
+                            "type": "string"
+                          },
+                          "offerCount": {
+                            "type": "integer"
+                          },
+                          "trafficTypes": {
+                            "items": {
+                              "properties": {
+                                "permission": {
+                                  "enum": [
+                                    "not_allowed",
+                                    "allowed"
+                                  ],
+                                  "type": "string"
+                                },
+                                "type": {
+                                  "type": "string"
+                                }
+                              },
+                              "type": "object"
+                            },
+                            "type": "array"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "type": "array"
+                    },
+                    "total": {
+                      "type": "integer"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Merchant Response"
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "securitySchemes": {
+          "ApiKeyAuth": {
+            "description": "Your project's API-Key.",
+            "in": "header",
+            "name": "API-Key",
+            "type": "apiKey"
+          }
+        },
+        "securitySource": "operation"
       }
     }
   }

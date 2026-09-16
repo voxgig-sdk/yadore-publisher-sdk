@@ -1,12 +1,18 @@
 # YadorePublisher SDK feature factory
 
 from yadorepublisher_sdk.feature.base_feature import YadorePublisherBaseFeature
+from yadorepublisher_sdk.feature.ratelimit_feature import YadorePublisherRatelimitFeature
+from yadorepublisher_sdk.feature.retry_feature import YadorePublisherRetryFeature
 from yadorepublisher_sdk.feature.test_feature import YadorePublisherTestFeature
+from yadorepublisher_sdk.feature.timeout_feature import YadorePublisherTimeoutFeature
 
 
 _FEATURES = {
     "base": lambda: YadorePublisherBaseFeature(),
+    "ratelimit": lambda: YadorePublisherRatelimitFeature(),
+    "retry": lambda: YadorePublisherRetryFeature(),
     "test": lambda: YadorePublisherTestFeature(),
+    "timeout": lambda: YadorePublisherTimeoutFeature(),
 }
 
 

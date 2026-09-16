@@ -2,7 +2,7 @@
   "existing": {
     "deeplink_merchant": {
       "DEEPLINK_MERCHANT00": {
-        "deeplinkCount": "s5a",
+        "deeplinkCount": 90,
         "estimatedCpc": {},
         "hasExternalHomepage": true,
         "hasSmartlinkHomepage": false,
@@ -13,7 +13,7 @@
         "trafficTypes": []
       },
       "DEEPLINK_MERCHANT01": {
-        "deeplinkCount": "sb4",
+        "deeplinkCount": 180,
         "estimatedCpc": {},
         "hasExternalHomepage": true,
         "hasSmartlinkHomepage": false,
@@ -24,7 +24,7 @@
         "trafficTypes": []
       },
       "DEEPLINK_MERCHANT02": {
-        "deeplinkCount": "s10e",
+        "deeplinkCount": 270,
         "estimatedCpc": {},
         "hasExternalHomepage": true,
         "hasSmartlinkHomepage": false,
@@ -39,7 +39,7 @@
   "new": {
     "deeplink_merchant": {
       "deeplink_merchant_ref01": {
-        "deeplinkCount": "s168",
+        "deeplinkCount": 360,
         "estimatedCpc": {},
         "hasExternalHomepage": true,
         "hasSmartlinkHomepage": false,
@@ -47,6 +47,156 @@
         "logo": {},
         "name": "s16f",
         "trafficTypes": []
+      }
+    }
+  },
+  "requests": {
+    "GET /v2/deeplink/merchant": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "getDeeplinkMerchant",
+        "parameters": [
+          {
+            "description": "Market to search. You can get the markets you are activated for with the Markets API.",
+            "in": "query",
+            "name": "market",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Set to 1 to limit results to smartlink merchants only. If omitted, you will get results for all merchants.",
+            "in": "query",
+            "name": "isSmartlink",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Set to 1 to limit results to homepage merchants only. If omitted, you will get results for all merchants.",
+            "in": "query",
+            "name": "hasHomepage",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "If your project has mixed traffic, you can filter the merchants by using this parameter.",
+            "in": "query",
+            "name": "isCouponing",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "protocol": "http",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "merchants": {
+                      "items": {
+                        "properties": {
+                          "deeplinkCount": {
+                            "description": "Even when a merchant has no deeplinks, it might still have smartlinks.",
+                            "type": "integer"
+                          },
+                          "estimatedCpc": {
+                            "properties": {
+                              "amount": {
+                                "nullable": true,
+                                "type": "string"
+                              },
+                              "currency": {
+                                "nullable": true,
+                                "type": "string"
+                              }
+                            },
+                            "type": "object"
+                          },
+                          "hasExternalHomepage": {
+                            "description": "If the merchant accept homepage deeplinks.",
+                            "type": "boolean"
+                          },
+                          "hasSmartlinkHomepage": {
+                            "description": "If the merchant accept homepage smartlinks.",
+                            "type": "boolean"
+                          },
+                          "id": {
+                            "type": "string"
+                          },
+                          "isSmartlink": {
+                            "description": "If the merchant has one or more smartlinks.",
+                            "type": "boolean"
+                          },
+                          "logo": {
+                            "properties": {
+                              "exists": {
+                                "type": "boolean"
+                              },
+                              "url": {
+                                "type": "string"
+                              }
+                            },
+                            "type": "object"
+                          },
+                          "name": {
+                            "type": "string"
+                          },
+                          "trafficTypes": {
+                            "items": {
+                              "properties": {
+                                "permission": {
+                                  "enum": [
+                                    "not_allowed",
+                                    "allowed"
+                                  ],
+                                  "type": "string"
+                                },
+                                "type": {
+                                  "type": "string"
+                                }
+                              },
+                              "type": "object"
+                            },
+                            "type": "array"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "type": "array"
+                    },
+                    "total": {
+                      "type": "integer"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Deeplink Merchant Response"
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "securitySchemes": {
+          "ApiKeyAuth": {
+            "description": "Your project's API-Key.",
+            "in": "header",
+            "name": "API-Key",
+            "type": "apiKey"
+          }
+        },
+        "securitySource": "operation"
       }
     }
   }

@@ -2,32 +2,180 @@
   "existing": {
     "conversion_detail_merchant": {
       "CONVERSION_DETAIL_MERCHANT00": {
-        "clicks": "s28",
+        "clicks": 40,
         "market": "s29",
         "merchant": {},
-        "sales": "s2b"
+        "sales": 43
       },
       "CONVERSION_DETAIL_MERCHANT01": {
-        "clicks": "s50",
+        "clicks": 80,
         "market": "s51",
         "merchant": {},
-        "sales": "s53"
+        "sales": 83
       },
       "CONVERSION_DETAIL_MERCHANT02": {
-        "clicks": "s78",
+        "clicks": 120,
         "market": "s79",
         "merchant": {},
-        "sales": "s7b"
+        "sales": 123
       }
     }
   },
   "new": {
     "conversion_detail_merchant": {
       "conversion_detail_merchant_ref01": {
-        "clicks": "sa0",
+        "clicks": 160,
         "market": "sa1",
         "merchant": {},
-        "sales": "sa3"
+        "sales": 163
+      }
+    }
+  },
+  "requests": {
+    "GET /v2/conversion/detail/merchant": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "getConversionDetailMerchant",
+        "parameters": [
+          {
+            "description": "Market to search. You will receive a list with valid Markets along with your account information and keys.",
+            "in": "query",
+            "name": "market",
+            "required": false,
+            "schema": {
+              "format": "ISO 3166 Alpha-2",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Starting date for which to generate the report. This parameter has to be in format `YYYY-mm-dd`",
+            "in": "query",
+            "name": "from",
+            "required": true,
+            "schema": {
+              "format": "date",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Ending date for which to generate the report. This parameter has to be in format `YYYY-mm-dd`",
+            "in": "query",
+            "name": "to",
+            "required": true,
+            "schema": {
+              "format": "date",
+              "type": "string"
+            }
+          },
+          {
+            "description": "A format to generate the reports. Available formats are `json` and `csv`.",
+            "in": "query",
+            "name": "format",
+            "required": true,
+            "schema": {
+              "enum": [
+                "json",
+                "csv"
+              ],
+              "type": "string"
+            }
+          }
+        ],
+        "protocol": "http",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "date": {
+                      "properties": {
+                        "from": {
+                          "format": "date",
+                          "type": "string"
+                        },
+                        "to": {
+                          "format": "date",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "salesByMerchant": {
+                      "items": {
+                        "properties": {
+                          "clicks": {
+                            "example": 16,
+                            "type": "integer"
+                          },
+                          "market": {
+                            "description": "Two character form of a country, in all lower-case",
+                            "example": "de",
+                            "format": "ISO 3166 Alpha-2",
+                            "pattern": "[A-Z]{2}",
+                            "type": "string"
+                          },
+                          "merchant": {
+                            "properties": {
+                              "id": {
+                                "type": "string"
+                              },
+                              "name": {
+                                "type": "string"
+                              }
+                            },
+                            "type": "object"
+                          },
+                          "sales": {
+                            "example": 42,
+                            "type": "integer"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "minItems": 0,
+                      "type": "array"
+                    },
+                    "total": {
+                      "properties": {
+                        "clicks": {
+                          "example": 16,
+                          "type": "integer"
+                        },
+                        "sales": {
+                          "example": 42,
+                          "type": "integer"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  },
+                  "type": "object"
+                }
+              },
+              "text/csv": {
+                "schema": {
+                  "example": "merchant_id,merchant_name,sales\n0000111122223333444455556666777788889999aaaabbbbccccddddeeeeffff,example.com,1337\n1000111122223333444455556666777788889999aaaabbbbccccddddeeeeffff,example.com,163\n"
+                }
+              }
+            },
+            "description": "Conversion Detail Merchant Response"
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "securitySchemes": {
+          "ApiKeyAuth": {
+            "description": "Your project's API-Key.",
+            "in": "header",
+            "name": "API-Key",
+            "type": "apiKey"
+          }
+        },
+        "securitySource": "operation"
       }
     }
   }

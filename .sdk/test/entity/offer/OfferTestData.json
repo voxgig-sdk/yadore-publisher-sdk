@@ -5,7 +5,7 @@
         "availability": "sbe",
         "brand": "sbf",
         "clickUrl": "sc0",
-        "count": "sc1",
+        "count": 193,
         "description": "sc2",
         "eer": "sc3",
         "estimatedCpc": {},
@@ -26,7 +26,7 @@
         "availability": "s17c",
         "brand": "s17d",
         "clickUrl": "s17e",
-        "count": "s17f",
+        "count": 383,
         "description": "s180",
         "eer": "s181",
         "estimatedCpc": {},
@@ -47,7 +47,7 @@
         "availability": "s23a",
         "brand": "s23b",
         "clickUrl": "s23c",
-        "count": "s23d",
+        "count": 573,
         "description": "s23e",
         "eer": "s23f",
         "estimatedCpc": {},
@@ -72,7 +72,7 @@
         "availability": "s2f8",
         "brand": "s2f9",
         "clickUrl": "s2fa",
-        "count": "s2fb",
+        "count": 763,
         "description": "s2fc",
         "eer": "s2fd",
         "estimatedCpc": {},
@@ -87,6 +87,642 @@
         "thumbnail": {},
         "title": "s309",
         "unitPrice": {}
+      }
+    }
+  },
+  "requests": {
+    "GET /v2/offer": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "getOffer",
+        "parameters": [
+          {
+            "description": "Market to search. You can get the markets you are activated for with the Markets API.",
+            "in": "query",
+            "name": "market",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Keyword to search. Must be at least one character long.",
+            "in": "query",
+            "name": "keyword",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Filter the results by this EAN. Must be `8`, `13` or `14` characters long. When omitted, you will get offers regardless of an ean.",
+            "in": "query",
+            "name": "ean",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Merchant ID to filter the offers. You can use this parameter to narrow the results. If omitted, you will get offers for all merchants.",
+            "in": "query",
+            "name": "merchantId",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Offer ID to filter the offers. If set you will only get this one offer, if it is found and active.",
+            "in": "query",
+            "name": "offerId",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Your own subID for your click-tracking. Must be at most 128 characters long. Only printable ASCII-characters are allowed. Defaults to `null`.",
+            "in": "query",
+            "name": "placementId",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Precision for the fulltext search. `strict` uses a more strict approach to get more relevant results. `fuzzy` uses a less strict approach to get more results.",
+            "in": "query",
+            "name": "precision",
+            "required": false,
+            "schema": {
+              "default": "fuzzy",
+              "enum": [
+                "strict",
+                "fuzzy"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "description": "Sort the results by relevance or price. Allowed values are `rel_desc`, `price_asc`, `price_desc`. Defaults to `rel_desc`. It is only possible to sort the results by relevance if you also specify a keyword. Without the keyword, the sort order is undefined.",
+            "in": "query",
+            "name": "sort",
+            "required": false,
+            "schema": {
+              "default": "rel_desc",
+              "enum": [
+                "rel_desc",
+                "price_asc",
+                "price_desc"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "description": "Limit of results, must be between `1` and `100`. Defaults to `20`.",
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "description": "If your project has in parts couponing traffic, you must use this parameter to tell the API if the click is a couponing click or not. If you don’t use this parameter when your project is labeled _“mixed”_ your traffic will not get paid. If you want to find out the label, please ask your account manager. You only must use this parameter if you have mixed traffic. If you have either couponing or no couponing traffic, this parameter is not important for you.\n",
+            "in": "query",
+            "name": "isCouponing",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "protocol": "http",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "count": {
+                      "type": "integer"
+                    },
+                    "offers": {
+                      "items": {
+                        "properties": {
+                          "availability": {
+                            "enum": [
+                              "AVAILABLE",
+                              "UNAVAILABLE",
+                              "UNKNOWN",
+                              "SOON",
+                              "PREORDER",
+                              "AVAILABLE ON ORDER",
+                              "STOCK ON ORDER",
+                              "BACKORDER"
+                            ],
+                            "type": "string"
+                          },
+                          "brand": {
+                            "nullable": true,
+                            "type": "string"
+                          },
+                          "clickUrl": {
+                            "type": "string"
+                          },
+                          "description": {
+                            "type": "string"
+                          },
+                          "eer": {
+                            "nullable": true,
+                            "type": "string"
+                          },
+                          "estimatedCpc": {
+                            "description": "estimatedCPC means the gross revenue per click Yadore gets from its merchants,\nyou have to use your revenue share to get your estimatedCPC.\nBe aware, the CPC paid can still differ from the estimated CPC\n",
+                            "properties": {
+                              "amount": {
+                                "type": "string"
+                              },
+                              "currency": {
+                                "type": "string"
+                              }
+                            },
+                            "type": "object"
+                          },
+                          "id": {
+                            "type": "string"
+                          },
+                          "image": {
+                            "properties": {
+                              "url": {
+                                "type": "string"
+                              }
+                            },
+                            "type": "object"
+                          },
+                          "merchant": {
+                            "properties": {
+                              "id": {
+                                "type": "string"
+                              },
+                              "logo": {
+                                "properties": {
+                                  "exists": {
+                                    "type": "boolean"
+                                  },
+                                  "url": {
+                                    "type": "string"
+                                  }
+                                },
+                                "type": "object"
+                              },
+                              "name": {
+                                "type": "string"
+                              }
+                            },
+                            "type": "object"
+                          },
+                          "originalPrice": {
+                            "properties": {
+                              "amount": {
+                                "type": "string"
+                              },
+                              "currency": {
+                                "type": "string"
+                              }
+                            },
+                            "type": "object"
+                          },
+                          "price": {
+                            "properties": {
+                              "amount": {
+                                "type": "string"
+                              },
+                              "currency": {
+                                "type": "string"
+                              }
+                            },
+                            "type": "object"
+                          },
+                          "promoText": {
+                            "nullable": true,
+                            "type": "string"
+                          },
+                          "shippingPrice": {
+                            "properties": {
+                              "amount": {
+                                "type": "string"
+                              },
+                              "currency": {
+                                "type": "string"
+                              }
+                            },
+                            "type": "object"
+                          },
+                          "shippingTime": {
+                            "properties": {
+                              "text": {
+                                "type": "string"
+                              }
+                            },
+                            "type": "object"
+                          },
+                          "thumbnail": {
+                            "properties": {
+                              "url": {
+                                "type": "string"
+                              }
+                            },
+                            "type": "object"
+                          },
+                          "title": {
+                            "type": "string"
+                          },
+                          "unitPrice": {
+                            "properties": {
+                              "text": {
+                                "nullable": true,
+                                "type": "string"
+                              }
+                            },
+                            "type": "object"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "type": "array"
+                    },
+                    "total": {
+                      "type": "integer"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Offer Response"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "errors": {
+                      "properties": {
+                        "isCouponing": {
+                          "items": {
+                            "oneOf": [
+                              {
+                                "example": "Field is required when mixed traffic is allowed",
+                                "type": "string"
+                              },
+                              {
+                                "example": "Field must be a boolean",
+                                "type": "string"
+                              }
+                            ]
+                          },
+                          "type": "array"
+                        },
+                        "market": {
+                          "items": {
+                            "oneOf": [
+                              {
+                                "example": "Field is required",
+                                "type": "string"
+                              },
+                              {
+                                "example": "Market 'xy' not found",
+                                "type": "string"
+                              }
+                            ]
+                          },
+                          "type": "array"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Bad Request"
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "securitySchemes": {
+          "ApiKeyAuth": {
+            "description": "Your project's API-Key.",
+            "in": "header",
+            "name": "API-Key",
+            "type": "apiKey"
+          }
+        },
+        "securitySource": "operation"
+      }
+    },
+    "GET /v2/offer/bulk": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "getOffersByEan",
+        "parameters": [
+          {
+            "description": "Market to search. You can get the markets you are activated for with the Markets API.",
+            "in": "query",
+            "name": "market",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The EANs to search (max. 50). Must be an comma seperated list of valid EANs. Each EAN must be `8`, `13` or `14` characters long.",
+            "in": "query",
+            "name": "eans",
+            "required": true,
+            "schema": {
+              "example": "12345678,87654321",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Merchant ID to filter the offers. You can use this parameter to narrow the results. If omitted, you will get offers for all merchants.",
+            "in": "query",
+            "name": "merchantId",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Your own subID for your click-tracking. Must be at most 128 characters long. Only printable ASCII-characters are allowed. Defaults to `null`.",
+            "in": "query",
+            "name": "placementId",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "If your project has in parts couponing traffic, you must use this parameter to tell the API if the click is a couponing click or not. If you don’t use this parameter when your project is labeled _“mixed”_ your traffic will not get paid. If you want to find out the label, please ask your account manager. You only must use this parameter if you have mixed traffic. If you have either couponing or no couponing traffic, this parameter is not important for you.\n",
+            "in": "query",
+            "name": "isCouponing",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "protocol": "http",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "ean": {
+                      "properties": {
+                        "count": {
+                          "type": "integer"
+                        },
+                        "offers": {
+                          "items": {
+                            "properties": {
+                              "availability": {
+                                "enum": [
+                                  "AVAILABLE",
+                                  "UNAVAILABLE",
+                                  "UNKNOWN",
+                                  "SOON",
+                                  "PREORDER",
+                                  "AVAILABLE ON ORDER",
+                                  "STOCK ON ORDER",
+                                  "BACKORDER"
+                                ],
+                                "type": "string"
+                              },
+                              "brand": {
+                                "nullable": true,
+                                "type": "string"
+                              },
+                              "clickUrl": {
+                                "type": "string"
+                              },
+                              "description": {
+                                "type": "string"
+                              },
+                              "eer": {
+                                "nullable": true,
+                                "type": "string"
+                              },
+                              "estimatedCpc": {
+                                "description": "estimatedCPC means the gross revenue per click Yadore gets from its merchants,\nyou have to use your revenue share to get your estimatedCPC.\nBe aware, the CPC paid can still differ from the estimated CPC\n",
+                                "properties": {
+                                  "amount": {
+                                    "type": "string"
+                                  },
+                                  "currency": {
+                                    "type": "string"
+                                  }
+                                },
+                                "type": "object"
+                              },
+                              "id": {
+                                "type": "string"
+                              },
+                              "image": {
+                                "properties": {
+                                  "url": {
+                                    "type": "string"
+                                  }
+                                },
+                                "type": "object"
+                              },
+                              "merchant": {
+                                "properties": {
+                                  "id": {
+                                    "type": "string"
+                                  },
+                                  "logo": {
+                                    "properties": {
+                                      "exists": {
+                                        "type": "boolean"
+                                      },
+                                      "url": {
+                                        "type": "string"
+                                      }
+                                    },
+                                    "type": "object"
+                                  },
+                                  "name": {
+                                    "type": "string"
+                                  }
+                                },
+                                "type": "object"
+                              },
+                              "originalPrice": {
+                                "properties": {
+                                  "amount": {
+                                    "type": "string"
+                                  },
+                                  "currency": {
+                                    "type": "string"
+                                  }
+                                },
+                                "type": "object"
+                              },
+                              "price": {
+                                "properties": {
+                                  "amount": {
+                                    "type": "string"
+                                  },
+                                  "currency": {
+                                    "type": "string"
+                                  }
+                                },
+                                "type": "object"
+                              },
+                              "promoText": {
+                                "nullable": true,
+                                "type": "string"
+                              },
+                              "shippingPrice": {
+                                "properties": {
+                                  "amount": {
+                                    "type": "string"
+                                  },
+                                  "currency": {
+                                    "type": "string"
+                                  }
+                                },
+                                "type": "object"
+                              },
+                              "shippingTime": {
+                                "properties": {
+                                  "text": {
+                                    "type": "string"
+                                  }
+                                },
+                                "type": "object"
+                              },
+                              "thumbnail": {
+                                "properties": {
+                                  "url": {
+                                    "type": "string"
+                                  }
+                                },
+                                "type": "object"
+                              },
+                              "title": {
+                                "type": "string"
+                              },
+                              "unitPrice": {
+                                "properties": {
+                                  "text": {
+                                    "nullable": true,
+                                    "type": "string"
+                                  }
+                                },
+                                "type": "object"
+                              }
+                            },
+                            "type": "object"
+                          },
+                          "type": "array"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Offer Ean Bulk Response"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "errors": {
+                      "properties": {
+                        "ean": {
+                          "items": {
+                            "oneOf": [
+                              {
+                                "example": "EAN list cant be empty",
+                                "type": "string"
+                              },
+                              {
+                                "example": "Cant request offers for more then 50 EANs at once",
+                                "type": "string"
+                              }
+                            ]
+                          },
+                          "type": "array"
+                        },
+                        "isCouponing": {
+                          "items": {
+                            "oneOf": [
+                              {
+                                "example": "Field is required when mixed traffic is allowed",
+                                "type": "string"
+                              },
+                              {
+                                "example": "Field must be a boolean",
+                                "type": "string"
+                              }
+                            ]
+                          },
+                          "type": "array"
+                        },
+                        "market": {
+                          "items": {
+                            "oneOf": [
+                              {
+                                "example": "Field is required",
+                                "type": "string"
+                              },
+                              {
+                                "example": "Market 'xy' not found",
+                                "type": "string"
+                              }
+                            ]
+                          },
+                          "type": "array"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Bad Request"
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "securitySchemes": {
+          "ApiKeyAuth": {
+            "description": "Your project's API-Key.",
+            "in": "header",
+            "name": "API-Key",
+            "type": "apiKey"
+          }
+        },
+        "securitySource": "operation"
       }
     }
   }

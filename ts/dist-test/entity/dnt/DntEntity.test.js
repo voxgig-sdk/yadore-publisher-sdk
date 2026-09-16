@@ -40,6 +40,8 @@ const node_path_1 = __importDefault(require("node:path"));
 const Fs = __importStar(require("node:fs"));
 const node_test_1 = require("node:test");
 const node_assert_1 = __importDefault(require("node:assert"));
+const live_runner_1 = require("../../live-runner");
+const live_entity_1 = require("../../live-entity");
 const __1 = require("../../..");
 const utility_1 = require("../../utility");
 // AFTER the imports on purpose: TypeScript hoists `import` above any
@@ -59,16 +61,12 @@ const utility_1 = require("../../utility");
     (0, node_test_1.test)('basic', async (t) => {
         const live = 'TRUE' === process.env.YADORE_PUBLISHER_TEST_LIVE;
         for (const op of ['load']) {
-            if ((0, utility_1.maybeSkipControl)(t, 'entityOp', 'dnt.' + op, live))
+            if (!live && (0, utility_1.maybeSkipControl)(t, 'entityOp', 'dnt.' + op, live))
                 return;
         }
         const setup = basicSetup();
-        // The basic flow consumes synthetic IDs and field values from the
-        // fixture (entity TestData.json). Those don't exist on the live API.
-        // Skip live runs unless the user provided a real ENTID env override.
-        if (setup.syntheticOnly) {
-            t.skip('live entity test uses synthetic IDs from fixture — set YADORE_PUBLISHER_TEST_DNT_ENTID JSON to run live');
-            return;
+        if (setup.live) {
+            return (0, live_entity_1.runLiveEntity)(setup, { "active": true, "alias": { "field": {} }, "fields": [], "name": "dnt", "op": { "load": { "input": "data", "name": "load", "points": [{ "active": true, "args": { "query": [{ "active": true, "kind": "query", "name": "callback_url", "orig": "callback_url", "reqd": false, "type": "`$STRING`", "index$": 0 }, { "active": true, "kind": "query", "name": "is_couponing", "orig": "is_couponing", "reqd": false, "type": "`$BOOLEAN`", "index$": 1 }, { "active": true, "kind": "query", "name": "market", "orig": "market", "reqd": true, "type": "`$STRING`", "index$": 2 }, { "active": true, "kind": "query", "name": "merchant_id", "orig": "merchant_id", "reqd": false, "type": "`$STRING`", "index$": 3 }, { "active": true, "kind": "query", "name": "placement_id", "orig": "placement_id", "reqd": false, "type": "`$STRING`", "index$": 4 }, { "active": true, "kind": "query", "name": "project_id", "orig": "project_id", "reqd": true, "type": "`$STRING`", "index$": 5 }, { "active": true, "kind": "query", "name": "url", "orig": "url", "reqd": true, "type": "`$STRING`", "index$": 6 }] }, "contract": { "id": "GET /v2/d", "json": "{\"operationId\":\"doDirectRedirect\",\"parameters\":[{\"description\":\"URL of shop to redirect to. Please copy & paste the URL in this field exactly how it is displayed in the browser.\",\"in\":\"query\",\"name\":\"url\",\"required\":true,\"schema\":{\"type\":\"string\"}},{\"description\":\"The URL to where requests with errors will be redirected to. The callbackUrl has to be whitelisted. If you want to use a callbackUrl please send your URL to your Yadore contact. Omitting this parameter will result in a 404 for results with errors.\",\"in\":\"query\",\"name\":\"callbackUrl\",\"required\":false,\"schema\":{\"type\":\"string\"}},{\"description\":\"Market to search. You can get the markets you are activated for with the Markets API.\",\"in\":\"query\",\"name\":\"market\",\"required\":true,\"schema\":{\"type\":\"string\"}},{\"description\":\"Merchant ID to filter the offers. You can use this parameter to narrow the results. If omitted, you will get offers for all merchants.\",\"in\":\"query\",\"name\":\"merchantId\",\"required\":false,\"schema\":{\"type\":\"string\"}},{\"description\":\"Your own subID for your click-tracking. Must be at most 128 characters long. Only printable ASCII-characters are allowed. Defaults to `null`.\",\"in\":\"query\",\"name\":\"placementId\",\"required\":false,\"schema\":{\"type\":\"string\"}},{\"description\":\"Your project ID, ask your account manager for your specific project ID.\",\"in\":\"query\",\"name\":\"projectId\",\"required\":true,\"schema\":{\"type\":\"string\"}},{\"description\":\"If your project has in parts couponing traffic, you must use this parameter to tell the API if the click is a couponing click or not. If you don’t use this parameter when your project is labeled _“mixed”_ your traffic will not get paid. If you want to find out the label, please ask your account manager. You only must use this parameter if you have mixed traffic. If you have either couponing or no couponing traffic, this parameter is not important for you.\\n\",\"in\":\"query\",\"name\":\"isCouponing\",\"required\":false,\"schema\":{\"type\":\"boolean\"}}],\"protocol\":\"http\",\"responses\":{\"302\":{\"description\":\"A redirect to the target shop website.\"},\"404\":{\"description\":\"An error occured and there was no callbackUrl.\"}},\"security\":[{\"ApiKeyAuth\":[]}],\"securitySchemes\":{\"ApiKeyAuth\":{\"description\":\"Your project's API-Key.\",\"in\":\"header\",\"name\":\"API-Key\",\"type\":\"apiKey\"}},\"securitySource\":\"operation\"}", "source": "openapi3", "version": 1 }, "kind": "http", "method": "GET", "orig": "/v2/d", "segments": [{ "lit": "v2" }, { "lit": "d" }], "select": { "exist": ["callback_url", "is_couponing", "market", "merchant_id", "placement_id", "project_id", "url"] }, "transform": { "req": "`reqdata`", "res": "`body`" }, "index$": 0 }], "key$": "load" } }, "relations": { "ancestors": [] }, "key$": "dnt", "name__orig": "dnt", "Name": "Dnt", "name_": "dnt", "name-": "dnt", "NAME": "DNT", "index$": 6 }, { "active": true, "entity": "dnt", "key$": "BasicDntFlow", "kind": "basic", "name": "BasicDntFlow", "param": {}, "step": [{ "active": true, "data": {}, "input": { "ref": "dnt_ref01", "srcdatavar": "dnt_ref01_data", "suffix": "_dt0" }, "match": {}, "op": "load", "spec": [], "valid": [{ "apply": "TextFieldMark", "def": { "mark": "Mark01-dnt_ref01" } }], "index$": 0 }] }, 'Dnt');
         }
         const client = setup.client;
         const struct = setup.struct;
@@ -102,12 +100,6 @@ function basicSetup(extra) {
                 '`$VAL`': ['`$FORMAT`', 'upper', '`$COPY`']
             }]
     });
-    // Detect whether the user provided a real ENTID JSON via env var. The
-    // basic flow consumes synthetic IDs from the fixture file; without an
-    // override those synthetic IDs reach the live API and 4xx. Surface this
-    // to the test so it can skip rather than fail.
-    const idmapEnvVal = process.env['YADORE_PUBLISHER_TEST_DNT_ENTID'];
-    const idmapOverridden = null != idmapEnvVal && idmapEnvVal.trim().startsWith('{');
     const env = (0, utility_1.envOverride)({
         'YADORE_PUBLISHER_TEST_DNT_ENTID': idmap,
         'YADORE_PUBLISHER_TEST_LIVE': 'FALSE',
@@ -116,7 +108,13 @@ function basicSetup(extra) {
     });
     idmap = env['YADORE_PUBLISHER_TEST_DNT_ENTID'];
     const live = 'TRUE' === env.YADORE_PUBLISHER_TEST_LIVE;
+    const transport = (0, live_runner_1.createLiveTransport)();
     if (live) {
+        const rawIds = process.env['YADORE_PUBLISHER_TEST_DNT_ENTID'];
+        idmap = rawIds && rawIds.trim() ? JSON.parse(rawIds) : {};
+        if (!idmap || Array.isArray(idmap) || typeof idmap !== 'object') {
+            throw new Error('Live ENTID must be a JSON object');
+        }
         client = new __1.YadorePublisherSDK(merge([
             // FIRST, so the generated fields below win: sdk-test-control.json's
             // test.client.options adds to the live client, it does not redirect it.
@@ -129,7 +127,8 @@ function basicSetup(extra) {
             // argument at all - so a bare 'extra' silently discarded the apikey
             // and server values above and handed the SDK undefined. Harmless
             // while there was nothing in that object; not harmless now.
-            extra || {}
+            extra || {},
+            { system: { fetch: transport.fetch } }
         ]));
     }
     const setup = {
@@ -141,7 +140,7 @@ function basicSetup(extra) {
         data: entityData,
         explain: 'TRUE' === env.YADORE_PUBLISHER_TEST_EXPLAIN,
         live,
-        syntheticOnly: live && !idmapOverridden,
+        transport,
         now: Date.now(),
     };
     return setup;
