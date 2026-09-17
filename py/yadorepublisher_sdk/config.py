@@ -106,6 +106,7 @@ def make_config():
             "base": "https://api.yadore.com/",
             "auth": {
                 "prefix": "",
+                "name": "API-Key",
             },
             "headers": {
         "content-type": "application/json",
@@ -910,10 +911,6 @@ def make_config():
             "type": "`$STRING`",
           },
           {
-            "name": "count",
-            "type": "`$INTEGER`",
-          },
-          {
             "name": "description",
             "type": "`$STRING`",
           },
@@ -937,10 +934,6 @@ def make_config():
           {
             "name": "merchant",
             "type": "`$OBJECT`",
-          },
-          {
-            "name": "offers",
-            "type": "`$ARRAY`",
           },
           {
             "name": "originalPrice",

@@ -1,7 +1,7 @@
 # YadorePublisher SDK utility: prepare_auth
 require_relative 'struct/voxgig_struct'
 module YadorePublisherUtilities
-  HEADER_AUTH = "authorization"
+  HEADER_AUTH = "api-key"
   OPTION_APIKEY = "apikey"
   NOT_FOUND = "__NOTFOUND__"
 

@@ -81,6 +81,7 @@ func MakeConfig() map[string]any {
 			"base": "https://api.yadore.com/",
 			"auth": map[string]any{
 				"prefix": "",
+				"name": "API-Key",
 			},
 			"headers": map[string]any{
 				"content-type": "application/json",
@@ -885,10 +886,6 @@ func MakeConfig() map[string]any {
 						"type": "`$STRING`",
 					},
 					map[string]any{
-						"name": "count",
-						"type": "`$INTEGER`",
-					},
-					map[string]any{
 						"name": "description",
 						"type": "`$STRING`",
 					},
@@ -912,10 +909,6 @@ func MakeConfig() map[string]any {
 					map[string]any{
 						"name": "merchant",
 						"type": "`$OBJECT`",
-					},
-					map[string]any{
-						"name": "offers",
-						"type": "`$ARRAY`",
 					},
 					map[string]any{
 						"name": "originalPrice",

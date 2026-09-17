@@ -387,14 +387,12 @@ API path: `/v2/merchant`
 | `availability` |  |
 | `brand` |  |
 | `clickUrl` |  |
-| `count` |  |
 | `description` |  |
 | `eer` |  |
 | `estimatedCpc` | estimatedCPC means the gross revenue per click Yadore gets from its merchants, you have to use your revenue share to get your estimatedCPC. |
 | `id` |  |
 | `image` |  |
 | `merchant` |  |
-| `offers` |  |
 | `originalPrice` |  |
 | `price` |  |
 | `promoText` |  |
@@ -720,14 +718,12 @@ Create an instance: `$offer = $client->Offer();`
 | `availability` | `string` |  |
 | `brand` | `string` |  |
 | `clickUrl` | `string` |  |
-| `count` | `int` |  |
 | `description` | `string` |  |
 | `eer` | `string` |  |
 | `estimatedCpc` | `array` | estimatedCPC means the gross revenue per click Yadore gets from its merchants, you have to use your revenue share to get your estimatedCPC. |
 | `id` | `string` |  |
 | `image` | `array` |  |
 | `merchant` | `array` |  |
-| `offers` | `array` |  |
 | `originalPrice` | `array` |  |
 | `price` | `array` |  |
 | `promoText` | `string` |  |
@@ -999,6 +995,7 @@ Use `Helpers::to_map()` to safely validate that a value is an array.
 php/
 ├── yadorepublisher_sdk.php          -- Main SDK class
 ├── config.php                     -- Configuration
+├── schema.php                     -- Generated option + entity specs
 ├── features.php                   -- Feature factory
 ├── core/                          -- Core types and context
 ├── entity/                        -- Entity implementations

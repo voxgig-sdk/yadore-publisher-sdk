@@ -383,14 +383,12 @@ API path: `/v2/merchant`
 | `availability` |  |
 | `brand` |  |
 | `clickUrl` |  |
-| `count` |  |
 | `description` |  |
 | `eer` |  |
 | `estimatedCpc` | estimatedCPC means the gross revenue per click Yadore gets from its merchants, you have to use your revenue share to get your estimatedCPC. |
 | `id` |  |
 | `image` |  |
 | `merchant` |  |
-| `offers` |  |
 | `originalPrice` |  |
 | `price` |  |
 | `promoText` |  |
@@ -708,14 +706,12 @@ Create an instance: `offer = client.Offer()`
 | `availability` | `str` |  |
 | `brand` | `str` |  |
 | `clickUrl` | `str` |  |
-| `count` | `int` |  |
 | `description` | `str` |  |
 | `eer` | `str` |  |
 | `estimatedCpc` | `dict` | estimatedCPC means the gross revenue per click Yadore gets from its merchants, you have to use your revenue share to get your estimatedCPC. |
 | `id` | `str` |  |
 | `image` | `dict` |  |
 | `merchant` | `dict` |  |
-| `offers` | `list` |  |
 | `originalPrice` | `dict` |  |
 | `price` | `dict` |  |
 | `promoText` | `str` |  |
@@ -981,6 +977,7 @@ Use `helpers.to_map()` to safely validate that a value is a dict.
 py/
 ├── yadorepublisher_sdk.py         -- Main SDK module
 ├── config.py                    -- Configuration
+├── schema.py                    -- Generated option + entity specs
 ├── features.py                  -- Feature factory
 ├── core/                        -- Core types and context
 ├── entity/                      -- Entity implementations

@@ -176,14 +176,12 @@ class Offer
     public ?string $availability = null;
     public ?string $brand = null;
     public ?string $clickUrl = null;
-    public ?int $count = null;
     public ?string $description = null;
     public ?string $eer = null;
     public ?array $estimatedCpc = null;
     public ?string $id = null;
     public ?array $image = null;
     public ?array $merchant = null;
-    public ?array $offers = null;
     public ?array $originalPrice = null;
     public ?array $price = null;
     public ?string $promoText = null;

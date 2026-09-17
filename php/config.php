@@ -103,6 +103,7 @@ class YadorePublisherConfig
                 "base" => "https://api.yadore.com/",
                 "auth" => [
                     "prefix" => "",
+                    "name" => "API-Key",
                 ],
                 "headers" => [
           'content-type' => 'application/json',
@@ -907,10 +908,6 @@ class YadorePublisherConfig
               'type' => '`$STRING`',
             ],
             [
-              'name' => 'count',
-              'type' => '`$INTEGER`',
-            ],
-            [
               'name' => 'description',
               'type' => '`$STRING`',
             ],
@@ -934,10 +931,6 @@ class YadorePublisherConfig
             [
               'name' => 'merchant',
               'type' => '`$OBJECT`',
-            ],
-            [
-              'name' => 'offers',
-              'type' => '`$ARRAY`',
             ],
             [
               'name' => 'originalPrice',

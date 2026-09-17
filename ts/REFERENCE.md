@@ -751,14 +751,12 @@ const offer = client.Offer()
 | `availability` | `string` | No |  |
 | `brand` | `string` | No |  |
 | `clickUrl` | `string` | No |  |
-| `count` | `number` | No |  |
 | `description` | `string` | No |  |
 | `eer` | `string` | No |  |
 | `estimatedCpc` | `Record<string, any>` | No | estimatedCPC means the gross revenue per click Yadore gets from its merchants, you have to use your revenue share to get your estimatedCPC. |
 | `id` | `string` | No |  |
 | `image` | `Record<string, any>` | No |  |
 | `merchant` | `Record<string, any>` | No |  |
-| `offers` | `any[]` | No |  |
 | `originalPrice` | `Record<string, any>` | No |  |
 | `price` | `Record<string, any>` | No |  |
 | `promoText` | `string` | No |  |

@@ -642,14 +642,12 @@ offer = client.Offer
 | `availability` | `String` | No |  |
 | `brand` | `String` | No |  |
 | `clickUrl` | `String` | No |  |
-| `count` | `Integer` | No |  |
 | `description` | `String` | No |  |
 | `eer` | `String` | No |  |
 | `estimatedCpc` | `Hash` | No | estimatedCPC means the gross revenue per click Yadore gets from its merchants, you have to use your revenue share to get your estimatedCPC. |
 | `id` | `String` | No |  |
 | `image` | `Hash` | No |  |
 | `merchant` | `Hash` | No |  |
-| `offers` | `Array` | No |  |
 | `originalPrice` | `Hash` | No |  |
 | `price` | `Hash` | No |  |
 | `promoText` | `String` | No |  |

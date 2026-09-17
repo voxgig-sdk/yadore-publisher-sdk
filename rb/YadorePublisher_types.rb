@@ -380,9 +380,6 @@ MerchantListMatch = Struct.new(
 # @!attribute [rw] clickUrl
 #   @return [String, nil]
 #
-# @!attribute [rw] count
-#   @return [Integer, nil]
-#
 # @!attribute [rw] description
 #   @return [String, nil]
 #
@@ -400,9 +397,6 @@ MerchantListMatch = Struct.new(
 #
 # @!attribute [rw] merchant
 #   @return [Hash, nil]
-#
-# @!attribute [rw] offers
-#   @return [Array, nil]
 #
 # @!attribute [rw] originalPrice
 #   @return [Hash, nil]
@@ -431,14 +425,12 @@ Offer = Struct.new(
   :availability,
   :brand,
   :clickUrl,
-  :count,
   :description,
   :eer,
   :estimatedCpc,
   :id,
   :image,
   :merchant,
-  :offers,
   :originalPrice,
   :price,
   :promoText,

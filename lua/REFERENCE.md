@@ -639,14 +639,12 @@ local offer = client:Offer(nil)
 | `availability` | `string` | No |  |
 | `brand` | `string` | No |  |
 | `clickUrl` | `string` | No |  |
-| `count` | `number` | No |  |
 | `description` | `string` | No |  |
 | `eer` | `string` | No |  |
 | `estimatedCpc` | `table` | No | estimatedCPC means the gross revenue per click Yadore gets from its merchants, you have to use your revenue share to get your estimatedCPC. |
 | `id` | `string` | No |  |
 | `image` | `table` | No |  |
 | `merchant` | `table` | No |  |
-| `offers` | `table` | No |  |
 | `originalPrice` | `table` | No |  |
 | `price` | `table` | No |  |
 | `promoText` | `string` | No |  |

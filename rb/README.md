@@ -376,14 +376,12 @@ API path: `/v2/merchant`
 | `availability` |  |
 | `brand` |  |
 | `clickUrl` |  |
-| `count` |  |
 | `description` |  |
 | `eer` |  |
 | `estimatedCpc` | estimatedCPC means the gross revenue per click Yadore gets from its merchants, you have to use your revenue share to get your estimatedCPC. |
 | `id` |  |
 | `image` |  |
 | `merchant` |  |
-| `offers` |  |
 | `originalPrice` |  |
 | `price` |  |
 | `promoText` |  |
@@ -709,14 +707,12 @@ Create an instance: `offer = client.Offer`
 | `availability` | `String` |  |
 | `brand` | `String` |  |
 | `clickUrl` | `String` |  |
-| `count` | `Integer` |  |
 | `description` | `String` |  |
 | `eer` | `String` |  |
 | `estimatedCpc` | `Hash` | estimatedCPC means the gross revenue per click Yadore gets from its merchants, you have to use your revenue share to get your estimatedCPC. |
 | `id` | `String` |  |
 | `image` | `Hash` |  |
 | `merchant` | `Hash` |  |
-| `offers` | `Array` |  |
 | `originalPrice` | `Hash` |  |
 | `price` | `Hash` |  |
 | `promoText` | `String` |  |
@@ -988,6 +984,7 @@ Use `Helpers.to_map()` to safely validate that a value is a hash.
 rb/
 ├── YadorePublisher_sdk.rb       -- Main SDK module
 ├── config.rb                  -- Configuration
+├── schema.rb                  -- Generated option + entity specs
 ├── features.rb                -- Feature factory
 ├── core/                      -- Core types and context
 ├── entity/                    -- Entity implementations

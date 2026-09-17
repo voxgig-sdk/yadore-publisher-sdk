@@ -638,14 +638,12 @@ fmt.Println(offer.GetName()) // "offer"
 | `availability` | `string` | No |  |
 | `brand` | `string` | No |  |
 | `clickUrl` | `string` | No |  |
-| `count` | `int` | No |  |
 | `description` | `string` | No |  |
 | `eer` | `string` | No |  |
 | `estimatedCpc` | `map[string]any` | No | estimatedCPC means the gross revenue per click Yadore gets from its merchants, you have to use your revenue share to get your estimatedCPC. |
 | `id` | `string` | No |  |
 | `image` | `map[string]any` | No |  |
 | `merchant` | `map[string]any` | No |  |
-| `offers` | `[]any` | No |  |
 | `originalPrice` | `map[string]any` | No |  |
 | `price` | `map[string]any` | No |  |
 | `promoText` | `string` | No |  |

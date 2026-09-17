@@ -106,14 +106,12 @@ export interface Offer {
     availability?: string;
     brand?: string;
     clickUrl?: string;
-    count?: number;
     description?: string;
     eer?: string;
     estimatedCpc?: Record<string, any>;
     id?: string;
     image?: Record<string, any>;
     merchant?: Record<string, any>;
-    offers?: any[];
     originalPrice?: Record<string, any>;
     price?: Record<string, any>;
     promoText?: string;

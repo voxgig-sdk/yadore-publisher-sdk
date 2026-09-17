@@ -434,14 +434,12 @@ API path: `/v2/merchant`
 | `availability` |  |
 | `brand` |  |
 | `clickUrl` |  |
-| `count` |  |
 | `description` |  |
 | `eer` |  |
 | `estimatedCpc` | estimatedCPC means the gross revenue per click Yadore gets from its merchants, you have to use your revenue share to get your estimatedCPC. |
 | `id` |  |
 | `image` |  |
 | `merchant` |  |
-| `offers` |  |
 | `originalPrice` |  |
 | `price` |  |
 | `promoText` |  |
@@ -759,14 +757,12 @@ Create an instance: `const offer = client.Offer()`
 | `availability` | `string` |  |
 | `brand` | `string` |  |
 | `clickUrl` | `string` |  |
-| `count` | `number` |  |
 | `description` | `string` |  |
 | `eer` | `string` |  |
 | `estimatedCpc` | `Record<string, any>` | estimatedCPC means the gross revenue per click Yadore gets from its merchants, you have to use your revenue share to get your estimatedCPC. |
 | `id` | `string` |  |
 | `image` | `Record<string, any>` |  |
 | `merchant` | `Record<string, any>` |  |
-| `offers` | `any[]` |  |
 | `originalPrice` | `Record<string, any>` |  |
 | `price` | `Record<string, any>` |  |
 | `promoText` | `string` |  |

@@ -123,6 +123,7 @@ class Config {
 
     auth: {
       prefix: '',
+      name: 'API-Key',
     },
 
     headers: {
@@ -131,48 +132,48 @@ class Config {
 
     entity: {
       
-      conversion_detail: {
-      },
-
-      conversion_detail_merchant: {
-      },
-
-      conversion_general: {
-      },
-
-      conversion_status: {
-      },
-
-      deeplink: {
-      },
-
-      deeplink_merchant: {
-      },
-
-      dnt: {
-      },
-
-      market: {
-      },
-
-      merchant: {
-      },
-
-      offer: {
-      },
-
-      report_detail: {
-      },
-
-      report_general: {
-      },
-
-      report_modified: {
-      },
-
-      report_status: {
-      },
-
+        conversion_detail: {
+        },
+  
+        conversion_detail_merchant: {
+        },
+  
+        conversion_general: {
+        },
+  
+        conversion_status: {
+        },
+  
+        deeplink: {
+        },
+  
+        deeplink_merchant: {
+        },
+  
+        dnt: {
+        },
+  
+        market: {
+        },
+  
+        merchant: {
+        },
+  
+        offer: {
+        },
+  
+        report_detail: {
+        },
+  
+        report_general: {
+        },
+  
+        report_modified: {
+        },
+  
+        report_status: {
+        },
+  
     }
   }
 
@@ -960,10 +961,6 @@ class Config {
           "type": "`$STRING`"
         },
         {
-          "name": "count",
-          "type": "`$INTEGER`"
-        },
-        {
           "name": "description",
           "type": "`$STRING`"
         },
@@ -987,10 +984,6 @@ class Config {
         {
           "name": "merchant",
           "type": "`$OBJECT`"
-        },
-        {
-          "name": "offers",
-          "type": "`$ARRAY`"
         },
         {
           "name": "originalPrice",

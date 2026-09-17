@@ -21,11 +21,6 @@ main: kit: entity: offer: {
       type: "`$STRING`"
     }
     {
-      name: "count"
-      req: false
-      type: "`$INTEGER`"
-    }
-    {
       name: "description"
       req: false
       type: "`$STRING`"
@@ -55,11 +50,6 @@ main: kit: entity: offer: {
       name: "merchant"
       req: false
       type: "`$OBJECT`"
-    }
-    {
-      name: "offers"
-      req: false
-      type: "`$ARRAY`"
     }
     {
       name: "originalPrice"

@@ -105,12 +105,12 @@ local result, err = client:ReportGeneral():load({ date = "example", format = "ex
 
 | Language | Package | Install |
 | --- | --- | --- |
-| TypeScript | `@voxgig-sdk/yadore-publisher-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/yadore-publisher-sdk/releases) |
-| Python | `voxgig-sdk-yadore-publisher` | publish pending — [install from git tag](https://github.com/voxgig-sdk/yadore-publisher-sdk/releases) |
-| PHP | `voxgig-sdk/yadore-publisher` | publish pending — [install from git tag](https://github.com/voxgig-sdk/yadore-publisher-sdk/releases) |
+| TypeScript | `@voxgig-sdk/yadore-publisher-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/yadore-publisher-sdk/tags) |
+| Python | `voxgig-sdk-yadore-publisher` | publish pending — [install from git tag](https://github.com/voxgig-sdk/yadore-publisher-sdk/tags) |
+| PHP | `voxgig-sdk/yadore-publisher` | publish pending — [install from git tag](https://github.com/voxgig-sdk/yadore-publisher-sdk/tags) |
 | Golang | `github.com/voxgig-sdk/yadore-publisher-sdk/go` | `go get github.com/voxgig-sdk/yadore-publisher-sdk/go@latest` |
-| Ruby | `voxgig-sdk-yadore-publisher` | publish pending — [install from git tag](https://github.com/voxgig-sdk/yadore-publisher-sdk/releases) |
-| Lua | `voxgig-sdk-yadore-publisher` | publish pending — [install from git tag](https://github.com/voxgig-sdk/yadore-publisher-sdk/releases) |
+| Ruby | `voxgig-sdk-yadore-publisher` | publish pending — [install from git tag](https://github.com/voxgig-sdk/yadore-publisher-sdk/tags) |
+| Lua | `voxgig-sdk-yadore-publisher` | publish pending — [install from git tag](https://github.com/voxgig-sdk/yadore-publisher-sdk/tags) |
 | Go CLI | `github.com/voxgig-sdk/yadore-publisher-sdk/go-cli` | `go install github.com/voxgig-sdk/yadore-publisher-sdk/go-cli/cmd/yadore-publisher@latest` |
 | Go MCP server | `github.com/voxgig-sdk/yadore-publisher-sdk/go-mcp` | `go get github.com/voxgig-sdk/yadore-publisher-sdk/go-mcp@latest` |
 

@@ -77,6 +77,7 @@ local function make_config()
       base = "https://api.yadore.com/",
       auth = {
         prefix = "",
+        name = "API-Key",
       },
       headers = {
         ["content-type"] = "application/json",
@@ -881,10 +882,6 @@ local function make_config()
             ["type"] = "`$STRING`",
           },
           {
-            ["name"] = "count",
-            ["type"] = "`$INTEGER`",
-          },
-          {
             ["name"] = "description",
             ["type"] = "`$STRING`",
           },
@@ -908,10 +905,6 @@ local function make_config()
           {
             ["name"] = "merchant",
             ["type"] = "`$OBJECT`",
-          },
-          {
-            ["name"] = "offers",
-            ["type"] = "`$ARRAY`",
           },
           {
             ["name"] = "originalPrice",

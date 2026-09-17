@@ -162,14 +162,12 @@ class Offer(TypedDict, total=False):
     availability: str
     brand: str
     clickUrl: str
-    count: int
     description: str
     eer: str
     estimatedCpc: dict
     id: str
     image: dict
     merchant: dict
-    offers: list
     originalPrice: dict
     price: dict
     promoText: str

@@ -157,14 +157,12 @@ type Offer struct {
 	Availability *string `json:"availability,omitempty"`
 	Brand *string `json:"brand,omitempty"`
 	ClickUrl *string `json:"clickUrl,omitempty"`
-	Count *int `json:"count,omitempty"`
 	Description *string `json:"description,omitempty"`
 	Eer *string `json:"eer,omitempty"`
 	EstimatedCpc *map[string]any `json:"estimatedCpc,omitempty"`
 	Id *string `json:"id,omitempty"`
 	Image *map[string]any `json:"image,omitempty"`
 	Merchant *map[string]any `json:"merchant,omitempty"`
-	Offers *[]any `json:"offers,omitempty"`
 	OriginalPrice *map[string]any `json:"originalPrice,omitempty"`
 	Price *map[string]any `json:"price,omitempty"`
 	PromoText *string `json:"promoText,omitempty"`

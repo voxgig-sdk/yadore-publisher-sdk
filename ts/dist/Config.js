@@ -104,6 +104,7 @@ class Config {
         base: "https://api.yadore.com/",
         auth: {
             prefix: '',
+            name: 'API-Key',
         },
         headers: {
             "content-type": "application/json"
@@ -908,10 +909,6 @@ class Config {
                     "type": "`$STRING`"
                 },
                 {
-                    "name": "count",
-                    "type": "`$INTEGER`"
-                },
-                {
                     "name": "description",
                     "type": "`$STRING`"
                 },
@@ -935,10 +932,6 @@ class Config {
                 {
                     "name": "merchant",
                     "type": "`$OBJECT`"
-                },
-                {
-                    "name": "offers",
-                    "type": "`$ARRAY`"
                 },
                 {
                     "name": "originalPrice",

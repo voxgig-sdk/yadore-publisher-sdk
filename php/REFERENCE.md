@@ -641,14 +641,12 @@ $offer = $client->Offer();
 | `availability` | `string` | No |  |
 | `brand` | `string` | No |  |
 | `clickUrl` | `string` | No |  |
-| `count` | `int` | No |  |
 | `description` | `string` | No |  |
 | `eer` | `string` | No |  |
 | `estimatedCpc` | `array` | No | estimatedCPC means the gross revenue per click Yadore gets from its merchants, you have to use your revenue share to get your estimatedCPC. |
 | `id` | `string` | No |  |
 | `image` | `array` | No |  |
 | `merchant` | `array` | No |  |
-| `offers` | `array` | No |  |
 | `originalPrice` | `array` | No |  |
 | `price` | `array` | No |  |
 | `promoText` | `string` | No |  |
