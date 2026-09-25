@@ -1,0 +1,120 @@
+# Entity: report_detail
+
+main: kit: entity: report_detail: {
+
+  alias: field: {}
+
+  fields: {
+    clickId: {
+      h: "Click Id"
+      n: "clickId"
+      r: false
+      t: "`$STRING`"
+    }
+    currency: {
+      h: "Currency"
+      n: "currency"
+      r: false
+      t: "`$STRING`"
+    }
+    date: {
+      fo: "date-time"
+      h: "Date"
+      n: "date"
+      r: false
+      t: "`$STRING`"
+    }
+    market: {
+      h: "Market"
+      n: "market"
+      r: false
+      t: "`$STRING`"
+    }
+    merchant: {
+      h: "Merchant"
+      n: "merchant"
+      r: false
+      t: "`$OBJECT`"
+    }
+    placementId: {
+      h: "Placement Id"
+      n: "placementId"
+      r: false
+      t: "`$STRING`"
+    }
+    revenue: {
+      h: "Revenue"
+      n: "revenue"
+      r: false
+      t: "`$NUMBER`"
+    }
+  }
+
+  name: "report_detail"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /v2/report/detail"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                k: "query"
+                n: "date"
+                or: "date"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "format"
+                or: "format"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "market"
+                or: "market"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/v2/report/detail"
+          q: {
+            exist: [
+              "date"
+              "format"
+              "market"
+            ]
+          }
+          s: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "report"
+            }
+            {
+              lit: "detail"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.clicks`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

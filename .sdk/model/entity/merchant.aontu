@@ -1,0 +1,101 @@
+# Entity: merchant
+
+main: kit: entity: merchant: {
+
+  alias: field: {}
+
+  fields: {
+    id: {
+      h: "Id"
+      n: "id"
+      r: false
+      t: "`$STRING`"
+    }
+    logo: {
+      h: "Logo"
+      n: "logo"
+      r: false
+      t: "`$OBJECT`"
+    }
+    name: {
+      h: "Name"
+      n: "name"
+      r: false
+      t: "`$STRING`"
+    }
+    offerCount: {
+      h: "Offer Count"
+      n: "offerCount"
+      r: false
+      t: "`$INTEGER`"
+    }
+    trafficTypes: {
+      h: "Traffic Types"
+      n: "trafficTypes"
+      r: false
+      t: "`$ARRAY`"
+    }
+  }
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "merchant"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /v2/merchant"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                k: "query"
+                n: "is_couponing"
+                or: "is_couponing"
+                r: false
+                t: "`$BOOLEAN`"
+              }
+              {
+                k: "query"
+                n: "market"
+                or: "market"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/v2/merchant"
+          q: {
+            exist: [
+              "is_couponing"
+              "market"
+            ]
+          }
+          s: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "merchant"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.merchants`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

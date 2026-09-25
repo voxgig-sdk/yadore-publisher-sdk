@@ -1,0 +1,53 @@
+# Entity: market
+
+main: kit: entity: market: {
+
+  alias: field: {}
+
+  fields: {
+    id: {
+      h: "Id"
+      n: "id"
+      r: false
+      t: "`$STRING`"
+    }
+  }
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "market"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /v2/markets"
+            source: "openapi3"
+            version: 2
+          }
+          m: "GET"
+          o: "/v2/markets"
+          s: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "markets"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.markets`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

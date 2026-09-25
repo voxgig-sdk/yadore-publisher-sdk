@@ -19,7 +19,6 @@ import type {
   ConversionDetailListMatch,
 } from '../YadorePublisherTypes'
 
-// TODO: needs Entity superclass
 class ConversionDetailEntity extends YadorePublisherEntityBase<ConversionDetail> {
 
   constructor(client: YadorePublisherSDK, entopts: any) {

@@ -1,0 +1,22 @@
+# BasicMerchantFlow
+
+main: kit: flow: BasicMerchantFlow:
+{
+  entity: "merchant",
+  kind: "basic",
+  name: "BasicMerchantFlow",
+  step: [
+    {
+      o: "list",
+      v: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "merchant_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicMerchantFlow"
+}

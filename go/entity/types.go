@@ -1,7 +1,7 @@
 // Typed models for the YadorePublisher SDK.
 //
-// GENERATED from the API model: main.kit.entity.<e>.fields[] and per-op
-// params (op.<name>.points[].args.params[]). Field/param types come from the
+// GENERATED from the API model: main.kit.entity.<e>.fields{} and per-op
+// params (op.<name>.points[].g.params[]). Field/param types come from the
 // canonical type sentinels via @voxgig/sdkgen canonToType (source of truth:
 // @voxgig/apidef VALID_CANON). Do not edit by hand.
 package entity
@@ -14,12 +14,6 @@ import (
 
 // ConversionDetail is the typed data model for the conversion_detail entity.
 type ConversionDetail struct {
-	ClickId *string `json:"clickId,omitempty"`
-	Date *string `json:"date,omitempty"`
-	Market *string `json:"market,omitempty"`
-	Merchant *map[string]any `json:"merchant,omitempty"`
-	PlacementId *string `json:"placementId,omitempty"`
-	Sales *float64 `json:"sales,omitempty"`
 }
 
 // ConversionDetailListMatch is the typed request payload for ConversionDetail.ListTyped.
@@ -31,10 +25,6 @@ type ConversionDetailListMatch struct {
 
 // ConversionDetailMerchant is the typed data model for the conversion_detail_merchant entity.
 type ConversionDetailMerchant struct {
-	Clicks *int `json:"clicks,omitempty"`
-	Market *string `json:"market,omitempty"`
-	Merchant *map[string]any `json:"merchant,omitempty"`
-	Sales *int `json:"sales,omitempty"`
 }
 
 // ConversionDetailMerchantListMatch is the typed request payload for ConversionDetailMerchant.ListTyped.
@@ -47,9 +37,6 @@ type ConversionDetailMerchantListMatch struct {
 
 // ConversionGeneral is the typed data model for the conversion_general entity.
 type ConversionGeneral struct {
-	Date *map[string]any `json:"date,omitempty"`
-	Market *map[string]any `json:"market,omitempty"`
-	Total *map[string]any `json:"total,omitempty"`
 }
 
 // ConversionGeneralLoadMatch is the typed request payload for ConversionGeneral.LoadTyped.
@@ -61,7 +48,6 @@ type ConversionGeneralLoadMatch struct {
 
 // ConversionStatus is the typed data model for the conversion_status entity.
 type ConversionStatus struct {
-	Status *string `json:"status,omitempty"`
 }
 
 // ConversionStatusLoadMatch is the typed request payload for ConversionStatus.LoadTyped.
@@ -71,13 +57,6 @@ type ConversionStatusLoadMatch struct {
 
 // Deeplink is the typed data model for the deeplink entity.
 type Deeplink struct {
-	Deeplinks *[]any `json:"deeplinks,omitempty"`
-	Found *int `json:"found,omitempty"`
-	IsCouponing *bool `json:"isCouponing,omitempty"`
-	Market string `json:"market"`
-	PlacementId *string `json:"placementId,omitempty"`
-	Total *int `json:"total,omitempty"`
-	Urls []any `json:"urls"`
 }
 
 // DeeplinkCreateData is the typed request payload for Deeplink.CreateTyped.
@@ -93,15 +72,6 @@ type DeeplinkCreateData struct {
 
 // DeeplinkMerchant is the typed data model for the deeplink_merchant entity.
 type DeeplinkMerchant struct {
-	DeeplinkCount *int `json:"deeplinkCount,omitempty"`
-	EstimatedCpc *map[string]any `json:"estimatedCpc,omitempty"`
-	HasExternalHomepage *bool `json:"hasExternalHomepage,omitempty"`
-	HasSmartlinkHomepage *bool `json:"hasSmartlinkHomepage,omitempty"`
-	Id *string `json:"id,omitempty"`
-	IsSmartlink *bool `json:"isSmartlink,omitempty"`
-	Logo *map[string]any `json:"logo,omitempty"`
-	Name *string `json:"name,omitempty"`
-	TrafficTypes *[]any `json:"trafficTypes,omitempty"`
 }
 
 // DeeplinkMerchantListMatch is the typed request payload for DeeplinkMerchant.ListTyped.
@@ -129,7 +99,6 @@ type DntLoadMatch struct {
 
 // Market is the typed data model for the market entity.
 type Market struct {
-	Id *string `json:"id,omitempty"`
 }
 
 // MarketListMatch is the typed request payload for Market.ListTyped.
@@ -139,11 +108,6 @@ type MarketListMatch struct {
 
 // Merchant is the typed data model for the merchant entity.
 type Merchant struct {
-	Id *string `json:"id,omitempty"`
-	Logo *map[string]any `json:"logo,omitempty"`
-	Name *string `json:"name,omitempty"`
-	OfferCount *int `json:"offerCount,omitempty"`
-	TrafficTypes *[]any `json:"trafficTypes,omitempty"`
 }
 
 // MerchantListMatch is the typed request payload for Merchant.ListTyped.
@@ -154,23 +118,6 @@ type MerchantListMatch struct {
 
 // Offer is the typed data model for the offer entity.
 type Offer struct {
-	Availability *string `json:"availability,omitempty"`
-	Brand *string `json:"brand,omitempty"`
-	ClickUrl *string `json:"clickUrl,omitempty"`
-	Description *string `json:"description,omitempty"`
-	Eer *string `json:"eer,omitempty"`
-	EstimatedCpc *map[string]any `json:"estimatedCpc,omitempty"`
-	Id *string `json:"id,omitempty"`
-	Image *map[string]any `json:"image,omitempty"`
-	Merchant *map[string]any `json:"merchant,omitempty"`
-	OriginalPrice *map[string]any `json:"originalPrice,omitempty"`
-	Price *map[string]any `json:"price,omitempty"`
-	PromoText *string `json:"promoText,omitempty"`
-	ShippingPrice *map[string]any `json:"shippingPrice,omitempty"`
-	ShippingTime *map[string]any `json:"shippingTime,omitempty"`
-	Thumbnail *map[string]any `json:"thumbnail,omitempty"`
-	Title *string `json:"title,omitempty"`
-	UnitPrice *map[string]any `json:"unitPrice,omitempty"`
 }
 
 // OfferLoadMatch is the typed request payload for Offer.LoadTyped.
@@ -198,13 +145,6 @@ type OfferListMatch struct {
 
 // ReportDetail is the typed data model for the report_detail entity.
 type ReportDetail struct {
-	ClickId *string `json:"clickId,omitempty"`
-	Currency *string `json:"currency,omitempty"`
-	Date *string `json:"date,omitempty"`
-	Market *string `json:"market,omitempty"`
-	Merchant *map[string]any `json:"merchant,omitempty"`
-	PlacementId *string `json:"placementId,omitempty"`
-	Revenue *float64 `json:"revenue,omitempty"`
 }
 
 // ReportDetailListMatch is the typed request payload for ReportDetail.ListTyped.
@@ -216,9 +156,6 @@ type ReportDetailListMatch struct {
 
 // ReportGeneral is the typed data model for the report_general entity.
 type ReportGeneral struct {
-	Date *map[string]any `json:"date,omitempty"`
-	Market *map[string]any `json:"market,omitempty"`
-	Total *map[string]any `json:"total,omitempty"`
 }
 
 // ReportGeneralLoadMatch is the typed request payload for ReportGeneral.LoadTyped.
@@ -229,8 +166,6 @@ type ReportGeneralLoadMatch struct {
 
 // ReportModified is the typed data model for the report_modified entity.
 type ReportModified struct {
-	Date *string `json:"date,omitempty"`
-	ModifiedDate *string `json:"modifiedDate,omitempty"`
 }
 
 // ReportModifiedLoadMatch is the typed request payload for ReportModified.LoadTyped.
@@ -242,7 +177,6 @@ type ReportModifiedLoadMatch struct {
 
 // ReportStatus is the typed data model for the report_status entity.
 type ReportStatus struct {
-	Status *string `json:"status,omitempty"`
 }
 
 // ReportStatusLoadMatch is the typed request payload for ReportStatus.LoadTyped.

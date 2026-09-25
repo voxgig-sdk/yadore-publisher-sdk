@@ -24,51 +24,123 @@
         "repr": "auto"
       },
       "contributor": {},
+      "doc": {
+        "active": true,
+        "assets": {
+          "path": ".sdk/doc/assets"
+        },
+        "brand": {
+          "label": "",
+          "notice": "",
+          "shortNotice": "",
+          "url": ""
+        },
+        "ci": {
+          "active": true,
+          "branch": "main"
+        },
+        "content": {
+          "path": ".sdk/doc/content"
+        },
+        "edition": {
+          "summary": {
+            "active": true,
+            "base": "node_modules/@voxgig/docgen/project/.sdk",
+            "brand": {},
+            "filter": {
+              "entities": [],
+              "features": [],
+              "targets": []
+            },
+            "kind": "summary",
+            "name": "summary",
+            "origname": "",
+            "output": {
+              "path": "SUMMARY.md"
+            },
+            "package": "@voxgig/docgen",
+            "published": false,
+            "site": {
+              "active": true
+            },
+            "style": {},
+            "title": ""
+          }
+        },
+        "qa": {
+          "vocabulary": []
+        },
+        "style": {
+          "color": {
+            "accent": "#00c6d8",
+            "background": "#f5f5f9",
+            "darkBackground": "#0f1117",
+            "darkText": "#e6edf3",
+            "primary": "#e70042",
+            "text": "#0a0a0a"
+          },
+          "font": "Nunito, system-ui, sans-serif",
+          "fontFile": "",
+          "headingFont": "Nunito, system-ui, sans-serif",
+          "headingFontFile": "",
+          "logo": "",
+          "mode": "light",
+          "mono": "ui-monospace, monospace",
+          "monoFile": ""
+        },
+        "target": {}
+      },
       "entity": {
         "conversion_detail": {
           "active": true,
           "alias": {
             "field": {}
           },
-          "fields": [
-            {
-              "active": true,
-              "name": "clickId",
-              "req": false,
-              "type": "`$STRING`"
+          "fields": {
+            "clickId": {
+              "a": true,
+              "h": "Click Id",
+              "n": "clickId",
+              "r": false,
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "format": "date-time",
-              "name": "date",
-              "req": false,
-              "type": "`$STRING`"
+            "date": {
+              "a": true,
+              "fo": "date-time",
+              "h": "Date",
+              "n": "date",
+              "r": false,
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "name": "market",
-              "req": false,
-              "type": "`$STRING`"
+            "market": {
+              "a": true,
+              "h": "Market",
+              "n": "market",
+              "r": false,
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "name": "merchant",
-              "req": false,
-              "type": "`$OBJECT`"
+            "merchant": {
+              "a": true,
+              "h": "Merchant",
+              "n": "merchant",
+              "r": false,
+              "t": "`$OBJECT`"
             },
-            {
-              "active": true,
-              "name": "placementId",
-              "req": false,
-              "type": "`$STRING`"
+            "placementId": {
+              "a": true,
+              "h": "Placement Id",
+              "n": "placementId",
+              "r": false,
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "name": "sales",
-              "req": false,
-              "type": "`$NUMBER`"
+            "sales": {
+              "a": true,
+              "h": "Sales",
+              "n": "sales",
+              "r": false,
+              "t": "`$NUMBER`"
             }
-          ],
+          },
           "name": "conversion_detail",
           "op": {
             "list": {
@@ -76,45 +148,52 @@
               "name": "list",
               "points": [
                 {
-                  "active": true,
-                  "args": {
+                  "a": true,
+                  "co": {
+                    "id": "GET /v2/conversion/detail",
+                    "source": "openapi3",
+                    "version": 2
+                  },
+                  "g": {
                     "query": [
                       {
-                        "active": true,
-                        "kind": "query",
-                        "name": "date",
-                        "orig": "date",
-                        "reqd": true,
-                        "type": "`$STRING`"
+                        "a": true,
+                        "k": "query",
+                        "n": "date",
+                        "or": "date",
+                        "r": true,
+                        "t": "`$STRING`"
                       },
                       {
-                        "active": true,
-                        "kind": "query",
-                        "name": "format",
-                        "orig": "format",
-                        "reqd": true,
-                        "type": "`$STRING`"
+                        "a": true,
+                        "k": "query",
+                        "n": "format",
+                        "or": "format",
+                        "r": true,
+                        "t": "`$STRING`"
                       },
                       {
-                        "active": true,
-                        "kind": "query",
-                        "name": "market",
-                        "orig": "market",
-                        "reqd": false,
-                        "type": "`$STRING`"
+                        "a": true,
+                        "k": "query",
+                        "n": "market",
+                        "or": "market",
+                        "r": false,
+                        "t": "`$STRING`"
                       }
                     ]
                   },
-                  "contract": {
-                    "id": "GET /v2/conversion/detail",
-                    "json": "{\"operationId\":\"getConversionDetail\",\"parameters\":[{\"description\":\"Date for which to generate a report. This date is in the UTC timezone. This parameter has to be in format `YYYY-mm-dd`, for example `2018-01-31`.\",\"in\":\"query\",\"name\":\"date\",\"required\":true,\"schema\":{\"format\":\"date\",\"type\":\"string\"}},{\"description\":\"A format to generate the reports. Available formats are `json` and `csv`.\",\"in\":\"query\",\"name\":\"format\",\"required\":true,\"schema\":{\"enum\":[\"json\",\"csv\"],\"type\":\"string\"}},{\"description\":\"Market to search. You can get the markets you are activated for with the Markets API.\",\"in\":\"query\",\"name\":\"market\",\"required\":false,\"schema\":{\"type\":\"string\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"clicks\":{\"items\":{\"properties\":{\"clickId\":{\"type\":\"string\"},\"date\":{\"format\":\"date-time\",\"type\":\"string\"},\"market\":{\"type\":\"string\"},\"merchant\":{\"properties\":{\"id\":{\"type\":\"string\"},\"name\":{\"type\":\"string\"}},\"type\":\"object\"},\"placementId\":{\"type\":\"string\"},\"sales\":{\"example\":42,\"type\":\"number\"}},\"type\":\"object\"},\"type\":\"array\"},\"totalClicks\":{\"type\":\"integer\"}},\"type\":\"object\"}},\"text/csv\":{\"schema\":{\"example\":\"\\\"clickId\\\",\\\"date\\\",\\\"placementId\\\",\\\"market\\\",\\\"merchantId\\\",\\\"merchantName\\\",\\\"sales\\\"\\n\\\"0003a6ba2712bf1eb0bbd1f67846bf70483989b14e9bfe3dfc96596e880d24ec\\\",\\\"2022-08-28T11:12:33+00:00\\\",\\\"cc3a69ebe06e41ec91c4c60e6de59b604682ca5489464a0ca00ab919497ce8ad\\\",\\\"de\\\",\\\"ec8408fbcc2f7523b596dec3e9462b50c4511d381780a7c0511e0e603a0c4327\\\",\\\"sanicare.de\\\",\\\"0\\\"\\n\\\"00193d37300edc9eee8abe91912a214bc5ba5123e17d65ed5ae28c3810cc47ce\\\",\\\"2022-08-28T15:56:32+00:00\\\",\\\"preisvergleich-de-o-wl\\\",\\\"de\\\",\\\"ec8408fbcc2f7523b596dec3e9462b50c4511d381780a7c0511e0e603a0c4327\\\",\\\"sanicare.de\\\",\\\"0\\\"\\n\\\"00358068c1e0a8372cd48445b47652e457b658f22050e5b9b2830b919a569636\\\",\\\"2022-08-28T12:24:54+00:00\\\",\\\"v03040001006029c697c39f3a4a2c8f3b3c277ed44467\\\",\\\"de\\\", \\\"218a1593ddb9bec9b5566a97efd5d9bf98f9eb10781d5aed06f4ebb1749f2ee9\\\",\\\"aboutyou.de\\\",\\\"0\\\"\\n\"}}},\"description\":\"Report Detail Response\"}},\"security\":[{\"ApiKeyAuth\":[]}],\"securitySchemes\":{\"ApiKeyAuth\":{\"description\":\"Your project's API-Key.\",\"in\":\"header\",\"name\":\"API-Key\",\"type\":\"apiKey\"}},\"securitySource\":\"operation\"}",
-                    "source": "openapi3",
-                    "version": 1
+                  "k": "http",
+                  "m": "GET",
+                  "o": "/v2/conversion/detail",
+                  "q": {
+                    "exist": [
+                      "date",
+                      "format",
+                      "market"
+                    ]
                   },
-                  "kind": "http",
-                  "method": "GET",
-                  "orig": "/v2/conversion/detail",
-                  "segments": [
+                  "r": {},
+                  "s": [
                     {
                       "lit": "v2"
                     },
@@ -125,14 +204,7 @@
                       "lit": "detail"
                     }
                   ],
-                  "select": {
-                    "exist": [
-                      "date",
-                      "format",
-                      "market"
-                    ]
-                  },
-                  "transform": {
+                  "t": {
                     "req": "`reqdata`",
                     "res": "`body.clicks`"
                   }
@@ -149,34 +221,38 @@
           "alias": {
             "field": {}
           },
-          "fields": [
-            {
-              "active": true,
-              "name": "clicks",
-              "req": false,
-              "type": "`$INTEGER`"
+          "fields": {
+            "clicks": {
+              "a": true,
+              "h": "Clicks",
+              "n": "clicks",
+              "r": false,
+              "t": "`$INTEGER`"
             },
-            {
-              "active": true,
-              "format": "ISO 3166 Alpha-2",
-              "name": "market",
-              "req": false,
-              "short": "Two character form of a country, in all lower-case",
-              "type": "`$STRING`"
+            "market": {
+              "a": true,
+              "fo": "ISO 3166 Alpha-2",
+              "h": "Market",
+              "n": "market",
+              "r": false,
+              "sh": "Two character form of a country, in all lower-case",
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "name": "merchant",
-              "req": false,
-              "type": "`$OBJECT`"
+            "merchant": {
+              "a": true,
+              "h": "Merchant",
+              "n": "merchant",
+              "r": false,
+              "t": "`$OBJECT`"
             },
-            {
-              "active": true,
-              "name": "sales",
-              "req": false,
-              "type": "`$INTEGER`"
+            "sales": {
+              "a": true,
+              "h": "Sales",
+              "n": "sales",
+              "r": false,
+              "t": "`$INTEGER`"
             }
-          ],
+          },
           "name": "conversion_detail_merchant",
           "op": {
             "list": {
@@ -184,53 +260,61 @@
               "name": "list",
               "points": [
                 {
-                  "active": true,
-                  "args": {
+                  "a": true,
+                  "co": {
+                    "id": "GET /v2/conversion/detail/merchant",
+                    "source": "openapi3",
+                    "version": 2
+                  },
+                  "g": {
                     "query": [
                       {
-                        "active": true,
-                        "kind": "query",
-                        "name": "format",
-                        "orig": "format",
-                        "reqd": true,
-                        "type": "`$STRING`"
+                        "a": true,
+                        "k": "query",
+                        "n": "format",
+                        "or": "format",
+                        "r": true,
+                        "t": "`$STRING`"
                       },
                       {
-                        "active": true,
-                        "kind": "query",
-                        "name": "from",
-                        "orig": "from",
-                        "reqd": true,
-                        "type": "`$STRING`"
+                        "a": true,
+                        "k": "query",
+                        "n": "from",
+                        "or": "from",
+                        "r": true,
+                        "t": "`$STRING`"
                       },
                       {
-                        "active": true,
-                        "kind": "query",
-                        "name": "market",
-                        "orig": "market",
-                        "reqd": false,
-                        "type": "`$STRING`"
+                        "a": true,
+                        "k": "query",
+                        "n": "market",
+                        "or": "market",
+                        "r": false,
+                        "t": "`$STRING`"
                       },
                       {
-                        "active": true,
-                        "kind": "query",
-                        "name": "to",
-                        "orig": "to",
-                        "reqd": true,
-                        "type": "`$STRING`"
+                        "a": true,
+                        "k": "query",
+                        "n": "to",
+                        "or": "to",
+                        "r": true,
+                        "t": "`$STRING`"
                       }
                     ]
                   },
-                  "contract": {
-                    "id": "GET /v2/conversion/detail/merchant",
-                    "json": "{\"operationId\":\"getConversionDetailMerchant\",\"parameters\":[{\"description\":\"Market to search. You will receive a list with valid Markets along with your account information and keys.\",\"in\":\"query\",\"name\":\"market\",\"required\":false,\"schema\":{\"format\":\"ISO 3166 Alpha-2\",\"type\":\"string\"}},{\"description\":\"Starting date for which to generate the report. This parameter has to be in format `YYYY-mm-dd`\",\"in\":\"query\",\"name\":\"from\",\"required\":true,\"schema\":{\"format\":\"date\",\"type\":\"string\"}},{\"description\":\"Ending date for which to generate the report. This parameter has to be in format `YYYY-mm-dd`\",\"in\":\"query\",\"name\":\"to\",\"required\":true,\"schema\":{\"format\":\"date\",\"type\":\"string\"}},{\"description\":\"A format to generate the reports. Available formats are `json` and `csv`.\",\"in\":\"query\",\"name\":\"format\",\"required\":true,\"schema\":{\"enum\":[\"json\",\"csv\"],\"type\":\"string\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"date\":{\"properties\":{\"from\":{\"format\":\"date\",\"type\":\"string\"},\"to\":{\"format\":\"date\",\"type\":\"string\"}},\"type\":\"object\"},\"salesByMerchant\":{\"items\":{\"properties\":{\"clicks\":{\"example\":16,\"type\":\"integer\"},\"market\":{\"description\":\"Two character form of a country, in all lower-case\",\"example\":\"de\",\"format\":\"ISO 3166 Alpha-2\",\"pattern\":\"[A-Z]{2}\",\"type\":\"string\"},\"merchant\":{\"properties\":{\"id\":{\"type\":\"string\"},\"name\":{\"type\":\"string\"}},\"type\":\"object\"},\"sales\":{\"example\":42,\"type\":\"integer\"}},\"type\":\"object\"},\"minItems\":0,\"type\":\"array\"},\"total\":{\"properties\":{\"clicks\":{\"example\":16,\"type\":\"integer\"},\"sales\":{\"example\":42,\"type\":\"integer\"}},\"type\":\"object\"}},\"type\":\"object\"}},\"text/csv\":{\"schema\":{\"example\":\"merchant_id,merchant_name,sales\\n0000111122223333444455556666777788889999aaaabbbbccccddddeeeeffff,example.com,1337\\n1000111122223333444455556666777788889999aaaabbbbccccddddeeeeffff,example.com,163\\n\"}}},\"description\":\"Conversion Detail Merchant Response\"}},\"security\":[{\"ApiKeyAuth\":[]}],\"securitySchemes\":{\"ApiKeyAuth\":{\"description\":\"Your project's API-Key.\",\"in\":\"header\",\"name\":\"API-Key\",\"type\":\"apiKey\"}},\"securitySource\":\"operation\"}",
-                    "source": "openapi3",
-                    "version": 1
+                  "k": "http",
+                  "m": "GET",
+                  "o": "/v2/conversion/detail/merchant",
+                  "q": {
+                    "exist": [
+                      "format",
+                      "from",
+                      "market",
+                      "to"
+                    ]
                   },
-                  "kind": "http",
-                  "method": "GET",
-                  "orig": "/v2/conversion/detail/merchant",
-                  "segments": [
+                  "r": {},
+                  "s": [
                     {
                       "lit": "v2"
                     },
@@ -244,15 +328,7 @@
                       "lit": "merchant"
                     }
                   ],
-                  "select": {
-                    "exist": [
-                      "format",
-                      "from",
-                      "market",
-                      "to"
-                    ]
-                  },
-                  "transform": {
+                  "t": {
                     "req": "`reqdata`",
                     "res": "`body`"
                   }
@@ -269,26 +345,29 @@
           "alias": {
             "field": {}
           },
-          "fields": [
-            {
-              "active": true,
-              "name": "date",
-              "req": false,
-              "type": "`$OBJECT`"
+          "fields": {
+            "date": {
+              "a": true,
+              "h": "Date",
+              "n": "date",
+              "r": false,
+              "t": "`$OBJECT`"
             },
-            {
-              "active": true,
-              "name": "market",
-              "req": false,
-              "type": "`$OBJECT`"
+            "market": {
+              "a": true,
+              "h": "Market",
+              "n": "market",
+              "r": false,
+              "t": "`$OBJECT`"
             },
-            {
-              "active": true,
-              "name": "total",
-              "req": false,
-              "type": "`$OBJECT`"
+            "total": {
+              "a": true,
+              "h": "Total",
+              "n": "total",
+              "r": false,
+              "t": "`$OBJECT`"
             }
-          ],
+          },
           "name": "conversion_general",
           "op": {
             "load": {
@@ -296,45 +375,52 @@
               "name": "load",
               "points": [
                 {
-                  "active": true,
-                  "args": {
+                  "a": true,
+                  "co": {
+                    "id": "GET /v2/conversion/general",
+                    "source": "openapi3",
+                    "version": 2
+                  },
+                  "g": {
                     "query": [
                       {
-                        "active": true,
-                        "kind": "query",
-                        "name": "format",
-                        "orig": "format",
-                        "reqd": true,
-                        "type": "`$STRING`"
+                        "a": true,
+                        "k": "query",
+                        "n": "format",
+                        "or": "format",
+                        "r": true,
+                        "t": "`$STRING`"
                       },
                       {
-                        "active": true,
-                        "kind": "query",
-                        "name": "from",
-                        "orig": "from",
-                        "reqd": true,
-                        "type": "`$STRING`"
+                        "a": true,
+                        "k": "query",
+                        "n": "from",
+                        "or": "from",
+                        "r": true,
+                        "t": "`$STRING`"
                       },
                       {
-                        "active": true,
-                        "kind": "query",
-                        "name": "to",
-                        "orig": "to",
-                        "reqd": true,
-                        "type": "`$STRING`"
+                        "a": true,
+                        "k": "query",
+                        "n": "to",
+                        "or": "to",
+                        "r": true,
+                        "t": "`$STRING`"
                       }
                     ]
                   },
-                  "contract": {
-                    "id": "GET /v2/conversion/general",
-                    "json": "{\"operationId\":\"getConversionGeneral\",\"parameters\":[{\"description\":\"Starting date for which to generate the report. This parameter has to be in format `YYYY-mm-dd`\",\"in\":\"query\",\"name\":\"from\",\"required\":true,\"schema\":{\"format\":\"date\",\"type\":\"string\"}},{\"description\":\"Ending date for which to generate the report. This parameter has to be in format `YYYY-mm-dd`\",\"in\":\"query\",\"name\":\"to\",\"required\":true,\"schema\":{\"format\":\"date\",\"type\":\"string\"}},{\"description\":\"A format to generate the reports. Available formats are `json` and `csv`.\",\"in\":\"query\",\"name\":\"format\",\"required\":true,\"schema\":{\"enum\":[\"json\",\"csv\"],\"type\":\"string\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"date\":{\"properties\":{\"from\":{\"format\":\"date\",\"type\":\"string\"},\"to\":{\"format\":\"date\",\"type\":\"string\"}},\"type\":\"object\"},\"market\":{\"properties\":{\"ch\":{\"properties\":{\"total\":{\"properties\":{\"clickCount\":{\"example\":\"123\",\"type\":\"integer\"},\"sales\":{\"example\":\"42\",\"type\":\"integer\"}},\"type\":\"object\"}},\"type\":\"object\"},\"de\":{\"properties\":{\"total\":{\"properties\":{\"clickCount\":{\"example\":\"123\",\"type\":\"integer\"},\"sales\":{\"example\":\"42\",\"type\":\"integer\"}},\"type\":\"object\"}},\"type\":\"object\"}},\"type\":\"object\"},\"total\":{\"properties\":{\"clickCount\":{\"example\":\"123\",\"type\":\"integer\"},\"sales\":{\"example\":\"42\",\"type\":\"integer\"}},\"type\":\"object\"}},\"type\":\"object\"}},\"text/csv\":{\"schema\":{\"example\":\"\\\"market\\\",\\\"sales\\\"\\n\\\"de\\\",\\\"432\\\"\\n\\\"br\\\",\\\"23\\\"\\n\"}}},\"description\":\"Report General Response\"}},\"security\":[{\"ApiKeyAuth\":[]}],\"securitySchemes\":{\"ApiKeyAuth\":{\"description\":\"Your project's API-Key.\",\"in\":\"header\",\"name\":\"API-Key\",\"type\":\"apiKey\"}},\"securitySource\":\"operation\"}",
-                    "source": "openapi3",
-                    "version": 1
+                  "k": "http",
+                  "m": "GET",
+                  "o": "/v2/conversion/general",
+                  "q": {
+                    "exist": [
+                      "format",
+                      "from",
+                      "to"
+                    ]
                   },
-                  "kind": "http",
-                  "method": "GET",
-                  "orig": "/v2/conversion/general",
-                  "segments": [
+                  "r": {},
+                  "s": [
                     {
                       "lit": "v2"
                     },
@@ -345,14 +431,7 @@
                       "lit": "general"
                     }
                   ],
-                  "select": {
-                    "exist": [
-                      "format",
-                      "from",
-                      "to"
-                    ]
-                  },
-                  "transform": {
+                  "t": {
                     "req": "`reqdata`",
                     "res": "`body`"
                   }
@@ -369,14 +448,15 @@
           "alias": {
             "field": {}
           },
-          "fields": [
-            {
-              "active": true,
-              "name": "status",
-              "req": false,
-              "type": "`$STRING`"
+          "fields": {
+            "status": {
+              "a": true,
+              "h": "Status",
+              "n": "status",
+              "r": false,
+              "t": "`$STRING`"
             }
-          ],
+          },
           "name": "conversion_status",
           "op": {
             "load": {
@@ -384,29 +464,34 @@
               "name": "load",
               "points": [
                 {
-                  "active": true,
-                  "args": {
+                  "a": true,
+                  "co": {
+                    "id": "GET /v2/conversion/status",
+                    "source": "openapi3",
+                    "version": 2
+                  },
+                  "g": {
                     "query": [
                       {
-                        "active": true,
-                        "kind": "query",
-                        "name": "date",
-                        "orig": "date",
-                        "reqd": true,
-                        "type": "`$STRING`"
+                        "a": true,
+                        "k": "query",
+                        "n": "date",
+                        "or": "date",
+                        "r": true,
+                        "t": "`$STRING`"
                       }
                     ]
                   },
-                  "contract": {
-                    "id": "GET /v2/conversion/status",
-                    "json": "{\"operationId\":\"getConversionStatus\",\"parameters\":[{\"description\":\"Date for which to generate a report. This date is in the UTC timezone. This parameter has to be in format `YYYY-mm-dd`, for example `2018-01-31`.\",\"in\":\"query\",\"name\":\"date\",\"required\":true,\"schema\":{\"format\":\"date\",\"type\":\"string\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"status\":{\"enum\":[\"complete\",\"incomplete\"],\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Conversion Report Status Response\"}},\"security\":[{\"ApiKeyAuth\":[]}],\"securitySchemes\":{\"ApiKeyAuth\":{\"description\":\"Your project's API-Key.\",\"in\":\"header\",\"name\":\"API-Key\",\"type\":\"apiKey\"}},\"securitySource\":\"operation\"}",
-                    "source": "openapi3",
-                    "version": 1
+                  "k": "http",
+                  "m": "GET",
+                  "o": "/v2/conversion/status",
+                  "q": {
+                    "exist": [
+                      "date"
+                    ]
                   },
-                  "kind": "http",
-                  "method": "GET",
-                  "orig": "/v2/conversion/status",
-                  "segments": [
+                  "r": {},
+                  "s": [
                     {
                       "lit": "v2"
                     },
@@ -417,12 +502,7 @@
                       "lit": "status"
                     }
                   ],
-                  "select": {
-                    "exist": [
-                      "date"
-                    ]
-                  },
-                  "transform": {
+                  "t": {
                     "req": "`reqdata`",
                     "res": "`body`"
                   }
@@ -439,54 +519,61 @@
           "alias": {
             "field": {}
           },
-          "fields": [
-            {
-              "active": true,
-              "name": "deeplinks",
-              "req": false,
-              "type": "`$ARRAY`"
+          "fields": {
+            "deeplinks": {
+              "a": true,
+              "h": "Deeplinks",
+              "n": "deeplinks",
+              "r": false,
+              "t": "`$ARRAY`"
             },
-            {
-              "active": true,
-              "name": "found",
-              "req": false,
-              "type": "`$INTEGER`"
+            "found": {
+              "a": true,
+              "h": "Found",
+              "n": "found",
+              "r": false,
+              "t": "`$INTEGER`"
             },
-            {
-              "active": true,
-              "name": "isCouponing",
-              "req": false,
-              "short": "If your project has in parts couponing traffic, you must use this parameter to tell the API if the click is a couponing click or not.",
-              "type": "`$BOOLEAN`"
+            "isCouponing": {
+              "a": true,
+              "h": "Is Couponing",
+              "n": "isCouponing",
+              "r": false,
+              "sh": "If your project has in parts couponing traffic, you must use this parameter to tell the API if the click is a couponing click or not.",
+              "t": "`$BOOLEAN`"
             },
-            {
-              "active": true,
-              "name": "market",
-              "req": true,
-              "short": "The market to query.",
-              "type": "`$STRING`"
+            "market": {
+              "a": true,
+              "h": "Market",
+              "n": "market",
+              "r": true,
+              "sh": "The market to query.",
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "name": "placementId",
-              "req": false,
-              "short": "Your own subID for your click-tracking.",
-              "type": "`$STRING`"
+            "placementId": {
+              "a": true,
+              "h": "Placement Id",
+              "n": "placementId",
+              "r": false,
+              "sh": "Your own subID for your click-tracking.",
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "name": "total",
-              "req": false,
-              "type": "`$INTEGER`"
+            "total": {
+              "a": true,
+              "h": "Total",
+              "n": "total",
+              "r": false,
+              "t": "`$INTEGER`"
             },
-            {
-              "active": true,
-              "name": "urls",
-              "req": true,
-              "short": "An array of URLs",
-              "type": "`$ARRAY`"
+            "urls": {
+              "a": true,
+              "h": "Urls",
+              "n": "urls",
+              "r": true,
+              "sh": "An array of URLs",
+              "t": "`$ARRAY`"
             }
-          ],
+          },
           "name": "deeplink",
           "op": {
             "create": {
@@ -494,18 +581,19 @@
               "name": "create",
               "points": [
                 {
-                  "active": true,
-                  "args": {},
-                  "contract": {
+                  "a": true,
+                  "co": {
                     "id": "POST /v2/deeplink",
-                    "json": "{\"operationId\":\"postDeeplink\",\"parameters\":[],\"protocol\":\"http\",\"requestBody\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"isCouponing\":{\"description\":\"If your project has in parts couponing traffic, you must use this parameter to tell the API if the click is a couponing click or not. If you don’t use this parameter when your project is labeled _“mixed”_ your traffic will not get paid. If you want to find out the label, please ask your account manager. You only must use this parameter if you have mixed traffic. If you have either couponing or no couponing traffic, this parameter is not important for you.\\n\",\"name\":\"isCouponing\",\"required\":false,\"type\":\"boolean\"},\"market\":{\"description\":\"The market to query.\",\"required\":true,\"type\":\"string\"},\"placementId\":{\"description\":\"Your own subID for your click-tracking. Must be at most 128 characters long. Only printable ASCII-characters are allowed. Defaults to null.\",\"required\":false,\"type\":\"string\"},\"urls\":{\"description\":\"An array of URLs\",\"items\":{\"properties\":{\"url\":{\"type\":\"string\"}},\"type\":\"object\"},\"required\":true,\"type\":\"array\"}},\"type\":\"object\"}}},\"required\":true},\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"result\":{\"properties\":{\"deeplinks\":{\"items\":{\"properties\":{\"clickUrl\":{\"description\":\"The clickUrl is only valid for 14 days.\",\"nullable\":true,\"type\":\"string\"},\"estimatedCpc\":{\"properties\":{\"amount\":{\"nullable\":true,\"type\":\"string\"},\"currency\":{\"nullable\":true,\"type\":\"string\"}},\"type\":\"object\"},\"found\":{\"type\":\"boolean\"},\"merchant\":{\"nullable\":true,\"properties\":{\"logo\":{\"properties\":{\"exists\":{\"type\":\"boolean\"},\"url\":{\"type\":\"string\"}},\"type\":\"object\"}},\"type\":\"object\"},\"url\":{\"type\":\"string\"}},\"type\":\"object\"},\"type\":\"array\"},\"found\":{\"type\":\"integer\"},\"total\":{\"type\":\"integer\"}},\"type\":\"object\"}},\"type\":\"object\"}}},\"description\":\"Deeplink Response\"}},\"security\":[{\"ApiKeyAuth\":[]}],\"securitySchemes\":{\"ApiKeyAuth\":{\"description\":\"Your project's API-Key.\",\"in\":\"header\",\"name\":\"API-Key\",\"type\":\"apiKey\"}},\"securitySource\":\"operation\"}",
                     "source": "openapi3",
-                    "version": 1
+                    "version": 2
                   },
-                  "kind": "http",
-                  "method": "POST",
-                  "orig": "/v2/deeplink",
-                  "segments": [
+                  "g": {},
+                  "k": "http",
+                  "m": "POST",
+                  "o": "/v2/deeplink",
+                  "q": {},
+                  "r": {},
+                  "s": [
                     {
                       "lit": "v2"
                     },
@@ -513,8 +601,7 @@
                       "lit": "deeplink"
                     }
                   ],
-                  "select": {},
-                  "transform": {
+                  "t": {
                     "req": "`reqdata`",
                     "res": "`body.result`"
                   }
@@ -531,66 +618,75 @@
           "alias": {
             "field": {}
           },
-          "fields": [
-            {
-              "active": true,
-              "name": "deeplinkCount",
-              "req": false,
-              "short": "Even when a merchant has no deeplinks, it might still have smartlinks.",
-              "type": "`$INTEGER`"
+          "fields": {
+            "deeplinkCount": {
+              "a": true,
+              "h": "Deeplink Count",
+              "n": "deeplinkCount",
+              "r": false,
+              "sh": "Even when a merchant has no deeplinks, it might still have smartlinks.",
+              "t": "`$INTEGER`"
             },
-            {
-              "active": true,
-              "name": "estimatedCpc",
-              "req": false,
-              "type": "`$OBJECT`"
+            "estimatedCpc": {
+              "a": true,
+              "h": "Estimated Cpc",
+              "n": "estimatedCpc",
+              "r": false,
+              "t": "`$OBJECT`"
             },
-            {
-              "active": true,
-              "name": "hasExternalHomepage",
-              "req": false,
-              "short": "If the merchant accept homepage deeplinks.",
-              "type": "`$BOOLEAN`"
+            "hasExternalHomepage": {
+              "a": true,
+              "h": "Has External Homepage",
+              "n": "hasExternalHomepage",
+              "r": false,
+              "sh": "If the merchant accept homepage deeplinks.",
+              "t": "`$BOOLEAN`"
             },
-            {
-              "active": true,
-              "name": "hasSmartlinkHomepage",
-              "req": false,
-              "short": "If the merchant accept homepage smartlinks.",
-              "type": "`$BOOLEAN`"
+            "hasSmartlinkHomepage": {
+              "a": true,
+              "h": "Has Smartlink Homepage",
+              "n": "hasSmartlinkHomepage",
+              "r": false,
+              "sh": "If the merchant accept homepage smartlinks.",
+              "t": "`$BOOLEAN`"
             },
-            {
-              "active": true,
-              "name": "id",
-              "req": false,
-              "type": "`$STRING`"
+            "id": {
+              "a": true,
+              "h": "Id",
+              "n": "id",
+              "r": false,
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "name": "isSmartlink",
-              "req": false,
-              "short": "If the merchant has one or more smartlinks.",
-              "type": "`$BOOLEAN`"
+            "isSmartlink": {
+              "a": true,
+              "h": "Is Smartlink",
+              "n": "isSmartlink",
+              "r": false,
+              "sh": "If the merchant has one or more smartlinks.",
+              "t": "`$BOOLEAN`"
             },
-            {
-              "active": true,
-              "name": "logo",
-              "req": false,
-              "type": "`$OBJECT`"
+            "logo": {
+              "a": true,
+              "h": "Logo",
+              "n": "logo",
+              "r": false,
+              "t": "`$OBJECT`"
             },
-            {
-              "active": true,
-              "name": "name",
-              "req": false,
-              "type": "`$STRING`"
+            "name": {
+              "a": true,
+              "h": "Name",
+              "n": "name",
+              "r": false,
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "name": "trafficTypes",
-              "req": false,
-              "type": "`$ARRAY`"
+            "trafficTypes": {
+              "a": true,
+              "h": "Traffic Types",
+              "n": "trafficTypes",
+              "r": false,
+              "t": "`$ARRAY`"
             }
-          ],
+          },
           "id": {
             "field": "id",
             "name": "id"
@@ -602,53 +698,61 @@
               "name": "list",
               "points": [
                 {
-                  "active": true,
-                  "args": {
+                  "a": true,
+                  "co": {
+                    "id": "GET /v2/deeplink/merchant",
+                    "source": "openapi3",
+                    "version": 2
+                  },
+                  "g": {
                     "query": [
                       {
-                        "active": true,
-                        "kind": "query",
-                        "name": "has_homepage",
-                        "orig": "has_homepage",
-                        "reqd": false,
-                        "type": "`$BOOLEAN`"
+                        "a": true,
+                        "k": "query",
+                        "n": "has_homepage",
+                        "or": "has_homepage",
+                        "r": false,
+                        "t": "`$BOOLEAN`"
                       },
                       {
-                        "active": true,
-                        "kind": "query",
-                        "name": "is_couponing",
-                        "orig": "is_couponing",
-                        "reqd": false,
-                        "type": "`$BOOLEAN`"
+                        "a": true,
+                        "k": "query",
+                        "n": "is_couponing",
+                        "or": "is_couponing",
+                        "r": false,
+                        "t": "`$BOOLEAN`"
                       },
                       {
-                        "active": true,
-                        "kind": "query",
-                        "name": "is_smartlink",
-                        "orig": "is_smartlink",
-                        "reqd": false,
-                        "type": "`$BOOLEAN`"
+                        "a": true,
+                        "k": "query",
+                        "n": "is_smartlink",
+                        "or": "is_smartlink",
+                        "r": false,
+                        "t": "`$BOOLEAN`"
                       },
                       {
-                        "active": true,
-                        "kind": "query",
-                        "name": "market",
-                        "orig": "market",
-                        "reqd": true,
-                        "type": "`$STRING`"
+                        "a": true,
+                        "k": "query",
+                        "n": "market",
+                        "or": "market",
+                        "r": true,
+                        "t": "`$STRING`"
                       }
                     ]
                   },
-                  "contract": {
-                    "id": "GET /v2/deeplink/merchant",
-                    "json": "{\"operationId\":\"getDeeplinkMerchant\",\"parameters\":[{\"description\":\"Market to search. You can get the markets you are activated for with the Markets API.\",\"in\":\"query\",\"name\":\"market\",\"required\":true,\"schema\":{\"type\":\"string\"}},{\"description\":\"Set to 1 to limit results to smartlink merchants only. If omitted, you will get results for all merchants.\",\"in\":\"query\",\"name\":\"isSmartlink\",\"required\":false,\"schema\":{\"type\":\"string\"}},{\"description\":\"Set to 1 to limit results to homepage merchants only. If omitted, you will get results for all merchants.\",\"in\":\"query\",\"name\":\"hasHomepage\",\"required\":false,\"schema\":{\"type\":\"string\"}},{\"description\":\"If your project has mixed traffic, you can filter the merchants by using this parameter.\",\"in\":\"query\",\"name\":\"isCouponing\",\"required\":false,\"schema\":{\"type\":\"boolean\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"merchants\":{\"items\":{\"properties\":{\"deeplinkCount\":{\"description\":\"Even when a merchant has no deeplinks, it might still have smartlinks.\",\"type\":\"integer\"},\"estimatedCpc\":{\"properties\":{\"amount\":{\"nullable\":true,\"type\":\"string\"},\"currency\":{\"nullable\":true,\"type\":\"string\"}},\"type\":\"object\"},\"hasExternalHomepage\":{\"description\":\"If the merchant accept homepage deeplinks.\",\"type\":\"boolean\"},\"hasSmartlinkHomepage\":{\"description\":\"If the merchant accept homepage smartlinks.\",\"type\":\"boolean\"},\"id\":{\"type\":\"string\"},\"isSmartlink\":{\"description\":\"If the merchant has one or more smartlinks.\",\"type\":\"boolean\"},\"logo\":{\"properties\":{\"exists\":{\"type\":\"boolean\"},\"url\":{\"type\":\"string\"}},\"type\":\"object\"},\"name\":{\"type\":\"string\"},\"trafficTypes\":{\"items\":{\"properties\":{\"permission\":{\"enum\":[\"not_allowed\",\"allowed\"],\"type\":\"string\"},\"type\":{\"type\":\"string\"}},\"type\":\"object\"},\"type\":\"array\"}},\"type\":\"object\"},\"type\":\"array\"},\"total\":{\"type\":\"integer\"}},\"type\":\"object\"}}},\"description\":\"Deeplink Merchant Response\"}},\"security\":[{\"ApiKeyAuth\":[]}],\"securitySchemes\":{\"ApiKeyAuth\":{\"description\":\"Your project's API-Key.\",\"in\":\"header\",\"name\":\"API-Key\",\"type\":\"apiKey\"}},\"securitySource\":\"operation\"}",
-                    "source": "openapi3",
-                    "version": 1
+                  "k": "http",
+                  "m": "GET",
+                  "o": "/v2/deeplink/merchant",
+                  "q": {
+                    "exist": [
+                      "has_homepage",
+                      "is_couponing",
+                      "is_smartlink",
+                      "market"
+                    ]
                   },
-                  "kind": "http",
-                  "method": "GET",
-                  "orig": "/v2/deeplink/merchant",
-                  "segments": [
+                  "r": {},
+                  "s": [
                     {
                       "lit": "v2"
                     },
@@ -659,15 +763,7 @@
                       "lit": "merchant"
                     }
                   ],
-                  "select": {
-                    "exist": [
-                      "has_homepage",
-                      "is_couponing",
-                      "is_smartlink",
-                      "market"
-                    ]
-                  },
-                  "transform": {
+                  "t": {
                     "req": "`reqdata`",
                     "res": "`body.merchants`"
                   }
@@ -684,7 +780,7 @@
           "alias": {
             "field": {}
           },
-          "fields": [],
+          "fields": {},
           "name": "dnt",
           "op": {
             "load": {
@@ -692,85 +788,76 @@
               "name": "load",
               "points": [
                 {
-                  "active": true,
-                  "args": {
+                  "a": true,
+                  "co": {
+                    "id": "GET /v2/d",
+                    "source": "openapi3",
+                    "version": 2
+                  },
+                  "g": {
                     "query": [
                       {
-                        "active": true,
-                        "kind": "query",
-                        "name": "callback_url",
-                        "orig": "callback_url",
-                        "reqd": false,
-                        "type": "`$STRING`"
+                        "a": true,
+                        "k": "query",
+                        "n": "callback_url",
+                        "or": "callback_url",
+                        "r": false,
+                        "t": "`$STRING`"
                       },
                       {
-                        "active": true,
-                        "kind": "query",
-                        "name": "is_couponing",
-                        "orig": "is_couponing",
-                        "reqd": false,
-                        "type": "`$BOOLEAN`"
+                        "a": true,
+                        "k": "query",
+                        "n": "is_couponing",
+                        "or": "is_couponing",
+                        "r": false,
+                        "t": "`$BOOLEAN`"
                       },
                       {
-                        "active": true,
-                        "kind": "query",
-                        "name": "market",
-                        "orig": "market",
-                        "reqd": true,
-                        "type": "`$STRING`"
+                        "a": true,
+                        "k": "query",
+                        "n": "market",
+                        "or": "market",
+                        "r": true,
+                        "t": "`$STRING`"
                       },
                       {
-                        "active": true,
-                        "kind": "query",
-                        "name": "merchant_id",
-                        "orig": "merchant_id",
-                        "reqd": false,
-                        "type": "`$STRING`"
+                        "a": true,
+                        "k": "query",
+                        "n": "merchant_id",
+                        "or": "merchant_id",
+                        "r": false,
+                        "t": "`$STRING`"
                       },
                       {
-                        "active": true,
-                        "kind": "query",
-                        "name": "placement_id",
-                        "orig": "placement_id",
-                        "reqd": false,
-                        "type": "`$STRING`"
+                        "a": true,
+                        "k": "query",
+                        "n": "placement_id",
+                        "or": "placement_id",
+                        "r": false,
+                        "t": "`$STRING`"
                       },
                       {
-                        "active": true,
-                        "kind": "query",
-                        "name": "project_id",
-                        "orig": "project_id",
-                        "reqd": true,
-                        "type": "`$STRING`"
+                        "a": true,
+                        "k": "query",
+                        "n": "project_id",
+                        "or": "project_id",
+                        "r": true,
+                        "t": "`$STRING`"
                       },
                       {
-                        "active": true,
-                        "kind": "query",
-                        "name": "url",
-                        "orig": "url",
-                        "reqd": true,
-                        "type": "`$STRING`"
+                        "a": true,
+                        "k": "query",
+                        "n": "url",
+                        "or": "url",
+                        "r": true,
+                        "t": "`$STRING`"
                       }
                     ]
                   },
-                  "contract": {
-                    "id": "GET /v2/d",
-                    "json": "{\"operationId\":\"doDirectRedirect\",\"parameters\":[{\"description\":\"URL of shop to redirect to. Please copy & paste the URL in this field exactly how it is displayed in the browser.\",\"in\":\"query\",\"name\":\"url\",\"required\":true,\"schema\":{\"type\":\"string\"}},{\"description\":\"The URL to where requests with errors will be redirected to. The callbackUrl has to be whitelisted. If you want to use a callbackUrl please send your URL to your Yadore contact. Omitting this parameter will result in a 404 for results with errors.\",\"in\":\"query\",\"name\":\"callbackUrl\",\"required\":false,\"schema\":{\"type\":\"string\"}},{\"description\":\"Market to search. You can get the markets you are activated for with the Markets API.\",\"in\":\"query\",\"name\":\"market\",\"required\":true,\"schema\":{\"type\":\"string\"}},{\"description\":\"Merchant ID to filter the offers. You can use this parameter to narrow the results. If omitted, you will get offers for all merchants.\",\"in\":\"query\",\"name\":\"merchantId\",\"required\":false,\"schema\":{\"type\":\"string\"}},{\"description\":\"Your own subID for your click-tracking. Must be at most 128 characters long. Only printable ASCII-characters are allowed. Defaults to `null`.\",\"in\":\"query\",\"name\":\"placementId\",\"required\":false,\"schema\":{\"type\":\"string\"}},{\"description\":\"Your project ID, ask your account manager for your specific project ID.\",\"in\":\"query\",\"name\":\"projectId\",\"required\":true,\"schema\":{\"type\":\"string\"}},{\"description\":\"If your project has in parts couponing traffic, you must use this parameter to tell the API if the click is a couponing click or not. If you don’t use this parameter when your project is labeled _“mixed”_ your traffic will not get paid. If you want to find out the label, please ask your account manager. You only must use this parameter if you have mixed traffic. If you have either couponing or no couponing traffic, this parameter is not important for you.\\n\",\"in\":\"query\",\"name\":\"isCouponing\",\"required\":false,\"schema\":{\"type\":\"boolean\"}}],\"protocol\":\"http\",\"responses\":{\"302\":{\"description\":\"A redirect to the target shop website.\"},\"404\":{\"description\":\"An error occured and there was no callbackUrl.\"}},\"security\":[{\"ApiKeyAuth\":[]}],\"securitySchemes\":{\"ApiKeyAuth\":{\"description\":\"Your project's API-Key.\",\"in\":\"header\",\"name\":\"API-Key\",\"type\":\"apiKey\"}},\"securitySource\":\"operation\"}",
-                    "source": "openapi3",
-                    "version": 1
-                  },
-                  "kind": "http",
-                  "method": "GET",
-                  "orig": "/v2/d",
-                  "segments": [
-                    {
-                      "lit": "v2"
-                    },
-                    {
-                      "lit": "d"
-                    }
-                  ],
-                  "select": {
+                  "k": "http",
+                  "m": "GET",
+                  "o": "/v2/d",
+                  "q": {
                     "exist": [
                       "callback_url",
                       "is_couponing",
@@ -781,7 +868,16 @@
                       "url"
                     ]
                   },
-                  "transform": {
+                  "r": {},
+                  "s": [
+                    {
+                      "lit": "v2"
+                    },
+                    {
+                      "lit": "d"
+                    }
+                  ],
+                  "t": {
                     "req": "`reqdata`",
                     "res": "`body`"
                   }
@@ -798,14 +894,15 @@
           "alias": {
             "field": {}
           },
-          "fields": [
-            {
-              "active": true,
-              "name": "id",
-              "req": false,
-              "type": "`$STRING`"
+          "fields": {
+            "id": {
+              "a": true,
+              "h": "Id",
+              "n": "id",
+              "r": false,
+              "t": "`$STRING`"
             }
-          ],
+          },
           "id": {
             "field": "id",
             "name": "id"
@@ -817,18 +914,19 @@
               "name": "list",
               "points": [
                 {
-                  "active": true,
-                  "args": {},
-                  "contract": {
+                  "a": true,
+                  "co": {
                     "id": "GET /v2/markets",
-                    "json": "{\"operationId\":\"getMarketsList\",\"parameters\":[],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"markets\":{\"items\":{\"properties\":{\"id\":{\"type\":\"string\"}},\"type\":\"object\"},\"type\":\"array\"}},\"type\":\"object\"}}},\"description\":\"Market List Response\"}},\"security\":[{\"ApiKeyAuth\":[]}],\"securitySchemes\":{\"ApiKeyAuth\":{\"description\":\"Your project's API-Key.\",\"in\":\"header\",\"name\":\"API-Key\",\"type\":\"apiKey\"}},\"securitySource\":\"operation\"}",
                     "source": "openapi3",
-                    "version": 1
+                    "version": 2
                   },
-                  "kind": "http",
-                  "method": "GET",
-                  "orig": "/v2/markets",
-                  "segments": [
+                  "g": {},
+                  "k": "http",
+                  "m": "GET",
+                  "o": "/v2/markets",
+                  "q": {},
+                  "r": {},
+                  "s": [
                     {
                       "lit": "v2"
                     },
@@ -836,8 +934,7 @@
                       "lit": "markets"
                     }
                   ],
-                  "select": {},
-                  "transform": {
+                  "t": {
                     "req": "`reqdata`",
                     "res": "`body.markets`"
                   }
@@ -854,38 +951,43 @@
           "alias": {
             "field": {}
           },
-          "fields": [
-            {
-              "active": true,
-              "name": "id",
-              "req": false,
-              "type": "`$STRING`"
+          "fields": {
+            "id": {
+              "a": true,
+              "h": "Id",
+              "n": "id",
+              "r": false,
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "name": "logo",
-              "req": false,
-              "type": "`$OBJECT`"
+            "logo": {
+              "a": true,
+              "h": "Logo",
+              "n": "logo",
+              "r": false,
+              "t": "`$OBJECT`"
             },
-            {
-              "active": true,
-              "name": "name",
-              "req": false,
-              "type": "`$STRING`"
+            "name": {
+              "a": true,
+              "h": "Name",
+              "n": "name",
+              "r": false,
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "name": "offerCount",
-              "req": false,
-              "type": "`$INTEGER`"
+            "offerCount": {
+              "a": true,
+              "h": "Offer Count",
+              "n": "offerCount",
+              "r": false,
+              "t": "`$INTEGER`"
             },
-            {
-              "active": true,
-              "name": "trafficTypes",
-              "req": false,
-              "type": "`$ARRAY`"
+            "trafficTypes": {
+              "a": true,
+              "h": "Traffic Types",
+              "n": "trafficTypes",
+              "r": false,
+              "t": "`$ARRAY`"
             }
-          ],
+          },
           "id": {
             "field": "id",
             "name": "id"
@@ -897,37 +999,43 @@
               "name": "list",
               "points": [
                 {
-                  "active": true,
-                  "args": {
+                  "a": true,
+                  "co": {
+                    "id": "GET /v2/merchant",
+                    "source": "openapi3",
+                    "version": 2
+                  },
+                  "g": {
                     "query": [
                       {
-                        "active": true,
-                        "kind": "query",
-                        "name": "is_couponing",
-                        "orig": "is_couponing",
-                        "reqd": false,
-                        "type": "`$BOOLEAN`"
+                        "a": true,
+                        "k": "query",
+                        "n": "is_couponing",
+                        "or": "is_couponing",
+                        "r": false,
+                        "t": "`$BOOLEAN`"
                       },
                       {
-                        "active": true,
-                        "kind": "query",
-                        "name": "market",
-                        "orig": "market",
-                        "reqd": true,
-                        "type": "`$STRING`"
+                        "a": true,
+                        "k": "query",
+                        "n": "market",
+                        "or": "market",
+                        "r": true,
+                        "t": "`$STRING`"
                       }
                     ]
                   },
-                  "contract": {
-                    "id": "GET /v2/merchant",
-                    "json": "{\"operationId\":\"getMerchant\",\"parameters\":[{\"description\":\"Market to search. You can get the markets you are activated for with the Markets API.\",\"in\":\"query\",\"name\":\"market\",\"required\":true,\"schema\":{\"type\":\"string\"}},{\"description\":\"If your project has mixed traffic, you can filter the merchants by using this parameter.\",\"in\":\"query\",\"name\":\"isCouponing\",\"required\":false,\"schema\":{\"type\":\"boolean\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"merchants\":{\"items\":{\"properties\":{\"id\":{\"type\":\"string\"},\"logo\":{\"properties\":{\"exists\":{\"type\":\"boolean\"},\"url\":{\"type\":\"string\"}},\"type\":\"object\"},\"name\":{\"type\":\"string\"},\"offerCount\":{\"type\":\"integer\"},\"trafficTypes\":{\"items\":{\"properties\":{\"permission\":{\"enum\":[\"not_allowed\",\"allowed\"],\"type\":\"string\"},\"type\":{\"type\":\"string\"}},\"type\":\"object\"},\"type\":\"array\"}},\"type\":\"object\"},\"type\":\"array\"},\"total\":{\"type\":\"integer\"}},\"type\":\"object\"}}},\"description\":\"Merchant Response\"}},\"security\":[{\"ApiKeyAuth\":[]}],\"securitySchemes\":{\"ApiKeyAuth\":{\"description\":\"Your project's API-Key.\",\"in\":\"header\",\"name\":\"API-Key\",\"type\":\"apiKey\"}},\"securitySource\":\"operation\"}",
-                    "source": "openapi3",
-                    "version": 1
+                  "k": "http",
+                  "m": "GET",
+                  "o": "/v2/merchant",
+                  "q": {
+                    "exist": [
+                      "is_couponing",
+                      "market"
+                    ]
                   },
-                  "kind": "http",
-                  "method": "GET",
-                  "orig": "/v2/merchant",
-                  "segments": [
+                  "r": {},
+                  "s": [
                     {
                       "lit": "v2"
                     },
@@ -935,13 +1043,7 @@
                       "lit": "merchant"
                     }
                   ],
-                  "select": {
-                    "exist": [
-                      "is_couponing",
-                      "market"
-                    ]
-                  },
-                  "transform": {
+                  "t": {
                     "req": "`reqdata`",
                     "res": "`body.merchants`"
                   }
@@ -958,111 +1060,128 @@
           "alias": {
             "field": {}
           },
-          "fields": [
-            {
-              "active": true,
-              "name": "availability",
-              "req": false,
-              "type": "`$STRING`"
+          "fields": {
+            "availability": {
+              "a": true,
+              "h": "Availability",
+              "n": "availability",
+              "r": false,
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "name": "brand",
-              "req": false,
-              "type": "`$STRING`"
+            "brand": {
+              "a": true,
+              "h": "Brand",
+              "n": "brand",
+              "r": false,
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "name": "clickUrl",
-              "req": false,
-              "type": "`$STRING`"
+            "clickUrl": {
+              "a": true,
+              "h": "Click Url",
+              "n": "clickUrl",
+              "r": false,
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "name": "description",
-              "req": false,
-              "type": "`$STRING`"
+            "description": {
+              "a": true,
+              "h": "Description",
+              "n": "description",
+              "r": false,
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "name": "eer",
-              "req": false,
-              "type": "`$STRING`"
+            "eer": {
+              "a": true,
+              "h": "Eer",
+              "n": "eer",
+              "r": false,
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "name": "estimatedCpc",
-              "req": false,
-              "short": "estimatedCPC means the gross revenue per click Yadore gets from its merchants, you have to use your revenue share to get your estimatedCPC.",
-              "type": "`$OBJECT`"
+            "estimatedCpc": {
+              "a": true,
+              "h": "Estimated Cpc",
+              "n": "estimatedCpc",
+              "r": false,
+              "sh": "estimatedCPC means the gross revenue per click Yadore gets from its merchants, you have to use your revenue share to get your estimatedCPC.",
+              "t": "`$OBJECT`"
             },
-            {
-              "active": true,
-              "name": "id",
-              "req": false,
-              "type": "`$STRING`"
+            "id": {
+              "a": true,
+              "h": "Id",
+              "n": "id",
+              "r": false,
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "name": "image",
-              "req": false,
-              "type": "`$OBJECT`"
+            "image": {
+              "a": true,
+              "h": "Image",
+              "n": "image",
+              "r": false,
+              "t": "`$OBJECT`"
             },
-            {
-              "active": true,
-              "name": "merchant",
-              "req": false,
-              "type": "`$OBJECT`"
+            "merchant": {
+              "a": true,
+              "h": "Merchant",
+              "n": "merchant",
+              "r": false,
+              "t": "`$OBJECT`"
             },
-            {
-              "active": true,
-              "name": "originalPrice",
-              "req": false,
-              "type": "`$OBJECT`"
+            "originalPrice": {
+              "a": true,
+              "h": "Original Price",
+              "n": "originalPrice",
+              "r": false,
+              "t": "`$OBJECT`"
             },
-            {
-              "active": true,
-              "name": "price",
-              "req": false,
-              "type": "`$OBJECT`"
+            "price": {
+              "a": true,
+              "h": "Price",
+              "n": "price",
+              "r": false,
+              "t": "`$OBJECT`"
             },
-            {
-              "active": true,
-              "name": "promoText",
-              "req": false,
-              "type": "`$STRING`"
+            "promoText": {
+              "a": true,
+              "h": "Promo Text",
+              "n": "promoText",
+              "r": false,
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "name": "shippingPrice",
-              "req": false,
-              "type": "`$OBJECT`"
+            "shippingPrice": {
+              "a": true,
+              "h": "Shipping Price",
+              "n": "shippingPrice",
+              "r": false,
+              "t": "`$OBJECT`"
             },
-            {
-              "active": true,
-              "name": "shippingTime",
-              "req": false,
-              "type": "`$OBJECT`"
+            "shippingTime": {
+              "a": true,
+              "h": "Shipping Time",
+              "n": "shippingTime",
+              "r": false,
+              "t": "`$OBJECT`"
             },
-            {
-              "active": true,
-              "name": "thumbnail",
-              "req": false,
-              "type": "`$OBJECT`"
+            "thumbnail": {
+              "a": true,
+              "h": "Thumbnail",
+              "n": "thumbnail",
+              "r": false,
+              "t": "`$OBJECT`"
             },
-            {
-              "active": true,
-              "name": "title",
-              "req": false,
-              "type": "`$STRING`"
+            "title": {
+              "a": true,
+              "h": "Title",
+              "n": "title",
+              "r": false,
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "name": "unitPrice",
-              "req": false,
-              "type": "`$OBJECT`"
+            "unitPrice": {
+              "a": true,
+              "h": "Unit Price",
+              "n": "unitPrice",
+              "r": false,
+              "t": "`$OBJECT`"
             }
-          ],
+          },
           "id": {
             "field": "id",
             "name": "id"
@@ -1074,111 +1193,102 @@
               "name": "list",
               "points": [
                 {
-                  "active": true,
-                  "args": {
+                  "a": true,
+                  "co": {
+                    "id": "GET /v2/offer",
+                    "source": "openapi3",
+                    "version": 2
+                  },
+                  "g": {
                     "query": [
                       {
-                        "active": true,
-                        "kind": "query",
-                        "name": "ean",
-                        "orig": "ean",
-                        "reqd": false,
-                        "type": "`$STRING`"
+                        "a": true,
+                        "k": "query",
+                        "n": "ean",
+                        "or": "ean",
+                        "r": false,
+                        "t": "`$STRING`"
                       },
                       {
-                        "active": true,
-                        "kind": "query",
-                        "name": "is_couponing",
-                        "orig": "is_couponing",
-                        "reqd": false,
-                        "type": "`$BOOLEAN`"
+                        "a": true,
+                        "k": "query",
+                        "n": "is_couponing",
+                        "or": "is_couponing",
+                        "r": false,
+                        "t": "`$BOOLEAN`"
                       },
                       {
-                        "active": true,
-                        "kind": "query",
-                        "name": "keyword",
-                        "orig": "keyword",
-                        "reqd": false,
-                        "type": "`$STRING`"
+                        "a": true,
+                        "k": "query",
+                        "n": "keyword",
+                        "or": "keyword",
+                        "r": false,
+                        "t": "`$STRING`"
                       },
                       {
-                        "active": true,
-                        "kind": "query",
-                        "name": "limit",
-                        "orig": "limit",
-                        "reqd": false,
-                        "type": "`$INTEGER`"
+                        "a": true,
+                        "k": "query",
+                        "n": "limit",
+                        "or": "limit",
+                        "r": false,
+                        "t": "`$INTEGER`"
                       },
                       {
-                        "active": true,
-                        "kind": "query",
-                        "name": "market",
-                        "orig": "market",
-                        "reqd": true,
-                        "type": "`$STRING`"
+                        "a": true,
+                        "k": "query",
+                        "n": "market",
+                        "or": "market",
+                        "r": true,
+                        "t": "`$STRING`"
                       },
                       {
-                        "active": true,
-                        "kind": "query",
-                        "name": "merchant_id",
-                        "orig": "merchant_id",
-                        "reqd": false,
-                        "type": "`$STRING`"
+                        "a": true,
+                        "k": "query",
+                        "n": "merchant_id",
+                        "or": "merchant_id",
+                        "r": false,
+                        "t": "`$STRING`"
                       },
                       {
-                        "active": true,
-                        "kind": "query",
-                        "name": "offer_id",
-                        "orig": "offer_id",
-                        "reqd": false,
-                        "type": "`$STRING`"
+                        "a": true,
+                        "k": "query",
+                        "n": "offer_id",
+                        "or": "offer_id",
+                        "r": false,
+                        "t": "`$STRING`"
                       },
                       {
-                        "active": true,
-                        "kind": "query",
-                        "name": "placement_id",
-                        "orig": "placement_id",
-                        "reqd": false,
-                        "type": "`$STRING`"
+                        "a": true,
+                        "k": "query",
+                        "n": "placement_id",
+                        "or": "placement_id",
+                        "r": false,
+                        "t": "`$STRING`"
                       },
                       {
-                        "active": true,
-                        "example": "fuzzy",
-                        "kind": "query",
-                        "name": "precision",
-                        "orig": "precision",
-                        "reqd": false,
-                        "type": "`$STRING`"
+                        "a": true,
+                        "ex": "fuzzy",
+                        "k": "query",
+                        "n": "precision",
+                        "or": "precision",
+                        "r": false,
+                        "t": "`$STRING`"
                       },
                       {
-                        "active": true,
-                        "example": "rel_desc",
-                        "kind": "query",
-                        "name": "sort",
-                        "orig": "sort",
-                        "reqd": false,
-                        "type": "`$STRING`"
+                        "a": true,
+                        "ex": "rel_desc",
+                        "k": "query",
+                        "n": "sort",
+                        "or": "sort",
+                        "r": false,
+                        "t": "`$STRING`"
                       }
                     ]
                   },
-                  "contract": {
-                    "id": "GET /v2/offer",
-                    "json": "{\"operationId\":\"getOffer\",\"parameters\":[{\"description\":\"Market to search. You can get the markets you are activated for with the Markets API.\",\"in\":\"query\",\"name\":\"market\",\"required\":true,\"schema\":{\"type\":\"string\"}},{\"description\":\"Keyword to search. Must be at least one character long.\",\"in\":\"query\",\"name\":\"keyword\",\"required\":false,\"schema\":{\"type\":\"string\"}},{\"description\":\"Filter the results by this EAN. Must be `8`, `13` or `14` characters long. When omitted, you will get offers regardless of an ean.\",\"in\":\"query\",\"name\":\"ean\",\"required\":false,\"schema\":{\"type\":\"string\"}},{\"description\":\"Merchant ID to filter the offers. You can use this parameter to narrow the results. If omitted, you will get offers for all merchants.\",\"in\":\"query\",\"name\":\"merchantId\",\"required\":false,\"schema\":{\"type\":\"string\"}},{\"description\":\"Offer ID to filter the offers. If set you will only get this one offer, if it is found and active.\",\"in\":\"query\",\"name\":\"offerId\",\"required\":false,\"schema\":{\"type\":\"string\"}},{\"description\":\"Your own subID for your click-tracking. Must be at most 128 characters long. Only printable ASCII-characters are allowed. Defaults to `null`.\",\"in\":\"query\",\"name\":\"placementId\",\"required\":false,\"schema\":{\"type\":\"string\"}},{\"description\":\"Precision for the fulltext search. `strict` uses a more strict approach to get more relevant results. `fuzzy` uses a less strict approach to get more results.\",\"in\":\"query\",\"name\":\"precision\",\"required\":false,\"schema\":{\"default\":\"fuzzy\",\"enum\":[\"strict\",\"fuzzy\"],\"type\":\"string\"}},{\"description\":\"Sort the results by relevance or price. Allowed values are `rel_desc`, `price_asc`, `price_desc`. Defaults to `rel_desc`. It is only possible to sort the results by relevance if you also specify a keyword. Without the keyword, the sort order is undefined.\",\"in\":\"query\",\"name\":\"sort\",\"required\":false,\"schema\":{\"default\":\"rel_desc\",\"enum\":[\"rel_desc\",\"price_asc\",\"price_desc\"],\"type\":\"string\"}},{\"description\":\"Limit of results, must be between `1` and `100`. Defaults to `20`.\",\"in\":\"query\",\"name\":\"limit\",\"required\":false,\"schema\":{\"type\":\"integer\"}},{\"description\":\"If your project has in parts couponing traffic, you must use this parameter to tell the API if the click is a couponing click or not. If you don’t use this parameter when your project is labeled _“mixed”_ your traffic will not get paid. If you want to find out the label, please ask your account manager. You only must use this parameter if you have mixed traffic. If you have either couponing or no couponing traffic, this parameter is not important for you.\\n\",\"in\":\"query\",\"name\":\"isCouponing\",\"required\":false,\"schema\":{\"type\":\"boolean\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"count\":{\"type\":\"integer\"},\"offers\":{\"items\":{\"properties\":{\"availability\":{\"enum\":[\"AVAILABLE\",\"UNAVAILABLE\",\"UNKNOWN\",\"SOON\",\"PREORDER\",\"AVAILABLE ON ORDER\",\"STOCK ON ORDER\",\"BACKORDER\"],\"type\":\"string\"},\"brand\":{\"nullable\":true,\"type\":\"string\"},\"clickUrl\":{\"type\":\"string\"},\"description\":{\"type\":\"string\"},\"eer\":{\"nullable\":true,\"type\":\"string\"},\"estimatedCpc\":{\"description\":\"estimatedCPC means the gross revenue per click Yadore gets from its merchants,\\nyou have to use your revenue share to get your estimatedCPC.\\nBe aware, the CPC paid can still differ from the estimated CPC\\n\",\"properties\":{\"amount\":{\"type\":\"string\"},\"currency\":{\"type\":\"string\"}},\"type\":\"object\"},\"id\":{\"type\":\"string\"},\"image\":{\"properties\":{\"url\":{\"type\":\"string\"}},\"type\":\"object\"},\"merchant\":{\"properties\":{\"id\":{\"type\":\"string\"},\"logo\":{\"properties\":{\"exists\":{\"type\":\"boolean\"},\"url\":{\"type\":\"string\"}},\"type\":\"object\"},\"name\":{\"type\":\"string\"}},\"type\":\"object\"},\"originalPrice\":{\"properties\":{\"amount\":{\"type\":\"string\"},\"currency\":{\"type\":\"string\"}},\"type\":\"object\"},\"price\":{\"properties\":{\"amount\":{\"type\":\"string\"},\"currency\":{\"type\":\"string\"}},\"type\":\"object\"},\"promoText\":{\"nullable\":true,\"type\":\"string\"},\"shippingPrice\":{\"properties\":{\"amount\":{\"type\":\"string\"},\"currency\":{\"type\":\"string\"}},\"type\":\"object\"},\"shippingTime\":{\"properties\":{\"text\":{\"type\":\"string\"}},\"type\":\"object\"},\"thumbnail\":{\"properties\":{\"url\":{\"type\":\"string\"}},\"type\":\"object\"},\"title\":{\"type\":\"string\"},\"unitPrice\":{\"properties\":{\"text\":{\"nullable\":true,\"type\":\"string\"}},\"type\":\"object\"}},\"type\":\"object\"},\"type\":\"array\"},\"total\":{\"type\":\"integer\"}},\"type\":\"object\"}}},\"description\":\"Offer Response\"},\"400\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"errors\":{\"properties\":{\"isCouponing\":{\"items\":{\"oneOf\":[{\"example\":\"Field is required when mixed traffic is allowed\",\"type\":\"string\"},{\"example\":\"Field must be a boolean\",\"type\":\"string\"}]},\"type\":\"array\"},\"market\":{\"items\":{\"oneOf\":[{\"example\":\"Field is required\",\"type\":\"string\"},{\"example\":\"Market 'xy' not found\",\"type\":\"string\"}]},\"type\":\"array\"}},\"type\":\"object\"}},\"type\":\"object\"}}},\"description\":\"Bad Request\"}},\"security\":[{\"ApiKeyAuth\":[]}],\"securitySchemes\":{\"ApiKeyAuth\":{\"description\":\"Your project's API-Key.\",\"in\":\"header\",\"name\":\"API-Key\",\"type\":\"apiKey\"}},\"securitySource\":\"operation\"}",
-                    "source": "openapi3",
-                    "version": 1
-                  },
-                  "kind": "http",
-                  "method": "GET",
-                  "orig": "/v2/offer",
-                  "segments": [
-                    {
-                      "lit": "v2"
-                    },
-                    {
-                      "lit": "offer"
-                    }
-                  ],
-                  "select": {
+                  "k": "http",
+                  "m": "GET",
+                  "o": "/v2/offer",
+                  "q": {
                     "exist": [
                       "ean",
                       "is_couponing",
@@ -1192,7 +1302,16 @@
                       "sort"
                     ]
                   },
-                  "transform": {
+                  "r": {},
+                  "s": [
+                    {
+                      "lit": "v2"
+                    },
+                    {
+                      "lit": "offer"
+                    }
+                  ],
+                  "t": {
                     "req": "`reqdata`",
                     "res": "`body.offers`"
                   }
@@ -1204,62 +1323,72 @@
               "name": "load",
               "points": [
                 {
-                  "active": true,
-                  "args": {
+                  "a": true,
+                  "co": {
+                    "id": "GET /v2/offer/bulk",
+                    "source": "openapi3",
+                    "version": 2
+                  },
+                  "g": {
                     "query": [
                       {
-                        "active": true,
-                        "example": "12345678,87654321",
-                        "kind": "query",
-                        "name": "ean",
-                        "orig": "ean",
-                        "reqd": true,
-                        "type": "`$STRING`"
+                        "a": true,
+                        "ex": "12345678,87654321",
+                        "k": "query",
+                        "n": "ean",
+                        "or": "ean",
+                        "r": true,
+                        "t": "`$STRING`"
                       },
                       {
-                        "active": true,
-                        "kind": "query",
-                        "name": "is_couponing",
-                        "orig": "is_couponing",
-                        "reqd": false,
-                        "type": "`$BOOLEAN`"
+                        "a": true,
+                        "k": "query",
+                        "n": "is_couponing",
+                        "or": "is_couponing",
+                        "r": false,
+                        "t": "`$BOOLEAN`"
                       },
                       {
-                        "active": true,
-                        "kind": "query",
-                        "name": "market",
-                        "orig": "market",
-                        "reqd": true,
-                        "type": "`$STRING`"
+                        "a": true,
+                        "k": "query",
+                        "n": "market",
+                        "or": "market",
+                        "r": true,
+                        "t": "`$STRING`"
                       },
                       {
-                        "active": true,
-                        "kind": "query",
-                        "name": "merchant_id",
-                        "orig": "merchant_id",
-                        "reqd": false,
-                        "type": "`$STRING`"
+                        "a": true,
+                        "k": "query",
+                        "n": "merchant_id",
+                        "or": "merchant_id",
+                        "r": false,
+                        "t": "`$STRING`"
                       },
                       {
-                        "active": true,
-                        "kind": "query",
-                        "name": "placement_id",
-                        "orig": "placement_id",
-                        "reqd": false,
-                        "type": "`$STRING`"
+                        "a": true,
+                        "k": "query",
+                        "n": "placement_id",
+                        "or": "placement_id",
+                        "r": false,
+                        "t": "`$STRING`"
                       }
                     ]
                   },
-                  "contract": {
-                    "id": "GET /v2/offer/bulk",
-                    "json": "{\"operationId\":\"getOffersByEan\",\"parameters\":[{\"description\":\"Market to search. You can get the markets you are activated for with the Markets API.\",\"in\":\"query\",\"name\":\"market\",\"required\":true,\"schema\":{\"type\":\"string\"}},{\"description\":\"The EANs to search (max. 50). Must be an comma seperated list of valid EANs. Each EAN must be `8`, `13` or `14` characters long.\",\"in\":\"query\",\"name\":\"eans\",\"required\":true,\"schema\":{\"example\":\"12345678,87654321\",\"type\":\"string\"}},{\"description\":\"Merchant ID to filter the offers. You can use this parameter to narrow the results. If omitted, you will get offers for all merchants.\",\"in\":\"query\",\"name\":\"merchantId\",\"required\":false,\"schema\":{\"type\":\"string\"}},{\"description\":\"Your own subID for your click-tracking. Must be at most 128 characters long. Only printable ASCII-characters are allowed. Defaults to `null`.\",\"in\":\"query\",\"name\":\"placementId\",\"required\":false,\"schema\":{\"type\":\"string\"}},{\"description\":\"If your project has in parts couponing traffic, you must use this parameter to tell the API if the click is a couponing click or not. If you don’t use this parameter when your project is labeled _“mixed”_ your traffic will not get paid. If you want to find out the label, please ask your account manager. You only must use this parameter if you have mixed traffic. If you have either couponing or no couponing traffic, this parameter is not important for you.\\n\",\"in\":\"query\",\"name\":\"isCouponing\",\"required\":false,\"schema\":{\"type\":\"boolean\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"ean\":{\"properties\":{\"count\":{\"type\":\"integer\"},\"offers\":{\"items\":{\"properties\":{\"availability\":{\"enum\":[\"AVAILABLE\",\"UNAVAILABLE\",\"UNKNOWN\",\"SOON\",\"PREORDER\",\"AVAILABLE ON ORDER\",\"STOCK ON ORDER\",\"BACKORDER\"],\"type\":\"string\"},\"brand\":{\"nullable\":true,\"type\":\"string\"},\"clickUrl\":{\"type\":\"string\"},\"description\":{\"type\":\"string\"},\"eer\":{\"nullable\":true,\"type\":\"string\"},\"estimatedCpc\":{\"description\":\"estimatedCPC means the gross revenue per click Yadore gets from its merchants,\\nyou have to use your revenue share to get your estimatedCPC.\\nBe aware, the CPC paid can still differ from the estimated CPC\\n\",\"properties\":{\"amount\":{\"type\":\"string\"},\"currency\":{\"type\":\"string\"}},\"type\":\"object\"},\"id\":{\"type\":\"string\"},\"image\":{\"properties\":{\"url\":{\"type\":\"string\"}},\"type\":\"object\"},\"merchant\":{\"properties\":{\"id\":{\"type\":\"string\"},\"logo\":{\"properties\":{\"exists\":{\"type\":\"boolean\"},\"url\":{\"type\":\"string\"}},\"type\":\"object\"},\"name\":{\"type\":\"string\"}},\"type\":\"object\"},\"originalPrice\":{\"properties\":{\"amount\":{\"type\":\"string\"},\"currency\":{\"type\":\"string\"}},\"type\":\"object\"},\"price\":{\"properties\":{\"amount\":{\"type\":\"string\"},\"currency\":{\"type\":\"string\"}},\"type\":\"object\"},\"promoText\":{\"nullable\":true,\"type\":\"string\"},\"shippingPrice\":{\"properties\":{\"amount\":{\"type\":\"string\"},\"currency\":{\"type\":\"string\"}},\"type\":\"object\"},\"shippingTime\":{\"properties\":{\"text\":{\"type\":\"string\"}},\"type\":\"object\"},\"thumbnail\":{\"properties\":{\"url\":{\"type\":\"string\"}},\"type\":\"object\"},\"title\":{\"type\":\"string\"},\"unitPrice\":{\"properties\":{\"text\":{\"nullable\":true,\"type\":\"string\"}},\"type\":\"object\"}},\"type\":\"object\"},\"type\":\"array\"}},\"type\":\"object\"}},\"type\":\"object\"}}},\"description\":\"Offer Ean Bulk Response\"},\"400\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"errors\":{\"properties\":{\"ean\":{\"items\":{\"oneOf\":[{\"example\":\"EAN list cant be empty\",\"type\":\"string\"},{\"example\":\"Cant request offers for more then 50 EANs at once\",\"type\":\"string\"}]},\"type\":\"array\"},\"isCouponing\":{\"items\":{\"oneOf\":[{\"example\":\"Field is required when mixed traffic is allowed\",\"type\":\"string\"},{\"example\":\"Field must be a boolean\",\"type\":\"string\"}]},\"type\":\"array\"},\"market\":{\"items\":{\"oneOf\":[{\"example\":\"Field is required\",\"type\":\"string\"},{\"example\":\"Market 'xy' not found\",\"type\":\"string\"}]},\"type\":\"array\"}},\"type\":\"object\"}},\"type\":\"object\"}}},\"description\":\"Bad Request\"}},\"security\":[{\"ApiKeyAuth\":[]}],\"securitySchemes\":{\"ApiKeyAuth\":{\"description\":\"Your project's API-Key.\",\"in\":\"header\",\"name\":\"API-Key\",\"type\":\"apiKey\"}},\"securitySource\":\"operation\"}",
-                    "source": "openapi3",
-                    "version": 1
+                  "k": "http",
+                  "m": "GET",
+                  "o": "/v2/offer/bulk",
+                  "q": {
+                    "$action": "bulk",
+                    "exist": [
+                      "ean",
+                      "is_couponing",
+                      "market",
+                      "merchant_id",
+                      "placement_id"
+                    ]
                   },
-                  "kind": "http",
-                  "method": "GET",
-                  "orig": "/v2/offer/bulk",
-                  "segments": [
+                  "r": {},
+                  "s": [
                     {
                       "lit": "v2"
                     },
@@ -1270,17 +1399,7 @@
                       "lit": "bulk"
                     }
                   ],
-                  "select": {
-                    "$action": "bulk",
-                    "exist": [
-                      "ean",
-                      "is_couponing",
-                      "market",
-                      "merchant_id",
-                      "placement_id"
-                    ]
-                  },
-                  "transform": {
+                  "t": {
                     "req": "`reqdata`",
                     "res": "`body.ean`"
                   }
@@ -1297,51 +1416,58 @@
           "alias": {
             "field": {}
           },
-          "fields": [
-            {
-              "active": true,
-              "name": "clickId",
-              "req": false,
-              "type": "`$STRING`"
+          "fields": {
+            "clickId": {
+              "a": true,
+              "h": "Click Id",
+              "n": "clickId",
+              "r": false,
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "name": "currency",
-              "req": false,
-              "type": "`$STRING`"
+            "currency": {
+              "a": true,
+              "h": "Currency",
+              "n": "currency",
+              "r": false,
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "format": "date-time",
-              "name": "date",
-              "req": false,
-              "type": "`$STRING`"
+            "date": {
+              "a": true,
+              "fo": "date-time",
+              "h": "Date",
+              "n": "date",
+              "r": false,
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "name": "market",
-              "req": false,
-              "type": "`$STRING`"
+            "market": {
+              "a": true,
+              "h": "Market",
+              "n": "market",
+              "r": false,
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "name": "merchant",
-              "req": false,
-              "type": "`$OBJECT`"
+            "merchant": {
+              "a": true,
+              "h": "Merchant",
+              "n": "merchant",
+              "r": false,
+              "t": "`$OBJECT`"
             },
-            {
-              "active": true,
-              "name": "placementId",
-              "req": false,
-              "type": "`$STRING`"
+            "placementId": {
+              "a": true,
+              "h": "Placement Id",
+              "n": "placementId",
+              "r": false,
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "name": "revenue",
-              "req": false,
-              "type": "`$NUMBER`"
+            "revenue": {
+              "a": true,
+              "h": "Revenue",
+              "n": "revenue",
+              "r": false,
+              "t": "`$NUMBER`"
             }
-          ],
+          },
           "name": "report_detail",
           "op": {
             "list": {
@@ -1349,45 +1475,52 @@
               "name": "list",
               "points": [
                 {
-                  "active": true,
-                  "args": {
+                  "a": true,
+                  "co": {
+                    "id": "GET /v2/report/detail",
+                    "source": "openapi3",
+                    "version": 2
+                  },
+                  "g": {
                     "query": [
                       {
-                        "active": true,
-                        "kind": "query",
-                        "name": "date",
-                        "orig": "date",
-                        "reqd": true,
-                        "type": "`$STRING`"
+                        "a": true,
+                        "k": "query",
+                        "n": "date",
+                        "or": "date",
+                        "r": true,
+                        "t": "`$STRING`"
                       },
                       {
-                        "active": true,
-                        "kind": "query",
-                        "name": "format",
-                        "orig": "format",
-                        "reqd": true,
-                        "type": "`$STRING`"
+                        "a": true,
+                        "k": "query",
+                        "n": "format",
+                        "or": "format",
+                        "r": true,
+                        "t": "`$STRING`"
                       },
                       {
-                        "active": true,
-                        "kind": "query",
-                        "name": "market",
-                        "orig": "market",
-                        "reqd": false,
-                        "type": "`$STRING`"
+                        "a": true,
+                        "k": "query",
+                        "n": "market",
+                        "or": "market",
+                        "r": false,
+                        "t": "`$STRING`"
                       }
                     ]
                   },
-                  "contract": {
-                    "id": "GET /v2/report/detail",
-                    "json": "{\"operationId\":\"getReportDetail\",\"parameters\":[{\"description\":\"Date for which to generate a report. This date is in the UTC timezone. This parameter has to be in format `YYYY-mm-dd`, for example `2018-01-31`.\",\"in\":\"query\",\"name\":\"date\",\"required\":true,\"schema\":{\"format\":\"date\",\"type\":\"string\"}},{\"description\":\"A format to generate the reports. Available formats are `json` and `csv`.\",\"in\":\"query\",\"name\":\"format\",\"required\":true,\"schema\":{\"enum\":[\"json\",\"csv\"],\"type\":\"string\"}},{\"description\":\"Market to search. You can get the markets you are activated for with the Markets API.\",\"in\":\"query\",\"name\":\"market\",\"required\":false,\"schema\":{\"type\":\"string\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"clicks\":{\"items\":{\"properties\":{\"clickId\":{\"type\":\"string\"},\"currency\":{\"example\":\"EUR\",\"type\":\"string\"},\"date\":{\"format\":\"date-time\",\"type\":\"string\"},\"market\":{\"type\":\"string\"},\"merchant\":{\"properties\":{\"id\":{\"type\":\"string\"},\"name\":{\"type\":\"string\"}},\"type\":\"object\"},\"placementId\":{\"type\":\"string\"},\"revenue\":{\"type\":\"number\"}},\"type\":\"object\"},\"type\":\"array\"},\"totalClicks\":{\"type\":\"integer\"}},\"type\":\"object\"}},\"text/csv\":{\"schema\":{\"example\":\"\\\"clickId\\\",\\\"date\\\",\\\"placementId\\\",\\\"market\\\",\\\"merchantId\\\",\\\"merchantName\\\",\\\"revenue\\\",\\\"currency\\\"\\n\\\"532f889fd3ba56f628f3234647d9854650534789938b7fdaafddf1d75081fadc\\\",\\\"2018-01-01T00:00:01+00:00\\\",\\\"your-custom-placement-id-1\\\",\\\"de\\\",\\\"583c1b14c50391777b40ee033a04cef033271e35307f7276125b2ba760d4b48e\\\",\\\"example.com\\\",\\\"0.142898\\\",\\\"EUR\\\"\\n\\\"ae7facb00d557e7d92e1d2ee31bc05cc9787bc6802e636ccb284cfbaeb6680b8\\\",\\\"2018-01-01T00:00:02+00:00\\\",\\\"your-custom-placement-id-2\\\",\\\"de\\\",\\\"583c1b14c50391777b40ee033a04cef033271e35307f7276125b2ba760d4b48e\\\",\\\"example.com\\\",\\\"0.142825\\\",\\\"EUR\\\"\\n\\\"8bc875e7f5260fa14b21797508b9e47ee2df2c2fe0351b88edded847ee59bb1f\\\",\\\"2018-01-01T00:00:03+00:00\\\",\\\"your-custom-placement-id-3\\\",\\\"de\\\",\\\"583c1b14c50391777b40ee033a04cef033271e35307f7276125b2ba760d4b48e\\\",\\\"example.com\\\",\\\"0.120417\\\",\\\"EUR\\\"\\n\"}}},\"description\":\"Report Detail Response\"}},\"security\":[{\"ApiKeyAuth\":[]}],\"securitySchemes\":{\"ApiKeyAuth\":{\"description\":\"Your project's API-Key.\",\"in\":\"header\",\"name\":\"API-Key\",\"type\":\"apiKey\"}},\"securitySource\":\"operation\"}",
-                    "source": "openapi3",
-                    "version": 1
+                  "k": "http",
+                  "m": "GET",
+                  "o": "/v2/report/detail",
+                  "q": {
+                    "exist": [
+                      "date",
+                      "format",
+                      "market"
+                    ]
                   },
-                  "kind": "http",
-                  "method": "GET",
-                  "orig": "/v2/report/detail",
-                  "segments": [
+                  "r": {},
+                  "s": [
                     {
                       "lit": "v2"
                     },
@@ -1398,14 +1531,7 @@
                       "lit": "detail"
                     }
                   ],
-                  "select": {
-                    "exist": [
-                      "date",
-                      "format",
-                      "market"
-                    ]
-                  },
-                  "transform": {
+                  "t": {
                     "req": "`reqdata`",
                     "res": "`body.clicks`"
                   }
@@ -1422,26 +1548,29 @@
           "alias": {
             "field": {}
           },
-          "fields": [
-            {
-              "active": true,
-              "name": "date",
-              "req": false,
-              "type": "`$OBJECT`"
+          "fields": {
+            "date": {
+              "a": true,
+              "h": "Date",
+              "n": "date",
+              "r": false,
+              "t": "`$OBJECT`"
             },
-            {
-              "active": true,
-              "name": "market",
-              "req": false,
-              "type": "`$OBJECT`"
+            "market": {
+              "a": true,
+              "h": "Market",
+              "n": "market",
+              "r": false,
+              "t": "`$OBJECT`"
             },
-            {
-              "active": true,
-              "name": "total",
-              "req": false,
-              "type": "`$OBJECT`"
+            "total": {
+              "a": true,
+              "h": "Total",
+              "n": "total",
+              "r": false,
+              "t": "`$OBJECT`"
             }
-          ],
+          },
           "name": "report_general",
           "op": {
             "load": {
@@ -1449,37 +1578,43 @@
               "name": "load",
               "points": [
                 {
-                  "active": true,
-                  "args": {
+                  "a": true,
+                  "co": {
+                    "id": "GET /v2/report/general",
+                    "source": "openapi3",
+                    "version": 2
+                  },
+                  "g": {
                     "query": [
                       {
-                        "active": true,
-                        "kind": "query",
-                        "name": "date",
-                        "orig": "date",
-                        "reqd": true,
-                        "type": "`$STRING`"
+                        "a": true,
+                        "k": "query",
+                        "n": "date",
+                        "or": "date",
+                        "r": true,
+                        "t": "`$STRING`"
                       },
                       {
-                        "active": true,
-                        "kind": "query",
-                        "name": "format",
-                        "orig": "format",
-                        "reqd": true,
-                        "type": "`$STRING`"
+                        "a": true,
+                        "k": "query",
+                        "n": "format",
+                        "or": "format",
+                        "r": true,
+                        "t": "`$STRING`"
                       }
                     ]
                   },
-                  "contract": {
-                    "id": "GET /v2/report/general",
-                    "json": "{\"operationId\":\"getReportGeneral\",\"parameters\":[{\"description\":\"Date for which to generate a report. This date is in the UTC timezone. This parameter has to be in format `YYYY-mm-dd`, for example `2018-01-31`.\",\"in\":\"query\",\"name\":\"date\",\"required\":true,\"schema\":{\"format\":\"date\",\"type\":\"string\"}},{\"description\":\"A format to generate the reports. Available formats are `json` and `csv`.\",\"in\":\"query\",\"name\":\"format\",\"required\":true,\"schema\":{\"enum\":[\"json\",\"csv\"],\"type\":\"string\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"date\":{\"properties\":{\"from\":{\"type\":\"string\"},\"to\":{\"type\":\"string\"}},\"type\":\"object\"},\"market\":{\"properties\":{\"de\":{\"properties\":{\"total\":{\"properties\":{\"clicks\":{\"type\":\"integer\"},\"currency\":{\"type\":\"string\"},\"revenue\":{\"example\":0,\"type\":\"number\"}},\"type\":\"object\"}},\"type\":\"object\"}},\"type\":\"object\"},\"total\":{\"properties\":{\"clicks\":{\"type\":\"integer\"},\"currency\":{\"type\":\"string\"},\"revenue\":{\"type\":\"integer\"}},\"type\":\"object\"}},\"type\":\"object\"}},\"text/csv\":{\"schema\":{\"example\":\"\\\"date\\\",\\\"market\\\",\\\"clicks\\\",\\\"revenue\\\",\\\"currency\\\"\\n\\\"2018-01-01\\\",\\\"de\\\",\\\"1000\\\",\\\"100.1234\\\",\\\"EUR\\\"\\n\\\"2018-01-01\\\",\\\"fr\\\",\\\"2000\\\",\\\"150.5678\\\",\\\"EUR\\\"\\n\\\"2018-01-01\\\",\\\"it\\\",\\\"1500\\\",\\\"125.6542\\\",\\\"EUR\\\"\\n\",\"type\":\"string\"}}},\"description\":\"Report General Response\"}},\"security\":[{\"ApiKeyAuth\":[]}],\"securitySchemes\":{\"ApiKeyAuth\":{\"description\":\"Your project's API-Key.\",\"in\":\"header\",\"name\":\"API-Key\",\"type\":\"apiKey\"}},\"securitySource\":\"operation\"}",
-                    "source": "openapi3",
-                    "version": 1
+                  "k": "http",
+                  "m": "GET",
+                  "o": "/v2/report/general",
+                  "q": {
+                    "exist": [
+                      "date",
+                      "format"
+                    ]
                   },
-                  "kind": "http",
-                  "method": "GET",
-                  "orig": "/v2/report/general",
-                  "segments": [
+                  "r": {},
+                  "s": [
                     {
                       "lit": "v2"
                     },
@@ -1490,13 +1625,7 @@
                       "lit": "general"
                     }
                   ],
-                  "select": {
-                    "exist": [
-                      "date",
-                      "format"
-                    ]
-                  },
-                  "transform": {
+                  "t": {
                     "req": "`reqdata`",
                     "res": "`body`"
                   }
@@ -1513,22 +1642,24 @@
           "alias": {
             "field": {}
           },
-          "fields": [
-            {
-              "active": true,
-              "format": "date",
-              "name": "date",
-              "req": false,
-              "type": "`$STRING`"
+          "fields": {
+            "date": {
+              "a": true,
+              "fo": "date",
+              "h": "Date",
+              "n": "date",
+              "r": false,
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "format": "date-time",
-              "name": "modifiedDate",
-              "req": false,
-              "type": "`$STRING`"
+            "modifiedDate": {
+              "a": true,
+              "fo": "date-time",
+              "h": "Modified Date",
+              "n": "modifiedDate",
+              "r": false,
+              "t": "`$STRING`"
             }
-          ],
+          },
           "name": "report_modified",
           "op": {
             "load": {
@@ -1536,45 +1667,52 @@
               "name": "load",
               "points": [
                 {
-                  "active": true,
-                  "args": {
+                  "a": true,
+                  "co": {
+                    "id": "GET /v2/report/modified",
+                    "source": "openapi3",
+                    "version": 2
+                  },
+                  "g": {
                     "query": [
                       {
-                        "active": true,
-                        "kind": "query",
-                        "name": "from",
-                        "orig": "from",
-                        "reqd": true,
-                        "type": "`$STRING`"
+                        "a": true,
+                        "k": "query",
+                        "n": "from",
+                        "or": "from",
+                        "r": true,
+                        "t": "`$STRING`"
                       },
                       {
-                        "active": true,
-                        "kind": "query",
-                        "name": "market",
-                        "orig": "market",
-                        "reqd": false,
-                        "type": "`$STRING`"
+                        "a": true,
+                        "k": "query",
+                        "n": "market",
+                        "or": "market",
+                        "r": false,
+                        "t": "`$STRING`"
                       },
                       {
-                        "active": true,
-                        "kind": "query",
-                        "name": "to",
-                        "orig": "to",
-                        "reqd": true,
-                        "type": "`$STRING`"
+                        "a": true,
+                        "k": "query",
+                        "n": "to",
+                        "or": "to",
+                        "r": true,
+                        "t": "`$STRING`"
                       }
                     ]
                   },
-                  "contract": {
-                    "id": "GET /v2/report/modified",
-                    "json": "{\"operationId\":\"getReportModifiedDetail\",\"parameters\":[{\"description\":\"Starting date for which to generate list of modified reports dates. This parameter has to be in format `YYYY-mm-dd`\",\"in\":\"query\",\"name\":\"from\",\"required\":true,\"schema\":{\"format\":\"date\",\"type\":\"string\"}},{\"description\":\"Ending date for which to generate list of modified reports dates. This parameter has to be in format `YYYY-mm-dd`\",\"in\":\"query\",\"name\":\"to\",\"required\":true,\"schema\":{\"format\":\"date\",\"type\":\"string\"}},{\"description\":\"Market to search. You will receive a list with valid Markets along with your account information and keys.\",\"in\":\"query\",\"name\":\"market\",\"required\":false,\"schema\":{\"format\":\"ISO 3166 Alpha-2\",\"type\":\"string\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"market\":{\"properties\":{\"date\":{\"format\":\"date\",\"type\":\"string\"},\"modifiedDate\":{\"format\":\"date-time\",\"type\":\"string\"}},\"type\":\"object\"}},\"type\":\"object\"}}},\"description\":\"Report Modified Response\"}},\"security\":[{\"ApiKeyAuth\":[]}],\"securitySchemes\":{\"ApiKeyAuth\":{\"description\":\"Your project's API-Key.\",\"in\":\"header\",\"name\":\"API-Key\",\"type\":\"apiKey\"}},\"securitySource\":\"operation\"}",
-                    "source": "openapi3",
-                    "version": 1
+                  "k": "http",
+                  "m": "GET",
+                  "o": "/v2/report/modified",
+                  "q": {
+                    "exist": [
+                      "from",
+                      "market",
+                      "to"
+                    ]
                   },
-                  "kind": "http",
-                  "method": "GET",
-                  "orig": "/v2/report/modified",
-                  "segments": [
+                  "r": {},
+                  "s": [
                     {
                       "lit": "v2"
                     },
@@ -1585,14 +1723,7 @@
                       "lit": "modified"
                     }
                   ],
-                  "select": {
-                    "exist": [
-                      "from",
-                      "market",
-                      "to"
-                    ]
-                  },
-                  "transform": {
+                  "t": {
                     "req": "`reqdata`",
                     "res": "`body.market`"
                   }
@@ -1609,14 +1740,15 @@
           "alias": {
             "field": {}
           },
-          "fields": [
-            {
-              "active": true,
-              "name": "status",
-              "req": false,
-              "type": "`$STRING`"
+          "fields": {
+            "status": {
+              "a": true,
+              "h": "Status",
+              "n": "status",
+              "r": false,
+              "t": "`$STRING`"
             }
-          ],
+          },
           "name": "report_status",
           "op": {
             "load": {
@@ -1624,29 +1756,34 @@
               "name": "load",
               "points": [
                 {
-                  "active": true,
-                  "args": {
+                  "a": true,
+                  "co": {
+                    "id": "GET /v2/report/status",
+                    "source": "openapi3",
+                    "version": 2
+                  },
+                  "g": {
                     "query": [
                       {
-                        "active": true,
-                        "kind": "query",
-                        "name": "date",
-                        "orig": "date",
-                        "reqd": true,
-                        "type": "`$STRING`"
+                        "a": true,
+                        "k": "query",
+                        "n": "date",
+                        "or": "date",
+                        "r": true,
+                        "t": "`$STRING`"
                       }
                     ]
                   },
-                  "contract": {
-                    "id": "GET /v2/report/status",
-                    "json": "{\"operationId\":\"getReportStatus\",\"parameters\":[{\"description\":\"Date for which to generate a report. This date is in the UTC timezone. This parameter has to be in format `YYYY-mm-dd`, for example `2018-01-31`.\",\"in\":\"query\",\"name\":\"date\",\"required\":true,\"schema\":{\"format\":\"date\",\"type\":\"string\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"status\":{\"enum\":[\"complete\",\"incomplete\"],\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Report Status Response\"}},\"security\":[{\"ApiKeyAuth\":[]}],\"securitySchemes\":{\"ApiKeyAuth\":{\"description\":\"Your project's API-Key.\",\"in\":\"header\",\"name\":\"API-Key\",\"type\":\"apiKey\"}},\"securitySource\":\"operation\"}",
-                    "source": "openapi3",
-                    "version": 1
+                  "k": "http",
+                  "m": "GET",
+                  "o": "/v2/report/status",
+                  "q": {
+                    "exist": [
+                      "date"
+                    ]
                   },
-                  "kind": "http",
-                  "method": "GET",
-                  "orig": "/v2/report/status",
-                  "segments": [
+                  "r": {},
+                  "s": [
                     {
                       "lit": "v2"
                     },
@@ -1657,12 +1794,7 @@
                       "lit": "status"
                     }
                   ],
-                  "select": {
-                    "exist": [
-                      "date"
-                    ]
-                  },
-                  "transform": {
+                  "t": {
                     "req": "`reqdata`",
                     "res": "`body`"
                   }
@@ -2091,13 +2223,13 @@
           "param": {},
           "step": [
             {
-              "active": true,
-              "data": {},
-              "input": {},
-              "match": {},
-              "op": "list",
-              "spec": [],
-              "valid": [
+              "a": true,
+              "d": {},
+              "i": {},
+              "m": {},
+              "o": "list",
+              "s": [],
+              "v": [
                 {
                   "apply": "ItemExists",
                   "def": {
@@ -2117,13 +2249,13 @@
           "param": {},
           "step": [
             {
-              "active": true,
-              "data": {},
-              "input": {},
-              "match": {},
-              "op": "list",
-              "spec": [],
-              "valid": [
+              "a": true,
+              "d": {},
+              "i": {},
+              "m": {},
+              "o": "list",
+              "s": [],
+              "v": [
                 {
                   "apply": "ItemExists",
                   "def": {
@@ -2143,17 +2275,17 @@
           "param": {},
           "step": [
             {
-              "active": true,
-              "data": {},
-              "input": {
+              "a": true,
+              "d": {},
+              "i": {
                 "ref": "conversion_general_ref01",
                 "srcdatavar": "conversion_general_ref01_data",
                 "suffix": "_dt0"
               },
-              "match": {},
-              "op": "load",
-              "spec": [],
-              "valid": [
+              "m": {},
+              "o": "load",
+              "s": [],
+              "v": [
                 {
                   "apply": "TextFieldMark",
                   "def": {
@@ -2173,17 +2305,17 @@
           "param": {},
           "step": [
             {
-              "active": true,
-              "data": {},
-              "input": {
+              "a": true,
+              "d": {},
+              "i": {
                 "ref": "conversion_status_ref01",
                 "srcdatavar": "conversion_status_ref01_data",
                 "suffix": "_dt0"
               },
-              "match": {},
-              "op": "load",
-              "spec": [],
-              "valid": [
+              "m": {},
+              "o": "load",
+              "s": [],
+              "v": [
                 {
                   "apply": "TextFieldMark",
                   "def": {
@@ -2203,15 +2335,15 @@
           "param": {},
           "step": [
             {
-              "active": true,
-              "data": {},
-              "input": {
+              "a": true,
+              "d": {},
+              "i": {
                 "ref": "deeplink_ref01"
               },
-              "match": {},
-              "op": "create",
-              "spec": [],
-              "valid": []
+              "m": {},
+              "o": "create",
+              "s": [],
+              "v": []
             }
           ]
         },
@@ -2224,13 +2356,13 @@
           "param": {},
           "step": [
             {
-              "active": true,
-              "data": {},
-              "input": {},
-              "match": {},
-              "op": "list",
-              "spec": [],
-              "valid": [
+              "a": true,
+              "d": {},
+              "i": {},
+              "m": {},
+              "o": "list",
+              "s": [],
+              "v": [
                 {
                   "apply": "ItemExists",
                   "def": {
@@ -2250,17 +2382,17 @@
           "param": {},
           "step": [
             {
-              "active": true,
-              "data": {},
-              "input": {
+              "a": true,
+              "d": {},
+              "i": {
                 "ref": "dnt_ref01",
                 "srcdatavar": "dnt_ref01_data",
                 "suffix": "_dt0"
               },
-              "match": {},
-              "op": "load",
-              "spec": [],
-              "valid": [
+              "m": {},
+              "o": "load",
+              "s": [],
+              "v": [
                 {
                   "apply": "TextFieldMark",
                   "def": {
@@ -2280,13 +2412,13 @@
           "param": {},
           "step": [
             {
-              "active": true,
-              "data": {},
-              "input": {},
-              "match": {},
-              "op": "list",
-              "spec": [],
-              "valid": [
+              "a": true,
+              "d": {},
+              "i": {},
+              "m": {},
+              "o": "list",
+              "s": [],
+              "v": [
                 {
                   "apply": "ItemExists",
                   "def": {
@@ -2306,13 +2438,13 @@
           "param": {},
           "step": [
             {
-              "active": true,
-              "data": {},
-              "input": {},
-              "match": {},
-              "op": "list",
-              "spec": [],
-              "valid": [
+              "a": true,
+              "d": {},
+              "i": {},
+              "m": {},
+              "o": "list",
+              "s": [],
+              "v": [
                 {
                   "apply": "ItemExists",
                   "def": {
@@ -2332,13 +2464,13 @@
           "param": {},
           "step": [
             {
-              "active": true,
-              "data": {},
-              "input": {},
-              "match": {},
-              "op": "list",
-              "spec": [],
-              "valid": [
+              "a": true,
+              "d": {},
+              "i": {},
+              "m": {},
+              "o": "list",
+              "s": [],
+              "v": [
                 {
                   "apply": "ItemExists",
                   "def": {
@@ -2348,17 +2480,17 @@
               ]
             },
             {
-              "active": true,
-              "data": {},
-              "input": {
+              "a": true,
+              "d": {},
+              "i": {
                 "ref": "offer_ref01",
                 "srcdatavar": "offer_ref01_data",
                 "suffix": "_dt0"
               },
-              "match": {},
-              "op": "load",
-              "spec": [],
-              "valid": [
+              "m": {},
+              "o": "load",
+              "s": [],
+              "v": [
                 {
                   "apply": "TextFieldMark",
                   "def": {
@@ -2378,13 +2510,13 @@
           "param": {},
           "step": [
             {
-              "active": true,
-              "data": {},
-              "input": {},
-              "match": {},
-              "op": "list",
-              "spec": [],
-              "valid": [
+              "a": true,
+              "d": {},
+              "i": {},
+              "m": {},
+              "o": "list",
+              "s": [],
+              "v": [
                 {
                   "apply": "ItemExists",
                   "def": {
@@ -2404,17 +2536,17 @@
           "param": {},
           "step": [
             {
-              "active": true,
-              "data": {},
-              "input": {
+              "a": true,
+              "d": {},
+              "i": {
                 "ref": "report_general_ref01",
                 "srcdatavar": "report_general_ref01_data",
                 "suffix": "_dt0"
               },
-              "match": {},
-              "op": "load",
-              "spec": [],
-              "valid": [
+              "m": {},
+              "o": "load",
+              "s": [],
+              "v": [
                 {
                   "apply": "TextFieldMark",
                   "def": {
@@ -2434,17 +2566,17 @@
           "param": {},
           "step": [
             {
-              "active": true,
-              "data": {},
-              "input": {
+              "a": true,
+              "d": {},
+              "i": {
                 "ref": "report_modified_ref01",
                 "srcdatavar": "report_modified_ref01_data",
                 "suffix": "_dt0"
               },
-              "match": {},
-              "op": "load",
-              "spec": [],
-              "valid": [
+              "m": {},
+              "o": "load",
+              "s": [],
+              "v": [
                 {
                   "apply": "TextFieldMark",
                   "def": {
@@ -2464,17 +2596,17 @@
           "param": {},
           "step": [
             {
-              "active": true,
-              "data": {},
-              "input": {
+              "a": true,
+              "d": {},
+              "i": {
                 "ref": "report_status_ref01",
                 "srcdatavar": "report_status_ref01_data",
                 "suffix": "_dt0"
               },
-              "match": {},
-              "op": "load",
-              "spec": [],
-              "valid": [
+              "m": {},
+              "o": "load",
+              "s": [],
+              "v": [
                 {
                   "apply": "TextFieldMark",
                   "def": {

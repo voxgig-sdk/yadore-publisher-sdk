@@ -45,7 +45,7 @@ local conversiondetails, err = client:ConversionDetail():list()
 if err then error(err) end
 
 for _, item in ipairs(conversiondetails) do
-  print(item["clickId"])
+  print(item)
 end
 ```
 

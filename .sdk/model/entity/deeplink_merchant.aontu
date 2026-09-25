@@ -1,0 +1,148 @@
+# Entity: deeplink_merchant
+
+main: kit: entity: deeplink_merchant: {
+
+  alias: field: {}
+
+  fields: {
+    deeplinkCount: {
+      h: "Deeplink Count"
+      n: "deeplinkCount"
+      r: false
+      sh: "Even when a merchant has no deeplinks, it might still have smartlinks."
+      t: "`$INTEGER`"
+    }
+    estimatedCpc: {
+      h: "Estimated Cpc"
+      n: "estimatedCpc"
+      r: false
+      t: "`$OBJECT`"
+    }
+    hasExternalHomepage: {
+      h: "Has External Homepage"
+      n: "hasExternalHomepage"
+      r: false
+      sh: "If the merchant accept homepage deeplinks."
+      t: "`$BOOLEAN`"
+    }
+    hasSmartlinkHomepage: {
+      h: "Has Smartlink Homepage"
+      n: "hasSmartlinkHomepage"
+      r: false
+      sh: "If the merchant accept homepage smartlinks."
+      t: "`$BOOLEAN`"
+    }
+    id: {
+      h: "Id"
+      n: "id"
+      r: false
+      t: "`$STRING`"
+    }
+    isSmartlink: {
+      h: "Is Smartlink"
+      n: "isSmartlink"
+      r: false
+      sh: "If the merchant has one or more smartlinks."
+      t: "`$BOOLEAN`"
+    }
+    logo: {
+      h: "Logo"
+      n: "logo"
+      r: false
+      t: "`$OBJECT`"
+    }
+    name: {
+      h: "Name"
+      n: "name"
+      r: false
+      t: "`$STRING`"
+    }
+    trafficTypes: {
+      h: "Traffic Types"
+      n: "trafficTypes"
+      r: false
+      t: "`$ARRAY`"
+    }
+  }
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "deeplink_merchant"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /v2/deeplink/merchant"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                k: "query"
+                n: "has_homepage"
+                or: "has_homepage"
+                r: false
+                t: "`$BOOLEAN`"
+              }
+              {
+                k: "query"
+                n: "is_couponing"
+                or: "is_couponing"
+                r: false
+                t: "`$BOOLEAN`"
+              }
+              {
+                k: "query"
+                n: "is_smartlink"
+                or: "is_smartlink"
+                r: false
+                t: "`$BOOLEAN`"
+              }
+              {
+                k: "query"
+                n: "market"
+                or: "market"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/v2/deeplink/merchant"
+          q: {
+            exist: [
+              "has_homepage"
+              "is_couponing"
+              "is_smartlink"
+              "market"
+            ]
+          }
+          s: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "deeplink"
+            }
+            {
+              lit: "merchant"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.merchants`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

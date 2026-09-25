@@ -1,0 +1,319 @@
+# Entity: offer
+
+main: kit: entity: offer: {
+
+  alias: field: {}
+
+  fields: {
+    availability: {
+      h: "Availability"
+      n: "availability"
+      r: false
+      t: "`$STRING`"
+    }
+    brand: {
+      h: "Brand"
+      n: "brand"
+      r: false
+      t: "`$STRING`"
+    }
+    clickUrl: {
+      h: "Click Url"
+      n: "clickUrl"
+      r: false
+      t: "`$STRING`"
+    }
+    description: {
+      h: "Description"
+      n: "description"
+      r: false
+      t: "`$STRING`"
+    }
+    eer: {
+      h: "Eer"
+      n: "eer"
+      r: false
+      t: "`$STRING`"
+    }
+    estimatedCpc: {
+      h: "Estimated Cpc"
+      n: "estimatedCpc"
+      r: false
+      sh: "estimatedCPC means the gross revenue per click Yadore gets from its merchants, you have to use your revenue share to get your estimatedCPC."
+      t: "`$OBJECT`"
+    }
+    id: {
+      h: "Id"
+      n: "id"
+      r: false
+      t: "`$STRING`"
+    }
+    image: {
+      h: "Image"
+      n: "image"
+      r: false
+      t: "`$OBJECT`"
+    }
+    merchant: {
+      h: "Merchant"
+      n: "merchant"
+      r: false
+      t: "`$OBJECT`"
+    }
+    originalPrice: {
+      h: "Original Price"
+      n: "originalPrice"
+      r: false
+      t: "`$OBJECT`"
+    }
+    price: {
+      h: "Price"
+      n: "price"
+      r: false
+      t: "`$OBJECT`"
+    }
+    promoText: {
+      h: "Promo Text"
+      n: "promoText"
+      r: false
+      t: "`$STRING`"
+    }
+    shippingPrice: {
+      h: "Shipping Price"
+      n: "shippingPrice"
+      r: false
+      t: "`$OBJECT`"
+    }
+    shippingTime: {
+      h: "Shipping Time"
+      n: "shippingTime"
+      r: false
+      t: "`$OBJECT`"
+    }
+    thumbnail: {
+      h: "Thumbnail"
+      n: "thumbnail"
+      r: false
+      t: "`$OBJECT`"
+    }
+    title: {
+      h: "Title"
+      n: "title"
+      r: false
+      t: "`$STRING`"
+    }
+    unitPrice: {
+      h: "Unit Price"
+      n: "unitPrice"
+      r: false
+      t: "`$OBJECT`"
+    }
+  }
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "offer"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /v2/offer"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                k: "query"
+                n: "ean"
+                or: "ean"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "is_couponing"
+                or: "is_couponing"
+                r: false
+                t: "`$BOOLEAN`"
+              }
+              {
+                k: "query"
+                n: "keyword"
+                or: "keyword"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "limit"
+                or: "limit"
+                r: false
+                t: "`$INTEGER`"
+              }
+              {
+                k: "query"
+                n: "market"
+                or: "market"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "merchant_id"
+                or: "merchant_id"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "offer_id"
+                or: "offer_id"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "placement_id"
+                or: "placement_id"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: "fuzzy"
+                k: "query"
+                n: "precision"
+                or: "precision"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: "rel_desc"
+                k: "query"
+                n: "sort"
+                or: "sort"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/v2/offer"
+          q: {
+            exist: [
+              "ean"
+              "is_couponing"
+              "keyword"
+              "limit"
+              "market"
+              "merchant_id"
+              "offer_id"
+              "placement_id"
+              "precision"
+              "sort"
+            ]
+          }
+          s: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "offer"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.offers`"
+          }
+        }
+      ]
+    }
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /v2/offer/bulk"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                ex: "12345678,87654321"
+                k: "query"
+                n: "ean"
+                or: "ean"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "is_couponing"
+                or: "is_couponing"
+                r: false
+                t: "`$BOOLEAN`"
+              }
+              {
+                k: "query"
+                n: "market"
+                or: "market"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "merchant_id"
+                or: "merchant_id"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "placement_id"
+                or: "placement_id"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/v2/offer/bulk"
+          q: {
+            "$action": "bulk"
+            exist: [
+              "ean"
+              "is_couponing"
+              "market"
+              "merchant_id"
+              "placement_id"
+            ]
+          }
+          s: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "offer"
+            }
+            {
+              lit: "bulk"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.ean`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

@@ -19,7 +19,6 @@ import type {
   MerchantListMatch,
 } from '../YadorePublisherTypes'
 
-// TODO: needs Entity superclass
 class MerchantEntity extends YadorePublisherEntityBase<Merchant> {
 
   constructor(client: YadorePublisherSDK, entopts: any) {

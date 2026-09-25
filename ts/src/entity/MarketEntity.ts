@@ -19,7 +19,6 @@ import type {
   MarketListMatch,
 } from '../YadorePublisherTypes'
 
-// TODO: needs Entity superclass
 class MarketEntity extends YadorePublisherEntityBase<Market> {
 
   constructor(client: YadorePublisherSDK, entopts: any) {

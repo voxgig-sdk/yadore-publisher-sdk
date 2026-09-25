@@ -19,7 +19,6 @@ import type {
   ReportDetailListMatch,
 } from '../YadorePublisherTypes'
 
-// TODO: needs Entity superclass
 class ReportDetailEntity extends YadorePublisherEntityBase<ReportDetail> {
 
   constructor(client: YadorePublisherSDK, entopts: any) {

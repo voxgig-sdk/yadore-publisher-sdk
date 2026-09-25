@@ -20,50 +20,8 @@
   "requests": {
     "GET /v2/markets": {
       "provenance": "operation-contract",
-      "contract": {
-        "operationId": "getMarketsList",
-        "parameters": [],
-        "protocol": "http",
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "properties": {
-                    "markets": {
-                      "items": {
-                        "properties": {
-                          "id": {
-                            "type": "string"
-                          }
-                        },
-                        "type": "object"
-                      },
-                      "type": "array"
-                    }
-                  },
-                  "type": "object"
-                }
-              }
-            },
-            "description": "Market List Response"
-          }
-        },
-        "security": [
-          {
-            "ApiKeyAuth": []
-          }
-        ],
-        "securitySchemes": {
-          "ApiKeyAuth": {
-            "description": "Your project's API-Key.",
-            "in": "header",
-            "name": "API-Key",
-            "type": "apiKey"
-          }
-        },
-        "securitySource": "operation"
-      }
+      "version": 2,
+      "source": "openapi3"
     }
   }
 }

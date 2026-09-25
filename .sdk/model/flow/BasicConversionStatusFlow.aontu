@@ -1,0 +1,28 @@
+# BasicConversionStatusFlow
+
+main: kit: flow: BasicConversionStatusFlow:
+{
+  entity: "conversion_status",
+  kind: "basic",
+  name: "BasicConversionStatusFlow",
+  step: [
+    {
+      i: {
+        ref: "conversion_status_ref01",
+        srcdatavar: "conversion_status_ref01_data",
+        suffix: "_dt0"
+      }
+
+      o: "load",
+      v: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-conversion_status_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicConversionStatusFlow"
+}

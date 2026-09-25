@@ -19,7 +19,6 @@ import type {
   DeeplinkMerchantListMatch,
 } from '../YadorePublisherTypes'
 
-// TODO: needs Entity superclass
 class DeeplinkMerchantEntity extends YadorePublisherEntityBase<DeeplinkMerchant> {
 
   constructor(client: YadorePublisherSDK, entopts: any) {

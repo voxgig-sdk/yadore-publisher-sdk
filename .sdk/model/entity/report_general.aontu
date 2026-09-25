@@ -1,0 +1,87 @@
+# Entity: report_general
+
+main: kit: entity: report_general: {
+
+  alias: field: {}
+
+  fields: {
+    date: {
+      h: "Date"
+      n: "date"
+      r: false
+      t: "`$OBJECT`"
+    }
+    market: {
+      h: "Market"
+      n: "market"
+      r: false
+      t: "`$OBJECT`"
+    }
+    total: {
+      h: "Total"
+      n: "total"
+      r: false
+      t: "`$OBJECT`"
+    }
+  }
+
+  name: "report_general"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /v2/report/general"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                k: "query"
+                n: "date"
+                or: "date"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "format"
+                or: "format"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/v2/report/general"
+          q: {
+            exist: [
+              "date"
+              "format"
+            ]
+          }
+          s: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "report"
+            }
+            {
+              lit: "general"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

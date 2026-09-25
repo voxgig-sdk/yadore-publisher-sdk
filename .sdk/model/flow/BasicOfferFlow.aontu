@@ -1,0 +1,40 @@
+# BasicOfferFlow
+
+main: kit: flow: BasicOfferFlow:
+{
+  entity: "offer",
+  kind: "basic",
+  name: "BasicOfferFlow",
+  step: [
+    {
+      o: "list",
+      v: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "offer_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      i: {
+        ref: "offer_ref01",
+        srcdatavar: "offer_ref01_data",
+        suffix: "_dt0"
+      }
+
+      o: "load",
+      v: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-offer_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicOfferFlow"
+}

@@ -2,7 +2,6 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.MarketEntity = void 0;
 const YadorePublisherEntityBase_1 = require("../YadorePublisherEntityBase");
-// TODO: needs Entity superclass
 class MarketEntity extends YadorePublisherEntityBase_1.YadorePublisherEntityBase {
     constructor(client, entopts) {
         super(client, entopts);

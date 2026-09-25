@@ -1,0 +1,114 @@
+# Entity: conversion_detail_merchant
+
+main: kit: entity: conversion_detail_merchant: {
+
+  alias: field: {}
+
+  fields: {
+    clicks: {
+      h: "Clicks"
+      n: "clicks"
+      r: false
+      t: "`$INTEGER`"
+    }
+    market: {
+      fo: "ISO 3166 Alpha-2"
+      h: "Market"
+      n: "market"
+      r: false
+      sh: "Two character form of a country, in all lower-case"
+      t: "`$STRING`"
+    }
+    merchant: {
+      h: "Merchant"
+      n: "merchant"
+      r: false
+      t: "`$OBJECT`"
+    }
+    sales: {
+      h: "Sales"
+      n: "sales"
+      r: false
+      t: "`$INTEGER`"
+    }
+  }
+
+  name: "conversion_detail_merchant"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /v2/conversion/detail/merchant"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                k: "query"
+                n: "format"
+                or: "format"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "from"
+                or: "from"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "market"
+                or: "market"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "to"
+                or: "to"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/v2/conversion/detail/merchant"
+          q: {
+            exist: [
+              "format"
+              "from"
+              "market"
+              "to"
+            ]
+          }
+          s: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "conversion"
+            }
+            {
+              lit: "detail"
+            }
+            {
+              lit: "merchant"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

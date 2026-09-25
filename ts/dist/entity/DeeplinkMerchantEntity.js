@@ -2,7 +2,6 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.DeeplinkMerchantEntity = void 0;
 const YadorePublisherEntityBase_1 = require("../YadorePublisherEntityBase");
-// TODO: needs Entity superclass
 class DeeplinkMerchantEntity extends YadorePublisherEntityBase_1.YadorePublisherEntityBase {
     constructor(client, entopts) {
         super(client, entopts);

@@ -1,0 +1,114 @@
+# Entity: conversion_detail
+
+main: kit: entity: conversion_detail: {
+
+  alias: field: {}
+
+  fields: {
+    clickId: {
+      h: "Click Id"
+      n: "clickId"
+      r: false
+      t: "`$STRING`"
+    }
+    date: {
+      fo: "date-time"
+      h: "Date"
+      n: "date"
+      r: false
+      t: "`$STRING`"
+    }
+    market: {
+      h: "Market"
+      n: "market"
+      r: false
+      t: "`$STRING`"
+    }
+    merchant: {
+      h: "Merchant"
+      n: "merchant"
+      r: false
+      t: "`$OBJECT`"
+    }
+    placementId: {
+      h: "Placement Id"
+      n: "placementId"
+      r: false
+      t: "`$STRING`"
+    }
+    sales: {
+      h: "Sales"
+      n: "sales"
+      r: false
+      t: "`$NUMBER`"
+    }
+  }
+
+  name: "conversion_detail"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /v2/conversion/detail"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                k: "query"
+                n: "date"
+                or: "date"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "format"
+                or: "format"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "market"
+                or: "market"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/v2/conversion/detail"
+          q: {
+            exist: [
+              "date"
+              "format"
+              "market"
+            ]
+          }
+          s: [
+            {
+              lit: "v2"
+            }
+            {
+              lit: "conversion"
+            }
+            {
+              lit: "detail"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.clicks`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}
