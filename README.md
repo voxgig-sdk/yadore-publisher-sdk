@@ -106,11 +106,11 @@ local result, err = client:ReportGeneral():load({ date = "example", format = "ex
 | Language | Package | Install |
 | --- | --- | --- |
 | TypeScript | `@voxgig-sdk/yadore-publisher-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/yadore-publisher-sdk/tags) |
-| Python | `voxgig-sdk-yadore-publisher` | publish pending — [install from git tag](https://github.com/voxgig-sdk/yadore-publisher-sdk/tags) |
-| PHP | `voxgig-sdk/yadore-publisher` | publish pending — [install from git tag](https://github.com/voxgig-sdk/yadore-publisher-sdk/tags) |
+| Python | `voxgig-sdk-yadore-publisher-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/yadore-publisher-sdk/tags) |
+| PHP | `voxgig-sdk/yadore-publisher-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/yadore-publisher-sdk/tags) |
 | Golang | `github.com/voxgig-sdk/yadore-publisher-sdk/go` | `go get github.com/voxgig-sdk/yadore-publisher-sdk/go@latest` |
-| Ruby | `voxgig-sdk-yadore-publisher` | publish pending — [install from git tag](https://github.com/voxgig-sdk/yadore-publisher-sdk/tags) |
-| Lua | `voxgig-sdk-yadore-publisher` | publish pending — [install from git tag](https://github.com/voxgig-sdk/yadore-publisher-sdk/tags) |
+| Ruby | `voxgig-sdk-yadore-publisher-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/yadore-publisher-sdk/tags) |
+| Lua | `voxgig-sdk-yadore-publisher-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/yadore-publisher-sdk/tags) |
 | Go CLI | `github.com/voxgig-sdk/yadore-publisher-sdk/go-cli` | `go install github.com/voxgig-sdk/yadore-publisher-sdk/go-cli/cmd/yadore-publisher@latest` |
 | Go MCP server | `github.com/voxgig-sdk/yadore-publisher-sdk/go-mcp` | `go get github.com/voxgig-sdk/yadore-publisher-sdk/go-mcp@latest` |
 
@@ -365,10 +365,10 @@ forking the SDK.
 
 | Feature | Purpose |
 | --- | --- |
-| **RatelimitFeature** | Client-side rate limiting via a token bucket |
-| **RetryFeature** | Automatic retry of transient failures with exponential backoff |
-| **TestFeature** | In-memory mock transport for testing without a live server |
-| **TimeoutFeature** | Per-request timeout with transport abort |
+| **RatelimitFeature** | Rate limiting |
+| **RetryFeature** | Retry |
+| **TestFeature** | Test transport |
+| **TimeoutFeature** | Timeout |
 
 Pass custom features via the `extend` option at construction time.
 
