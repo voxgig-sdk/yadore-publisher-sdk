@@ -282,7 +282,7 @@ class Config {
                             "rename": {},
                             "transform": {
                                 "req": "`reqdata`",
-                                "res": "`body`"
+                                "res": "`body.salesByMerchant`"
                             },
                             "args": {
                                 "query": [
@@ -655,19 +655,19 @@ class Config {
                                 "query": [
                                     {
                                         "name": "has_homepage",
-                                        "orig": "has_homepage",
+                                        "orig": "hasHomepage",
                                         "type": "`$BOOLEAN`",
                                         "kind": "query"
                                     },
                                     {
                                         "name": "is_couponing",
-                                        "orig": "is_couponing",
+                                        "orig": "isCouponing",
                                         "type": "`$BOOLEAN`",
                                         "kind": "query"
                                     },
                                     {
                                         "name": "is_smartlink",
-                                        "orig": "is_smartlink",
+                                        "orig": "isSmartlink",
                                         "type": "`$BOOLEAN`",
                                         "kind": "query"
                                     },
@@ -729,13 +729,13 @@ class Config {
                                 "query": [
                                     {
                                         "name": "callback_url",
-                                        "orig": "callback_url",
+                                        "orig": "callbackUrl",
                                         "type": "`$STRING`",
                                         "kind": "query"
                                     },
                                     {
                                         "name": "is_couponing",
-                                        "orig": "is_couponing",
+                                        "orig": "isCouponing",
                                         "type": "`$BOOLEAN`",
                                         "kind": "query"
                                     },
@@ -748,19 +748,19 @@ class Config {
                                     },
                                     {
                                         "name": "merchant_id",
-                                        "orig": "merchant_id",
+                                        "orig": "merchantId",
                                         "type": "`$STRING`",
                                         "kind": "query"
                                     },
                                     {
                                         "name": "placement_id",
-                                        "orig": "placement_id",
+                                        "orig": "placementId",
                                         "type": "`$STRING`",
                                         "kind": "query"
                                     },
                                     {
                                         "name": "project_id",
-                                        "orig": "project_id",
+                                        "orig": "projectId",
                                         "type": "`$STRING`",
                                         "kind": "query",
                                         "reqd": true
@@ -905,7 +905,7 @@ class Config {
                                 "query": [
                                     {
                                         "name": "is_couponing",
-                                        "orig": "is_couponing",
+                                        "orig": "isCouponing",
                                         "type": "`$BOOLEAN`",
                                         "kind": "query"
                                     },
@@ -1062,7 +1062,7 @@ class Config {
                                     },
                                     {
                                         "name": "is_couponing",
-                                        "orig": "is_couponing",
+                                        "orig": "isCouponing",
                                         "type": "`$BOOLEAN`",
                                         "kind": "query"
                                     },
@@ -1087,19 +1087,19 @@ class Config {
                                     },
                                     {
                                         "name": "merchant_id",
-                                        "orig": "merchant_id",
+                                        "orig": "merchantId",
                                         "type": "`$STRING`",
                                         "kind": "query"
                                     },
                                     {
                                         "name": "offer_id",
-                                        "orig": "offer_id",
+                                        "orig": "offerId",
                                         "type": "`$STRING`",
                                         "kind": "query"
                                     },
                                     {
                                         "name": "placement_id",
-                                        "orig": "placement_id",
+                                        "orig": "placementId",
                                         "type": "`$STRING`",
                                         "kind": "query"
                                     },
@@ -1169,7 +1169,7 @@ class Config {
                                 "query": [
                                     {
                                         "name": "ean",
-                                        "orig": "ean",
+                                        "orig": "eans",
                                         "type": "`$STRING`",
                                         "kind": "query",
                                         "reqd": true,
@@ -1177,7 +1177,7 @@ class Config {
                                     },
                                     {
                                         "name": "is_couponing",
-                                        "orig": "is_couponing",
+                                        "orig": "isCouponing",
                                         "type": "`$BOOLEAN`",
                                         "kind": "query"
                                     },
@@ -1190,13 +1190,13 @@ class Config {
                                     },
                                     {
                                         "name": "merchant_id",
-                                        "orig": "merchant_id",
+                                        "orig": "merchantId",
                                         "type": "`$STRING`",
                                         "kind": "query"
                                     },
                                     {
                                         "name": "placement_id",
-                                        "orig": "placement_id",
+                                        "orig": "placementId",
                                         "type": "`$STRING`",
                                         "kind": "query"
                                     }

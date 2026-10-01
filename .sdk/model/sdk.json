@@ -330,7 +330,7 @@
                   ],
                   "t": {
                     "req": "`reqdata`",
-                    "res": "`body`"
+                    "res": "`body.salesByMerchant`"
                   }
                 }
               ]
@@ -710,7 +710,7 @@
                         "a": true,
                         "k": "query",
                         "n": "has_homepage",
-                        "or": "has_homepage",
+                        "or": "hasHomepage",
                         "r": false,
                         "t": "`$BOOLEAN`"
                       },
@@ -718,7 +718,7 @@
                         "a": true,
                         "k": "query",
                         "n": "is_couponing",
-                        "or": "is_couponing",
+                        "or": "isCouponing",
                         "r": false,
                         "t": "`$BOOLEAN`"
                       },
@@ -726,7 +726,7 @@
                         "a": true,
                         "k": "query",
                         "n": "is_smartlink",
-                        "or": "is_smartlink",
+                        "or": "isSmartlink",
                         "r": false,
                         "t": "`$BOOLEAN`"
                       },
@@ -800,7 +800,7 @@
                         "a": true,
                         "k": "query",
                         "n": "callback_url",
-                        "or": "callback_url",
+                        "or": "callbackUrl",
                         "r": false,
                         "t": "`$STRING`"
                       },
@@ -808,7 +808,7 @@
                         "a": true,
                         "k": "query",
                         "n": "is_couponing",
-                        "or": "is_couponing",
+                        "or": "isCouponing",
                         "r": false,
                         "t": "`$BOOLEAN`"
                       },
@@ -824,7 +824,7 @@
                         "a": true,
                         "k": "query",
                         "n": "merchant_id",
-                        "or": "merchant_id",
+                        "or": "merchantId",
                         "r": false,
                         "t": "`$STRING`"
                       },
@@ -832,7 +832,7 @@
                         "a": true,
                         "k": "query",
                         "n": "placement_id",
-                        "or": "placement_id",
+                        "or": "placementId",
                         "r": false,
                         "t": "`$STRING`"
                       },
@@ -840,7 +840,7 @@
                         "a": true,
                         "k": "query",
                         "n": "project_id",
-                        "or": "project_id",
+                        "or": "projectId",
                         "r": true,
                         "t": "`$STRING`"
                       },
@@ -1011,7 +1011,7 @@
                         "a": true,
                         "k": "query",
                         "n": "is_couponing",
-                        "or": "is_couponing",
+                        "or": "isCouponing",
                         "r": false,
                         "t": "`$BOOLEAN`"
                       },
@@ -1213,7 +1213,7 @@
                         "a": true,
                         "k": "query",
                         "n": "is_couponing",
-                        "or": "is_couponing",
+                        "or": "isCouponing",
                         "r": false,
                         "t": "`$BOOLEAN`"
                       },
@@ -1245,7 +1245,7 @@
                         "a": true,
                         "k": "query",
                         "n": "merchant_id",
-                        "or": "merchant_id",
+                        "or": "merchantId",
                         "r": false,
                         "t": "`$STRING`"
                       },
@@ -1253,7 +1253,7 @@
                         "a": true,
                         "k": "query",
                         "n": "offer_id",
-                        "or": "offer_id",
+                        "or": "offerId",
                         "r": false,
                         "t": "`$STRING`"
                       },
@@ -1261,7 +1261,7 @@
                         "a": true,
                         "k": "query",
                         "n": "placement_id",
-                        "or": "placement_id",
+                        "or": "placementId",
                         "r": false,
                         "t": "`$STRING`"
                       },
@@ -1336,7 +1336,7 @@
                         "ex": "12345678,87654321",
                         "k": "query",
                         "n": "ean",
-                        "or": "ean",
+                        "or": "eans",
                         "r": true,
                         "t": "`$STRING`"
                       },
@@ -1344,7 +1344,7 @@
                         "a": true,
                         "k": "query",
                         "n": "is_couponing",
-                        "or": "is_couponing",
+                        "or": "isCouponing",
                         "r": false,
                         "t": "`$BOOLEAN`"
                       },
@@ -1360,7 +1360,7 @@
                         "a": true,
                         "k": "query",
                         "n": "merchant_id",
-                        "or": "merchant_id",
+                        "or": "merchantId",
                         "r": false,
                         "t": "`$STRING`"
                       },
@@ -1368,7 +1368,7 @@
                         "a": true,
                         "k": "query",
                         "n": "placement_id",
-                        "or": "placement_id",
+                        "or": "placementId",
                         "r": false,
                         "t": "`$STRING`"
                       }
@@ -2657,7 +2657,12 @@
         },
         "base": "http://localhost:8000",
         "clean": {
-          "keys": "key,token,id"
+          "active": true,
+          "hint": "0",
+          "keys": "key,secret,token,password,passwd,authorization,cookie,credential,signature",
+          "mask": "[redacted]",
+          "min": "4",
+          "values": ""
         },
         "entity": {
           "`$CHILD`": {

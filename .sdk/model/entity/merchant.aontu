@@ -58,7 +58,7 @@ main: kit: entity: merchant: {
               {
                 k: "query"
                 n: "is_couponing"
-                or: "is_couponing"
+                or: "isCouponing"
                 r: false
                 t: "`$BOOLEAN`"
               }

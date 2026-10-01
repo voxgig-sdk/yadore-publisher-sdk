@@ -33,6 +33,8 @@ require_relative 'transform_response'
 
 YadorePublisherUtility.registrar = ->(u) {
   u.clean = YadorePublisherUtilities::Clean
+  u.clean_add = YadorePublisherUtilities::CleanAdd
+  u.clean_explain = YadorePublisherUtilities::CleanExplain
   u.done = YadorePublisherUtilities::Done
   u.make_error = YadorePublisherUtilities::MakeError
   u.feature_add = YadorePublisherUtilities::FeatureAdd

@@ -138,7 +138,7 @@ main: kit: entity: offer: {
               {
                 k: "query"
                 n: "is_couponing"
-                or: "is_couponing"
+                or: "isCouponing"
                 r: false
                 t: "`$BOOLEAN`"
               }
@@ -166,21 +166,21 @@ main: kit: entity: offer: {
               {
                 k: "query"
                 n: "merchant_id"
-                or: "merchant_id"
+                or: "merchantId"
                 r: false
                 t: "`$STRING`"
               }
               {
                 k: "query"
                 n: "offer_id"
-                or: "offer_id"
+                or: "offerId"
                 r: false
                 t: "`$STRING`"
               }
               {
                 k: "query"
                 n: "placement_id"
-                or: "placement_id"
+                or: "placementId"
                 r: false
                 t: "`$STRING`"
               }
@@ -248,14 +248,14 @@ main: kit: entity: offer: {
                 ex: "12345678,87654321"
                 k: "query"
                 n: "ean"
-                or: "ean"
+                or: "eans"
                 r: true
                 t: "`$STRING`"
               }
               {
                 k: "query"
                 n: "is_couponing"
-                or: "is_couponing"
+                or: "isCouponing"
                 r: false
                 t: "`$BOOLEAN`"
               }
@@ -269,14 +269,14 @@ main: kit: entity: offer: {
               {
                 k: "query"
                 n: "merchant_id"
-                or: "merchant_id"
+                or: "merchantId"
                 r: false
                 t: "`$STRING`"
               }
               {
                 k: "query"
                 n: "placement_id"
-                or: "placement_id"
+                or: "placementId"
                 r: false
                 t: "`$STRING`"
               }

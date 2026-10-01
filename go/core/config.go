@@ -266,7 +266,7 @@ func MakeConfig() map[string]any {
 								"rename": map[string]any{},
 								"transform": map[string]any{
 									"req": "`reqdata`",
-									"res": "`body`",
+									"res": "`body.salesByMerchant`",
 								},
 								"args": map[string]any{
 									"query": []any{
@@ -639,19 +639,19 @@ func MakeConfig() map[string]any {
 									"query": []any{
 										map[string]any{
 											"name": "has_homepage",
-											"orig": "has_homepage",
+											"orig": "hasHomepage",
 											"type": "`$BOOLEAN`",
 											"kind": "query",
 										},
 										map[string]any{
 											"name": "is_couponing",
-											"orig": "is_couponing",
+											"orig": "isCouponing",
 											"type": "`$BOOLEAN`",
 											"kind": "query",
 										},
 										map[string]any{
 											"name": "is_smartlink",
-											"orig": "is_smartlink",
+											"orig": "isSmartlink",
 											"type": "`$BOOLEAN`",
 											"kind": "query",
 										},
@@ -713,13 +713,13 @@ func MakeConfig() map[string]any {
 									"query": []any{
 										map[string]any{
 											"name": "callback_url",
-											"orig": "callback_url",
+											"orig": "callbackUrl",
 											"type": "`$STRING`",
 											"kind": "query",
 										},
 										map[string]any{
 											"name": "is_couponing",
-											"orig": "is_couponing",
+											"orig": "isCouponing",
 											"type": "`$BOOLEAN`",
 											"kind": "query",
 										},
@@ -732,19 +732,19 @@ func MakeConfig() map[string]any {
 										},
 										map[string]any{
 											"name": "merchant_id",
-											"orig": "merchant_id",
+											"orig": "merchantId",
 											"type": "`$STRING`",
 											"kind": "query",
 										},
 										map[string]any{
 											"name": "placement_id",
-											"orig": "placement_id",
+											"orig": "placementId",
 											"type": "`$STRING`",
 											"kind": "query",
 										},
 										map[string]any{
 											"name": "project_id",
-											"orig": "project_id",
+											"orig": "projectId",
 											"type": "`$STRING`",
 											"kind": "query",
 											"reqd": true,
@@ -889,7 +889,7 @@ func MakeConfig() map[string]any {
 									"query": []any{
 										map[string]any{
 											"name": "is_couponing",
-											"orig": "is_couponing",
+											"orig": "isCouponing",
 											"type": "`$BOOLEAN`",
 											"kind": "query",
 										},
@@ -1046,7 +1046,7 @@ func MakeConfig() map[string]any {
 										},
 										map[string]any{
 											"name": "is_couponing",
-											"orig": "is_couponing",
+											"orig": "isCouponing",
 											"type": "`$BOOLEAN`",
 											"kind": "query",
 										},
@@ -1071,19 +1071,19 @@ func MakeConfig() map[string]any {
 										},
 										map[string]any{
 											"name": "merchant_id",
-											"orig": "merchant_id",
+											"orig": "merchantId",
 											"type": "`$STRING`",
 											"kind": "query",
 										},
 										map[string]any{
 											"name": "offer_id",
-											"orig": "offer_id",
+											"orig": "offerId",
 											"type": "`$STRING`",
 											"kind": "query",
 										},
 										map[string]any{
 											"name": "placement_id",
-											"orig": "placement_id",
+											"orig": "placementId",
 											"type": "`$STRING`",
 											"kind": "query",
 										},
@@ -1153,7 +1153,7 @@ func MakeConfig() map[string]any {
 									"query": []any{
 										map[string]any{
 											"name": "ean",
-											"orig": "ean",
+											"orig": "eans",
 											"type": "`$STRING`",
 											"kind": "query",
 											"reqd": true,
@@ -1161,7 +1161,7 @@ func MakeConfig() map[string]any {
 										},
 										map[string]any{
 											"name": "is_couponing",
-											"orig": "is_couponing",
+											"orig": "isCouponing",
 											"type": "`$BOOLEAN`",
 											"kind": "query",
 										},
@@ -1174,13 +1174,13 @@ func MakeConfig() map[string]any {
 										},
 										map[string]any{
 											"name": "merchant_id",
-											"orig": "merchant_id",
+											"orig": "merchantId",
 											"type": "`$STRING`",
 											"kind": "query",
 										},
 										map[string]any{
 											"name": "placement_id",
-											"orig": "placement_id",
+											"orig": "placementId",
 											"type": "`$STRING`",
 											"kind": "query",
 										},

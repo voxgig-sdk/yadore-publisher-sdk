@@ -86,21 +86,21 @@ main: kit: entity: deeplink_merchant: {
               {
                 k: "query"
                 n: "has_homepage"
-                or: "has_homepage"
+                or: "hasHomepage"
                 r: false
                 t: "`$BOOLEAN`"
               }
               {
                 k: "query"
                 n: "is_couponing"
-                or: "is_couponing"
+                or: "isCouponing"
                 r: false
                 t: "`$BOOLEAN`"
               }
               {
                 k: "query"
                 n: "is_smartlink"
-                or: "is_smartlink"
+                or: "isSmartlink"
                 r: false
                 t: "`$BOOLEAN`"
               }

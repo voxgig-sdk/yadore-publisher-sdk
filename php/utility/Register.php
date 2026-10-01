@@ -37,6 +37,8 @@ require_once __DIR__ . '/TransformResponse.php';
 
 YadorePublisherUtility::setRegistrar(function (YadorePublisherUtility $u): void {
     $u->clean = [YadorePublisherClean::class, 'call'];
+    $u->clean_add = [YadorePublisherClean::class, 'add'];
+    $u->clean_explain = [YadorePublisherDone::class, 'clean_explain'];
     $u->done = [YadorePublisherDone::class, 'call'];
     $u->make_error = [YadorePublisherMakeError::class, 'call'];
     $u->feature_add = [YadorePublisherFeatureAdd::class, 'call'];
