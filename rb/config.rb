@@ -79,6 +79,7 @@ module YadorePublisherConfig
           },
           "optspec" => {
             "clearTimer" => "`$FUNCTION`",
+            "now" => "`$FUNCTION`",
             "setTimer" => "`$FUNCTION`",
           },
           "strict" => false,
@@ -185,6 +186,7 @@ module YadorePublisherConfig
                         "type" => "`$STRING`",
                         "kind" => "query",
                         "reqd" => true,
+                        "field" => true,
                       },
                       {
                         "name" => "format",
@@ -198,6 +200,7 @@ module YadorePublisherConfig
                         "orig" => "market",
                         "type" => "`$STRING`",
                         "kind" => "query",
+                        "field" => true,
                       },
                     ],
                   },
@@ -205,8 +208,18 @@ module YadorePublisherConfig
                     "exist" => [
                       "date",
                       "format",
-                      "market",
                     ],
+                  },
+                  "response" => {
+                    "alternatives" => [
+                      {
+                        "binary" => true,
+                        "kind" => "raw",
+                        "media" => "text/csv",
+                      },
+                    ],
+                    "kind" => "json",
+                    "media" => "application/json",
                   },
                 },
               ],
@@ -297,6 +310,7 @@ module YadorePublisherConfig
                         "orig" => "market",
                         "type" => "`$STRING`",
                         "kind" => "query",
+                        "field" => true,
                       },
                       {
                         "name" => "to",
@@ -311,9 +325,19 @@ module YadorePublisherConfig
                     "exist" => [
                       "format",
                       "from",
-                      "market",
                       "to",
                     ],
+                  },
+                  "response" => {
+                    "alternatives" => [
+                      {
+                        "binary" => true,
+                        "kind" => "raw",
+                        "media" => "text/csv",
+                      },
+                    ],
+                    "kind" => "json",
+                    "media" => "application/json",
                   },
                 },
               ],
@@ -404,6 +428,17 @@ module YadorePublisherConfig
                       "to",
                     ],
                   },
+                  "response" => {
+                    "alternatives" => [
+                      {
+                        "binary" => true,
+                        "kind" => "raw",
+                        "media" => "text/csv",
+                      },
+                    ],
+                    "kind" => "json",
+                    "media" => "application/json",
+                  },
                 },
               ],
             },
@@ -466,6 +501,10 @@ module YadorePublisherConfig
                     "exist" => [
                       "date",
                     ],
+                  },
+                  "response" => {
+                    "kind" => "json",
+                    "media" => "application/json",
                   },
                 },
               ],
@@ -548,6 +587,10 @@ module YadorePublisherConfig
                   },
                   "args" => {},
                   "select" => {},
+                  "response" => {
+                    "kind" => "json",
+                    "media" => "application/json",
+                  },
                 },
               ],
             },
@@ -674,11 +717,12 @@ module YadorePublisherConfig
                   },
                   "select" => {
                     "exist" => [
-                      "has_homepage",
-                      "is_couponing",
-                      "is_smartlink",
                       "market",
                     ],
+                  },
+                  "response" => {
+                    "kind" => "json",
+                    "media" => "application/json",
                   },
                 },
               ],
@@ -768,11 +812,7 @@ module YadorePublisherConfig
                   },
                   "select" => {
                     "exist" => [
-                      "callback_url",
-                      "is_couponing",
                       "market",
-                      "merchant_id",
-                      "placement_id",
                       "project_id",
                       "url",
                     ],
@@ -826,6 +866,10 @@ module YadorePublisherConfig
                   },
                   "args" => {},
                   "select" => {},
+                  "response" => {
+                    "kind" => "json",
+                    "media" => "application/json",
+                  },
                 },
               ],
             },
@@ -912,9 +956,12 @@ module YadorePublisherConfig
                   },
                   "select" => {
                     "exist" => [
-                      "is_couponing",
                       "market",
                     ],
+                  },
+                  "response" => {
+                    "kind" => "json",
+                    "media" => "application/json",
                   },
                 },
               ],
@@ -1113,17 +1160,12 @@ module YadorePublisherConfig
                   },
                   "select" => {
                     "exist" => [
-                      "ean",
-                      "is_couponing",
-                      "keyword",
-                      "limit",
                       "market",
-                      "merchant_id",
-                      "offer_id",
-                      "placement_id",
-                      "precision",
-                      "sort",
                     ],
+                  },
+                  "response" => {
+                    "kind" => "json",
+                    "media" => "application/json",
                   },
                 },
               ],
@@ -1198,11 +1240,12 @@ module YadorePublisherConfig
                     "$action" => "bulk",
                     "exist" => [
                       "ean",
-                      "is_couponing",
                       "market",
-                      "merchant_id",
-                      "placement_id",
                     ],
+                  },
+                  "response" => {
+                    "kind" => "json",
+                    "media" => "application/json",
                   },
                 },
               ],
@@ -1290,6 +1333,7 @@ module YadorePublisherConfig
                         "type" => "`$STRING`",
                         "kind" => "query",
                         "reqd" => true,
+                        "field" => true,
                       },
                       {
                         "name" => "format",
@@ -1303,6 +1347,7 @@ module YadorePublisherConfig
                         "orig" => "market",
                         "type" => "`$STRING`",
                         "kind" => "query",
+                        "field" => true,
                       },
                     ],
                   },
@@ -1310,8 +1355,18 @@ module YadorePublisherConfig
                     "exist" => [
                       "date",
                       "format",
-                      "market",
                     ],
+                  },
+                  "response" => {
+                    "alternatives" => [
+                      {
+                        "binary" => true,
+                        "kind" => "raw",
+                        "media" => "text/csv",
+                      },
+                    ],
+                    "kind" => "json",
+                    "media" => "application/json",
                   },
                 },
               ],
@@ -1378,6 +1433,7 @@ module YadorePublisherConfig
                         "type" => "`$STRING`",
                         "kind" => "query",
                         "reqd" => true,
+                        "field" => true,
                       },
                       {
                         "name" => "format",
@@ -1393,6 +1449,16 @@ module YadorePublisherConfig
                       "date",
                       "format",
                     ],
+                  },
+                  "response" => {
+                    "alternatives" => [
+                      {
+                        "kind" => "raw",
+                        "media" => "text/csv",
+                      },
+                    ],
+                    "kind" => "json",
+                    "media" => "application/json",
                   },
                 },
               ],
@@ -1475,9 +1541,12 @@ module YadorePublisherConfig
                   "select" => {
                     "exist" => [
                       "from",
-                      "market",
                       "to",
                     ],
+                  },
+                  "response" => {
+                    "kind" => "json",
+                    "media" => "application/json",
                   },
                 },
               ],
@@ -1541,6 +1610,10 @@ module YadorePublisherConfig
                     "exist" => [
                       "date",
                     ],
+                  },
+                  "response" => {
+                    "kind" => "json",
+                    "media" => "application/json",
                   },
                 },
               ],

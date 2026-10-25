@@ -67,6 +67,7 @@ local function make_config()
         },
         ["optspec"] = {
           ["clearTimer"] = "`$FUNCTION`",
+          ["now"] = "`$FUNCTION`",
           ["setTimer"] = "`$FUNCTION`",
         },
         ["strict"] = false,
@@ -173,6 +174,7 @@ local function make_config()
                       ["type"] = "`$STRING`",
                       ["kind"] = "query",
                       ["reqd"] = true,
+                      ["field"] = true,
                     },
                     {
                       ["name"] = "format",
@@ -186,6 +188,7 @@ local function make_config()
                       ["orig"] = "market",
                       ["type"] = "`$STRING`",
                       ["kind"] = "query",
+                      ["field"] = true,
                     },
                   },
                 },
@@ -193,8 +196,18 @@ local function make_config()
                   ["exist"] = {
                     "date",
                     "format",
-                    "market",
                   },
+                },
+                ["response"] = {
+                  ["alternatives"] = {
+                    {
+                      ["binary"] = true,
+                      ["kind"] = "raw",
+                      ["media"] = "text/csv",
+                    },
+                  },
+                  ["kind"] = "json",
+                  ["media"] = "application/json",
                 },
               },
             },
@@ -285,6 +298,7 @@ local function make_config()
                       ["orig"] = "market",
                       ["type"] = "`$STRING`",
                       ["kind"] = "query",
+                      ["field"] = true,
                     },
                     {
                       ["name"] = "to",
@@ -299,9 +313,19 @@ local function make_config()
                   ["exist"] = {
                     "format",
                     "from",
-                    "market",
                     "to",
                   },
+                },
+                ["response"] = {
+                  ["alternatives"] = {
+                    {
+                      ["binary"] = true,
+                      ["kind"] = "raw",
+                      ["media"] = "text/csv",
+                    },
+                  },
+                  ["kind"] = "json",
+                  ["media"] = "application/json",
                 },
               },
             },
@@ -392,6 +416,17 @@ local function make_config()
                     "to",
                   },
                 },
+                ["response"] = {
+                  ["alternatives"] = {
+                    {
+                      ["binary"] = true,
+                      ["kind"] = "raw",
+                      ["media"] = "text/csv",
+                    },
+                  },
+                  ["kind"] = "json",
+                  ["media"] = "application/json",
+                },
               },
             },
           },
@@ -454,6 +489,10 @@ local function make_config()
                   ["exist"] = {
                     "date",
                   },
+                },
+                ["response"] = {
+                  ["kind"] = "json",
+                  ["media"] = "application/json",
                 },
               },
             },
@@ -536,6 +575,10 @@ local function make_config()
                 },
                 ["args"] = {},
                 ["select"] = {},
+                ["response"] = {
+                  ["kind"] = "json",
+                  ["media"] = "application/json",
+                },
               },
             },
           },
@@ -662,11 +705,12 @@ local function make_config()
                 },
                 ["select"] = {
                   ["exist"] = {
-                    "has_homepage",
-                    "is_couponing",
-                    "is_smartlink",
                     "market",
                   },
+                },
+                ["response"] = {
+                  ["kind"] = "json",
+                  ["media"] = "application/json",
                 },
               },
             },
@@ -756,11 +800,7 @@ local function make_config()
                 },
                 ["select"] = {
                   ["exist"] = {
-                    "callback_url",
-                    "is_couponing",
                     "market",
-                    "merchant_id",
-                    "placement_id",
                     "project_id",
                     "url",
                   },
@@ -814,6 +854,10 @@ local function make_config()
                 },
                 ["args"] = {},
                 ["select"] = {},
+                ["response"] = {
+                  ["kind"] = "json",
+                  ["media"] = "application/json",
+                },
               },
             },
           },
@@ -900,9 +944,12 @@ local function make_config()
                 },
                 ["select"] = {
                   ["exist"] = {
-                    "is_couponing",
                     "market",
                   },
+                },
+                ["response"] = {
+                  ["kind"] = "json",
+                  ["media"] = "application/json",
                 },
               },
             },
@@ -1101,17 +1148,12 @@ local function make_config()
                 },
                 ["select"] = {
                   ["exist"] = {
-                    "ean",
-                    "is_couponing",
-                    "keyword",
-                    "limit",
                     "market",
-                    "merchant_id",
-                    "offer_id",
-                    "placement_id",
-                    "precision",
-                    "sort",
                   },
+                },
+                ["response"] = {
+                  ["kind"] = "json",
+                  ["media"] = "application/json",
                 },
               },
             },
@@ -1186,11 +1228,12 @@ local function make_config()
                   ["$action"] = "bulk",
                   ["exist"] = {
                     "ean",
-                    "is_couponing",
                     "market",
-                    "merchant_id",
-                    "placement_id",
                   },
+                },
+                ["response"] = {
+                  ["kind"] = "json",
+                  ["media"] = "application/json",
                 },
               },
             },
@@ -1278,6 +1321,7 @@ local function make_config()
                       ["type"] = "`$STRING`",
                       ["kind"] = "query",
                       ["reqd"] = true,
+                      ["field"] = true,
                     },
                     {
                       ["name"] = "format",
@@ -1291,6 +1335,7 @@ local function make_config()
                       ["orig"] = "market",
                       ["type"] = "`$STRING`",
                       ["kind"] = "query",
+                      ["field"] = true,
                     },
                   },
                 },
@@ -1298,8 +1343,18 @@ local function make_config()
                   ["exist"] = {
                     "date",
                     "format",
-                    "market",
                   },
+                },
+                ["response"] = {
+                  ["alternatives"] = {
+                    {
+                      ["binary"] = true,
+                      ["kind"] = "raw",
+                      ["media"] = "text/csv",
+                    },
+                  },
+                  ["kind"] = "json",
+                  ["media"] = "application/json",
                 },
               },
             },
@@ -1366,6 +1421,7 @@ local function make_config()
                       ["type"] = "`$STRING`",
                       ["kind"] = "query",
                       ["reqd"] = true,
+                      ["field"] = true,
                     },
                     {
                       ["name"] = "format",
@@ -1381,6 +1437,16 @@ local function make_config()
                     "date",
                     "format",
                   },
+                },
+                ["response"] = {
+                  ["alternatives"] = {
+                    {
+                      ["kind"] = "raw",
+                      ["media"] = "text/csv",
+                    },
+                  },
+                  ["kind"] = "json",
+                  ["media"] = "application/json",
                 },
               },
             },
@@ -1463,9 +1529,12 @@ local function make_config()
                 ["select"] = {
                   ["exist"] = {
                     "from",
-                    "market",
                     "to",
                   },
+                },
+                ["response"] = {
+                  ["kind"] = "json",
+                  ["media"] = "application/json",
                 },
               },
             },
@@ -1529,6 +1598,10 @@ local function make_config()
                   ["exist"] = {
                     "date",
                   },
+                },
+                ["response"] = {
+                  ["kind"] = "json",
+                  ["media"] = "application/json",
                 },
               },
             },

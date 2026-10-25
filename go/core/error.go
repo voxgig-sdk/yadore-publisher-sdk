@@ -12,6 +12,8 @@ type YadorePublisherError struct {
 	Ctx    *Context `json:"-"`
 	Result any
 	Spec   any
+	// The HTTP status, -1 when there was no response.
+	Status int
 }
 
 func NewYadorePublisherError(code string, msg string, ctx *Context) *YadorePublisherError {
@@ -21,7 +23,12 @@ func NewYadorePublisherError(code string, msg string, ctx *Context) *YadorePubli
 		Code:               code,
 		Msg:                msg,
 		Ctx:                ctx,
+		Status:             -1,
 	}
+}
+
+func (e *YadorePublisherError) NotFound() bool {
+	return 404 == e.Status
 }
 
 func (e *YadorePublisherError) Error() string {
@@ -35,6 +42,7 @@ func (e *YadorePublisherError) Record() map[string]any {
 		"sdk":     e.Sdk,
 		"code":    e.Code,
 		"message": e.Msg,
+		"status":  e.Status,
 		"result":  e.Result,
 		"spec":    e.Spec,
 	}

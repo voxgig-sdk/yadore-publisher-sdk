@@ -75,9 +75,12 @@ main: kit: entity: merchant: {
           o: "/v2/merchant"
           q: {
             exist: [
-              "is_couponing"
               "market"
             ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
           }
           s: [
             {

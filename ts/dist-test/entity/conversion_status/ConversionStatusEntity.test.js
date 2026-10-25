@@ -54,6 +54,14 @@ const utility_1 = require("../../utility");
         const ent = testsdk.ConversionStatus();
         (0, node_assert_1.default)(null != ent);
     });
+    (0, node_test_1.test)('validate', async (t) => {
+        if (null == __1.config.feature?.validate) {
+            t.skip('feature not present in this SDK: validate');
+            return;
+        }
+        const client = __1.YadorePublisherSDK.test(undefined, { feature: { validate: { active: true } } });
+        await node_assert_1.default.rejects(client.ConversionStatus().load({ "date": 1 }), (err) => 'validate_failed' === err.code);
+    });
     (0, node_test_1.test)('basic', async (t) => {
         const live = 'TRUE' === process.env.YADORE_PUBLISHER_TEST_LIVE;
         for (const op of ['load']) {
@@ -62,7 +70,7 @@ const utility_1 = require("../../utility");
         }
         const setup = basicSetup();
         if (setup.live) {
-            return (0, live_entity_1.runLiveEntity)(setup, { "active": true, "alias": { "field": {} }, "fields": { "status": { "a": true, "h": "Status", "n": "status", "r": false, "t": "`$STRING`", "key$": "status", "index$": 0 } }, "name": "conversion_status", "op": { "load": { "input": "data", "name": "load", "points": [{ "a": true, "co": { "id": "GET /v2/conversion/status", "source": "openapi3", "version": 2 }, "g": { "query": [{ "a": true, "k": "query", "n": "date", "or": "date", "r": true, "t": "`$STRING`", "index$": 0 }] }, "k": "http", "m": "GET", "o": "/v2/conversion/status", "q": { "exist": ["date"] }, "r": {}, "s": [{ "lit": "v2" }, { "lit": "conversion" }, { "lit": "status" }], "t": { "req": "`reqdata`", "res": "`body`" }, "index$": 0 }], "key$": "load" } }, "relations": { "ancestors": [] }, "key$": "conversion_status", "name__orig": "conversion_status", "Name": "ConversionStatus", "name_": "conversion_status", "name-": "conversion-status", "NAME": "CONVERSION_STATUS", "index$": 3 }, { "active": true, "entity": "conversion_status", "key$": "BasicConversionStatusFlow", "kind": "basic", "name": "BasicConversionStatusFlow", "param": {}, "step": [{ "a": true, "d": {}, "i": { "ref": "conversion_status_ref01", "srcdatavar": "conversion_status_ref01_data", "suffix": "_dt0" }, "m": {}, "o": "load", "s": [], "v": [{ "apply": "TextFieldMark", "def": { "mark": "Mark01-conversion_status_ref01" } }], "index$": 0 }] }, 'ConversionStatus', { "GET /v2/conversion/status": { "protocol": "http", "parameters": [{ "name": "date", "description": "Date for which to generate a report. This date is in the UTC timezone. This parameter has to be in format `YYYY-mm-dd`, for example `2018-01-31`.", "in": "query", "required": true, "schema": { "type": "string", "format": "date" }, "x-ref": "#/components/parameters/Date", "index$": 0 }] } });
+            return (0, live_entity_1.runLiveEntity)(setup, { "active": true, "alias": { "field": {} }, "fields": { "status": { "a": true, "h": "Status", "n": "status", "r": false, "t": "`$STRING`", "key$": "status", "index$": 0 } }, "name": "conversion_status", "op": { "load": { "input": "data", "name": "load", "points": [{ "a": true, "co": { "id": "GET /v2/conversion/status", "source": "openapi3", "version": 2 }, "g": { "query": [{ "a": true, "k": "query", "n": "date", "or": "date", "r": true, "t": "`$STRING`", "index$": 0 }] }, "k": "http", "m": "GET", "o": "/v2/conversion/status", "q": { "exist": ["date"] }, "r": {}, "rs": { "kind": "json", "media": "application/json" }, "s": [{ "lit": "v2" }, { "lit": "conversion" }, { "lit": "status" }], "t": { "req": "`reqdata`", "res": "`body`" }, "index$": 0 }], "key$": "load" } }, "relations": { "ancestors": [] }, "key$": "conversion_status", "name__orig": "conversion_status", "Name": "ConversionStatus", "name_": "conversion_status", "name-": "conversion-status", "NAME": "CONVERSION_STATUS", "index$": 3 }, { "active": true, "entity": "conversion_status", "key$": "BasicConversionStatusFlow", "kind": "basic", "name": "BasicConversionStatusFlow", "param": {}, "step": [{ "a": true, "d": {}, "i": { "ref": "conversion_status_ref01", "srcdatavar": "conversion_status_ref01_data", "suffix": "_dt0" }, "m": {}, "o": "load", "s": [], "v": [{ "apply": "TextFieldMark", "def": { "mark": "Mark01-conversion_status_ref01" } }], "index$": 0 }] }, 'ConversionStatus', { "GET /v2/conversion/status": { "protocol": "http", "parameters": [{ "name": "date", "description": "Date for which to generate a report. This date is in the UTC timezone. This parameter has to be in format `YYYY-mm-dd`, for example `2018-01-31`.", "in": "query", "required": true, "schema": { "type": "string", "format": "date" }, "x-ref": "#/components/parameters/Date", "index$": 0 }] } }, { strict: LIVE_STRICT, t });
         }
         const client = setup.client;
         const struct = setup.struct;
@@ -76,6 +84,11 @@ const utility_1 = require("../../utility");
         (0, node_assert_1.default)(null != conversion_status_ref01_data_dt0);
     });
 });
+// main.kit.test.live.strict is true (the default is true): a live
+// request that fails, or a live test missing an input it needs,
+// fails the test.
+// An account with no record for a test to read skips it either way.
+const LIVE_STRICT = true;
 function basicSetup(extra) {
     // TODO: fix test def options
     const options = {}; // null

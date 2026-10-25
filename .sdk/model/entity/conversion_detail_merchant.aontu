@@ -82,9 +82,19 @@ main: kit: entity: conversion_detail_merchant: {
             exist: [
               "format"
               "from"
-              "market"
               "to"
             ]
+          }
+          rs: {
+            alternatives: [
+              {
+                binary: true
+                kind: "raw"
+                media: "text/csv"
+              }
+            ]
+            kind: "json"
+            media: "application/json"
           }
           s: [
             {

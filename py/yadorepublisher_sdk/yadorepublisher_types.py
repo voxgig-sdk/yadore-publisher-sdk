@@ -41,13 +41,19 @@ class ConversionDetailMerchant(TypedDict, total=False):
     sales: int
 
 
-class ConversionDetailMerchantListMatchRequired(TypedDict):
-    format: str
-    to: str
+ConversionDetailMerchantListMatchRequired = TypedDict('ConversionDetailMerchantListMatchRequired', {
+    "format": str,
+    "from": str,
+    "to": str,
+})
+
+ConversionDetailMerchantListMatchOptional = TypedDict('ConversionDetailMerchantListMatchOptional', {
+    "market": str,
+}, total=False)
 
 
-class ConversionDetailMerchantListMatch(ConversionDetailMerchantListMatchRequired, total=False):
-    market: str
+class ConversionDetailMerchantListMatch(ConversionDetailMerchantListMatchRequired, ConversionDetailMerchantListMatchOptional):
+    pass
 
 
 class ConversionGeneral(TypedDict, total=False):
@@ -56,9 +62,11 @@ class ConversionGeneral(TypedDict, total=False):
     total: dict
 
 
-class ConversionGeneralLoadMatch(TypedDict):
-    format: str
-    to: str
+ConversionGeneralLoadMatch = TypedDict('ConversionGeneralLoadMatch', {
+    "format": str,
+    "from": str,
+    "to": str,
+})
 
 
 class ConversionStatus(TypedDict, total=False):
@@ -88,11 +96,8 @@ class DeeplinkCreateDataRequired(TypedDict):
 
 
 class DeeplinkCreateData(DeeplinkCreateDataRequired, total=False):
-    deeplinks: list
-    found: int
     isCouponing: bool
     placementId: str
-    total: int
 
 
 class DeeplinkMerchant(TypedDict, total=False):
@@ -240,12 +245,18 @@ class ReportModified(TypedDict, total=False):
     modifiedDate: str
 
 
-class ReportModifiedLoadMatchRequired(TypedDict):
-    to: str
+ReportModifiedLoadMatchRequired = TypedDict('ReportModifiedLoadMatchRequired', {
+    "from": str,
+    "to": str,
+})
+
+ReportModifiedLoadMatchOptional = TypedDict('ReportModifiedLoadMatchOptional', {
+    "market": str,
+}, total=False)
 
 
-class ReportModifiedLoadMatch(ReportModifiedLoadMatchRequired, total=False):
-    market: str
+class ReportModifiedLoadMatch(ReportModifiedLoadMatchRequired, ReportModifiedLoadMatchOptional):
+    pass
 
 
 class ReportStatus(TypedDict, total=False):

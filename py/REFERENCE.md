@@ -149,14 +149,14 @@ conversion_detail = client.ConversionDetail()
 
 ### Operations
 
-#### `list(reqmatch=None, ctrl=None) -> list`
+#### `list(reqmatch=None, ctrl=None) -> list[ConversionDetailEntity]`
 
-List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list and raises on error.
+List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list of entities, one per record, and raises on error.
 
 ```python
 results = client.ConversionDetail().list({"date": "example", "format": "example"})
 for conversion_detail in results:
-    print(conversion_detail)
+    print(conversion_detail.data_get())
 ```
 
 ### Common Methods
@@ -205,14 +205,14 @@ conversion_detail_merchant = client.ConversionDetailMerchant()
 
 ### Operations
 
-#### `list(reqmatch=None, ctrl=None) -> list`
+#### `list(reqmatch=None, ctrl=None) -> list[ConversionDetailMerchantEntity]`
 
-List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list and raises on error.
+List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list of entities, one per record, and raises on error.
 
 ```python
 results = client.ConversionDetailMerchant().list({"format": "example", "from": "example", "to": "example"})
 for conversion_detail_merchant in results:
-    print(conversion_detail_merchant)
+    print(conversion_detail_merchant.data_get())
 ```
 
 ### Common Methods
@@ -260,9 +260,9 @@ conversion_general = client.ConversionGeneral()
 
 ### Operations
 
-#### `load(reqmatch, ctrl=None) -> dict`
+#### `load(reqmatch, ctrl=None) -> ConversionGeneralEntity`
 
-Load a single entity matching the given criteria. Returns the entity data and raises on error.
+Load a single entity matching the given criteria. Returns the entity, whose record `data_get()` reads, and raises on error.
 
 ```python
 result = client.ConversionGeneral().load({"format": "format", "from": "from", "to": "to"})
@@ -311,9 +311,9 @@ conversion_status = client.ConversionStatus()
 
 ### Operations
 
-#### `load(reqmatch, ctrl=None) -> dict`
+#### `load(reqmatch, ctrl=None) -> ConversionStatusEntity`
 
-Load a single entity matching the given criteria. Returns the entity data and raises on error.
+Load a single entity matching the given criteria. Returns the entity, whose record `data_get()` reads, and raises on error.
 
 ```python
 result = client.ConversionStatus().load({"date": "date"})
@@ -368,9 +368,9 @@ deeplink = client.Deeplink()
 
 ### Operations
 
-#### `create(reqdata, ctrl=None) -> dict`
+#### `create(reqdata, ctrl=None) -> DeeplinkEntity`
 
-Create a new entity with the given data. Returns the created entity data and raises on error.
+Create a new entity with the given data. Returns the created entity and raises on error.
 
 ```python
 result = client.Deeplink().create({
@@ -430,14 +430,14 @@ deeplink_merchant = client.DeeplinkMerchant()
 
 ### Operations
 
-#### `list(reqmatch=None, ctrl=None) -> list`
+#### `list(reqmatch=None, ctrl=None) -> list[DeeplinkMerchantEntity]`
 
-List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list and raises on error.
+List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list of entities, one per record, and raises on error.
 
 ```python
 results = client.DeeplinkMerchant().list({"market": "example"})
 for deeplink_merchant in results:
-    print(deeplink_merchant)
+    print(deeplink_merchant.data_get())
 ```
 
 ### Common Methods
@@ -477,9 +477,9 @@ dnt = client.Dnt()
 
 ### Operations
 
-#### `load(reqmatch, ctrl=None) -> dict`
+#### `load(reqmatch, ctrl=None) -> DntEntity`
 
-Load a single entity matching the given criteria. Returns the entity data and raises on error.
+Load a single entity matching the given criteria. Returns the entity, whose record `data_get()` reads, and raises on error.
 
 ```python
 result = client.Dnt().load({"market": "market", "project_id": "project_id", "url": "url"})
@@ -528,14 +528,14 @@ market = client.Market()
 
 ### Operations
 
-#### `list(reqmatch=None, ctrl=None) -> list`
+#### `list(reqmatch=None, ctrl=None) -> list[MarketEntity]`
 
-List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list and raises on error.
+List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list of entities, one per record, and raises on error.
 
 ```python
 results = client.Market().list()
 for market in results:
-    print(market)
+    print(market.data_get())
 ```
 
 ### Common Methods
@@ -585,14 +585,14 @@ merchant = client.Merchant()
 
 ### Operations
 
-#### `list(reqmatch=None, ctrl=None) -> list`
+#### `list(reqmatch=None, ctrl=None) -> list[MerchantEntity]`
 
-List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list and raises on error.
+List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list of entities, one per record, and raises on error.
 
 ```python
 results = client.Merchant().list({"market": "example"})
 for merchant in results:
-    print(merchant)
+    print(merchant.data_get())
 ```
 
 ### Common Methods
@@ -654,19 +654,19 @@ offer = client.Offer()
 
 ### Operations
 
-#### `list(reqmatch=None, ctrl=None) -> list`
+#### `list(reqmatch=None, ctrl=None) -> list[OfferEntity]`
 
-List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list and raises on error.
+List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list of entities, one per record, and raises on error.
 
 ```python
 results = client.Offer().list({"market": "example"})
 for offer in results:
-    print(offer)
+    print(offer.data_get())
 ```
 
-#### `load(reqmatch, ctrl=None) -> dict`
+#### `load(reqmatch, ctrl=None) -> OfferEntity`
 
-Load a single entity matching the given criteria. Returns the entity data and raises on error.
+Load a single entity matching the given criteria. Returns the entity, whose record `data_get()` reads, and raises on error.
 
 ```python
 result = client.Offer().load({"ean": "ean", "market": "market"})
@@ -721,14 +721,14 @@ report_detail = client.ReportDetail()
 
 ### Operations
 
-#### `list(reqmatch=None, ctrl=None) -> list`
+#### `list(reqmatch=None, ctrl=None) -> list[ReportDetailEntity]`
 
-List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list and raises on error.
+List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list of entities, one per record, and raises on error.
 
 ```python
 results = client.ReportDetail().list({"date": "example", "format": "example"})
 for report_detail in results:
-    print(report_detail)
+    print(report_detail.data_get())
 ```
 
 ### Common Methods
@@ -776,9 +776,9 @@ report_general = client.ReportGeneral()
 
 ### Operations
 
-#### `load(reqmatch, ctrl=None) -> dict`
+#### `load(reqmatch, ctrl=None) -> ReportGeneralEntity`
 
-Load a single entity matching the given criteria. Returns the entity data and raises on error.
+Load a single entity matching the given criteria. Returns the entity, whose record `data_get()` reads, and raises on error.
 
 ```python
 result = client.ReportGeneral().load({"date": "date", "format": "format"})
@@ -828,9 +828,9 @@ report_modified = client.ReportModified()
 
 ### Operations
 
-#### `load(reqmatch, ctrl=None) -> dict`
+#### `load(reqmatch, ctrl=None) -> ReportModifiedEntity`
 
-Load a single entity matching the given criteria. Returns the entity data and raises on error.
+Load a single entity matching the given criteria. Returns the entity, whose record `data_get()` reads, and raises on error.
 
 ```python
 result = client.ReportModified().load({"from": "from", "to": "to"})
@@ -879,9 +879,9 @@ report_status = client.ReportStatus()
 
 ### Operations
 
-#### `load(reqmatch, ctrl=None) -> dict`
+#### `load(reqmatch, ctrl=None) -> ReportStatusEntity`
 
-Load a single entity matching the given criteria. Returns the entity data and raises on error.
+Load a single entity matching the given criteria. Returns the entity, whose record `data_get()` reads, and raises on error.
 
 ```python
 result = client.ReportStatus().load({"date": "date"})
@@ -1073,6 +1073,7 @@ Timeout.
 | Option | Type |
 |---|---|
 | `clearTimer` | function |
+| `now` | function |
 | `setTimer` | function |
 
 These take no default: the feature behaves one way when you supply them and

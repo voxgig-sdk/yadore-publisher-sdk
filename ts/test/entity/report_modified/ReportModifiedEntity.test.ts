@@ -9,7 +9,7 @@ import { createLiveTransport } from '../../live-runner'
 import { runLiveEntity } from '../../live-entity'
 
 
-import { YadorePublisherSDK, BaseFeature, stdutil } from '../../..'
+import { YadorePublisherSDK, BaseFeature, config, stdutil } from '../../..'
 
 import {
   envOverride,
@@ -41,6 +41,18 @@ describe('ReportModifiedEntity', async () => {
   })
 
 
+  test('validate', async (t) => {
+    if (null == (config as any).feature?.validate) {
+      t.skip('feature not present in this SDK: validate')
+      return
+    }
+    const client = YadorePublisherSDK.test(undefined, { feature: { validate: { active: true } } })
+    await assert.rejects(client.ReportModified().load({"from":1,"to":"x"} as any),
+      (err: any) => 'validate_failed' === err.code)
+  })
+
+
+
   test('basic', async (t) => {
 
     const live = 'TRUE' === process.env.YADORE_PUBLISHER_TEST_LIVE
@@ -51,7 +63,7 @@ describe('ReportModifiedEntity', async () => {
     
     const setup = basicSetup()
     if (setup.live) {
-      return runLiveEntity(setup, {"active":true,"alias":{"field":{}},"fields":{"date":{"a":true,"fo":"date","h":"Date","n":"date","r":false,"t":"`$STRING`","key$":"date","index$":0},"modifiedDate":{"a":true,"fo":"date-time","h":"Modified Date","n":"modifiedDate","r":false,"t":"`$STRING`","key$":"modifiedDate","index$":1}},"name":"report_modified","op":{"load":{"input":"data","name":"load","points":[{"a":true,"co":{"id":"GET /v2/report/modified","source":"openapi3","version":2},"g":{"query":[{"a":true,"k":"query","n":"from","or":"from","r":true,"t":"`$STRING`","index$":0},{"a":true,"k":"query","n":"market","or":"market","r":false,"t":"`$STRING`","index$":1},{"a":true,"k":"query","n":"to","or":"to","r":true,"t":"`$STRING`","index$":2}]},"k":"http","m":"GET","o":"/v2/report/modified","q":{"exist":["from","market","to"]},"r":{},"s":[{"lit":"v2"},{"lit":"report"},{"lit":"modified"}],"t":{"req":"`reqdata`","res":"`body.market`"},"index$":0}],"key$":"load"}},"relations":{"ancestors":[]},"key$":"report_modified","name__orig":"report_modified","Name":"ReportModified","name_":"report_modified","name-":"report-modified","NAME":"REPORT_MODIFIED","index$":12}, {"active":true,"entity":"report_modified","key$":"BasicReportModifiedFlow","kind":"basic","name":"BasicReportModifiedFlow","param":{},"step":[{"a":true,"d":{},"i":{"ref":"report_modified_ref01","srcdatavar":"report_modified_ref01_data","suffix":"_dt0"},"m":{},"o":"load","s":[],"v":[{"apply":"TextFieldMark","def":{"mark":"Mark01-report_modified_ref01"}}],"index$":0}]}, 'ReportModified', {"GET /v2/report/modified":{"protocol":"http","parameters":[{"name":"from","description":"Starting date for which to generate list of modified reports dates. This parameter has to be in format `YYYY-mm-dd`","in":"query","required":true,"schema":{"type":"string","format":"date"},"index$":0},{"name":"to","description":"Ending date for which to generate list of modified reports dates. This parameter has to be in format `YYYY-mm-dd`","in":"query","required":true,"schema":{"type":"string","format":"date"},"index$":1},{"name":"market","description":"Market to search. You will receive a list with valid Markets along with your account information and keys.","in":"query","required":false,"schema":{"type":"string","format":"ISO 3166 Alpha-2"},"index$":2}]}})
+      return runLiveEntity(setup, {"active":true,"alias":{"field":{}},"fields":{"date":{"a":true,"fo":"date","h":"Date","n":"date","r":false,"t":"`$STRING`","key$":"date","index$":0},"modifiedDate":{"a":true,"fo":"date-time","h":"Modified Date","n":"modifiedDate","r":false,"t":"`$STRING`","key$":"modifiedDate","index$":1}},"name":"report_modified","op":{"load":{"input":"data","name":"load","points":[{"a":true,"co":{"id":"GET /v2/report/modified","source":"openapi3","version":2},"g":{"query":[{"a":true,"k":"query","n":"from","or":"from","r":true,"t":"`$STRING`","index$":0},{"a":true,"k":"query","n":"market","or":"market","r":false,"t":"`$STRING`","index$":1},{"a":true,"k":"query","n":"to","or":"to","r":true,"t":"`$STRING`","index$":2}]},"k":"http","m":"GET","o":"/v2/report/modified","q":{"exist":["from","to"]},"r":{},"rs":{"kind":"json","media":"application/json"},"s":[{"lit":"v2"},{"lit":"report"},{"lit":"modified"}],"t":{"req":"`reqdata`","res":"`body.market`"},"index$":0}],"key$":"load"}},"relations":{"ancestors":[]},"key$":"report_modified","name__orig":"report_modified","Name":"ReportModified","name_":"report_modified","name-":"report-modified","NAME":"REPORT_MODIFIED","index$":12}, {"active":true,"entity":"report_modified","key$":"BasicReportModifiedFlow","kind":"basic","name":"BasicReportModifiedFlow","param":{},"step":[{"a":true,"d":{},"i":{"ref":"report_modified_ref01","srcdatavar":"report_modified_ref01_data","suffix":"_dt0"},"m":{},"o":"load","s":[],"v":[{"apply":"TextFieldMark","def":{"mark":"Mark01-report_modified_ref01"}}],"index$":0}]}, 'ReportModified', {"GET /v2/report/modified":{"protocol":"http","parameters":[{"name":"from","description":"Starting date for which to generate list of modified reports dates. This parameter has to be in format `YYYY-mm-dd`","in":"query","required":true,"schema":{"type":"string","format":"date"},"index$":0},{"name":"to","description":"Ending date for which to generate list of modified reports dates. This parameter has to be in format `YYYY-mm-dd`","in":"query","required":true,"schema":{"type":"string","format":"date"},"index$":1},{"name":"market","description":"Market to search. You will receive a list with valid Markets along with your account information and keys.","in":"query","required":false,"schema":{"type":"string","format":"ISO 3166 Alpha-2"},"index$":2}]}}, { strict: LIVE_STRICT, t })
     }
     const client = setup.client
     const struct = setup.struct
@@ -72,6 +84,12 @@ describe('ReportModifiedEntity', async () => {
 })
 
 
+
+// main.kit.test.live.strict is true (the default is true): a live
+// request that fails, or a live test missing an input it needs,
+// fails the test.
+// An account with no record for a test to read skips it either way.
+const LIVE_STRICT = true
 
 function basicSetup(extra?: any) {
   // TODO: fix test def options

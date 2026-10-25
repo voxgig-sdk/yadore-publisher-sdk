@@ -9,7 +9,7 @@ import { createLiveTransport } from '../../live-runner'
 import { runLiveEntity } from '../../live-entity'
 
 
-import { YadorePublisherSDK, BaseFeature, stdutil } from '../../..'
+import { YadorePublisherSDK, BaseFeature, config, stdutil } from '../../..'
 
 import {
   envOverride,
@@ -41,6 +41,18 @@ describe('ReportStatusEntity', async () => {
   })
 
 
+  test('validate', async (t) => {
+    if (null == (config as any).feature?.validate) {
+      t.skip('feature not present in this SDK: validate')
+      return
+    }
+    const client = YadorePublisherSDK.test(undefined, { feature: { validate: { active: true } } })
+    await assert.rejects(client.ReportStatus().load({"date":1} as any),
+      (err: any) => 'validate_failed' === err.code)
+  })
+
+
+
   test('basic', async (t) => {
 
     const live = 'TRUE' === process.env.YADORE_PUBLISHER_TEST_LIVE
@@ -51,7 +63,7 @@ describe('ReportStatusEntity', async () => {
     
     const setup = basicSetup()
     if (setup.live) {
-      return runLiveEntity(setup, {"active":true,"alias":{"field":{}},"fields":{"status":{"a":true,"h":"Status","n":"status","r":false,"t":"`$STRING`","key$":"status","index$":0}},"name":"report_status","op":{"load":{"input":"data","name":"load","points":[{"a":true,"co":{"id":"GET /v2/report/status","source":"openapi3","version":2},"g":{"query":[{"a":true,"k":"query","n":"date","or":"date","r":true,"t":"`$STRING`","index$":0}]},"k":"http","m":"GET","o":"/v2/report/status","q":{"exist":["date"]},"r":{},"s":[{"lit":"v2"},{"lit":"report"},{"lit":"status"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":0}],"key$":"load"}},"relations":{"ancestors":[]},"key$":"report_status","name__orig":"report_status","Name":"ReportStatus","name_":"report_status","name-":"report-status","NAME":"REPORT_STATUS","index$":13}, {"active":true,"entity":"report_status","key$":"BasicReportStatusFlow","kind":"basic","name":"BasicReportStatusFlow","param":{},"step":[{"a":true,"d":{},"i":{"ref":"report_status_ref01","srcdatavar":"report_status_ref01_data","suffix":"_dt0"},"m":{},"o":"load","s":[],"v":[{"apply":"TextFieldMark","def":{"mark":"Mark01-report_status_ref01"}}],"index$":0}]}, 'ReportStatus', {"GET /v2/report/status":{"protocol":"http","parameters":[{"name":"date","description":"Date for which to generate a report. This date is in the UTC timezone. This parameter has to be in format `YYYY-mm-dd`, for example `2018-01-31`.","in":"query","required":true,"schema":{"type":"string","format":"date"},"x-ref":"#/components/parameters/Date","index$":0}]}})
+      return runLiveEntity(setup, {"active":true,"alias":{"field":{}},"fields":{"status":{"a":true,"h":"Status","n":"status","r":false,"t":"`$STRING`","key$":"status","index$":0}},"name":"report_status","op":{"load":{"input":"data","name":"load","points":[{"a":true,"co":{"id":"GET /v2/report/status","source":"openapi3","version":2},"g":{"query":[{"a":true,"k":"query","n":"date","or":"date","r":true,"t":"`$STRING`","index$":0}]},"k":"http","m":"GET","o":"/v2/report/status","q":{"exist":["date"]},"r":{},"rs":{"kind":"json","media":"application/json"},"s":[{"lit":"v2"},{"lit":"report"},{"lit":"status"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":0}],"key$":"load"}},"relations":{"ancestors":[]},"key$":"report_status","name__orig":"report_status","Name":"ReportStatus","name_":"report_status","name-":"report-status","NAME":"REPORT_STATUS","index$":13}, {"active":true,"entity":"report_status","key$":"BasicReportStatusFlow","kind":"basic","name":"BasicReportStatusFlow","param":{},"step":[{"a":true,"d":{},"i":{"ref":"report_status_ref01","srcdatavar":"report_status_ref01_data","suffix":"_dt0"},"m":{},"o":"load","s":[],"v":[{"apply":"TextFieldMark","def":{"mark":"Mark01-report_status_ref01"}}],"index$":0}]}, 'ReportStatus', {"GET /v2/report/status":{"protocol":"http","parameters":[{"name":"date","description":"Date for which to generate a report. This date is in the UTC timezone. This parameter has to be in format `YYYY-mm-dd`, for example `2018-01-31`.","in":"query","required":true,"schema":{"type":"string","format":"date"},"x-ref":"#/components/parameters/Date","index$":0}]}}, { strict: LIVE_STRICT, t })
     }
     const client = setup.client
     const struct = setup.struct
@@ -72,6 +84,12 @@ describe('ReportStatusEntity', async () => {
 })
 
 
+
+// main.kit.test.live.strict is true (the default is true): a live
+// request that fails, or a live test missing an input it needs,
+// fails the test.
+// An account with no record for a test to read skips it either way.
+const LIVE_STRICT = true
 
 function basicSetup(extra?: any) {
   // TODO: fix test def options

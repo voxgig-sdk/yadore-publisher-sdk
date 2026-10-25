@@ -65,12 +65,9 @@ export interface Deeplink {
 }
 
 export interface DeeplinkCreateData {
-  deeplinks?: any[]
-  found?: number
   isCouponing?: boolean
   market: string
   placementId?: string
-  total?: number
   urls: any[]
 }
 

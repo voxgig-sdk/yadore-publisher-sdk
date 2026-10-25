@@ -57,12 +57,9 @@
 ---@field urls table
 
 ---@class DeeplinkCreateData
----@field deeplinks? table
----@field found? number
 ---@field isCouponing? boolean
 ---@field market string
 ---@field placementId? string
----@field total? number
 ---@field urls table
 
 ---@class DeeplinkMerchant

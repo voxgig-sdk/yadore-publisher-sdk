@@ -92,8 +92,18 @@ main: kit: entity: report_detail: {
             exist: [
               "date"
               "format"
-              "market"
             ]
+          }
+          rs: {
+            alternatives: [
+              {
+                binary: true
+                kind: "raw"
+                media: "text/csv"
+              }
+            ]
+            kind: "json"
+            media: "application/json"
           }
           s: [
             {

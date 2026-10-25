@@ -117,11 +117,12 @@ main: kit: entity: deeplink_merchant: {
           o: "/v2/deeplink/merchant"
           q: {
             exist: [
-              "has_homepage"
-              "is_couponing"
-              "is_smartlink"
               "market"
             ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
           }
           s: [
             {

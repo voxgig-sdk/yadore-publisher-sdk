@@ -87,6 +87,7 @@ class Config {
             },
             "optspec": {
                 "clearTimer": "`$FUNCTION`",
+                "now": "`$FUNCTION`",
                 "setTimer": "`$FUNCTION`"
             },
             "strict": false,
@@ -192,7 +193,8 @@ class Config {
                                         "orig": "date",
                                         "type": "`$STRING`",
                                         "kind": "query",
-                                        "reqd": true
+                                        "reqd": true,
+                                        "field": true
                                     },
                                     {
                                         "name": "format",
@@ -205,16 +207,27 @@ class Config {
                                         "name": "market",
                                         "orig": "market",
                                         "type": "`$STRING`",
-                                        "kind": "query"
+                                        "kind": "query",
+                                        "field": true
                                     }
                                 ]
                             },
                             "select": {
                                 "exist": [
                                     "date",
-                                    "format",
-                                    "market"
+                                    "format"
                                 ]
+                            },
+                            "response": {
+                                "alternatives": [
+                                    {
+                                        "binary": true,
+                                        "kind": "raw",
+                                        "media": "text/csv"
+                                    }
+                                ],
+                                "kind": "json",
+                                "media": "application/json"
                             }
                         }
                     ]
@@ -304,7 +317,8 @@ class Config {
                                         "name": "market",
                                         "orig": "market",
                                         "type": "`$STRING`",
-                                        "kind": "query"
+                                        "kind": "query",
+                                        "field": true
                                     },
                                     {
                                         "name": "to",
@@ -319,9 +333,19 @@ class Config {
                                 "exist": [
                                     "format",
                                     "from",
-                                    "market",
                                     "to"
                                 ]
+                            },
+                            "response": {
+                                "alternatives": [
+                                    {
+                                        "binary": true,
+                                        "kind": "raw",
+                                        "media": "text/csv"
+                                    }
+                                ],
+                                "kind": "json",
+                                "media": "application/json"
                             }
                         }
                     ]
@@ -411,6 +435,17 @@ class Config {
                                     "from",
                                     "to"
                                 ]
+                            },
+                            "response": {
+                                "alternatives": [
+                                    {
+                                        "binary": true,
+                                        "kind": "raw",
+                                        "media": "text/csv"
+                                    }
+                                ],
+                                "kind": "json",
+                                "media": "application/json"
                             }
                         }
                     ]
@@ -474,6 +509,10 @@ class Config {
                                 "exist": [
                                     "date"
                                 ]
+                            },
+                            "response": {
+                                "kind": "json",
+                                "media": "application/json"
                             }
                         }
                     ]
@@ -555,7 +594,11 @@ class Config {
                                 "res": "`body.result`"
                             },
                             "args": {},
-                            "select": {}
+                            "select": {},
+                            "response": {
+                                "kind": "json",
+                                "media": "application/json"
+                            }
                         }
                     ]
                 }
@@ -682,11 +725,12 @@ class Config {
                             },
                             "select": {
                                 "exist": [
-                                    "has_homepage",
-                                    "is_couponing",
-                                    "is_smartlink",
                                     "market"
                                 ]
+                            },
+                            "response": {
+                                "kind": "json",
+                                "media": "application/json"
                             }
                         }
                     ]
@@ -776,11 +820,7 @@ class Config {
                             },
                             "select": {
                                 "exist": [
-                                    "callback_url",
-                                    "is_couponing",
                                     "market",
-                                    "merchant_id",
-                                    "placement_id",
                                     "project_id",
                                     "url"
                                 ]
@@ -833,7 +873,11 @@ class Config {
                                 "res": "`body.markets`"
                             },
                             "args": {},
-                            "select": {}
+                            "select": {},
+                            "response": {
+                                "kind": "json",
+                                "media": "application/json"
+                            }
                         }
                     ]
                 }
@@ -920,9 +964,12 @@ class Config {
                             },
                             "select": {
                                 "exist": [
-                                    "is_couponing",
                                     "market"
                                 ]
+                            },
+                            "response": {
+                                "kind": "json",
+                                "media": "application/json"
                             }
                         }
                     ]
@@ -1121,17 +1168,12 @@ class Config {
                             },
                             "select": {
                                 "exist": [
-                                    "ean",
-                                    "is_couponing",
-                                    "keyword",
-                                    "limit",
-                                    "market",
-                                    "merchant_id",
-                                    "offer_id",
-                                    "placement_id",
-                                    "precision",
-                                    "sort"
+                                    "market"
                                 ]
+                            },
+                            "response": {
+                                "kind": "json",
+                                "media": "application/json"
                             }
                         }
                     ]
@@ -1206,11 +1248,12 @@ class Config {
                                 "$action": "bulk",
                                 "exist": [
                                     "ean",
-                                    "is_couponing",
-                                    "market",
-                                    "merchant_id",
-                                    "placement_id"
+                                    "market"
                                 ]
+                            },
+                            "response": {
+                                "kind": "json",
+                                "media": "application/json"
                             }
                         }
                     ]
@@ -1297,7 +1340,8 @@ class Config {
                                         "orig": "date",
                                         "type": "`$STRING`",
                                         "kind": "query",
-                                        "reqd": true
+                                        "reqd": true,
+                                        "field": true
                                     },
                                     {
                                         "name": "format",
@@ -1310,16 +1354,27 @@ class Config {
                                         "name": "market",
                                         "orig": "market",
                                         "type": "`$STRING`",
-                                        "kind": "query"
+                                        "kind": "query",
+                                        "field": true
                                     }
                                 ]
                             },
                             "select": {
                                 "exist": [
                                     "date",
-                                    "format",
-                                    "market"
+                                    "format"
                                 ]
+                            },
+                            "response": {
+                                "alternatives": [
+                                    {
+                                        "binary": true,
+                                        "kind": "raw",
+                                        "media": "text/csv"
+                                    }
+                                ],
+                                "kind": "json",
+                                "media": "application/json"
                             }
                         }
                     ]
@@ -1385,7 +1440,8 @@ class Config {
                                         "orig": "date",
                                         "type": "`$STRING`",
                                         "kind": "query",
-                                        "reqd": true
+                                        "reqd": true,
+                                        "field": true
                                     },
                                     {
                                         "name": "format",
@@ -1401,6 +1457,16 @@ class Config {
                                     "date",
                                     "format"
                                 ]
+                            },
+                            "response": {
+                                "alternatives": [
+                                    {
+                                        "kind": "raw",
+                                        "media": "text/csv"
+                                    }
+                                ],
+                                "kind": "json",
+                                "media": "application/json"
                             }
                         }
                     ]
@@ -1483,9 +1549,12 @@ class Config {
                             "select": {
                                 "exist": [
                                     "from",
-                                    "market",
                                     "to"
                                 ]
+                            },
+                            "response": {
+                                "kind": "json",
+                                "media": "application/json"
                             }
                         }
                     ]
@@ -1549,6 +1618,10 @@ class Config {
                                 "exist": [
                                     "date"
                                 ]
+                            },
+                            "response": {
+                                "kind": "json",
+                                "media": "application/json"
                             }
                         }
                     ]

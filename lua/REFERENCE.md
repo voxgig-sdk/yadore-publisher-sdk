@@ -154,10 +154,10 @@ local conversion_detail = client:ConversionDetail(nil)
 
 #### `list(reqmatch, ctrl) -> any, err`
 
-List entities matching the given criteria. Returns an array.
+List entities matching the given criteria. Returns an array of entities, one per record, or `nil` and an error on failure.
 
 ```lua
-local results, err = client:ConversionDetail():list()
+local results, err = client:ConversionDetail():list({ date = "example", format = "example" })
 ```
 
 ### Common Methods
@@ -209,10 +209,10 @@ local conversion_detail_merchant = client:ConversionDetailMerchant(nil)
 
 #### `list(reqmatch, ctrl) -> any, err`
 
-List entities matching the given criteria. Returns an array.
+List entities matching the given criteria. Returns an array of entities, one per record, or `nil` and an error on failure.
 
 ```lua
-local results, err = client:ConversionDetailMerchant():list()
+local results, err = client:ConversionDetailMerchant():list({ format = "example", from = "example", to = "example" })
 ```
 
 ### Common Methods
@@ -263,7 +263,7 @@ local conversion_general = client:ConversionGeneral(nil)
 
 #### `load(reqmatch, ctrl) -> any, err`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Returns the entity, whose record `data_get()` reads, or `nil` and an error on failure.
 
 ```lua
 local result, err = client:ConversionGeneral():load({ format = "format", from = "from", to = "to" })
@@ -315,7 +315,7 @@ local conversion_status = client:ConversionStatus(nil)
 
 #### `load(reqmatch, ctrl) -> any, err`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Returns the entity, whose record `data_get()` reads, or `nil` and an error on failure.
 
 ```lua
 local result, err = client:ConversionStatus():load({ date = "date" })
@@ -373,7 +373,7 @@ local deeplink = client:Deeplink(nil)
 
 #### `create(reqdata, ctrl) -> any, err`
 
-Create a new entity with the given data.
+Create a new entity with the given data. Returns the created entity, or `nil` and an error on failure.
 
 ```lua
 local result, err = client:Deeplink():create({
@@ -436,10 +436,10 @@ local deeplink_merchant = client:DeeplinkMerchant(nil)
 
 #### `list(reqmatch, ctrl) -> any, err`
 
-List entities matching the given criteria. Returns an array.
+List entities matching the given criteria. Returns an array of entities, one per record, or `nil` and an error on failure.
 
 ```lua
-local results, err = client:DeeplinkMerchant():list()
+local results, err = client:DeeplinkMerchant():list({ market = "example" })
 ```
 
 ### Common Methods
@@ -482,7 +482,7 @@ local dnt = client:Dnt(nil)
 
 #### `load(reqmatch, ctrl) -> any, err`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Returns the entity, whose record `data_get()` reads, or `nil` and an error on failure.
 
 ```lua
 local result, err = client:Dnt():load({ market = "market", project_id = "project_id", url = "url" })
@@ -534,7 +534,7 @@ local market = client:Market(nil)
 
 #### `list(reqmatch, ctrl) -> any, err`
 
-List entities matching the given criteria. Returns an array.
+List entities matching the given criteria. Returns an array of entities, one per record, or `nil` and an error on failure.
 
 ```lua
 local results, err = client:Market():list()
@@ -590,10 +590,10 @@ local merchant = client:Merchant(nil)
 
 #### `list(reqmatch, ctrl) -> any, err`
 
-List entities matching the given criteria. Returns an array.
+List entities matching the given criteria. Returns an array of entities, one per record, or `nil` and an error on failure.
 
 ```lua
-local results, err = client:Merchant():list()
+local results, err = client:Merchant():list({ market = "example" })
 ```
 
 ### Common Methods
@@ -658,15 +658,15 @@ local offer = client:Offer(nil)
 
 #### `list(reqmatch, ctrl) -> any, err`
 
-List entities matching the given criteria. Returns an array.
+List entities matching the given criteria. Returns an array of entities, one per record, or `nil` and an error on failure.
 
 ```lua
-local results, err = client:Offer():list()
+local results, err = client:Offer():list({ market = "example" })
 ```
 
 #### `load(reqmatch, ctrl) -> any, err`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Returns the entity, whose record `data_get()` reads, or `nil` and an error on failure.
 
 ```lua
 local result, err = client:Offer():load({ ean = "ean", market = "market" })
@@ -724,10 +724,10 @@ local report_detail = client:ReportDetail(nil)
 
 #### `list(reqmatch, ctrl) -> any, err`
 
-List entities matching the given criteria. Returns an array.
+List entities matching the given criteria. Returns an array of entities, one per record, or `nil` and an error on failure.
 
 ```lua
-local results, err = client:ReportDetail():list()
+local results, err = client:ReportDetail():list({ date = "example", format = "example" })
 ```
 
 ### Common Methods
@@ -778,7 +778,7 @@ local report_general = client:ReportGeneral(nil)
 
 #### `load(reqmatch, ctrl) -> any, err`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Returns the entity, whose record `data_get()` reads, or `nil` and an error on failure.
 
 ```lua
 local result, err = client:ReportGeneral():load({ date = "date", format = "format" })
@@ -831,7 +831,7 @@ local report_modified = client:ReportModified(nil)
 
 #### `load(reqmatch, ctrl) -> any, err`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Returns the entity, whose record `data_get()` reads, or `nil` and an error on failure.
 
 ```lua
 local result, err = client:ReportModified():load({ from = "from", to = "to" })
@@ -883,7 +883,7 @@ local report_status = client:ReportStatus(nil)
 
 #### `load(reqmatch, ctrl) -> any, err`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Returns the entity, whose record `data_get()` reads, or `nil` and an error on failure.
 
 ```lua
 local result, err = client:ReportStatus():load({ date = "date" })
@@ -1076,6 +1076,7 @@ Timeout.
 | Option | Type |
 |---|---|
 | `clearTimer` | function |
+| `now` | function |
 | `setTimer` | function |
 
 These take no default: the feature behaves one way when you supply them and

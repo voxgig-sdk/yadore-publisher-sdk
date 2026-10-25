@@ -54,6 +54,53 @@ const utility_1 = require("../../utility");
         const ent = testsdk.Merchant();
         (0, node_assert_1.default)(null != ent);
     });
+    class FailHook extends __1.BaseFeature {
+        name = 'failhook';
+        version = '0.0.1';
+        active = true;
+        unexpected = 0;
+        init() { }
+        PreSpec() { throw new Error('merchant hook failed'); }
+        PreUnexpected() { this.unexpected++; }
+    }
+    (0, node_test_1.test)('stream-error', async () => {
+        const offline = { net: { offline: true } };
+        await node_assert_1.default.rejects(async () => {
+            for await (const _item of __1.YadorePublisherSDK.test(offline).Merchant().stream('list')) { }
+        }, /offline/);
+        for await (const _item of __1.YadorePublisherSDK.test(offline).Merchant()
+            .stream('list', undefined, { ctrl: { throw: false } })) { }
+        if (null != __1.config.feature?.rbac) {
+            const denied = __1.YadorePublisherSDK.test(undefined, { feature: { rbac: { active: true, deny: true } } });
+            await node_assert_1.default.rejects(async () => {
+                for await (const _item of denied.Merchant().stream('list')) { }
+            }, (err) => 'rbac_denied' === err.code);
+        }
+    });
+    (0, node_test_1.test)('stream-ctrl', async () => {
+        const explain = {};
+        const ctrl = { explain };
+        for await (const _item of __1.YadorePublisherSDK.test().Merchant().stream('list', undefined, { ctrl })) { }
+        node_assert_1.default.deepStrictEqual(Object.keys(ctrl), ['explain']);
+        (0, node_assert_1.default)(explain === ctrl.explain && 0 < Object.keys(explain).length);
+    });
+    (0, node_test_1.test)('unexpected', async () => {
+        const hook = new FailHook();
+        const client = new __1.YadorePublisherSDK({ feature: { test: { active: true } }, extend: [hook] });
+        await node_assert_1.default.rejects(client.Merchant().list(), /hook failed/);
+        (0, node_assert_1.default)(0 < hook.unexpected);
+        const fired = hook.unexpected;
+        node_assert_1.default.strictEqual(await client.Merchant().list(undefined, { throw: false }), undefined);
+        (0, node_assert_1.default)(fired < hook.unexpected);
+    });
+    (0, node_test_1.test)('validate', async (t) => {
+        if (null == __1.config.feature?.validate) {
+            t.skip('feature not present in this SDK: validate');
+            return;
+        }
+        const client = __1.YadorePublisherSDK.test(undefined, { feature: { validate: { active: true } } });
+        await node_assert_1.default.rejects(client.Merchant().list({ "is_couponing": "x", "market": "x" }), (err) => 'validate_failed' === err.code);
+    });
     (0, node_test_1.test)('basic', async (t) => {
         const live = 'TRUE' === process.env.YADORE_PUBLISHER_TEST_LIVE;
         for (const op of ['list']) {
@@ -62,7 +109,7 @@ const utility_1 = require("../../utility");
         }
         const setup = basicSetup();
         if (setup.live) {
-            return (0, live_entity_1.runLiveEntity)(setup, { "active": true, "alias": { "field": {} }, "fields": { "id": { "a": true, "h": "Id", "n": "id", "r": false, "t": "`$STRING`", "key$": "id", "index$": 0 }, "logo": { "a": true, "h": "Logo", "n": "logo", "r": false, "t": "`$OBJECT`", "key$": "logo", "index$": 1 }, "name": { "a": true, "h": "Name", "n": "name", "r": false, "t": "`$STRING`", "key$": "name", "index$": 2 }, "offerCount": { "a": true, "h": "Offer Count", "n": "offerCount", "r": false, "t": "`$INTEGER`", "key$": "offerCount", "index$": 3 }, "trafficTypes": { "a": true, "h": "Traffic Types", "n": "trafficTypes", "r": false, "t": "`$ARRAY`", "key$": "trafficTypes", "index$": 4 } }, "id": { "field": "id", "name": "id" }, "name": "merchant", "op": { "list": { "input": "data", "name": "list", "points": [{ "a": true, "co": { "id": "GET /v2/merchant", "source": "openapi3", "version": 2 }, "g": { "query": [{ "a": true, "k": "query", "n": "is_couponing", "or": "isCouponing", "r": false, "t": "`$BOOLEAN`", "index$": 0 }, { "a": true, "k": "query", "n": "market", "or": "market", "r": true, "t": "`$STRING`", "index$": 1 }] }, "k": "http", "m": "GET", "o": "/v2/merchant", "q": { "exist": ["is_couponing", "market"] }, "r": {}, "s": [{ "lit": "v2" }, { "lit": "merchant" }], "t": { "req": "`reqdata`", "res": "`body.merchants`" }, "index$": 0 }], "key$": "list" } }, "relations": { "ancestors": [] }, "key$": "merchant", "name__orig": "merchant", "Name": "Merchant", "name_": "merchant", "name-": "merchant", "NAME": "MERCHANT", "index$": 8 }, { "active": true, "entity": "merchant", "key$": "BasicMerchantFlow", "kind": "basic", "name": "BasicMerchantFlow", "param": {}, "step": [{ "a": true, "d": {}, "i": {}, "m": {}, "o": "list", "s": [], "v": [{ "apply": "ItemExists", "def": { "ref": "merchant_ref01" } }], "index$": 0 }] }, 'Merchant', { "GET /v2/merchant": { "protocol": "http", "parameters": [{ "name": "market", "description": "Market to search. You can get the markets you are activated for with the Markets API.", "in": "query", "required": true, "schema": { "type": "string" }, "x-ref": "#/components/parameters/Market", "index$": 0 }, { "name": "isCouponing", "description": "If your project has mixed traffic, you can filter the merchants by using this parameter.", "in": "query", "required": false, "schema": { "type": "boolean" }, "x-ref": "#/components/parameters/IsCouponingMerchantFilter", "index$": 1 }] } });
+            return (0, live_entity_1.runLiveEntity)(setup, { "active": true, "alias": { "field": {} }, "fields": { "id": { "a": true, "h": "Id", "n": "id", "r": false, "t": "`$STRING`", "key$": "id", "index$": 0 }, "logo": { "a": true, "h": "Logo", "n": "logo", "r": false, "t": "`$OBJECT`", "key$": "logo", "index$": 1 }, "name": { "a": true, "h": "Name", "n": "name", "r": false, "t": "`$STRING`", "key$": "name", "index$": 2 }, "offerCount": { "a": true, "h": "Offer Count", "n": "offerCount", "r": false, "t": "`$INTEGER`", "key$": "offerCount", "index$": 3 }, "trafficTypes": { "a": true, "h": "Traffic Types", "n": "trafficTypes", "r": false, "t": "`$ARRAY`", "key$": "trafficTypes", "index$": 4 } }, "id": { "field": "id", "name": "id" }, "name": "merchant", "op": { "list": { "input": "data", "name": "list", "points": [{ "a": true, "co": { "id": "GET /v2/merchant", "source": "openapi3", "version": 2 }, "g": { "query": [{ "a": true, "k": "query", "n": "is_couponing", "or": "isCouponing", "r": false, "t": "`$BOOLEAN`", "index$": 0 }, { "a": true, "k": "query", "n": "market", "or": "market", "r": true, "t": "`$STRING`", "index$": 1 }] }, "k": "http", "m": "GET", "o": "/v2/merchant", "q": { "exist": ["market"] }, "r": {}, "rs": { "kind": "json", "media": "application/json" }, "s": [{ "lit": "v2" }, { "lit": "merchant" }], "t": { "req": "`reqdata`", "res": "`body.merchants`" }, "index$": 0 }], "key$": "list" } }, "relations": { "ancestors": [] }, "key$": "merchant", "name__orig": "merchant", "Name": "Merchant", "name_": "merchant", "name-": "merchant", "NAME": "MERCHANT", "index$": 8 }, { "active": true, "entity": "merchant", "key$": "BasicMerchantFlow", "kind": "basic", "name": "BasicMerchantFlow", "param": {}, "step": [{ "a": true, "d": {}, "i": {}, "m": {}, "o": "list", "s": [], "v": [{ "apply": "ItemExists", "def": { "ref": "merchant_ref01" } }], "index$": 0 }] }, 'Merchant', { "GET /v2/merchant": { "protocol": "http", "parameters": [{ "name": "market", "description": "Market to search. You can get the markets you are activated for with the Markets API.", "in": "query", "required": true, "schema": { "type": "string" }, "x-ref": "#/components/parameters/Market", "index$": 0 }, { "name": "isCouponing", "description": "If your project has mixed traffic, you can filter the merchants by using this parameter.", "in": "query", "required": false, "schema": { "type": "boolean" }, "x-ref": "#/components/parameters/IsCouponingMerchantFilter", "index$": 1 }] } }, { strict: LIVE_STRICT, t });
         }
         const client = setup.client;
         const struct = setup.struct;
@@ -75,6 +122,11 @@ const utility_1 = require("../../utility");
         const merchant_ref01_list = (await merchant_ref01_ent.list(merchant_ref01_match)).map((e) => e.data());
     });
 });
+// main.kit.test.live.strict is true (the default is true): a live
+// request that fails, or a live test missing an input it needs,
+// fails the test.
+// An account with no record for a test to read skips it either way.
+const LIVE_STRICT = true;
 function basicSetup(extra) {
     // TODO: fix test def options
     const options = {}; // null

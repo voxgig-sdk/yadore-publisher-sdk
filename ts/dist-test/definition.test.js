@@ -21,10 +21,29 @@ const PLAN = [
             "market": "v1"
         },
         "headers": [],
+        "cookies": [],
+        "responseMedia": [
+            "application/json",
+            "text/csv"
+        ],
         "query": [
             "date",
             "format",
             "market"
+        ],
+        "queryArgs": [
+            {
+                "name": "date",
+                "wire": "date"
+            },
+            {
+                "name": "format",
+                "wire": "format"
+            },
+            {
+                "name": "market",
+                "wire": "market"
+            }
         ],
         "auth": [
             [
@@ -41,12 +60,12 @@ const PLAN = [
                 {
                     "clickId": "x",
                     "date": "2026-01-01T00:00:00Z",
+                    "placementId": "x",
                     "market": "x",
                     "merchant": {
                         "id": "x",
                         "name": "x"
                     },
-                    "placementId": "x",
                     "sales": 42
                 }
             ]
@@ -63,15 +82,38 @@ const PLAN = [
         "select": {
             "format": "v1",
             "from": "v1",
-            "market": "v1",
-            "to": "v1"
+            "to": "v1",
+            "market": "v1"
         },
         "headers": [],
+        "cookies": [],
+        "responseMedia": [
+            "application/json",
+            "text/csv"
+        ],
         "query": [
             "market",
             "from",
             "to",
             "format"
+        ],
+        "queryArgs": [
+            {
+                "name": "format",
+                "wire": "format"
+            },
+            {
+                "name": "from",
+                "wire": "from"
+            },
+            {
+                "name": "market",
+                "wire": "market"
+            },
+            {
+                "name": "to",
+                "wire": "to"
+            }
         ],
         "auth": [
             [
@@ -88,18 +130,18 @@ const PLAN = [
                 "to": "2026-01-01"
             },
             "total": {
-                "clicks": 16,
-                "sales": 42
+                "sales": 42,
+                "clicks": 16
             },
             "salesByMerchant": [
                 {
-                    "clicks": 16,
                     "market": "de",
                     "merchant": {
                         "id": "x",
                         "name": "x"
                     },
-                    "sales": 42
+                    "sales": 42,
+                    "clicks": 16
                 }
             ]
         },
@@ -118,10 +160,29 @@ const PLAN = [
             "to": "v1"
         },
         "headers": [],
+        "cookies": [],
+        "responseMedia": [
+            "application/json",
+            "text/csv"
+        ],
         "query": [
             "from",
             "to",
             "format"
+        ],
+        "queryArgs": [
+            {
+                "name": "format",
+                "wire": "format"
+            },
+            {
+                "name": "from",
+                "wire": "from"
+            },
+            {
+                "name": "to",
+                "wire": "to"
+            }
         ],
         "auth": [
             [
@@ -138,20 +199,20 @@ const PLAN = [
                 "to": "2026-01-01"
             },
             "total": {
-                "clickCount": "123",
-                "sales": "42"
+                "sales": "42",
+                "clickCount": "123"
             },
             "market": {
-                "ch": {
-                    "total": {
-                        "clickCount": "123",
-                        "sales": "42"
-                    }
-                },
                 "de": {
                     "total": {
-                        "clickCount": "123",
-                        "sales": "42"
+                        "sales": "42",
+                        "clickCount": "123"
+                    }
+                },
+                "ch": {
+                    "total": {
+                        "sales": "42",
+                        "clickCount": "123"
                     }
                 }
             }
@@ -169,8 +230,18 @@ const PLAN = [
             "date": "v1"
         },
         "headers": [],
+        "cookies": [],
+        "responseMedia": [
+            "application/json"
+        ],
         "query": [
             "date"
+        ],
+        "queryArgs": [
+            {
+                "name": "date",
+                "wire": "date"
+            }
         ],
         "auth": [
             [
@@ -195,7 +266,12 @@ const PLAN = [
         "args": [],
         "select": {},
         "headers": [],
+        "cookies": [],
+        "responseMedia": [
+            "application/json"
+        ],
         "query": [],
+        "queryArgs": [],
         "auth": [
             [
                 {
@@ -238,17 +314,39 @@ const PLAN = [
         "path": "/v2/deeplink/merchant",
         "args": [],
         "select": {
+            "market": "v1",
             "has_homepage": "v1",
             "is_couponing": "v1",
-            "is_smartlink": "v1",
-            "market": "v1"
+            "is_smartlink": "v1"
         },
         "headers": [],
+        "cookies": [],
+        "responseMedia": [
+            "application/json"
+        ],
         "query": [
             "market",
             "isSmartlink",
             "hasHomepage",
             "isCouponing"
+        ],
+        "queryArgs": [
+            {
+                "name": "has_homepage",
+                "wire": "hasHomepage"
+            },
+            {
+                "name": "is_couponing",
+                "wire": "isCouponing"
+            },
+            {
+                "name": "is_smartlink",
+                "wire": "isSmartlink"
+            },
+            {
+                "name": "market",
+                "wire": "market"
+            }
         ],
         "auth": [
             [
@@ -263,24 +361,24 @@ const PLAN = [
             "total": 1,
             "merchants": [
                 {
+                    "id": "x",
+                    "name": "x",
+                    "isSmartlink": true,
+                    "hasSmartlinkHomepage": true,
+                    "hasExternalHomepage": true,
                     "deeplinkCount": 1,
+                    "logo": {
+                        "url": "x",
+                        "exists": true
+                    },
                     "estimatedCpc": {
                         "amount": "x",
                         "currency": "x"
                     },
-                    "hasExternalHomepage": true,
-                    "hasSmartlinkHomepage": true,
-                    "id": "x",
-                    "isSmartlink": true,
-                    "logo": {
-                        "exists": true,
-                        "url": "x"
-                    },
-                    "name": "x",
                     "trafficTypes": [
                         {
-                            "permission": "not_allowed",
-                            "type": "x"
+                            "type": "x",
+                            "permission": "not_allowed"
                         }
                     ]
                 }
@@ -296,15 +394,16 @@ const PLAN = [
         "path": "/v2/d",
         "args": [],
         "select": {
+            "market": "v1",
+            "project_id": "v1",
+            "url": "v1",
             "callback_url": "v1",
             "is_couponing": "v1",
-            "market": "v1",
             "merchant_id": "v1",
-            "placement_id": "v1",
-            "project_id": "v1",
-            "url": "v1"
+            "placement_id": "v1"
         },
         "headers": [],
+        "cookies": [],
         "query": [
             "url",
             "callbackUrl",
@@ -313,6 +412,36 @@ const PLAN = [
             "placementId",
             "projectId",
             "isCouponing"
+        ],
+        "queryArgs": [
+            {
+                "name": "callback_url",
+                "wire": "callbackUrl"
+            },
+            {
+                "name": "is_couponing",
+                "wire": "isCouponing"
+            },
+            {
+                "name": "market",
+                "wire": "market"
+            },
+            {
+                "name": "merchant_id",
+                "wire": "merchantId"
+            },
+            {
+                "name": "placement_id",
+                "wire": "placementId"
+            },
+            {
+                "name": "project_id",
+                "wire": "projectId"
+            },
+            {
+                "name": "url",
+                "wire": "url"
+            }
         ],
         "auth": [
             [
@@ -335,7 +464,12 @@ const PLAN = [
         "args": [],
         "select": {},
         "headers": [],
+        "cookies": [],
+        "responseMedia": [
+            "application/json"
+        ],
         "query": [],
+        "queryArgs": [],
         "auth": [
             [
                 {
@@ -362,13 +496,27 @@ const PLAN = [
         "path": "/v2/merchant",
         "args": [],
         "select": {
-            "is_couponing": "v1",
-            "market": "v1"
+            "market": "v1",
+            "is_couponing": "v1"
         },
         "headers": [],
+        "cookies": [],
+        "responseMedia": [
+            "application/json"
+        ],
         "query": [
             "market",
             "isCouponing"
+        ],
+        "queryArgs": [
+            {
+                "name": "is_couponing",
+                "wire": "isCouponing"
+            },
+            {
+                "name": "market",
+                "wire": "market"
+            }
         ],
         "auth": [
             [
@@ -384,16 +532,16 @@ const PLAN = [
             "merchants": [
                 {
                     "id": "x",
-                    "logo": {
-                        "exists": true,
-                        "url": "x"
-                    },
                     "name": "x",
                     "offerCount": 1,
+                    "logo": {
+                        "url": "x",
+                        "exists": true
+                    },
                     "trafficTypes": [
                         {
-                            "permission": "not_allowed",
-                            "type": "x"
+                            "type": "x",
+                            "permission": "not_allowed"
                         }
                     ]
                 }
@@ -409,18 +557,22 @@ const PLAN = [
         "path": "/v2/offer",
         "args": [],
         "select": {
+            "market": "v1",
             "ean": "v1",
             "is_couponing": "v1",
             "keyword": "v1",
             "limit": "v1",
-            "market": "v1",
             "merchant_id": "v1",
             "offer_id": "v1",
             "placement_id": "v1",
-            "precision": "v1",
-            "sort": "v1"
+            "precision": "fuzzy",
+            "sort": "rel_desc"
         },
         "headers": [],
+        "cookies": [],
+        "responseMedia": [
+            "application/json"
+        ],
         "query": [
             "market",
             "keyword",
@@ -432,6 +584,48 @@ const PLAN = [
             "sort",
             "limit",
             "isCouponing"
+        ],
+        "queryArgs": [
+            {
+                "name": "ean",
+                "wire": "ean"
+            },
+            {
+                "name": "is_couponing",
+                "wire": "isCouponing"
+            },
+            {
+                "name": "keyword",
+                "wire": "keyword"
+            },
+            {
+                "name": "limit",
+                "wire": "limit"
+            },
+            {
+                "name": "market",
+                "wire": "market"
+            },
+            {
+                "name": "merchant_id",
+                "wire": "merchantId"
+            },
+            {
+                "name": "offer_id",
+                "wire": "offerId"
+            },
+            {
+                "name": "placement_id",
+                "wire": "placementId"
+            },
+            {
+                "name": "precision",
+                "wire": "precision"
+            },
+            {
+                "name": "sort",
+                "wire": "sort"
+            }
         ],
         "auth": [
             [
@@ -447,49 +641,49 @@ const PLAN = [
             "total": 1,
             "offers": [
                 {
-                    "availability": "AVAILABLE",
+                    "id": "x",
+                    "title": "x",
+                    "description": "x",
+                    "promoText": "x",
                     "brand": "x",
                     "clickUrl": "x",
-                    "description": "x",
+                    "availability": "AVAILABLE",
                     "eer": "x",
-                    "estimatedCpc": {
-                        "amount": "x",
-                        "currency": "x"
-                    },
-                    "id": "x",
-                    "image": {
-                        "url": "x"
+                    "shippingTime": {
+                        "text": "x"
                     },
                     "merchant": {
                         "id": "x",
+                        "name": "x",
                         "logo": {
-                            "exists": true,
-                            "url": "x"
-                        },
-                        "name": "x"
-                    },
-                    "originalPrice": {
-                        "amount": "x",
-                        "currency": "x"
+                            "url": "x",
+                            "exists": true
+                        }
                     },
                     "price": {
                         "amount": "x",
                         "currency": "x"
                     },
-                    "promoText": "x",
+                    "originalPrice": {
+                        "amount": "x",
+                        "currency": "x"
+                    },
                     "shippingPrice": {
                         "amount": "x",
                         "currency": "x"
                     },
-                    "shippingTime": {
+                    "estimatedCpc": {
+                        "amount": "x",
+                        "currency": "x"
+                    },
+                    "unitPrice": {
                         "text": "x"
+                    },
+                    "image": {
+                        "url": "x"
                     },
                     "thumbnail": {
                         "url": "x"
-                    },
-                    "title": "x",
-                    "unitPrice": {
-                        "text": "x"
                     }
                 }
             ]
@@ -506,18 +700,44 @@ const PLAN = [
         "args": [],
         "select": {
             "ean": "v1",
-            "is_couponing": "v1",
             "market": "v1",
+            "is_couponing": "v1",
             "merchant_id": "v1",
             "placement_id": "v1"
         },
         "headers": [],
+        "cookies": [],
+        "responseMedia": [
+            "application/json"
+        ],
         "query": [
             "market",
             "eans",
             "merchantId",
             "placementId",
             "isCouponing"
+        ],
+        "queryArgs": [
+            {
+                "name": "ean",
+                "wire": "eans"
+            },
+            {
+                "name": "is_couponing",
+                "wire": "isCouponing"
+            },
+            {
+                "name": "market",
+                "wire": "market"
+            },
+            {
+                "name": "merchant_id",
+                "wire": "merchantId"
+            },
+            {
+                "name": "placement_id",
+                "wire": "placementId"
+            }
         ],
         "auth": [
             [
@@ -533,49 +753,49 @@ const PLAN = [
                 "count": 1,
                 "offers": [
                     {
-                        "availability": "AVAILABLE",
+                        "id": "x",
+                        "title": "x",
+                        "description": "x",
+                        "promoText": "x",
                         "brand": "x",
                         "clickUrl": "x",
-                        "description": "x",
+                        "availability": "AVAILABLE",
                         "eer": "x",
-                        "estimatedCpc": {
-                            "amount": "x",
-                            "currency": "x"
-                        },
-                        "id": "x",
-                        "image": {
-                            "url": "x"
+                        "shippingTime": {
+                            "text": "x"
                         },
                         "merchant": {
                             "id": "x",
+                            "name": "x",
                             "logo": {
-                                "exists": true,
-                                "url": "x"
-                            },
-                            "name": "x"
-                        },
-                        "originalPrice": {
-                            "amount": "x",
-                            "currency": "x"
+                                "url": "x",
+                                "exists": true
+                            }
                         },
                         "price": {
                             "amount": "x",
                             "currency": "x"
                         },
-                        "promoText": "x",
+                        "originalPrice": {
+                            "amount": "x",
+                            "currency": "x"
+                        },
                         "shippingPrice": {
                             "amount": "x",
                             "currency": "x"
                         },
-                        "shippingTime": {
+                        "estimatedCpc": {
+                            "amount": "x",
+                            "currency": "x"
+                        },
+                        "unitPrice": {
                             "text": "x"
+                        },
+                        "image": {
+                            "url": "x"
                         },
                         "thumbnail": {
                             "url": "x"
-                        },
-                        "title": "x",
-                        "unitPrice": {
-                            "text": "x"
                         }
                     }
                 ]
@@ -596,10 +816,29 @@ const PLAN = [
             "market": "v1"
         },
         "headers": [],
+        "cookies": [],
+        "responseMedia": [
+            "application/json",
+            "text/csv"
+        ],
         "query": [
             "date",
             "format",
             "market"
+        ],
+        "queryArgs": [
+            {
+                "name": "date",
+                "wire": "date"
+            },
+            {
+                "name": "format",
+                "wire": "format"
+            },
+            {
+                "name": "market",
+                "wire": "market"
+            }
         ],
         "auth": [
             [
@@ -615,15 +854,15 @@ const PLAN = [
             "clicks": [
                 {
                     "clickId": "x",
-                    "currency": "EUR",
                     "date": "2026-01-01T00:00:00Z",
+                    "placementId": "x",
                     "market": "x",
                     "merchant": {
                         "id": "x",
                         "name": "x"
                     },
-                    "placementId": "x",
-                    "revenue": 1
+                    "revenue": 1,
+                    "currency": "EUR"
                 }
             ]
         },
@@ -641,9 +880,24 @@ const PLAN = [
             "format": "v1"
         },
         "headers": [],
+        "cookies": [],
+        "responseMedia": [
+            "application/json",
+            "text/csv"
+        ],
         "query": [
             "date",
             "format"
+        ],
+        "queryArgs": [
+            {
+                "name": "date",
+                "wire": "date"
+            },
+            {
+                "name": "format",
+                "wire": "format"
+            }
         ],
         "auth": [
             [
@@ -661,15 +915,15 @@ const PLAN = [
             },
             "total": {
                 "clicks": 1,
-                "currency": "x",
-                "revenue": 1
+                "revenue": 1,
+                "currency": "x"
             },
             "market": {
                 "de": {
                     "total": {
                         "clicks": 1,
-                        "currency": "x",
-                        "revenue": 0
+                        "revenue": 0,
+                        "currency": "x"
                     }
                 }
             }
@@ -685,14 +939,32 @@ const PLAN = [
         "args": [],
         "select": {
             "from": "v1",
-            "market": "v1",
-            "to": "v1"
+            "to": "v1",
+            "market": "v1"
         },
         "headers": [],
+        "cookies": [],
+        "responseMedia": [
+            "application/json"
+        ],
         "query": [
             "from",
             "to",
             "market"
+        ],
+        "queryArgs": [
+            {
+                "name": "from",
+                "wire": "from"
+            },
+            {
+                "name": "market",
+                "wire": "market"
+            },
+            {
+                "name": "to",
+                "wire": "to"
+            }
         ],
         "auth": [
             [
@@ -722,8 +994,18 @@ const PLAN = [
             "date": "v1"
         },
         "headers": [],
+        "cookies": [],
+        "responseMedia": [
+            "application/json"
+        ],
         "query": [
             "date"
+        ],
+        "queryArgs": [
+            {
+                "name": "date",
+                "wire": "date"
+            }
         ],
         "auth": [
             [

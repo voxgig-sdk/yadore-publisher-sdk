@@ -54,6 +54,14 @@ const utility_1 = require("../../utility");
         const ent = testsdk.ReportGeneral();
         (0, node_assert_1.default)(null != ent);
     });
+    (0, node_test_1.test)('validate', async (t) => {
+        if (null == __1.config.feature?.validate) {
+            t.skip('feature not present in this SDK: validate');
+            return;
+        }
+        const client = __1.YadorePublisherSDK.test(undefined, { feature: { validate: { active: true } } });
+        await node_assert_1.default.rejects(client.ReportGeneral().load({ "date": 1, "format": "x" }), (err) => 'validate_failed' === err.code);
+    });
     (0, node_test_1.test)('basic', async (t) => {
         const live = 'TRUE' === process.env.YADORE_PUBLISHER_TEST_LIVE;
         for (const op of ['load']) {
@@ -62,7 +70,7 @@ const utility_1 = require("../../utility");
         }
         const setup = basicSetup();
         if (setup.live) {
-            return (0, live_entity_1.runLiveEntity)(setup, { "active": true, "alias": { "field": {} }, "fields": { "date": { "a": true, "h": "Date", "n": "date", "r": false, "t": "`$OBJECT`", "key$": "date", "index$": 0 }, "market": { "a": true, "h": "Market", "n": "market", "r": false, "t": "`$OBJECT`", "key$": "market", "index$": 1 }, "total": { "a": true, "h": "Total", "n": "total", "r": false, "t": "`$OBJECT`", "key$": "total", "index$": 2 } }, "name": "report_general", "op": { "load": { "input": "data", "name": "load", "points": [{ "a": true, "co": { "id": "GET /v2/report/general", "source": "openapi3", "version": 2 }, "g": { "query": [{ "a": true, "k": "query", "n": "date", "or": "date", "r": true, "t": "`$STRING`", "index$": 0 }, { "a": true, "k": "query", "n": "format", "or": "format", "r": true, "t": "`$STRING`", "index$": 1 }] }, "k": "http", "m": "GET", "o": "/v2/report/general", "q": { "exist": ["date", "format"] }, "r": {}, "s": [{ "lit": "v2" }, { "lit": "report" }, { "lit": "general" }], "t": { "req": "`reqdata`", "res": "`body`" }, "index$": 0 }], "key$": "load" } }, "relations": { "ancestors": [] }, "key$": "report_general", "name__orig": "report_general", "Name": "ReportGeneral", "name_": "report_general", "name-": "report-general", "NAME": "REPORT_GENERAL", "index$": 11 }, { "active": true, "entity": "report_general", "key$": "BasicReportGeneralFlow", "kind": "basic", "name": "BasicReportGeneralFlow", "param": {}, "step": [{ "a": true, "d": {}, "i": { "ref": "report_general_ref01", "srcdatavar": "report_general_ref01_data", "suffix": "_dt0" }, "m": {}, "o": "load", "s": [], "v": [{ "apply": "TextFieldMark", "def": { "mark": "Mark01-report_general_ref01" } }], "index$": 0 }] }, 'ReportGeneral', { "GET /v2/report/general": { "protocol": "http", "parameters": [{ "name": "date", "description": "Date for which to generate a report. This date is in the UTC timezone. This parameter has to be in format `YYYY-mm-dd`, for example `2018-01-31`.", "in": "query", "required": true, "schema": { "type": "string", "format": "date" }, "x-ref": "#/components/parameters/Date", "index$": 0 }, { "name": "format", "description": "A format to generate the reports. Available formats are `json` and `csv`.", "in": "query", "required": true, "schema": { "type": "string", "enum": ["json", "csv"] }, "x-ref": "#/components/parameters/Format", "index$": 1 }] } });
+            return (0, live_entity_1.runLiveEntity)(setup, { "active": true, "alias": { "field": {} }, "fields": { "date": { "a": true, "h": "Date", "n": "date", "r": false, "t": "`$OBJECT`", "key$": "date", "index$": 0 }, "market": { "a": true, "h": "Market", "n": "market", "r": false, "t": "`$OBJECT`", "key$": "market", "index$": 1 }, "total": { "a": true, "h": "Total", "n": "total", "r": false, "t": "`$OBJECT`", "key$": "total", "index$": 2 } }, "name": "report_general", "op": { "load": { "input": "data", "name": "load", "points": [{ "a": true, "co": { "id": "GET /v2/report/general", "source": "openapi3", "version": 2 }, "g": { "query": [{ "a": true, "k": "query", "n": "date", "or": "date", "r": true, "t": "`$STRING`", "index$": 0 }, { "a": true, "k": "query", "n": "format", "or": "format", "r": true, "t": "`$STRING`", "index$": 1 }] }, "k": "http", "m": "GET", "o": "/v2/report/general", "q": { "exist": ["date", "format"] }, "r": {}, "rs": { "alternatives": [{ "kind": "raw", "media": "text/csv" }], "kind": "json", "media": "application/json" }, "s": [{ "lit": "v2" }, { "lit": "report" }, { "lit": "general" }], "t": { "req": "`reqdata`", "res": "`body`" }, "index$": 0 }], "key$": "load" } }, "relations": { "ancestors": [] }, "key$": "report_general", "name__orig": "report_general", "Name": "ReportGeneral", "name_": "report_general", "name-": "report-general", "NAME": "REPORT_GENERAL", "index$": 11 }, { "active": true, "entity": "report_general", "key$": "BasicReportGeneralFlow", "kind": "basic", "name": "BasicReportGeneralFlow", "param": {}, "step": [{ "a": true, "d": {}, "i": { "ref": "report_general_ref01", "srcdatavar": "report_general_ref01_data", "suffix": "_dt0" }, "m": {}, "o": "load", "s": [], "v": [{ "apply": "TextFieldMark", "def": { "mark": "Mark01-report_general_ref01" } }], "index$": 0 }] }, 'ReportGeneral', { "GET /v2/report/general": { "protocol": "http", "parameters": [{ "name": "date", "description": "Date for which to generate a report. This date is in the UTC timezone. This parameter has to be in format `YYYY-mm-dd`, for example `2018-01-31`.", "in": "query", "required": true, "schema": { "type": "string", "format": "date" }, "x-ref": "#/components/parameters/Date", "index$": 0 }, { "name": "format", "description": "A format to generate the reports. Available formats are `json` and `csv`.", "in": "query", "required": true, "schema": { "type": "string", "enum": ["json", "csv"] }, "x-ref": "#/components/parameters/Format", "index$": 1 }] } }, { strict: LIVE_STRICT, t });
         }
         const client = setup.client;
         const struct = setup.struct;
@@ -76,6 +84,11 @@ const utility_1 = require("../../utility");
         (0, node_assert_1.default)(null != report_general_ref01_data_dt0);
     });
 });
+// main.kit.test.live.strict is true (the default is true): a live
+// request that fails, or a live test missing an input it needs,
+// fails the test.
+// An account with no record for a test to read skips it either way.
+const LIVE_STRICT = true;
 function basicSetup(extra) {
     // TODO: fix test def options
     const options = {}; // null

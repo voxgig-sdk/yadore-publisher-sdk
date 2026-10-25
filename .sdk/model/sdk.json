@@ -188,11 +188,21 @@
                   "q": {
                     "exist": [
                       "date",
-                      "format",
-                      "market"
+                      "format"
                     ]
                   },
                   "r": {},
+                  "rs": {
+                    "alternatives": [
+                      {
+                        "binary": true,
+                        "kind": "raw",
+                        "media": "text/csv"
+                      }
+                    ],
+                    "kind": "json",
+                    "media": "application/json"
+                  },
                   "s": [
                     {
                       "lit": "v2"
@@ -309,11 +319,21 @@
                     "exist": [
                       "format",
                       "from",
-                      "market",
                       "to"
                     ]
                   },
                   "r": {},
+                  "rs": {
+                    "alternatives": [
+                      {
+                        "binary": true,
+                        "kind": "raw",
+                        "media": "text/csv"
+                      }
+                    ],
+                    "kind": "json",
+                    "media": "application/json"
+                  },
                   "s": [
                     {
                       "lit": "v2"
@@ -420,6 +440,17 @@
                     ]
                   },
                   "r": {},
+                  "rs": {
+                    "alternatives": [
+                      {
+                        "binary": true,
+                        "kind": "raw",
+                        "media": "text/csv"
+                      }
+                    ],
+                    "kind": "json",
+                    "media": "application/json"
+                  },
                   "s": [
                     {
                       "lit": "v2"
@@ -491,6 +522,10 @@
                     ]
                   },
                   "r": {},
+                  "rs": {
+                    "kind": "json",
+                    "media": "application/json"
+                  },
                   "s": [
                     {
                       "lit": "v2"
@@ -582,6 +617,12 @@
               "points": [
                 {
                   "a": true,
+                  "bf": [
+                    "isCouponing",
+                    "market",
+                    "placementId",
+                    "urls"
+                  ],
                   "co": {
                     "id": "POST /v2/deeplink",
                     "source": "openapi3",
@@ -593,6 +634,10 @@
                   "o": "/v2/deeplink",
                   "q": {},
                   "r": {},
+                  "rs": {
+                    "kind": "json",
+                    "media": "application/json"
+                  },
                   "s": [
                     {
                       "lit": "v2"
@@ -745,13 +790,14 @@
                   "o": "/v2/deeplink/merchant",
                   "q": {
                     "exist": [
-                      "has_homepage",
-                      "is_couponing",
-                      "is_smartlink",
                       "market"
                     ]
                   },
                   "r": {},
+                  "rs": {
+                    "kind": "json",
+                    "media": "application/json"
+                  },
                   "s": [
                     {
                       "lit": "v2"
@@ -859,11 +905,7 @@
                   "o": "/v2/d",
                   "q": {
                     "exist": [
-                      "callback_url",
-                      "is_couponing",
                       "market",
-                      "merchant_id",
-                      "placement_id",
                       "project_id",
                       "url"
                     ]
@@ -926,6 +968,10 @@
                   "o": "/v2/markets",
                   "q": {},
                   "r": {},
+                  "rs": {
+                    "kind": "json",
+                    "media": "application/json"
+                  },
                   "s": [
                     {
                       "lit": "v2"
@@ -1030,11 +1076,14 @@
                   "o": "/v2/merchant",
                   "q": {
                     "exist": [
-                      "is_couponing",
                       "market"
                     ]
                   },
                   "r": {},
+                  "rs": {
+                    "kind": "json",
+                    "media": "application/json"
+                  },
                   "s": [
                     {
                       "lit": "v2"
@@ -1290,19 +1339,14 @@
                   "o": "/v2/offer",
                   "q": {
                     "exist": [
-                      "ean",
-                      "is_couponing",
-                      "keyword",
-                      "limit",
-                      "market",
-                      "merchant_id",
-                      "offer_id",
-                      "placement_id",
-                      "precision",
-                      "sort"
+                      "market"
                     ]
                   },
                   "r": {},
+                  "rs": {
+                    "kind": "json",
+                    "media": "application/json"
+                  },
                   "s": [
                     {
                       "lit": "v2"
@@ -1381,13 +1425,14 @@
                     "$action": "bulk",
                     "exist": [
                       "ean",
-                      "is_couponing",
-                      "market",
-                      "merchant_id",
-                      "placement_id"
+                      "market"
                     ]
                   },
                   "r": {},
+                  "rs": {
+                    "kind": "json",
+                    "media": "application/json"
+                  },
                   "s": [
                     {
                       "lit": "v2"
@@ -1515,11 +1560,21 @@
                   "q": {
                     "exist": [
                       "date",
-                      "format",
-                      "market"
+                      "format"
                     ]
                   },
                   "r": {},
+                  "rs": {
+                    "alternatives": [
+                      {
+                        "binary": true,
+                        "kind": "raw",
+                        "media": "text/csv"
+                      }
+                    ],
+                    "kind": "json",
+                    "media": "application/json"
+                  },
                   "s": [
                     {
                       "lit": "v2"
@@ -1614,6 +1669,16 @@
                     ]
                   },
                   "r": {},
+                  "rs": {
+                    "alternatives": [
+                      {
+                        "kind": "raw",
+                        "media": "text/csv"
+                      }
+                    ],
+                    "kind": "json",
+                    "media": "application/json"
+                  },
                   "s": [
                     {
                       "lit": "v2"
@@ -1707,11 +1772,14 @@
                   "q": {
                     "exist": [
                       "from",
-                      "market",
                       "to"
                     ]
                   },
                   "r": {},
+                  "rs": {
+                    "kind": "json",
+                    "media": "application/json"
+                  },
                   "s": [
                     {
                       "lit": "v2"
@@ -1783,6 +1851,10 @@
                     ]
                   },
                   "r": {},
+                  "rs": {
+                    "kind": "json",
+                    "media": "application/json"
+                  },
                   "s": [
                     {
                       "lit": "v2"
@@ -2129,6 +2201,7 @@
             },
             "optspec": {
               "clearTimer": "`$FUNCTION`",
+              "now": "`$FUNCTION`",
               "setTimer": "`$FUNCTION`"
             },
             "strict": false
@@ -2646,7 +2719,7 @@
       "optspec": {
         "allow": {
           "method": "GET,PUT,POST,PATCH,DELETE,OPTIONS",
-          "op": "create,update,load,list,remove,command,direct,graphql"
+          "op": "create,update,patch,load,list,remove,command,direct,graphql"
         },
         "apikey": "",
         "auth": {
@@ -2699,6 +2772,11 @@
         "top": {
           "active": true
         }
+      },
+      "publisher": {
+        "name": "",
+        "security": "",
+        "url": ""
       },
       "repo": {
         "host": "github.com",
@@ -2929,7 +3007,10 @@
             "version": "0.0.1"
           },
           "superseded": [],
-          "title": "Go MCP server"
+          "title": "Go MCP server",
+          "tool": {
+            "write": false
+          }
         },
         "lua": {
           "active": true,
@@ -3306,6 +3387,17 @@
           "base": "",
           "strict": true
         }
+      },
+      "text": {
+        "about_md": "",
+        "docs_url": "",
+        "entity_desc": {},
+        "homepage": "",
+        "meta_source": "",
+        "summary": "",
+        "tagline": "",
+        "title": "",
+        "website": ""
       }
     }
   },

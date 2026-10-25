@@ -9,7 +9,7 @@ import { createLiveTransport } from '../../live-runner'
 import { runLiveEntity } from '../../live-entity'
 
 
-import { YadorePublisherSDK, BaseFeature, stdutil } from '../../..'
+import { YadorePublisherSDK, BaseFeature, config, stdutil } from '../../..'
 
 import {
   envOverride,
@@ -41,6 +41,18 @@ describe('ConversionGeneralEntity', async () => {
   })
 
 
+  test('validate', async (t) => {
+    if (null == (config as any).feature?.validate) {
+      t.skip('feature not present in this SDK: validate')
+      return
+    }
+    const client = YadorePublisherSDK.test(undefined, { feature: { validate: { active: true } } })
+    await assert.rejects(client.ConversionGeneral().load({"format":1,"from":"x","to":"x"} as any),
+      (err: any) => 'validate_failed' === err.code)
+  })
+
+
+
   test('basic', async (t) => {
 
     const live = 'TRUE' === process.env.YADORE_PUBLISHER_TEST_LIVE
@@ -51,7 +63,7 @@ describe('ConversionGeneralEntity', async () => {
     
     const setup = basicSetup()
     if (setup.live) {
-      return runLiveEntity(setup, {"active":true,"alias":{"field":{}},"fields":{"date":{"a":true,"h":"Date","n":"date","r":false,"t":"`$OBJECT`","key$":"date","index$":0},"market":{"a":true,"h":"Market","n":"market","r":false,"t":"`$OBJECT`","key$":"market","index$":1},"total":{"a":true,"h":"Total","n":"total","r":false,"t":"`$OBJECT`","key$":"total","index$":2}},"name":"conversion_general","op":{"load":{"input":"data","name":"load","points":[{"a":true,"co":{"id":"GET /v2/conversion/general","source":"openapi3","version":2},"g":{"query":[{"a":true,"k":"query","n":"format","or":"format","r":true,"t":"`$STRING`","index$":0},{"a":true,"k":"query","n":"from","or":"from","r":true,"t":"`$STRING`","index$":1},{"a":true,"k":"query","n":"to","or":"to","r":true,"t":"`$STRING`","index$":2}]},"k":"http","m":"GET","o":"/v2/conversion/general","q":{"exist":["format","from","to"]},"r":{},"s":[{"lit":"v2"},{"lit":"conversion"},{"lit":"general"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":0}],"key$":"load"}},"relations":{"ancestors":[]},"key$":"conversion_general","name__orig":"conversion_general","Name":"ConversionGeneral","name_":"conversion_general","name-":"conversion-general","NAME":"CONVERSION_GENERAL","index$":2}, {"active":true,"entity":"conversion_general","key$":"BasicConversionGeneralFlow","kind":"basic","name":"BasicConversionGeneralFlow","param":{},"step":[{"a":true,"d":{},"i":{"ref":"conversion_general_ref01","srcdatavar":"conversion_general_ref01_data","suffix":"_dt0"},"m":{},"o":"load","s":[],"v":[{"apply":"TextFieldMark","def":{"mark":"Mark01-conversion_general_ref01"}}],"index$":0}]}, 'ConversionGeneral', {"GET /v2/conversion/general":{"protocol":"http","parameters":[{"name":"from","description":"Starting date for which to generate the report. This parameter has to be in format `YYYY-mm-dd`","in":"query","required":true,"schema":{"type":"string","format":"date"},"index$":0},{"name":"to","description":"Ending date for which to generate the report. This parameter has to be in format `YYYY-mm-dd`","in":"query","required":true,"schema":{"type":"string","format":"date"},"index$":1},{"name":"format","description":"A format to generate the reports. Available formats are `json` and `csv`.","in":"query","required":true,"schema":{"type":"string","enum":["json","csv"]},"x-ref":"#/components/parameters/Format","index$":2}]}})
+      return runLiveEntity(setup, {"active":true,"alias":{"field":{}},"fields":{"date":{"a":true,"h":"Date","n":"date","r":false,"t":"`$OBJECT`","key$":"date","index$":0},"market":{"a":true,"h":"Market","n":"market","r":false,"t":"`$OBJECT`","key$":"market","index$":1},"total":{"a":true,"h":"Total","n":"total","r":false,"t":"`$OBJECT`","key$":"total","index$":2}},"name":"conversion_general","op":{"load":{"input":"data","name":"load","points":[{"a":true,"co":{"id":"GET /v2/conversion/general","source":"openapi3","version":2},"g":{"query":[{"a":true,"k":"query","n":"format","or":"format","r":true,"t":"`$STRING`","index$":0},{"a":true,"k":"query","n":"from","or":"from","r":true,"t":"`$STRING`","index$":1},{"a":true,"k":"query","n":"to","or":"to","r":true,"t":"`$STRING`","index$":2}]},"k":"http","m":"GET","o":"/v2/conversion/general","q":{"exist":["format","from","to"]},"r":{},"rs":{"alternatives":[{"binary":true,"kind":"raw","media":"text/csv"}],"kind":"json","media":"application/json"},"s":[{"lit":"v2"},{"lit":"conversion"},{"lit":"general"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":0}],"key$":"load"}},"relations":{"ancestors":[]},"key$":"conversion_general","name__orig":"conversion_general","Name":"ConversionGeneral","name_":"conversion_general","name-":"conversion-general","NAME":"CONVERSION_GENERAL","index$":2}, {"active":true,"entity":"conversion_general","key$":"BasicConversionGeneralFlow","kind":"basic","name":"BasicConversionGeneralFlow","param":{},"step":[{"a":true,"d":{},"i":{"ref":"conversion_general_ref01","srcdatavar":"conversion_general_ref01_data","suffix":"_dt0"},"m":{},"o":"load","s":[],"v":[{"apply":"TextFieldMark","def":{"mark":"Mark01-conversion_general_ref01"}}],"index$":0}]}, 'ConversionGeneral', {"GET /v2/conversion/general":{"protocol":"http","parameters":[{"name":"from","description":"Starting date for which to generate the report. This parameter has to be in format `YYYY-mm-dd`","in":"query","required":true,"schema":{"type":"string","format":"date"},"index$":0},{"name":"to","description":"Ending date for which to generate the report. This parameter has to be in format `YYYY-mm-dd`","in":"query","required":true,"schema":{"type":"string","format":"date"},"index$":1},{"name":"format","description":"A format to generate the reports. Available formats are `json` and `csv`.","in":"query","required":true,"schema":{"type":"string","enum":["json","csv"]},"x-ref":"#/components/parameters/Format","index$":2}]}}, { strict: LIVE_STRICT, t })
     }
     const client = setup.client
     const struct = setup.struct
@@ -72,6 +84,12 @@ describe('ConversionGeneralEntity', async () => {
 })
 
 
+
+// main.kit.test.live.strict is true (the default is true): a live
+// request that fails, or a live test missing an input it needs,
+// fails the test.
+// An account with no record for a test to read skips it either way.
+const LIVE_STRICT = true
 
 function basicSetup(extra?: any) {
   // TODO: fix test def options

@@ -59,6 +59,12 @@ main: kit: entity: deeplink: {
       name: "create"
       points: [
         {
+          bf: [
+            "isCouponing"
+            "market"
+            "placementId"
+            "urls"
+          ]
           co: {
             id: "POST /v2/deeplink"
             source: "openapi3"
@@ -66,6 +72,10 @@ main: kit: entity: deeplink: {
           }
           m: "POST"
           o: "/v2/deeplink"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
           s: [
             {
               lit: "v2"

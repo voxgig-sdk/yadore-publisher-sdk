@@ -206,17 +206,12 @@ main: kit: entity: offer: {
           o: "/v2/offer"
           q: {
             exist: [
-              "ean"
-              "is_couponing"
-              "keyword"
-              "limit"
               "market"
-              "merchant_id"
-              "offer_id"
-              "placement_id"
-              "precision"
-              "sort"
             ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
           }
           s: [
             {
@@ -288,11 +283,12 @@ main: kit: entity: offer: {
             "$action": "bulk"
             exist: [
               "ean"
-              "is_couponing"
               "market"
-              "merchant_id"
-              "placement_id"
             ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
           }
           s: [
             {

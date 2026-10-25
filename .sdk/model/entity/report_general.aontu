@@ -62,6 +62,16 @@ main: kit: entity: report_general: {
               "format"
             ]
           }
+          rs: {
+            alternatives: [
+              {
+                kind: "raw"
+                media: "text/csv"
+              }
+            ]
+            kind: "json"
+            media: "application/json"
+          }
           s: [
             {
               lit: "v2"

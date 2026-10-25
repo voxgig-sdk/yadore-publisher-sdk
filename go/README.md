@@ -16,7 +16,7 @@ go get github.com/voxgig-sdk/yadore-publisher-sdk/go@latest
 ```
 
 The Go module proxy resolves the version from the `go/vX.Y.Z` GitHub
-release tag — see [Releases](https://github.com/voxgig-sdk/yadore-publisher-sdk/releases) for the available versions.
+release tag — see [Tags](https://github.com/voxgig-sdk/yadore-publisher-sdk/tags) for the available versions.
 
 To vendor from a local checkout instead, clone this repo alongside your
 project and add a `replace` directive pointing at the checked-out
@@ -30,14 +30,15 @@ go mod edit -replace github.com/voxgig-sdk/yadore-publisher-sdk/go=../yadore-pub
 ## Tutorial: your first API call
 
 This tutorial walks through creating a client, listing entities, and
-loading a specific record.
+loading a specific record. The client sends the API key in the `API-Key` header.
 
 ### Quickstart
 
 A complete program: create a client, then call the entity operations.
-Each operation returns `(value, error)` — the value is the data itself
-(there is no `{ok, data}` wrapper), so check `err` and use the value
-directly.
+Each operation returns `(value, error)` — the value is the entity, and for
+`List` a `[]any` of entities, one per record (there is no `{ok, data}`
+wrapper), so check `err` and read a record through the entity's
+`Data()`.
 
 ```go
 package main
@@ -53,13 +54,13 @@ func main() {
         "apikey": os.Getenv("YADORE_PUBLISHER_APIKEY"),
     })
 
-    // List conversionDetail records — the value is the array of records itself.
-    conversionDetails, err := client.ConversionDetail(nil).List(nil, nil)
+    // List conversionDetail records — the value is a []any of entities, one per record.
+    conversionDetails, err := client.ConversionDetail(nil).List(map[string]any{"date": "example", "format": "example"}, nil)
     if err != nil {
         panic(err)
     }
     for _, item := range conversionDetails.([]any) {
-        fmt.Println(item)
+        fmt.Println(item.(sdk.Entity).Data())
     }
 }
 ```
@@ -146,7 +147,7 @@ reportGeneral, err := client.ReportGeneral(nil).Load(
 if err != nil {
     panic(err)
 }
-fmt.Println(reportGeneral) // the returned mock data
+fmt.Println(reportGeneral.(sdk.Entity).Data()) // the entity's mock record
 ```
 
 ### Use a custom fetch function
@@ -246,9 +247,9 @@ All entities implement the `YadorePublisherEntity` interface.
 
 | Method | Signature | Description |
 | --- | --- | --- |
-| `Load` | `(reqmatch, ctrl map[string]any) (any, error)` | Load a single entity by match criteria. |
-| `List` | `(reqmatch, ctrl map[string]any) (any, error)` | List entities matching the criteria. |
-| `Create` | `(reqdata, ctrl map[string]any) (any, error)` | Create a new entity. |
+| `Load` | `(reqmatch, ctrl map[string]any) (any, error)` | Load a single entity by match criteria, and return it. |
+| `List` | `(reqmatch, ctrl map[string]any) (any, error)` | List entities matching the criteria, one per record. |
+| `Create` | `(reqdata, ctrl map[string]any) (any, error)` | Create a new entity, and return it. |
 | `Data` | `(args ...any) any` | Get or set entity data. |
 | `Match` | `(args ...any) any` | Get or set entity match criteria. |
 | `Make` | `() Entity` | Create a new instance with the same options. |
@@ -256,21 +257,21 @@ All entities implement the `YadorePublisherEntity` interface.
 
 ### Result shape
 
-Entity operations return `(value, error)`. The `value` is the
-operation's data **directly** — there is no wrapper:
+Entity operations return `(value, error)`. The `value` is the entity
+itself — there is no wrapper:
 
 | Operation | `value` |
 | --- | --- |
-| `Load` / `Create` | the entity record (`map[string]any`) |
-| `List` | a `[]any` of entity records |
+| `Load` / `Create` | the entity, whose `Data()` reads its record (`map[string]any`) |
+| `List` | a `[]any` of entities, one per record |
 
 Check `err` first, then use the value directly (or the typed
 `...Typed` variants, which return the entity's model struct and a typed
 slice):
 
-    conversionDetail, err := client.ConversionDetail(nil).List(map[string]any{/* fields */}, nil)
+    conversionDetail, err := client.ConversionDetail(nil).List(map[string]any{"date": "example", "format": "example"}, nil)
     if err != nil { /* handle */ }
-    // conversionDetail is the returned record
+    // conversionDetail is a []any of entities, one per record
 
 Only `Direct()` returns a response envelope — a `map[string]any` with
 `"ok"`, `"status"`, `"headers"`, and `"data"` keys.
@@ -498,11 +499,14 @@ Create an instance: `conversionDetail := client.ConversionDetail(nil)`
 #### Example: List
 
 ```go
-conversionDetails, err := client.ConversionDetail(nil).List(nil, nil)
+conversionDetails, err := client.ConversionDetail(nil).List(map[string]any{"date": "example", "format": "example"}, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(conversionDetails) // the array of records
+// A []any of entities, one per record.
+for _, item := range conversionDetails.([]any) {
+    fmt.Println(item.(sdk.Entity).Data())
+}
 ```
 
 
@@ -528,11 +532,14 @@ Create an instance: `conversionDetailMerchant := client.ConversionDetailMerchant
 #### Example: List
 
 ```go
-conversionDetailMerchants, err := client.ConversionDetailMerchant(nil).List(nil, nil)
+conversionDetailMerchants, err := client.ConversionDetailMerchant(nil).List(map[string]any{"format": "example", "from": "example", "to": "example"}, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(conversionDetailMerchants) // the array of records
+// A []any of entities, one per record.
+for _, item := range conversionDetailMerchants.([]any) {
+    fmt.Println(item.(sdk.Entity).Data())
+}
 ```
 
 
@@ -561,7 +568,7 @@ conversionGeneral, err := client.ConversionGeneral(nil).Load(map[string]any{"for
 if err != nil {
     panic(err)
 }
-fmt.Println(conversionGeneral) // the loaded record
+fmt.Println(conversionGeneral.(sdk.Entity).Data()) // the loaded entity's record
 ```
 
 
@@ -588,7 +595,7 @@ conversionStatus, err := client.ConversionStatus(nil).Load(map[string]any{"date"
 if err != nil {
     panic(err)
 }
-fmt.Println(conversionStatus) // the loaded record
+fmt.Println(conversionStatus.(sdk.Entity).Data()) // the loaded entity's record
 ```
 
 
@@ -624,7 +631,7 @@ result, err := client.Deeplink(nil).Create(map[string]any{
 if err != nil {
     panic(err)
 }
-fmt.Println(result)
+fmt.Println(result.(sdk.Entity).Data()) // the created entity's record
 ```
 
 
@@ -655,11 +662,14 @@ Create an instance: `deeplinkMerchant := client.DeeplinkMerchant(nil)`
 #### Example: List
 
 ```go
-deeplinkMerchants, err := client.DeeplinkMerchant(nil).List(nil, nil)
+deeplinkMerchants, err := client.DeeplinkMerchant(nil).List(map[string]any{"market": "example"}, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(deeplinkMerchants) // the array of records
+// A []any of entities, one per record.
+for _, item := range deeplinkMerchants.([]any) {
+    fmt.Println(item.(sdk.Entity).Data())
+}
 ```
 
 
@@ -680,7 +690,7 @@ dnt, err := client.Dnt(nil).Load(map[string]any{"market": "market", "project_id"
 if err != nil {
     panic(err)
 }
-fmt.Println(dnt) // the loaded record
+fmt.Println(dnt.(sdk.Entity).Data()) // the loaded entity's record
 ```
 
 
@@ -707,7 +717,10 @@ markets, err := client.Market(nil).List(nil, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(markets) // the array of records
+// A []any of entities, one per record.
+for _, item := range markets.([]any) {
+    fmt.Println(item.(sdk.Entity).Data())
+}
 ```
 
 
@@ -734,11 +747,14 @@ Create an instance: `merchant := client.Merchant(nil)`
 #### Example: List
 
 ```go
-merchants, err := client.Merchant(nil).List(nil, nil)
+merchants, err := client.Merchant(nil).List(map[string]any{"market": "example"}, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(merchants) // the array of records
+// A []any of entities, one per record.
+for _, item := range merchants.([]any) {
+    fmt.Println(item.(sdk.Entity).Data())
+}
 ```
 
 
@@ -782,17 +798,20 @@ offer, err := client.Offer(nil).Load(map[string]any{"ean": "ean", "market": "mar
 if err != nil {
     panic(err)
 }
-fmt.Println(offer) // the loaded record
+fmt.Println(offer.(sdk.Entity).Data()) // the loaded entity's record
 ```
 
 #### Example: List
 
 ```go
-offers, err := client.Offer(nil).List(nil, nil)
+offers, err := client.Offer(nil).List(map[string]any{"market": "example"}, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(offers) // the array of records
+// A []any of entities, one per record.
+for _, item := range offers.([]any) {
+    fmt.Println(item.(sdk.Entity).Data())
+}
 ```
 
 
@@ -821,11 +840,14 @@ Create an instance: `reportDetail := client.ReportDetail(nil)`
 #### Example: List
 
 ```go
-reportDetails, err := client.ReportDetail(nil).List(nil, nil)
+reportDetails, err := client.ReportDetail(nil).List(map[string]any{"date": "example", "format": "example"}, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(reportDetails) // the array of records
+// A []any of entities, one per record.
+for _, item := range reportDetails.([]any) {
+    fmt.Println(item.(sdk.Entity).Data())
+}
 ```
 
 
@@ -854,7 +876,7 @@ reportGeneral, err := client.ReportGeneral(nil).Load(map[string]any{"date": "dat
 if err != nil {
     panic(err)
 }
-fmt.Println(reportGeneral) // the loaded record
+fmt.Println(reportGeneral.(sdk.Entity).Data()) // the loaded entity's record
 ```
 
 
@@ -882,7 +904,7 @@ reportModified, err := client.ReportModified(nil).Load(map[string]any{"from": "f
 if err != nil {
     panic(err)
 }
-fmt.Println(reportModified) // the loaded record
+fmt.Println(reportModified.(sdk.Entity).Data()) // the loaded entity's record
 ```
 
 
@@ -909,7 +931,7 @@ reportStatus, err := client.ReportStatus(nil).Load(map[string]any{"date": "date"
 if err != nil {
     panic(err)
 }
-fmt.Println(reportStatus) // the loaded record
+fmt.Println(reportStatus.(sdk.Entity).Data()) // the loaded entity's record
 ```
 
 ## Features
@@ -1046,7 +1068,9 @@ The Go SDK uses `map[string]any` throughout rather than typed structs.
 This mirrors the dynamic nature of the API and keeps the SDK
 flexible — no code generation is needed when the API schema changes.
 
-Use `core.ToMapAny()` to safely cast results and nested data.
+An operation returns the entity, and its `Data()` returns the record. Use
+`core.ToMapAny()` to safely cast that record, or data nested in it, to
+`map[string]any`: it returns `nil` for anything else, an entity included.
 
 ### Package structure
 

@@ -54,6 +54,53 @@ const utility_1 = require("../../utility");
         const ent = testsdk.ConversionDetail();
         (0, node_assert_1.default)(null != ent);
     });
+    class FailHook extends __1.BaseFeature {
+        name = 'failhook';
+        version = '0.0.1';
+        active = true;
+        unexpected = 0;
+        init() { }
+        PreSpec() { throw new Error('conversion_detail hook failed'); }
+        PreUnexpected() { this.unexpected++; }
+    }
+    (0, node_test_1.test)('stream-error', async () => {
+        const offline = { net: { offline: true } };
+        await node_assert_1.default.rejects(async () => {
+            for await (const _item of __1.YadorePublisherSDK.test(offline).ConversionDetail().stream('list')) { }
+        }, /offline/);
+        for await (const _item of __1.YadorePublisherSDK.test(offline).ConversionDetail()
+            .stream('list', undefined, { ctrl: { throw: false } })) { }
+        if (null != __1.config.feature?.rbac) {
+            const denied = __1.YadorePublisherSDK.test(undefined, { feature: { rbac: { active: true, deny: true } } });
+            await node_assert_1.default.rejects(async () => {
+                for await (const _item of denied.ConversionDetail().stream('list')) { }
+            }, (err) => 'rbac_denied' === err.code);
+        }
+    });
+    (0, node_test_1.test)('stream-ctrl', async () => {
+        const explain = {};
+        const ctrl = { explain };
+        for await (const _item of __1.YadorePublisherSDK.test().ConversionDetail().stream('list', undefined, { ctrl })) { }
+        node_assert_1.default.deepStrictEqual(Object.keys(ctrl), ['explain']);
+        (0, node_assert_1.default)(explain === ctrl.explain && 0 < Object.keys(explain).length);
+    });
+    (0, node_test_1.test)('unexpected', async () => {
+        const hook = new FailHook();
+        const client = new __1.YadorePublisherSDK({ feature: { test: { active: true } }, extend: [hook] });
+        await node_assert_1.default.rejects(client.ConversionDetail().list(), /hook failed/);
+        (0, node_assert_1.default)(0 < hook.unexpected);
+        const fired = hook.unexpected;
+        node_assert_1.default.strictEqual(await client.ConversionDetail().list(undefined, { throw: false }), undefined);
+        (0, node_assert_1.default)(fired < hook.unexpected);
+    });
+    (0, node_test_1.test)('validate', async (t) => {
+        if (null == __1.config.feature?.validate) {
+            t.skip('feature not present in this SDK: validate');
+            return;
+        }
+        const client = __1.YadorePublisherSDK.test(undefined, { feature: { validate: { active: true } } });
+        await node_assert_1.default.rejects(client.ConversionDetail().list({ "date": 1, "format": "x" }), (err) => 'validate_failed' === err.code);
+    });
     (0, node_test_1.test)('basic', async (t) => {
         const live = 'TRUE' === process.env.YADORE_PUBLISHER_TEST_LIVE;
         for (const op of ['list']) {
@@ -62,7 +109,7 @@ const utility_1 = require("../../utility");
         }
         const setup = basicSetup();
         if (setup.live) {
-            return (0, live_entity_1.runLiveEntity)(setup, { "active": true, "alias": { "field": {} }, "fields": { "clickId": { "a": true, "h": "Click Id", "n": "clickId", "r": false, "t": "`$STRING`", "key$": "clickId", "index$": 0 }, "date": { "a": true, "fo": "date-time", "h": "Date", "n": "date", "r": false, "t": "`$STRING`", "key$": "date", "index$": 1 }, "market": { "a": true, "h": "Market", "n": "market", "r": false, "t": "`$STRING`", "key$": "market", "index$": 2 }, "merchant": { "a": true, "h": "Merchant", "n": "merchant", "r": false, "t": "`$OBJECT`", "key$": "merchant", "index$": 3 }, "placementId": { "a": true, "h": "Placement Id", "n": "placementId", "r": false, "t": "`$STRING`", "key$": "placementId", "index$": 4 }, "sales": { "a": true, "h": "Sales", "n": "sales", "r": false, "t": "`$NUMBER`", "key$": "sales", "index$": 5 } }, "name": "conversion_detail", "op": { "list": { "input": "data", "name": "list", "points": [{ "a": true, "co": { "id": "GET /v2/conversion/detail", "source": "openapi3", "version": 2 }, "g": { "query": [{ "a": true, "k": "query", "n": "date", "or": "date", "r": true, "t": "`$STRING`", "index$": 0 }, { "a": true, "k": "query", "n": "format", "or": "format", "r": true, "t": "`$STRING`", "index$": 1 }, { "a": true, "k": "query", "n": "market", "or": "market", "r": false, "t": "`$STRING`", "index$": 2 }] }, "k": "http", "m": "GET", "o": "/v2/conversion/detail", "q": { "exist": ["date", "format", "market"] }, "r": {}, "s": [{ "lit": "v2" }, { "lit": "conversion" }, { "lit": "detail" }], "t": { "req": "`reqdata`", "res": "`body.clicks`" }, "index$": 0 }], "key$": "list" } }, "relations": { "ancestors": [] }, "key$": "conversion_detail", "name__orig": "conversion_detail", "Name": "ConversionDetail", "name_": "conversion_detail", "name-": "conversion-detail", "NAME": "CONVERSION_DETAIL", "index$": 0 }, { "active": true, "entity": "conversion_detail", "key$": "BasicConversionDetailFlow", "kind": "basic", "name": "BasicConversionDetailFlow", "param": {}, "step": [{ "a": true, "d": {}, "i": {}, "m": {}, "o": "list", "s": [], "v": [{ "apply": "ItemExists", "def": { "ref": "conversion_detail_ref01" } }], "index$": 0 }] }, 'ConversionDetail', { "GET /v2/conversion/detail": { "protocol": "http", "parameters": [{ "name": "date", "description": "Date for which to generate a report. This date is in the UTC timezone. This parameter has to be in format `YYYY-mm-dd`, for example `2018-01-31`.", "in": "query", "required": true, "schema": { "type": "string", "format": "date" }, "x-ref": "#/components/parameters/Date", "index$": 0 }, { "name": "format", "description": "A format to generate the reports. Available formats are `json` and `csv`.", "in": "query", "required": true, "schema": { "type": "string", "enum": ["json", "csv"] }, "x-ref": "#/components/parameters/Format", "index$": 1 }, { "name": "market", "description": "Market to search. You can get the markets you are activated for with the Markets API.", "in": "query", "required": false, "schema": { "type": "string" }, "x-ref": "#/components/parameters/ReportMarket", "index$": 2 }] } });
+            return (0, live_entity_1.runLiveEntity)(setup, { "active": true, "alias": { "field": {} }, "fields": { "clickId": { "a": true, "h": "Click Id", "n": "clickId", "r": false, "t": "`$STRING`", "key$": "clickId", "index$": 0 }, "date": { "a": true, "fo": "date-time", "h": "Date", "n": "date", "r": false, "t": "`$STRING`", "key$": "date", "index$": 1 }, "market": { "a": true, "h": "Market", "n": "market", "r": false, "t": "`$STRING`", "key$": "market", "index$": 2 }, "merchant": { "a": true, "h": "Merchant", "n": "merchant", "r": false, "t": "`$OBJECT`", "key$": "merchant", "index$": 3 }, "placementId": { "a": true, "h": "Placement Id", "n": "placementId", "r": false, "t": "`$STRING`", "key$": "placementId", "index$": 4 }, "sales": { "a": true, "h": "Sales", "n": "sales", "r": false, "t": "`$NUMBER`", "key$": "sales", "index$": 5 } }, "name": "conversion_detail", "op": { "list": { "input": "data", "name": "list", "points": [{ "a": true, "co": { "id": "GET /v2/conversion/detail", "source": "openapi3", "version": 2 }, "g": { "query": [{ "a": true, "k": "query", "n": "date", "or": "date", "r": true, "t": "`$STRING`", "index$": 0 }, { "a": true, "k": "query", "n": "format", "or": "format", "r": true, "t": "`$STRING`", "index$": 1 }, { "a": true, "k": "query", "n": "market", "or": "market", "r": false, "t": "`$STRING`", "index$": 2 }] }, "k": "http", "m": "GET", "o": "/v2/conversion/detail", "q": { "exist": ["date", "format"] }, "r": {}, "rs": { "alternatives": [{ "binary": true, "kind": "raw", "media": "text/csv" }], "kind": "json", "media": "application/json" }, "s": [{ "lit": "v2" }, { "lit": "conversion" }, { "lit": "detail" }], "t": { "req": "`reqdata`", "res": "`body.clicks`" }, "index$": 0 }], "key$": "list" } }, "relations": { "ancestors": [] }, "key$": "conversion_detail", "name__orig": "conversion_detail", "Name": "ConversionDetail", "name_": "conversion_detail", "name-": "conversion-detail", "NAME": "CONVERSION_DETAIL", "index$": 0 }, { "active": true, "entity": "conversion_detail", "key$": "BasicConversionDetailFlow", "kind": "basic", "name": "BasicConversionDetailFlow", "param": {}, "step": [{ "a": true, "d": {}, "i": {}, "m": {}, "o": "list", "s": [], "v": [{ "apply": "ItemExists", "def": { "ref": "conversion_detail_ref01" } }], "index$": 0 }] }, 'ConversionDetail', { "GET /v2/conversion/detail": { "protocol": "http", "parameters": [{ "name": "date", "description": "Date for which to generate a report. This date is in the UTC timezone. This parameter has to be in format `YYYY-mm-dd`, for example `2018-01-31`.", "in": "query", "required": true, "schema": { "type": "string", "format": "date" }, "x-ref": "#/components/parameters/Date", "index$": 0 }, { "name": "format", "description": "A format to generate the reports. Available formats are `json` and `csv`.", "in": "query", "required": true, "schema": { "type": "string", "enum": ["json", "csv"] }, "x-ref": "#/components/parameters/Format", "index$": 1 }, { "name": "market", "description": "Market to search. You can get the markets you are activated for with the Markets API.", "in": "query", "required": false, "schema": { "type": "string" }, "x-ref": "#/components/parameters/ReportMarket", "index$": 2 }] } }, { strict: LIVE_STRICT, t });
         }
         const client = setup.client;
         const struct = setup.struct;
@@ -75,6 +122,11 @@ const utility_1 = require("../../utility");
         const conversion_detail_ref01_list = (await conversion_detail_ref01_ent.list(conversion_detail_ref01_match)).map((e) => e.data());
     });
 });
+// main.kit.test.live.strict is true (the default is true): a live
+// request that fails, or a live test missing an input it needs,
+// fails the test.
+// An account with no record for a test to read skips it either way.
+const LIVE_STRICT = true;
 function basicSetup(extra) {
     // TODO: fix test def options
     const options = {}; // null

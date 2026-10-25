@@ -183,12 +183,6 @@ Deeplink = Struct.new(
 
 # Request payload for Deeplink#create.
 #
-# @!attribute [rw] deeplinks
-#   @return [Array, nil]
-#
-# @!attribute [rw] found
-#   @return [Integer, nil]
-#
 # @!attribute [rw] isCouponing
 #   @return [Boolean, nil]
 #
@@ -198,18 +192,12 @@ Deeplink = Struct.new(
 # @!attribute [rw] placementId
 #   @return [String, nil]
 #
-# @!attribute [rw] total
-#   @return [Integer, nil]
-#
 # @!attribute [rw] urls
 #   @return [Array]
 DeeplinkCreateData = Struct.new(
-  :deeplinks,
-  :found,
   :isCouponing,
   :market,
   :placementId,
-  :total,
   :urls,
   keyword_init: true
 )

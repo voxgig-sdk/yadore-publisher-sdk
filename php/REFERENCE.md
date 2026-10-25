@@ -156,10 +156,10 @@ $conversion_detail = $client->ConversionDetail();
 
 #### `list(?array $reqmatch = null, ?array $ctrl = null): mixed`
 
-List entities matching the given criteria (call with no argument to list all). Returns an array. Throws on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array of entities, one per record, and throws on error.
 
 ```php
-$results = $client->ConversionDetail()->list();
+$results = $client->ConversionDetail()->list(["date" => "example", "format" => "example"]);
 ```
 
 ### Common Methods
@@ -211,10 +211,10 @@ $conversion_detail_merchant = $client->ConversionDetailMerchant();
 
 #### `list(?array $reqmatch = null, ?array $ctrl = null): mixed`
 
-List entities matching the given criteria (call with no argument to list all). Returns an array. Throws on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array of entities, one per record, and throws on error.
 
 ```php
-$results = $client->ConversionDetailMerchant()->list();
+$results = $client->ConversionDetailMerchant()->list(["format" => "example", "from" => "example", "to" => "example"]);
 ```
 
 ### Common Methods
@@ -265,7 +265,7 @@ $conversion_general = $client->ConversionGeneral();
 
 #### `load(array $reqmatch, ?array $ctrl = null): mixed`
 
-Load a single entity matching the given criteria. Throws on error.
+Load a single entity matching the given criteria. Returns the entity, whose record `data_get()` reads, and throws on error.
 
 ```php
 $result = $client->ConversionGeneral()->load(["format" => "format", "from" => "from", "to" => "to"]);
@@ -317,7 +317,7 @@ $conversion_status = $client->ConversionStatus();
 
 #### `load(array $reqmatch, ?array $ctrl = null): mixed`
 
-Load a single entity matching the given criteria. Throws on error.
+Load a single entity matching the given criteria. Returns the entity, whose record `data_get()` reads, and throws on error.
 
 ```php
 $result = $client->ConversionStatus()->load(["date" => "date"]);
@@ -375,7 +375,7 @@ $deeplink = $client->Deeplink();
 
 #### `create(array $reqdata, ?array $ctrl = null): mixed`
 
-Create a new entity with the given data. Throws on error.
+Create a new entity with the given data. Returns the created entity and throws on error.
 
 ```php
 $result = $client->Deeplink()->create([
@@ -438,10 +438,10 @@ $deeplink_merchant = $client->DeeplinkMerchant();
 
 #### `list(?array $reqmatch = null, ?array $ctrl = null): mixed`
 
-List entities matching the given criteria (call with no argument to list all). Returns an array. Throws on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array of entities, one per record, and throws on error.
 
 ```php
-$results = $client->DeeplinkMerchant()->list();
+$results = $client->DeeplinkMerchant()->list(["market" => "example"]);
 ```
 
 ### Common Methods
@@ -484,7 +484,7 @@ $dnt = $client->Dnt();
 
 #### `load(array $reqmatch, ?array $ctrl = null): mixed`
 
-Load a single entity matching the given criteria. Throws on error.
+Load a single entity matching the given criteria. Returns the entity, whose record `data_get()` reads, and throws on error.
 
 ```php
 $result = $client->Dnt()->load(["market" => "market", "project_id" => "project_id", "url" => "url"]);
@@ -536,7 +536,7 @@ $market = $client->Market();
 
 #### `list(?array $reqmatch = null, ?array $ctrl = null): mixed`
 
-List entities matching the given criteria (call with no argument to list all). Returns an array. Throws on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array of entities, one per record, and throws on error.
 
 ```php
 $results = $client->Market()->list();
@@ -592,10 +592,10 @@ $merchant = $client->Merchant();
 
 #### `list(?array $reqmatch = null, ?array $ctrl = null): mixed`
 
-List entities matching the given criteria (call with no argument to list all). Returns an array. Throws on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array of entities, one per record, and throws on error.
 
 ```php
-$results = $client->Merchant()->list();
+$results = $client->Merchant()->list(["market" => "example"]);
 ```
 
 ### Common Methods
@@ -660,15 +660,15 @@ $offer = $client->Offer();
 
 #### `list(?array $reqmatch = null, ?array $ctrl = null): mixed`
 
-List entities matching the given criteria (call with no argument to list all). Returns an array. Throws on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array of entities, one per record, and throws on error.
 
 ```php
-$results = $client->Offer()->list();
+$results = $client->Offer()->list(["market" => "example"]);
 ```
 
 #### `load(array $reqmatch, ?array $ctrl = null): mixed`
 
-Load a single entity matching the given criteria. Throws on error.
+Load a single entity matching the given criteria. Returns the entity, whose record `data_get()` reads, and throws on error.
 
 ```php
 $result = $client->Offer()->load(["ean" => "ean", "market" => "market"]);
@@ -726,10 +726,10 @@ $report_detail = $client->ReportDetail();
 
 #### `list(?array $reqmatch = null, ?array $ctrl = null): mixed`
 
-List entities matching the given criteria (call with no argument to list all). Returns an array. Throws on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array of entities, one per record, and throws on error.
 
 ```php
-$results = $client->ReportDetail()->list();
+$results = $client->ReportDetail()->list(["date" => "example", "format" => "example"]);
 ```
 
 ### Common Methods
@@ -780,7 +780,7 @@ $report_general = $client->ReportGeneral();
 
 #### `load(array $reqmatch, ?array $ctrl = null): mixed`
 
-Load a single entity matching the given criteria. Throws on error.
+Load a single entity matching the given criteria. Returns the entity, whose record `data_get()` reads, and throws on error.
 
 ```php
 $result = $client->ReportGeneral()->load(["date" => "date", "format" => "format"]);
@@ -833,7 +833,7 @@ $report_modified = $client->ReportModified();
 
 #### `load(array $reqmatch, ?array $ctrl = null): mixed`
 
-Load a single entity matching the given criteria. Throws on error.
+Load a single entity matching the given criteria. Returns the entity, whose record `data_get()` reads, and throws on error.
 
 ```php
 $result = $client->ReportModified()->load(["from" => "from", "to" => "to"]);
@@ -885,7 +885,7 @@ $report_status = $client->ReportStatus();
 
 #### `load(array $reqmatch, ?array $ctrl = null): mixed`
 
-Load a single entity matching the given criteria. Throws on error.
+Load a single entity matching the given criteria. Returns the entity, whose record `data_get()` reads, and throws on error.
 
 ```php
 $result = $client->ReportStatus()->load(["date" => "date"]);
@@ -1078,6 +1078,7 @@ Timeout.
 | Option | Type |
 |---|---|
 | `clearTimer` | function |
+| `now` | function |
 | `setTimer` | function |
 
 These take no default: the feature behaves one way when you supply them and

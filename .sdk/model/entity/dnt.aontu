@@ -72,11 +72,7 @@ main: kit: entity: dnt: {
           o: "/v2/d"
           q: {
             exist: [
-              "callback_url"
-              "is_couponing"
               "market"
-              "merchant_id"
-              "placement_id"
               "project_id"
               "url"
             ]

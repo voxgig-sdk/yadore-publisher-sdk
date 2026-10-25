@@ -93,6 +93,7 @@ class YadorePublisherConfig
           ],
           'optspec' => [
             'clearTimer' => '`$FUNCTION`',
+            'now' => '`$FUNCTION`',
             'setTimer' => '`$FUNCTION`',
           ],
           'strict' => false,
@@ -199,6 +200,7 @@ class YadorePublisherConfig
                         'type' => '`$STRING`',
                         'kind' => 'query',
                         'reqd' => true,
+                        'field' => true,
                       ],
                       [
                         'name' => 'format',
@@ -212,6 +214,7 @@ class YadorePublisherConfig
                         'orig' => 'market',
                         'type' => '`$STRING`',
                         'kind' => 'query',
+                        'field' => true,
                       ],
                     ],
                   ],
@@ -219,8 +222,18 @@ class YadorePublisherConfig
                     'exist' => [
                       'date',
                       'format',
-                      'market',
                     ],
+                  ],
+                  'response' => [
+                    'alternatives' => [
+                      [
+                        'binary' => true,
+                        'kind' => 'raw',
+                        'media' => 'text/csv',
+                      ],
+                    ],
+                    'kind' => 'json',
+                    'media' => 'application/json',
                   ],
                 ],
               ],
@@ -311,6 +324,7 @@ class YadorePublisherConfig
                         'orig' => 'market',
                         'type' => '`$STRING`',
                         'kind' => 'query',
+                        'field' => true,
                       ],
                       [
                         'name' => 'to',
@@ -325,9 +339,19 @@ class YadorePublisherConfig
                     'exist' => [
                       'format',
                       'from',
-                      'market',
                       'to',
                     ],
+                  ],
+                  'response' => [
+                    'alternatives' => [
+                      [
+                        'binary' => true,
+                        'kind' => 'raw',
+                        'media' => 'text/csv',
+                      ],
+                    ],
+                    'kind' => 'json',
+                    'media' => 'application/json',
                   ],
                 ],
               ],
@@ -418,6 +442,17 @@ class YadorePublisherConfig
                       'to',
                     ],
                   ],
+                  'response' => [
+                    'alternatives' => [
+                      [
+                        'binary' => true,
+                        'kind' => 'raw',
+                        'media' => 'text/csv',
+                      ],
+                    ],
+                    'kind' => 'json',
+                    'media' => 'application/json',
+                  ],
                 ],
               ],
             ],
@@ -480,6 +515,10 @@ class YadorePublisherConfig
                     'exist' => [
                       'date',
                     ],
+                  ],
+                  'response' => [
+                    'kind' => 'json',
+                    'media' => 'application/json',
                   ],
                 ],
               ],
@@ -562,6 +601,10 @@ class YadorePublisherConfig
                   ],
                   'args' => [],
                   'select' => [],
+                  'response' => [
+                    'kind' => 'json',
+                    'media' => 'application/json',
+                  ],
                 ],
               ],
             ],
@@ -688,11 +731,12 @@ class YadorePublisherConfig
                   ],
                   'select' => [
                     'exist' => [
-                      'has_homepage',
-                      'is_couponing',
-                      'is_smartlink',
                       'market',
                     ],
+                  ],
+                  'response' => [
+                    'kind' => 'json',
+                    'media' => 'application/json',
                   ],
                 ],
               ],
@@ -782,11 +826,7 @@ class YadorePublisherConfig
                   ],
                   'select' => [
                     'exist' => [
-                      'callback_url',
-                      'is_couponing',
                       'market',
-                      'merchant_id',
-                      'placement_id',
                       'project_id',
                       'url',
                     ],
@@ -840,6 +880,10 @@ class YadorePublisherConfig
                   ],
                   'args' => [],
                   'select' => [],
+                  'response' => [
+                    'kind' => 'json',
+                    'media' => 'application/json',
+                  ],
                 ],
               ],
             ],
@@ -926,9 +970,12 @@ class YadorePublisherConfig
                   ],
                   'select' => [
                     'exist' => [
-                      'is_couponing',
                       'market',
                     ],
+                  ],
+                  'response' => [
+                    'kind' => 'json',
+                    'media' => 'application/json',
                   ],
                 ],
               ],
@@ -1127,17 +1174,12 @@ class YadorePublisherConfig
                   ],
                   'select' => [
                     'exist' => [
-                      'ean',
-                      'is_couponing',
-                      'keyword',
-                      'limit',
                       'market',
-                      'merchant_id',
-                      'offer_id',
-                      'placement_id',
-                      'precision',
-                      'sort',
                     ],
+                  ],
+                  'response' => [
+                    'kind' => 'json',
+                    'media' => 'application/json',
                   ],
                 ],
               ],
@@ -1212,11 +1254,12 @@ class YadorePublisherConfig
                     '$action' => 'bulk',
                     'exist' => [
                       'ean',
-                      'is_couponing',
                       'market',
-                      'merchant_id',
-                      'placement_id',
                     ],
+                  ],
+                  'response' => [
+                    'kind' => 'json',
+                    'media' => 'application/json',
                   ],
                 ],
               ],
@@ -1304,6 +1347,7 @@ class YadorePublisherConfig
                         'type' => '`$STRING`',
                         'kind' => 'query',
                         'reqd' => true,
+                        'field' => true,
                       ],
                       [
                         'name' => 'format',
@@ -1317,6 +1361,7 @@ class YadorePublisherConfig
                         'orig' => 'market',
                         'type' => '`$STRING`',
                         'kind' => 'query',
+                        'field' => true,
                       ],
                     ],
                   ],
@@ -1324,8 +1369,18 @@ class YadorePublisherConfig
                     'exist' => [
                       'date',
                       'format',
-                      'market',
                     ],
+                  ],
+                  'response' => [
+                    'alternatives' => [
+                      [
+                        'binary' => true,
+                        'kind' => 'raw',
+                        'media' => 'text/csv',
+                      ],
+                    ],
+                    'kind' => 'json',
+                    'media' => 'application/json',
                   ],
                 ],
               ],
@@ -1392,6 +1447,7 @@ class YadorePublisherConfig
                         'type' => '`$STRING`',
                         'kind' => 'query',
                         'reqd' => true,
+                        'field' => true,
                       ],
                       [
                         'name' => 'format',
@@ -1407,6 +1463,16 @@ class YadorePublisherConfig
                       'date',
                       'format',
                     ],
+                  ],
+                  'response' => [
+                    'alternatives' => [
+                      [
+                        'kind' => 'raw',
+                        'media' => 'text/csv',
+                      ],
+                    ],
+                    'kind' => 'json',
+                    'media' => 'application/json',
                   ],
                 ],
               ],
@@ -1489,9 +1555,12 @@ class YadorePublisherConfig
                   'select' => [
                     'exist' => [
                       'from',
-                      'market',
                       'to',
                     ],
+                  ],
+                  'response' => [
+                    'kind' => 'json',
+                    'media' => 'application/json',
                   ],
                 ],
               ],
@@ -1555,6 +1624,10 @@ class YadorePublisherConfig
                     'exist' => [
                       'date',
                     ],
+                  ],
+                  'response' => [
+                    'kind' => 'json',
+                    'media' => 'application/json',
                   ],
                 ],
               ],

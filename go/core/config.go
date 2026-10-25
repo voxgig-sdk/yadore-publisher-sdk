@@ -71,6 +71,7 @@ func MakeConfig() map[string]any {
 				},
 				"optspec": map[string]any{
 					"clearTimer": "`$FUNCTION`",
+					"now": "`$FUNCTION`",
 					"setTimer": "`$FUNCTION`",
 				},
 				"strict": false,
@@ -177,6 +178,7 @@ func MakeConfig() map[string]any {
 											"type": "`$STRING`",
 											"kind": "query",
 											"reqd": true,
+											"field": true,
 										},
 										map[string]any{
 											"name": "format",
@@ -190,6 +192,7 @@ func MakeConfig() map[string]any {
 											"orig": "market",
 											"type": "`$STRING`",
 											"kind": "query",
+											"field": true,
 										},
 									},
 								},
@@ -197,8 +200,18 @@ func MakeConfig() map[string]any {
 									"exist": []any{
 										"date",
 										"format",
-										"market",
 									},
+								},
+								"response": map[string]any{
+									"alternatives": []any{
+										map[string]any{
+											"binary": true,
+											"kind": "raw",
+											"media": "text/csv",
+										},
+									},
+									"kind": "json",
+									"media": "application/json",
 								},
 							},
 						},
@@ -289,6 +302,7 @@ func MakeConfig() map[string]any {
 											"orig": "market",
 											"type": "`$STRING`",
 											"kind": "query",
+											"field": true,
 										},
 										map[string]any{
 											"name": "to",
@@ -303,9 +317,19 @@ func MakeConfig() map[string]any {
 									"exist": []any{
 										"format",
 										"from",
-										"market",
 										"to",
 									},
+								},
+								"response": map[string]any{
+									"alternatives": []any{
+										map[string]any{
+											"binary": true,
+											"kind": "raw",
+											"media": "text/csv",
+										},
+									},
+									"kind": "json",
+									"media": "application/json",
 								},
 							},
 						},
@@ -396,6 +420,17 @@ func MakeConfig() map[string]any {
 										"to",
 									},
 								},
+								"response": map[string]any{
+									"alternatives": []any{
+										map[string]any{
+											"binary": true,
+											"kind": "raw",
+											"media": "text/csv",
+										},
+									},
+									"kind": "json",
+									"media": "application/json",
+								},
 							},
 						},
 					},
@@ -458,6 +493,10 @@ func MakeConfig() map[string]any {
 									"exist": []any{
 										"date",
 									},
+								},
+								"response": map[string]any{
+									"kind": "json",
+									"media": "application/json",
 								},
 							},
 						},
@@ -540,6 +579,10 @@ func MakeConfig() map[string]any {
 								},
 								"args": map[string]any{},
 								"select": map[string]any{},
+								"response": map[string]any{
+									"kind": "json",
+									"media": "application/json",
+								},
 							},
 						},
 					},
@@ -666,11 +709,12 @@ func MakeConfig() map[string]any {
 								},
 								"select": map[string]any{
 									"exist": []any{
-										"has_homepage",
-										"is_couponing",
-										"is_smartlink",
 										"market",
 									},
+								},
+								"response": map[string]any{
+									"kind": "json",
+									"media": "application/json",
 								},
 							},
 						},
@@ -760,11 +804,7 @@ func MakeConfig() map[string]any {
 								},
 								"select": map[string]any{
 									"exist": []any{
-										"callback_url",
-										"is_couponing",
 										"market",
-										"merchant_id",
-										"placement_id",
 										"project_id",
 										"url",
 									},
@@ -818,6 +858,10 @@ func MakeConfig() map[string]any {
 								},
 								"args": map[string]any{},
 								"select": map[string]any{},
+								"response": map[string]any{
+									"kind": "json",
+									"media": "application/json",
+								},
 							},
 						},
 					},
@@ -904,9 +948,12 @@ func MakeConfig() map[string]any {
 								},
 								"select": map[string]any{
 									"exist": []any{
-										"is_couponing",
 										"market",
 									},
+								},
+								"response": map[string]any{
+									"kind": "json",
+									"media": "application/json",
 								},
 							},
 						},
@@ -1105,17 +1152,12 @@ func MakeConfig() map[string]any {
 								},
 								"select": map[string]any{
 									"exist": []any{
-										"ean",
-										"is_couponing",
-										"keyword",
-										"limit",
 										"market",
-										"merchant_id",
-										"offer_id",
-										"placement_id",
-										"precision",
-										"sort",
 									},
+								},
+								"response": map[string]any{
+									"kind": "json",
+									"media": "application/json",
 								},
 							},
 						},
@@ -1190,11 +1232,12 @@ func MakeConfig() map[string]any {
 									"$action": "bulk",
 									"exist": []any{
 										"ean",
-										"is_couponing",
 										"market",
-										"merchant_id",
-										"placement_id",
 									},
+								},
+								"response": map[string]any{
+									"kind": "json",
+									"media": "application/json",
 								},
 							},
 						},
@@ -1282,6 +1325,7 @@ func MakeConfig() map[string]any {
 											"type": "`$STRING`",
 											"kind": "query",
 											"reqd": true,
+											"field": true,
 										},
 										map[string]any{
 											"name": "format",
@@ -1295,6 +1339,7 @@ func MakeConfig() map[string]any {
 											"orig": "market",
 											"type": "`$STRING`",
 											"kind": "query",
+											"field": true,
 										},
 									},
 								},
@@ -1302,8 +1347,18 @@ func MakeConfig() map[string]any {
 									"exist": []any{
 										"date",
 										"format",
-										"market",
 									},
+								},
+								"response": map[string]any{
+									"alternatives": []any{
+										map[string]any{
+											"binary": true,
+											"kind": "raw",
+											"media": "text/csv",
+										},
+									},
+									"kind": "json",
+									"media": "application/json",
 								},
 							},
 						},
@@ -1370,6 +1425,7 @@ func MakeConfig() map[string]any {
 											"type": "`$STRING`",
 											"kind": "query",
 											"reqd": true,
+											"field": true,
 										},
 										map[string]any{
 											"name": "format",
@@ -1385,6 +1441,16 @@ func MakeConfig() map[string]any {
 										"date",
 										"format",
 									},
+								},
+								"response": map[string]any{
+									"alternatives": []any{
+										map[string]any{
+											"kind": "raw",
+											"media": "text/csv",
+										},
+									},
+									"kind": "json",
+									"media": "application/json",
 								},
 							},
 						},
@@ -1467,9 +1533,12 @@ func MakeConfig() map[string]any {
 								"select": map[string]any{
 									"exist": []any{
 										"from",
-										"market",
 										"to",
 									},
+								},
+								"response": map[string]any{
+									"kind": "json",
+									"media": "application/json",
 								},
 							},
 						},
@@ -1533,6 +1602,10 @@ func MakeConfig() map[string]any {
 									"exist": []any{
 										"date",
 									},
+								},
+								"response": map[string]any{
+									"kind": "json",
+									"media": "application/json",
 								},
 							},
 						},

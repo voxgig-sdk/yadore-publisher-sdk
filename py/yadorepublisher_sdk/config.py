@@ -96,6 +96,7 @@ def make_config():
         },
         "optspec": {
           "clearTimer": "`$FUNCTION`",
+          "now": "`$FUNCTION`",
           "setTimer": "`$FUNCTION`",
         },
         "strict": False,
@@ -202,6 +203,7 @@ def make_config():
                       "type": "`$STRING`",
                       "kind": "query",
                       "reqd": True,
+                      "field": True,
                     },
                     {
                       "name": "format",
@@ -215,6 +217,7 @@ def make_config():
                       "orig": "market",
                       "type": "`$STRING`",
                       "kind": "query",
+                      "field": True,
                     },
                   ],
                 },
@@ -222,8 +225,18 @@ def make_config():
                   "exist": [
                     "date",
                     "format",
-                    "market",
                   ],
+                },
+                "response": {
+                  "alternatives": [
+                    {
+                      "binary": True,
+                      "kind": "raw",
+                      "media": "text/csv",
+                    },
+                  ],
+                  "kind": "json",
+                  "media": "application/json",
                 },
               },
             ],
@@ -314,6 +327,7 @@ def make_config():
                       "orig": "market",
                       "type": "`$STRING`",
                       "kind": "query",
+                      "field": True,
                     },
                     {
                       "name": "to",
@@ -328,9 +342,19 @@ def make_config():
                   "exist": [
                     "format",
                     "from",
-                    "market",
                     "to",
                   ],
+                },
+                "response": {
+                  "alternatives": [
+                    {
+                      "binary": True,
+                      "kind": "raw",
+                      "media": "text/csv",
+                    },
+                  ],
+                  "kind": "json",
+                  "media": "application/json",
                 },
               },
             ],
@@ -421,6 +445,17 @@ def make_config():
                     "to",
                   ],
                 },
+                "response": {
+                  "alternatives": [
+                    {
+                      "binary": True,
+                      "kind": "raw",
+                      "media": "text/csv",
+                    },
+                  ],
+                  "kind": "json",
+                  "media": "application/json",
+                },
               },
             ],
           },
@@ -483,6 +518,10 @@ def make_config():
                   "exist": [
                     "date",
                   ],
+                },
+                "response": {
+                  "kind": "json",
+                  "media": "application/json",
                 },
               },
             ],
@@ -565,6 +604,10 @@ def make_config():
                 },
                 "args": {},
                 "select": {},
+                "response": {
+                  "kind": "json",
+                  "media": "application/json",
+                },
               },
             ],
           },
@@ -691,11 +734,12 @@ def make_config():
                 },
                 "select": {
                   "exist": [
-                    "has_homepage",
-                    "is_couponing",
-                    "is_smartlink",
                     "market",
                   ],
+                },
+                "response": {
+                  "kind": "json",
+                  "media": "application/json",
                 },
               },
             ],
@@ -785,11 +829,7 @@ def make_config():
                 },
                 "select": {
                   "exist": [
-                    "callback_url",
-                    "is_couponing",
                     "market",
-                    "merchant_id",
-                    "placement_id",
                     "project_id",
                     "url",
                   ],
@@ -843,6 +883,10 @@ def make_config():
                 },
                 "args": {},
                 "select": {},
+                "response": {
+                  "kind": "json",
+                  "media": "application/json",
+                },
               },
             ],
           },
@@ -929,9 +973,12 @@ def make_config():
                 },
                 "select": {
                   "exist": [
-                    "is_couponing",
                     "market",
                   ],
+                },
+                "response": {
+                  "kind": "json",
+                  "media": "application/json",
                 },
               },
             ],
@@ -1130,17 +1177,12 @@ def make_config():
                 },
                 "select": {
                   "exist": [
-                    "ean",
-                    "is_couponing",
-                    "keyword",
-                    "limit",
                     "market",
-                    "merchant_id",
-                    "offer_id",
-                    "placement_id",
-                    "precision",
-                    "sort",
                   ],
+                },
+                "response": {
+                  "kind": "json",
+                  "media": "application/json",
                 },
               },
             ],
@@ -1215,11 +1257,12 @@ def make_config():
                   "$action": "bulk",
                   "exist": [
                     "ean",
-                    "is_couponing",
                     "market",
-                    "merchant_id",
-                    "placement_id",
                   ],
+                },
+                "response": {
+                  "kind": "json",
+                  "media": "application/json",
                 },
               },
             ],
@@ -1307,6 +1350,7 @@ def make_config():
                       "type": "`$STRING`",
                       "kind": "query",
                       "reqd": True,
+                      "field": True,
                     },
                     {
                       "name": "format",
@@ -1320,6 +1364,7 @@ def make_config():
                       "orig": "market",
                       "type": "`$STRING`",
                       "kind": "query",
+                      "field": True,
                     },
                   ],
                 },
@@ -1327,8 +1372,18 @@ def make_config():
                   "exist": [
                     "date",
                     "format",
-                    "market",
                   ],
+                },
+                "response": {
+                  "alternatives": [
+                    {
+                      "binary": True,
+                      "kind": "raw",
+                      "media": "text/csv",
+                    },
+                  ],
+                  "kind": "json",
+                  "media": "application/json",
                 },
               },
             ],
@@ -1395,6 +1450,7 @@ def make_config():
                       "type": "`$STRING`",
                       "kind": "query",
                       "reqd": True,
+                      "field": True,
                     },
                     {
                       "name": "format",
@@ -1410,6 +1466,16 @@ def make_config():
                     "date",
                     "format",
                   ],
+                },
+                "response": {
+                  "alternatives": [
+                    {
+                      "kind": "raw",
+                      "media": "text/csv",
+                    },
+                  ],
+                  "kind": "json",
+                  "media": "application/json",
                 },
               },
             ],
@@ -1492,9 +1558,12 @@ def make_config():
                 "select": {
                   "exist": [
                     "from",
-                    "market",
                     "to",
                   ],
+                },
+                "response": {
+                  "kind": "json",
+                  "media": "application/json",
                 },
               },
             ],
@@ -1558,6 +1627,10 @@ def make_config():
                   "exist": [
                     "date",
                   ],
+                },
+                "response": {
+                  "kind": "json",
+                  "media": "application/json",
                 },
               },
             ],

@@ -9,9 +9,19 @@ import pytest
 from yadorepublisher_sdk.utility.voxgig_struct import voxgig_struct as vs
 from yadorepublisher_sdk import YadorePublisherSDK
 from yadorepublisher_sdk.core import helpers
+from yadorepublisher_sdk.config import shared_config
+from yadorepublisher_sdk.feature.base_feature import YadorePublisherBaseFeature
 
 _TEST_DIR = os.path.dirname(os.path.abspath(__file__))
 from test import runner
+
+
+
+# main.kit.test.live.strict is true (the default is true): a live
+# request that fails, or a live test missing an input it needs,
+# fails the test.
+# An account with no record for a test to read skips it either way.
+LIVE_STRICT = True
 
 
 class TestDeeplinkEntity:
@@ -20,6 +30,15 @@ class TestDeeplinkEntity:
         testsdk = YadorePublisherSDK.test(None, None)
         ent = testsdk.Deeplink(None)
         assert ent is not None
+
+    def test_should_refuse_an_invalid_request(self):
+        if "validate" not in (shared_config().get("feature") or {}):
+            pytest.skip("feature not present in this SDK: validate")
+        client = YadorePublisherSDK.test(
+            None, {"feature": {"validate": {"active": True}}})
+        with pytest.raises(Exception) as err:
+            client.Deeplink(None).create({"isCouponing": "x", "market": "x", "urls": "x"}, None)
+        assert "validate_failed" == getattr(err.value, "code", None)
 
     def test_should_run_basic_flow(self):
         setup = _deeplink_basic_setup(None)
@@ -32,11 +51,6 @@ class TestDeeplinkEntity:
             if _skip:
                 pytest.skip(_reason or "skipped via sdk-test-control.json")
                 return
-        # The basic flow consumes synthetic IDs from the fixture. In live mode
-        # without an *_ENTID env override, those IDs hit the live API and 4xx.
-        if setup.get("synthetic_only"):
-            pytest.skip("live entity test uses synthetic IDs from fixture — "
-                        "set YADORE_PUBLISHER_TEST_DEEPLINK_ENTID JSON to run live")
         client = setup["client"]
 
         # CREATE
@@ -53,7 +67,7 @@ def _deeplink_basic_setup(extra):
     runner.load_env_local()
 
     entity_data_file = os.path.join(_TEST_DIR, "../../.sdk/test/entity/deeplink/DeeplinkTestData.json")
-    with open(entity_data_file, "r") as f:
+    with open(entity_data_file, "r", encoding="utf-8") as f:
         entity_data_source = f.read()
 
     entity_data = json.loads(entity_data_source)
@@ -74,9 +88,8 @@ def _deeplink_basic_setup(extra):
         }
     )
 
-    # Detect ENTID env override before envOverride consumes it. When live
-    # mode is on without a real override, the basic test runs against synthetic
-    # IDs from the fixture and 4xx's. We surface this so the test can skip.
+    # Whether *_ENTID supplied the idmap, read before env_override consumes
+    # it: without it, the ids a live flow binds are the fixture's synthetic ones.
     _entid_env_raw = os.environ.get(
         "YADORE_PUBLISHER_TEST_DEEPLINK_ENTID")
     _idmap_overridden = _entid_env_raw is not None and _entid_env_raw.strip().startswith("{")

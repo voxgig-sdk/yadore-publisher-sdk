@@ -92,12 +92,9 @@ class Deeplink
 /** Request payload for Deeplink#create. */
 class DeeplinkCreateData
 {
-    public ?array $deeplinks = null;
-    public ?int $found = null;
     public ?bool $isCouponing = null;
     public string $market;
     public ?string $placementId = null;
-    public ?int $total = null;
     public array $urls;
 }
 

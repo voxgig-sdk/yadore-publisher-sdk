@@ -244,8 +244,10 @@ Make a direct HTTP request to any API endpoint.
 | `fetchargs.headers` | `object` | Request headers (merged with defaults). |
 | `fetchargs.body` | `any` | Request body (objects are JSON-serialized). |
 | `fetchargs.ctrl` | `object` | Control options (e.g. `{ explain: true }`). |
+| `fetchargs.ctrl.signal` | `AbortSignal` | Aborts the request in flight: `ok` is then `false` and `err.code` is `request_aborted`. |
 
-**Returns:** `Promise<{ ok, status, headers, data } | Error>`
+**Returns:** `Promise<{ ok, status, headers, data }>`. On a failure
+`ok` is `false` and `err` holds the error.
 
 #### `prepare(fetchargs?: object)`
 
@@ -259,6 +261,15 @@ same parameters as `direct()`.
 Alias for `YadorePublisherSDK.test()`.
 
 **Returns:** `YadorePublisherSDK` instance in test mode.
+
+#### Cancelling a call
+
+Every entity operation takes an optional `ctrl` object after its match or
+data, and an `AbortSignal` in `ctrl.signal` cancels the request in flight.
+The operation then rejects with an error whose `code` is
+`request_aborted` and whose `cause` is the signal's reason. A request
+whose signal has already aborted is not sent. `stream()` takes the signal
+as `callopts.signal`, and ends when it aborts.
 
 
 ---
@@ -284,7 +295,7 @@ const conversion_detail = client.ConversionDetail()
 
 #### `list(match: object, ctrl?: object)`
 
-List entities matching the given criteria. Returns an array.
+List entities matching the given criteria. Resolves to an array of entities, one per record.
 
 ```ts
 const results = await client.ConversionDetail().list({ date: "example", format: "example" })
@@ -337,7 +348,7 @@ const conversion_detail_merchant = client.ConversionDetailMerchant()
 
 #### `list(match: object, ctrl?: object)`
 
-List entities matching the given criteria. Returns an array.
+List entities matching the given criteria. Resolves to an array of entities, one per record.
 
 ```ts
 const results = await client.ConversionDetailMerchant().list({ format: "example", from: "example", to: "example" })
@@ -389,7 +400,7 @@ const conversion_general = client.ConversionGeneral()
 
 #### `load(match: object, ctrl?: object)`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Resolves to the entity, whose record `data()` reads.
 
 ```ts
 const result = await client.ConversionGeneral().load({ format: 'format', from: 'from', to: 'to' })
@@ -439,7 +450,7 @@ const conversion_status = client.ConversionStatus()
 
 #### `load(match: object, ctrl?: object)`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Resolves to the entity, whose record `data()` reads.
 
 ```ts
 const result = await client.ConversionStatus().load({ date: 'date' })
@@ -495,7 +506,7 @@ const deeplink = client.Deeplink()
 
 #### `create(data: object, ctrl?: object)`
 
-Create a new entity with the given data.
+Create a new entity with the given data. Resolves to the created entity.
 
 ```ts
 const result = await client.Deeplink().create({
@@ -556,7 +567,7 @@ const deeplink_merchant = client.DeeplinkMerchant()
 
 #### `list(match: object, ctrl?: object)`
 
-List entities matching the given criteria. Returns an array.
+List entities matching the given criteria. Resolves to an array of entities, one per record.
 
 ```ts
 const results = await client.DeeplinkMerchant().list({ market: "example" })
@@ -600,7 +611,7 @@ const dnt = client.Dnt()
 
 #### `load(match: object, ctrl?: object)`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Resolves to the entity, whose record `data()` reads.
 
 ```ts
 const result = await client.Dnt().load({ market: 'market', project_id: 'project_id', url: 'url' })
@@ -650,7 +661,7 @@ const market = client.Market()
 
 #### `list(match: object, ctrl?: object)`
 
-List entities matching the given criteria. Returns an array.
+List entities matching the given criteria. Resolves to an array of entities, one per record.
 
 ```ts
 const results = await client.Market().list()
@@ -704,7 +715,7 @@ const merchant = client.Merchant()
 
 #### `list(match: object, ctrl?: object)`
 
-List entities matching the given criteria. Returns an array.
+List entities matching the given criteria. Resolves to an array of entities, one per record.
 
 ```ts
 const results = await client.Merchant().list({ market: "example" })
@@ -790,7 +801,7 @@ const result = await client.Offer().load({
 
 #### `list(match: object, ctrl?: object)`
 
-List entities matching the given criteria. Returns an array.
+List entities matching the given criteria. Resolves to an array of entities, one per record.
 
 ```ts
 const results = await client.Offer().list({ market: "example" })
@@ -798,7 +809,7 @@ const results = await client.Offer().list({ market: "example" })
 
 #### `load(match: object, ctrl?: object)`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Resolves to the entity, whose record `data()` reads.
 
 ```ts
 const result = await client.Offer().load({ ean: 'ean', market: 'market' })
@@ -854,7 +865,7 @@ const report_detail = client.ReportDetail()
 
 #### `list(match: object, ctrl?: object)`
 
-List entities matching the given criteria. Returns an array.
+List entities matching the given criteria. Resolves to an array of entities, one per record.
 
 ```ts
 const results = await client.ReportDetail().list({ date: "example", format: "example" })
@@ -906,7 +917,7 @@ const report_general = client.ReportGeneral()
 
 #### `load(match: object, ctrl?: object)`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Resolves to the entity, whose record `data()` reads.
 
 ```ts
 const result = await client.ReportGeneral().load({ date: 'date', format: 'format' })
@@ -957,7 +968,7 @@ const report_modified = client.ReportModified()
 
 #### `load(match: object, ctrl?: object)`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Resolves to the entity, whose record `data()` reads.
 
 ```ts
 const result = await client.ReportModified().load({ from: 'from', to: 'to' })
@@ -1007,7 +1018,7 @@ const report_status = client.ReportStatus()
 
 #### `load(match: object, ctrl?: object)`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Resolves to the entity, whose record `data()` reads.
 
 ```ts
 const result = await client.ReportStatus().load({ date: 'date' })
@@ -1198,6 +1209,7 @@ Timeout.
 | Option | Type |
 |---|---|
 | `clearTimer` | function |
+| `now` | function |
 | `setTimer` | function |
 
 These take no default: the feature behaves one way when you supply them and

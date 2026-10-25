@@ -62,9 +62,12 @@ main: kit: entity: report_modified: {
           q: {
             exist: [
               "from"
-              "market"
               "to"
             ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
           }
           s: [
             {

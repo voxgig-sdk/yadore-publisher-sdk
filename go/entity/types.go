@@ -61,12 +61,9 @@ type Deeplink struct {
 
 // DeeplinkCreateData is the typed request payload for Deeplink.CreateTyped.
 type DeeplinkCreateData struct {
-	Deeplinks *[]any `json:"deeplinks,omitempty"`
-	Found *int `json:"found,omitempty"`
 	IsCouponing *bool `json:"isCouponing,omitempty"`
 	Market string `json:"market"`
 	PlacementId *string `json:"placementId,omitempty"`
-	Total *int `json:"total,omitempty"`
 	Urls []any `json:"urls"`
 }
 

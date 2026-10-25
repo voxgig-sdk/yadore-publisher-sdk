@@ -31,6 +31,10 @@ main: kit: entity: market: {
           }
           m: "GET"
           o: "/v2/markets"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
           s: [
             {
               lit: "v2"
